@@ -1,0 +1,300 @@
+{
+ "persona": "Learner with Visual Preference",
+ "persona_version": "1.0.0",
+ "chapter_id": "biomolecules-lipids",
+ "chapter_version": "1",
+ "summary": "This chapter is 36 accurate, well-labelled, individually purposeful 2D molecule figures attached to ten sections of unusually good prose - and almost none of them carry the chapter's actual arguments. Every one of the chapter's four load-bearing claims is geometric and relational: a cis kink defeating crystal packing (a claim about several chains at once), a wedge-shaped soap closing into a sphere while a cylindrical phospholipid tiles into a sheet (a claim about aggregates), a trans-fused ring system that cannot flip (a claim about chairs and axial/equatorial junction bonds), and isoprene units cut out of a skeleton (a claim about where to draw lines on a structure). Each of those four was scoped as a video brief, and all four are production_status: deferred - which in the compiled reader means the block carries is_hidden: true and disappears entirely, leaving no static substitute. What remains is a single-molecule figure per card, one card per row, capped at maxH 180px, so no two structures are ever seen side by side and no size or length comparison survives. The two decalin figures render as flat hexagons with wedge/dash junction hydrogens while the prose argues in chair, axial and equatorial terms, and their own long_descriptions describe equatorial junction bonds the figure does not draw. The terpenoid section has six clean skeleton renderings and not one cut line. Nothing here is chemically wrong that I could verify - I checked formulas, CIP labels, and the trans/cis decalin junction geometry by 3D embedding, and all were correct - so I record no publication blockers. But the figures currently confirm identity, not argument, and the compiled layout (one monolithic prose block per section, then a run of figures at the end) means no figure ever sits beside the sentence it supports.",
+ "overall_score": 6.0,
+ "publication_blockers": [],
+ "findings": [
+  {
+   "finding_id": "visual-001",
+   "location": {
+    "section_id": "nugget-chain-packing-and-melting-points",
+    "concept_slug": "chain-packing-and-melting-points",
+    "nugget_id": "nugget-chain-packing-and-melting-points",
+    "anchor_text": "Bent chains cannot lie flat against one another, the contact area between neighbours falls"
+   },
+   "severity": "high",
+   "category": "visual-opportunity",
+   "observation": "The section's causal chain - cis geometry produces a permanent kink, the kink prevents efficient stacking, poor stacking means less total dispersion attraction, less attraction means a lower melting point - is a claim about how several chains sit relative to each other. Every one of the seven figures in this section (mol-lauric-acid through mol-alpha-linolenic-acid) shows exactly one isolated molecule. Nothing in the reader ever shows two chains adjacent, a contact surface, or a gap opened by a kink. The prose does the entire relational step in words ('stack against one another like pencils in a box', 'the bends collide'), and the learner must build the multi-molecule picture unaided.",
+   "learner_impact": "A learner can look at oleic acid, see a bend, and still not have the argument, because the argument is not about the bend - it is about what the bend does to the neighbour. Without a picture of two or more chains together, the most likely takeaway is the memorised association 'double bond = low melting point', which is precisely the misconception the concept's trouble_spots list warns about.",
+   "evidence": "frontend/public/reader/topic-chapters/biomolecules-lipids.json section nugget-chain-packing-and-melting-points: blocks 1-7 are all block_type 'molecule', single-species. The only asset scoped to show packing, video_brief video-cis-kink-packing ('Slide four identical copies alongside it. They nest flat against one another with no gaps'), is production_status 'deferred' and compiles to block blk-vh7dhul0 with is_hidden: true, which [internal source reference \u2014 not in this repo] line 360 renders as null.",
+   "recommended_outcome": "The multi-chain packing relationship - identical chains lying flat and sharing contact surface, versus kinked chains wedging gaps between neighbours - is asserted in prose and shown nowhere. The chapter needs some visible representation of more than one chain at a time; whether that is motion or a static labelled comparison is a separate decision.",
+   "confidence": 0.95
+  },
+  {
+   "finding_id": "visual-002",
+   "location": {
+    "section_id": "nugget-phospholipids-and-membranes",
+    "concept_slug": "phospholipids-and-membranes",
+    "nugget_id": "nugget-phospholipids-and-membranes",
+    "anchor_text": "Wedges packed side by side curve, and curvature closes"
+   },
+   "severity": "high",
+   "category": "visual-opportunity",
+   "observation": "The 'why a bilayer rather than a micelle' argument turns on molecular shape - a soap's cross-section is wider at the head than the tail (a wedge), a phospholipid's two tails make it roughly cylindrical, wedges curve into a sphere and cylinders tile into a sheet, and a finite sheet closes on itself to bury its edge. None of that is visible anywhere. The section's six figures (mol-dppc, mol-phosphatidylethanolamine, mol-sphingosine, mol-sphingomyelin, mol-stearate-anion, mol-glycerol) are all single-molecule 2D skeletons. There is no wedge outline, no cylinder outline, no micelle, no bilayer, no vesicle, and no head/tail region marking.",
+   "learner_impact": "This is the chapter's most spatial claim and the one with the largest downstream payoff - it explains why cells are compartments at all. Delivered as prose only, it reduces to a memorised pair of words ('wedge/sphere, cylinder/sheet'). The chapter then assesses exactly this argument in ch27-bilayer-versus-micelle, whose four options are also pure text, so a learner can pass without ever having formed a spatial picture.",
+   "evidence": "Section nugget-phospholipids-and-membranes blocks 1-6 are all block_type 'molecule'. video_brief video-bilayer-assembly, which is the only scoped support ('Overlay its outline and show it is wider at the head than at the tail - a wedge'), is production_status 'deferred' and compiles to blk-11akxo27 with is_hidden: true. compiled/question-set.json ch27-bilayer-versus-micelle student_config contains only text options.",
+   "recommended_outcome": "The shape-to-aggregate relationship (one tail = wedge = sphere; two tails = cylinder = sheet; sheet with an edge closes into a vesicle) is currently carried entirely by prose. The chapter needs the packing geometry to be visible in some form, and the assessment of it needs to reference that visible form rather than restate the conclusion in words.",
+   "confidence": 0.95
+  },
+  {
+   "finding_id": "visual-003",
+   "location": {
+    "section_id": "nugget-steroids-structure-and-conformation",
+    "asset_id": "mol-trans-decalin",
+    "concept_slug": "steroids-structure-and-conformation",
+    "anchor_text": "the two carbon-carbon bonds that join the rings are equatorial with respect to both chairs"
+   },
+   "severity": "high",
+   "category": "figure-purpose",
+   "observation": "The trans-decalin and cis-decalin figures are 2D RDKit renderings from SMILES, and I rendered both to confirm what a reader sees: two flat regular hexagons sharing an edge, with a bold-wedge H and a dashed H (trans) or two bold-wedge H's (cis). The prose argument is conducted entirely in chair language - both junction bonds equatorial with respect to each chair, a flip converting every equatorial to axial, two axial bonds on adjacent carbons pointing in opposite directions, four remaining carbons unable to bridge them. A flat hexagon pair shows none of that: there is no chair, no axial or equatorial direction, and no way to attempt the flip. The figures establish only the cis/trans configuration, which is the premise, not the argument. The same figures' long_descriptions go further and describe geometry the picture does not contain - mol-trans-decalin's long_description states 'the two bonds joining the rings are both equatorial with respect to each chair' and mol-cis-decalin's states 'one of the two bonds joining the rings is axial and the other equatorial'.",
+   "learner_impact": "The section title is 'Four fused rings that cannot flip' and this is the argument it is named for. A learner who reads the prose and then looks at the figure for confirmation finds a picture that cannot confirm it, and may reasonably conclude the impossibility is a rule to memorise rather than something they could have seen. It also sets up a failure two steps later: ch27-cholesterol-a-ring-chair asks the learner to place cholesterol's 3-beta OH on a chair, on a drawing tool that (per the prompt's own parenthetical) 'shows a plain cyclohexane', after a chapter that never once drew a steroid or a decalin as chairs.",
+   "evidence": "Package assets mol-trans-decalin ('[H][C@]12CCCC[C@]1([H])CCCC2') and mol-cis-decalin ('[H][C@]12CCCC[C@@]1([H])CCCC2'), both rdkit_options null. I verified the configurations are correct (3D embed, junction H-C-C-H dihedral 180.0 deg for trans, 43.7 deg for cis) and rendered them - output is two flat fused hexagons. video_brief video-steroid-rigidity ('Open on cis-decalin drawn as two fused chairs') is production_status 'deferred', compiled to blk-nym57vqy with is_hidden: true.",
+   "recommended_outcome": "The ring-flip argument requires a chair representation, and the chapter's only ring-fusion figures are flat. The chapter needs the junction bonds shown in a conformation where axial and equatorial are meaningful, and the two decalin figures' descriptions need to stop asserting geometry the accompanying picture does not carry.",
+   "confidence": 0.95
+  },
+  {
+   "finding_id": "visual-004",
+   "location": {
+    "section_id": "nugget-terpenoids-and-the-isoprene-rule",
+    "concept_slug": "terpenoids-and-the-isoprene-rule",
+    "nugget_id": "nugget-terpenoids-and-the-isoprene-rule",
+    "anchor_text": "In a cyclic terpenoid such as limonene or alpha-pinene the same dissection works, but the cut lines run through the ring and take more care to find"
+   },
+   "severity": "high",
+   "category": "visual-opportunity",
+   "observation": "The isoprene rule is explicitly a rule about drawing lines on a skeleton, and the prose says so ('this is a rule about cutting a skeleton'). All seven figures in the section (mol-isoprene, mol-myrcene, mol-limonene, mol-alpha-pinene, mol-farnesol, mol-squalene, mol-beta-carotene) are plain unannotated skeletons with rdkit_options null - no highlighted units, no cut lines, no head/tail marking. The text even tells the learner that cut lines exist and are hard to find in a ring, and then shows a ring with no cut lines. Squalene's central tail-to-tail bond, which the section calls out by name and which the next section leans on for the cyclisation cascade, is not marked on the squalene figure; the same is true of beta-carotene's centre.",
+   "learner_impact": "A learner is asked to perform a visual dissection that is never demonstrated visually - not even once on myrcene, the case the prose itself calls 'the cleanest illustration'. Practically, they will fall back on the arithmetic (count carbons, divide by five), which is exactly the shortcut the concept's trouble_spots warn defeats them, because it ignores the connection pattern that distinguishes head-to-tail from squalene's tail-to-tail junction.",
+   "evidence": "Package assets mol-myrcene, mol-limonene, mol-alpha-pinene, mol-farnesol, mol-squalene, mol-beta-carotene all have rdkit_options null and no highlight or annotation data. mol-squalene learning_goal says 'the famous tail-to-tail bond at the centre' but the asset carries nothing that identifies that bond. There is no video_brief for this concept at all.",
+   "recommended_outcome": "The chapter needs at least one worked visual dissection - a skeleton with its five-carbon units distinguishable and the head-to-tail joins visible - carried through from the acyclic easy case to a cyclic one, and squalene's central junction needs to be identifiable on the structure rather than only in the caption.",
+   "confidence": 0.94
+  },
+  {
+   "finding_id": "visual-005",
+   "location": {
+    "section_id": "nugget-chain-packing-and-melting-points",
+    "asset_id": "mol-lauric-acid",
+    "anchor_text": "lauric acid, 12:0, melts near 44 degrees Celsius"
+   },
+   "severity": "high",
+   "category": "figure-purpose",
+   "observation": "Every molecule figure in the reader is a separately rendered image capped at maxH 180px in its own full-width card. RDKit scales each structure to fill its own canvas, so a twelve-carbon chain and an eighteen-carbon chain are drawn at the same on-screen size. Any argument in this chapter that depends on relative size therefore cannot be read off the figures: the chain-length melting trend (lauric 12:0 / palmitic 16:0 / stearic 18:0, three near-identical straight zigzags), the terpenoid ladder (isoprene C5 through beta-carotene C40, where the classification table is entirely about carbon count), and the wax-versus-triacylglycerol contrast (one ester versus three). I confirmed by rendering: at matched canvas size the three saturated acids differ visibly in length, but at per-figure autoscale they do not.",
+   "learner_impact": "A learner scrolling the chain-packing section sees three pictures that look the same and one that bends. The 'every added CH2 adds contact area' half of the argument is invisible, so the whole section collapses onto the unsaturation half, and the melting-point numbers become a table to memorise rather than a trend with a visible cause.",
+   "evidence": "[internal source reference \u2014 not in this repo] StructureCard renders each molecule via the deck-creator preview endpoint into an Image with maxH=\"180px\"; [internal source reference \u2014 not in this repo] maps each block into its own Box in a maxW 860px column, one per row. Assets mol-lauric-acid, mol-palmitic-acid, mol-stearic-acid have identical rdkit_options (null) and no shared scale directive.",
+   "recommended_outcome": "Wherever the chapter argues from relative size or chain length, the figures must be comparable in scale and visible together; at present per-figure autoscaling normalises away the exact quantity being argued about.",
+   "confidence": 0.9
+  },
+  {
+   "finding_id": "visual-006",
+   "location": {
+    "section_id": "nugget-saponification-and-soap-action",
+    "anchor_text": "A lone pair on the hydroxide oxygen forms the new bond to carbon while the carbonyl pi electrons shift onto the carbonyl oxygen"
+   },
+   "severity": "high",
+   "category": "sequencing",
+   "observation": "In all ten sections the compiled reader emits exactly one text block containing the entire section (3,484 to 7,294 characters of markdown) followed by a run of every figure for that section, then the video and link blocks. No figure sits next to the sentence it supports. In the saponification section the learner reads a 5,536-character passage covering stoichiometry, a three-step mechanism, the irreversibility argument, micelle formation, hard water and detergent design, and only then meets six structures in a row - tributyrin, glycerol, stearate, stearic acid, calcium stearate, alkylbenzenesulfonate - with no indication of which paragraph each belongs to.",
+   "learner_impact": "The figures cannot function as support while reading; they become an appendix the learner has to re-map back onto prose from memory. The effect is worst exactly where the prose is densest, and it also destroys the intended adjacency of deliberately paired figures (mol-stearate-anion immediately after the carboxylate discussion, mol-calcium-stearate immediately after the hard-water paragraph).",
+   "evidence": "frontend/public/reader/topic-chapters/biomolecules-lipids.json: every section has blocks[0].block_type == 'text' carrying the whole section, followed by consecutive 'molecule' blocks. Block-type census for the chapter: 59 molecule, 10 text, 10 external_link, 4 video (all hidden), 1 mcmurry_link - i.e. exactly one text block per section.",
+   "recommended_outcome": "Figures need to be placeable at the point in the argument where they are used, rather than batched after the section prose; the compiled section is currently one text block plus a figure appendix.",
+   "confidence": 0.92
+  },
+  {
+   "finding_id": "visual-007",
+   "location": {
+    "section_id": "nugget-chain-packing-and-melting-points",
+    "asset_id": "mol-elaidic-acid",
+    "anchor_text": "same everything except the geometry at C9"
+   },
+   "severity": "medium",
+   "category": "figure-purpose",
+   "observation": "The oleic/elaidic pair is explicitly framed as a control experiment - same formula, same double-bond count, one difference. Delivered as two consecutive full-width cards, each rendered independently, the comparison is undermined: I rendered both and RDKit places oleic acid diagonally with the carboxyl at upper left and elaidic acid horizontally with the carboxyl at right. A learner must mentally rotate one onto the other before the single intended difference becomes the visible difference. The same problem applies to every other deliberate pair in the chapter: mol-trans-decalin vs mol-cis-decalin, mol-testosterone vs mol-estradiol, mol-dppc vs mol-phosphatidylethanolamine, mol-tristearin vs mol-triolein, mol-cetyl-palmitate vs the triacylglycerols.",
+   "learner_impact": "A control experiment only works if the controlled variables visibly match. When orientation, scale and position all differ, the learner cannot see that only one thing changed, and the rhetorical force of 'same everything except' is carried by the sentence rather than by the picture that was supposed to prove it.",
+   "evidence": "Assets mol-oleic-acid ('CCCCCCCC/C=C\\CCCCCCCC(=O)O') and mol-elaidic-acid ('CCCCCCCC/C=C/CCCCCCCC(=O)O'), both rdkit_options null, compiled to consecutive standalone molecule blocks (section nugget-chain-packing-and-melting-points blocks 4 and 5). Verified by rendering both with default Compute2DCoords: differing orientation and aspect.",
+   "recommended_outcome": "Paired figures whose whole purpose is a controlled one-variable comparison need to be presented so that only the intended variable differs visually - matched orientation, matched scale, seen together. The chapter contains at least six such pairs and none of them currently get that treatment.",
+   "confidence": 0.88
+  },
+  {
+   "finding_id": "visual-008",
+   "location": {
+    "section_id": "nugget-saponification-and-soap-action",
+    "concept_slug": "saponification-and-soap-action",
+    "question_slug": "ch27-saponification-first-arrow",
+    "anchor_text": "Step 3 is the reason saponification is irreversible"
+   },
+   "severity": "medium",
+   "category": "worked-example-gap",
+   "observation": "The prose calls the proton-transfer step 'the single most examinable point in the section' and lays the mechanism out as three numbered paragraphs describing lone pairs moving, pi electrons shifting, a tetrahedral intermediate forming and collapsing, and an alkoxide leaving. No figure in the section shows a single curved arrow, an intermediate, or a charge. The section's six figures are the starting material, the products and two detergent comparators - none of them is a mechanistic step. The chapter then asks the learner to draw the first curved arrow (ch27-saponification-first-arrow) and to record every bond and formal-charge change of that step (ch27-saponification-bond-ledger).",
+   "learner_impact": "Arrow-pushing is a drawing skill, and this is the only mechanism the chapter teaches. Asking a learner to produce an arrow they have never been shown on this substrate, after reading the electron movement in prose, puts the whole cost of translation on them at assessment time rather than during instruction.",
+   "evidence": "Section nugget-saponification-and-soap-action blocks 1-6 are molecule blocks (tributyrin, glycerol, stearate, stearic acid, calcium stearate, LAS). The only mechanistic support scoped, video_brief video-saponification-mechanism, is production_status 'deferred' and compiles to blk-j10vowxu with is_hidden: true. compiled/question-set.json contains ch27-saponification-first-arrow (curved_arrow, molecule_smiles tributyrin) and ch27-saponification-bond-ledger (bond_change_ledger).",
+   "recommended_outcome": "The addition-elimination sequence, and specifically the irreversible proton transfer the section builds toward, is asserted in prose and assessed by drawing, with nothing in between. The chapter needs the electron movement to be visible somewhere in the reading before it is required as output.",
+   "confidence": 0.9
+  },
+  {
+   "finding_id": "visual-009",
+   "location": {
+    "section_id": "nugget-chain-packing-and-melting-points",
+    "question_slug": "ch27-saturated-chain-conformation",
+    "anchor_text": "Sighting down any interior carbon-carbon bond gives the same picture as looking down the C2-C3 bond of butane"
+   },
+   "severity": "medium",
+   "category": "visual-opportunity",
+   "observation": "The chain-packing section runs a full Newman argument in words: sight down an interior C-C bond, two bulky chain-continuation groups and four hydrogens, anti at 180 degrees is the minimum, syn-eclipsed lines them up and combines torsional with steric strain, and that barrier is what a chain must climb to change shape. The chapter contains no Newman projection and no torsional energy curve - all seven figures in the section are 2D skeletons, and the block-type census confirms the chapter uses only 'molecule' figures throughout. The chapter then asks the learner to set a Newman projection to the lowest-energy conformation (ch27-saturated-chain-conformation, student_config preset_hint 'butane', geometry 'staggered').",
+   "learner_impact": "The prose is asking the learner to construct, from a sentence, a projection along a bond - the single most spatially demanding act in the section - and then assesses their ability to produce that projection. A learner who has not carried a Newman picture forward from earlier conformational analysis has no way to recover it here, and the 'straight chains stack like pencils' conclusion that depends on it becomes an assertion.",
+   "evidence": "Section nugget-chain-packing-and-melting-points contains block types text + 7x molecule + video(hidden) + external_link only. compiled/question-set.json ch27-saturated-chain-conformation is question_type_slug 'newman'. The platform supports a newman_projection teaching-asset kind ([internal source reference \u2014 not in this repo]) that this chapter does not use.",
+   "recommended_outcome": "The anti-versus-eclipsed conformational basis for 'a saturated chain is straight' is prose-only and then assessed in a projection format the reading never displays; the chapter needs that conformational picture present in the reading, not only in the question.",
+   "confidence": 0.87
+  },
+  {
+   "finding_id": "visual-010",
+   "location": {
+    "section_id": "nugget-eicosanoids-and-prostaglandins",
+    "concept_slug": "eicosanoids-and-prostaglandins",
+    "anchor_text": "ring from cyclooxygenase, no ring from lipoxygenase"
+   },
+   "severity": "medium",
+   "category": "visual-opportunity",
+   "observation": "The section's stated thesis is a fork: one precursor, two enzyme branches, ring versus no ring. Only one side of the fork is drawn. mol-arachidonic-acid shows the precursor and mol-pge2 shows the cyclooxygenase product; there is no leukotriene figure (the open-chain conjugated-triene product that the prose says defines the other branch), no thromboxane figure (the six-membered oxygen-containing ring the prose contrasts against the five-membered carbocycle), and no representation of the branch structure itself. The section has four figures and no video brief - the fewest figures of any section in the chapter, for the concept whose whole organising idea is a two-way comparison.",
+   "learner_impact": "A learner can see what a prostaglandin looks like but has to take 'leukotrienes never close a ring' entirely on faith, which makes the two branches symbolic labels rather than two recognisably different architectures. The corticosteroid-versus-NSAID point that closes the section ('shuts off the supply upstream of both branches at once') depends on the fork being a picture the learner holds.",
+   "evidence": "Section nugget-eicosanoids-and-prostaglandins has 6 blocks: text, mol-arachidonic-acid, mol-pge2, mol-aspirin, mol-ibuprofen, external_link. Package video_briefs contains no brief for concept eicosanoids-and-prostaglandins. Compounds named in prose with no structure anywhere: PGH2, PGF2-alpha, thromboxane A2, leukotrienes, montelukast.",
+   "recommended_outcome": "The COX/LOX fork - one precursor, two structurally distinguishable outcomes - is the section's organising claim and only one outcome is visible. The chapter needs both branch products to be seeable side by side, and the branching relationship itself to be shown rather than narrated.",
+   "confidence": 0.88
+  },
+  {
+   "finding_id": "visual-011",
+   "location": {
+    "section_id": "nugget-steroids-structure-and-conformation",
+    "asset_id": "mol-cholesterol",
+    "anchor_text": "seventeen in the four-ring nucleus, two angular methyl groups (C18 on the C/D junction and C19 on the A/B junction)"
+   },
+   "severity": "medium",
+   "category": "figure-purpose",
+   "observation": "The steroid section is dense with positional references - rings A, B, C and D; C3 hydroxyl; C5-C6 double bond; C17 side chain; C18 and C19 angular methyls; alpha and beta faces - and it explicitly asks the learner to hold two labelling systems apart. The cholesterol figure carries none of those labels. It is a clean, correctly oriented RDKit skeleton with wedge/dash stereo and no ring letters, no locants and no face annotation. The asset's own long_description describes labels the picture does not have: 'three six-membered rings labelled A, B and C, and one five-membered ring labelled D'. The same gap applies to mol-testosterone and mol-estradiol, whose descriptions reference C3, C4-C5, C17, C18 and C19 positions that appear nowhere on the figures.",
+   "learner_impact": "Every positional claim in the section requires the learner to count round a fused polycyclic skeleton from memory of the steroid numbering convention - which this chapter never establishes visually. The alpha/beta versus axial/equatorial clarification the prose calls 'the single most valuable clarification in this section' is impossible to check against the figure, because neither faces nor orientations are marked.",
+   "evidence": "Package asset mol-cholesterol, rdkit_options null, no atom labels or annotation data; long_description text quoted above. Same for mol-testosterone and mol-estradiol. I rendered all three - output carries wedge/dash stereo and heteroatom labels only.",
+   "recommended_outcome": "The section argues almost entirely from named ring and carbon positions, and no figure in it names any. The chapter needs the steroid numbering and face convention to be established on a structure the learner can look at, rather than assumed.",
+   "confidence": 0.9
+  },
+  {
+   "finding_id": "visual-012",
+   "location": {
+    "section_id": "nugget-lipid-classification-and-solubility",
+    "concept_slug": "lipid-classification-and-solubility",
+    "anchor_text": "the class contains molecules with almost nothing structural in common"
+   },
+   "severity": "medium",
+   "category": "figure-purpose",
+   "observation": "This section makes two visual arguments and the layout defeats both. First, 'these six molecules have almost nothing in common' requires seeing them together - but mol-tristearin, mol-cetyl-palmitate, mol-dppc, mol-cholesterol, mol-limonene and mol-pge2 are six consecutive full-width cards, each capped at 180px, spread across several screens of scrolling, so the learner sees a sequence of unrelated structures rather than a contrast. Second, the section's real organising content is a taxonomy - hydrolysable versus non-hydrolysable, then wax (one ester) / triacylglycerol (three esters) / phospholipid (two esters plus a phosphate) - which is a hierarchy delivered as nested prose bullets with no visual structure at all.",
+   "learner_impact": "The 'nothing in common' point is the section's hook and it lands only if the diversity is simultaneous. Read sequentially, six structures separated by scroll simply read as six molecules. And the ester-count taxonomy - the discriminating test the section says does 'the most work' - is exactly the kind of branching decision a learner benefits from seeing laid out; as prose it has to be reconstructed each time it is used, and it is used again in the wax/triacylglycerol section and in ch27-hydrolysable-lipid-classes.",
+   "evidence": "Section nugget-lipid-classification-and-solubility blocks 1-6 are six consecutive molecule blocks; [internal source reference \u2014 not in this repo] renders one block per row in a maxW 860px column. The hydrolysable/non-hydrolysable split and the ester-count discriminator appear only as markdown bullets in blocks[0].",
+   "recommended_outcome": "The class-diversity claim needs its exemplars visible together rather than in sequence, and the hydrolysability/ester-count taxonomy - which the chapter reuses three times - needs a form the learner can see as a structure rather than re-derive from prose.",
+   "confidence": 0.85
+  },
+  {
+   "finding_id": "visual-013",
+   "location": {
+    "asset_id": "mol-mixed-tag",
+    "section_id": "nugget-triacylglycerols-and-waxes",
+    "anchor_text": "C2 now bears four different substituents"
+   },
+   "severity": "medium",
+   "category": "alt-text-quality",
+   "observation": "The alt_text for mol-mixed-tag states 'The central carbon is marked as a stereocenter.' It is not. The asset has rdkit_options null, so no stereo annotation is applied; I rendered the SMILES and the figure shows a dashed bond at C2 and nothing else - no R/S label, no asterisk, no highlight. A learner (or a screen-reader user) is told to look for a marking that does not exist. Separately, the figure asks for a discrimination it makes hard: the whole point is that the two outer acyl chains differ, and they differ by two carbons (palmitoyl C16 versus stearoyl C18) on two long arms that RDKit splays in opposite directions inside a 180px-tall card.",
+   "learner_impact": "The learner looks for a stereocenter marker, does not find one, and either assumes they have missed it or distrusts the figure. Then the actual argument - C2 is a stereocenter because the two arms are no longer identical - requires counting carbons on two divergent chains at small on-screen size, which is precisely the perceptual task most likely to fail. The result is that the chapter's stated 'point most often missed' is left resting on the prose.",
+   "evidence": "Package asset mol-mixed-tag: smiles 'CCCCCCCCCCCCCCCC(=O)OC[C@@H](OC(=O)CCCCCCC/C=C\\\\CCCCCCCC)COC(=O)CCCCCCCCCCCCCCCCC', accessibility.alt_text contains 'The central carbon is marked as a stereocenter', and the asset has no rdkit_options key. Verified by rendering: dashed bond present, no annotation. Contrast mol-glycerol and mol-isoprene, which do carry rdkit_options {show_hydrogens: true}.",
+   "recommended_outcome": "The figure's description promises a stereocenter marking the figure does not carry, and the difference between the two outer chains - the entire basis of the chirality claim - is not made perceptible. Either the figure needs to actually distinguish the central carbon and the two arms, or the description needs to stop claiming it does.",
+   "confidence": 0.93
+  },
+  {
+   "finding_id": "visual-014",
+   "location": {
+    "section_id": "nugget-chain-packing-and-melting-points",
+    "question_slug": "ch27-rank-unsaturation-melting-points",
+    "anchor_text": "Rank them from lowest melting point to highest"
+   },
+   "severity": "medium",
+   "category": "visual-opportunity",
+   "observation": "The ranking task is about shape, and its cards are text. Each card reads as a name plus the answer criterion spelled out - 'Stearic acid, 18:0 - no carbon-carbon double bonds', 'Oleic acid, 18:1 D9 - one cis double bond', and so on - so the learner sorts by a count they are handed rather than by anything they have to see. The same pattern recurs in ch27-hydrolysable-lipid-classes, where six lipids are sorted by whether NaOH cleaves them and every item is a bare name, so a structural discrimination (is there an ester?) becomes name recall.",
+   "learner_impact": "These are the two tasks in the set where looking at a structure is the skill, and both remove the structure. A learner who cannot recognise a kink or spot an ester linkage can still score full marks, so the assessment gives no signal about the visual competence the chapter is trying to build - and gives the learner no reason to practise it.",
+   "evidence": "compiled/question-set.json ch27-rank-unsaturation-melting-points student_config.cards are text-only (no structure_smiles); ch27-hydrolysable-lipid-classes student_config.items are text-only. Contrast ch27-lipid-architecture-matrix, which does supply structure_smiles for each case, and ch27-read-fatty-acid-shorthand, whose options carry SMILES.",
+   "recommended_outcome": "Two structure-recognition tasks currently supply the discriminating feature in words instead of showing it. Where the skill being assessed is reading a structure, the item needs to require reading a structure.",
+   "confidence": 0.86
+  },
+  {
+   "finding_id": "visual-015",
+   "location": {
+    "section_id": "nugget-phospholipids-and-membranes",
+    "asset_id": "mol-glycerol",
+    "anchor_text": "The glycerol backbone is still there"
+   },
+   "severity": "low",
+   "category": "visual-redundancy",
+   "observation": "mol-glycerol appears three times in the chapter and mol-stearic-acid four. Most repeats earn their place - glycerol is the product in the saponification section, stearic acid is the hydrogenation product and the packing reference. The instance that does not is mol-glycerol as the sixth and last figure of the phospholipid section: by that point the learner has already been shown four structures that contain a glycerol backbone (DPPC, PE, and by contrast sphingosine and sphingomyelin), and the standalone triol adds nothing the DPPC figure does not already contain. Ending an already long figure run with the section's least informative structure also puts the weakest image in the most memorable position.",
+   "learner_impact": "Minor, but in a section already carrying six full-width cards for a 5,712-character passage, the last card should be the one that pays off the argument - and here that would be anything showing aggregation, not the backbone the learner met two sections earlier.",
+   "evidence": "Package nugget-phospholipids-and-membranes asset_ids: ['mol-dppc', 'mol-phosphatidylethanolamine', 'mol-sphingosine', 'mol-sphingomyelin', 'mol-stearate-anion', 'mol-glycerol']; mol-glycerol also appears in nugget-triacylglycerols-and-waxes and nugget-saponification-and-soap-action.",
+   "recommended_outcome": "A repeated figure should be doing a new job each time it appears; the glycerol repeat in the phospholipid section is not, and the slot would be better spent on the section's unshown argument.",
+   "confidence": 0.75
+  },
+  {
+   "finding_id": "visual-016",
+   "location": {
+    "section_id": "nugget-terpenoids-and-the-isoprene-rule",
+    "asset_id": "mol-limonene",
+    "anchor_text": "the compound responsible for citrus peel odour"
+   },
+   "severity": "low",
+   "category": "figure-accuracy",
+   "observation": "mol-limonene's SMILES 'CC(=C)[C@@H]1CC=C(C)CC1' specifies (S)-limonene (CIP S, verified with RDKit's CIP labeller), and the figure renders that stereocenter as a visible wedge. The asset's long_description says limonene is 'the compound responsible for citrus peel odour' and notes 'the ring carbon bearing it is a stereocenter, so limonene is chiral' - but the enantiomer associated with citrus peel is (R)-(+)-limonene. The figure therefore draws a specific, visible configuration that the caption's identification does not match.",
+   "learner_impact": "Low in this chapter, since nothing in the section turns on limonene's configuration. But the figure is one of the chapter's few places where a drawn wedge encodes a claim about a named real substance, and a learner who checks it against any outside source will find a mismatch. This overlaps the instructor persona's territory and I defer the chemistry call to them.",
+   "evidence": "Package asset mol-limonene smiles 'CC(=C)[C@@H]1CC=C(C)CC1'; RDKit rdCIPLabeler assigns S at the ring stereocenter. accessibility.long_description begins 'A cyclic monoterpene, and the compound responsible for citrus peel odour.'",
+   "recommended_outcome": "The depicted configuration and the identification in the description need to agree, or the figure needs to not commit to a configuration the text does not intend.",
+   "confidence": 0.7
+  },
+  {
+   "finding_id": "visual-017",
+   "location": {
+    "section_id": "nugget-steroids-structure-and-conformation",
+    "anchor_text": "a cascade of ring closures in which each newly formed cation is attacked by the next alkene in the chain"
+   },
+   "severity": "medium",
+   "category": "media-equivalence",
+   "observation": "All four video briefs are production_status 'deferred', and the compiler emits them as video blocks with url '' and is_hidden true, which the reader renders as null. The consequence is silent: the learner sees no placeholder, no note, and no substitute - the four hardest arguments in the chapter simply have no non-prose support, and there is nothing to indicate that support was planned. The four briefs are precisely the chapter's four geometric arguments (cis-kink packing, saponification arrows, micelle-versus-bilayer, decalin ring flip), and their storyboards read as a fairly exact specification of what the reader is now missing. A fifth argument of the same kind - squalene folding and closing four rings in one cascade - was never scoped at all.",
+   "learner_impact": "Deferring production is a reasonable call, but deferring it to nothing means the visual load is not reduced, it is transferred wholesale to the prose - and then to the learner. Sections 3, 5, 7 and 10 all now ask the learner to construct spatial or mechanistic pictures from paragraphs, with the chapter's most demanding content and its least visual support coinciding exactly.",
+   "evidence": "Package video_briefs: video-cis-kink-packing, video-saponification-mechanism, video-bilayer-assembly, video-steroid-rigidity, all production_status 'deferred'. Compiled reader blocks blk-vh7dhul0, blk-j10vowxu, blk-11akxo27, blk-nym57vqy each carry url '' and is_hidden: true; [internal source reference \u2014 not in this repo] line 360 returns null for hidden blocks.",
+   "recommended_outcome": "Deferring the animated form of an argument should not remove the argument's visual support entirely. Each deferred brief describes a relationship the reader still needs to be able to see; the chapter needs some equivalent to stand in until (or instead of) the animation, and the decision to defer needs to be visible to whoever picks the chapter up.",
+   "confidence": 0.9
+  },
+  {
+   "finding_id": "visual-018",
+   "location": {
+    "section_id": "nugget-terpenoids-and-the-isoprene-rule",
+    "concept_slug": "terpenoids-and-the-isoprene-rule",
+    "anchor_text": "DMAPP ionises, losing diphosphate to give a resonance-stabilised allylic carbocation"
+   },
+   "severity": "low",
+   "category": "missing-example",
+   "observation": "Several compounds that carry real argumentative weight are named in prose with no structure anywhere in the chapter: IPP and DMAPP and the diphosphate leaving group (the terpenoid section's entire biosynthesis passage, including the allylic cation and the chain-extension sequence, runs on structures that are never drawn - while isoprene, which the prose is at pains to say is NOT the building block, does get a figure); myristic acid, which appears in the melting-point trend list without a structure while its three neighbours have one; phosphatidylserine, the exception that carries a genuine net negative charge; and cholic acid, whose cis A/B fusion producing a polar face and a nonpolar face is the one place a bile acid's shape is argued.",
+   "learner_impact": "The asymmetry is the problem more than the absence: the chapter shows the decoy (isoprene) and not the real reagents (IPP/DMAPP), shows three points of a four-point melting trend, and shows the two zwitterionic phospholipids but not the anionic exception the prose singles out. A learner reasonably infers that what is drawn is what matters.",
+   "evidence": "Chapter asset list (36 assets) contains mol-isoprene but no IPP, DMAPP, geranyl/farnesyl diphosphate, lanosterol, myristic acid, phosphatidylserine, cholic acid, leukotriene or thromboxane. Prose references: 'isopentenyl diphosphate (IPP) and its isomer dimethylallyl diphosphate (DMAPP)'; 'myristic acid, 14:0, near 54 degrees'; 'Phosphatidylserine is the exception'; 'Bile acids, such as cholic acid ... unusual in having a cis A/B ring fusion'.",
+   "recommended_outcome": "Where the prose singles out a compound as the real building block, the exception, or the shape argument, the learner needs to be able to see it; at present the chapter draws the counterexample and omits the case.",
+   "confidence": 0.8
+  }
+ ],
+ "strengths": [
+  "Every one of the 36 assets carries a stated learning_goal and is bound to concept_slugs and nugget_ids - there is no decorative or orphan figure anywhere in the chapter, which is rarer than it sounds.",
+  "The alt_text and long_description pairs are substantive and frequently carry the pedagogical point plus data the picture cannot show (melting points, shorthand, why the figure exists). mol-elaidic-acid's description even names its own purpose: 'The visual consequence is the point of the figure.'",
+  "RDKit's cis/trans handling genuinely delivers on the fatty acids: oleic acid's mid-chain bend, elaidic acid's near-straightness, and the progressive curvature of linoleic, alpha-linolenic and arachidonic acid all read at a glance. This is the one geometric claim in the chapter that its figures actually carry.",
+  "The steroid figures share RDKit's canonical steroid orientation, so cholesterol, testosterone and estradiol read as three variations on one skeleton - the aromatic A ring and the missing angular methyl in estradiol are visible without being told. This is the only comparison in the chapter that survives the one-card-per-row layout.",
+  "mol-glycerol and mol-isoprene are the only two assets carrying rdkit_options {show_hydrogens: true}, and they are exactly the two molecules whose argument is about substituent count - C2's four groups and the C5 branching pattern. That is a deliberate and correct per-figure choice rather than a blanket setting.",
+  "mol-dppc and mol-phosphatidylethanolamine render the [O-] and the N+ explicitly, so the zwitterion claim the prose is careful about is directly checkable against the picture; DPPC's default layout also happens to put both tails on one side and the head on the other, which is the closest the chapter comes to showing membrane architecture.",
+  "ch27-lipid-architecture-matrix supplies structure_smiles for each of its three cases, so at least one assessment item requires reading structures rather than names."
+ ],
+ "open_questions": [
+  "Does the reader offer any multi-panel or comparison block primitive? I found only one-molecule-per-card (ReaderBlockRenderer StructureCard, maxH 180px, one block per row in a maxW 860px column), which is what drives findings visual-005, visual-007 and visual-012. If no side-by-side primitive exists, those three are a platform need rather than a chapter need and should be routed accordingly.",
+  "The platform declares newman_projection, conformational_energy_profile and stereochemistry_conversion teaching-asset kinds, and the chapter uses none of them - it uses 'molecule' for all 59 figure blocks. Before choosing interventions for visual-003 and visual-009 the orchestrator should confirm which teaching-asset kinds actually render on this reader path; there is a prior note in project memory that stereochemistry_conversion assets do not render in the reader at all.",
+  "Is there an existing chair-drawing capability that can depict a fused bicyclic system (decalin, or a steroid A/B junction), or only monocyclic cyclohexane? ch27-cholesterol-a-ring-chair's own prompt says the tool 'shows a plain cyclohexane', which suggests the fused case may not be representable - that would change what visual-003 can realistically ask for.",
+  "ch27-bilayer-versus-micelle's correct option is markedly longer and more specific than its three distractors, which reads as a length tell. I am flagging it only because it sits on the argument in visual-002; the assessment call belongs to the instructor persona.",
+  "I did not attempt to verify melting-point values, biosynthetic claims, or the drug-mechanism narrative - those are outside this lens. I did verify molecular formulas and CIP labels for the stereo-bearing assets and the trans/cis decalin junction geometry (by 3D embedding and H-C-C-H dihedral), and found no errors there."
+ ]
+}

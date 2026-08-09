@@ -1,0 +1,329 @@
+{
+ "persona": "Organic Chemistry Instructor",
+ "persona_version": "1.0.0",
+ "chapter_id": "biomolecules-lipids",
+ "chapter_version": "1",
+ "summary": "NOT-GO as it stands, but this is a near-miss rather than a rebuild. The prose is the strongest lipid chapter I have reviewed in this series: every melting point I checked against the literature is right (lauric 44, myristic 54, palmitic 63, stearic 70, oleic 13, elaidic 45, linoleic -5, alpha-linolenic -11, arachidonic -49), every arithmetic claim checks out (70-13=57, 70-(-49)=119, 17+2+8=27 carbons in cholesterol, 7+8+5=20 in a prostaglandin), and the causal arguments - packing not bond strength, proton transfer not addition as the source of saponification's irreversibility, shape not chemistry as the source of bilayer-versus-micelle, trans fusion not sterics as the source of steroid rigidity - are genuinely mechanistic rather than assertive. 34 of 36 SMILES verify clean against authentic InChIKeys, including cholesterol, testosterone, estradiol, DPPC, DPPE, sphingosine, squalene, and all-trans-beta-carotene. Two things stop me assigning it. First, mol-pge2 is the C15 epimer of prostaglandin E2, not PGE2, and that structure is rendered in two reader sections and used as the substrate of three questions. Second, the model answer of ch27-steroid-rigidity-error-repair-v2 asserts that steroids are not built from acetyl units, which is false and which the chapter's own mevalonate sentence contradicts. Beyond the chemistry, all four video briefs are deferred, which leaves the trans-decalin ring-flip argument, the saponification mechanism, and the micelle-versus-bilayer geometry with no figure at all - and each of those has a question that assumes the missing figure. Fix the two chemistry errors, repair the collapse-step curved-arrow question, and give sections 5, 7 and 10 a static figure apiece, and I would assign this chapter without reservation.",
+ "overall_score": 6,
+ "publication_blockers": [
+ "instr-001",
+ "instr-002"
+ ],
+ "findings": [
+ {
+ "finding_id": "instr-001",
+ "location": {
+ "asset_id": "mol-pge2",
+ "concept_slug": "eicosanoids-and-prostaglandins",
+ "question_slug": "ch27-prostaglandin-ring-ketone",
+ "anchor_text": "CCCCC[C@@H](O)/C=C/[C@H]1[C@H](O)CC(=O)[C@@H]1C/C=C\\CCCC(=O)O"
+ },
+ "severity": "blocker",
+ "category": "chemical-accuracy",
+ "observation": "The SMILES for mol-pge2 sets the C15 side-chain carbinol to R. Authentic prostaglandin E2 is 15S. RDKit gives the asset InChIKey XEYBRNLFEZDVAW-GKEZHNTDSA-N against XEYBRNLFEZDVAW-ARSRFYASSA-N for the PubChem reference structure; the ring centres (8R,11R,12R) are correct and only the C15 centre is inverted. The molecule as drawn is 15-epi-PGE2, a distinct compound. The same string is copied into frontend/public/reader/topic-chapters/biomolecules-lipids.json (sections 1 and 8), into option d of ch27-lipid-defining-property-v2, and into student_config.molecule_smiles of ch27-prostaglandin-ring-ketone and its v2.",
+ "learner_impact": "Students meet a mislabelled structure five times across the chapter and are asked to click atoms on it. Anyone who later compares it with a drug-chemistry source, a biochemistry text, or PubChem will find a mismatch at exactly the centre (C15-OH) that determines eicosanoid receptor activity, and a chapter that has otherwise earned trust on structural detail will have taught a wrong stereocentre.",
+ "evidence": "RDKit verification: asset SMILES -> XEYBRNLFEZDVAW-GKEZHNTDSA-N, CIP (C15 = R); reference 'CCCCC[C@H](O)/C=C/[C@H]1[C@H](O)CC(=O)[C@@H]1C/C=C\\CCCC(=O)O' -> XEYBRNLFEZDVAW-ARSRFYASSA-N, CIP (C15 = S). The two differ only in the leading [C@@H] versus [C@H].",
+ "recommended_outcome": "The chapter needs the prostaglandin E2 structure corrected to the natural 15S configuration everywhere it appears - asset, compiled reader chapter, and all three question configurations - and needs a check that no other copy of the string survives in the compiled artifacts.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "instr-002",
+ "location": {
+ "question_slug": "ch27-steroid-rigidity-error-repair-v2",
+ "concept_slug": "steroids-structure-and-conformation",
+ "anchor_text": "terpenoids and steroids are not. They are built from five-carbon isopentenyl and dimethylallyl diphosphate units"
+ },
+ "severity": "blocker",
+ "category": "chemical-accuracy",
+ "observation": "The student's 'flawed work' opens with 'Cholesterol is a lipid, and like all lipids it is assembled from acetyl units.' The answer key names that as the flawed claim, categorises it as over-generalisation, and grades fix_scope as the repair - a repair that states outright that terpenoids and steroids are NOT assembled from acetyl units. That is false. Isopentenyl diphosphate is made from three acetyl-CoA via HMG-CoA and mevalonate, so every one of cholesterol's twenty-seven carbons traces to acetate. The chapter's own terpenoid nugget names the mevalonate pathway two sections earlier, so the package contradicts itself.",
+ "learner_impact": "An advanced question tells a student that a correct biosynthetic statement is an error, and hands them a false replacement they will carry into biochemistry, where the acetate origin of cholesterol is one of the standard labelling results. Worse, the item's whole pedagogic move - 'test each claim independently, two are true' - trains students to trust the key over their own correct reasoning.",
+ "evidence": "topic.package.json question_sets ch27-steroid-rigidity-error-repair-v2: expected_target 't_acetyl', expected_repair 'fix_scope'; against nugget-terpenoids-and-the-isoprene-rule expanded text 'IPP itself is made by two different routes ... the mevalonate pathway in animals and fungi ... the enzyme HMG-CoA reductase catalyses its rate-limiting step'.",
+ "recommended_outcome": "This item needs its flawed claim and repair re-scoped so the graded distinction is between the IMMEDIATE building block (C2 acetyl for fatty acids versus C5 IPP/DMAPP for terpenoids) and the ultimate carbon source, which is acetyl-CoA in both cases - or a different flawed claim substituted entirely.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "instr-003",
+ "location": {
+ "question_slug": "ch27-saponification-first-arrow-v2",
+ "concept_slug": "saponification-and-soap-action"
+ },
+ "severity": "high",
+ "category": "assessment-readiness",
+ "observation": "The prompt says 'The tetrahedral intermediate from hydroxide addition to the central ester of tributyrin has formed. Draw the single curved arrow that begins its COLLAPSE.' But student_config.molecule_smiles is still 'CCCC(=O)OCC(OC(=O)CCC)COC(=O)CCC.[OH-]' - intact tributyrin plus a free hydroxide. The tetrahedral intermediate is never rendered. Site 10 is labelled 'the oxygen that became negatively charged on addition' but on the displayed structure it is still the neutral carbonyl oxygen double-bonded to site 9, so the keyed arrow (lone pair on 10 to atom 9) drawn on what the student can see would give a carbon with five bonds. The accessibility_bundle concedes the problem: 'The tetrahedral intermediate of an ester hydrolysis is described in the question.'",
+ "learner_impact": "Students cannot do the task as drawn. Either they push the arrow on the visible structure and produce nonsense, or they must hold an undrawn intermediate in their head while interacting with a contradictory picture. Both outcomes punish the students who are actually reading the structure, which is the habit the chapter otherwise builds.",
+ "evidence": "topic.package.json question_sets ch27-saponification-first-arrow-v2 student_config.molecule_smiles is byte-identical to the v1 (pre-attack) structure; answer_key expected_arrows source {lone_pair, site 10} -> target {atom, site 9}.",
+ "recommended_outcome": "The question needs the actual tetrahedral-intermediate structure supplied as its substrate rather than the starting ester, and the site indices re-derived against it. Separately, the collapse step needs both of its arrows (pi re-formation AND C-O cleavage) available, since max_arrows is currently 1 and the feedback has to explain away the missing second arrow.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "instr-004",
+ "location": {
+ "concept_slug": "steroids-structure-and-conformation",
+ "asset_id": "mol-trans-decalin",
+ "nugget_id": "nugget-steroids-structure-and-conformation",
+ "anchor_text": "the two carbon-carbon bonds that join the rings are equatorial with respect to both chairs"
+ },
+ "severity": "high",
+ "category": "visual-opportunity",
+ "observation": "The entire rigidity argument in section 10 is conformational: junction bonds equatorial, a flip would make both axial, two axial bonds on adjacent carbons point up and down, the second ring cannot bridge them. The only figures available are mol-trans-decalin and mol-cis-decalin, which are flat 2D SMILES depictions - they show which face each bridgehead hydrogen is on but cannot show an axial or equatorial bond at all. video-steroid-rigidity, which would have animated the failed flip, carries production_status 'deferred', and the compiled reader block for it is emitted with url \"\" and is_hidden true, so nothing renders. ch27-cholesterol-a-ring-chair then asks the student to place an OH on a chair for ring A of cholesterol - a chair the chapter never draws.",
+ "learner_impact": "The single hardest idea in the chapter is delivered as pure prose. Students who cannot already visualise fused chairs have no way in, and the assessment demands the visualisation the chapter declined to supply. This is exactly where a static chair-pair figure earns its keep, because the argument is about geometry the reader cannot construct from a flat drawing.",
+ "evidence": "topic.package.json video_briefs video-steroid-rigidity production_status 'deferred'; frontend/public/reader/topic-chapters/biomolecules-lipids.json section nugget-steroids-structure-and-conformation, video block content.url = \"\" with is_hidden true; assets mol-trans-decalin / mol-cis-decalin are type 'molecule' with plain SMILES.",
+ "recommended_outcome": "Section 10 needs a non-deferred figure that shows cis- and trans-decalin as fused chairs with the two junction bonds marked axial or equatorial, and a cholesterol ring-A chair carrying the 3-beta-OH in its equatorial position - i.e. the visual the prose and the chair question both already assume exists.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "instr-005",
+ "location": {
+ "question_slug": "ch27-cis-trans-packing-reasoning",
+ "concept_slug": "chain-packing-and-melting-points",
+ "anchor_text": "Name the intermolecular consequence that links shape to melting point"
+ },
+ "severity": "high",
+ "category": "assessment-readiness",
+ "observation": "Both structured_reasoning items end in a short_text field whose label and placeholder invite a sentence ('Name the intermolecular consequence...', placeholder 'What does the bend do to neighbouring chains?'; and in v2 'State in a few words why a kink costs more than an extra CH2 gains'). The answer key is a controlled vocabulary of single words - expected_text ['packing','van der waals','dispersion'] with four synonyms - and [internal source reference — not in this repo]::controlled_vocabulary_match tests whether the student's WHOLE normalised string is a member of that set. 'van der Waals forces', 'the bend stops the chains packing closely', or 'less dispersion contact area' all score zero, and the field is scored deterministically with no review fallback.",
+ "learner_impact": "The two most demanding items in the chapter - the ones that ask students to build the causal argument rather than recognise it - will mark the great majority of correct explanations wrong. Students who write the right physics in their own words lose the mark, which is precisely the wrong lesson for a chapter whose whole thesis is 'understand the argument, do not memorise the table'.",
+ "evidence": "[internal source reference — not in this repo] lines 96-105: 'if norm in accepted_norm: return True' after full-string normalisation only; ch27-cis-trans-packing-reasoning answer_key [redacted].",
+ "recommended_outcome": "The four structured_reasoning short_text fields need either a prompt rewritten to demand a single controlled term (so the exact-match grader is honest about what it wants), or a key that routes the written field to review instead of scoring it - the chapter needs the written-explanation channel to be gradable in the way it is worded.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "instr-006",
+ "location": {
+ "concept_slug": "saponification-and-soap-action",
+ "nugget_id": "nugget-saponification-and-soap-action",
+ "anchor_text": "1. **Addition.** Hydroxide attacks the ester carbonyl carbon."
+ },
+ "severity": "high",
+ "category": "worked-example-gap",
+ "observation": "Section 5 teaches the nucleophilic acyl substitution mechanism as three numbered prose steps and then hangs six assessment items off it: two curved_arrow items, two bond_change_ledger items, ch27-hard-water-scum-v2 on the irreversible step, and the saponification practice_check. Not one mechanism figure exists. The nugget's assets are six isolated molecules (tributyrin, glycerol, stearate, stearic acid, calcium stearate, LAS detergent) and video-saponification-mechanism, which would have carried the curved arrows, is deferred and hidden in the compiled reader.",
+ "learner_impact": "Students are asked to draw curved arrows and fill a bond-change ledger for a mechanism they have only read about. The chapter never shows them what a correct arrow looks like on this substrate, so the ledger items in particular (which demand before/after bond orders and formal charges for a tetrahedral intermediate) are the first time the intermediate appears anywhere - and it appears as a question, not as an example.",
+ "evidence": "topic.package.json nugget-saponification-and-soap-action asset_ids are all type 'molecule'; video_briefs video-saponification-mechanism production_status 'deferred'; compiled reader section nugget-saponification-and-soap-action video block url \"\" / is_hidden true.",
+ "recommended_outcome": "Section 5 needs a static worked mechanism for one ester of tributyrin - starting ester, tetrahedral intermediate with its charge, the collapse, and the final proton transfer - with the arrows drawn, so the mechanism questions assess a step the chapter has actually demonstrated.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "instr-007",
+ "location": {
+ "question_slug": "ch27-cholesterol-a-ring-chair",
+ "concept_slug": "steroids-structure-and-conformation",
+ "anchor_text": "Think about which orientation avoids 1,3-diaxial interactions with the other substituents on the ring. That is the one cholesterol's C3 hydroxyl occupies."
+ },
+ "severity": "medium",
+ "category": "misconception",
+ "observation": "Hint level 2 of this item states correctly that 'Ring A here cannot flip, so there is only one chair to consider - you are not choosing the more stable of two conformers, you are reading off what the single available one gives.' Hint level 3 then reverses it and tells the student to pick the orientation that avoids 1,3-diaxial interactions - i.e. to use exactly the free-cyclohexane energetic argument the chapter's prose forbids here ('It is not equatorial by preference over an axial alternative; there is no alternative').",
+ "learner_impact": "A student who follows the hint ladder to the end arrives at the right answer by the reasoning the chapter has spent a page dismantling, and will generalise it: 'wedge groups go equatorial because axial is crowded.' The v2 item is deliberately built as the contrasting free-cyclohexane case, so the two variants now teach the same reasoning instead of the intended contrast.",
+ "evidence": "topic.package.json ch27-cholesterol-a-ring-chair feedback_bundle.hints[2] versus hints[1] and versus nugget-steroids-structure-and-conformation expanded text 'because trans fusion prevents ring A from flipping, equatorial is the only orientation it can have'.",
+ "recommended_outcome": "The final hint for the locked-ring variant needs to resolve the question by geometry (which orientation the single available chair puts C3-OH in), reserving the 1,3-diaxial energetic argument for the methylcyclohexane variant where it applies.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "instr-008",
+ "location": {
+ "concept_slug": "eicosanoids-and-prostaglandins",
+ "nugget_id": "nugget-eicosanoids-and-prostaglandins",
+ "question_slug": "ch27-eicosanoid-precursor",
+ "anchor_text": "Every eicosanoid derives from arachidonic acid"
+ },
+ "severity": "medium",
+ "category": "misconception",
+ "observation": "The nugget asserts that every eicosanoid derives from arachidonic acid and contains exactly twenty carbons, and ch27-eicosanoid-precursor hardens this into a graded claim ('all eicosanoids - prostaglandins, thromboxanes, and leukotrienes alike'). The series-1 prostaglandins come from dihomo-gamma-linolenic acid (20:3) and the series-3 from EPA (20:5), and the cysteinyl leukotrienes LTC4/LTD4/LTE4 carry a glutathione-derived fragment that takes them well past twenty carbons (LTC4 is C30H47N3O9S). The chapter half-flags this itself - it explains that 'the subscript 2 records that two carbon-carbon double bonds remain in the side chains' - but never says what a 1 or a 3 would mean, leaving the series system dangling.",
+ "learner_impact": "Two of the three loud takeaways in the section will need un-teaching in biochemistry or nutrition, and the dangling subscript invites the student to ask a question the chapter refuses to answer. The fixed-carbon-count idea is a good teaching move, but as written it is stated as an exceptionless rule rather than as a rule about the arachidonate family.",
+ "evidence": "topic.package.json nugget-eicosanoids-and-prostaglandins expanded text 'Every eicosanoid derives from arachidonic acid' and 'every eicosanoid contains exactly twenty carbons'; ch27-eicosanoid-precursor prompt_text.",
+ "recommended_outcome": "The section needs the arachidonate claim scoped to the series-2 family and the subscript convention closed out with a one-sentence note that other twenty-carbon precursors give the 1- and 3-series, plus a hedge on the leukotriene carbon count so the 'exactly twenty' rule is stated as applying to the core skeleton.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "instr-009",
+ "location": {
+ "concept_slug": "eicosanoids-and-prostaglandins",
+ "nugget_id": "nugget-eicosanoids-and-prostaglandins",
+ "question_slug": "ch27-prostaglandin-ring-ketone-v2"
+ },
+ "severity": "medium",
+ "category": "objective-alignment",
+ "observation": "The nugget's second learning objective - 'Distinguish the cyclooxygenase branch (prostaglandins, thromboxanes) from the lipoxygenase branch (leukotrienes) by the presence or absence of a ring' - is not assessed by any question in the set, and neither is the reversible-versus-irreversible contrast in objective 3 (the aspirin item asks only for the residue name). The concept carries four question slugs, of which two are variants; both hotspot items ask the student to click a carbonyl carbon on the same PGE2 drawing, which is close to the same task twice. The section also describes structures the chapter never shows: the six-membered oxygen-containing thromboxane ring and the leukotriene conjugated triene both appear in prose with no figure.",
+ "learner_impact": "The single most examinable idea in the section - one precursor, two enzymes, ring or no ring - has no retrieval practice at all, while the two items that do exist test carbonyl recognition, which the student mastered in the carboxylic acid chapters. A student who works every question here will still not have practised the branch distinction.",
+ "evidence": "topic.package.json nugget-eicosanoids-and-prostaglandins learning_objectives[1]; question_sets filtered on concept_slug 'eicosanoids-and-prostaglandins' yields only ch27-eicosanoid-precursor(+v2) and ch27-prostaglandin-ring-ketone(+v2); asset_ids for the nugget are mol-arachidonic-acid, mol-pge2, mol-aspirin, mol-ibuprofen only.",
+ "recommended_outcome": "The section needs at least one item that makes the student sort or predict on the ring-versus-no-ring branch point, one that contrasts covalent-permanent with competitive-reversible inhibition, and a figure showing a thromboxane and a leukotriene alongside the prostaglandin so the three architectures can be compared visually.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "instr-010",
+ "location": {
+ "concept_slug": "terpenoids-and-the-isoprene-rule",
+ "nugget_id": "nugget-terpenoids-and-the-isoprene-rule",
+ "anchor_text": "Apply the isoprene rule by dissecting a terpenoid skeleton into five-carbon units joined head to tail"
+ },
+ "severity": "medium",
+ "category": "objective-alignment",
+ "observation": "The first learning objective of the terpenoid section is the dissection skill, and the prose builds it carefully ('In a cyclic terpenoid such as limonene or alpha-pinene the same dissection works, but the cut lines run through the ring and take more care to find'). No question anywhere in the set asks a student to perform a dissection - the four terpenoid items are two classification-by-carbon-count questions and two about squalene's tail-to-tail junction. Nor is the dissection ever shown: the seven terpenoid assets are plain structures with no cut lines, highlights, or unit shading, so the reader has to do in their head what the prose says takes care.",
+ "learner_impact": "The chapter's stated skill is taught but never demonstrated and never practised. Students will leave able to divide a carbon count by five - which the questions do test - without ever having found a head-to-tail junction on a ring, which is what the isoprene rule actually asks of them on an exam.",
+ "evidence": "topic.package.json nugget-terpenoids-and-the-isoprene-rule learning_objectives[0]; question_sets for concept 'terpenoids-and-the-isoprene-rule' are ch27-classify-squalene(+v2) and ch27-terpene-class-carbon-counts(+v2); all seven assets are type 'molecule' with no highlight metadata.",
+ "recommended_outcome": "The section needs a figure in which the isoprene units of at least one acyclic and one cyclic terpenoid are visibly separated at the cut lines, and a question in which the student marks or selects a junction rather than only counting carbons.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "instr-011",
+ "location": {
+ "concept_slug": "terpenoids-and-the-isoprene-rule",
+ "nugget_id": "nugget-terpenoids-and-the-isoprene-rule",
+ "anchor_text": "The biological five-carbon units are isopentenyl diphosphate (IPP) and its isomer dimethylallyl diphosphate (DMAPP)"
+ },
+ "severity": "medium",
+ "category": "missing-example",
+ "observation": "The section makes a point of correcting a misconception - 'The cell does not use isoprene' - and then names IPP, DMAPP, geranyl diphosphate, farnesyl diphosphate, and geranylgeranyl diphosphate, and walks through an ionisation / electrophilic addition / proton-loss chain-building sequence. None of these five compounds has a structure asset, and the mechanism is not drawn. The only C5 structure in the chapter is mol-isoprene, i.e. the very molecule the prose has just told the student is NOT the building block.",
+ "learner_impact": "The correction lands as an assertion the student cannot check. Having been told isoprene is a bookkeeping fiction, the student is shown isoprene and nothing else, so the memorable image remains the wrong one. The carbocation chain-building sequence - which is the section's only genuine mechanism and the one link back to alkene chemistry - is also invisible.",
+ "evidence": "topic.package.json nugget-terpenoids-and-the-isoprene-rule asset_ids = [mol-isoprene, mol-myrcene, mol-limonene, mol-alpha-pinene, mol-farnesol, mol-squalene, mol-beta-carotene]; expanded text paragraphs beginning 'The actual building blocks' and 'Chain assembly is then a straightforward carbocation process'.",
+ "recommended_outcome": "The section needs structures for IPP and DMAPP shown side by side with isoprene so the difference is visible, and ideally the DMAPP-plus-IPP-to-geranyl-diphosphate step drawn once so the diphosphate leaving group and the allylic cation are seen rather than described.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "instr-012",
+ "location": {
+ "concept_slug": "phospholipids-and-membranes",
+ "nugget_id": "nugget-phospholipids-and-membranes",
+ "anchor_text": "Cylinders packed side by side do not curve; they tile into a flat sheet."
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "Section 7's central argument is entirely geometric - wedge outlines force curvature and close into a sphere, cylindrical outlines tile into a sheet, a finite sheet has a costly hydrocarbon rim so it seals into a vesicle. The six assets are individual molecules (DPPC, PE, sphingosine, sphingomyelin, stearate, glycerol); there is no micelle, no bilayer, no vesicle, and no wedge-versus-cylinder outline. video-bilayer-assembly, which would have carried all of it, is deferred and its reader block is emitted hidden. ch27-bilayer-versus-micelle then grades the student on exactly this geometry.",
+ "learner_impact": "The one argument in the chapter that is genuinely about shapes rather than about structures is delivered with no shape shown. Students who cannot construct the packing picture unaided will fall back on the charge explanation (option b), which the item's own distractor analysis identifies as the common wrong answer.",
+ "evidence": "topic.package.json nugget-phospholipids-and-membranes asset_ids (all type 'molecule'); video_briefs video-bilayer-assembly production_status 'deferred'; compiled reader section nugget-phospholipids-and-membranes video block url \"\" / is_hidden true.",
+ "recommended_outcome": "Section 7 needs a static schematic contrasting the single-tail wedge closing into a micelle with the two-tail cylinder tiling into a bilayer that seals into a vesicle - the figure the prose, the video brief, and the assessment all presuppose.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "instr-013",
+ "location": {
+ "question_slug": "ch27-lipid-class-defining-feature",
+ "concept_slug": "triacylglycerols-and-waxes"
+ },
+ "severity": "medium",
+ "category": "sequencing",
+ "observation": "Two question families are filed against concepts whose prose has not yet delivered what they ask. ch27-lipid-class-defining-feature and its v2 carry concept_slug 'triacylglycerols-and-waxes' (order 4) but require the student to recognise phosphatidylcholine's phosphate diester, phosphatidylethanolamine's hydrolysis products, and sphingomyelin's amide-to-sphingosine linkage - all of which are taught in 'phospholipids-and-membranes' (order 7). ch27-hydrogen-equivalents-arachidonic and its v2 carry concept_slug 'fatty-acid-structure-and-shorthand' (order 2) but ask for H2 stoichiometry, which is taught in 'hydrogenation-and-trans-fats' (order 6), and the v2 does so on a triacylglycerol from order 4.",
+ "learner_impact": "Any delivery that filters questions by concept - a per-section practice set, a concept-tagged homework assignment, or an adaptive path - will present these to students three to five sections before the content lands. The chapter's prerequisite chain is otherwise carefully declared, so the mis-tagging is the only thing that would break it.",
+ "evidence": "topic.package.json question_sets ch27-lipid-class-defining-feature.concept_slug = 'triacylglycerols-and-waxes' with right-hand options naming a phosphate diester and a sphingosine amide; ch27-hydrogen-equivalents-arachidonic.concept_slug = 'fatty-acid-structure-and-shorthand' with prompt 'How many equivalents of H2 are needed...'; concepts[] order fields 4, 7, 2, 6.",
+ "recommended_outcome": "These four items need their concept tags moved to the concept that actually teaches the required content, or the items need their content trimmed back to what their current concept has delivered.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "instr-014",
+ "location": {
+ "concept_slug": "triacylglycerols-and-waxes",
+ "nugget_id": "nugget-triacylglycerols-and-waxes",
+ "anchor_text": "Draw a triacylglycerol from glycerol and three named fatty acids, and identify the three ester linkages."
+ },
+ "severity": "medium",
+ "category": "objective-alignment",
+ "observation": "This is the first learning objective of section 4 and it is neither demonstrated nor assessed. The nugget's practice_check is about chirality at C2, not about construction. The only structure_scaffold items in the chapter run the reaction backwards - ch27-draw-saponification-alcohol asks for glycerol and its v2 for hexadecan-1-ol - so no question ever asks a student to assemble an ester, let alone three. The prose likewise states the definition ('Esterify all three hydroxyls with fatty acids') without walking the condensation through once.",
+ "learner_impact": "Building a triacylglycerol from named acids is the standard first exam question on this material and the prerequisite for the phospholipid section that follows. Students meet triacylglycerols only as finished pictures to be read, never as structures to be built, and the drawing skill the objective promises is never rehearsed.",
+ "evidence": "topic.package.json nugget-triacylglycerols-and-waxes learning_objectives[0] and practice_check.prompt; question_sets structure_scaffold entries answer_key [redacted] and 'CCCCCCCCCCCCCCCCO'.",
+ "recommended_outcome": "Section 4 needs a construction item in the forward direction - build a named mixed triacylglycerol from glycerol plus three named acids and mark the three ester linkages - and a worked example showing the assembly once before the question asks for it.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "instr-015",
+ "location": {
+ "concept_slug": "fatty-acid-structure-and-shorthand",
+ "question_slug": "ch27-natural-fatty-acid-regularities-v2",
+ "anchor_text": "Counting from the methyl end makes this an omega-3 fatty acid"
+ },
+ "severity": "medium",
+ "category": "objective-alignment",
+ "observation": "The omega numbering system appears only in the expanded tier of nugget-fatty-acid-structure-and-shorthand (a check of all three tiers confirms 'omega' is absent from terse and standard), and it appears in none of that nugget's three learning objectives, which name only the delta locants. Option d of ch27-natural-fatty-acid-regularities-v2 nonetheless grades it as one of three required correct selections, and the item is set at 'standard' difficulty.",
+ "learner_impact": "Students reading at the terse or standard depth are graded on a convention their text never introduced, and even expanded-tier readers meet it as a paragraph that no objective told them to retain. Because this is a multi_select graded on the exact set, missing omega-3 costs the whole item.",
+ "evidence": "topic.package.json nugget-fatty-acid-structure-and-shorthand: 'omega' present in text.expanded only; learning_objectives list delta locants, the three regularities, and the skipped pattern; ch27-natural-fatty-acid-regularities-v2 answer_key [redacted].",
+ "recommended_outcome": "The omega convention needs either an explicit learning objective plus a place in the standard tier, or removal from the graded option set of the standard-difficulty item.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "instr-016",
+ "location": {
+ "concept_slug": "hydrogenation-and-trans-fats",
+ "nugget_id": "nugget-hydrogenation-and-trans-fats",
+ "anchor_text": "One mole of H₂ is consumed per carbon-carbon double bond"
+ },
+ "severity": "medium",
+ "category": "notation-consistency",
+ "observation": "The chapter changes its typographic convention halfway through. Sections 1-5 use ASCII throughout - 'CH2 group', 'H2', 'delta-9', 'alpha-linolenic acid', 'beta-carotene'. Sections 6-10 switch to Unicode - 'H₂', 'CH₂', 'H₃PO₄', 'C₃₀', 'C₂₇H₄₆O'. Every question in the set, including the ones attached to sections 1-5, uses Greek glyphs and subscripts ('18:2 Δ9,12', 'α-linolenic acid', 'PGE₂', 'H₂'). A scan of all thirty nugget tiers shows zero subscript characters in sections 1-5 and up to fifteen per tier in sections 6-10.",
+ "learner_impact": "A student moving between the reader and the question bank sees the same species written two ways within a single section - '18:2 delta-9,12' in the prose and '18:2 Δ9,12' in the question - and has to work out that they are the same notation. It is a small tax on every item, and it undercuts the impression of a single authoritative text.",
+ "evidence": "Scan of topic.package.json nuggets[].text[tier]: subscript-character counts are 0 for nuggets 1-5 in all tiers and 2-15 for nuggets 6-10; spelled-out Greek ('delta-', 'alpha-', 'beta-') appears 20 times in nugget-fatty-acid-structure-and-shorthand expanded while ch27-read-fatty-acid-shorthand uses 'Δ'.",
+ "recommended_outcome": "The chapter needs one convention applied end to end across prose, figure titles, alt text, and question prompts - most cheaply the Unicode subscript / Greek-glyph convention that the questions and the later sections already use.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "instr-017",
+ "location": {
+ "question_slug": "ch27-identify-steroid-from-evidence",
+ "concept_slug": "steroids-structure-and-conformation"
+ },
+ "severity": "medium",
+ "category": "assessment-readiness",
+ "observation": "Both evidence_board items have a completely uniform key: in ch27-identify-steroid-from-evidence all three rows are support-estradiol / contradict-testosterone, and in the v2 all three rows are support-cholesterol / contradict-tristearin. The 'Neutral' status is offered in both items and is never the correct answer in any of the twelve cells. In the v2 the third row is also loose - 'showing a single set of sharp signals with no evidence of ring flipping' is marked as contradicting tristearin, but tristearin has no rings at all, so 'no evidence of ring flipping' is trivially consistent with it and the discriminating word is really 'rigid'.",
+ "learner_impact": "The item teaches a pattern rather than a discrimination: a student who reads one row correctly can fill the grid without reading the other two, and the never-correct Neutral option trains them that no evidence is ever uninformative. Evidence boards earn their cost only when the rows disagree, and neither of these does.",
+ "evidence": "topic.package.json ch27-identify-steroid-from-evidence answer_key.expected_marks - all three evidence ids map to {estradiol: support, testosterone: contradict}; ch27-identify-steroid-from-evidence-v2 likewise; both configs list a 'neutral' status.",
+ "recommended_outcome": "Each evidence board needs at least one row that is genuinely neutral for one candidate, or one that points the opposite way, so the student has to reason cell by cell rather than detect a pattern - and the rigidity row needs rewording so it discriminates on rigidity rather than on the absence of rings.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "instr-018",
+ "location": {
+ "concept_slug": "chain-packing-and-melting-points",
+ "nugget_id": "nugget-chain-packing-and-melting-points",
+ "anchor_text": "myristic acid, 14:0, near 54 degrees"
+ },
+ "severity": "low",
+ "category": "missing-example",
+ "observation": "Myristic acid is a bullet in the chain-length melting-point series in section 3, is named in the objective's 'recognise on sight' list in section 2, and is a draggable card in ch27-rank-unsaturation-melting-points-v2 - but there is no myristic acid asset anywhere in the package. Arachidonic acid is similarly quoted as the dramatic -49 degree data point in section 3 while its structure asset is attached only to section 2's nugget, so the reader does not show it beside the melting-point series it anchors.",
+ "learner_impact": "Small, but the section's whole rhetorical move is 'look at the series' and one member of the series is invisible. A student ranking the four saturated acids in the variant question has structures for three of them and a name for the fourth.",
+ "evidence": "topic.package.json assets[] contains no myristic acid entry; nugget-chain-packing-and-melting-points asset_ids omits mol-arachidonic-acid while its expanded text cites 'arachidonic acid, 20:4, near minus 49 degrees'; ch27-rank-unsaturation-melting-points-v2 card c_myristic.",
+ "recommended_outcome": "The melting-point series needs every member it quotes to have a structure the student can see, including myristic acid and arachidonic acid at the point of use.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "instr-019",
+ "location": {
+ "asset_id": "mol-myrcene",
+ "concept_slug": "terpenoids-and-the-isoprene-rule",
+ "anchor_text": "an open-chain ten-carbon skeleton with three double bonds and two methyl branches"
+ },
+ "severity": "low",
+ "category": "figure-accuracy",
+ "observation": "The alt text for myrcene describes 'two methyl branches'. Beta-myrcene is 7-methyl-3-methyleneocta-1,6-diene: off the eight-carbon backbone there is one methyl branch (at C7) and one exocyclic methylene (at C3), not two methyls. The double-bond count of three is correct. This matters more than usual here because the section's stated practical test for a terpenoid is 'the methyl branches recur at regular four-carbon intervals along the backbone, and spotting that regular spacing is the practical test', and myrcene is offered as 'the cleanest illustration' of that spacing.",
+ "learner_impact": "A student using the alt text as their description of the figure - which is the intended route for anyone not reading the drawing - will count branches wrongly on the exact molecule the chapter picked to teach branch counting.",
+ "evidence": "topic.package.json assets mol-myrcene smiles 'CC(C)=CCCC(=C)C=C' (RDKit formula C10H16); accessibility.alt_text 'three double bonds and two methyl branches'; nugget-terpenoids-and-the-isoprene-rule expanded 'Myrcene, an acyclic monoterpene, is the cleanest illustration'.",
+ "recommended_outcome": "The myrcene description needs its branch inventory restated so the methyl and the methylene are distinguished, ideally in the same words the prose uses for finding head-to-tail junctions.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "instr-020",
+ "location": {
+ "section_id": "nugget-fatty-acid-structure-and-shorthand",
+ "anchor_text": "https://en.wikipedia.org/wiki/Fatty acid"
+ },
+ "severity": "low",
+ "category": "objective-alignment",
+ "observation": "Three of the ten compiled Wikipedia links carry unencoded spaces in the path ('/wiki/Fatty acid', '/wiki/Unsaturated fat', '/wiki/Trans fat'). Separately, the chapter carries exactly one OpenStax link and it is the generic chapter landing page 'https://openstax.org/books/organic-chemistry/pages/27-why-this-chapter', rather than the specific sections the chapter maps to (waxes/fats/oils, soap, phospholipids, prostaglandins, terpenoids, steroids), which is the standing convention for Additional Reading in this repo.",
+ "learner_impact": "An instructor assigning the chapter alongside OpenStax has to work out the section mapping themselves, and students following Additional Reading land on a chapter preamble rather than on the passage that matches the section they just read.",
+ "evidence": "frontend/public/reader/topic-chapters/biomolecules-lipids.json external_link block urls; the single mcmurry_link block url.",
+ "recommended_outcome": "The reading links need URL-safe paths and a set of specific OpenStax section targets matched to each of the ten sections rather than a single chapter-level link.",
+ "confidence": 0.9
+ }
+ ],
+ "strengths": [
+ "Every numeric claim I checked is right. Melting points (lauric 44, myristic 54, palmitic 63, stearic 70, oleic 13, elaidic 45, linoleic -5, alpha-linolenic -11, arachidonic -49) all match literature values; the derived gaps quoted in the prose (57 degrees stearic-to-oleic, 25 degrees stearic-to-elaidic, ~119 degrees stearic-to-arachidonic, 'more than thirty degrees' elaidic-to-oleic) all reconcile; cholesterol's carbon accounting (17 ring + 2 angular methyl + 8 side chain = 27) and the prostaglandin skeleton accounting (7 + 8 + 5 = 20) are both correct.",
+ "34 of 36 SMILES verify against authentic InChIKeys: cholesterol HVYWMOMLDIMFJA-DPAQBDIFSA-N, testosterone MUMGGOZAMZWBJJ-DYKIIFRCSA-N, 17-beta-estradiol VOXZDWNPVJITMN-ZBRFXRBCSA-N, DPPC KILNVBDSWZSGLL-KXQOOQHDSA-N, D-erythro-sphingosine WWUZIQQURGPMPG-KRWOKUGFSA-N, all-trans-squalene YYGNTYWPHWGJRM-AAJYLUCBSA-N, all-trans-beta-carotene OENHQHLEOONYIE-JLTXGRSLSA-N, and every fatty acid with correct cis/trans assignment including the oleic/elaidic pair the argument turns on.",
+ "The cis- and trans-decalin assets really are cis and trans: 3D embedding gives a bridgehead H-C-C-H dihedral of -166 degrees for the trans structure and +14 degrees for the cis one, so the two figures support the argument they are attached to even though they cannot show the chairs.",
+ "The elaidic acid control experiment in section 3 is the best piece of teaching in the chapter. Framing oleic/elaidic as the pair that holds formula, bond count, and bond energy constant so that only shape can be responsible turns a memorised trend into a falsifiable argument, and ch27-cis-trans-packing-reasoning is built to make the student run that argument rather than recall its conclusion.",
+ "The saponification section correctly locates irreversibility in the final proton transfer rather than in the addition or the collapse, explicitly flags that hydroxide acts as a nucleophile and not a base in step 1, and distinguishes base from acid hydrolysis on the electrophilicity of the carboxylate product. ch27-hard-water-scum-v2's distractors are unusually good - each one names a plausible step and the wrong-answer explanation refutes it on mechanism rather than by assertion.",
+ "The alpha/beta versus axial/equatorial clarification in section 10 is exactly right and is stated in the terms students actually confuse: configurational versus conformational, cannot change without breaking bonds versus changes on every ring flip, and the closing observation that ring A's hydroxyl is not equatorial by preference because there is no alternative.",
+ "Trouble_spots are written as specific wrong models a student will actually form rather than as generic difficulty warnings, and several of them are picked up directly by a distractor or a wrong-answer explanation later - the 'wedge therefore axial' trap, the 'double bond weakens the molecule' trap, the 'phosphatidylcholine is anionic' trap, and the 'diterpene has two units' trap all appear in both places.",
+ "Question type coverage is broad and mostly well matched to the chemistry: eighteen types across ten concepts, with the mechanism types (curved_arrow, bond_change_ledger) placed on the one section that has a mechanism, chair and newman placed on the two conformational arguments, and evidence_board and error_repair reserved for the advanced steroid material. structure_scaffold items correctly carry grading_rules.structure_engine = 'rdkit', so drawn answers are graded on the molecular graph rather than on the SMILES string."
+ ],
+ "open_questions": [
+ "mol-limonene is the (S) enantiomer (InChIKey XMGQYMWWDOXHJM-SNVBAGLBSA-N) while the citrus limonene most textbooks show is (R)-(+). Neither the title nor the alt text specifies an enantiomer, so nothing is wrong as written - but if the chapter later gets a chirality or odour-perception aside, it should be pinned deliberately. Same question applies to mol-alpha-pinene, which is drawn as the (1S,5S)-(-) enantiomer.",
+ "No question in the set is marked demo_eligible (counts.demo_eligible = 0 in the compiled question-set). I do not know whether that blocks the sampler and public-preview surfaces for this chapter, but it is worth a deliberate decision rather than a default, since several items here - the rank_order melting-point series and ch27-bilayer-versus-micelle in particular - would demo well.",
+ "The prose says a steroid is 'a trans-fused system of three six-membered rings with a cyclopentane fused on the end, so the same argument applies to every junction at once'. The decalin ring-flip argument strictly governs the 6-6 junctions; the C/D junction to a cyclopentane is rigid for a different reason. I did not raise this as a finding because the conclusion is correct and the simplification is standard, but an instructor teaching from this chapter may want the sentence narrowed.",
+ "I used only the categories in the supplied list; no new category was coined."
+ ]
+}

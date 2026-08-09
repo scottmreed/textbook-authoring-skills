@@ -1,0 +1,159 @@
+{
+  "chapters": [
+    {
+      "chapter": 1,
+      "slug": "structure-and-bonding",
+      "title": "Structure and Bonding"
+    },
+    {
+      "chapter": 2,
+      "slug": "acids-bases-and-curved-arrows",
+      "title": "Polar Covalent Bonds; Acids and Bases"
+    },
+    {
+      "chapter": 3,
+      "slug": "alkanes-and-stereochemistry",
+      "title": "Organic Compounds: Alkanes and Their Stereochemistry"
+    },
+    {
+      "chapter": 4,
+      "slug": "cycloalkanes-and-stereochemistry",
+      "title": "Organic Compounds: Cycloalkanes and Their Stereochemistry"
+    },
+    {
+      "chapter": 5,
+      "slug": "stereochemistry-at-tetrahedral-centers",
+      "title": "Stereochemistry at Tetrahedral Centers"
+    },
+    {
+      "chapter": 6,
+      "slug": "overview-of-organic-reactions",
+      "title": "An Overview of Organic Reactions"
+    },
+    {
+      "chapter": 7,
+      "slug": "alkenes-structure-and-reactivity",
+      "title": "Alkenes: Structure and Reactivity"
+    },
+    {
+      "chapter": 8,
+      "slug": "alkenes-reactions-and-synthesis",
+      "title": "Alkenes: Reactions and Synthesis"
+    },
+    {
+      "chapter": 9,
+      "slug": "alkynes-organic-synthesis",
+      "title": "Alkynes: An Introduction to Organic Synthesis"
+    },
+    {
+      "chapter": 10,
+      "slug": "organohalides",
+      "title": "Organohalides"
+    },
+    {
+      "chapter": 11,
+      "slug": "alkyl-halide-substitution-and-elimination",
+      "title": "Reactions of Alkyl Halides: Nucleophilic Substitutions and Eliminations"
+    },
+    {
+      "chapter": 12,
+      "slug": "mass-spectrometry-and-infrared-spectroscopy",
+      "title": "Structure Determination: Mass Spectrometry and Infrared Spectroscopy"
+    },
+    {
+      "chapter": 13,
+      "slug": "nuclear-magnetic-resonance-spectroscopy",
+      "title": "Structure Determination: Nuclear Magnetic Resonance Spectroscopy"
+    },
+    {
+      "chapter": 14,
+      "slug": "conjugated-compounds-and-ultraviolet-spectroscopy",
+      "title": "Conjugated Compounds and Ultraviolet Spectroscopy"
+    },
+    {
+      "chapter": 15,
+      "slug": "benzene-and-aromaticity",
+      "title": "Benzene and Aromaticity"
+    },
+    {
+      "chapter": 16,
+      "slug": "electrophilic-aromatic-substitution",
+      "title": "Chemistry of Benzene: Electrophilic Aromatic Substitution"
+    },
+    {
+      "chapter": 17,
+      "slug": "alcohols-and-phenols",
+      "title": "Alcohols and Phenols"
+    },
+    {
+      "chapter": 18,
+      "slug": "ethers-epoxides-thiols-and-sulfides",
+      "title": "Ethers and Epoxides; Thiols and Sulfides"
+    },
+    {
+      "chapter": 19,
+      "slug": "aldehydes-and-ketones",
+      "title": "Aldehydes and Ketones: Nucleophilic Addition Reactions"
+    },
+    {
+      "chapter": 20,
+      "slug": "carboxylic-acids-and-nitriles",
+      "title": "Carboxylic Acids and Nitriles"
+    },
+    {
+      "chapter": 21,
+      "slug": "carboxylic-acid-derivatives",
+      "title": "Carboxylic Acid Derivatives: Nucleophilic Acyl Substitution"
+    },
+    {
+      "chapter": 22,
+      "slug": "carbonyl-alpha-substitution",
+      "title": "Carbonyl Alpha-Substitution Reactions"
+    },
+    {
+      "chapter": 23,
+      "slug": "carbonyl-condensation",
+      "title": "Carbonyl Condensation Reactions"
+    },
+    {
+      "chapter": 24,
+      "slug": "amines-and-heterocycles",
+      "title": "Amines and Heterocycles"
+    },
+    {
+      "chapter": 25,
+      "slug": "biomolecules-carbohydrates",
+      "title": "Biomolecules: Carbohydrates"
+    },
+    {
+      "chapter": 26,
+      "slug": "biomolecules-amino-acids-peptides-and-proteins",
+      "title": "Biomolecules: Amino Acids, Peptides, and Proteins"
+    },
+    {
+      "chapter": 27,
+      "slug": "biomolecules-lipids",
+      "title": "Biomolecules: Lipids"
+    },
+    {
+      "chapter": 28,
+      "slug": "biomolecules-nucleic-acids",
+      "title": "Biomolecules: Nucleic Acids"
+    },
+    {
+      "chapter": 29,
+      "slug": "organic-chemistry-of-metabolic-pathways",
+      "title": "The Organic Chemistry of Metabolic Pathways"
+    },
+    {
+      "chapter": 30,
+      "slug": "orbitals-and-pericyclic-reactions",
+      "title": "Orbitals and Organic Chemistry: Pericyclic Reactions"
+    },
+    {
+      "chapter": 31,
+      "slug": "synthetic-polymers",
+      "title": "Synthetic Polymers"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+interface:
+ display_name: "Author Organic Topic Package"
+ short_description: "Build canonical organic topic packages"
+ default_prompt: "Use $author-organic-topic-package to add a textbook-agnostic topic across Deck Creator, assets, videos, review queues, concept maps, and textbook lenses."

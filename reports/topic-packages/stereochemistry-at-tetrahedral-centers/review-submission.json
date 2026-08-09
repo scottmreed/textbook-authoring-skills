@@ -1,0 +1,172 @@
+{
+ "reviews": [
+ {
+ "asset_id": "deck-text:stereochemistry-at-tetrahedral-centers-s01:nugget-chirality",
+ "status": "needs_review",
+ "chapter_id": "stereochemistry-at-tetrahedral-centers",
+ "asset_title": "Chirality begins at a carbon with four different groups — Chirality is the property of not being superimposable on one's mirror image, the same relationship a l",
+ "asset_type": "deck_text",
+ "notes": ""
+ },
+ {
+ "asset_id": "deck-figure:mol-r-chlorofluorobromomethane",
+ "status": "needs_review",
+ "chapter_id": "stereochemistry-at-tetrahedral-centers",
+ "asset_title": "(R)-Bromochlorofluoromethane, the simplest chiral molecule",
+ "asset_type": "deck_figure",
+ "notes": ""
+ },
+ {
+ "asset_id": "deck-figure:mol-s-chlorofluorobromomethane",
+ "status": "needs_review",
+ "chapter_id": "stereochemistry-at-tetrahedral-centers",
+ "asset_title": "(S)-Bromochlorofluoromethane, the mirror image",
+ "asset_type": "deck_figure",
+ "notes": ""
+ },
+ {
+ "asset_id": "deck-figure:mol-2-propanol-achiral",
+ "status": "needs_review",
+ "chapter_id": "stereochemistry-at-tetrahedral-centers",
+ "asset_title": "Propan-2-ol, an achiral molecule for contrast",
+ "asset_type": "deck_figure",
+ "notes": ""
+ },
+ {
+ "asset_id": "deck-text:stereochemistry-at-tetrahedral-centers-s06:nugget-optical-activity",
+ "status": "needs_review",
+ "chapter_id": "stereochemistry-at-tetrahedral-centers",
+ "asset_title": "Enantiomers rotate plane-polarized light in equal and opposite senses — A single enantiomer of a chiral compound is optically active, meaning it rotates the pla",
+ "asset_type": "deck_text",
+ "notes": ""
+ },
+ {
+ "asset_id": "deck-figure:mol-r-2-butanol",
+ "status": "needs_review",
+ "chapter_id": "stereochemistry-at-tetrahedral-centers",
+ "asset_title": "(R)-Butan-2-ol",
+ "asset_type": "deck_figure",
+ "notes": ""
+ },
+ {
+ "asset_id": "deck-figure:mol-s-2-butanol",
+ "status": "needs_review",
+ "chapter_id": "stereochemistry-at-tetrahedral-centers",
+ "asset_title": "(S)-Butan-2-ol",
+ "asset_type": "deck_figure",
+ "notes": ""
+ },
+ {
+ "asset_id": "deck-text:stereochemistry-at-tetrahedral-centers-s10:nugget-rs",
+ "status": "needs_review",
+ "chapter_id": "stereochemistry-at-tetrahedral-centers",
+ "asset_title": "The CIP rules translate a three-dimensional arrangement into R or S — The absolute arrangement at a stereocenter is named with the Cahn-Ingold-Prelog, or CIP, s",
+ "asset_type": "deck_text",
+ "notes": ""
+ },
+ {
+ "asset_id": "deck-figure:mol-r-2-bromobutane",
+ "status": "needs_review",
+ "chapter_id": "stereochemistry-at-tetrahedral-centers",
+ "asset_title": "(R)-2-Bromobutane",
+ "asset_type": "deck_figure",
+ "notes": ""
+ },
+ {
+ "asset_id": "deck-figure:mol-d-glyceraldehyde",
+ "status": "needs_review",
+ "chapter_id": "stereochemistry-at-tetrahedral-centers",
+ "asset_title": "D-(R)-Glyceraldehyde",
+ "asset_type": "deck_figure",
+ "notes": ""
+ },
+ {
+ "asset_id": "deck-text:stereochemistry-at-tetrahedral-centers-s14:nugget-diastereomers",
+ "status": "needs_review",
+ "chapter_id": "stereochemistry-at-tetrahedral-centers",
+ "asset_title": "Several stereocenters give diastereomers, and symmetry can give meso compounds — With more than one stereocenter, the number of stereoisomers grows. A molecule ",
+ "asset_type": "deck_text",
+ "notes": ""
+ },
+ {
+ "asset_id": "deck-figure:mol-rr-tartaric",
+ "status": "needs_review",
+ "chapter_id": "stereochemistry-at-tetrahedral-centers",
+ "asset_title": "(R,R)-Tartaric acid",
+ "asset_type": "deck_figure",
+ "notes": ""
+ },
+ {
+ "asset_id": "deck-figure:mol-meso-tartaric",
+ "status": "needs_review",
+ "chapter_id": "stereochemistry-at-tetrahedral-centers",
+ "asset_title": "meso-Tartaric acid",
+ "asset_type": "deck_figure",
+ "notes": ""
+ },
+ {
+ "asset_id": "deck-figure:mol-3-bromo-2-butanol",
+ "status": "needs_review",
+ "chapter_id": "stereochemistry-at-tetrahedral-centers",
+ "asset_title": "3-Bromobutan-2-ol, a molecule with two different stereocenters",
+ "asset_type": "deck_figure",
+ "notes": ""
+ },
+ {
+ "asset_id": "deck-text:stereochemistry-at-tetrahedral-centers-s19:nugget-racemates",
+ "status": "needs_review",
+ "chapter_id": "stereochemistry-at-tetrahedral-centers",
+ "asset_title": "Enantiomers are separated by converting them temporarily into diastereomers — A racemate cannot be separated into its enantiomers by the physical methods that w",
+ "asset_type": "deck_text",
+ "notes": ""
+ },
+ {
+ "asset_id": "deck-figure:mol-l-alanine",
+ "status": "needs_review",
+ "chapter_id": "stereochemistry-at-tetrahedral-centers",
+ "asset_title": "L-Alanine, a chiral building block of proteins",
+ "asset_type": "deck_figure",
+ "notes": ""
+ },
+ {
+ "asset_id": "deck-text:stereochemistry-at-tetrahedral-centers-s22:nugget-nature",
+ "status": "needs_review",
+ "chapter_id": "stereochemistry-at-tetrahedral-centers",
+ "asset_title": "Chiral environments distinguish enantiomers, and prochirality selects between paired groups — Because the amino acids and sugars of living systems occur as sing",
+ "asset_type": "deck_text",
+ "notes": ""
+ },
+ {
+ "asset_id": "deck-text:stereochemistry-at-tetrahedral-centers-s24:nugget-rs-arrow",
+ "status": "needs_review",
+ "chapter_id": "stereochemistry-at-tetrahedral-centers",
+ "asset_title": "The priority-rotation arrow: reading R and S at a glance — The priority ranking becomes an assignment through a single visual step. Imagine, or draw, a curved a",
+ "asset_type": "deck_text",
+ "notes": ""
+ },
+ {
+ "asset_id": "deck-figure:mol-rs-arrow-r",
+ "status": "needs_review",
+ "chapter_id": "stereochemistry-at-tetrahedral-centers",
+ "asset_title": "Tracing CIP priorities on (R)-2-bromobutane",
+ "asset_type": "deck_figure",
+ "notes": ""
+ },
+ {
+ "asset_id": "deck-figure:mol-rs-arrow-s",
+ "status": "needs_review",
+ "chapter_id": "stereochemistry-at-tetrahedral-centers",
+ "asset_title": "Tracing CIP priorities on (S)-2-bromobutane",
+ "asset_type": "deck_figure",
+ "notes": ""
+ },
+ {
+ "asset_id": "deck-video:video-rs-assignment",
+ "status": "needs_review",
+ "chapter_id": "stereochemistry-at-tetrahedral-centers",
+ "asset_title": "Assigning R and S at a stereocenter, step by step",
+ "asset_type": "deck_video_brief",
+ "notes": ""
+ }
+ ]
+}

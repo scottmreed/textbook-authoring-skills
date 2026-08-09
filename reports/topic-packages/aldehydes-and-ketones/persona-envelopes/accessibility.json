@@ -1,0 +1,129 @@
+{
+ "persona": "Accessibility Persona",
+ "persona_version": "1.0.0",
+ "chapter_id": "aldehydes-and-ketones",
+ "chapter_version": "1",
+ "model": "claude-opus-5[1m]",
+ "summary": "This chapter is unusually text-forward, and that works strongly in its favor: every nugget's chemistry (carbonyl polarization, the addition mechanism, acetal/imine/enamine formation, 1,2 vs 1,4 selectivity, IR/NMR values) is carried by prose rather than by an unlabeled figure, all 13 assets are simple molecule renders with chemically substantive alt text that the reader also prints visibly as 'Described as: …', and every question stimulus and option is plain text or a condensed formula — no color, motion, hover, or spatial coding carries meaning anywhere in the package. I ran the repository's own answer-leak guard over all 36 compiled questions and it flagged nothing, and my manual read of every accessible_description found none that hands over the answer. Two real barriers remain. First, the four structure_scaffold questions (draw the cyanohydrin, draw the Wittig alkene, plus their v2 variants) are required response-by-drawing on the Ketcher canvas; the platform itself records keyboard_complete=False for that type and declares a nonvisual_response_mode ('structured_molecule_entry') that has no implementation anywhere in the student frontend — a learner who cannot use a fine-pointer canvas simply cannot answer them, even though the grader already accepts a SMILES string. Second, the carefully authored accessible_description on all 36 questions appears to be metadata that no student-facing renderer actually reads, so the non-visual task framing the author wrote may never reach a screen-reader user. Beyond those, the issues are modest: a heading-level skip in the reader, an undescribed acetal structure in the error-repair item, unlabeled per-option structures, and an alt text that numbers but does not name the alpha/beta carbons the conjugate-addition concept depends on.",
+ "overall_score": 7.2,
+ "publication_blockers": ["access-001"],
+ "findings": [
+ {
+ "finding_id": "access-001",
+ "location": {
+ "question_slug": "ch19-draw-cyanohydrin",
+ "concept_slug": "wittig-reaction",
+ "anchor_text": "Draw the alkene formed when cyclohexanone reacts with methylenetriphenylphosphorane"
+ },
+ "severity": "blocker",
+ "category": "interactive-fallback",
+ "observation": "Four required questions — ch19-draw-cyanohydrin, ch19-draw-cyanohydrin-v2, ch19-draw-wittig-product, ch19-draw-wittig-product-v2 — are question_type structure_scaffold with student_config [redacted]. Answering means drawing a structure in the Ketcher canvas. The platform's own type manifest at [internal source reference — not in this repo] records keyboard_complete=False and declares nonvisual_response_mode=\"structured_molecule_entry\", but that response mode appears nowhere in the frontend: the two student surfaces for this type ([internal source reference — not in this repo] and [internal source reference — not in this repo]) offer only a same-origin generator iframe plus a 'Submit canvas structure' button, with no SMILES or text-entry field. There is therefore no implemented alternative response path in this chapter's delivery.",
+ "learner_impact": "A student who is blind, has low vision, uses a screen reader, or cannot use a mouse/trackpad-style pointing device cannot complete four of this chapter's questions at all — including the only production-style assessment of cyanohydrin formation and the only production-style assessment of the Wittig product. They are excluded from graded work their sighted, pointer-using classmates complete, on two concepts (hydration-and-cyanohydrins, wittig-reaction) where drawing the product is the stated task.",
+ "evidence": "topic.package.json question_sets: slugs ch19-draw-cyanohydrin / -v2 / ch19-draw-wittig-product / -v2, question_type 'structure_scaffold', student_config [redacted], answer_key [redacted] etc. compiled/question-set.json counts.by_type shows structure_scaffold: 4. [internal source reference — not in this repo]: keyboard_complete=False. [internal source reference — not in this repo] contains only onSubmit(\"canvas_structure\").",
+ "recommended_outcome": "These four items need a response path that does not require drawing on a pointer-driven canvas — the answer key is already a SMILES string and STRUCTURE_GRADER already grades chemical graphs, so an equivalent non-drawing way to submit the same chemical answer (or an equivalent alternate task assessing the same objective) must exist before the chapter is assigned as graded work.",
+ "confidence": 0.93
+ },
+ {
+ "finding_id": "access-002",
+ "location": {
+ "question_slug": "ch19-classify-carbonyls",
+ "anchor_text": "Sort six named carbonyl compounds into two families based on the substitution at the carbonyl carbon."
+ },
+ "severity": "high",
+ "category": "media-equivalence",
+ "observation": "All 36 questions carry a well-written accessibility_bundle.accessible_description, and it survives compilation into compiled/question-set.json and into the backend LMS envelope ([internal source reference — not in this repo] sets accessibilityBundle). But no general student renderer reads it: searching the frontend for accessible_description / accessibilityDescription / accessibilityBundle finds only MolecularGeometryRenderer (its own responseConfig key), ReactionCoordinateQuestionRenderer (reads accessibilityBundle.description, a different key), and the internal QuestionTypeDemoPage. The delivery panels used for a chapter question set — [internal source reference — not in this repo] and [internal source reference — not in this repo] — render only the prompt. None of this chapter's 11 question types is one of the two renderers that read an accessibility bundle.",
+ "learner_impact": "The non-visual task framing the author wrote — which is exactly what orients a screen-reader user to what a multi-part matrix, matching set, or ranking is asking — is never announced. Assistive-technology users fall back to inferring the task from raw option lists and control labels, which is slower and more error-prone, and the chapter appears accessible on paper while delivering less in practice.",
+ "evidence": "Every question in compiled/question-set.json has accessibility_bundle.accessible_description (e.g. ch19-hemiacetal-vs-acetal: 'For a hemiacetal and an acetal, mark yes or no for five properties…'). [internal source reference — not in this repo] declares accessibilityBundle but only [internal source reference — not in this repo] consumes any key from it.",
+ "recommended_outcome": "The authored non-visual task description needs to actually reach the student's assistive technology on the surfaces where this chapter's question types are delivered; presence in the package is not access. If delivery is expected to surface it and I have missed the path, that needs confirming before publication.",
+ "confidence": 0.72
+ },
+ {
+ "finding_id": "access-003",
+ "location": {
+ "section_id": "nugget-carbonyl-structure-naming",
+ "anchor_text": "The carbonyl group, and how aldehydes and ketones are named"
+ },
+ "severity": "medium",
+ "category": "keyboard-operability",
+ "observation": "The compiled reader renders the chapter title as h1 and each of the 11 section titles as h2 ([internal source reference — not in this repo] lines 118 and 140), but every in-section block heading — molecule figure names, video titles, link titles — is emitted as h4 ([internal source reference — not in this repo] lines 179, 290, 368, 498, 525, 567). No h3 exists anywhere in the chapter, so the heading hierarchy skips a level at every one of the 11 sections.",
+ "learner_impact": "Screen-reader users navigating by heading level, and users of heading outlines/rotors, get a structure that misreports nesting depth; level-3 navigation returns nothing while figures sit two levels below their section. With 17 molecule figures and 11 sections, this is the primary navigation scaffold for the chapter.",
+ "evidence": "[internal source reference — not in this repo]: Heading as=\"h1\" (chapter), Heading as=\"h2\" (section); [internal source reference — not in this repo]: Heading as=\"h4\" for molecule, video, link, and reaction-coordinate blocks.",
+ "recommended_outcome": "The chapter's reading order needs a heading hierarchy that steps without skipping, so heading-based navigation reflects the real section→figure nesting.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "access-004",
+ "location": {
+ "question_slug": "ch19-acetal-base-error",
+ "concept_slug": "acetals-and-protecting-groups"
+ },
+ "severity": "medium",
+ "category": "alt-text-quality",
+ "observation": "This error_repair item ships a structural stimulus, student_config.molecule_smiles = 'C1CCC2(CC1)OCCO2' (the cyclohexanone ethylene acetal), but its accessible_description ('Diagnose and repair a claim about how an acetal protecting group is removed after a Grignard addition') never describes that structure. Where an error_repair structure does render, [internal source reference — not in this repo] line 116 gives it the fixed alt text 'Structure for the flawed step' — a name, not a description. Separately, that renderer reads config.molecule?.svgDataUri, not molecule_smiles, so for this authored payload the structure may not display at all.",
+ "learner_impact": "A learner who cannot see the structure has no description of which carbon bears the two ring oxygens — the exact feature that makes the compound an acetal rather than a hemiacetal or ketone, and the feature the repair depends on. The prose of flawed_work partly rescues this, so the item is answerable, but the visual stimulus contributes nothing non-visually. Sighted learners may equally be shown nothing, given the key mismatch.",
+ "evidence": "topic.package.json ch19-acetal-base-error student_config.molecule_smiles 'C1CCC2(CC1)OCCO2'; [internal source reference — not in this repo] const molecule = config.molecule as MoleculeVisual | undefined; and :116 alt=\"Structure for the flawed step\".",
+ "recommended_outcome": "The structural stimulus attached to this question needs a chemically informative non-visual equivalent that names the gem-dialkoxy (acetal) carbon without stating the repair, and its rendering path needs confirming so both visual and non-visual learners receive the same stimulus.",
+ "confidence": 0.8
+ },
+ {
+ "finding_id": "access-005",
+ "location": {
+ "question_slug": "ch19-iupac-name",
+ "anchor_text": "4-Methyl-2-pentanone"
+ },
+ "severity": "low",
+ "category": "media-equivalence",
+ "observation": "Several questions attach per-option structures — ch19-iupac-name and ch19-iupac-name-v2 options carry structure_smiles, and both rank_order items give each card a structure_smiles — but none of these structures has an authored accessible name, and [internal source reference — not in this repo] only renders an option's imageUrl (alt={option.text}), ignoring structure_smiles entirely. In ch19-iupac-name, options 'a' (4-Methyl-2-pentanone) and 'b' (2-Methyl-4-pentanone) carry the identical SMILES 'CC(=O)CC(C)C', so on any surface that renders the option structures the two choices would be visually indistinguishable.",
+ "learner_impact": "Today the options are effectively text-only, which is accessible; the risk is asymmetric access if a surface begins rendering these structures, since a screen-reader user would get only the option name while a sighted user gets name plus picture — and in the IUPAC item the picture would actively mislead by showing two different names over one structure.",
+ "evidence": "topic.package.json ch19-iupac-name student_config.options a and b both structure_smiles 'CC(=O)CC(C)C'; ch19-reactivity-ranking cards each carry structure_smiles; [internal source reference — not in this repo] renders only option.imageUrl.",
+ "recommended_outcome": "Per-option structural stimuli need either an authored accessible equivalent tied to each option, or removal if the option text already carries the full information — the two must not diverge across learners.",
+ "confidence": 0.7
+ },
+ {
+ "finding_id": "access-006",
+ "location": {
+ "asset_id": "mol-methyl-vinyl-ketone",
+ "concept_slug": "conjugate-addition",
+ "section_id": "nugget-conjugate-addition"
+ },
+ "severity": "low",
+ "category": "alt-text-quality",
+ "observation": "The only figure supporting the conjugate-addition concept is described as 'a four-carbon chain in which carbon 2 forms a double bond to oxygen (the ketone) and carbons 3 and 4 form a carbon–carbon double bond conjugated with it'. The surrounding prose and the assessment both work in alpha/beta vocabulary ('bonds the nucleophile to the beta carbon'; ch19-conjugate-addition-select-v2 asks which carbon the nitrogen attacks, choosing among beta, carbonyl, alpha, methyl). The alt text uses locants only and never maps C3 to the beta position.",
+ "learner_impact": "A learner working entirely from the description has to derive the locant-to-alpha/beta mapping themselves at the moment the concept is introduced, adding a translation step to the chapter's single hardest regiochemical distinction. The prose does define beta as 'two atoms away', so this is recoverable, not blocking.",
+ "evidence": "topic.package.json asset mol-methyl-vinyl-ketone accessibility.alt_text; nugget-conjugate-addition prose 'positive character appearing at two carbons: the carbonyl carbon and the beta carbon, two atoms away'.",
+ "recommended_outcome": "The description of the alpha,beta-unsaturated ketone needs to name the alpha and beta carbons in the same vocabulary the concept and its question use, so the non-visual reader gets the labeling directly rather than deriving it.",
+ "confidence": 0.72
+ },
+ {
+ "finding_id": "access-007",
+ "location": {
+ "section_id": "nugget-nucleophilic-addition",
+ "asset_id": "video-nucleophilic-addition",
+ "anchor_text": "One mechanism, many reactions: nucleophilic addition to the carbonyl"
+ },
+ "severity": "low",
+ "category": "media-equivalence",
+ "observation": "Three video blocks are compiled into the reader (nugget-nucleophilic-addition, nugget-acetals, nugget-wittig) with url: \"\" and is_hidden: true; [internal source reference — not in this repo] returns null for hidden blocks, so students currently see nothing — the videos are deferred at authoring. The compiled block would otherwise render a 'Watch →' link to an empty route. The video_briefs each record the caption/narration/transcript requirement as a production note only; nothing in the package yet holds the caption or transcript content.",
+ "learner_impact": "No present barrier — the mechanism content is carried in prose, which is fully accessible. The risk is future: if these blocks are unhidden when the videos are produced, three mechanism animations enter the chapter and the deaf/hard-of-hearing and non-visual equivalents (captions, descriptive narration of electron flow, transcript, and pause/step controls) would have to already exist, and a broken empty-url link would ship in the interim.",
+ "evidence": "frontend/public/reader/topic-chapters/aldehydes-and-ketones.json blocks blk-r8gcfq5b, blk-ijjski5m, blk-pmnwmeje: {\"url\": \"\", \"is_external\": false, \"is_hidden\": true}; topic.package.json video_briefs[*].production_note 'Production requirement recorded: include a closed-caption track and narration that names every meaningful visual change … plus a text transcript.'",
+ "recommended_outcome": "The deferred mechanism videos must not become visible without their caption, described-narration, transcript, and playback-control equivalents in place, and the placeholder blocks should not be able to surface an empty destination.",
+ "confidence": 0.85
+ }
+ ],
+ "strengths": [
+ "Every question stimulus and every answer option in all 36 questions is plain text or a condensed formula (e.g. 'Trichloroacetaldehyde (chloral), Cl₃CCHO', 'Lithium dimethylcuprate, (CH₃)₂CuLi') — no item requires reading an unlabeled structure to choose an answer.",
+ "I ran the repository's own guard ([internal source reference — not in this repo]::find_accessibility_leaks) over all 36 compiled questions: zero leaks. Manual review agrees — the accessible descriptions consistently state the task ('determining which atoms end up on the former carbonyl carbon is part of the task') without the answer.",
+ "All 13 molecule assets carry alt text that describes chemically relevant connectivity rather than naming the image (e.g. the cyclic acetal: 'a six-membered carbon ring sharing one carbon with a five-membered ring that contains two oxygen atoms; the shared carbon is bonded to both oxygens and bears no hydroxyl or carbonyl group'), and the reader prints it visibly as 'Described as: …' beneath every structure, benefiting low-vision and cognitive-access users too.",
+ "The drag-flavored question types this chapter uses are all implemented as keyboard-complete controls, not drag-and-drop: CategorizeRenderer is one labeled Select per item with aria-label 'Category for X', MatchingRenderer likewise, MechanismCardSortRenderer provides 'Move up'/'Move down' buttons with position-announcing labels, and ComparisonMatrixRenderer is a semantic table of keyboard-reachable selects.",
+ "Nothing in the chapter uses color, motion, spatial position, or hover as the sole carrier of meaning; there are no animations, no interactive spectra, and no color-coded diagrams to fail on.",
+ "All 76 hints across the question set are text hints — no hint requires seeing a highlight, projection label, or animation — and every nugget's practice_check is answerable purely in prose.",
+ "The 11 nuggets carry the mechanism and spectroscopy content in full sentences with explicit numbers (1730/1715/1690 cm⁻¹, 9–10 ppm, 206 ppm), and no prose sentence points at a figure with 'as shown', 'below', or a color word — so nothing in the reading depends on a visual the learner may not receive."
+ ],
+ "open_questions": [
+ "Does any student delivery surface I did not inspect (an LTI tutorial view, a PDF/LMS export, or a server-rendered path) actually announce accessibility_bundle.accessible_description? Finding access-002 assumes not, based on the frontend having no general consumer of that key.",
+ "Are single_select option orders shuffled at render time? Every single_select answer_key in this chapter is option 'a', and several accessible descriptions enumerate the options in stored order — if the UI shuffles, the spoken enumeration order will not match the presented order, which is disorienting for screen-reader users.",
+ "Is the 'Open in Generator to edit →' link that appears under all 17 reader molecule blocks a keyboard-operable and screen-reader-usable destination, or does it land a learner in the same pointer-driven canvas implicated in access-001?",
+ "Is structure_scaffold's declared nonvisual_response_mode 'structured_molecule_entry' scheduled for implementation, or is it aspirational metadata? That determines whether access-001 is a chapter-authoring choice or a platform dependency the chapter is blocked behind.",
+ "In ch19-acetal-base-error, does the compiled student_config key molecule_smiles get transformed into the config.molecule object ErrorRepairRenderer expects at delivery time? If not, that structure renders for nobody."
+ ]
+}

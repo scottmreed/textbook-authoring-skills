@@ -1,0 +1,140 @@
+{
+ "reviews": [
+ {
+ "asset_id": "deck-text:overview-of-organic-reactions-s01:nugget-classes",
+ "status": "needs_review",
+ "chapter_id": "overview-of-organic-reactions",
+ "asset_title": "Most organic reactions are additions, eliminations, substitutions, or rearrangements — Despite their number, most organic reactions belong to one of four classe",
+ "asset_type": "deck_text",
+ "notes": ""
+ },
+ {
+ "asset_id": "deck-figure:mol-but-2-ene",
+ "status": "needs_review",
+ "chapter_id": "overview-of-organic-reactions",
+ "asset_title": "But-2-ene, an addition substrate",
+ "asset_type": "deck_figure",
+ "notes": ""
+ },
+ {
+ "asset_id": "deck-figure:mol-2-bromobutane",
+ "status": "needs_review",
+ "chapter_id": "overview-of-organic-reactions",
+ "asset_title": "2-Bromobutane, an addition product",
+ "asset_type": "deck_figure",
+ "notes": ""
+ },
+ {
+ "asset_id": "deck-figure:mol-tert-butyl-bromide",
+ "status": "needs_review",
+ "chapter_id": "overview-of-organic-reactions",
+ "asset_title": "2-Bromo-2-methylpropane, a substitution and elimination substrate",
+ "asset_type": "deck_figure",
+ "notes": ""
+ },
+ {
+ "asset_id": "deck-text:overview-of-organic-reactions-s06:nugget-bonds",
+ "status": "needs_review",
+ "chapter_id": "overview-of-organic-reactions",
+ "asset_title": "Bonds break evenly to give radicals or unevenly to give ions — The mechanism of a reaction is set by how its bonds break and form. Homolytic cleavage divides a ",
+ "asset_type": "deck_text",
+ "notes": ""
+ },
+ {
+ "asset_id": "deck-figure:mol-chlorine",
+ "status": "needs_review",
+ "chapter_id": "overview-of-organic-reactions",
+ "asset_title": "Molecular chlorine, a bond that cleaves homolytically",
+ "asset_type": "deck_figure",
+ "notes": ""
+ },
+ {
+ "asset_id": "deck-figure:mol-tert-butyl-cation",
+ "status": "needs_review",
+ "chapter_id": "overview-of-organic-reactions",
+ "asset_title": "The tert-butyl cation, an electrophilic intermediate",
+ "asset_type": "deck_figure",
+ "notes": ""
+ },
+ {
+ "asset_id": "deck-figure:mol-hydroxide",
+ "status": "needs_review",
+ "chapter_id": "overview-of-organic-reactions",
+ "asset_title": "Hydroxide ion, a nucleophile",
+ "asset_type": "deck_figure",
+ "notes": ""
+ },
+ {
+ "asset_id": "deck-text:overview-of-organic-reactions-s11:nugget-arrows",
+ "status": "needs_review",
+ "chapter_id": "overview-of-organic-reactions",
+ "asset_title": "Curved arrows track the movement of electron pairs — The curved arrow is the notation that makes a polar mechanism explicit. Each arrow depicts the movement of ",
+ "asset_type": "deck_text",
+ "notes": ""
+ },
+ {
+ "asset_id": "deck-figure:mol-bromomethane",
+ "status": "needs_review",
+ "chapter_id": "overview-of-organic-reactions",
+ "asset_title": "Bromomethane, an electrophilic carbon",
+ "asset_type": "deck_figure",
+ "notes": ""
+ },
+ {
+ "asset_id": "deck-figure:mol-methanol",
+ "status": "needs_review",
+ "chapter_id": "overview-of-organic-reactions",
+ "asset_title": "Methanol, a substitution product",
+ "asset_type": "deck_figure",
+ "notes": ""
+ },
+ {
+ "asset_id": "deck-text:overview-of-organic-reactions-s15:nugget-thermo",
+ "status": "needs_review",
+ "chapter_id": "overview-of-organic-reactions",
+ "asset_title": "The equilibrium constant and free energy measure how favorable a reaction is — The extent to which a reaction proceeds is governed by thermodynamics and summari",
+ "asset_type": "deck_text",
+ "notes": ""
+ },
+ {
+ "asset_id": "deck-figure:rc-one-step",
+ "status": "needs_review",
+ "chapter_id": "overview-of-organic-reactions",
+ "asset_title": "Single-step exergonic reaction",
+ "asset_type": "deck_figure",
+ "notes": ""
+ },
+ {
+ "asset_id": "deck-text:overview-of-organic-reactions-s18:nugget-kinetics",
+ "status": "needs_review",
+ "chapter_id": "overview-of-organic-reactions",
+ "asset_title": "Activation energy and the transition state control reaction rate — The rate of a reaction is determined by the height of the energy barrier separating reactants",
+ "asset_type": "deck_text",
+ "notes": ""
+ },
+ {
+ "asset_id": "deck-text:overview-of-organic-reactions-s20:nugget-intermediates",
+ "status": "needs_review",
+ "chapter_id": "overview-of-organic-reactions",
+ "asset_title": "Energy diagrams reveal transition states and reactive intermediates — An energy diagram makes the course of a reaction visible by plotting the system's energy a",
+ "asset_type": "deck_text",
+ "notes": ""
+ },
+ {
+ "asset_id": "deck-figure:rc-two-step",
+ "status": "needs_review",
+ "chapter_id": "overview-of-organic-reactions",
+ "asset_title": "Two-step reaction with an intermediate",
+ "asset_type": "deck_figure",
+ "notes": ""
+ },
+ {
+ "asset_id": "deck-video:video-energy-diagram",
+ "status": "needs_review",
+ "chapter_id": "overview-of-organic-reactions",
+ "asset_title": "Walking a two-step energy diagram",
+ "asset_type": "deck_video_brief",
+ "notes": ""
+ }
+ ]
+}

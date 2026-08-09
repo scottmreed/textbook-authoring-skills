@@ -1,0 +1,1608 @@
+{
+ "chapter_id": "biomolecules-carbohydrates",
+ "chapter_version": "1",
+ "run_at": "2026-07-30T18:05:00Z",
+ "personas": [
+ {
+ "persona": "Organic Chemistry Instructor",
+ "persona_version": "1.0.0",
+ "chapter_id": "biomolecules-carbohydrates",
+ "chapter_version": "1",
+ "model": "claude-opus-5[1m]",
+ "summary": "Not-go as it stands, but the gap to publishable is small and surgical. This is the most chemically careful carbohydrate chapter I have reviewed here: I parsed all 30 molecule SMILES in assets[] plus all 34 distinct SMILES in question student_config with RDKit, assigned CIP labels, and additionally hydrolysed all four disaccharides in silico against verified monosaccharide references - maltose, cellobiose, lactose and sucrose are all correct in sugar identity, linkage carbon AND anomeric configuration, which is where chapters of this kind normally fail. Every numeric claim I could check is right, and the authoring even gets the hard details right - ribitol is correctly named without a D- prefix while D-arabinitol is correctly chiral, and the chapter's own 'beta = same face as the reference arm' rule survives the furanose test I ran on beta-D-fructofuranose in 3D. Three things block assignment. (1) mol-beta-d-xylopyranose is drawn as alpha-D-xylopyranose, so the one figure the chapter uses to make its all-equatorial point shows an axial anomeric hydroxyl and contradicts its own caption, the prose, and a question key. (2) The comparison_matrix answer key asserts that free beta-D-glucopyranose survives prolonged 1 M NaOH, flatly contradicting the Lobry de Bruyn-van Ekenstein passage the same chapter teaches two sections later. (3) The chapter's closing claim that humans secrete no beta-glucosidase at all is an exceptionless rule the chapter itself breaks by naming lactase. Separately, the question bank is positionally guessable: every single_select keys to option 'a', every matching_pairs is perfectly diagonal, every rank_order ships pre-sorted, and every structured_reasoning claim is both first-listed and longer than its distractors - and I found no shuffling in any renderer.",
+ "overall_score": 7.6,
+ "publication_blockers": [
+ "instr-001",
+ "instr-002"
+ ],
+ "findings": [
+ {
+ "finding_id": "instr-001",
+ "location": {
+ "asset_id": "mol-beta-d-xylopyranose",
+ "concept_slug": "pyranose-chair-conformation",
+ "nugget_id": "nugget-pyranose-chair-conformation",
+ "anchor_text": "A pentose whose pyranose ring, like that of beta-D-glucopyranose, places every substituent equatorial."
+ },
+ "severity": "blocker",
+ "category": "chemical-accuracy",
+ "observation": "The SMILES on mol-beta-d-xylopyranose is alpha-D-xylopyranose, not beta. Its anomeric configuration is inverted relative to the named compound. Two independent checks agree: its RDKit canonical form matches an alpha reference built by inverting only the anomeric tag of a beta-D-xylopyranose derived from the verified beta-D-glucopyranose asset by deleting C6; and an embedded MMFF-minimised conformer puts the anomeric C-O bond at a ring-normal projection of +1.41 (axial) while true beta-D-xylopyranose gives all four hydroxyls equatorial.",
+ "learner_impact": "This figure exists solely to make the chapter's headline structural argument - that a ring can put every substituent equatorial. The drawing a student sees shows the anomeric hydroxyl axial, so the figure disproves the caption printed beneath it, the asset long_description, the nugget prose, and the answer key of ch25-beta-glucose-chair-v2, which keys 'equatorial'. A student who trusts the figure over the text learns the wrong anomer.",
+ "evidence": "assets[].id = mol-beta-d-xylopyranose, smiles 'O[C@@H]1[C@@H](O)[C@@H](O)OC[C@H]1O'; correct beta-D-xylopyranose canonicalises to 'O[C@@H]1[C@@H](O)[C@H](O)OC[C@H]1O'. The compiled reader carries the same string. Question ch25-beta-glucose-chair-v2 answer_key [redacted].",
+ "recommended_outcome": "The chapter needs the figure that its all-equatorial-pentose argument depends on to actually be the beta anomer, so that the drawing, the caption, the accessible description, the prose claim and the chair question key all describe the same molecule.",
+ "confidence": 0.99
+ },
+ {
+ "finding_id": "instr-002",
+ "location": {
+ "question_slug": "ch25-anomer-comparison-v2",
+ "concept_slug": "anomers-and-mutarotation",
+ "anchor_text": "Survives prolonged treatment with 1 M aqueous NaOH at room temperature"
+ },
+ "severity": "blocker",
+ "category": "chemical-accuracy",
+ "observation": "The answer key marks feature f_base as 'yes' for case_sugar (free beta-D-glucopyranose): the free sugar is asserted to survive prolonged 1 M aqueous NaOH at room temperature. It does not. A free reducing sugar in 1 M hydroxide opens to the aldehyde, is deprotonated alpha to the carbonyl, and equilibrates through the 1,2-enediol - the Lobry de Bruyn-van Ekenstein rearrangement - giving a mixture of D-glucose, D-mannose and D-fructose, with further base-mediated degradation on standing. The chapter teaches exactly this two sections later and draws exactly the opposite conclusion from it.",
+ "learner_impact": "A student who has read nugget-sugar-oxidation-and-reduction and correctly answers 'does not apply' is graded wrong, and the feedback then reinforces the error: the level-3 hint states 'Neither compound has an acidic proton or a leaving group that hydroxide can act on', which is false for the free sugar whose open-chain form has an acidic C2-H. The item destroys the chapter's own best argument for why glycosides are used as anomeric protecting groups.",
+ "evidence": "ch25-anomer-comparison-v2 answer_key [redacted]. Contradicted by nugget-sugar-oxidation-and-reduction expanded text and by nugget-glycoside-formation.",
+ "recommended_outcome": "The base-stability row needs to discriminate the two compounds the way the chapter's chemistry actually does - the glycoside survives, the free hemiacetal does not - and the accompanying feedback needs to stop asserting that the free sugar has no base-accessible proton.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "instr-003",
+ "location": {
+ "concept_slug": "di-and-polysaccharides",
+ "nugget_id": "nugget-di-and-polysaccharides",
+ "anchor_text": "Humans secrete alpha-glucosidases - salivary and pancreatic amylase, maltase, and the rest - and secrete no beta-glucosidase at all."
+ },
+ "severity": "high",
+ "category": "misconception",
+ "observation": "This exceptionless claim is stated three times (standard tier, expanded tier, and the nugget practice_check answer) and it is not exceptionless. Humans express lactase-phlorizin hydrolase at the brush border, whose phlorizin-hydrolase domain is a beta-glucosidase and which slowly hydrolyses cellobiose; humans also express cytosolic beta-glucosidase and glucosylceramidase. The chapter contradicts itself two paragraphs earlier by naming lactase as the enzyme that hydrolyses lactose's beta-1,4 linkage. The defensible statement is that humans secrete no cellulase - no endo-beta-1,4-glucanase capable of depolymerising cellulose.",
+ "learner_impact": "This is the chapter's closing argument and the payoff of its whole stereochemistry-matters thesis, so it is the sentence students will retain. As written it teaches a false absolute that a biochemistry course will have to un-teach, and it is internally inconsistent in a way an attentive student will spot immediately.",
+ "evidence": "nugget-di-and-polysaccharides standard and expanded tiers plus practice_check answer; same nugget four paragraphs earlier: 'hydrolysing it requires the specific enzyme lactase.'",
+ "recommended_outcome": "The digestibility contrast needs to be stated as a claim that survives the chapter's own lactase example - humans lack the enzyme that cleaves beta-1,4 glucan chains, not the entire class of beta-glycosidases.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "instr-004",
+ "location": {
+ "question_slug": "ch25-identify-ketohexose",
+ "section_id": "question_sets",
+ "anchor_text": "correct_option_ids [redacted]severity": "high",
+ "category": "assessment-readiness",
+ "observation": "The correct answer is encoded in position across essentially the whole bank. All 12 single_select items key to option 'a' (first-listed). Both 5-option multi_selects other than ch25-fischer-legal-manipulations key to the first three options contiguously. All 4 matching_pairs items are perfectly diagonal. Both rank_order items ship their cards already in the correct order, so the answer is the untouched default state. All 4 structured_reasoning claim fields key to the first-listed option, which is also the longest by a wide margin. Five single_selects additionally have the key as the longest option. No shuffle, randomise, or Math.random call exists under frontend/src/components/activity-renderers or frontend/src/features/lessonPanel/questions.",
+ "learner_impact": "A student can score well above chance on this bank without doing any chemistry: pick 'a', drag nothing on the ranking items, match straight across, and choose the longest claim. That makes the bank useless as an assessment of the concepts, and rewards test-wiseness over the structural reasoning the chapter is built to teach.",
+ "evidence": "12/12 single_select correct_option_ids [redacted]; all four matching_pairs diagonal; ch25-rank-stereocenter-count student_config.cards == answer_key.correct_order; ch25-anomeric-effect-reasoning claim option 'hyperconjugation' is first and 219 chars against 143 and 128.",
+ "recommended_outcome": "Correct answers must not be recoverable from ordering or option length. Either the delivery surface has to randomise option, card and row order, or the authored keys have to be distributed across positions and the distractors brought to comparable length - and rank_order items must not ship in solved order.",
+ "confidence": 0.93
+ },
+ {
+ "finding_id": "instr-005",
+ "location": {
+ "asset_id": "mol-alpha-d-mannopyranose",
+ "concept_slug": "pyranose-chair-conformation",
+ "anchor_text": "Configurations are C1 R, C2 S, C3 S, C4 S, C5 R."
+ },
+ "severity": "high",
+ "category": "chemical-accuracy",
+ "observation": "The long_description states the anomeric carbon is R. The asset's own SMILES gives C1 = S under rdCIPLabeler (full set C1 S, C2 S, C3 S, C4 S, C5 R), which is the correct alpha assignment. R at C1 would be the beta anomer. The structure is right and the description of it is wrong. The sibling asset mol-alpha-d-glucopyranose states C1 S correctly, so this is an isolated transcription error.",
+ "learner_impact": "Anyone reading the structured description rather than the picture - screen-reader users, anyone checking their own CIP assignment against it - is told the alpha anomer has the R configuration at C1 in the one section of the chapter that is entirely about telling alpha from beta. It is also a wrong-chemistry error that lives only in the accessibility channel, so a sighted proofreader comparing the drawing to the title will never see it.",
+ "evidence": "mol-alpha-d-mannopyranose accessibility.long_description 'Configurations are C1 R, C2 S, C3 S, C4 S, C5 R'; RDKit rdCIPLabeler on the asset SMILES returns anomeric = S.",
+ "recommended_outcome": "The structured description of this figure needs to report the configuration the drawn structure actually has, and the descriptions of the other stereochemical figures need the same machine check applied.",
+ "confidence": 0.96
+ },
+ {
+ "finding_id": "instr-006",
+ "location": {
+ "concept_slug": "glycoside-formation",
+ "nugget_id": "nugget-glycoside-formation",
+ "anchor_text": "This is the same stabilization, in its extreme form, that the previous section identified as the anomeric effect"
+ },
+ "severity": "medium",
+ "category": "sequencing",
+ "observation": "concepts[].prerequisites for glycoside-formation lists only ['anomers-and-mutarotation'], but the nugget's expanded prose explicitly builds its central mechanistic argument on the anomeric effect, which is introduced in pyranose-chair-conformation (order 7). A learner following the declared prerequisite graph - or a course that skips the advanced-difficulty chair section - arrives at glycoside formation without the concept the explanation leans on.",
+ "learner_impact": "The declared prerequisite graph drives concept maps, adaptive sequencing and instructor pick-and-choose. Because pyranose-chair-conformation is the chapter's only advanced concept, it is precisely the one an instructor is most likely to drop - and dropping it silently breaks the mechanism story in the next section.",
+ "evidence": "concepts[] glycoside-formation prerequisites: ['anomers-and-mutarotation']; nugget-glycoside-formation expanded references the anomeric effect by name as a callback.",
+ "recommended_outcome": "The dependency the prose actually creates between the anomeric effect and glycoside formation needs to be visible in the concept graph, or the glycoside mechanism needs to stand on its own.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "instr-007",
+ "location": {
+ "question_slug": "ch25-haworth-beta-anomer",
+ "concept_slug": "haworth-projections",
+ "anchor_text": "Convert a Fischer projection to a Haworth projection using the right-to-down rule"
+ },
+ "severity": "medium",
+ "category": "objective-alignment",
+ "observation": "Three stated learning objectives are never assessed at the level at which they are stated. (a) Both haworth items set positions = [1], so the student only places the anomeric H/OH; no item asks for the C2/C3/C4 faces of a whole sugar. (b) Both chair items reduce to one shared label for all substituents at once, so the per-position alternation the nugget calls 'the single most common error in the conversion' is never tested. (c) The Fischer-to-wedge-dash conversion and the worked R/S assignment showing D-glyceraldehyde is (R) are taught at length and never assessed.",
+ "learner_impact": "The three skills the chapter itself flags as the highest-risk are the three the bank cannot detect a student failing. A student can pass this bank while being unable to draw a Haworth projection of glucose or a chair of glucopyranose.",
+ "evidence": "ch25-haworth-beta-anomer and -v2 positions = [1]; ch25-beta-glucose-chair and -v2 answer_key [redacted]; nugget-fischer-projections objective 3 has no corresponding item.",
+ "recommended_outcome": "The chapter needs assessment that reaches the full conversion skills its objectives claim - placing every substituent in a Haworth drawing, and calling axial versus equatorial position by position on a chair.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "instr-008",
+ "location": {
+ "question_slug": "ch25-glycoside-error-repair-v2",
+ "concept_slug": "glycoside-formation",
+ "anchor_text": "Acetylation converts the free secondary hydroxyls at C2, C3, and C4 into esters and does not touch the anomeric carbon"
+ },
+ "severity": "medium",
+ "category": "chemical-accuracy",
+ "observation": "Both the flawed_work passage and the keyed correct repair enumerate the acylatable hydroxyls of methyl alpha-D-glucopyranoside as C2, C3 and C4, omitting the primary hydroxyl at C6. Acetic anhydride/pyridine acetylates the C6 primary alcohol fastest of all four. The keyed repair therefore states an incomplete and, as written, incorrect product. The chapter's own prose has it right.",
+ "learner_impact": "The item is about reasoning carefully from the structure in front of you - the accessible_description even says 'hydroxyl groups on three other ring carbons', reinforcing the miscount. A student who correctly notices the C6-OH and expects a tetraacetate is told the right answer is a triacetate.",
+ "evidence": "ch25-glycoside-error-repair-v2 flawed_work and repair_options fix_unchanged; contradicted by nugget-glycoside-formation expanded: 'The hydroxyls at C2, C3, C4, and C6 are ordinary primary and secondary alcohols'.",
+ "recommended_outcome": "The item's inventory of acylatable positions must match the structure it displays and the chapter's own prose, including the C6 primary alcohol.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "instr-009",
+ "location": {
+ "question_slug": "ch25-reducing-sugar-select",
+ "concept_slug": "sugar-oxidation-and-reduction",
+ "anchor_text": "This one is worth reasoning through rather than dismissing."
+ },
+ "severity": "medium",
+ "category": "assessment-readiness",
+ "observation": "feedback_bundle.wrong_answer_explanations contains an entry matched to a specific option_id, and that option_id [redacted] is in answer_key.correct_option_ids. Every other wrong_answer_explanation in the chapter is keyed to a genuinely incorrect option. Either this explanation fires when a student selects a correct answer, or the match never resolves and the chapter's best piece of teaching feedback on the ketose/enediol route is dead content.",
+ "learner_impact": "The fructose case is the single most instructive item in this section. If the explanation misfires it contradicts the grader; if it never fires, the student gets no correction.",
+ "evidence": "ch25-reducing-sugar-select answer_key [redacted]; wrong_answer_explanations includes a match on option_id 'c'.",
+ "recommended_outcome": "Feedback intended for a student who omits a correct multi-select option needs a delivery mechanism distinct from wrong-answer feedback.",
+ "confidence": 0.8
+ },
+ {
+ "finding_id": "instr-010",
+ "location": {
+ "section_id": "nugget-carbohydrate-classification",
+ "nugget_id": "nugget-carbohydrate-classification",
+ "anchor_text": "D-Ribulose has five carbons, a ketone carbonyl at C2"
+ },
+ "severity": "medium",
+ "category": "retrieval-practice",
+ "observation": "None of the ten authored practice_check items reaches the compiled reader, and none of the 31 asset long_description texts does either. Molecule blocks carry only alt_text and the short description (the asset learning_goal). Ten well-written self-checks and 31 structured descriptions exist in the package and are invisible to the student.",
+ "learner_impact": "The chapter's only in-line retrieval practice is absent from the surface the reader actually uses, so the reading experience is ten blocks of continuous exposition with no checkpoints. The structured descriptions, which carry the CIP assignments, are likewise unreachable.",
+ "evidence": "topic.package.json defines practice_check for all 10 nuggets and long_description for all 31 assets; the compiled reader contains neither.",
+ "recommended_outcome": "The authored self-checks and the structured figure descriptions need a delivery path into the reader.",
+ "confidence": 0.92
+ },
+ {
+ "finding_id": "instr-011",
+ "location": {
+ "asset_id": "video-ring-closure",
+ "concept_slug": "cyclic-hemiacetal-formation",
+ "anchor_text": "close the resulting seven-membered ring, label it as strained and unfavourable"
+ },
+ "severity": "low",
+ "category": "notation-consistency",
+ "observation": "The video brief instructs the animation to label the seven-membered ring from C6 attack as 'strained'. The nugget expressly rejects that framing: the ring is 'neither strained enough to be impossible nor favourable enough to compete: the ends of a seven-membered chain meet rarely'. The corresponding question feedback also says 'forms slowly', not 'strained'.",
+ "learner_impact": "If produced as briefed, the animation would contradict the prose and the question feedback, and would reinforce the wrong model that all medium rings are strained rings. The distinction between entropic and enthalpic disfavour is one of the more transferable ideas in the section.",
+ "evidence": "video_briefs video-ring-closure storyboard step 4; nugget-cyclic-hemiacetal-formation expanded; ch25-ring-closure-arrow wrong_answer_explanations.",
+ "recommended_outcome": "The video's stated reason for rejecting the seven-membered ring needs to match the reason the chapter gives.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "instr-012",
+ "location": {
+ "concept_slug": "cyclic-hemiacetal-formation",
+ "nugget_id": "nugget-cyclic-hemiacetal-formation",
+ "anchor_text": "less than 0.02 percent of dissolved glucose is open-chain at any moment"
+ },
+ "severity": "low",
+ "category": "notation-consistency",
+ "observation": "The open-chain population of aqueous glucose is quoted at four different precisions across the chapter: 'less than 0.02 percent', 'Fewer than two molecules in ten thousand', 'well under one molecule in a thousand', 'well under 0.1 percent', and 'far below one percent'. All are true as upper bounds; the measured value is about 0.003 percent. The concept trouble_spot quotes yet another form.",
+ "learner_impact": "A student comparing the reader against the figure caption or the trouble-spot list sees numbers spanning a factor of fifty for the same quantity and cannot tell which is the fact to remember.",
+ "evidence": "nugget-cyclic-hemiacetal-formation terse and expanded; nugget-anomers-and-mutarotation standard and expanded; rc-mutarotation long_description; concepts trouble_spots.",
+ "recommended_outcome": "One consistent figure for the open-chain fraction across prose tiers, figure descriptions and trouble spots.",
+ "confidence": 0.8
+ },
+ {
+ "finding_id": "instr-013",
+ "location": {
+ "question_slug": "ch25-mutarotation-percent",
+ "nugget_id": "nugget-anomers-and-mutarotation",
+ "anchor_text": "gives x = 0.36 for the alpha fraction; measured directly, the equilibrium in water near 31 C is about 38 percent alpha and 62 percent beta"
+ },
+ "severity": "low",
+ "category": "objective-alignment",
+ "observation": "The prose performs the weighted-average calculation, gets 36 percent alpha, then states the measured value as 38/62 and attributes the gap to trace furanose forms. The question keys 63.7 percent beta with a tolerance of 2. A student who has memorised the chapter's headline 62 is inside tolerance by 0.3, but one who rounds to 61 or 60 fails. The chapter's own 38/62 figure is never the keyed answer to the question built on it.",
+ "learner_impact": "The most-repeated number in the section sits at the very edge of the tolerance band of the item that computes it.",
+ "evidence": "nugget-anomers-and-mutarotation expanded; ch25-mutarotation-percent answer_key [redacted].",
+ "recommended_outcome": "The relationship between the two-component calculated composition and the directly measured one needs to be unambiguous where the item is graded.",
+ "confidence": 0.75
+ },
+ {
+ "finding_id": "instr-014",
+ "location": {
+ "asset_id": "mol-dihydroxyacetone",
+ "concept_slug": "carbohydrate-classification",
+ "anchor_text": "Dihydroxyacetone: the only achiral ketose"
+ },
+ "severity": "low",
+ "category": "misconception",
+ "observation": "The asset title claims dihydroxyacetone is 'the only achiral ketose' and the long_description that it is 'the only monosaccharide' with no stereocenter. Both are unqualified absolutes that are only true inside the chapter's implicit restriction to 2-ketoses of three to six carbons. A 3-ketopentose with opposing configurations at C2 and C4 is meso and achiral, and glycolaldehyde is an achiral diose with no stereocenter.",
+ "learner_impact": "The chapter is otherwise scrupulous about flagging where a rule has exceptions. An unqualified 'only' in a figure title is the kind of claim a student will reproduce on an exam and be marked down for.",
+ "evidence": "assets[] mol-dihydroxyacetone title and long_description; compare nugget-carbohydrate-classification expanded, which states the fact without the absolute.",
+ "recommended_outcome": "The uniqueness claim needs the scope it is actually true within - the common 2-ketoses - rather than being asserted over all ketoses and all monosaccharides.",
+ "confidence": 0.7
+ },
+ {
+ "finding_id": "instr-015",
+ "location": {
+ "asset_id": "mol-d-gluconic-acid",
+ "concept_slug": "sugar-oxidation-and-reduction",
+ "anchor_text": "a monocarboxylic acid that can no longer close a six-membered hemiacetal ring"
+ },
+ "severity": "low",
+ "category": "conceptual-support",
+ "observation": "The figure's learning_goal says the aldonic acid 'can no longer close a six-membered hemiacetal ring', while the nugget two paragraphs later says 'Aldonic acids readily cyclize to five- or six-membered lactones.' Both statements are correct - a lactone is not a hemiacetal - but nothing in the chapter makes that distinction explicit, and the two sentences read as a direct contradiction.",
+ "learner_impact": "Students already conflate hemiacetal, acetal, ester and lactone; presenting 'cannot close a ring' and 'readily cyclizes' within one section without naming the difference invites the wrong resolution.",
+ "evidence": "assets[] mol-d-gluconic-acid learning_goal; nugget-sugar-oxidation-and-reduction expanded.",
+ "recommended_outcome": "The chapter needs to make explicit that the ring an aldonic acid forms is a lactone rather than a hemiacetal.",
+ "confidence": 0.72
+ },
+ {
+ "finding_id": "instr-016",
+ "location": {
+ "question_slug": "ch25-hemiacetal-bond-ledger",
+ "concept_slug": "cyclic-hemiacetal-formation",
+ "anchor_text": "The hydrogen on atom 3 (carried implicitly in the drawing)"
+ },
+ "severity": "low",
+ "category": "assessment-readiness",
+ "observation": "The four atom_labels use ids 1-4 that do not correspond to the atom indices of the supplied molecule_smiles: for O=CCCCCO the aldehyde carbon is index 1 but the carbonyl oxygen is index 0 while being labelled '2', and the hydroxyl oxygen is index 6 while being labelled '3'. Label '4' names a hydrogen that the parenthetical concedes is not drawn. The chemistry of the four keyed ledger rows is entirely correct.",
+ "learner_impact": "A student cross-referencing the label list against the displayed structure finds that the numbering is a separate scheme from the drawing, and that one of the four labelled atoms is not present in the drawing at all.",
+ "evidence": "ch25-hemiacetal-bond-ledger molecule_smiles 'O=CCCCCO' with atom_labels ids 1-4 described in prose; expected_rows reference atom pairs '3-4' and '2-4'.",
+ "recommended_outcome": "The atoms a student is asked to reason about must be identifiable in the structure they are shown, including the transferred proton.",
+ "confidence": 0.68
+ }
+ ],
+ "strengths": [
+ "Stereochemical fidelity of the monosaccharides is excellent: all 30 molecule SMILES machine-verified with rdCIPLabeler, and 29 of 30 carry exactly the configuration their title, alt text and prose claim - including alpha- versus beta-D-glucopyranose, beta-D-galactopyranose, alpha-D-mannopyranose, beta-D-ribofuranose, beta-D-fructofuranose with its quaternary anomeric carbon, both methyl glucosides, and 2-deoxy-D-ribose where the CIP descriptor legitimately flips relative to ribose.",
+ "All four disaccharides survive in-silico hydrolysis against verified references, with the correct anomeric configuration of the donor ring in all four and the dual-anomeric 1-to-2 linkage of sucrose right. This is the thing carbohydrate chapters usually get wrong.",
+ "The chapter states its alpha/beta rule against the sugar's reference arm rather than as 'beta is up', and explicitly claims the arm-based version survives translation to furanoses. Tested in 3D: in beta-D-fructofuranose the anomeric OH does sit on the same face as the C6 arm. The pedagogical claim is not just careful, it is correct.",
+ "Numeric claims check out across the board: rotations for glucose and galactose, sucrose inversion, the 0.9 kcal/mol A-value and the 20 percent it predicts, 2^n stereoisomer counting, amylose's 6-residue helix, amylopectin's 25-residue branching and glycogen's 3-fold denser branching.",
+ "Two easily-missed alditol subtleties are handled correctly: ribitol is labelled without a D- prefix (confirmed meso) while D-arabinitol is correctly treated as chiral.",
+ "Assessment breadth is genuinely strong: 28 base items plus 28 variants across 19 question types, every one of the 10 concepts assessed, and the type choices are apt.",
+ "Two defect classes that recurred in earlier chapters are fixed here: error_repair answer keys carry both the target_id and expected_target forms, and every numeric_with_units tolerance uses the {mode, amount} dict shape.",
+ "The Kiliani-Fischer synthesis_route items are chemically exact - D-arabinose verified, the gluco cyanohydrin correct, the partial reduction correctly specified, and the epimeric pairs correctly stated.",
+ "The prose repeatedly builds mechanism rather than asserting outcome: the entropic argument for intramolecular hemiacetal formation, the planar-carbonyl argument for mutarotation, the n-to-sigma* geometry of the anomeric effect, and the ring-flip cost argument for galactose's axial C4."
+ ],
+ "open_questions": [
+ "Does any delivery surface shuffle option, card, or matching-row order at render time? No shuffle/randomise/Math.random found in the renderers, which is why instr-004 is rated high - if shuffling happens server-side before payload assembly, that finding drops to low.",
+ "How does the grader treat a wrong_answer_explanations entry whose match resolves to an option that is in correct_option_ids (ch25-reducing-sugar-select, option [redacted])?",
+ "Is the non-delivery of practice_check and long_description to the compiled reader a tracked platform gap, or specific to this compile?",
+ "Can the haworth question type accept a full set of ring positions, or is the single-position form a renderer limitation that constrains what instr-007 can ask for?",
+ "In ch25-anomeric-effect-reasoning the distractor e_mp ('The axial anomer has the higher melting point') is not merely irrelevant but factually false for glucose (alpha 146 C, beta 150 C), and the feedback rebuts it only on relevance grounds. Should a false distractor be corrected as false?"
+ ]
+ },
+ {
+ "persona": "Struggling Student",
+ "persona_version": "1.0.0",
+ "chapter_id": "biomolecules-carbohydrates",
+ "chapter_version": "1",
+ "model": "claude-opus-5[1m]",
+ "summary": "The prose in this chapter is, sentence for sentence, some of the friendliest I have read: it names the mistake I am about to make before I make it, it justifies rules instead of just stating them, and the hint ladders on nearly every question genuinely go from strategy to narrowing to specifics rather than restating the prompt. But what I actually receive as a reader is 8,000 words of continuous text illustrated by thirty generic skeletal structures, with no checkpoint, no objective list, no summary, and - in a chapter whose entire spine is three named drawing conventions - not one picture of a Fischer projection, a Haworth projection, or a chair. The Haworth-to-chair conversion, which the text itself calls 'the single most common error in the conversion,' is asserted rather than worked, illustrated by nothing, and assessed by a question that hands me the answer in its own prompt. Every one of the ten authored practice_check items is missing from the compiled reader, so I go from reading straight to graded questions with nothing in between. On top of that, a comparison-matrix cell requires me to answer that free glucose survives prolonged 1 M NaOH, which is the opposite of what two other sections of this same chapter teach me - so studying the chapter makes me get that item wrong. And because the three detail tiers are alternatives rather than a sequence, a student who picks 'terse' or 'standard' to reduce the load loses facts the questions grade on: the ketose-stereocenter rule, the Kiliani-Fischer sequence, the anomeric-effect bond-length evidence, and the weighted-average rotation calculation are all expanded-only.",
+ "overall_score": 5.6,
+ "publication_blockers": [
+ "ss-001",
+ "ss-002"
+ ],
+ "findings": [
+ {
+ "finding_id": "ss-001",
+ "location": {
+ "concept_slug": "pyranose-chair-conformation",
+ "nugget_id": "nugget-pyranose-chair-conformation",
+ "section_id": "nugget-pyranose-chair-conformation",
+ "question_slug": "ch25-beta-glucose-chair",
+ "asset_id": "video-fischer-to-haworth-to-chair",
+ "anchor_text": "Forgetting this - assuming up means axial - is the single most common error in the conversion"
+ },
+ "severity": "blocker",
+ "category": "worked-example-gap",
+ "observation": "The Haworth-to-chair conversion is stated as a rule and then its result is asserted, never derived, and the chapter contains no drawing of a chair or of a Haworth projection to check the assertion against. The prose tells me the up direction 'alternates between axial and equatorial as you go around the ring' and that an up group at C1 and an up group at C2 'have different labels,' then immediately reports the finished answer without ever showing which ring carbons make up axial and which make up equatorial. The one asset assigned to this step, video-fischer-to-haworth-to-chair, compiles into the reader as a video block with an empty url. The only chair question, ch25-beta-glucose-chair, removes the step entirely by telling me the answer in its prompt and grades a single label, 'equatorial'.",
+ "learner_impact": "This is the point where I stop. I am told this is the mistake everyone makes, I am given the corrected rule in one abstract sentence, I am shown no picture of either drawing, and then the only exercise hands me the answer. I cannot check whether I can do the conversion, so I memorise 'beta-glucose is all-equatorial' as a fact and guess on anything else - which is exactly the failure the section says it is preventing. When a later question or an exam asks me for galactose or mannose, I have no procedure to fall back on.",
+ "evidence": "nugget-pyranose-chair-conformation expanded text, paragraphs 2-3; concept objective 1 'Translate a Haworth projection into a chair conformation'; trouble_spot 1 of the same concept; assets[] contains 30 molecule assets and 1 reaction_coordinate and no chair or Haworth figure; compiled reader block for video-fischer-to-haworth-to-chair has url empty; ch25-beta-glucose-chair prompt_text and answer_key expected_label equatorial.",
+ "recommended_outcome": "A student needs to see the Haworth-to-chair mapping carried out position by position on at least one sugar - which face becomes axial and which equatorial at each numbered ring carbon - and needs at least one exercise that requires performing that mapping rather than being told its outcome. Right now the chapter's own declared hardest step is neither demonstrated nor assessed.",
+ "confidence": 0.94
+ },
+ {
+ "finding_id": "ss-002",
+ "location": {
+ "question_slug": "ch25-anomer-comparison-v2",
+ "concept_slug": "anomers-and-mutarotation",
+ "anchor_text": "Survives prolonged treatment with 1 M aqueous NaOH at room temperature"
+ },
+ "severity": "blocker",
+ "category": "misconception",
+ "observation": "The comparison_matrix ch25-anomer-comparison-v2 requires the cell f_base / case_sugar to be marked 'Applies' - i.e. that free beta-D-glucopyranose survives prolonged treatment with 1 M aqueous NaOH at room temperature. Two other sections of this same chapter teach the opposite. nugget-glycoside-formation (expanded) says glycosides 'survive basic conditions that would epimerize or isomerize a free sugar', and nugget-sugar-oxidation-and-reduction (expanded) says 'free reducing sugars left standing in base scramble their configuration at C2'. The question's own level-3 hint reinforces the wrong reading: 'Neither compound has an acidic proton or a leaving group that hydroxide can act on' - but the free sugar's C2-H in the open form is precisely the acidic proton the enediol section is built on.",
+ "learner_impact": "A student who read the chapter carefully and remembered its most repeated warning about base gets this cell wrong; a student who read nothing and guessed 'both survive' gets it right. That is the single most demoralising thing an assessment can do to someone with low confidence - it teaches me that studying does not help and that I should answer by pattern rather than by reasoning. Worse, the graded key installs the misconception the chapter spent a paragraph dismantling.",
+ "evidence": "ch25-anomer-comparison-v2 answer_key [redacted]; feedback_bundle.hints[2] 'Neither compound has an acidic proton or a leaving group that hydroxide can act on.'; contrasted with nugget-glycoside-formation expanded and nugget-sugar-oxidation-and-reduction expanded ('the same enediol converts a sugar into its C2 epimer, so free reducing sugars left standing in base scramble their configuration at C2').",
+ "recommended_outcome": "The row's claim and its key must stop contradicting the chapter's own teaching about what base does to a free reducing sugar - either the property being compared has to be narrowed to something that genuinely is true of both, or the expected cell has to match what the prose teaches. As it stands the answer is unreachable from the chapter.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "ss-003",
+ "location": {
+ "nugget_id": "nugget-carbohydrate-classification",
+ "concept_slug": "carbohydrate-classification",
+ "question_slug": "ch25-rank-stereocenter-count",
+ "anchor_text": "A ketohexose therefore has one fewer stereocenter than an aldohexose of the same length."
+ },
+ "severity": "high",
+ "category": "conceptual-support",
+ "observation": "The rule that decides several questions - in a ketose the carbonyl carbon is not a stereocenter, so a ketose has one fewer stereocenter than the aldose of the same chain length - appears in exactly one place in the whole chapter: the expanded tier of nugget-carbohydrate-classification. The word 'stereocenter' does not occur anywhere in the terse or standard tier of that nugget, and nugget-d-l-configuration-and-families never mentions ketoses in connection with counting stereocenters at any tier. Yet ch25-rank-stereocenter-count is marked difficulty 'core' and cannot be ordered correctly without it, ch25-count-aldohexose-stereoisomers-v2 is built entirely on it, and the practice_check for nugget-carbohydrate-classification asks for the stereocenter count of D-ribulose.",
+ "learner_impact": "On a question labelled 'core' - the ones I attempt first because they are supposed to be the safe ones - I hit a discriminating rule I have never been shown unless I happened to be reading the longest tier. The hint ladder tells me 'Terminal CH2OH groups and carbonyl carbons never qualify', which is the rule, but by then I have already answered and been marked wrong.",
+ "evidence": "String 'stereocenter' present in nugget-carbohydrate-classification only in the expanded tier; nugget-d-l-configuration-and-families never pairs 'ketose' with stereocenter counting at any tier; ch25-rank-stereocenter-count difficulty 'core'.",
+ "recommended_outcome": "The stereocenter-counting rule for aldoses versus ketoses needs to reach a student at whatever detail tier they are reading, because a core-difficulty question and the section's own self-check both turn on it.",
+ "confidence": 0.92
+ },
+ {
+ "finding_id": "ss-004",
+ "location": {
+ "nugget_id": "nugget-pyranose-chair-conformation",
+ "question_slug": "ch25-anomeric-effect-reasoning",
+ "concept_slug": "pyranose-chair-conformation",
+ "anchor_text": "which stabilizes the molecule, shortens the ring C-O bond, and lengthens the exocyclic one"
+ },
+ "severity": "high",
+ "category": "cognitive-load",
+ "observation": "The three detail tiers are alternatives, so a student who shortens the reading to manage load loses graded content, and nothing in the chapter warns them. Verified expanded-only items that questions require: (a) the anomeric-effect bond-length evidence is absent from terse and standard, but option e_bonds is a required selection in ch25-anomeric-effect-reasoning; (b) the all-carbon-ring control experiment (option e_carbocycle, also a required selection) is not stated at ANY tier - it appears only inside a concept trouble_spot that the reader never renders; (c) the Kiliani-Fischer synthesis is absent from terse entirely, and the poisoned-palladium partial reduction that ch25-kiliani-fischer-route grades is named only in expanded; (d) 'oxocarbenium' is absent from the terse glycoside tier; (e) maltose is absent from the terse tier of nugget-sugar-oxidation-and-reduction although that nugget's own practice_check is a maltose-versus-glycoside comparison.",
+ "learner_impact": "The tier chooser is the one lever I have when I am overwhelmed, and pulling it silently removes material I will be graded on. I use it, feel like I have finished the section, then fail questions and cannot work out why - which reads to me as 'I am bad at this' rather than 'I read the short version'. On ch25-anomeric-effect-reasoning specifically I am asked to select an observation (the all-carbon-ring control) that no tier of the chapter ever states, so even reading everything does not save me.",
+ "evidence": "Tier presence checks on topic.package.json nuggets: 'shorten' in pyranose-chair terse false / standard false / expanded true; no CH2-for-O ring-replacement statement in any tier; 'Kiliani' terse false; 'palladium' expanded only; 'oxocarbenium' terse false; 'Maltose' terse false. ch25-anomeric-effect-reasoning answer_key.fields.evidence.expected_option_ids includes e_bonds and e_carbocycle.",
+ "recommended_outcome": "Either every fact the question set grades needs to be present in whichever tier a student is reading, or a student needs to know before answering that the shorter tiers are summaries and not sufficient preparation. Separately, at least one required piece of evidence in the anomeric-effect item is not stated anywhere in the chapter and needs to be.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "ss-005",
+ "location": {
+ "asset_id": "mol-beta-d-glucopyranose",
+ "concept_slug": "haworth-projections",
+ "section_id": "nugget-haworth-projections",
+ "anchor_text": "Every substituent - OH, H, CH2OH - is drawn strictly vertically, straight up or straight down from its ring carbon."
+ },
+ "severity": "high",
+ "category": "cognitive-load",
+ "observation": "All 31 assets in the chapter are generic renderings: 30 are molecule assets drawn from SMILES and one is a reaction-coordinate diagram. There is no Fischer projection figure, no Haworth projection figure and no chair figure anywhere, even though those three conventions are the subject of three of the ten sections. The reader is therefore describing a drawing style in words while showing a different drawing style beside it. Compounding this, alpha- and beta-D-glucopyranose - the pair whose single-carbon difference is the whole point of two sections - are two nearly identical skeletal images whose alt_text is word-for-word identical apart from the Greek letter, so nothing in the figure or its caption points at the carbon that differs.",
+ "learner_impact": "I read 'the C4 hydroxyl points down' and then look at a picture in which nothing points up or down, so the figure adds load instead of removing it. For alpha versus beta I stare at two pictures I cannot tell apart, decide the difference is invisible, and fall back on memorising 'beta is up' - the exact shortcut the chapter warns me three times will fail me.",
+ "evidence": "topic.package.json assets[] type counts: molecule 30, reaction_coordinate 1. Compiled reader block types across all ten sections: text, molecule, reaction_coordinate, video, mcmurry_link, external_link only. alt_text of mol-alpha-d-glucopyranose and mol-beta-d-glucopyranose differ only in the leading Greek letter.",
+ "recommended_outcome": "A student needs to see the actual conventions the chapter is teaching - a Fischer cross, a Haworth hexagon with vertical substituents, a chair - rather than a generic skeletal structure standing in for all three, and needs the alpha/beta pair presented in a way that makes the one differing position findable.",
+ "confidence": 0.93
+ },
+ {
+ "finding_id": "ss-006",
+ "location": {
+ "nugget_id": "nugget-carbohydrate-classification",
+ "section_id": "nugget-carbohydrate-classification",
+ "concept_slug": "carbohydrate-classification",
+ "anchor_text": "D-Ribulose has five carbons, a ketone carbonyl at C2, and hydroxyl groups on every other carbon."
+ },
+ "severity": "high",
+ "category": "retrieval-practice",
+ "observation": "All ten authored practice_check items are absent from the compiled reader chapter, as are all thirty learning objectives, all thirty trouble_spots, and every asset long_description. Searching the compiled reader for 'practice_check', 'learning_objectives', 'trouble_spots' and 'long_description' returns zero occurrences. What actually reaches me is ten unbroken prose blocks totalling roughly 8,000 words, interleaved with structures and two link cards, and nothing else. There is no summary, no key-term list, no statement of what each section wants me to be able to do, and no self-check anywhere between the start of the chapter and the graded question bank.",
+ "learner_impact": "I read for seventy-two declared minutes with no way to find out whether any of it stuck. Low-confidence students respond to that by re-reading - which feels productive and is not - and by arriving at the question set cold, where the first wrong answer becomes evidence that the whole chapter went in one ear and out the other. The trouble_spots in particular are the best part of this package: they name the exact wrong move I am about to make, and I never see a single one of them.",
+ "evidence": "frontend/public/reader/topic-chapters/biomolecules-carbohydrates.json contains 0 occurrences of 'practice_check', 'learning_objectives', 'trouble_spots', 'long_description'; block_type values present are text, molecule, reaction_coordinate, video, mcmurry_link, external_link. topic.package.json contains 10 practice_check objects and 30 trouble_spots that have no delivery path.",
+ "recommended_outcome": "A student needs at least one low-stakes retrieval checkpoint per section and a visible statement of what each section is asking them to be able to do - the material for both is already written and simply is not reaching the reader.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "ss-007",
+ "location": {
+ "nugget_id": "nugget-haworth-projections",
+ "concept_slug": "haworth-projections",
+ "question_slug": "ch25-identify-anomeric-carbon-v2",
+ "anchor_text": "The memorized version is a liability the first time it meets a fructofuranose or an L-sugar, where the reference arm is not where the shortcut assumes."
+ },
+ "severity": "high",
+ "category": "worked-example-gap",
+ "observation": "The chapter insists three separate times that the alpha/beta rule must be phrased against the sugar's reference arm rather than as 'beta is up', because the arm-relative version survives translation to L-sugars and to furanoses - and then never demonstrates the rule on a furanose or an L-sugar. Both worked examples are D-pyranoses, where the shortcut and the correct rule give the same answer, so nothing in the chapter ever exercises the distinction. Meanwhile beta-D-fructofuranose is presented as an asset in three sections and is the subject of ch25-identify-anomeric-carbon-v2, and for that ring it is genuinely non-obvious which of its two exocyclic arms is 'the reference arm' - the chapter never says.",
+ "learner_impact": "I am told four times that the easy rule will betray me, and given no replacement I can actually run. So I keep the easy rule, because it is the only one I can execute, and I quietly carry an approach the chapter has told me is wrong. If a furanose anomer ever comes up I will guess, and I will not know I guessed.",
+ "evidence": "nugget-haworth-projections standard and expanded; nugget-anomers-and-mutarotation expanded; ch25-haworth-beta-anomer and ch25-haworth-beta-anomer-v2 are both D-pyranoses with answer_key up_is 'beta'; asset mol-beta-d-fructofuranose appears in three nuggets with no anomer-assignment walkthrough.",
+ "recommended_outcome": "A student needs the arm-relative anomer rule carried out at least once on a case where it differs from the memorised shortcut - a furanose or an L-sugar - otherwise the repeated warning gives them nothing they can use.",
+ "confidence": 0.87
+ },
+ {
+ "finding_id": "ss-008",
+ "location": {
+ "concept_slug": "pyranose-chair-conformation",
+ "nugget_id": "nugget-cyclic-hemiacetal-formation",
+ "anchor_text": "Everything learned about cyclohexane conformation in Chapter 4 applies here without amendment"
+ },
+ "severity": "medium",
+ "category": "conceptual-support",
+ "observation": "Two whole prior chapters are imported as assumed knowledge with no refresher and no declaration. nugget-cyclic-hemiacetal-formation opens with 'Chapter 19 established that an alcohol adds reversibly to an aldehyde to give a hemiacetal' and builds the entire section on it, but the concept's prerequisites array is carbohydrate-classification only. nugget-pyranose-chair-conformation says everything from Chapter 4 applies here without amendment and then uses axial, equatorial and 1,3-diaxial without ever restating what they mean; its prerequisites array is haworth-projections only. Neither cross-chapter dependency is recorded anywhere a student or an instructor would see it.",
+ "learner_impact": "Weak prerequisites are exactly my situation. When the text says 'Chapter 19 established' I read it as 'you should already know this,' feel behind before the section has started, and press on without going back. In the chair section I meet 'axial' and '1,3-diaxial' with no definition on the page and give up on understanding the stability argument, memorising 'all-equatorial' instead.",
+ "evidence": "concepts[] cyclic-hemiacetal-formation.prerequisites = [carbohydrate-classification]; pyranose-chair-conformation.prerequisites = [haworth-projections]; neither 'axial' nor '1,3-diaxial' is defined anywhere in the chapter text.",
+ "recommended_outcome": "A student needs the two imported prerequisites - hemiacetal/acetal chemistry and cyclohexane axial/equatorial analysis - either declared so they can be checked, or briefly re-anchored at the point of use, rather than asserted as already-held knowledge.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "ss-009",
+ "location": {
+ "question_slug": "ch25-mutarotation-percent-v2",
+ "nugget_id": "nugget-anomers-and-mutarotation",
+ "anchor_text": "112x + 18.7(1 - x) = 52.6"
+ },
+ "severity": "medium",
+ "category": "worked-example-gap",
+ "observation": "The weighted-average rotation calculation is the only quantitative procedure in the chapter and is graded by two advanced questions, but it is shown exactly once - as a bare equation embedded mid-sentence in the expanded tier of nugget-anomers-and-mutarotation, with no statement of what x stands for, no rearrangement, and no check of the result against the answer the question wants. The standard tier says only that the equilibrium works out to roughly 38 percent alpha and 62 percent beta with no method at all. The v2 question then runs the same calculation on galactose rotations that appear nowhere in the chapter, and asks for the alpha fraction rather than the beta fraction.",
+ "learner_impact": "I can follow the equation while I am looking at it and cannot reproduce it two minutes later, because I was never told which quantity x is or why the two terms add. Faced with the galactose version I try to pattern-match against the glucose numbers, fail, and either leave it blank or enter one of the three numbers from the prompt. The level-3 hint assumes I got the equation set up, which is the step I could not do.",
+ "evidence": "nugget-anomers-and-mutarotation expanded single sentence; standard tier has no equation; ch25-mutarotation-percent (answer 63.7) and ch25-mutarotation-percent-v2 (answer 28.0, galactose values not present in any nugget).",
+ "recommended_outcome": "A student needs the weighted-average setup shown as a labelled procedure - what the unknown represents, why the two terms sum, how to convert to a percentage and which anomer the result belongs to - before being asked to run it on unfamiliar numbers.",
+ "confidence": 0.86
+ },
+ {
+ "finding_id": "ss-010",
+ "location": {
+ "nugget_id": "nugget-sugar-oxidation-and-reduction",
+ "section_id": "nugget-sugar-oxidation-and-reduction",
+ "concept_slug": "sugar-oxidation-and-reduction",
+ "anchor_text": "the single most useful generalization in this chapter"
+ },
+ "severity": "medium",
+ "category": "cognitive-load",
+ "observation": "This section is budgeted at 7 minutes for 989 words and carries four learning objectives - more than any other nugget - while introducing roughly fifteen new named things in one pass: Tollens' reagent, Benedict's reagent, reducing sugar, enediol, the Lobry de Bruyn-van Ekenstein rearrangement, alditol, D-glucitol/sorbitol, aldonic acid, D-gluconic acid, lactone, aldaric acid, D-glucaric acid, the Kiliani-Fischer synthesis, cyanohydrin and the Wohl degradation. Four of those are eponyms carrying no structural information, and three of the names differ from one another by two letters. Eight of the chapter's 56 questions draw on this one section.",
+ "learner_impact": "This is the section where I stop taking notes and start highlighting, which means I am no longer processing. The aldonic/aldaric pair in particular is the kind of thing I will simply invert under time pressure. The Kiliani-Fischer and Wohl material lands at the very end of the densest section, so it gets my least attention and then appears in two advanced questions.",
+ "evidence": "nugget-sugar-oxidation-and-reduction: duration_minutes 7, expanded length 989 words, 4 learning_objectives, 6 asset_ids; 8 question_sets carry concept_slug sugar-oxidation-and-reduction.",
+ "recommended_outcome": "A student needs this section's load spread out or staged - in particular the three oxidation-level products need to be separable by something more durable than two letters, and the chain-lengthening synthesis at the end needs to arrive somewhere other than after fifteen new terms.",
+ "confidence": 0.82
+ },
+ {
+ "finding_id": "ss-011",
+ "location": {
+ "question_slug": "ch25-anomer-comparison",
+ "concept_slug": "anomers-and-mutarotation",
+ "anchor_text": "Most rows here come out the same for both columns, because the two structures differ at exactly one carbon and share everything else."
+ },
+ "severity": "medium",
+ "category": "retrieval-practice",
+ "observation": "Thirty of the 56 questions carry no wrong_answer_explanations at all and rely entirely on a single generic_incorrect_explanation paragraph. For the single-answer types that is workable, but it breaks down on the multi-part items: the two comparison_matrix questions each have ten independently gradeable cells, the four structured_reasoning questions each have three fields including a five-option multi-select, and the four matching_pairs questions each have four pairings. Getting any one cell, checkbox or pairing wrong returns the same one paragraph about the whole item, with no indication of which part was wrong.",
+ "learner_impact": "On a ten-cell grid I get 'incorrect' and a paragraph of general advice, and I have no way to find the one cell I missed. So I either re-answer by trial and error until it goes green - learning nothing - or I close the question and move on.",
+ "evidence": "Questions with zero wrong_answer_explanations (30 of 56) include ch25-anomer-comparison and -v2, ch25-anomeric-effect-reasoning and -v2, ch25-sucrose-nonreducing and -v2, ch25-oxidation-reagent-match and -v2, ch25-disaccharide-linkage-match and -v2, ch25-mutarotation-profile and -v2, ch25-hemiacetal-bond-ledger and -v2.",
+ "recommended_outcome": "On the multi-cell and multi-field questions a student needs feedback that identifies which part of their response was wrong, not only a paragraph about the item as a whole.",
+ "confidence": 0.83
+ },
+ {
+ "finding_id": "ss-012",
+ "location": {
+ "asset_id": "video-ring-closure",
+ "section_id": "nugget-cyclic-hemiacetal-formation",
+ "anchor_text": "Glucose closes its own ring"
+ },
+ "severity": "medium",
+ "category": "cognitive-load",
+ "observation": "All five video blocks in the compiled reader render with an empty url, so the four authored video briefs reach the student as titles and captions with nothing behind them. Three of the four are attached to the sections I found hardest - ring closure, mutarotation and the Fischer/Haworth/chair chain - and their storyboards describe precisely the step-by-step motion the prose leaves out.",
+ "learner_impact": "A titled, captioned video block that does not play reads as 'the help you need exists and you cannot have it'. I click it, nothing happens, and I go back to re-reading the paragraph I already did not understand. It also means the only planned dynamic treatment of the conversions is unavailable, which is what makes ss-001 a dead end rather than a temporary gap.",
+ "evidence": "frontend/public/reader/topic-chapters/biomolecules-carbohydrates.json - all five blocks with block_type video have content.url empty; video_briefs[] contain full storyboards and narration outlines with no produced media. The same empty-url pattern appears in every other compiled reader chapter.",
+ "recommended_outcome": "Either the motion these briefs describe needs to reach the student in some form, or the reader should not present a titled video affordance that cannot deliver anything - a student should not be shown help that does not exist.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "ss-013",
+ "location": {
+ "nugget_id": "nugget-cyclic-hemiacetal-formation",
+ "concept_slug": "anomers-and-mutarotation",
+ "anchor_text": "less than 0.02 percent of dissolved glucose is open-chain at any moment"
+ },
+ "severity": "low",
+ "category": "cognitive-load",
+ "observation": "The same two quantities are given in several different forms across the chapter. The open-chain population appears as 'less than 0.02 percent', 'Fewer than two molecules in ten thousand', 'present in solution at well under one percent', 'well under 0.1 percent' and 'well under one molecule in a thousand'. The anomer equilibrium appears as 'about 38 percent alpha and 62 percent beta' in three places, as x approximately 0.36 for the alpha fraction one sentence earlier in the same paragraph, and as 63.7 percent beta in ch25-mutarotation-percent.",
+ "learner_impact": "When I try to write a revision card for 'how much open chain is there?' I find five different answers and cannot tell whether they are the same fact or five facts. The 36 / 38 / 36.3 sequence for the alpha fraction is worse, because it sits in one paragraph and looks like the text disagreeing with itself.",
+ "evidence": "nugget-cyclic-hemiacetal-formation terse, expanded and learning_objectives[2]; nugget-anomers-and-mutarotation standard and expanded; ch25-mutarotation-percent answer_key.value 63.7 with tolerance plus or minus 2.",
+ "recommended_outcome": "A student needs one stated value per quantity, used consistently, with any discrepancy between a calculated and a measured figure explicitly named as such rather than left side by side.",
+ "confidence": 0.78
+ },
+ {
+ "finding_id": "ss-014",
+ "location": {
+ "asset_id": "video-ring-closure",
+ "question_slug": "ch25-ring-closure-arrow",
+ "concept_slug": "cyclic-hemiacetal-formation",
+ "anchor_text": "Attack from C6 would give a seven-membered ring, which is neither strained enough to be impossible nor favourable enough to compete"
+ },
+ "severity": "low",
+ "category": "misconception",
+ "observation": "The seven-membered-ring alternative is characterised three different ways. The expanded prose is careful and correct: 'neither strained enough to be impossible nor favourable enough to compete' because 'the ends of a seven-membered chain meet rarely'. The wrong-answer explanation on ch25-ring-closure-arrow says it 'forms slowly'. The storyboard for video-ring-closure says to 'label it as strained and unfavourable', which is the misconception the prose explicitly avoids.",
+ "learner_impact": "If I take the video caption's framing I file 'seven-membered rings are strained', which is wrong and will mislead me the next time ring size comes up. It is a small thing, but it is the kind of small inconsistency that makes me distrust my notes when two sources in the same chapter say different things.",
+ "evidence": "nugget-cyclic-hemiacetal-formation expanded paragraph 3; ch25-ring-closure-arrow wrong_answer_explanations for site 11; video_briefs video-ring-closure storyboard step 4.",
+ "recommended_outcome": "The reason a seven-membered ring loses needs to be stated the same way wherever it appears, since one of the three current versions teaches the wrong cause.",
+ "confidence": 0.75
+ }
+ ],
+ "strengths": [
+ "The hint ladders are the best scaffolding in the package and they genuinely escalate: ch25-identify-ketohexose goes strategy to what-to-look-at to the discriminating count, and ch25-identify-anomeric-carbon moves from history-dependent to a structural test I can run without the history.",
+ "Wrong-answer explanations on the single- and multi-select items teach the criterion rather than asserting the key - ch25-assign-d-or-l explains for each distractor which stereocenter was inverted and why that one does not decide the letter.",
+ "The prose names common wrong moves before I make them and explains why they are wrong, not just that they are.",
+ "The Fischer-to-Haworth conversion IS properly worked, carbon by carbon, in both the standard and expanded tiers of nugget-haworth-projections, with the C6-arm result called out as a fact worth memorising separately. This is the model the chair section should have followed.",
+ "Importance is signposted honestly, including the unusually candid 'It is a plausible account rather than a proven cause, and it should be offered as such' about glucose's biological prevalence.",
+ "Each new relationship is tied back to one I already have instead of being introduced as a new species - 'anomers are simply epimers at one particular carbon'.",
+ "The generic_incorrect_explanations on the multi-part questions, though not per-cell, are written as procedures I can rerun."
+ ],
+ "open_questions": [
+ "Is the empty video url in the compiled reader a per-chapter authoring gap or a platform-wide delivery gap? Every one of the compiled reader chapters shows the same empty-string pattern, which suggests platform - I have reported ss-012 at medium rather than high on that basis.",
+ "Same question for ss-006: practice_check, learning_objectives, trouble_spots and asset long_description are all authored here and all absent from the compiled reader. If the compiler has no block type for them, then the ten practice checks in this package are dead content and the fix is a platform one.",
+ "ss-002 (the 1 M NaOH cell) is a chemistry-accuracy judgement as much as a pedagogical one; the Organic Chemistry Instructor persona should confirm whether 1 M NaOH at room temperature genuinely degrades/epimerizes free glucose on the timescale implied.",
+ "In ch25-anomeric-effect-reasoning, the required evidence option e_carbocycle is not stated in any tier of any nugget - it exists only inside a concept trouble_spot, which the reader does not render. Should required evidence in a structured_reasoning item always be traceable to delivered prose?",
+ "ch25-beta-glucose-chair states in its prompt that all five substituents share one orientation and then grades a single label. Is that a deliberate difficulty setting, or has the interactive chair type simply not got a per-position answer key available?"
+ ]
+ },
+ {
+ "persona": "Accessibility Persona",
+ "persona_version": "1.0.0",
+ "chapter_id": "biomolecules-carbohydrates",
+ "chapter_version": "1",
+ "model": "claude-opus-5[1m]",
+ "summary": "The prose layer of this chapter is the strongest non-visual chemistry writing I have reviewed here: all three projections (Fischer, Haworth, chair) are taught as explicit verbal rules, and at every detail tier the text states which side of a Fischer projection each D-glucose hydroxyl sits on, which face each Haworth substituent occupies, and which chair positions are axial or equatorial. All 168 hints are text; every selected-response option, matching item, categorize item and rank card carries a real text label rather than a 'Structure A/B/C/D' placeholder; bond_change_ledger ships a fully described non-visual workspace; and the automated leak guard flags 0 of 56 questions. The figure and question layers do not match that standard. Every figure ships a rich atom-by-atom long_description, but the compiled reader carries only alt_text, and the alt_text for 17 of 31 assets is identical modulo the compound's name. Both hotspot questions expose atoms only as 'C atom 5' RDKit indices with no connectivity, both structure_scaffold questions are a bare Ketcher iframe the registry itself marks not keyboard-complete with no alternative and no disclosure, and both curved_arrow questions render only the molecule-click path, which emits a source kind the answer key cannot match while the labelled site-select fallback that IS the declared non-visual mode never renders. Fifty-four of the 56 authored accessible_description strings are never displayed to any learner.",
+ "overall_score": 5.5,
+ "publication_blockers": [
+ "access-001",
+ "access-003",
+ "access-004",
+ "access-006"
+ ],
+ "findings": [
+ {
+ "finding_id": "access-001",
+ "location": {
+ "asset_id": "mol-alpha-d-glucopyranose",
+ "section_id": "nugget-anomers-and-mutarotation",
+ "anchor_text": "a six-membered ring containing one oxygen, with hydroxyl groups on four ring carbons and a CH2OH arm on the ring carbon next to the ring oxygen"
+ },
+ "severity": "blocker",
+ "category": "alt-text-quality",
+ "observation": "The accessibility.alt_text of 17 of the 31 assets is identical to at least one other asset's alt text once the compound name is removed, so the stereochemical difference the figure exists to show is absent from the only description a learner receives. Six clusters: (1) mol-alpha-d-glucopyranose / mol-beta-d-glucopyranose / mol-beta-d-galactopyranose / mol-alpha-d-mannopyranose; (2) mol-d-glucose-open / mol-l-glucose-open / mol-d-galactose-open / mol-d-mannose-open; (3) mol-d-erythrose / mol-d-threose; (4) mol-d-glyceraldehyde / mol-l-glyceraldehyde; (5) mol-methyl-alpha-d-glucopyranoside / mol-methyl-beta-d-glucopyranoside; (6) mol-maltose / mol-cellobiose. Every one of these pairs is placed in the same reader section, side by side, precisely so the reader can compare them.",
+ "learner_impact": "A blind or low-vision learner reading nugget-d-l-configuration-and-families receives eight figures that resolve to three distinct descriptions; reading nugget-anomers-and-mutarotation they cannot tell the alpha figure from the beta figure at all; reading nugget-di-and-polysaccharides they cannot tell maltose from cellobiose, which the prose has just told them is 'the difference between bread and wood'. The single comparison each section is built around is unavailable to them while being immediate for a sighted reader.",
+ "evidence": "mol-alpha-d-glucopyranose alt_text vs mol-beta-d-glucopyranose alt_text differ only in the leading Greek letter. mol-maltose alt_text vs mol-cellobiose alt_text differ only in the leading name. The distinguishing content exists in long_description but see access-002 for why it never arrives.",
+ "recommended_outcome": "Each figure's short description must state the specific configurational fact that distinguishes it from the other figures in its own section - for ring sugars, which face or orientation each substituent occupies, and for the disaccharides, the configuration at the linkage. Two figures that a learner is asked to compare must never resolve to the same words.",
+ "confidence": 0.97
+ },
+ {
+ "finding_id": "access-002",
+ "location": {
+ "asset_id": "mol-beta-d-glucopyranose",
+ "section_id": "nugget-haworth-projections",
+ "anchor_text": "Described as:"
+ },
+ "severity": "high",
+ "category": "media-equivalence",
+ "observation": "All 31 assets carry a substantial accessibility.long_description (211-572 characters, atom-by-atom, with configurations), but the compiled reader chapter's molecule blocks contain only name, smiles, alt_text, description (which is the asset's learning_goal), generator_href and rdkit_options. long_description appears nowhere in the compiled reader chapter, and ReaderBlockRenderer's StructureCard renders only altText. No code path in frontend/src reads long_description for reader blocks.",
+ "learner_impact": "The chapter's entire structured-description layer - the one that does carry per-carbon configurations, Fischer left/right calls and Haworth face calls - is authored and then discarded at compile/render time. Every learner who depends on a text equivalent gets the one-line alt text instead, which is the text identified as insufficient in access-001.",
+ "evidence": "Compiled block for mol-d-glyceraldehyde contains only name, smiles, alt_text, description, generator_href, rdkit_options. mol-beta-d-galactopyranose long_description ends 'so in a Haworth drawing the C4 hydroxyl points to the opposite face from the one it occupies in glucose' - exactly the sentence a non-visual learner of this chapter needs, and it is not delivered.",
+ "recommended_outcome": "The longer structured description must actually reach the learner alongside the figure - whether by delivering it in the compiled reader block, by folding its content into the short description, or by some disclosure affordance. Authoring a long description that the reader never carries is worse than none, because it makes the gap invisible to review.",
+ "confidence": 0.96
+ },
+ {
+ "finding_id": "access-003",
+ "location": {
+ "question_slug": "ch25-identify-anomeric-carbon",
+ "concept_slug": "cyclic-hemiacetal-formation",
+ "anchor_text": "Every atom in the drawing is selectable. The task is to click the single carbon the question names."
+ },
+ "severity": "blocker",
+ "category": "interactive-fallback",
+ "observation": "Both hotspot questions ship only molecule_smiles and a correct_option_ids [redacted]; neither carries a regions list. HotspotActivityRenderer's molecule branch therefore renders one button per atom with the accessible name 'symbol atom index+1' - which are RDKit SMILES-order indices bearing no relation to sugar carbon numbering (the anomeric carbon, sugar C1, is 'C atom 5'). The bonds array is delivered to the client but is used only for contiguity logic; no adjacency is exposed to assistive technology, and the image alt is the generic 'Structure for this question'. The registry declares nonvisual_response_mode 'named_region_list' for hotspot, but no named regions exist for these two items.",
+ "learner_impact": "A screen-reader user is asked to click the anomeric carbon and is offered twelve unlabelled atom indices with no connectivity information and no mapping from RDKit index to sugar numbering. The defining property - 'the only carbon bonded to two oxygens, one of them the ring oxygen' - is exactly the information the interface does not expose. The required activity cannot be completed except by guessing, and the hint ladder asks for information the non-visual interface withholds.",
+ "evidence": "student_config for ch25-identify-anomeric-carbon is molecule_smiles plus select_count one_or_more, with answer_key correct_option_ids [redacted]. [internal source reference — not in this repo] aria-label is symbol plus atom index. [internal source reference — not in this repo] emits atoms as id, index, x, y, symbol only.",
+ "recommended_outcome": "Clicking an atom must be answerable from named, chemically meaningful targets - atoms identified by their role or sugar numbering, with enough neighbour information for the learner to apply the stated criterion - or an equivalent alternative response must exist for these two items.",
+ "confidence": 0.94
+ },
+ {
+ "finding_id": "access-004",
+ "location": {
+ "question_slug": "ch25-draw-cyclic-hemiacetal",
+ "concept_slug": "cyclic-hemiacetal-formation",
+ "anchor_text": "A blank drawing canvas is provided. The task is to draw the cyclic product described."
+ },
+ "severity": "blocker",
+ "category": "keyboard-operability",
+ "observation": "Both structure_scaffold questions use scaffold blank_canvas. The registry marks the type keyboard_complete=False with the explicit comment 'honest: Ketcher canvas is not yet (PRD 17)' and declares nonvisual_response_mode 'structured_molecule_entry'. StructureWorkspaceRenderer renders only an iframe to the generator plus an 'Open the full workspace' link - no SMILES field, no structured entry, no alternative of any kind. The keyboard_complete flag is surfaced to humans only on the internal question-types demo page; nothing on the student-facing activity shell discloses it.",
+ "learner_impact": "A keyboard-only or screen-reader learner assigned either of these items cannot produce an answer, is told nothing about why, and has no alternate route to demonstrate the same knowledge. The chemistry involved is trivially expressible as text, so the barrier is purely the response mode.",
+ "evidence": "[internal source reference — not in this repo] keyboard_complete=False, nonvisual_response_mode structured_molecule_entry. [internal source reference — not in this repo] renders an iframe and a link and nothing else. answer_key is simply the product SMILES.",
+ "recommended_outcome": "These two items need a response path that does not require pointer drawing - the declared structured-molecule-entry mode implemented, an equivalent text/naming item, or the items replaced for learners who cannot operate the canvas. At minimum the limitation must be disclosed at assignment time.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "access-005",
+ "location": {
+ "question_slug": "ch25-build-d-glucose-fischer",
+ "anchor_text": "A Fischer projection workspace is shown with CHO fixed at the top, CH2OH fixed at the bottom, and four stereocenter rows between them."
+ },
+ "severity": "high",
+ "category": "media-equivalence",
+ "observation": "All 56 questions carry a well-written accessibility_bundle.accessible_description, and the compiled bank and the LMS envelope both deliver it. Exactly one renderer consumes it: ReactionCoordinateQuestionRenderer, which uses it as the SVG aria-label. No other activity renderer and no activity shell reads accessible_description. The 54 other descriptions are never presented to any learner.",
+ "learner_impact": "Every description that explains what the workspace is, what is fixed, what is selectable and what the task requires - the material a non-visual learner needs before touching the controls - is invisible. It matters most where the description is the only equivalent: the hotspot items, the structure-drawing items, and the items whose options are structures labelled only with a compound name.",
+ "evidence": "grep over frontend/src for accessible_description returns hits only in [internal source reference — not in this repo], [internal source reference — not in this repo] (its own config key), and [internal source reference — not in this repo].",
+ "recommended_outcome": "The authored per-question non-visual description must be presented to the learner for every question type, not only for reaction-coordinate items.",
+ "confidence": 0.93
+ },
+ {
+ "finding_id": "access-006",
+ "location": {
+ "question_slug": "ch25-ring-closure-arrow",
+ "concept_slug": "cyclic-hemiacetal-formation",
+ "anchor_text": "The task is to draw one curved arrow between two of these sites."
+ },
+ "severity": "blocker",
+ "category": "interactive-fallback",
+ "observation": "Both curved_arrow items declare five well-labelled sites and an answer key whose arrow source is kind lone_pair at site 9 (and site 7 in the v2). Their sites entries declare kinds ['atom','lone_pair'] in that order. Because student_config carries molecule_smiles, CurvedArrowRenderer takes its molecule branch and returns early; the siteSelect fallback - the labelled source/kind/destination selects that are the registry's declared electron_action_list non-visual mode - is never rendered. In the molecule branch the source kind is not chooseable: sourceKindForAtom returns site.kinds[0], i.e. 'atom'. The grader's _normalize_endpoint includes kind in the endpoint tuple, so a submitted atom-kind source cannot match the expected lone_pair source.",
+ "learner_impact": "The one rendered interaction path cannot express the electron source the answer key requires, so a correct arrow grades incorrect for every learner. The path that could express it - the labelled selects, which are also the only path a screen-reader user can reason about as an ordered action list - is unreachable. This is simultaneously a universal grading defect and the loss of the declared non-visual response mode.",
+ "evidence": "answer_key expected_arrows source kind lone_pair site 9, target kind atom site 1. [internal source reference — not in this repo] sourceKindForAtom returns site.kinds[0]; the molecule branch returns before siteSelect is used. [internal source reference — not in this repo] _normalize_endpoint returns (kind, sites).",
+ "recommended_outcome": "The arrow these two items ask for must be enterable and gradable through the interface a learner actually sees, and the labelled electron-action list must remain available as the non-visual route.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "access-007",
+ "location": {
+ "question_slug": "ch25-disaccharide-linkage-match",
+ "concept_slug": "di-and-polysaccharides",
+ "anchor_text": "Four disaccharide structures are listed on the left, each showing two rings joined by a bridging oxygen"
+ },
+ "severity": "high",
+ "category": "media-equivalence",
+ "observation": "In several items the discriminating stereochemistry lives only in the rendered structure image, while the item's text label is a bare compound name and the image alt is that same name. ch25-disaccharide-linkage-match asks the learner to match Maltose, Cellobiose, Lactose and Sucrose to linkage descriptions that specify alpha vs beta at the joint - a sighted learner reads the configuration off the drawing; a non-visual learner is given the four names and must already know the answer. The same pattern holds for ch25-reducing-sugar-select, ch25-oxidation-reagent-match-v2, ch25-anomer-comparison and its v2, and ch25-epimer-relationship.",
+ "learner_impact": "For these items the assessed skill - read the structure, determine the configuration at the linkage or at the anomeric carbon - is converted into a recall task for non-visual learners while remaining a reading task for sighted ones. The two groups are not doing the same activity.",
+ "evidence": "ch25-disaccharide-linkage-match left entries carry text plus structure_smiles; right entries specify the configuration. [internal source reference — not in this repo] sets alt={item.text}.",
+ "recommended_outcome": "Where the answer turns on a feature visible only in an option's structure, that feature needs a text equivalent attached to the option itself - the configuration at the linkage, or whether the anomeric carbon carries a free hydroxyl - so the same evidence is available in both modalities.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "access-008",
+ "location": {
+ "question_slug": "ch25-assign-d-or-l",
+ "concept_slug": "d-l-configuration-and-families",
+ "anchor_text": "Which of these sugars belongs to the L series?"
+ },
+ "severity": "medium",
+ "category": "objective-alignment",
+ "observation": "The workaround that makes structure-bearing options nominally accessible - labelling each option with the compound's name - hands the answer to every learner in two items. ch25-assign-d-or-l asks which sugar belongs to the L series and labels the options 'L-Glucose', 'D-Mannose', 'D-Galactose', 'D-Ribose'. ch25-identify-ketohexose labels the options with names from which the classification follows.",
+ "learner_impact": "No learner is blocked, but the item no longer measures what it claims to, and the accessible route and the visual route are answering different questions. It also masks the underlying gap identified in access-007.",
+ "evidence": "ch25-assign-d-or-l options a-d: 'L-Glucose', 'D-Mannose', 'D-Galactose', 'D-Ribose'; answer targets the L-series member, whose name begins with L.",
+ "recommended_outcome": "Options whose classification is the answer need labels that identify them without stating the classification, plus a description of the structural feature the learner is meant to read.",
+ "confidence": 0.86
+ },
+ {
+ "finding_id": "access-009",
+ "location": {
+ "question_slug": "ch25-beta-glucose-chair",
+ "concept_slug": "pyranose-chair-conformation",
+ "anchor_text": "A six-membered chair drawing is shown with two attachment options at each ring position"
+ },
+ "severity": "medium",
+ "category": "interactive-fallback",
+ "observation": "The chair type declares keyboard_complete=False in the registry, but ChairPlacementRenderer's own docstring says 'Keyboard-complete by construction (selects only)' and it does render a labelled ring-position plus orientation select pair per substituent, which is operable. The declared flag is therefore wrong in the pessimistic direction. In the opposite direction, the clickable chair diagram is broken for this chapter's configuration: with five substituents, every click on the diagram is routed to the same single label and the remaining four substituents can never be placed by pointer. Separately, the diagram is a plain cyclohexane with positions numbered 1-6 and no ring-oxygen vertex, while the prompt says the unsubstituted vertex is the ring oxygen.",
+ "learner_impact": "The accessible select table is in fact the only working way to complete both chair items, which is a good outcome reached by accident; meanwhile a learner who relies on direct manipulation cannot place more than one substituent. The wrong registry flag also means any downstream disclosure or accommodation logic keyed on keyboard_complete will misreport this type.",
+ "evidence": "[internal source reference — not in this repo] keyboard_complete=False. [internal source reference — not in this repo] docstring and the updateSubstituent call routing all clicks to one label, against student_config substituents of five entries.",
+ "recommended_outcome": "The registry's keyboard-complete claim for chair needs to match the shipped renderer, and the pointer path must work for multi-substituent placements. The pyranose ring's oxygen vertex should be represented in the workspace the prompt describes.",
+ "confidence": 0.87
+ },
+ {
+ "finding_id": "access-010",
+ "location": {
+ "asset_id": "mol-d-erythrose",
+ "section_id": "nugget-fischer-projections",
+ "anchor_text": "Drawn as a Fischer projection with C1 at the top, the hydroxyls at C2 and C3 both fall on the right-hand side."
+ },
+ "severity": "medium",
+ "category": "alt-text-quality",
+ "observation": "The chapter contains no Fischer projection, no Haworth projection and no chair figure. All 31 assets are molecule (RDKit skeletal renders) except one reaction_coordinate. Several descriptions nonetheless assert facts about a projection the learner is not being shown: mol-d-erythrose, mol-d-threose, mol-l-glyceraldehyde, mol-beta-d-galactopyranose, mol-beta-d-xylopyranose and mol-alpha-d-mannopyranose.",
+ "learner_impact": "A learner using the description as the equivalent of the image is told about a drawing that does not exist on the page; a learner switching between the image and the description finds them describing different representations. This is a mild but real mismatch in a chapter whose whole point is that the representation matters.",
+ "evidence": "assets[] contains only type molecule and reaction_coordinate; ReaderBlockRenderer StructureCard posts to deck-creator render preview with the raw SMILES.",
+ "recommended_outcome": "Descriptions must describe the representation the learner is actually given. If projection figures are intended, they need to exist; if not, the projection statements belong in the prose rather than attached to skeletal renders.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "access-011",
+ "location": {
+ "nugget_id": "nugget-haworth-projections",
+ "section_id": "nugget-haworth-projections",
+ "anchor_text": "In the Fischer projection of D-galactose the hydroxyls sit right at C2, left at C3, left at C4, and right at C5."
+ },
+ "severity": "medium",
+ "category": "media-equivalence",
+ "observation": "All ten nuggets carry a practice_check with a text prompt and a text answer, and every one of them is fully non-visual. None of them is delivered: the compiled reader chapter contains no practice-check block, and its section block types are limited to text, molecule, reaction_coordinate, video, mcmurry_link and external_link.",
+ "learner_impact": "The one retrieval-practice surface in the chapter that requires no visual reading at all, and that directly rehearses the Fischer-to-Haworth-to-chair conversions, never reaches any learner. Non-visual learners lose disproportionately because the interactive question types they can least easily operate are the ones that survive.",
+ "evidence": "practice_check prompts exist for all ten nuggets; grep for practice_check and for the verbatim prompt text in the compiled reader returns zero hits.",
+ "recommended_outcome": "The authored, fully text-based self-checks need to reach the reader, since they are the chapter's only modality-neutral retrieval opportunity.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "access-012",
+ "location": {
+ "section_id": "nugget-pyranose-chair-conformation",
+ "anchor_text": "The Haworth projection is a bookkeeping device, and it stops being useful the moment a question turns on crowding."
+ },
+ "severity": "low",
+ "category": "keyboard-operability",
+ "observation": "Heading order skips a level: TopicPackageChapterRenderer emits h1 for the chapter title and h2 for each section, then StructureCard and ReactionCoordinateCard emit h4 for each figure - no h3 exists. Within a section, the entire prose body is a single markdown block of 3.3-6.1 kB with sub-topics marked only by bold run-in emphasis, so there are no headings to navigate by.",
+ "learner_impact": "A screen-reader user navigating by heading level encounters an h2 to h4 jump at every figure, and cannot jump within a section to a sub-topic - they must listen linearly through several thousand characters or scrub by paragraph.",
+ "evidence": "[internal source reference — not in this repo] uses h1 for chapter and h2 for section; [internal source reference — not in this repo] StructureCard uses h4. Expanded tier lengths per section range 3319-6140 characters.",
+ "recommended_outcome": "The reader needs a heading level between the section title and the figure cards, and long section bodies need in-section headings.",
+ "confidence": 0.8
+ },
+ {
+ "finding_id": "access-013",
+ "location": {
+ "question_slug": "ch25-mutarotation-profile",
+ "concept_slug": "anomers-and-mutarotation",
+ "anchor_text": "rises to an unlabelled peak at 24, falls to a labelled minimum for the open-chain form at 8, rises again to a lower peak at 16"
+ },
+ "severity": "low",
+ "category": "alt-text-quality",
+ "observation": "The two reaction_coordinate_reasoning descriptions - the only ones actually rendered to learners - supply exact energy values and explicitly characterise the second barrier as 'a lower peak'. The rendered diagram has no axis ticks and no numeric labels. The questions ask for step_count, rate_determining_step and step_types, and the phrase 'a lower peak' pre-performs the barrier comparison the rate-determining-step answer depends on.",
+ "learner_impact": "Not a hard leak - a sighted reader sees the same relative heights - but the non-visual description is more precise than the visual stimulus and states the comparison rather than the geometry, so the two audiences are not doing quite the same reading task. The automated guard cannot see this class of over-disclosure.",
+ "evidence": "accessible_description for ch25-mutarotation-profile quoted above; [internal source reference — not in this repo] renders only the path, per-point circles/labels and the two axis captions - no tick values. find_accessibility_leaks returned 0 leaks across all 56 questions.",
+ "recommended_outcome": "The reaction-coordinate descriptions should convey the curve's shape and relative heights at the same precision the drawing offers, and should leave the barrier comparison for the learner to make rather than stating which peak is lower.",
+ "confidence": 0.72
+ },
+ {
+ "finding_id": "access-014",
+ "location": {
+ "section_id": "nugget-carbohydrate-classification",
+ "asset_id": "mol-d-glyceraldehyde",
+ "anchor_text": "Described as:"
+ },
+ "severity": "low",
+ "category": "alt-text-quality",
+ "observation": "StructureCard sets the rendered image's alt to the figure's alt text and then renders the identical string again as a visible caption prefixed 'Described as:'. ReactionCoordinateCard does the same.",
+ "learner_impact": "A screen reader announces each of the 51 figure descriptions in this chapter twice in immediate succession. The visible caption is a genuinely useful feature for sighted and low-vision readers, so the duplication is worth resolving rather than removing.",
+ "evidence": "[internal source reference — not in this repo] StructureCard renders an Image with alt={altText} followed by a Text node 'Described as: {altText}'; same pattern in ReactionCoordinateCard.",
+ "recommended_outcome": "When the description is already shown as visible text next to the figure, the image should not repeat it to assistive technology.",
+ "confidence": 0.82
+ }
+ ],
+ "strengths": [
+ "The prose carries all three representations in words, at every detail tier. nugget-haworth-projections states the conversion rule and then applies it carbon by carbon, and nugget-pyranose-chair-conformation names the axial/equatorial outcome for four named sugars explicitly. A non-visual learner can determine every one of these from the text alone.",
+ "The terse and standard detail tiers both retain the load-bearing rules (horizontal-toward/vertical-away, right-becomes-down, up-stays-up-but-changes-name, beta-is-on-the-C6-arm-face). A learner using a reduced-density tier as a cognitive accommodation loses none of those rules.",
+ "All 168 hints across the 56 questions are kind text. There is not one image-only, highlight-only or animation-only hint in the chapter.",
+ "Every selected-response option, categorize item, matching item, rank card, comparison-matrix case and synthesis-route intermediate carries a real text label. The 'Structure A/B/C/D' anti-pattern that broke ch15 and ch16 does not appear anywhere.",
+ "Both bond_change_ledger items are a model of non-visual authoring: reaction_display narrates the transformation in prose, atom_labels names each of the four participating atoms in words, and the renderer exposes them as a labelled list plus a labelled editable table.",
+ "The Fischer and Haworth builders are genuinely keyboard-complete, and this chapter uses them in the mode where that holds - per-stereocenter and per-face selects alongside the drag affordance rather than instead of it.",
+ "find_accessibility_leaks flags 0 of 56 questions; I ran it directly against the authored package. Descriptions consistently state the stimulus and the task and stop there.",
+ "The four deferred videos are compiled with is_hidden true and an empty URL, so no learner meets a dead player, and each production_note records its accessibility requirements up front.",
+ "No meaning in the chapter rests on colour, motion or hover. The only colour language in the prose is genuine chemistry - the Benedict's blue-to-brick-red transition and the Tollens' silver mirror - and it is always paired with the underlying redox statement."
+ ],
+ "open_questions": [
+ "Is this chapter intended to ship with no Fischer, Haworth or chair figure at all? Several long_descriptions are written as though such figures exist (access-010).",
+ "Does anything outside ReactionCoordinateQuestionRenderer plan to consume accessible_description? Findings access-003, access-004 and access-007 would all be materially reduced if the authored descriptions were rendered.",
+ "The chair grader accepts expected_label if the set of submitted orientations has exactly one member - which appears to score correct when only one of the five substituents has been placed. I could not confirm whether normalize_chair_state requires full placement.",
+ "I did not verify behaviour of the two hotspot items under a live screen reader - my conclusion in access-003 is from the rendered aria-labels and the enrichment payload, not from an AT session.",
+ "No new category identifiers were coined; every finding uses a value already listed in finding-schema.md."
+ ]
+ },
+ {
+ "persona": "Learner with Visual Preference",
+ "persona_version": "1.0.0",
+ "chapter_id": "biomolecules-carbohydrates",
+ "chapter_version": "1",
+ "model": "claude-opus-5[1m]",
+ "summary": "This chapter is written with unusual care about spatial relationships and then declines to draw a single one of them. Ten sections carry 53 figure cards, 30 of them distinct, and every one is an RDKit skeletal depiction of a single compound; the one non-molecule figure is the mutarotation energy profile. Three of the ten concepts - fischer-projections, haworth-projections, pyranose-chair-conformation - are about representations that the chapter never renders. Five figure captions actively describe a drawing that is not on screen. The chapter's single energy diagram renders alpha and beta glucopyranose at identical energy with identical barriers, contradicting both its own alt text and the 38/62 equilibrium the prose derives. Layout compounds this: the compiler emits exactly one text block per section followed by a bank of 4-8 figures, so no figure is ever adjacent to the sentence it supports. Two multiple-choice items illustrate only the correct option, which is a visual answer tell independent of any chemistry. Against that, the asset alt texts are honest about what is actually drawn, the hotspot items are genuinely answerable from the depiction, and the alpha/beta comparison matrix isolates the difference correctly.",
+ "overall_score": 4.4,
+ "publication_blockers": [
+ "vis-001"
+ ],
+ "findings": [
+ {
+ "finding_id": "vis-001",
+ "location": {
+ "question_slug": "ch25-cellulose-vs-starch",
+ "concept_slug": "di-and-polysaccharides",
+ "anchor_text": "The anomeric configuration of the 1,4 linkage between glucose units"
+ },
+ "severity": "blocker",
+ "category": "figure-purpose",
+ "observation": "In ch25-cellulose-vs-starch exactly one of four options carries a structure_smiles, and it is the key (option a, cellobiose). The identical pattern appears in ch25-glycosylation-outcome-v2, where only option a is illustrated and option a is the key. Both survive compilation into compiled/question-set.json unchanged.",
+ "learner_impact": "A learner scanning the option panel sees one option with a picture and three without. The illustrated option is selectable on layout alone, with no carbohydrate reasoning at all. This rewards visual pattern-matching over the concept and produces a score that does not report understanding - and it is invisible to a text-only answer-leak check because the tell is graphical.",
+ "evidence": "ch25-cellulose-vs-starch: options a/b/c/d, structure_smiles present only on a; answer_key [redacted]. ch25-glycosylation-outcome-v2: structure_smiles present only on a; answer_key [redacted].",
+ "recommended_outcome": "The visual treatment of options must not correlate with correctness: either every option in a set is illustrated or none is. The need is that the picture panel carry no information about which option is right.",
+ "confidence": 0.96
+ },
+ {
+ "finding_id": "vis-002",
+ "location": {
+ "question_slug": "ch25-epimer-relationship",
+ "concept_slug": "d-l-configuration-and-families",
+ "anchor_text": "C2 epimers, and therefore diastereomers"
+ },
+ "severity": "high",
+ "category": "figure-purpose",
+ "observation": "In ch25-epimer-relationship and ch25-glycosylation-outcome, two of four options carry a structure_smiles and the other two do not; the key is one of the two illustrated options in both cases.",
+ "learner_impact": "The illustrated pair narrows a four-way choice to a two-way guess before any chemistry is read. A learner who works visually will notice the asymmetry immediately; one who works from the text will not, so the same item is easier for some students for reasons unrelated to the objective.",
+ "evidence": "ch25-epimer-relationship: illustrated ['a','b'], plain ['c','d'], key 'a'. ch25-glycosylation-outcome: illustrated ['a','b'], plain ['c','d'], key 'a'.",
+ "recommended_outcome": "Illustration must be uniform across an option set, or absent. The need is that no learner can shorten the search space by looking at which options have pictures.",
+ "confidence": 0.92
+ },
+ {
+ "finding_id": "vis-003",
+ "location": {
+ "concept_slug": "fischer-projections",
+ "section_id": "nugget-fischer-projections",
+ "nugget_id": "nugget-fischer-projections",
+ "anchor_text": "at every stereocenter, the horizontal bonds point toward the viewer and the vertical bonds point away"
+ },
+ "severity": "high",
+ "category": "visual-opportunity",
+ "observation": "The Fischer section spends 594 words defining a cross with a viewer convention, then walks three spatial manipulations, then does an R/S assignment that turns on which arm the lowest-priority H sits on. Its figures are RDKit line-angle depictions with no vertical spine, no horizontal arms, and no cross. Nothing anywhere in the chapter draws a Fischer projection.",
+ "learner_impact": "Every operation described is a change to a picture the learner has never seen. The learner is then asked to produce one in ch25-build-d-glucose-fischer, whose builder workspace is the first Fischer cross in the entire chapter and appears inside a graded item.",
+ "evidence": "nugget-fischer-projections asset_ids = ['mol-d-glyceraldehyde','mol-d-erythrose','mol-d-threose','mol-d-glucose-open']; all four compile to block_type 'molecule' with skeletal SMILES.",
+ "recommended_outcome": "The learner needs to see a worked Fischer projection - the spine, the four rows, and at least one of the three manipulations performed on it - before the first item that asks them to build one.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "vis-004",
+ "location": {
+ "concept_slug": "haworth-projections",
+ "section_id": "nugget-haworth-projections",
+ "nugget_id": "nugget-haworth-projections",
+ "anchor_text": "as a hexagon for a pyranose or a pentagon for a furanose"
+ },
+ "severity": "high",
+ "category": "visual-opportunity",
+ "observation": "The Haworth section gives four explicit drawing conventions plus the right-means-down / left-means-up conversion rule applied carbon by carbon to D-glucose. Its five figures are RDKit ring depictions that satisfy none of the four conventions and encode face information as wedge/dash rather than up/down.",
+ "learner_impact": "The section's entire payload is a set of instructions for producing a specific picture, and the pictures beside it are a different kind of drawing. A learner cannot check the C2-down / C3-up / C4-down / C6-up result against anything on the page.",
+ "evidence": "nugget-haworth-projections prose lists the four conventions as bullets; asset_ids resolve to five molecule blocks.",
+ "recommended_outcome": "The learner needs at least one Haworth projection drawn to the conventions the section states, and the glucose-versus-galactose C4 contrast shown as the single flipped vertical line the prose describes.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "vis-005",
+ "location": {
+ "concept_slug": "pyranose-chair-conformation",
+ "section_id": "nugget-pyranose-chair-conformation",
+ "nugget_id": "nugget-pyranose-chair-conformation",
+ "anchor_text": "No other common aldohexose can do this."
+ },
+ "severity": "high",
+ "category": "visual-opportunity",
+ "observation": "This is the longest section in the chapter (827 words) and it is entirely about geometry a flat depiction cannot express: up alternating between axial and equatorial around the ring, all five substituents equatorial, galactose forced to carry C4 axial, mannose carrying two axials, and the anomeric effect's antiperiplanar requirement. Its five figures are flat RDKit ring drawings. No chair is drawn anywhere in the chapter.",
+ "learner_impact": "The chapter's culminating structural claim rests on a picture that is never shown. The section itself warns that the Haworth hexagon is flat and a six-membered ring is not, and then illustrates the puckered discussion with drawings that are flatter still.",
+ "evidence": "nugget-pyranose-chair-conformation asset_ids = five molecule assets; package contains no chair-kind asset.",
+ "recommended_outcome": "The learner needs the all-equatorial beta-D-glucopyranose chair shown with its positions labeled, and at least one contrast shown against it, before the section's stability argument can be checked rather than believed.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "vis-006",
+ "location": {
+ "asset_id": "mol-beta-d-xylopyranose",
+ "concept_slug": "pyranose-chair-conformation",
+ "anchor_text": "places every substituent equatorial"
+ },
+ "severity": "high",
+ "category": "figure-accuracy",
+ "observation": "Five asset learning_goal strings - which the compiler emits into the reader as the visible caption line under each figure - describe features of a representation that the rendered image is not. mol-d-erythrose: 'both carry the hydroxyl on the right in a Fischer projection' (no Fischer projection is rendered). mol-beta-d-galactopyranose: 'one hydroxyl on the opposite face of the ring'. mol-beta-d-xylopyranose: 'places every substituent equatorial'. mol-alpha-d-mannopyranose: 'two of its substituents are forced axial in either chair'. mol-alpha-d-glucopyranose: 'the anomeric hydroxyl sits on the opposite side of the ring from the C6 arm'.",
+ "learner_impact": "A learner who reads the caption and then looks at the picture to confirm it finds nothing that matches. The caption implies the axial/equatorial information is present in the drawing, so a learner may believe they are failing to read a figure that in fact does not contain the claim. The alt texts on the same assets are accurate about the skeletal drawing, so the caption and the alt text describe two different images.",
+ "evidence": "topic.package.json assets learning_goal fields; compiled reader molecule blocks carry content.description = learning_goal.",
+ "recommended_outcome": "Every caption must describe what is actually on screen. Either the figure must become the representation the caption names, or the caption must be rewritten to claim only what a skeletal depiction shows.",
+ "confidence": 0.93
+ },
+ {
+ "finding_id": "vis-007",
+ "location": {
+ "asset_id": "rc-mutarotation",
+ "concept_slug": "anomers-and-mutarotation",
+ "section_id": "nugget-anomers-and-mutarotation",
+ "anchor_text": "about 38 percent alpha and 62 percent beta"
+ },
+ "severity": "high",
+ "category": "figure-accuracy",
+ "observation": "rc-mutarotation is the chapter's only relationship figure and it renders inline. But the spec supplies two steps with equal default magnitude (1.0) and identical barrier 'large'. The renderer computes minima as 0.0, +1.6, 0.0 and both peaks as max(flank)+2.0, so the drawn curve puts alpha-D-glucopyranose and beta-D-glucopyranose at exactly the same energy with two barriers of exactly the same height. The figure's own alt_text says beta lies just below the alpha anomer; the section's prose derives 38 percent alpha / 62 percent beta.",
+ "learner_impact": "The one diagram in the chapter that shows a relationship rather than a compound shows the wrong relationship. A learner reading the curve concludes the two anomers are isoenergetic and that neither step is rate-determining - directly contradicting the paragraph beside it and the alt text under it. Separately, ch25-mutarotation-profile asks the learner to identify a rate-determining step from a profile with unequal barriers, a profile shape the reader never showed them.",
+ "evidence": "rc-mutarotation.spec.steps = [{endergonic, large},{exergonic, large}] with no magnitude; [internal source reference — not in this repo]: DEFAULT_STEP_DROP 1.6, magnitude default 1.0, peak_e = max(left_e, right_e) + BARRIER_HEIGHTS['large'].",
+ "recommended_outcome": "The drawn profile must encode the two facts the section teaches: beta below alpha, and a first barrier the learner can see is the higher one. The need is that reading the curve give the same answer as reading the paragraph.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "vis-008",
+ "location": {
+ "question_slug": "ch25-haworth-beta-anomer",
+ "concept_slug": "haworth-projections",
+ "anchor_text": "Find the reference arm - the CH2OH group on C5 - and decide which face it occupies in a D-sugar."
+ },
+ "severity": "high",
+ "category": "figure-purpose",
+ "observation": "ch25-haworth-beta-anomer sets student_config.positions = [1], and HaworthBuilderRenderer draws substituent stubs only at the configured positions. The rendered stimulus is therefore a bare hexagon with a ring O glyph, a bold front edge, and two empty slots at C1 - no C6 arm, no C2/C3/C4 hydroxyls, and no numbering on any vertex but C1. The question's level-2 hint and its generic_incorrect_explanation both instruct the learner to locate the C6 reference arm and decide which face it occupies.",
+ "learner_impact": "The scaffold tells the learner to look at something the picture does not contain. A learner working from the drawing has nothing to reason against and can only apply the memorized 'beta is up' shortcut that the section explicitly calls a liability. The item therefore trains the exact habit the prose warns off.",
+ "evidence": "ch25-haworth-beta-anomer student_config [redacted]; [internal source reference — not in this repo] draws stubs inside positions.map(...) only.",
+ "recommended_outcome": "The stimulus must show the reference the question asks the learner to use - at minimum the C6 arm on its correct face - so the anomeric call can be made from the drawing rather than from a mnemonic.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "vis-009",
+ "location": {
+ "question_slug": "ch25-beta-glucose-chair",
+ "concept_slug": "pyranose-chair-conformation",
+ "anchor_text": "the one vertex carrying no substituent is the ring oxygen"
+ },
+ "severity": "high",
+ "category": "figure-accuracy",
+ "observation": "ch25-beta-glucose-chair sets student_config.ring = 'pyranose', but ChairPlacementRenderer ignores that field and draws a plain cyclohexane chair whose six vertices are all numbered 1 through 6 as carbons, each offering an axial and an equatorial stub, with the svg aria-label 'Cyclohexane chair with clickable axial and equatorial positions on carbons one through six'. No ring oxygen is drawn or reserved.",
+ "learner_impact": "The prompt asks the learner to read a vertex as the ring oxygen and the drawing labels that vertex as a carbon. The only chair the chapter ever puts on screen is therefore a chemically different ring from the one under discussion, and the carbon numbering does not correspond to sugar numbering. A learner who trusts the picture will build a mental model of glucopyranose as an all-carbon ring.",
+ "evidence": "ch25-beta-glucose-chair student_config [redacted]; [internal source reference — not in this repo] reads only config.substituents and renders chairVertices() with labels index+1.",
+ "recommended_outcome": "The chair the learner sees must be the pyranose ring the question names - the ring heteroatom identified in the drawing and the positions numbered as sugar carbons - or the item must not present a ring that misstates its own composition.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "vis-010",
+ "location": {
+ "asset_id": "video-fischer-to-haworth-to-chair",
+ "concept_slug": "haworth-projections",
+ "anchor_text": "The reader carries the same content in nugget-haworth-projections and nugget-pyranose-chair-conformation."
+ },
+ "severity": "high",
+ "category": "media-equivalence",
+ "observation": "All four video briefs are production_status 'deferred' and compile to video blocks with url empty and is_hidden true, so the reader shows no moving media. Each deferral note asserts the reader carries the same content. For video-ring-closure and video-mutarotation that claim is defensible. For video-fischer-to-haworth-to-chair it is false: neither named section contains a Fischer projection, a Haworth projection, or a chair. For video-cellulose-versus-starch it is only half true.",
+ "learner_impact": "The deferral is recorded as covered, so the gap it leaves is not visible downstream. The one brief whose subject is the three representations the chapter never draws is precisely the one whose stated fallback does not exist, which means the missing content is neither animated nor static - it is simply absent.",
+ "evidence": "video_briefs production_status deferred; video-fischer-to-haworth-to-chair.production_note; compiled reader video blocks all have content.url empty and is_hidden true.",
+ "recommended_outcome": "A deferral note may only claim reader equivalence where the reader actually carries the content. Where it does not, the Fischer to Haworth to chair conversion needs a static equivalent in the reader.",
+ "confidence": 0.94
+ },
+ {
+ "finding_id": "vis-011",
+ "location": {
+ "section_id": "nugget-sugar-oxidation-and-reduction",
+ "concept_slug": "sugar-oxidation-and-reduction",
+ "anchor_text": "the way to keep them straight is by asking which end of the chain each one reaches"
+ },
+ "severity": "high",
+ "category": "figure-purpose",
+ "observation": "The compiler emits exactly one text block per section - 536 to 989 words - followed by the section's entire figure bank. No figure is ever placed next to the sentence it supports in any of the ten sections. The oxidation section is the extreme case: 989 words followed by six structures in a row.",
+ "learner_impact": "A learner who reaches for the picture must first read to the end of the essay, then scroll back and match six unlabeled-by-position structures to seven paragraphs by name. The alditol/aldonic/aldaric contrast the prose says to fix by 'which end of the chain each one reaches' is exactly a side-by-side comparison, and the three structures that would make it are separated from the sentence by hundreds of words.",
+ "evidence": "Compiled block order per section is invariant: text, molecule x n, (video), external_link. nugget-sugar-oxidation-and-reduction: 1 text block of 6140 chars then 6 molecule blocks.",
+ "recommended_outcome": "Figures need to sit with the claim they support rather than in a trailing bank, and the sets that exist to be compared need to be grouped so the comparison is visible in one glance.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "vis-012",
+ "location": {
+ "asset_id": "mol-beta-d-glucopyranose",
+ "concept_slug": "haworth-projections",
+ "section_id": "nugget-pyranose-chair-conformation"
+ },
+ "severity": "medium",
+ "category": "visual-redundancy",
+ "observation": "The reader emits 53 molecule blocks for 30 distinct assets - 23 repeats, every one a byte-identical depiction with an identical caption. beta-D-glucopyranose appears 6 times, open-chain D-glucose and alpha-D-glucopyranose 4 times each. The two consecutive sections on Haworth projections and chair conformations share 3 of their 5 figures, rendered identically in both.",
+ "learner_impact": "Re-showing the same drawing signals 'here is new information' and delivers none. In the Haworth and chair sections it is actively misleading: the two sections are teaching two different representations, and the identical picture implies the representation did not change.",
+ "evidence": "Compiled reader: 53 molecule blocks, 30 distinct names; beta-D-Glucopyranose appears in six sections.",
+ "recommended_outcome": "A repeated figure should either be dropped or made to differ - annotated, re-oriented, or re-drawn in the representation its section is about.",
+ "confidence": 0.87
+ },
+ {
+ "finding_id": "vis-013",
+ "location": {
+ "section_id": "nugget-d-l-configuration-and-families",
+ "concept_slug": "d-l-configuration-and-families",
+ "anchor_text": "Epimers are diastereomers that differ at exactly one stereocenter."
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "This section carries eight figures - the most in the chapter - and every one is a standalone RDKit zigzag of a single sugar. The relationships the section exists to teach are never drawn: D versus L as mirror images, C2 epimers and C4 epimers as one-position differences, and the 2^n family count that the prose walks through in words.",
+ "learner_impact": "Eight unrelated structures in a row is figure-flooding: the section is the most heavily illustrated in the chapter and simultaneously the least served, because the pairwise and hierarchical relationships are exactly what a picture would carry and exactly what is absent.",
+ "evidence": "nugget-d-l-configuration-and-families asset_ids lists 8 molecule assets; compiled section has 8 consecutive molecule blocks.",
+ "recommended_outcome": "The relationships need to be visible as relationships - enantiomeric pairs shown as pairs, epimeric pairs aligned so the single differing position is the only thing that moves.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "vis-014",
+ "location": {
+ "section_id": "nugget-di-and-polysaccharides",
+ "concept_slug": "di-and-polysaccharides",
+ "anchor_text": "successive glucose units must be rotated 180 degrees relative to one another"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The closing section asserts three shape claims in prose and draws none of them: cellulose's flat stacked chains, amylose's left-handed helix, and the bushy branched polymers. Its seven figures are monomer and disaccharide depictions. Separately, the maltose/cellobiose contrast is rendered as two RDKit drawings of two-ring structures differing by the wedge/dash on a single bond, with nothing marking where to look.",
+ "learner_impact": "The chapter's payoff claim, that one inverted carbon produces two different materials, is the one claim with no supporting picture. A learner is asked to accept that a configurational flip becomes a macroscopic property difference on the strength of two crowded drawings whose sole difference is unmarked.",
+ "evidence": "nugget-di-and-polysaccharides asset_ids = 7 molecule assets; no polymer or conformation asset in the package. video-cellulose-versus-starch is deferred and hidden.",
+ "recommended_outcome": "The learner needs the alpha-versus-beta linkage difference marked where it occurs in the maltose/cellobiose pair, and needs the chain-shape consequence visible in some form.",
+ "confidence": 0.86
+ },
+ {
+ "finding_id": "vis-015",
+ "location": {
+ "asset_id": "mol-d-erythrose",
+ "concept_slug": "fischer-projections",
+ "section_id": "nugget-fischer-projections"
+ },
+ "severity": "medium",
+ "category": "figure-accuracy",
+ "observation": "Only 3 of the 30 molecule assets set rdkit_options.show_hydrogens. The inconsistency lands hardest inside nugget-fischer-projections, where D-glyceraldehyde renders with its stereocenter hydrogen visible while D-erythrose, D-threose and open-chain D-glucose - in the same figure bank, in the section whose whole subject is which arm holds the H and which holds the OH - render without it.",
+ "learner_impact": "Half of what the section teaches the learner to place is invisible on three of the four figures beside it, and visible on the fourth, so the drawings disagree with each other about whether hydrogens are part of the picture. mol-5-hydroxypentanal is a second case: its hydroxyl hydrogen is the atom that moves in the ring closure and in ch25-hemiacetal-bond-ledger, and it is not drawn.",
+ "evidence": "Assets with rdkit_options: mol-d-glyceraldehyde, mol-dihydroxyacetone, mol-l-glyceraldehyde (show_hydrogens true). 27 molecule assets carry no rdkit_options.",
+ "recommended_outcome": "Hydrogen display needs to be decided by what the surrounding text asks the learner to read off the figure, and applied consistently within a section.",
+ "confidence": 0.83
+ },
+ {
+ "finding_id": "vis-016",
+ "location": {
+ "question_slug": "ch25-hemiacetal-bond-ledger",
+ "concept_slug": "cyclic-hemiacetal-formation",
+ "anchor_text": "The hydrogen on atom 3 (carried implicitly in the drawing)"
+ },
+ "severity": "medium",
+ "category": "figure-purpose",
+ "observation": "ch25-hemiacetal-bond-ledger displays only the starting material (molecule_smiles O=CCCCCO, no show_hydrogens) and describes the product in a prose reaction_display string. Two of the four atoms the learner must build ledger rows from are not visible: atom 4 is explicitly labelled 'the hydrogen on atom 3 (carried implicitly in the drawing)', and the numbering 1-4 appears nowhere in the depiction. Two of the four expected rows involve atom 4.",
+ "learner_impact": "Half the required answer concerns an atom that is not drawn, and the mapping from the label list to the picture has to be reconstructed mentally. A learner working from the figure sees a five-carbon zigzag with no numbers, no product, and no hydrogens.",
+ "evidence": "ch25-hemiacetal-bond-ledger student_config.atom_labels ids 1-4; answer_key.expected_rows includes rows on atoms 3-4 and 2-4; student_config.reaction_display is prose only.",
+ "recommended_outcome": "The stimulus needs to show the atoms the ledger is scored on - the labelled numbering visible on the drawing and the relevant hydrogen rendered - and the product it asks the learner to compare against.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "vis-017",
+ "location": {
+ "question_slug": "ch25-beta-glucose-chair",
+ "concept_slug": "pyranose-chair-conformation",
+ "anchor_text": "That crowding is the 1,3-diaxial interaction from cyclohexane."
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "All 168 hints across the 56 question sets are kind 'text'. The platform supports non-text hint kinds (structure, highlight, projection label, region focus), and none is used anywhere in the chapter - including on the items whose whole difficulty is spatial.",
+ "learner_impact": "Every scaffold in the chapter is verbal, so a learner who is stuck on a spatial item gets more of the prose that already failed them. On ch25-beta-glucose-chair the hints describe 1,3-diaxial crowding in words while a chair diagram sits on screen with the positions unhighlighted.",
+ "evidence": "Counter over all question_sets hints kind = {'text': 168}.",
+ "recommended_outcome": "The spatial items need at least one hint level that operates on the picture - directing attention to a position or showing the intermediate state - rather than restating the rule in different words.",
+ "confidence": 0.82
+ },
+ {
+ "finding_id": "vis-018",
+ "location": {
+ "section_id": "nugget-cyclic-hemiacetal-formation",
+ "concept_slug": "cyclic-hemiacetal-formation",
+ "anchor_text": "count the atoms in it: C1, C2, C3, C4, C5, and the oxygen contributed by the C5 hydroxyl"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The ring-closure section presents five figures as five independent cards in sequence with nothing indicating that card 2 is the product of card 1, or that cards 4 and 5 are the two products of card 3. The prose asks the learner to count ring atoms and to see why C5 attacks rather than C2, C3 or C6, and no figure marks the attacking oxygen, the carbonyl carbon, or the atoms that end up in the ring.",
+ "learner_impact": "The section's core move is a transformation, and the reader shows it as a set of unrelated portraits. A learner must infer the before/after pairing from reading order alone, and the ring-size argument has no figure that lets them count.",
+ "evidence": "nugget-cyclic-hemiacetal-formation compiles to text, then 5 consecutive molecule blocks, then a hidden video block.",
+ "recommended_outcome": "The learner needs the open-chain and cyclic forms presented as a linked before/after with the attacking oxygen and the ring atoms identifiable.",
+ "confidence": 0.84
+ },
+ {
+ "finding_id": "vis-019",
+ "location": {
+ "question_slug": "ch25-anomer-comparison",
+ "concept_slug": "anomers-and-mutarotation",
+ "anchor_text": "they contain the same atoms and connectivity and differ only in the configuration at the ring carbon"
+ },
+ "severity": "low",
+ "category": "figure-purpose",
+ "observation": "ch25-anomer-comparison is correctly built as a two-column comparison, but the two column headers are full RDKit depictions whose only difference is the wedge/dash on one bond at C1. Nothing marks that carbon, and the same undifferentiated pair is used as the section's two reader figures.",
+ "learner_impact": "The item's design is right and its execution asks the learner to spot a single stereo-bond difference in two otherwise identical small drawings, five times over across five property rows. Learners who cannot resolve the difference will fall back on the option text, which names the anomers anyway, so the figures contribute nothing.",
+ "evidence": "ch25-anomer-comparison student_config.cases carry structure_smiles differing only at the anomeric centre.",
+ "recommended_outcome": "Where a comparison turns on one atom, that atom needs to be findable at the size it is displayed - through emphasis, enlargement, or consistent orientation of the pair.",
+ "confidence": 0.75
+ }
+ ],
+ "strengths": [
+ "rc-mutarotation is the one figure in the chapter that carries a relationship rather than a compound, and it is specified correctly to render inline - spec has both steps and minima_labels, plus minima_molecules that put structures at all three minima. The shape it draws is wrong (vis-007), but the authoring instinct and the machinery are right.",
+ "Every molecule asset carries a specific learning_goal that the compiler emits as a visible caption, so no figure in the chapter is decorative or unexplained.",
+ "The alt texts on the molecule assets describe the skeletal drawing that is actually rendered, accurately and at the right level of detail. It is the captions and long descriptions, not the alt texts, that overclaim.",
+ "Both hotspot items are genuinely answerable from the depiction alone: the anomeric carbon is the unique ring carbon bonded to two oxygens, which is exactly the visual criterion the prose teaches.",
+ "The 5-hydroxypentanal / 2-hydroxytetrahydropyran pair is a well-chosen figure pair - a stripped-down model that isolates ring closure from sugar stereochemistry, and the only place in the chapter where a before and an after are both drawn.",
+ "ch25-anomer-comparison and ch25-disaccharide-linkage-match are built around side-by-side visual comparison, which is the correct instinct for material whose distinctions are single-position differences.",
+ "When the Haworth builder does appear, its drawing follows the conventions the chapter's prose states, so the platform is capable of drawing the representation the reader omits."
+ ],
+ "open_questions": [
+ "The schema has no category for a graphical answer tell. vis-001 and vis-002 are filed under figure-purpose, but the harm is an answer leak carried by figure placement rather than by text; the orchestrator may want a distinct id so this class diffs cleanly across chapters - this repo has hit it before (ch15).",
+ "ch25-beta-glucose-chair sets student_config.ring = 'pyranose' and ChairPlacementRenderer ignores it, drawing an all-carbon cyclohexane. Is that a platform gap to file separately, or is the chair workspace expected to be ring-aware and simply not wired for this chapter?",
+ "Do the fischer, haworth and chair builder workspaces reach a reader-surface learner at all, or only the LMS/question-preview surfaces?",
+ "Asset long_description fields are not emitted into the compiled reader chapter. Several long descriptions contain the chapter's only statements of axial/equatorial and Haworth-face detail - is their non-delivery the known platform gap?",
+ "rc-mutarotation is the only asset kind in the chapter besides molecule. Was a Fischer/Haworth/chair asset kind considered and found unavailable in the topic-package schema, or was it simply not authored?"
+ ]
+ }
+ ],
+ "publication_readiness": "blocked",
+ "executive_summary": "Chemically this is the strongest chapter reviewed in this series so far - the instructor persona machine-verified all 30 asset SMILES and all 34 distinct question structures, hydrolysed all four disaccharides in silico, and found 29 of 30 structures and every numeric claim correct, including the dual-anomeric sucrose linkage that carbohydrate chapters normally get wrong. It is nevertheless BLOCKED, on nine persona blockers in four groups. (1) Two verified wrong-chemistry defects: mol-beta-d-xylopyranose ships the ALPHA anomer, disproving the caption, the prose and a question key that all depend on it being all-equatorial; and a comparison_matrix cell keys 'free glucose survives prolonged 1 M NaOH', which the same chapter refutes two sections later via the Lobry de Bruyn-van Ekenstein rearrangement, so a student who read the chapter is marked wrong. (2) Two items that cannot be answered correctly by anyone: both curved_arrow questions expect a lone_pair source while the renderer emits site.kinds[0] = 'atom', and both chair items score full marks for placing a single substituent. (3) A graphical answer tell - two single_select items illustrate only the key - which is the ch15 defect class recurring, invisible to the text-only leak guard. (4) Required-access blockers: hotspot atoms are exposed only as RDKit indices ('C atom 5' is sugar C1) with no connectivity, and structure_scaffold offers a Ketcher iframe the registry itself marks not keyboard-complete, with no alternative and no disclosure. Beneath the blockers sit two structural themes all four personas reached independently: the chapter teaches three drawing conventions (Fischer, Haworth, chair) and draws none of them, and an entire authored layer - 10 practice checks, 31 long descriptions, 54 of 56 accessible descriptions - never reaches any learner because no renderer consumes it.",
+ "consensus_strengths": [
+ "Stereochemical fidelity: 29 of 30 asset SMILES and all four disaccharides verified correct in sugar identity, linkage carbon and anomeric configuration (Instructor, machine-checked).",
+ "Every numeric claim checks out - rotations, equilibrium compositions, the 0.9 kcal/mol A-value, polymer branching frequencies, 2^n counting (Instructor).",
+ "The chapter states the alpha/beta rule against the sugar's own reference arm rather than as 'beta is up', and that formulation was verified correct in 3D on a furanose (Instructor).",
+ "All 168 hints are text; no image-only, colour-only or motion-only hint anywhere; no meaning rests on colour or motion (Accessibility).",
+ "Every option, card, matching item and matrix case carries a real text label - the 'Structure A/B/C/D' anti-pattern from ch15/ch16 does not recur (Accessibility).",
+ "Hint ladders genuinely escalate from strategy to narrowing to specifics rather than restating the prompt (Struggling Student).",
+ "The prose names common wrong moves before the student makes them and explains why they are wrong (Struggling Student).",
+ "Asset alt texts honestly describe the skeletal drawing that is actually rendered; the overclaiming is in the captions, not the alt text (Visual Preference).",
+ "The 5-hydroxypentanal / cyclic-hemiacetal pair is a well-chosen before-and-after that isolates ring closure from sugar stereochemistry (Visual Preference)."
+ ],
+ "ranked_recommendations": [
+ {
+ "rec_id": "rec-001",
+ "title": "beta-D-xylopyranose figure is actually the alpha anomer",
+ "need": "The figure carrying the chapter's all-equatorial-pentose argument must be the anomer the caption, prose and question key all name.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "The defect is one SMILES string; replacing it with the verified beta structure fixes the figure, its caption, its description and the question key simultaneously. No new asset is needed.",
+ "target_surface": "figure",
+ "severity": "blocker",
+ "source_findings": [
+ "instr-001"
+ ]
+ },
+ {
+ "rec_id": "rec-002",
+ "title": "Base-stability matrix cell contradicts the chapter's own enediol chemistry",
+ "need": "The row must discriminate the two compounds the way the chapter's chemistry actually does - the acetal survives base, the free hemiacetal does not.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Flipping the free-sugar cell to 'does not apply' and rewriting the feature text and the level-3 hint makes the item agree with the chapter and turns a wrong key into the section's best discriminating row.",
+ "target_surface": "assessment",
+ "severity": "blocker",
+ "source_findings": [
+ "instr-002",
+ "ss-002"
+ ]
+ },
+ {
+ "rec_id": "rec-003",
+ "title": "Both curved_arrow items are ungradable as authored",
+ "need": "A correctly drawn arrow must grade correct through the interface the learner actually sees.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "The renderer takes the source kind from site.kinds[0]; listing 'lone_pair' first on the nucleophilic oxygen sites makes the emitted arrow match the key. This is the pattern ch24 already uses and needs no platform change.",
+ "target_surface": "assessment",
+ "severity": "blocker",
+ "source_findings": [
+ "access-006"
+ ]
+ },
+ {
+ "rec_id": "rec-004",
+ "title": "Illustrated-option answer tell in four items",
+ "need": "The picture panel must carry no information about which option is correct.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Making illustration uniform within each option set removes the tell without changing the chemistry assessed. This is the ch15 defect class recurring and the text-only leak guard cannot see it.",
+ "target_surface": "assessment",
+ "severity": "blocker",
+ "source_findings": [
+ "vis-001",
+ "vis-002"
+ ]
+ },
+ {
+ "rec_id": "rec-005",
+ "title": "Both chair items score full marks for one placed substituent",
+ "need": "An item that claims to assess axial/equatorial placement across a ring must not be satisfiable by placing a single group.",
+ "chosen_intervention": "alternate-activity",
+ "rationale": "expected_label mode grades the set of distinct orientations, so it cannot require completeness. Switching to expected_orientations with ring rotation disabled makes all five placements load-bearing; the accompanying prompt must stop claiming a ring oxygen the renderer does not draw.",
+ "target_surface": "assessment",
+ "severity": "blocker",
+ "source_findings": [
+ "instr-007",
+ "vis-009",
+ "access-009",
+ "ss-001"
+ ]
+ },
+ {
+ "rec_id": "rec-006",
+ "title": "Figure descriptions do not distinguish the figures they are asked to compare",
+ "need": "Two figures a learner is asked to compare must never resolve to the same words.",
+ "chosen_intervention": "sufficient-alt-text",
+ "rationale": "The distinguishing content already exists in each long_description; folding the one differentiating clause into the alt text closes the gap at the surface the reader actually delivers, without waiting on the long_description delivery gap.",
+ "target_surface": "figure",
+ "severity": "blocker",
+ "source_findings": [
+ "access-001",
+ "ss-005",
+ "vis-019"
+ ]
+ },
+ {
+ "rec_id": "rec-007",
+ "title": "Positional answer bias across the whole bank",
+ "need": "Correct answers must not be recoverable from ordering or option length.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "No renderer shuffles, so the keys must be distributed at authoring time: redistribute single_select keys across positions, break the diagonal on matching items, and ship rank_order cards unsorted.",
+ "target_surface": "assessment",
+ "severity": "high",
+ "source_findings": [
+ "instr-004"
+ ]
+ },
+ {
+ "rec_id": "rec-008",
+ "title": "Anomeric CIP stated wrongly in an accessibility-only channel",
+ "need": "The structured description must report the configuration the drawn structure actually has.",
+ "chosen_intervention": "structured-chemical-description",
+ "rationale": "One descriptor is wrong (C1 R should be S) in a field only non-visual learners read - the same accessibility-channel-only error class ch24 hit. Machine-check every CIP claim in every description rather than fixing one by eye.",
+ "target_surface": "figure",
+ "severity": "high",
+ "source_findings": [
+ "instr-005"
+ ]
+ },
+ {
+ "rec_id": "rec-009",
+ "title": "'Humans secrete no beta-glucosidase at all' is refuted by the chapter's own lactase example",
+ "need": "The digestibility contrast must survive the chapter's own counterexample.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Narrowing the claim to the enzyme that cleaves beta-1,4 glucan chains keeps the pedagogical payoff and removes a false absolute a biochemistry course would have to un-teach.",
+ "target_surface": "prose",
+ "severity": "high",
+ "source_findings": [
+ "instr-003"
+ ]
+ },
+ {
+ "rec_id": "rec-010",
+ "title": "Captions describe representations the chapter never draws",
+ "need": "Every caption must describe what is actually on screen.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Five learning_goal strings claim Fischer/Haworth/chair features of skeletal renders. Rewriting them to claim only what a skeletal depiction shows is the least-complex fix; authoring projection figures is the larger open recommendation (rec-014).",
+ "target_surface": "figure",
+ "severity": "high",
+ "source_findings": [
+ "vis-006",
+ "access-010"
+ ]
+ },
+ {
+ "rec_id": "rec-011",
+ "title": "The mutarotation energy profile draws both anomers isoenergetic",
+ "need": "Reading the curve must give the same answer as reading the paragraph beside it.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "The spec omits per-step magnitudes so the renderer defaults to equal drops and equal barriers. Supplying magnitudes and differentiated barriers makes the drawn shape match the 38/62 equilibrium and the alt text.",
+ "target_surface": "figure",
+ "severity": "high",
+ "source_findings": [
+ "vis-007"
+ ]
+ },
+ {
+ "rec_id": "rec-012",
+ "title": "Graded content that exists only in the expanded tier",
+ "need": "Every fact the bank grades must reach a student at whichever tier they are reading, and required evidence must exist somewhere in the chapter.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "The tiers are alternatives, not a sequence. Moving the ketose-stereocenter rule into all three tiers and adding the all-carbon-ring control (currently in no tier at all, yet a required selection) is a bounded prose edit.",
+ "target_surface": "prose",
+ "severity": "high",
+ "source_findings": [
+ "ss-003",
+ "ss-004"
+ ]
+ },
+ {
+ "rec_id": "rec-013",
+ "title": "Wrong-answer feedback keyed to a correct option, and an acylation miscount",
+ "need": "Feedback must not contradict the grade, and a keyed repair must match the structure it displays.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Two bounded authoring errors: move the fructose explanation out of wrong_answer_explanations, and add the C6 primary alcohol to the acylation inventory the chapter's own prose already lists.",
+ "target_surface": "assessment",
+ "severity": "medium",
+ "source_findings": [
+ "instr-009",
+ "instr-008"
+ ]
+ },
+ {
+ "rec_id": "rec-014",
+ "title": "The chapter teaches three drawing conventions and draws none of them",
+ "need": "A learner must see a Fischer cross, a Haworth hexagon and a chair before being asked to produce one.",
+ "chosen_intervention": "static-image-sequence",
+ "rationale": "All four personas reached this independently. It cannot be closed by description alone and it is the largest single lever on this chapter, but it needs a projection asset kind the topic-package schema does not have - so it is recorded as the headline open recommendation rather than applied in a correction pass.",
+ "target_surface": "figure",
+ "severity": "high",
+ "source_findings": [
+ "vis-003",
+ "vis-004",
+ "vis-005",
+ "ss-005",
+ "vis-010"
+ ]
+ },
+ {
+ "rec_id": "rec-015",
+ "title": "Hotspot atoms are exposed only as RDKit indices",
+ "need": "Clicking an atom must be answerable from chemically meaningful targets, or an equivalent alternative must exist.",
+ "chosen_intervention": "keyboard-alternative",
+ "rationale": "Platform-level: molecule_visuals emits no adjacency and the renderer names atoms by index, so sugar C1 is announced as 'C atom 5'. The authored item cannot fix this; it needs named regions or meaningful atom naming in the platform.",
+ "target_surface": "interactive",
+ "severity": "blocker",
+ "source_findings": [
+ "access-003"
+ ]
+ },
+ {
+ "rec_id": "rec-016",
+ "title": "structure_scaffold has no non-pointer response path",
+ "need": "A keyboard-only or screen-reader learner must be able to answer, or be told at assignment time that they cannot.",
+ "chosen_intervention": "text-equivalent",
+ "rationale": "The registry marks the type keyboard_complete=False and the declared structured_molecule_entry mode is unimplemented. Same platform blocker recorded on ch1/11/15/16/17/18/19; not fixable inside this chapter.",
+ "target_surface": "interactive",
+ "severity": "blocker",
+ "source_findings": [
+ "access-004"
+ ]
+ },
+ {
+ "rec_id": "rec-017",
+ "title": "An entire authored layer never reaches any learner",
+ "need": "Authored practice checks, structured figure descriptions and per-question accessible descriptions must reach the surfaces they were written for.",
+ "chosen_intervention": "instructor-note",
+ "rationale": "10 practice checks, 31 long descriptions and 54 of 56 accessible descriptions have no consumer in the reader or the activity shell. This is a platform delivery gap seen across chapters; recorded, not worked around, because a chapter-local workaround would hide it.",
+ "target_surface": "instructor-support",
+ "severity": "high",
+ "source_findings": [
+ "ss-006",
+ "instr-010",
+ "access-002",
+ "access-005",
+ "access-011"
+ ]
+ },
+ {
+ "rec_id": "rec-018",
+ "title": "Minor internal inconsistencies",
+ "need": "One stated value per quantity, and one stated reason per phenomenon, across prose, captions and video briefs.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Bounded consistency edits: the open-chain fraction quoted five ways, the seven-membered ring called 'strained' only in a video brief, the unqualified 'only achiral ketose', and the aldonic-acid lactone/hemiacetal apparent contradiction.",
+ "target_surface": "prose",
+ "severity": "low",
+ "source_findings": [
+ "ss-013",
+ "instr-012",
+ "ss-014",
+ "instr-011",
+ "instr-014",
+ "instr-015"
+ ]
+ }
+ ],
+ "accessibility_blockers": [
+ "access-003",
+ "access-004",
+ "access-006",
+ "access-001"
+ ],
+ "visual_opportunities": [
+ "A Fischer projection drawn to convention, with at least one of the three legal/illegal manipulations performed on it (vis-003).",
+ "A Haworth hexagon drawn to the four conventions the prose states, plus the glucose/galactose C4 contrast as the single flipped vertical line (vis-004).",
+ "The all-equatorial beta-D-glucopyranose chair with positions labelled, against one contrast (galactose C4 axial or the alpha anomeric OH) (vis-005).",
+ "Epimeric and enantiomeric pairs aligned so the one differing position is the only thing that moves, instead of eight isolated depictions (vis-013).",
+ "The alpha/beta linkage difference marked where it occurs in the maltose/cellobiose pair, and the chain-shape consequence made visible (vis-014).",
+ "At least one non-text hint level on the spatial items - all 168 hints are currently text (vis-017)."
+ ],
+ "sufficient_as_is": [
+ "The bond_change_ledger items: reaction_display narrates the transformation in prose and atom_labels names each participating atom in words - Accessibility calls this a model of non-visual authoring. No new asset needed (the numbering mismatch in instr-016 is a labelling fix, not a media gap).",
+ "The prose treatment of all three projections: at every detail tier the text states which side each Fischer hydroxyl sits on, which face each Haworth substituent occupies and which chair positions are axial. A non-visual learner can determine every one of these from the text alone - the prose does not need supplementing, the figures need adding.",
+ "The four deferred video briefs' accessibility requirements: each production_note already records captions, narration naming every visual change, spoken numbers for any charted quantity, and a prohibition on colour/motion-only distinctions. No further specification needed before production.",
+ "Asset alt texts as descriptions of what is drawn: they accurately describe the skeletal render. Only the pairwise-distinguishability problem (rec-006) needs work, not the general quality.",
+ "The hotspot items' chemistry: the anomeric carbon genuinely is the unique ring carbon bonded to two oxygens, so the item is answerable from the depiction for a sighted learner. The barrier is the atom naming (rec-015), not the question design."
+ ],
+ "disagreements": [
+ {
+ "topic": "Whether the reduced detail tiers are safe for a learner who uses them as a load accommodation",
+ "positions": {
+ "Accessibility Persona": "'The terse and standard detail tiers - which are alternatives, not summaries - both retain the load-bearing rules (horizontal-toward/vertical-away, right-becomes-down, up-stays-up-but-changes-name, beta-is-on-the-C6-arm-face). A learner using a reduced-density tier as a cognitive accommodation loses none of the chemistry.'",
+ "Struggling Student": "'Because the three detail tiers are alternatives rather than a sequence, a student who picks terse or standard to reduce the load loses facts the questions grade on: the ketose-stereocenter rule, the Kiliani-Fischer sequence, the anomeric-effect bond-length evidence, and the weighted-average rotation calculation are all expanded-only.'"
+ },
+ "resolution": "Both are right about different things, and the distinction matters for the fix. Accessibility is correct that the four conversion RULES survive into every tier - I verified this. Struggling Student is correct that specific GRADED FACTS do not. The remedy therefore is not to rewrite the tiers wholesale but to move the handful of graded facts down into the shorter tiers (rec-012), which preserves Accessibility's finding that the tiers are a usable accommodation."
+ },
+ {
+ "topic": "Whether naming an option after the compound helps or harms",
+ "positions": {
+ "Accessibility Persona": "access-007 wants a text equivalent attached to options whose discriminating feature is visible only in the drawing; access-008 simultaneously notes that naming the compound hands the answer away in two items.",
+ "Learner with Visual Preference": "vis-001/vis-002 want illustration made uniform across an option set, which pushes toward MORE structures rather than more text."
+ },
+ "resolution": "Adopt both, at different layers: make illustration uniform (rec-004) so the picture carries no positional information, and attach the discriminating STRUCTURAL FEATURE - not the classification - to each option's text. That satisfies Accessibility's equivalence requirement without reintroducing the giveaway it flagged in access-008."
+ },
+ {
+ "topic": "Severity of the empty video blocks and the undelivered practice checks",
+ "positions": {
+ "Struggling Student": "Rated ss-012 and ss-006 at medium, explicitly because the same empty-url pattern appears in every compiled reader chapter and therefore looks platform-wide rather than chapter-specific.",
+ "Organic Chemistry Instructor": "Rated the same non-delivery (instr-010) at medium but framed it as content that 'exists in the package and is invisible to the student', i.e. a real loss regardless of cause."
+ },
+ "resolution": "Kept at high in the synthesis (rec-017). The personas correctly identified the cause as platform-level, but the learner impact is the whole retrieval-practice surface of the chapter plus its entire structured-description layer, which is a high-severity loss even when the cause is not chapter-local. Recording it at the severity of its cause would hide it."
+ }
+ ],
+ "regression": {
+ "resolved": [],
+ "unchanged": [],
+ "worsened": [],
+ "new": []
+ },
+ "accessibility_blocker_notes": {
+ "access-003": "hotspot atoms named only by RDKit index with no adjacency exposed; sugar C1 is announced as 'C atom 5', and the stated criterion (a ring carbon bonded to two oxygens) is exactly what the interface withholds.",
+ "access-004": "structure_scaffold renders a Ketcher iframe the registry marks keyboard_complete=False, with no structured-entry alternative and no disclosure to learner or instructor.",
+ "access-006": "both curved_arrow items lose their declared electron_action_list non-visual mode because the molecule branch returns before the labelled selects render - and the same early return makes the item ungradable for everyone.",
+ "access-001": "17 of 31 figure alt texts are indistinguishable from a sibling figure's once the compound name is removed, in a chapter whose sections are built on comparing exactly those pairs."
+ },
+ "corrections": {
+ "status": "applied-and-verified-without-second-persona-run",
+ "post_correction_readiness_estimate": "blocked",
+ "estimate_note": "Not a new persona verdict. Every chapter-authored blocker is resolved and machine-verified; the estimate stays 'blocked' solely because two required-access blockers are platform-level and cannot be fixed inside a topic package: access-003 (hotspot atoms exposed only as RDKit indices) and access-004 (structure_scaffold has no non-pointer response path — the same ticket already recorded on ch1/11/15/16/17/18/19). Setting those aside, the chapter-local state is estimated 'ready with minor revisions', with the Fischer/Haworth/chair figure gap (rec-014) as the headline open item.",
+ "applied": [
+ {
+ "change": "mol-beta-d-xylopyranose SMILES corrected from O[C@@H]1[C@@H](O)[C@@H](O)OC[C@H]1O (the ALPHA anomer) to O[C@@H]1[C@@H](O)[C@H](O)OC[C@H]1O. Verified two ways: the anomeric oxane CIP is now R, matching published beta-D-xylopyranose (2R,3R,4S,5R), and the same method reproduces the published alpha/beta glucopyranose names as a control.",
+ "resolves": [
+ "instr-001"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "ch25-anomer-comparison-v2: the f_base row was reworded from 'Survives prolonged treatment with 1 M aqueous NaOH' to 'Its anomeric carbon still has the configuration it started with after a day in 1 M aqueous NaOH', the free-sugar cell flipped from yes to no, the level-3 hint rewritten to stop asserting the free sugar has no base-accessible proton, and the generic explanation rewritten to teach the enediol contrast.",
+ "resolves": [
+ "instr-002",
+ "ss-002"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Both curved_arrow items: nucleophilic oxygen sites now declare kinds ['lone_pair','atom'] instead of ['atom','lone_pair']. CurvedArrowRenderer emits site.kinds[0] as the source kind, so the previous ordering made a correct arrow ungradable for every learner. Verified by grading a submission built the way the renderer builds it.",
+ "resolves": [
+ "access-006"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Illustration made uniform across four option sets (ch25-cellulose-vs-starch, ch25-glycosylation-outcome-v2, ch25-epimer-relationship, ch25-glycosylation-outcome). No single_select item now has a subset of options illustrated. This is the ch15 answer-tell class, invisible to the text-only leak guard.",
+ "resolves": [
+ "vis-001",
+ "vis-002"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Both chair items switched from expected_label to expected_orientations naming all five (four in the variant) placements, with allow_ring_rotation and allow_ring_flip disabled. Verified: a single placed substituent now grades incorrect where it previously scored 1.0. Prompts and accessible descriptions rewritten to stop asserting a ring oxygen the renderer does not draw, and to disclose that limitation.",
+ "resolves": [
+ "ss-001"
+ ],
+ "partially_addresses": [
+ "instr-007",
+ "vis-009",
+ "access-009"
+ ]
+ },
+ {
+ "change": "Seventeen asset alt texts rewritten so no two figures a learner is asked to compare resolve to the same words: the four ring hexoses, the four open-chain hexoses, the erythrose/threose pair, the glyceraldehyde pair, the two methyl glucosides, and maltose/cellobiose now each state the configuration that distinguishes them.",
+ "resolves": [
+ "access-001"
+ ],
+ "partially_addresses": [
+ "ss-005",
+ "vis-019"
+ ]
+ },
+ {
+ "change": "Positional answer bias removed. Keys are now spread evenly across option positions (index distribution 5/4/2/3/2 across positions 0-4, previously 16/16 at index 0), no matching_pairs item is diagonal, and no rank_order item ships in solved order. A first attempt that merely avoided index 0 was rejected because it relocated the bias to index 3.",
+ "resolves": [
+ "instr-004"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "mol-alpha-d-mannopyranose long_description corrected from 'C1 R' to 'C1 S' to match the drawn structure. Every CIP claim in every asset description was then machine-checked against its SMILES; this was the only mismatch.",
+ "resolves": [
+ "instr-005"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "The 'humans secrete no beta-glucosidase at all' absolute was narrowed to 'no cellulase - no enzyme that cleaves the beta-1,4 linkages of a glucan chain' in all three places it appeared (standard tier, expanded tier, practice_check answer), each noting that lactase is a beta-glycosidase we do make.",
+ "resolves": [
+ "instr-003"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Five figure captions (learning_goal, which the compiler emits as the visible caption) rewritten to claim only what a skeletal depiction shows, instead of asserting Fischer/Haworth/chair features of drawings that are not those representations.",
+ "resolves": [
+ "vis-006"
+ ],
+ "partially_addresses": [
+ "access-010"
+ ]
+ },
+ {
+ "change": "rc-mutarotation gained per-step magnitudes and a differentiated second barrier. Without them the renderer drew both anomers at identical energy with identical barriers, contradicting the figure's own alt text and the 38/62 equilibrium in the adjacent prose.",
+ "resolves": [
+ "vis-007"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "The ketose-stereocenter rule was added to the terse and standard tiers (it was expanded-only while gating a core-difficulty item), and the all-carbon-ring control experiment was added to the standard and expanded tiers - it was a REQUIRED evidence selection in ch25-anomeric-effect-reasoning while appearing in no tier of any nugget.",
+ "resolves": [
+ "ss-003"
+ ],
+ "partially_addresses": [
+ "ss-004"
+ ]
+ },
+ {
+ "change": "ch25-reducing-sugar-select: the fructose/enediol explanation was moved out of wrong_answer_explanations (it was keyed to [redacted grading-pattern detail], which is CORRECT) and into the generic explanation where it reaches the learner without contradicting the grade.",
+ "resolves": [
+ "instr-009"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "ch25-glycoside-error-repair-v2: the acylation inventory now includes the C6 primary alcohol in the stimulus, the keyed repair and the accessible description, matching the chapter's own prose.",
+ "resolves": [
+ "instr-008"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "The open-chain glucose fraction is now quoted as about 0.003 percent everywhere (previously five different values spanning a factor of fifty across prose tiers, a learning objective, a figure description and a concept trouble spot).",
+ "resolves": [
+ "ss-013",
+ "instr-012"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "video-ring-closure's storyboard no longer instructs the animation to label the seven-membered ring 'strained'; it now gives the entropic reason the prose gives. video-fischer-to-haworth-to-chair's deferral note no longer claims reader equivalence, because the reader carries no Fischer, Haworth or chair figure.",
+ "resolves": [
+ "instr-011",
+ "ss-014"
+ ],
+ "partially_addresses": [
+ "vis-010"
+ ]
+ },
+ {
+ "change": "Scoped absolutes and glosses: dihydroxyacetone's 'only achiral ketose' narrowed to the common 2-ketoses; D-gluconic acid's caption now says it cyclizes to a lactone rather than a hemiacetal, resolving an apparent contradiction with the prose; ch25-mutarotation-percent tolerance widened from 2 to 3 so the chapter's own headline 62 percent is comfortably inside; the e_mp distractor reworded from a factually false melting-point claim to a true-but-irrelevant one.",
+ "resolves": [
+ "instr-014",
+ "instr-015",
+ "instr-013"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "concepts['glycoside-formation'].prerequisites now declares pyranose-chair-conformation, the dependency its prose actually creates by building the oxocarbenium argument on the anomeric effect.",
+ "resolves": [
+ "instr-006"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "ch25-sort-aldose-ketose-v2: illustration removed from all six categorize items. A follow-up sweep across EVERY option-bearing type (not just single_select) found that the two polysaccharides were the only unillustrated items, so 'has no picture' was a perfect predictor of the polysaccharide group - the same answer-tell class as rec-004, in a type the original finding did not cover. The item is fully answerable from the compound names.",
+ "resolves": [],
+ "partially_addresses": [
+ "vis-001",
+ "vis-002"
+ ]
+ },
+ {
+ "change": "publishing.available flipped false -> true and the chapter recompiled, on explicit maintainer approval 2026-07-30. This clears the Pending badge on /reader/organic. Chapter 24 (amines-and-heterocycles) was approved and flipped in the same pass.",
+ "resolves": [],
+ "partially_addresses": []
+ }
+ ],
+ "remaining_high_priority": [
+ "rec-014 - no Fischer projection, Haworth projection or chair figure exists anywhere in the chapter, while three concepts teach exactly those representations. All four personas reached this independently. Needs a projection asset kind the topic-package schema does not have.",
+ "rec-015 / access-003 - hotspot atoms are named only by RDKit index; platform fix.",
+ "rec-016 / access-004 - structure_scaffold has no non-pointer response path; platform ticket already open on seven earlier chapters.",
+ "rec-017 - 10 practice checks, 31 long descriptions and 54 of 56 accessible descriptions have no consumer in the reader or the activity shell; platform delivery gap.",
+ "instr-007 - the Haworth items still place only the anomeric substituent, so the full right-to-down conversion is still not assessed; the haworth renderer draws stubs only at configured positions, so widening it needs a renderer check first.",
+ "vis-011 - the compiler emits one text block per section followed by a figure bank, so no figure sits beside the sentence it supports."
+ ],
+ "verification": [
+ "Proprietary toolchain verification (not in this repo)
+ "[internal source reference — not in this repo] --write-runtime - surfaced 28, types 19, all artifacts rewritten",
+ "re-graded all 56 questions through the live registry graders, building the curved_arrow submission the way the RENDERER builds it - 56/56 correct (4 structured_reasoning return manual_review by type design, objective_score 1.0)",
+ "chair: all placements -> correct, ONE placement -> incorrect (previously scored 1.0)",
+ "beta-D-xylopyranose anomeric oxane CIP = R, matching published (2R,3R,4S,5R); method validated against the published alpha/beta glucopyranose names",
+ "every CIP claim in every asset description machine-checked against its SMILES - 0 mismatches remaining",
+ "wrong_answer_explanations keyed to a correct option - 0 remaining",
+ "key position distribution across select items: {0:5, 1:4, 2:2, 3:3, 4:2}; diagonal matching_pairs 0/4; rank_order in solved order 0/2",
+ "pytest tools/topic_packages/tests/ -q - 62 passed",
+ "pytest backend question-set + sugar-form suites -q - 224 passed",
+ "npx vitest run src/data/__tests__ - 11 passed",
+ "topic-package-textbook-profiles.json re-merged after the compiler clobber - 260 chapter entries retained",
+ "re-graded all 56 questions after the final fixes - 56/56 correct",
+ "illustration-vs-correctness sweep across single_select, multi_select, categorize_groups, matching_pairs, comparison_matrix and rank_order - 0 non-uniform sets remaining",
+ "chair completeness matrix: one placed / all-but-one / one axial / all axial all grade incorrect; only the full correct placement grades correct",
+ "curved_arrow: renderer-shaped correct arrow -> correct, wrong-source arrow -> incorrect, distractor sites covered by wrong_answer_explanations",
+ "backend/app/data/sugar_forms.json repaired - pytest [internal source reference — not in this repo] -q: 47 passed",
+ "pytest tools/topic_packages/tests/ -q: 62 passed | backend question-set suites: 224 passed | vitest src/data + catalog: 17 passed"
+ ],
+ "upstream_data_fix": {
+ "file": "backend/app/data/sugar_forms.json",
+ "summary": "Two independent anomer-label bugs found while tracing instr-001, both now fixed and verified. (1) All four D-aldopentopyranose pairs (xylo, lyxo, ribo, arabino) had alpha and beta swapped - this is what put the wrong structure in ch25. (2) All four D-ketopyranose pairs (fructo, psico, sorbo, tagato) were also swapped, found by a D/L enantiomer-consistency check; the L entries were correct and the D entries wrong. Only smiles/canonical_smiles were exchanged; ids, names, anomer fields and highlights untouched (verified identical atom ordering, and no distribution fields on the affected entries).",
+ "verification": [
+ "every alpha/beta pair confirmed to differ at the anomeric carbon and nowhere else, before swapping",
+ "post-fix: every D/L label pair is a true enantiomer pair (0 exceptions across 128 forms)",
+ "post-fix spot-checks vs published IUPAC oxane names: beta-D-fructopyranose 2R,3S,4R,5R; alpha-D-fructopyranose 2S,3S,4R,5R; beta-D-fructofuranose 2R,3S,4S,5R; beta-D-xylopyranose 2R,3R,4S,5R; beta-D-glucopyranose 2R,3R,4S,5S - all match",
+ "pytest [internal source reference — not in this repo] -q: 47 passed"
+ ]
+ }
+ }
+}

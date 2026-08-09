@@ -1,0 +1,182 @@
+{
+ "persona": "Accessibility Persona",
+ "persona_version": "1.0.0",
+ "chapter_id": "biomolecules-lipids",
+ "chapter_version": "1",
+ "summary": "This is one of the strongest chapters I have reviewed for non-visual access at the prose-and-figure level, and it fails at exactly three assessment points. All 36 assets carry substantive, teaching-bearing alt_text and a long_description; the reader renders alt_text both as image alt and as a visible 'Described as:' caption plus the figure's learning goal, so no figure is a bare 'a reaction scheme'. The reader prose is self-sufficient at all three depth tiers - I verified that the melting-point series (70/45/13 degrees), the wedge-versus-cylinder micelle/bilayer argument, the phosphate-diester and zwitterion points, and the trans-decalin flip geometry are all stated in words independently of any figure - and nothing in the chapter is carried by colour, motion, hover, or spatial position alone (only two assets set rdkit_options at all, and only show_hydrogens). The interactive renderers this chapter targets are mostly keyboard-complete by construction: matching_pairs, categorize_groups, comparison_matrix, evidence_board, synthesis_route and bond_change_ledger are all labelled <select> grids, rank_order uses move-up/move-down buttons rather than drag, newman exposes discrete +/-60 degree buttons with an aria-live conformer readout, chair exposes position and orientation selects (and the grader allows ring rotation, so no arbitrary numbering penalty), and curved_arrow inherits the authored site labels as its atom-button accessible names. The mechanical answer-leak guard flags zero of 52 questions and every question carries an accessible_description. Against that, three required activities cannot be completed without vision: the two fatty-acid shorthand items whose options are labelled only 'Structure 1' through 'Structure 4' (the renderer sets the image alt to that same string), the two prostaglandin hotspot items whose atom buttons are named only 'C atom 14' with no connectivity context, and the two saponification structure_scaffold items that embed a pointer-driven drawing canvas in an iframe with no typed alternative. One systemic loss compounds this: the compiler drops every asset's long_description, so the richest authored non-visual readouts never reach the reader.",
+ "overall_score": 6.4,
+ "publication_blockers": ["access-001", "access-002", "access-003"],
+ "findings": [
+ {
+ "finding_id": "access-001",
+ "location": {
+ "question_slug": "ch27-read-fatty-acid-shorthand",
+ "concept_slug": "fatty-acid-structure-and-shorthand",
+ "anchor_text": "Which structure is the fatty acid written 18:2 Δ9,12?"
+ },
+ "severity": "blocker",
+ "category": "media-equivalence",
+ "observation": "Both shorthand-reading items present their four candidates as options whose only text is \"Structure 1\", \"Structure 2\", \"Structure 3\", \"Structure 4\", with the chemistry carried entirely by a per-option structure_smiles. The option-rendering component sets the molecule image's alt attribute to the option's own text ([internal source reference — not in this repo] line 165: alt={option.text}), so a screen-reader user hears four semantically empty labels and four images described as \"Structure 1\" through \"Structure 4\". The question's accessible_description characterises the set collectively (\"they differ in chain length and in how many carbon-carbon double bonds they contain\") but never distinguishes one option from another, and the three-level hint ladder instructs the learner to \"count the carbons in each chain\" and \"count carbon-carbon double bonds in each candidate\" - operations that require seeing the drawings.",
+ "learner_impact": "A learner using a screen reader, or any learner who cannot resolve a skeletal structure visually, has literally no information on which to choose and must guess at 25 percent. Both the core item and its variant are affected, so the whole retrieval path for the number:number shorthand concept - the chapter's central notation skill - is closed off. Sighted learners answer a structure-reading question; non-visual learners answer nothing.",
+ "evidence": "topic.package.json question_sets ch27-read-fatty-acid-shorthand and ch27-read-fatty-acid-shorthand-v2, student_config.options = [{id:\"a\", text:\"Structure 1\", structure_smiles:\"CCCCC/C=C\\\\C/C=C\\\\CCCCCCCC(=O)O\"}, ...]; compiled/question-set.json carries the same option text verbatim; [internal source reference — not in this repo] alt={option.text}.",
+ "recommended_outcome": "Each of the four candidates needs a non-visual identity that preserves the task rather than answering it: a learner who cannot see the drawings must still be able to tell the four candidates apart and count chain carbons and double bonds for each, without the option label naming the compound or restating its shorthand. Two questions need this; the placeholder 'Structure N' labels cannot stand.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "access-002",
+ "location": {
+ "question_slug": "ch27-prostaglandin-ring-ketone",
+ "concept_slug": "eicosanoids-and-prostaglandins",
+ "asset_id": "mol-pge2",
+ "anchor_text": "Click the carbon of that ring ketone carbonyl."
+ },
+ "severity": "blocker",
+ "category": "interactive-fallback",
+ "observation": "Both hotspot items require selecting one atom on a rendered prostaglandin E2 structure. The renderer is keyboard-complete in the mechanical sense - each atom is a real <button> with aria-pressed - but its accessible name is only element symbol plus ordinal ([internal source reference — not in this repo] line 268: aria-label={`${atom.symbol} atom ${atom.index + 1}`}), and the structure image itself carries the generic alt \"Structure for this question\" (lines 237, 347). Nothing in the atom labels, the image alt, or the question's accessible_description tells a non-visual learner which numbered carbon sits in the five-membered ring, which bears the ketone, or which terminates the seven-carbon chain. The answer keys are bare indices (\"atom_13\", \"atom_22\").",
+ "learner_impact": "A learner who cannot see the drawing can tab to every atom button and still has no way to map the chemistry described in the prompt onto an index. The hint ladder is well written but assumes visual inspection (\"Find the five-membered ring first\", \"Count how many oxygens are attached to each\"). Both hotspot items are unanswerable except by trial. The concept is separately assessed by two accessible short_answer items, so concept coverage survives, but the activity itself does not.",
+ "evidence": "topic.package.json question_sets ch27-prostaglandin-ring-ketone (answer_key [redacted]) and ch27-prostaglandin-ring-ketone-v2 ([\"atom_22\"]); accessibility_bundle.accessible_description describes only the gross skeleton; [internal source reference — not in this repo] lines 237, 268, 347.",
+ "recommended_outcome": "Selecting an atom needs a non-visual addressing scheme: the learner must be able to identify candidate atoms by their chemical environment (ring membership, neighbours, attached oxygens) rather than by an arbitrary index, or the item needs an equivalent way to express 'the ring ketone carbon' that does not depend on locating it on an image. Two questions need this.",
+ "confidence": 0.92
+ },
+ {
+ "finding_id": "access-003",
+ "location": {
+ "question_slug": "ch27-draw-saponification-alcohol",
+ "concept_slug": "saponification-and-soap-action",
+ "anchor_text": "Draw the alcohol released."
+ },
+ "severity": "blocker",
+ "category": "interactive-fallback",
+ "observation": "Both structure_scaffold items set student_config.scaffold = \"blank_canvas\" and are answered in an embedded drawing tool. The renderer is a bare same-origin iframe ([internal source reference — not in this repo]: <Box as=\"iframe\" ... title={`${label} tool`}>) whose only surrounding affordance is the instruction \"Draw your answer in the ... tool above\" and a link to open the full workspace. There is no typed SMILES/name entry path in the renderer, and canvas structure drawing is pointer-driven and not screen-reader operable. The answer keys are simple SMILES (\"OCC(O)CO\" for glycerol, \"CCCCCCCCCCCCCCCCO\" for cetyl alcohol) that could be expressed in text.",
+ "learner_impact": "A learner who cannot use a pointer with fine precision, or who navigates by screen reader, cannot complete either drawing task. These are the only two core-difficulty items on the saponification concept, so the accessible route into that concept is the harder mechanistic and stoichiometric items. The chemistry itself is recoverable elsewhere (ch27-lipid-class-defining-feature-v2 pairs each lipid with its hydrolysis products; ch27-naoh-per-triacylglycerol handles the stoichiometry), which limits but does not remove the harm.",
+ "evidence": "topic.package.json question_sets ch27-draw-saponification-alcohol and ch27-draw-saponification-alcohol-v2, student_config [redacted], answer_key [redacted] / {"smiles": "[redacted]"}; [internal source reference — not in this repo] lines 128-155.",
+ "recommended_outcome": "A learner who cannot draw on a canvas needs an equivalent way to submit the same product - the answer is a short, unambiguous structure that a text or constructed-choice route could express - or the concept needs a required accessible counterpart at the same difficulty. This is a platform-level gap the chapter inherits, but the chapter is the surface where two required items become uncompletable.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "access-004",
+ "location": {
+ "section_id": "nugget-terpenoids-and-the-isoprene-rule",
+ "asset_id": "mol-myrcene",
+ "concept_slug": "terpenoids-and-the-isoprene-rule",
+ "anchor_text": "the skeleton divides cleanly into two five-carbon units"
+ },
+ "severity": "medium",
+ "category": "media-equivalence",
+ "observation": "Every one of the 36 assets carries both accessibility.alt_text and a substantial accessibility.long_description in the topic package, but the compiler emits only alt_text. The string \"long_description\" does not occur anywhere in frontend/public/reader/topic-chapters/biomolecules-lipids.json; each of the 59 molecule blocks carries {name, smiles, alt_text, description}, where description is the asset's learning_goal rather than the long description. The material lost is exactly the part that explains what the figure teaches at the atom level - for myrcene, that the skeleton divides into two five-carbon units joined head to tail and where the methyl branches recur; for mol-trans-decalin, the equatorial-junction argument for why the flip is impossible; for mol-dppc, that the phosphorus is a diester joined to glycerol on one side and choline on the other. The retained alt_text for myrcene (\"an open-chain ten-carbon skeleton with three double bonds and two methyl branches, drawn without any ring\") does not convey the dissection the figure exists to show.",
+ "learner_impact": "A learner relying on the text equivalent gets a competent one-sentence depiction of each structure plus its teaching goal, but not the structured readout that was written for them. Reader prose covers most of the affected points (I confirmed head-to-tail, tail-to-tail and mirror-symmetry language in the terpenoid nugget at standard and expanded tiers, and wedge/equatorial/axial/flip language in the steroid nugget), so this is a degradation rather than a loss of the chemistry - but it silently discards authored accessibility work across the whole chapter.",
+ "evidence": "topic.package.json assets[*].accessibility.long_description present for all 36 assets; grep for \"long_description\" in frontend/public/reader/topic-chapters/biomolecules-lipids.json returns nothing; sample compiled block blk-nwvxtbm0 content keys = name, smiles, alt_text, description.",
+ "recommended_outcome": "The longer authored readouts need a route to the reader for learners who want more than a sentence per figure; as compiled, the chapter's deepest non-visual figure descriptions exist only in the source package. Affects all 10 sections.",
+ "confidence": 0.97
+ },
+ {
+ "finding_id": "access-005",
+ "location": {
+ "question_slug": "ch27-saturated-chain-conformation",
+ "concept_slug": "chain-packing-and-melting-points",
+ "anchor_text": "Rotate the rear carbon to set the conformation the question asks for."
+ },
+ "severity": "medium",
+ "category": "keyboard-operability",
+ "observation": "Both newman items tell the non-visual learner to \"Rotate the rear carbon\", but the workspace does the opposite: its only two controls are labelled \"Rotate front -60\" and \"Rotate front +60\", and its own help text states \"The back carbon stays fixed - conformations are graded by the relative angle between the two faces\" ([internal source reference — not in this repo] lines 168-193). A learner navigating by accessible name is told to look for a rear-carbon control that does not exist.",
+ "learner_impact": "A screen-reader user following the accessible_description will search for a control that is not present and may conclude the widget is broken or unreachable, when in fact this is one of the better-instrumented tools in the chapter (discrete 60-degree steps plus an aria-live conformer readout). The mismatch turns a usable interaction into an apparent dead end.",
+ "evidence": "topic.package.json ch27-saturated-chain-conformation and -v2 accessibility_bundle.accessible_description: \"Rotate the rear carbon to set the conformation the question asks for.\" versus [internal source reference — not in this repo] button labels and help text.",
+ "recommended_outcome": "The accessible description of each Newman item needs to match the controls the learner will actually encounter, so that a non-visual learner can find and operate the rotation control from the description alone. Two questions affected.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "access-006",
+ "location": {
+ "question_slug": "ch27-tag-central-stereocenter",
+ "concept_slug": "triacylglycerols-and-waxes",
+ "anchor_text": "Select the one in which the central glycerol carbon bears four different substituents."
+ },
+ "severity": "medium",
+ "category": "alt-text-quality",
+ "observation": "The prompt asks which triacylglycerol has a stereocenter at glycerol C2 - the point of the item is that the learner must know a stereocenter means four different substituents and then check the acyl pattern. The accessible_description supplies that criterion outright, and the option labels already state the acyl pattern in words (\"Palmitoyl at C1, oleoyl at C2, stearoyl at C3\" against three options that say \"at all three positions\"). Combining the two makes the answer immediate without any structural reasoning. The mechanical guard does not catch this: find_accessibility_leaks flags 0 of 52 questions here, because the leak is semantic rather than an id, verdict word, or computed number.",
+ "learner_impact": "The non-visual learner is handed the discriminating principle the item is testing, so the question stops assessing them on the intended concept, and their score on it is not comparable to a sighted learner's. It is an inequity in the unusual direction, and it degrades the item as evidence of learning for anyone who reads the description.",
+ "evidence": "topic.package.json ch27-tag-central-stereocenter: prompt_text \"In which of these triacylglycerols is C2 of the glycerol backbone - the central carbon - a stereocenter?\"; accessibility_bundle.accessible_description ends \"Select the one in which the central glycerol carbon bears four different substituents.\"; backend accessibility_guard.find_accessibility_leaks returns [] for all 52 questions.",
+ "recommended_outcome": "This description needs to convey the task (four labelled triacylglycerols differing in their acyl pattern; choose the one meeting the criterion the question names) without restating the definition that constitutes the reasoning step.",
+ "confidence": 0.78
+ },
+ {
+ "finding_id": "access-007",
+ "location": {
+ "section_id": "nugget-phospholipids-and-membranes",
+ "concept_slug": "phospholipids-and-membranes",
+ "anchor_text": "One tail makes a sphere, two tails make a sheet"
+ },
+ "severity": "low",
+ "category": "media-equivalence",
+ "observation": "All four video briefs are production_status \"deferred\" and compile into the reader as video blocks with url \"\" and is_hidden true, so nothing broken renders - but nothing renders at all. The strings \"captions\", \"transcript\", \"storyboard\" and \"narration\" do not appear in the compiled reader; only storyboard[0] survives, as the hidden block's description. The briefs are the chapter's only process representations: chains failing to stack, curved-arrow electron flow across three steps, molecules self-assembling into a micelle versus a bilayer, and a ring flip attempted and failing. Their content is genuinely carried by prose - I confirmed the melting-point series with all three values, wedge/cylinder/micelle/bilayer, and equatorial-junction/flip language in the corresponding nuggets at every depth tier - so no learner is left without the chemistry.",
+ "learner_impact": "Learners who depend on a demonstrated process rather than a described one (including many learners with reading or working-memory differences, not only visual ones) get static structures plus paragraphs and no stepwise sequence. The authored storyboards would already support a still-frame equivalent, but none is surfaced. The four production notes correctly pre-record the captions-plus-transcript and no-colour-alone requirements, which is the right thing to have written down.",
+ "evidence": "topic.package.json video_briefs[*].production_status = \"deferred\" with production_note recording \"closed captions plus narration that names every visual change in words, and a text transcript\"; compiled reader blocks blk-vh7dhul0, blk-j10vowxu, blk-11akxo27, blk-nym57vqy all have content.url = \"\" and is_hidden = true.",
+ "recommended_outcome": "The four deferred briefs leave the chapter's four process arguments available only as prose; a stepwise equivalent that does not require animation would serve both the deferred-video gap and the learners who cannot use video, and the recorded caption/transcript requirement must survive into whatever eventually gets produced.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "access-008",
+ "location": {
+ "question_slug": "ch27-rank-unsaturation-melting-points",
+ "concept_slug": "chain-packing-and-melting-points",
+ "anchor_text": "Four draggable cards, each naming an eighteen-carbon fatty acid"
+ },
+ "severity": "low",
+ "category": "interactive-fallback",
+ "observation": "Both rank_order items describe the workspace to non-visual users as \"Four draggable cards\". The actual renderer contains no drag affordance at all: MechanismCardSortRenderer exposes per-card move-up and move-down IconButtons with fully descriptive names (aria-label={`Move \"${card.text}\" up (currently position ${index + 1} of ${order.length})`}).",
+ "learner_impact": "A learner who cannot drag reads the description and reasonably concludes the activity is closed to them, when it is in fact one of the most accessible interactions in the chapter. The description advertises a barrier that does not exist and hides the keyboard path that does.",
+ "evidence": "topic.package.json ch27-rank-unsaturation-melting-points and -v2 accessibility_bundle.accessible_description; [internal source reference — not in this repo] lines 105-146.",
+ "recommended_outcome": "The ranking items need their accessible descriptions to reflect the reorder controls the learner actually gets, so that no learner is deterred by an advertised drag requirement. Two questions affected.",
+ "confidence": 0.86
+ },
+ {
+ "finding_id": "access-009",
+ "location": {
+ "question_slug": "ch27-prostaglandin-ring-ketone-v2",
+ "concept_slug": "eicosanoids-and-prostaglandins",
+ "anchor_text": "Click the single atom the question describes."
+ },
+ "severity": "low",
+ "category": "interactive-fallback",
+ "observation": "Both hotspot items set student_config.select_count = \"one_or_more\" while the prompt says \"Click the carbon ...\" and the accessible_description says \"Click the single atom the question describes.\" The answer keys each contain exactly one atom.",
+ "learner_impact": "A learner working only from the accessible description does not know whether the widget will accept or require more than one selection, and cannot tell from the description whether a stray extra selection will be scored. The uncertainty falls hardest on learners who cannot glance at the widget to check its state.",
+ "evidence": "topic.package.json ch27-prostaglandin-ring-ketone and -v2: student_config [redacted]; answer_key.correct_option_ids has length 1 in both.",
+ "recommended_outcome": "The number of selections the item expects needs to be unambiguous from the non-visual description and consistent with what the widget enforces.",
+ "confidence": 0.7
+ },
+ {
+ "finding_id": "access-010",
+ "location": {
+ "question_slug": "ch27-lipid-defining-property-v2",
+ "concept_slug": "lipid-classification-and-solubility",
+ "anchor_text": "differing greatly in how many carbon atoms accompany it"
+ },
+ "severity": "low",
+ "category": "alt-text-quality",
+ "observation": "The item asks which of four carboxylic-acid-containing compounds is not a lipid. The accessible_description volunteers that the options differ \"greatly in how many carbon atoms accompany\" the acid group, which points straight at acetic acid - the two-carbon outlier and the answer - before any reasoning about the solubility definition. The option labels already name the compounds, so a sighted learner gets no comparable steer from the images.",
+ "learner_impact": "A milder instance of the same pattern as access-006: the non-visual learner is nudged toward the answer along a dimension the item did not intend to foreground, weakening the item as evidence of whether the lipid definition was understood.",
+ "evidence": "topic.package.json ch27-lipid-defining-property-v2 accessibility_bundle.accessible_description: \"Four structures are offered as options, each containing a carboxylic acid group but differing greatly in how many carbon atoms accompany it. Select the one that falls outside the lipid class.\"",
+ "recommended_outcome": "This description needs to establish that four named acid-containing compounds are on offer without singling out the property that resolves the item.",
+ "confidence": 0.62
+ }
+ ],
+ "strengths": [
+ "All 36 assets carry alt_text that states the chemically relevant content rather than naming the image - mol-elaidic-acid's alt text records that the trans double bond leaves the chain nearly straight, which is the entire point of the figure - and all 36 additionally carry a long_description written at the level of individual functional groups and counts.",
+ "The reader surfaces the alt text twice: as the image's alt attribute and as a visible 'Described as: ...' caption below the structure, alongside the figure's learning goal as visible text ([internal source reference — not in this repo] lines 191-224). A learner who cannot see the drawing and a learner who simply prefers reading get the same sentence.",
+ "Reader prose is self-sufficient without any figure at every depth tier. I verified that the terse tier alone carries the 70/45/13 degree melting-point series with elaidic acid named, the diester/zwitterion/cylinder argument for phosphatidylcholine, and head-to-tail versus tail-to-tail isoprene joining - so no chemistry in this chapter exists only in an image.",
+ "Nothing is carried by colour, motion, hover, or spatial position alone. Only two of 36 assets set rdkit_options at all, and only to show hydrogens (mol-glycerol, mol-isoprene); there are no highlight-colour encodings and no animated assets.",
+ "curved_arrow is the model case for a pointer-dependent type done right: the authored sites carry semantic labels ('The ester oxygen joining the central ester to glycerol C2'), and the renderer uses those labels verbatim as its atom-button accessible names ([internal source reference — not in this repo] atomLabel + line 321), so the arrow can be constructed entirely from meaningful names.",
+ "matching_pairs, categorize_groups, comparison_matrix, evidence_board, synthesis_route and bond_change_ledger are all realised as labelled <select> grids with no drag interaction, and every structure-bearing option in those types carries a text name alongside its SMILES - so the six most structurally complex activity types in the chapter are fully operable and fully identifiable without vision.",
+ "The chair items are both keyboard-complete (position and orientation selects with per-control aria-labels) and grading-fair: ChairGrader defaults allow_ring_rotation to true, so a learner who places the substituent at a different ring position is not penalised for a numbering they cannot see.",
+ "Every one of the 52 questions has a populated accessible_description, and backend accessibility_guard.find_accessibility_leaks flags zero of them; the two semantic leaks I found (access-006, access-010) are of a class the guard does not attempt.",
+ "All hint ladders across the chapter are kind 'text' and reason in words rather than pointing at picture regions, so progressive help is available to a non-visual learner even where the item itself is not.",
+ "The four deferred video briefs pre-record their accessibility requirements in production_note - closed captions, narration naming every visual change, a text transcript, and no distinction resting on colour, highlight, motion, or position alone - and each names the reader nugget that carries the same content."
+ ],
+ "open_questions": [
+ "Does the embedded structure workspace (StructureWorkspaceRenderer iframe) expose a typed SMILES or name entry path inside the frame? I could not verify from outside the iframe, and it is the difference between access-003 being a blocker and being a labelling problem.",
+ "Are the reader's terse/standard/expanded depth-tier controls keyboard-reachable and is a tier change announced? The tier text is present in the compiled chapter (_detail_texts) but the switching control lives outside the chapter data I reviewed.",
+ "Do the LTI/LMS export surfaces render these 52 questions with the same renderers I inspected? My conclusions about keyboard operability come from frontend/src/components/activity-renderers/* and may not hold for an exported cartridge.",
+ "Is there any Braille-ready or linear structural notation surface for the reader's 59 molecule blocks, or is sentence-level alt text the only text form of a structure available to a learner?",
+ "For hotspot items generally, is there a platform intent to enrich atom button names with connectivity context, or is per-question site labelling (as curved_arrow already does) the expected authoring pattern? The answer determines whether access-002 is a chapter fix or a platform fix."
+ ]
+}

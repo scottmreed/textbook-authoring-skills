@@ -1,0 +1,483 @@
+chapter,preferred_name,canonical_smiles,chemillusion_source_names,aliases_checked,matched_aliases_in_openstax,identical_molecule_named_in_openstax
+1,Acetic acid,CC(=O)O,Acetic acid,Acetic acid,,False
+1,Acetylene (ethyne),C#C,Acetylene (ethyne),Acetylene | Acetylene (ethyne) | ethyne,Acetylene,True
+1,Ethane,CC,Ethane,Ethane,Ethane,True
+1,Ethanol,CCO,Ethanol,Ethanol,Ethanol,True
+1,Ethylene (ethene),C=C,Ethylene (ethene),Ethylene | Ethylene (ethene) | ethene,Ethylene,True
+2,Hydronium ion,[OH3+],Hydronium ion,Hydronium ion,Hydronium ion,True
+2,Methoxide ion,C[O-],Methoxide ion,Methoxide ion,,False
+3,"2,2-Dimethylpropane (neopentane)",CC(C)(C)C,"2,2-Dimethylpropane (neopentane)","2,2-Dimethylpropane | 2,2-Dimethylpropane (neopentane) | neopentane","2,2-Dimethylpropane | neopentane",True
+3,2-Methylbutane,CCC(C)C,2-Methylbutane,2-Methylbutane,2-Methylbutane,True
+3,2-Methylpropane (isobutane),CC(C)C,2-Methylpropane (isobutane),2-Methylpropane | 2-Methylpropane (isobutane) | isobutane,2-Methylpropane | 2-Methylpropane (isobutane) | isobutane,True
+3,Acetic acid (a carboxylic acid),CC(=O)O,Acetic acid (a carboxylic acid),Acetic acid | Acetic acid (a carboxylic acid),Acetic acid,True
+3,Acetone (a ketone),CC(C)=O,Acetone (a ketone),Acetone | Acetone (a ketone),,False
+3,Butane,CCCC,Butane,Butane,Butane,True
+3,Ethane,CC,Ethane,Ethane,Ethane,True
+3,Ethanol (an alcohol),CCO,Ethanol (an alcohol),Ethanol | Ethanol (an alcohol),Ethanol,True
+3,Pentane,CCCCC,Pentane,Pentane,Pentane,True
+4,Cyclobutane,C1CCC1,Cyclobutane,Cyclobutane,Cyclobutane,True
+4,Cyclohexane,C1CCCCC1,Cyclohexane,Cyclohexane,Cyclohexane,True
+4,Cyclopentane,C1CCCC1,Cyclopentane,Cyclopentane,Cyclopentane,True
+4,Cyclopropane,C1CC1,Cyclopropane,Cyclopropane,Cyclopropane,True
+4,Methylcyclohexane,CC1CCCCC1,Methylcyclohexane,Methylcyclohexane,Methylcyclohexane,True
+4,"trans-1,2-Dimethylcyclohexane",C[C@H]1CCCC[C@@H]1C,"trans-1,2-Dimethylcyclohexane","trans-1,2-Dimethylcyclohexane","trans-1,2-Dimethylcyclohexane",True
+4,"trans-1,2-Dimethylcyclopentane",C[C@@H]1CCC[C@H]1C,"trans-1,2-Dimethylcyclopentane","trans-1,2-Dimethylcyclopentane","trans-1,2-Dimethylcyclopentane",True
+5,(R)-2-Bromobutane,CC[C@@H](C)Br,(R)-2-Bromobutane | Tracing CIP priorities on (R)-2-bromobutane,(R)-2-Bromobutane | Tracing CIP priorities on (R)-2-bromobutane | Tracing CIP priorities on -2-bromobutane,,False
+5,"(R)-Bromochlorofluoromethane, the simplest chiral molecule",F[C@H](Cl)Br,"(R)-Bromochlorofluoromethane, the simplest chiral molecule","(R)-Bromochlorofluoromethane, the simplest chiral molecule",,False
+5,(R)-Butan-2-ol,CC[C@@H](C)O,(R)-Butan-2-ol,(R)-Butan-2-ol,,False
+5,"(R,R)-Tartaric acid",O=C(O)[C@H](O)[C@@H](O)C(=O)O,"(R,R)-Tartaric acid","(R,R)-Tartaric acid",,False
+5,"(S)-Bromochlorofluoromethane, the mirror image",F[C@@H](Cl)Br,"(S)-Bromochlorofluoromethane, the mirror image","(S)-Bromochlorofluoromethane, the mirror image",,False
+5,(S)-Butan-2-ol,CC[C@H](C)O,(S)-Butan-2-ol,(S)-Butan-2-ol,,False
+5,"3-Bromobutan-2-ol, a molecule with two different stereocenters",C[C@H](O)[C@H](C)Br,"3-Bromobutan-2-ol, a molecule with two different stereocenters","3-Bromobutan-2-ol, a molecule with two different stereocenters",,False
+5,D-(R)-Glyceraldehyde,O=C[C@H](O)CO,D-(R)-Glyceraldehyde,D- -Glyceraldehyde | D-(R)-Glyceraldehyde,,False
+5,"L-Alanine, a chiral building block of proteins",C[C@H](N)C(=O)O,"L-Alanine, a chiral building block of proteins","L-Alanine, a chiral building block of proteins",,False
+5,meso-Tartaric acid,O=C(O)[C@@H](O)[C@@H](O)C(=O)O,meso-Tartaric acid,meso-Tartaric acid,meso-Tartaric acid,True
+5,"Propan-2-ol, an achiral molecule for contrast",CC(C)O,"Propan-2-ol, an achiral molecule for contrast","Propan-2-ol, an achiral molecule for contrast",,False
+5,Tracing CIP priorities on (S)-2-bromobutane,CC[C@H](C)Br,Tracing CIP priorities on (S)-2-bromobutane,Tracing CIP priorities on (S)-2-bromobutane | Tracing CIP priorities on -2-bromobutane,,False
+6,"2-Bromo-2-methylpropane, a substitution and elimination substrate",CC(C)(C)Br,"2-Bromo-2-methylpropane, a substitution and elimination substrate","2-Bromo-2-methylpropane, a substitution and elimination substrate",,False
+6,"2-Bromobutane, an addition product",CC[C@@H](C)Br,"2-Bromobutane, an addition product","2-Bromobutane, an addition product",,False
+6,"Bromomethane, an electrophilic carbon",CBr,"Bromomethane, an electrophilic carbon","Bromomethane, an electrophilic carbon",,False
+6,"But-2-ene, an addition substrate",C/C=C\C,"But-2-ene, an addition substrate","But-2-ene, an addition substrate",,False
+6,"Hydroxide ion, a nucleophile",[OH-],"Hydroxide ion, a nucleophile","Hydroxide ion, a nucleophile",,False
+6,"Methanol, a substitution product",CO,"Methanol, a substitution product","Methanol, a substitution product",,False
+6,"Molecular chlorine, a bond that cleaves homolytically",ClCl,"Molecular chlorine, a bond that cleaves homolytically","Molecular chlorine, a bond that cleaves homolytically",,False
+6,"The tert-butyl cation, an electrophilic intermediate",C[C+](C)C,"The tert-butyl cation, an electrophilic intermediate","The tert-butyl cation, an electrophilic intermediate",,False
+7,But-2-ene,C/C=C\C,But-2-ene,But-2-ene,But-2-ene,True
+7,Ethene (ethylene),C=C,Ethene (ethylene),Ethene | Ethene (ethylene) | ethylene,Ethene | ethylene,True
+7,"Halogenation product: 2,3-dibromobutane",CC(Br)C(C)Br,"Halogenation product: 2,3-dibromobutane","Halogenation product: 2,3-dibromobutane",,False
+7,Hydration product: propan-2-ol (isopropyl alcohol),CC(C)O,Hydration product: propan-2-ol (isopropyl alcohol),Hydration product: propan-2-ol | Hydration product: propan-2-ol (isopropyl alcohol) | isopropyl alcohol,,False
+7,Markovnikov product: 2-bromopropane (isopropyl bromide),CC(C)Br,Markovnikov product: 2-bromopropane (isopropyl bromide),Markovnikov product: 2-bromopropane | Markovnikov product: 2-bromopropane (isopropyl bromide) | isopropyl bromide,,False
+7,Prop-1-ene (propene),C=CC,Prop-1-ene (propene),Prop-1-ene | Prop-1-ene (propene) | propene,propene,True
+8,Anti-Markovnikov product: butan-1-ol,CCCCO,Anti-Markovnikov product: butan-1-ol,Anti-Markovnikov product: butan-1-ol,,False
+8,"Dihydroxylation product: propane-1,2-diol",CC(O)CO,"Dihydroxylation product: propane-1,2-diol","Dihydroxylation product: propane-1,2-diol",,False
+8,Epoxidation product: 2-methyloxirane,CC1CO1,Epoxidation product: 2-methyloxirane,Epoxidation product: 2-methyloxirane,,False
+8,Epoxidation substrate: propene,C=CC,Dihydroxylation substrate: propene | Epoxidation substrate: propene,Dihydroxylation substrate: propene | Epoxidation substrate: propene,,False
+8,Hydroboration substrate: but-1-ene,C=CCC,Hydroboration substrate: but-1-ene,Hydroboration substrate: but-1-ene,,False
+8,Hydrogenation product: butane,CCCC,Hydrogenation product: butane,Hydrogenation product: butane,,False
+8,Hydrogenation substrate: but-2-ene,CC=CC,Hydrogenation substrate: but-2-ene,Hydrogenation substrate: but-2-ene,,False
+8,Markovnikov product: butan-2-ol,CCC(C)O,Markovnikov product: butan-2-ol,Markovnikov product: butan-2-ol,,False
+8,Ozonolysis product: acetaldehyde,CC=O,Ozonolysis product: acetaldehyde,Ozonolysis product: acetaldehyde,,False
+8,Ozonolysis product: acetone,CC(C)=O,Ozonolysis product: acetone,Ozonolysis product: acetone,,False
+8,Ozonolysis substrate: 2-methylbut-2-ene,CC=C(C)C,Ozonolysis substrate: 2-methylbut-2-ene,Ozonolysis substrate: 2-methylbut-2-ene,,False
+9,"2,2-Dibromopropane, the geminal dihalide",CC(C)(Br)Br,"2,2-Dibromopropane, the geminal dihalide","2,2-Dibromopropane, the geminal dihalide",,False
+9,"2-Bromopropene, the Markovnikov addition product",C=C(C)Br,"2-Bromopropene, the Markovnikov addition product","2-Bromopropene, the Markovnikov addition product",,False
+9,"Acetone, the ketone from Markovnikov hydration",CC(C)=O,"Acetone, the ketone from Markovnikov hydration","Acetone, the ketone from Markovnikov hydration",,False
+9,"Bromoethane, a primary alkyl halide",CCBr,"Bromoethane, a primary alkyl halide","Bromoethane, a primary alkyl halide",,False
+9,"But-1-yne, numbered from the triple bond",C#CCC,"But-1-yne, numbered from the triple bond","But-1-yne, numbered from the triple bond",,False
+9,"But-2-yne, an internal alkyne",CC#CC,"But-2-yne, an internal alkyne","But-2-yne, an internal alkyne",,False
+9,Butane from complete hydrogenation,CCCC,Butane from complete hydrogenation,Butane from complete hydrogenation,,False
+9,cis-2-Butene from partial hydrogenation,C/C=C\C,cis-2-Butene from partial hydrogenation,cis-2-Butene from partial hydrogenation,,False
+9,"Pent-2-yne, the acetylide alkylation product",CC#CCC,"Pent-2-yne, the acetylide alkylation product","Pent-2-yne, the acetylide alkylation product",,False
+9,"Propanal, the aldehyde from hydroboration-oxidation",CCC=O,"Propanal, the aldehyde from hydroboration-oxidation","Propanal, the aldehyde from hydroboration-oxidation",,False
+9,"Propyne, a terminal alkyne",C#CC,"Propyne, a terminal alkyne","Propyne, a terminal alkyne",,False
+9,"Propynide, the acetylide anion",[C-]#CC,"Propynide, the acetylide anion","Propynide, the acetylide anion",,False
+9,The enol intermediate from Markovnikov hydration,C=C(C)O,The enol intermediate from Markovnikov hydration,The enol intermediate from Markovnikov hydration,,False
+9,trans-2-Butene from dissolving-metal reduction,C/C=C/C,trans-2-Butene from dissolving-metal reduction,trans-2-Butene from dissolving-metal reduction,,False
+10,"1-Bromo-2-butene, the resonance-shifted product",CC=CCBr,"1-Bromo-2-butene, the resonance-shifted product","1-Bromo-2-butene, the resonance-shifted product",,False
+10,"1-Chlorobutane, a primary alkyl halide",CCCCCl,"1-Chlorobutane, a primary alkyl halide","1-Chlorobutane, a primary alkyl halide",,False
+10,"2-Bromo-2-methylbutane, the selective bromination product",CCC(C)(C)Br,"2-Bromo-2-methylbutane, the selective bromination product","2-Bromo-2-methylbutane, the selective bromination product",,False
+10,"2-Bromobutane, a secondary alkyl halide",CC[C@@H](C)Br,"2-Bromobutane, a secondary alkyl halide","2-Bromobutane, a secondary alkyl halide",,False
+10,"2-Chloro-2-methylpropane, a tertiary alkyl halide",CC(C)(C)Cl,"2-Chloro-2-methylpropane, a tertiary alkyl halide","2-Chloro-2-methylpropane, a tertiary alkyl halide",,False
+10,"3-Bromo-1-butene, one allylic-bromination product",C=CC(C)Br,"3-Bromo-1-butene, one allylic-bromination product","3-Bromo-1-butene, one allylic-bromination product",,False
+10,"3-Bromoprop-1-ene (allyl bromide), an allylic halide",C=CCBr,"3-Bromoprop-1-ene (allyl bromide), an allylic halide","3-Bromoprop-1-ene (allyl bromide), an allylic halide | 3-Bromoprop-1-ene , an allylic halide | allyl bromide",,False
+10,"But-1-ene, an unsymmetrical allylic substrate",C=CCC,"But-1-ene, an unsymmetrical allylic substrate","But-1-ene, an unsymmetrical allylic substrate",,False
+10,"Chloroethene, a vinylic halide",C=CCl,"Chloroethene, a vinylic halide","Chloroethene, a vinylic halide",,False
+10,"Cyclohexene, an allylic-bromination substrate",C1=CCCCC1,"Cyclohexene, an allylic-bromination substrate","Cyclohexene, an allylic-bromination substrate",,False
+10,"Propene, showing the allylic position",C=CC,"Propene, showing the allylic position","Propene, showing the allylic position",,False
+11,"(E)-2-Butene, the Zaitsev elimination product",C/C=C/C,"(E)-2-Butene, the Zaitsev elimination product","(E)-2-Butene, the Zaitsev elimination product",,False
+11,"(R)-2-Butanol, the inverted SN2 product",CC[C@@H](C)O,"(R)-2-Butanol, the inverted SN2 product","(R)-2-Butanol, the inverted SN2 product",,False
+11,"(S)-2-Bromobutane, a single enantiomer of substrate",CC[C@H](C)Br,"(S)-2-Bromobutane, a single enantiomer of substrate","(S)-2-Bromobutane, a single enantiomer of substrate",,False
+11,"1-Butene, the Hofmann elimination product",C=CCC,"1-Butene, the Hofmann elimination product","1-Butene, the Hofmann elimination product",,False
+11,"2-Bromo-2-methylpropane (tert-butyl bromide), a tertiary halide",CC(C)(C)Br,"2-Bromo-2-methylpropane (tert-butyl bromide), a tertiary halide","2-Bromo-2-methylpropane (tert-butyl bromide), a tertiary halide | 2-Bromo-2-methylpropane , a tertiary halide | tert-butyl bromide",,False
+11,"2-Bromobutane, the substrate for the elimination examples",CCC(C)Br,"2-Bromobutane, the substrate for the elimination examples","2-Bromobutane, the substrate for the elimination examples",,False
+11,"2-Bromopropane, a secondary alkyl halide",CC(C)Br,"2-Bromopropane, a secondary alkyl halide","2-Bromopropane, a secondary alkyl halide",,False
+11,"2-Methyl-2-propanol (tert-butyl alcohol), the SN1 product",CC(C)(C)O,"2-Methyl-2-propanol (tert-butyl alcohol), the SN1 product","2-Methyl-2-propanol (tert-butyl alcohol), the SN1 product | 2-Methyl-2-propanol , the SN1 product | tert-butyl alcohol",,False
+11,"Bromoethane, a primary alkyl halide",CCBr,"Bromoethane, a primary alkyl halide","Bromoethane, a primary alkyl halide",,False
+11,"Bromomethane, the ideal SN2 substrate",CBr,"Bromomethane, the ideal SN2 substrate","Bromomethane, the ideal SN2 substrate",,False
+11,"Butyl tosylate, a sulfonate leaving group",CCCCOS(=O)(=O)c1ccc(C)cc1,"Butyl tosylate, a sulfonate leaving group","Butyl tosylate, a sulfonate leaving group",,False
+11,"Iodoethane, illustrating iodide as an excellent leaving group",CCI,"Iodoethane, illustrating iodide as an excellent leaving group","Iodoethane, illustrating iodide as an excellent leaving group",,False
+11,"Methyl propyl ether, a Williamson ether product",CCCOC,"Methyl propyl ether, a Williamson ether product","Methyl propyl ether, a Williamson ether product",,False
+12,"1-Bromopropane, showing the bromine 1:1 isotope doublet",CCCBr,"1-Bromopropane, showing the bromine 1:1 isotope doublet","1-Bromopropane, showing the bromine 1:1 isotope doublet",,False
+12,"2-Chloropropane, showing the chlorine 3:1 isotope pattern",CC(C)Cl,"2-Chloropropane, showing the chlorine 3:1 isotope pattern","2-Chloropropane, showing the chlorine 3:1 isotope pattern",,False
+12,"Benzaldehyde, combining aromatic, aldehyde, and conjugated carbonyl bands",O=Cc1ccccc1,"Benzaldehyde, combining aromatic, aldehyde, and conjugated carbonyl bands","Benzaldehyde, combining aromatic, aldehyde, and conjugated carbonyl bands",,False
+12,"Cyclohexanone, showing the intense ketone C=O stretch",O=C1CCCCC1,"Cyclohexanone, showing the intense ketone C=O stretch","Cyclohexanone, showing the intense ketone C=O stretch",,False
+12,"Hex-1-yne, a terminal alkyne with two diagnostic stretches",C#CCCCC,"Hex-1-yne, a terminal alkyne with two diagnostic stretches","Hex-1-yne, a terminal alkyne with two diagnostic stretches",,False
+12,"Hexan-1-ol, showing the broad hydrogen-bonded O–H stretch",CCCCCCO,"Hexan-1-ol, showing the broad hydrogen-bonded O–H stretch","Hexan-1-ol, showing the broad hydrogen-bonded O-H stretch",,False
+12,"Hexan-2-one, an alpha-cleavage and McLafferty substrate",CCCCC(C)=O,"Hexan-2-one, an alpha-cleavage and McLafferty substrate","Hexan-2-one, an alpha-cleavage and McLafferty substrate",,False
+12,"Pent-1-ene, an alkene reference for the double-bond region",C=CCCC,"Pent-1-ene, an alkene reference for the double-bond region","Pent-1-ene, an alkene reference for the double-bond region",,False
+12,"Triethylamine, an odd-mass molecular ion",CCN(CC)CC,"Triethylamine, an odd-mass molecular ion","Triethylamine, an odd-mass molecular ion",,False
+13,"1,1-Dichloroethane, a doublet-plus-quartet pair",CC(Cl)Cl,"1,1-Dichloroethane, a doublet-plus-quartet pair","1,1-Dichloroethane, a doublet-plus-quartet pair",,False
+13,"2-Bromopropane, whose symmetry gives two signals",CC(C)Br,"2-Bromopropane, whose symmetry gives two signals","2-Bromopropane, whose symmetry gives two signals",,False
+13,"Bromoethane, the classic quartet-plus-triplet ethyl pattern",CCBr,"Bromoethane, the classic quartet-plus-triplet ethyl pattern","Bromoethane, the classic quartet-plus-triplet ethyl pattern",,False
+13,"Butan-2-one, four carbons in four ¹³C regions",CCC(C)=O,"Butan-2-one, four carbons in four ¹³C regions","Butan-2-one, four carbons in four 13C regions",,False
+13,"Cyclohexane, twelve equivalent hydrogens in one line",C1CCCCC1,"Cyclohexane, twelve equivalent hydrogens in one line","Cyclohexane, twelve equivalent hydrogens in one line",,False
+13,"Ethyl acetate, whose δ 4.1 quartet locates the CH₂ on oxygen",CCOC(C)=O,"Ethyl acetate, whose δ 4.1 quartet locates the CH₂ on oxygen","Ethyl acetate, whose δ 4.1 quartet locates the CH2 on oxygen",,False
+13,"Methyl 2,2-dimethylpropanoate, a 3:1 integration example",COC(=O)C(C)(C)C,"Methyl 2,2-dimethylpropanoate, a 3:1 integration example","Methyl 2,2-dimethylpropanoate, a 3:1 integration example",,False
+13,"Methyl acetate, whose two proton environments give two signals",COC(C)=O,"Methyl acetate, whose two proton environments give two signals","Methyl acetate, whose two proton environments give two signals",,False
+13,"Methyl propanoate, the isomer whose quartet sits at δ 2.3",CCC(=O)OC,"Methyl propanoate, the isomer whose quartet sits at δ 2.3","Methyl propanoate, the isomer whose quartet sits at δ 2.3",,False
+13,"p-Xylene, ten hydrogens condensed into two signals",Cc1ccc(C)cc1,"p-Xylene, ten hydrogens condensed into two signals","p-Xylene, ten hydrogens condensed into two signals",,False
+13,"Propanal, whose aldehyde proton absorbs near δ 9.8",CCC=O,"Propanal, whose aldehyde proton absorbs near δ 9.8","Propanal, whose aldehyde proton absorbs near δ 9.8",,False
+13,"Tetramethylsilane (TMS), the 0 ppm reference",C[Si](C)(C)C,"Tetramethylsilane (TMS), the 0 ppm reference","TMS | Tetramethylsilane (TMS), the 0 ppm reference | Tetramethylsilane , the 0 ppm reference",TMS,True
+14,"(3E)-Hexa-1,3,5-triene, an extended conjugated system",C=C/C=C/C=C,"(3E)-Hexa-1,3,5-triene, an extended conjugated system","(3E)-Hexa-1,3,5-triene, an extended conjugated system",,False
+14,"(E)-1-Bromobut-2-ene, the 1,4-addition product",C/C=C/CBr,"(E)-1-Bromobut-2-ene, the 1,4-addition product","(E)-1-Bromobut-2-ene, the 1,4-addition product",,False
+14,"3-Bromobut-1-ene, the 1,2-addition product",C=CC(C)Br,"3-Bromobut-1-ene, the 1,2-addition product","3-Bromobut-1-ene, the 1,2-addition product",,False
+14,"Buta-1,3-diene, the parent conjugated diene",C=CC=C,"Buta-1,3-diene, the parent conjugated diene","Buta-1,3-diene, the parent conjugated diene",,False
+14,"Cyclohexene, the parent Diels–Alder adduct",C1=CCCCC1,"Cyclohexene, the parent Diels–Alder adduct","Cyclohexene, the parent Diels-Alder adduct",,False
+14,"Cyclopenta-1,3-diene, a diene locked s-cis",C1=CCC=C1,"Cyclopenta-1,3-diene, a diene locked s-cis","Cyclopenta-1,3-diene, a diene locked s-cis",,False
+14,"Isoprene (2-methylbuta-1,3-diene)",C=CC(=C)C,"Isoprene (2-methylbuta-1,3-diene)","2-methylbuta-1,3-diene | Isoprene | Isoprene (2-methylbuta-1,3-diene)",Isoprene,True
+14,"Maleic anhydride, a highly reactive dienophile",O=C1C=CC(=O)O1,"Maleic anhydride, a highly reactive dienophile","Maleic anhydride, a highly reactive dienophile",,False
+14,"Penta-1,4-diene, an isolated diene",C=CCC=C,"Penta-1,4-diene, an isolated diene","Penta-1,4-diene, an isolated diene",,False
+14,"Propa-1,2-diene (allene), a cumulated diene",C=C=C,"Propa-1,2-diene (allene), a cumulated diene","Propa-1,2-diene (allene), a cumulated diene | Propa-1,2-diene , a cumulated diene | allene",allene,True
+14,"Propenal (acrolein), an activated dienophile",C=CC=O,"Propenal (acrolein), an activated dienophile","Propenal (acrolein), an activated dienophile | Propenal , an activated dienophile | acrolein",,False
+14,"β-Carotene, an eleven-fold conjugated polyene",CC1=C(/C=C/C(C)=C/C=C/C(C)=C/C=C/C=C(C)/C=C/C=C(C)/C=C/C2=C(C)C(C)(C)CCC2)C(C)(C)CCC1,"β-Carotene, an eleven-fold conjugated polyene","β-Carotene, an eleven-fold conjugated polyene",,False
+15,"Adenine, a fused aromatic heterocycle",Nc1ncnc2[nH]cnc12,"Adenine, a fused aromatic heterocycle","Adenine, a fused aromatic heterocycle",,False
+15,"Aniline, a retained parent name",Nc1ccccc1,"Aniline, a retained parent name","Aniline, a retained parent name",,False
+15,"Anthracene, three linearly fused rings",c1ccc2cc3ccccc3cc2c1,"Anthracene, three linearly fused rings","Anthracene, three linearly fused rings",,False
+15,"Benzene, the parent aromatic ring",c1ccccc1,"Benzene, the parent aromatic ring","Benzene, the parent aromatic ring",,False
+15,"Cyclobutadiene, an antiaromatic ring",C1=CC=C1,"Cyclobutadiene, an antiaromatic ring","Cyclobutadiene, an antiaromatic ring",,False
+15,"Cyclohepta-1,3,5-triene",C1=CC=CCC=C1,"Cyclohepta-1,3,5-triene","Cyclohepta-1,3,5-triene",,False
+15,"Cyclohexa-1,3-diene, the conjugated reference",C1=CCCC=C1,"Cyclohexa-1,3-diene, the conjugated reference","Cyclohexa-1,3-diene, the conjugated reference",,False
+15,"Cyclohexene, the one-double-bond reference",C1=CCCCC1,"Cyclohexene, the one-double-bond reference","Cyclohexene, the one-double-bond reference",,False
+15,"Cyclooctatetraene, a nonaromatic ring",C1=CC=CC=CC=C1,"Cyclooctatetraene, a nonaromatic ring","Cyclooctatetraene, a nonaromatic ring",,False
+15,"Cyclopenta-1,3-diene, the acidic hydrocarbon",C1=CCC=C1,"Cyclopenta-1,3-diene, the acidic hydrocarbon","Cyclopenta-1,3-diene, the acidic hydrocarbon",,False
+15,"Cyclopentadienyl anion, an aromatic ion",c1cc[cH-]c1,"Cyclopentadienyl anion, an aromatic ion","Cyclopentadienyl anion, an aromatic ion",,False
+15,"Cyclopropenyl cation, the smallest aromatic ion",c1c[cH+]1,"Cyclopropenyl cation, the smallest aromatic ion","Cyclopropenyl cation, the smallest aromatic ion",,False
+15,"Naphthalene, the simplest fused aromatic",c1ccc2ccccc2c1,"Naphthalene, the simplest fused aromatic","Naphthalene, the simplest fused aromatic",,False
+15,"Phenanthrene, three angularly fused rings",c1ccc2c(c1)ccc1ccccc12,"Phenanthrene, three angularly fused rings","Phenanthrene, three angularly fused rings",,False
+15,"Phenol, a retained parent name",Oc1ccccc1,"Phenol, a retained parent name","Phenol, a retained parent name",,False
+15,"Pyridine, a six-membered aromatic heterocycle",c1ccncc1,"Pyridine, a six-membered aromatic heterocycle","Pyridine, a six-membered aromatic heterocycle",,False
+15,"Pyrrole, a five-membered aromatic heterocycle",c1cc[nH]c1,"Pyrrole, a five-membered aromatic heterocycle","Pyrrole, a five-membered aromatic heterocycle",,False
+15,"Toluene, a retained parent name",Cc1ccccc1,"Toluene, a retained parent name","Toluene, a retained parent name",,False
+15,"Tropylium cation, an aromatic ion",c1ccc[cH+]cc1,"Tropylium cation, an aromatic ion","Tropylium cation, an aromatic ion",,False
+16,"1-Chloro-2,4-dinitrobenzene, an activated aryl halide",O=[N+]([O-])c1ccc(Cl)c([N+](=O)[O-])c1,"1-Chloro-2,4-dinitrobenzene, an activated aryl halide","1-Chloro-2,4-dinitrobenzene, an activated aryl halide",,False
+16,"Acetophenone, a Friedel–Crafts acylation product",CC(=O)c1ccccc1,"Acetophenone, a Friedel–Crafts acylation product","Acetophenone, a Friedel-Crafts acylation product",,False
+16,"Aniline, from reduction of nitrobenzene",Nc1ccccc1,"Aniline, from reduction of nitrobenzene","Aniline, from reduction of nitrobenzene",,False
+16,"Anisole, a strongly activated ring",COc1ccccc1,"Anisole, a strongly activated ring","Anisole, a strongly activated ring",,False
+16,Benzenesulfonic acid,O=S(=O)(O)c1ccccc1,Benzenesulfonic acid,Benzenesulfonic acid,Benzenesulfonic acid,True
+16,Benzoic acid,O=C(O)c1ccccc1,Benzoic acid,Benzoic acid,Benzoic acid,True
+16,"Benzyl bromide, from benzylic bromination",BrCc1ccccc1,"Benzyl bromide, from benzylic bromination","Benzyl bromide, from benzylic bromination",,False
+16,Benzyne,c1ccccc#1,Benzyne,Benzyne,Benzyne,True
+16,"Bromobenzene, the substitution product",Brc1ccccc1,"Bromobenzene, the substitution product","Bromobenzene, the substitution product",,False
+16,Chlorobenzene: deactivated yet ortho–para directed,Clc1ccccc1,Chlorobenzene: deactivated yet ortho–para directed,Chlorobenzene: deactivated yet ortho-para directed,,False
+16,Nitrobenzene,O=[N+]([O-])c1ccccc1,Nitrobenzene,Nitrobenzene,Nitrobenzene,True
+16,"p-Nitrotoluene, a directed product",Cc1ccc([N+](=O)[O-])cc1,"p-Nitrotoluene, a directed product","p-Nitrotoluene, a directed product",,False
+16,"tert-Butylbenzene, a rearrangement product",CC(C)(C)c1ccccc1,"tert-Butylbenzene, a rearrangement product","tert-Butylbenzene, a rearrangement product",,False
+16,The acetyl (acylium) cation,C[C+]=O,The acetyl (acylium) cation,The acetyl (acylium) cation | The acetyl cation | acylium,,False
+16,The arenium ion from bromination of benzene,BrC1C=CC=C[CH+]1,The arenium ion from bromination of benzene,The arenium ion from bromination of benzene,,False
+16,The Meisenheimer complex,O=[N+]([O-])C1=C[CH-]C(O)(Cl)C([N+](=O)[O-])=C1,The Meisenheimer complex,The Meisenheimer complex,,False
+16,"The nitronium ion, NO₂⁺",O=[N+]=O,"The nitronium ion, NO₂⁺","The nitronium ion, NO2+","The nitronium ion, NO2+",True
+16,The oxygen-stabilized arenium contributor (para attack on anisole),C[O+]=C1C=CC([N+](=O)[O-])C=C1,The oxygen-stabilized arenium contributor (para attack on anisole),The oxygen-stabilized arenium contributor | The oxygen-stabilized arenium contributor (para attack on anisole) | para attack on anisole,,False
+16,"Toluene, a weakly activated ring",Cc1ccccc1,"Toluene, a weakly activated ring","Toluene, a weakly activated ring",,False
+17,"2-Methyl-2-butanol, a tertiary alcohol",CCC(C)(C)O,"2-Methyl-2-butanol, a tertiary alcohol","2-Methyl-2-butanol, a tertiary alcohol",,False
+17,"Cyclohexanol, a secondary alcohol",OC1CCCCC1,"Cyclohexanol, a secondary alcohol","Cyclohexanol, a secondary alcohol",,False
+17,"Ethanol, a primary alcohol",CCO,"Ethanol, a primary alcohol","Ethanol, a primary alcohol",,False
+17,para-Benzoquinone,O=C1C=CC(=O)C=C1,para-Benzoquinone,para-Benzoquinone,,False
+17,para-Nitrophenol,O=[N+]([O-])c1ccc(O)cc1,para-Nitrophenol,para-Nitrophenol,,False
+17,Phenol,Oc1ccccc1,Phenol,Phenol,Phenol,True
+18,"1,2-Epoxycyclohexane (cyclohexene oxide)",C1CCC2OC2C1,"1,2-Epoxycyclohexane (cyclohexene oxide)","1,2-Epoxycyclohexane | 1,2-Epoxycyclohexane (cyclohexene oxide) | cyclohexene oxide","1,2-Epoxycyclohexane",True
+18,"1,4-Dioxane",C1COCCO1,"1,4-Dioxane","1,4-Dioxane",,False
+18,1-Methoxy-2-methyl-2-propanol (base-promoted product),COCC(C)(C)O,1-Methoxy-2-methyl-2-propanol (base-promoted product),1-Methoxy-2-methyl-2-propanol | 1-Methoxy-2-methyl-2-propanol (base-promoted product) | base-promoted product,,False
+18,18-Crown-6,C1COCCOCCOCCOCCOCCO1,18-Crown-6,18-Crown-6,18-Crown-6,True
+18,"2,2-Dimethyloxirane",CC1(C)CO1,"2,2-Dimethyloxirane","2,2-Dimethyloxirane",,False
+18,2-Methoxy-2-methyl-1-propanol (acid-catalyzed product),COC(C)(C)CO,2-Methoxy-2-methyl-1-propanol (acid-catalyzed product),2-Methoxy-2-methyl-1-propanol | 2-Methoxy-2-methyl-1-propanol (acid-catalyzed product) | acid-catalyzed product,,False
+18,Anisole (methoxybenzene),COc1ccccc1,Anisole (methoxybenzene),Anisole | Anisole (methoxybenzene) | methoxybenzene,Anisole,True
+18,Butyl methyl ether,CCCCOC,Butyl methyl ether,Butyl methyl ether,Butyl methyl ether,True
+18,"cis-2,3-Dimethyloxirane",C[C@@H]1O[C@@H]1C,"cis-2,3-Dimethyloxirane","cis-2,3-Dimethyloxirane",,False
+18,Diethyl ether,CCOCC,Diethyl ether,Diethyl ether,Diethyl ether,True
+18,Dimethyl disulfide,CSSC,Dimethyl disulfide,Dimethyl disulfide,,False
+18,Dimethyl sulfide,CSC,Dimethyl sulfide,Dimethyl sulfide,,False
+18,Dimethyl sulfone,CS(C)(=O)=O,Dimethyl sulfone,Dimethyl sulfone,,False
+18,Dimethyl sulfoxide (DMSO),CS(C)=O,Dimethyl sulfoxide (DMSO),DMSO | Dimethyl sulfoxide | Dimethyl sulfoxide (DMSO),DMSO | Dimethyl sulfoxide | Dimethyl sulfoxide (DMSO),True
+18,Ethanethiol,CCS,Ethanethiol,Ethanethiol,Ethanethiol,True
+18,Ethylene oxide (oxirane),C1CO1,Ethylene oxide (oxirane),Ethylene oxide | Ethylene oxide (oxirane) | oxirane,Ethylene oxide,True
+18,meta-Chloroperoxybenzoic acid (mCPBA),O=C(OO)c1cccc(Cl)c1,meta-Chloroperoxybenzoic acid (mCPBA),mCPBA | meta-Chloroperoxybenzoic acid | meta-Chloroperoxybenzoic acid (mCPBA),,False
+18,tert-Butyl methyl ether,COC(C)(C)C,tert-Butyl methyl ether,tert-Butyl methyl ether,tert-Butyl methyl ether,True
+18,Tetrahydrofuran (THF),C1CCOC1,Tetrahydrofuran (THF),THF | Tetrahydrofuran | Tetrahydrofuran (THF),THF | Tetrahydrofuran | Tetrahydrofuran (THF),True
+18,"trans-1,2-Cyclohexanediol",O[C@H]1CCCC[C@@H]1O,"trans-1,2-Cyclohexanediol","trans-1,2-Cyclohexanediol",,False
+18,Trimethylsulfonium ion,C[S+](C)C,Trimethylsulfonium ion,Trimethylsulfonium ion,,False
+19,1-Phenylethanol from benzaldehyde plus CH₃MgBr,CC(O)c1ccccc1,1-Phenylethanol from benzaldehyde plus CH₃MgBr,1-Phenylethanol from benzaldehyde plus CH3MgBr,,False
+19,"Acetaldehyde, the simplest common aldehyde",CC=O,"Acetaldehyde, the simplest common aldehyde","Acetaldehyde, the simplest common aldehyde",,False
+19,Acetone cyanohydrin,CC(C)(O)C#N,Acetone cyanohydrin,Acetone cyanohydrin,,False
+19,"Acetone, the simplest ketone",CC(C)=O,"Acetone, the simplest ketone","Acetone, the simplest ketone",,False
+19,"Benzaldehyde, a conjugated aromatic aldehyde",O=Cc1ccccc1,"Benzaldehyde, a conjugated aromatic aldehyde","Benzaldehyde, a conjugated aromatic aldehyde",,False
+19,"Benzoic acid, the oxidation product of benzaldehyde",O=C(O)c1ccccc1,"Benzoic acid, the oxidation product of benzaldehyde","Benzoic acid, the oxidation product of benzaldehyde",,False
+19,"Chloral hydrate, a stable gem-diol",OC(O)C(Cl)(Cl)Cl,"Chloral hydrate, a stable gem-diol","Chloral hydrate, a stable gem-diol",,False
+19,"Cyclohexanone, a cyclic ketone",O=C1CCCCC1,"Cyclohexanone, a cyclic ketone","Cyclohexanone, a cyclic ketone",,False
+19,"Methyl vinyl ketone, an alpha,beta-unsaturated ketone",C=CC(C)=O,"Methyl vinyl ketone, an alpha,beta-unsaturated ketone","Methyl vinyl ketone, an alpha,beta-unsaturated ketone",,False
+19,"Methylenecyclohexane, a Wittig product",C=C1CCCCC1,"Methylenecyclohexane, a Wittig product","Methylenecyclohexane, a Wittig product",,False
+19,The cyclic acetal of cyclohexanone and ethylene glycol,C1CCC2(CC1)OCCO2,The cyclic acetal of cyclohexanone and ethylene glycol,The cyclic acetal of cyclohexanone and ethylene glycol,,False
+19,The N-methylimine of cyclohexanone,CN=C1CCCCC1,The N-methylimine of cyclohexanone,The N-methylimine of cyclohexanone,,False
+19,The pyrrolidine enamine of cyclohexanone,C1=C(N2CCCC2)CCCC1,The pyrrolidine enamine of cyclohexanone,The pyrrolidine enamine of cyclohexanone,,False
+20,4-Methoxybenzoic acid,COc1ccc(C(=O)O)cc1,4-Methoxybenzoic acid,4-Methoxybenzoic acid,,False
+20,4-Nitrobenzoic acid,O=C(O)c1ccc([N+](=O)[O-])cc1,4-Nitrobenzoic acid,4-Nitrobenzoic acid,,False
+20,"Acetate ion, the conjugate base of acetic acid",CC(=O)[O-],"Acetate ion, the conjugate base of acetic acid","Acetate ion, the conjugate base of acetic acid",,False
+20,"Acetic acid, the parent carboxylic acid",CC(=O)O,"Acetic acid, the parent carboxylic acid","Acetic acid, the parent carboxylic acid",,False
+20,"Acetonitrile, the simplest common nitrile",CC#N,"Acetonitrile, the simplest common nitrile","Acetonitrile, the simplest common nitrile",,False
+20,"Acetophenone, from benzonitrile and a Grignard reagent",CC(=O)c1ccccc1,"Acetophenone, from benzonitrile and a Grignard reagent","Acetophenone, from benzonitrile and a Grignard reagent",,False
+20,"Benzoic acid, a carboxyl group on an aromatic ring",O=C(O)c1ccccc1,"Benzoic acid, a carboxyl group on an aromatic ring","Benzoic acid, a carboxyl group on an aromatic ring",,False
+20,Benzonitrile,N#Cc1ccccc1,Benzonitrile,Benzonitrile,,False
+20,"Butan-1-amine, the reduction product of butanenitrile",CCCCN,"Butan-1-amine, the reduction product of butanenitrile","Butan-1-amine, the reduction product of butanenitrile",,False
+20,Butanoic acid,CCCC(=O)O,Butanoic acid,Butanoic acid,Butanoic acid,True
+20,Chloroacetic acid,O=C(O)CCl,Chloroacetic acid,Chloroacetic acid,,False
+20,"Hexanedioic acid, a dicarboxylic acid",O=C(O)CCCCC(=O)O,"Hexanedioic acid, a dicarboxylic acid","Hexanedioic acid, a dicarboxylic acid",,False
+20,Pentanenitrile,CCCCC#N,Pentanenitrile,Pentanenitrile,,False
+20,"Pentanoic acid, the five-carbon product of a four-carbon halide",CCCCC(=O)O,"Pentanoic acid, the five-carbon product of a four-carbon halide","Pentanoic acid, the five-carbon product of a four-carbon halide",,False
+20,"Propanoic acid, a spectroscopic reference",CCC(=O)O,"Propanoic acid, a spectroscopic reference","Propanoic acid, a spectroscopic reference",,False
+20,"Sodium acetate, a carboxylate salt",CC(=O)[O-].[Na+],"Sodium acetate, a carboxylate salt","Sodium acetate, a carboxylate salt",,False
+20,"Toluene, the substrate for side-chain oxidation",Cc1ccccc1,"Toluene, the substrate for side-chain oxidation","Toluene, the substrate for side-chain oxidation",,False
+20,Trifluoroacetic acid,O=C(O)C(F)(F)F,Trifluoroacetic acid,Trifluoroacetic acid,Trifluoroacetic acid,True
+21,2-Phenylpropan-2-ol: the tertiary alcohol from an ester and a Grignard reagent,CC(C)(O)c1ccccc1,2-Phenylpropan-2-ol: the tertiary alcohol from an ester and a Grignard reagent,2-Phenylpropan-2-ol: the tertiary alcohol from an ester and a Grignard reagent,,False
+21,"Acetamide, a primary amide",CC(N)=O,"Acetamide, a primary amide","Acetamide, a primary amide",,False
+21,Acetic anhydride: two acyl groups sharing one oxygen,CC(=O)OC(C)=O,Acetic anhydride: two acyl groups sharing one oxygen,Acetic anhydride: two acyl groups sharing one oxygen,,False
+21,"Acetyl chloride, the most reactive derivative",CC(=O)Cl,"Acetyl chloride, the most reactive derivative","Acetyl chloride, the most reactive derivative",,False
+21,"Acetyl phosphate, the other biological activated acyl group",CC(=O)OP(=O)(O)O,"Acetyl phosphate, the other biological activated acyl group","Acetyl phosphate, the other biological activated acyl group",,False
+21,"Adipic acid, one half of nylon 66",O=C(O)CCCCC(=O)O,"Adipic acid, one half of nylon 66","Adipic acid, one half of nylon 66",,False
+21,Aspirin: an acetyl group delivered by an anhydride,CC(=O)Oc1ccccc1C(=O)O,Aspirin: an acetyl group delivered by an anhydride,Aspirin: an acetyl group delivered by an anhydride,,False
+21,Benzamide: hydrolysis and reduction of a primary amide,NC(=O)c1ccccc1,Benzamide: hydrolysis and reduction of a primary amide,Benzamide: hydrolysis and reduction of a primary amide,,False
+21,"Benzoic acid: the starting point, too low on the ladder to acylate an amine",O=C(O)c1ccccc1,"Benzoic acid: the starting point, too low on the ladder to acylate an amine","Benzoic acid: the starting point, too low on the ladder to acylate an amine",,False
+21,"Benzoyl chloride, the acylating agent for benzamides and benzoate esters",O=C(Cl)c1ccccc1,"Benzoyl chloride, the acylating agent for benzamides and benzoate esters","Benzoyl chloride, the acylating agent for benzamides and benzoate esters",,False
+21,Caprolactam: one monomer that carries both partners,O=C1CCCCCN1,Caprolactam: one monomer that carries both partners,Caprolactam: one monomer that carries both partners,,False
+21,"Hexane-1,6-diamine, the other half of nylon 66",NCCCCCCN,"Hexane-1,6-diamine, the other half of nylon 66","Hexane-1,6-diamine, the other half of nylon 66",,False
+21,"Methyl acetate, the reference ester",COC(C)=O,"Methyl acetate, the reference ester","Methyl acetate, the reference ester",,False
+21,Methyl propanoate: naming an ester from both of its parts,CCC(=O)OC,Methyl propanoate: naming an ester from both of its parts,Methyl propanoate: naming an ester from both of its parts,,False
+21,"N-Methylacetamide, a secondary amide",CNC(C)=O,"N-Methylacetamide, a secondary amide","N-Methylacetamide, a secondary amide",,False
+21,"N-Methylbenzamide: the target, reached by running back down the ladder",CNC(=O)c1ccccc1,"N-Methylbenzamide: the target, reached by running back down the ladder","N-Methylbenzamide: the target, reached by running back down the ladder",,False
+21,"S-Methyl thioacetate, a model thioester",CSC(C)=O,"S-Methyl thioacetate, a model thioester","S-Methyl thioacetate, a model thioester",,False
+21,Sodium stearate: the soap obtained by saponifying a fat,CCCCCCCCCCCCCCCCCC(=O)[O-].[Na+],Sodium stearate: the soap obtained by saponifying a fat,Sodium stearate: the soap obtained by saponifying a fat,,False
+21,Succinic anhydride: a cyclic anhydride whose leaving group cannot escape,O=C1CCC(=O)O1,Succinic anhydride: a cyclic anhydride whose leaving group cannot escape,Succinic anhydride: a cyclic anhydride whose leaving group cannot escape,,False
+21,"Terephthalic acid, the diacid of poly(ethylene terephthalate)",O=C(O)c1ccc(C(=O)O)cc1,"Terephthalic acid, the diacid of poly(ethylene terephthalate)","Terephthalic acid, the diacid of poly | Terephthalic acid, the diacid of poly(ethylene terephthalate)",,False
+21,The tetrahedral intermediate from methoxide and acetyl chloride,COC(C)([O-])Cl,The tetrahedral intermediate from methoxide and acetyl chloride,The tetrahedral intermediate from methoxide and acetyl chloride,,False
+21,"γ-Butyrolactone, a cyclic ester",O=C1CCCO1,"γ-Butyrolactone, a cyclic ester","γ-Butyrolactone, a cyclic ester",,False
+22,"2,4-Pentanedione: a doubly activated CH₂",CC(=O)CC(C)=O,"2,4-Pentanedione: a doubly activated CH₂","2,4-Pentanedione: a doubly activated CH2",,False
+22,2-Bromocyclohexanone: the monobromination product,O=C1CCCCC1Br,2-Bromocyclohexanone: the monobromination product,2-Bromocyclohexanone: the monobromination product,,False
+22,2-Bromopropanoic acid: a Hell-Volhard-Zelinskii product,CC(Br)C(=O)O,2-Bromopropanoic acid: a Hell-Volhard-Zelinskii product,2-Bromopropanoic acid: a Hell-Volhard-Zelinskii product,,False
+22,2-Methylcyclohexanone: two different alpha carbons,CC1CCCCC1=O,2-Methylcyclohexanone: two different alpha carbons,2-Methylcyclohexanone: two different alpha carbons,,False
+22,4-Phenyl-2-butanone: an acetoacetic ester synthesis product,CC(=O)CCc1ccccc1,4-Phenyl-2-butanone: an acetoacetic ester synthesis product,4-Phenyl-2-butanone: an acetoacetic ester synthesis product,,False
+22,Acetone: the keto tautomer,CC(C)=O,Acetone: the keto tautomer,Acetone: the keto tautomer,,False
+22,Acetophenone: a methyl ketone,CC(=O)c1ccccc1,Acetophenone: a methyl ketone,Acetophenone: a methyl ketone,,False
+22,Benzyl bromide: an ideal alkylating agent,BrCc1ccccc1,Benzyl bromide: an ideal alkylating agent,Benzyl bromide: an ideal alkylating agent,,False
+22,Cyclohex-2-enone: the elimination product,O=C1C=CCCC1,Cyclohex-2-enone: the elimination product,Cyclohex-2-enone: the elimination product,,False
+22,Diethyl malonate: two esters flanking one CH₂,CCOC(=O)CC(=O)OCC,Diethyl malonate: two esters flanking one CH₂,Diethyl malonate: two esters flanking one CH2,,False
+22,Ethyl acetate: a singly activated ester,CCOC(C)=O,Ethyl acetate: a singly activated ester,Ethyl acetate: a singly activated ester,,False
+22,Ethyl acetoacetate: ketone and ester on one carbon,CCOC(=O)CC(C)=O,Ethyl acetoacetate: ketone and ester on one carbon,Ethyl acetoacetate: ketone and ester on one carbon,,False
+22,Iodoform: the yellow precipitate,IC(I)I,Iodoform: the yellow precipitate,Iodoform: the yellow precipitate,,False
+22,Lithium diisopropylamide (LDA),CC(C)[N-]C(C)C.[Li+],Lithium diisopropylamide (LDA),LDA | Lithium diisopropylamide | Lithium diisopropylamide (LDA),LDA | Lithium diisopropylamide | Lithium diisopropylamide (LDA),True
+22,Pentanoic acid: a malonic ester synthesis product,CCCCC(=O)O,Pentanoic acid: a malonic ester synthesis product,Pentanoic acid: a malonic ester synthesis product,,False
+22,Prop-1-en-2-ol: the enol of acetone,C=C(C)O,Prop-1-en-2-ol: the enol of acetone,Prop-1-en-2-ol: the enol of acetone,,False
+22,"The enol of 2,4-pentanedione",CC(=O)C=C(C)O,"The enol of 2,4-pentanedione","The enol of 2,4-pentanedione",,False
+22,The enol of cyclohexanone,OC1=CCCCC1,The enol of cyclohexanone,The enol of cyclohexanone,,False
+22,"The enolate of acetone, drawn with the charge on oxygen",C=C(C)[O-],"The enolate of acetone, drawn with the charge on oxygen","The enolate of acetone, drawn with the charge on oxygen",,False
+22,The kinetic enolate of 2-methylcyclohexanone,CC1CCCC=C1[O-],The kinetic enolate of 2-methylcyclohexanone,The kinetic enolate of 2-methylcyclohexanone,,False
+22,The thermodynamic enolate of 2-methylcyclohexanone,CC1=C([O-])CCCC1,The thermodynamic enolate of 2-methylcyclohexanone,The thermodynamic enolate of 2-methylcyclohexanone,,False
+23,(E)-4-Phenylbut-3-en-2-one: a clean mixed aldol condensation product,CC(=O)/C=C/c1ccccc1,(E)-4-Phenylbut-3-en-2-one: a clean mixed aldol condensation product,(E)-4-Phenylbut-3-en-2-one: a clean mixed aldol condensation product,,False
+23,(E)-But-2-enal: the enone from dehydrating the acetaldehyde aldol,C/C=C/C=O,(E)-But-2-enal: the enone from dehydrating the acetaldehyde aldol,(E)-But-2-enal: the enone from dehydrating the acetaldehyde aldol,,False
+23,"1-(Cyclohex-1-en-1-yl)pyrrolidine: the enamine, a neutral enolate equivalent",C1=C(N2CCCC2)CCCC1,"1-(Cyclohex-1-en-1-yl)pyrrolidine: the enamine, a neutral enolate equivalent","1- pyrrolidine: the enamine, a neutral enolate equivalent | 1-(Cyclohex-1-en-1-yl)pyrrolidine: the enamine, a neutral enolate equivalent | Cyclohex-1-en-1-yl",,False
+23,2-(3-Oxobutyl)cyclohexan-1-one: the Stork product after hydrolysis,CC(=O)CCC1CCCCC1=O,2-(3-Oxobutyl)cyclohexan-1-one: the Stork product after hydrolysis,2- cyclohexan-1-one: the Stork product after hydrolysis | 2-(3-Oxobutyl)cyclohexan-1-one: the Stork product after hydrolysis | 3-Oxobutyl,,False
+23,"2-Methylcyclohexane-1,3-dione: a doubly activated Robinson donor",CC1C(=O)CCCC1=O,"2-Methylcyclohexane-1,3-dione: a doubly activated Robinson donor","2-Methylcyclohexane-1,3-dione: a doubly activated Robinson donor",,False
+23,3-Hydroxybutanal: the aldol product of acetaldehyde,CC(O)CC=O,3-Hydroxybutanal: the aldol product of acetaldehyde,3-Hydroxybutanal: the aldol product of acetaldehyde,,False
+23,3-Methylcyclohex-2-enone: the six-membered condensation product,CC1=CC(=O)CCC1,3-Methylcyclohex-2-enone: the six-membered condensation product,3-Methylcyclohex-2-enone: the six-membered condensation product,,False
+23,3-Methylcyclopent-2-enone: the five-membered condensation product,CC1=CC(=O)CC1,3-Methylcyclopent-2-enone: the five-membered condensation product,3-Methylcyclopent-2-enone: the five-membered condensation product,,False
+23,4-Hydroxy-4-methylpentan-2-one: the acetone aldol product,CC(=O)CC(C)(C)O,4-Hydroxy-4-methylpentan-2-one: the acetone aldol product,4-Hydroxy-4-methylpentan-2-one: the acetone aldol product,,False
+23,4-Methylpent-3-en-2-one: dehydration rescues the ketone condensation,CC(=O)C=C(C)C,4-Methylpent-3-en-2-one: dehydration rescues the ketone condensation,4-Methylpent-3-en-2-one: dehydration rescues the ketone condensation,,False
+23,Acetaldehyde: a partner that can play both roles,CC=O,Acetaldehyde: a partner that can play both roles,Acetaldehyde: a partner that can play both roles,,False
+23,Acetone: a ketone whose aldol equilibrium runs backward,CC(C)=O,Acetone: a ketone whose aldol equilibrium runs backward,Acetone: a ketone whose aldol equilibrium runs backward,,False
+23,Benzaldehyde: an acceptor that cannot compete as a donor,O=Cc1ccccc1,Benzaldehyde: an acceptor that cannot compete as a donor,Benzaldehyde: an acceptor that cannot compete as a donor,,False
+23,But-3-en-2-one (methyl vinyl ketone): a conjugate acceptor,C=CC(C)=O,But-3-en-2-one (methyl vinyl ketone): a conjugate acceptor,But-3-en-2-one (methyl vinyl ketone): a conjugate acceptor | But-3-en-2-one : a conjugate acceptor | methyl vinyl ketone,,False
+23,Cyclohexanone: the ketone that becomes an enamine,O=C1CCCCC1,Cyclohexanone: the ketone that becomes an enamine,Cyclohexanone: the ketone that becomes an enamine,,False
+23,"Diethyl hexanedioate: a 1,6-diester poised for five-membered closure",CCOC(=O)CCCCC(=O)OCC,"Diethyl hexanedioate: a 1,6-diester poised for five-membered closure","Diethyl hexanedioate: a 1,6-diester poised for five-membered closure",,False
+23,Diethyl malonate: the archetypal Michael donor,CCOC(=O)CC(=O)OCC,Diethyl malonate: the archetypal Michael donor,Diethyl malonate: the archetypal Michael donor,,False
+23,Ethyl 2-oxocyclopentane-1-carboxylate: the Dieckmann product,CCOC(=O)C1CCCC1=O,Ethyl 2-oxocyclopentane-1-carboxylate: the Dieckmann product,Ethyl 2-oxocyclopentane-1-carboxylate: the Dieckmann product,,False
+23,Ethyl acetate: an ester carries a leaving group its aldol counterpart lacks,CCOC(C)=O,Ethyl acetate: an ester carries a leaving group its aldol counterpart lacks,Ethyl acetate: an ester carries a leaving group its aldol counterpart lacks,,False
+23,Ethyl acetoacetate: the beta-keto ester from the Claisen condensation,CCOC(=O)CC(C)=O,Ethyl acetoacetate: the beta-keto ester from the Claisen condensation,Ethyl acetoacetate: the beta-keto ester from the Claisen condensation,,False
+23,"Heptane-2,6-dione: a 1,5-diketone that closes a six-membered ring",CC(=O)CCCC(C)=O,"Heptane-2,6-dione: a 1,5-diketone that closes a six-membered ring","Heptane-2,6-dione: a 1,5-diketone that closes a six-membered ring",,False
+23,"Hexane-2,5-dione: a 1,4-diketone that closes a five-membered ring",CC(=O)CCC(C)=O,"Hexane-2,5-dione: a 1,4-diketone that closes a five-membered ring","Hexane-2,5-dione: a 1,4-diketone that closes a five-membered ring",,False
+23,The acetaldehyde enolate: the donor half of every aldol,[CH2-]C=O,The acetaldehyde enolate: the donor half of every aldol,The acetaldehyde enolate: the donor half of every aldol,,False
+23,The bicyclic enone from the Robinson annulation,CC12CCC(=O)C=C1CCCC2=O,The bicyclic enone from the Robinson annulation,The bicyclic enone from the Robinson annulation,,False
+24,(sec-Butyl)trimethylammonium ion: the manufactured leaving group,CCC(C)[N+](C)(C)C,(sec-Butyl)trimethylammonium ion: the manufactured leaving group,(sec-Butyl)trimethylammonium ion: the manufactured leaving group | sec-Butyl | trimethylammonium ion: the manufactured leaving group,,False
+24,1-Butene: the Hofmann product,C=CCC,1-Butene: the Hofmann product,1-Butene: the Hofmann product,,False
+24,Acetamide: a nitrogen that is not a base,CC(N)=O,Acetamide: a nitrogen that is not a base,Acetamide: a nitrogen that is not a base,,False
+24,"Aniline: the parent arylamine, pKaH 4.6",Nc1ccccc1,"Aniline: the parent arylamine, pKaH 4.6","Aniline: the parent arylamine, pKaH 4.6",,False
+24,Benzenediazonium ion: nitrogen poised to leave,N#[N+]c1ccccc1,Benzenediazonium ion: nitrogen poised to leave,Benzenediazonium ion: nitrogen poised to leave,,False
+24,Benzonitrile: the Sandmeyer cyanation product,N#Cc1ccccc1,Benzonitrile: the Sandmeyer cyanation product,Benzonitrile: the Sandmeyer cyanation product,,False
+24,Butan-1-amine: the clean product of the masked-nitrogen routes,CCCCN,Butan-1-amine: the clean product of the masked-nitrogen routes,Butan-1-amine: the clean product of the masked-nitrogen routes,,False
+24,"Butyl azide: nitrogen installed, appetite gone",CCCCN=[N+]=[N-],"Butyl azide: nitrogen installed, appetite gone","Butyl azide: nitrogen installed, appetite gone",,False
+24,Cyclohexanone: the carbonyl partner in a reductive amination,O=C1CCCCC1,Cyclohexanone: the carbonyl partner in a reductive amination,Cyclohexanone: the carbonyl partner in a reductive amination,,False
+24,"Cyclohexylamine: an alkylamine benchmark, pKaH 10.7",NC1CCCCC1,"Cyclohexylamine: an alkylamine benchmark, pKaH 10.7","Cyclohexylamine: an alkylamine benchmark, pKaH 10.7",,False
+24,Histamine: an imidazole your immune system deploys,NCCc1c[nH]cn1,Histamine: an imidazole your immune system deploys,Histamine: an imidazole your immune system deploys,,False
+24,Imidazole: one nitrogen of each kind,c1c[nH]cn1,Imidazole: one nitrogen of each kind,Imidazole: one nitrogen of each kind,,False
+24,Methylamine: the simplest primary amine,CN,Methylamine: the simplest primary amine,Methylamine: the simplest primary amine,,False
+24,"N-Methylcyclohexylamine: cyclohexanone plus methylamine, reduced",CNC1CCCCC1,"N-Methylcyclohexylamine: cyclohexanone plus methylamine, reduced","N-Methylcyclohexylamine: cyclohexanone plus methylamine, reduced",,False
+24,Nitrobenzene: the gateway to every arylamine,O=[N+]([O-])c1ccccc1,Nitrobenzene: the gateway to every arylamine,Nitrobenzene: the gateway to every arylamine,,False
+24,p-(Phenyldiazenyl)phenol: an azo dye from diazonium coupling,Oc1ccc(/N=N/c2ccccc2)cc1,p-(Phenyldiazenyl)phenol: an azo dye from diazonium coupling,Phenyldiazenyl | p- phenol: an azo dye from diazonium coupling | p-(Phenyldiazenyl)phenol: an azo dye from diazonium coupling,,False
+24,p-Nitroaniline: an electron-withdrawing group deepens the discount,Nc1ccc([N+](=O)[O-])cc1,p-Nitroaniline: an electron-withdrawing group deepens the discount,p-Nitroaniline: an electron-withdrawing group deepens the discount,,False
+24,Phthalimide: the Gabriel synthesis' masked nitrogen,O=C1NC(=O)c2ccccc21,Phthalimide: the Gabriel synthesis' masked nitrogen,Phthalimide: the Gabriel synthesis' masked nitrogen,,False
+24,Pyridine: aromatic with the lone pair left over,c1ccncc1,Pyridine: aromatic with the lone pair left over,Pyridine: aromatic with the lone pair left over,,False
+24,Pyrrole: the lone pair belongs to the ring,c1cc[nH]c1,Pyrrole: the lone pair belongs to the ring,Pyrrole: the lone pair belongs to the ring,,False
+24,Quinoline: pyridine wearing a benzo ring,c1ccc2ncccc2c1,Quinoline: pyridine wearing a benzo ring,Quinoline: pyridine wearing a benzo ring,,False
+24,sec-Butylamine: the Hofmann elimination's starting amine,CCC(C)N,sec-Butylamine: the Hofmann elimination's starting amine,sec-Butylamine: the Hofmann elimination's starting amine,,False
+24,tert-Butylamine: a primary amine on a tertiary carbon,CC(C)(C)N,tert-Butylamine: a primary amine on a tertiary carbon,tert-Butylamine: a primary amine on a tertiary carbon,,False
+24,"Tetramethylammonium ion: quaternary, charged, and not an amine",C[N+](C)(C)C,"Tetramethylammonium ion: quaternary, charged, and not an amine","Tetramethylammonium ion: quaternary, charged, and not an amine",,False
+24,Triethylamine: a tertiary amine,CCN(CC)CC,Triethylamine: a tertiary amine,Triethylamine: a tertiary amine,,False
+25,2-Deoxy-D-ribose,O=CC[C@H](O)[C@H](O)CO,2-Deoxy-D-ribose,2-Deoxy-D-ribose,,False
+25,5-Hydroxypentanal: a sugar-free model of ring closure,O=CCCCCO,5-Hydroxypentanal: a sugar-free model of ring closure,5-Hydroxypentanal: a sugar-free model of ring closure,,False
+25,"Cellobiose: the same two sugars, a β-1,4 linkage",OC[C@H]1O[C@@H](O[C@H]2[C@H](O)[C@@H](O)[C@H](O)O[C@@H]2CO)[C@H](O)[C@@H](O)[C@@H]1O,"Cellobiose: the same two sugars, a β-1,4 linkage","Cellobiose: the same two sugars, a β-1,4 linkage",,False
+25,D-Erythrose: both hydroxyls on the right,O=C[C@H](O)[C@H](O)CO,D-Erythrose: both hydroxyls on the right,D-Erythrose: both hydroxyls on the right,,False
+25,"D-Fructose, open-chain form: a ketohexose",O=C(CO)[C@@H](O)[C@H](O)[C@H](O)CO,"D-Fructose, open-chain form: a ketohexose","D-Fructose, open-chain form: a ketohexose",,False
+25,D-Galactose: the C4 epimer of D-glucose,O=C[C@H](O)[C@@H](O)[C@@H](O)[C@H](O)CO,D-Galactose: the C4 epimer of D-glucose,D-Galactose: the C4 epimer of D-glucose,,False
+25,D-Glucaric acid: the aldaric acid from oxidizing both ends,O=C(O)[C@@H](O)[C@@H](O)[C@H](O)[C@@H](O)C(=O)O,D-Glucaric acid: the aldaric acid from oxidizing both ends,D-Glucaric acid: the aldaric acid from oxidizing both ends,,False
+25,D-Glucitol (sorbitol): the alditol from reducing D-glucose,OC[C@@H](O)[C@@H](O)[C@H](O)[C@@H](O)CO,D-Glucitol (sorbitol): the alditol from reducing D-glucose,D-Glucitol (sorbitol): the alditol from reducing D-glucose | D-Glucitol : the alditol from reducing D-glucose | sorbitol,sorbitol,True
+25,D-Gluconic acid: the aldonic acid from oxidizing C1,O=C(O)[C@H](O)[C@@H](O)[C@H](O)[C@H](O)CO,D-Gluconic acid: the aldonic acid from oxidizing C1,D-Gluconic acid: the aldonic acid from oxidizing C1,,False
+25,"D-Glucose, open-chain form: the reference aldohexose",O=C[C@H](O)[C@@H](O)[C@H](O)[C@H](O)CO,"D-Glucose, open-chain form: the reference aldohexose","D-Glucose, open-chain form: the reference aldohexose",,False
+25,D-Glyceraldehyde: the smallest chiral aldose,O=C[C@H](O)CO,D-Glyceraldehyde: the smallest chiral aldose,D-Glyceraldehyde: the smallest chiral aldose,,False
+25,D-Mannose: the C2 epimer of D-glucose,O=C[C@@H](O)[C@@H](O)[C@H](O)[C@H](O)CO,D-Mannose: the C2 epimer of D-glucose,D-Mannose: the C2 epimer of D-glucose,,False
+25,D-Threose: the C2 epimer of D-erythrose,O=C[C@@H](O)[C@H](O)CO,D-Threose: the C2 epimer of D-erythrose,D-Threose: the C2 epimer of D-erythrose,,False
+25,Dihydroxyacetone: the achiral ketotriose,O=C(CO)CO,Dihydroxyacetone: the achiral ketotriose,Dihydroxyacetone: the achiral ketotriose,,False
+25,L-Glucose: every stereocenter inverted,O=C[C@@H](O)[C@H](O)[C@@H](O)[C@@H](O)CO,L-Glucose: every stereocenter inverted,L-Glucose: every stereocenter inverted,,False
+25,L-Glyceraldehyde: the mirror image reference,O=C[C@@H](O)CO,L-Glyceraldehyde: the mirror image reference,L-Glyceraldehyde: the mirror image reference,,False
+25,"Lactose: a β-1,4 linkage between galactose and glucose",OC[C@H]1O[C@@H](O[C@H]2[C@H](O)[C@@H](O)[C@H](O)O[C@@H]2CO)[C@H](O)[C@@H](O)[C@H]1O,"Lactose: a β-1,4 linkage between galactose and glucose","Lactose: a β-1,4 linkage between galactose and glucose",,False
+25,"Maltose: an α-1,4 linked glucose dimer",OC[C@H]1O[C@H](O[C@H]2[C@H](O)[C@@H](O)[C@H](O)O[C@@H]2CO)[C@H](O)[C@@H](O)[C@@H]1O,"Maltose: an α-1,4 linked glucose dimer","Maltose: an α-1,4 linked glucose dimer",,False
+25,Methyl α-D-glucopyranoside,CO[C@H]1O[C@H](CO)[C@@H](O)[C@H](O)[C@H]1O,Methyl α-D-glucopyranoside,Methyl α-D-glucopyranoside,,False
+25,Methyl β-D-glucopyranoside,CO[C@@H]1O[C@H](CO)[C@@H](O)[C@H](O)[C@H]1O,Methyl β-D-glucopyranoside,Methyl β-D-glucopyranoside,,False
+25,Sucrose: both anomeric carbons committed,OC[C@H]1O[C@@](CO)(O[C@H]2O[C@H](CO)[C@@H](O)[C@H](O)[C@H]2O)[C@@H](O)[C@@H]1O,Sucrose: both anomeric carbons committed,Sucrose: both anomeric carbons committed,,False
+25,The cyclic hemiacetal of 5-hydroxypentanal,OC1CCCCO1,The cyclic hemiacetal of 5-hydroxypentanal,The cyclic hemiacetal of 5-hydroxypentanal,,False
+25,The D-gluco cyanohydrin: the Kiliani–Fischer intermediate,N#C[C@H](O)[C@@H](O)[C@H](O)[C@H](O)CO,The D-gluco cyanohydrin: the Kiliani–Fischer intermediate,The D-gluco cyanohydrin: the Kiliani-Fischer intermediate,,False
+25,α-D-Glucopyranose,OC[C@H]1O[C@H](O)[C@H](O)[C@@H](O)[C@@H]1O,α-D-Glucopyranose,α-D-Glucopyranose,α-D-Glucopyranose,True
+25,α-D-Mannopyranose,OC[C@H]1O[C@H](O)[C@@H](O)[C@@H](O)[C@@H]1O,α-D-Mannopyranose,α-D-Mannopyranose,,False
+25,β-D-Fructofuranose,OC[C@H]1O[C@](O)(CO)[C@@H](O)[C@@H]1O,β-D-Fructofuranose,β-D-Fructofuranose,,False
+25,β-D-Galactopyranose,OC[C@H]1O[C@@H](O)[C@H](O)[C@@H](O)[C@H]1O,β-D-Galactopyranose,β-D-Galactopyranose,β-D-Galactopyranose,True
+25,β-D-Glucopyranose,OC[C@H]1O[C@@H](O)[C@H](O)[C@@H](O)[C@@H]1O,β-D-Glucopyranose,β-D-Glucopyranose,β-D-Glucopyranose,True
+25,β-D-Ribofuranose,OC[C@H]1O[C@@H](O)[C@H](O)[C@@H]1O,β-D-Ribofuranose,β-D-Ribofuranose,β-D-Ribofuranose,True
+25,β-D-Xylopyranose,O[C@@H]1[C@@H](O)[C@H](O)OC[C@H]1O,β-D-Xylopyranose,β-D-Xylopyranose,,False
+26,2-Aminopropanenitrile: the Strecker intermediate,CC(N)C#N,2-Aminopropanenitrile: the Strecker intermediate,2-Aminopropanenitrile: the Strecker intermediate,,False
+26,2-Bromopropanoic acid: the Hell-Volhard-Zelinskii product,CC(Br)C(=O)O,2-Bromopropanoic acid: the Hell-Volhard-Zelinskii product,2-Bromopropanoic acid: the Hell-Volhard-Zelinskii product,,False
+26,Ala-Gly: alanine at the N-terminus,C[C@H](N)C(=O)NCC(=O)O,Ala-Gly: alanine at the N-terminus,Ala-Gly: alanine at the N-terminus,,False
+26,Aspartate above pH 10: the alpha-ammonium group deprotonated too,N[C@@H](CC(=O)[O-])C(=O)[O-],Aspartate above pH 10: the alpha-ammonium group deprotonated too,Aspartate above pH 10: the alpha-ammonium group deprotonated too,,False
+26,Boc-glycine: an amino group protected as a carbamate,CC(C)(C)OC(=O)NCC(=O)O,Boc-glycine: an amino group protected as a carbamate,Boc-glycine: an amino group protected as a carbamate,,False
+26,Cystine: two cysteines joined by a disulfide,N[C@@H](CSSC[C@H](N)C(=O)O)C(=O)O,Cystine: two cysteines joined by a disulfide,Cystine: two cysteines joined by a disulfide,,False
+26,DCC: the carbodiimide that activates the carboxyl,C(=NC1CCCCC1)=NC1CCCCC1,DCC: the carbodiimide that activates the carboxyl,DCC: the carbodiimide that activates the carboxyl,,False
+26,Diethyl acetamidomalonate: the amidomalonate reagent,CCOC(=O)C(NC(C)=O)C(=O)OCC,Diethyl acetamidomalonate: the amidomalonate reagent,Diethyl acetamidomalonate: the amidomalonate reagent,,False
+26,Fmoc-glycine: the base-labile alternative,O=C(O)CNC(=O)OCC1c2ccccc2-c2ccccc21,Fmoc-glycine: the base-labile alternative,Fmoc-glycine: the base-labile alternative,,False
+26,"Gly-Ala: the other order, a different compound",C[C@H](NC(=O)CN)C(=O)O,"Gly-Ala: the other order, a different compound","Gly-Ala: the other order, a different compound",,False
+26,Glycine at high pH: the anion,NCC(=O)[O-],Glycine at high pH: the anion,Glycine at high pH: the anion,,False
+26,Glycine at low pH: the cation,[NH3+]CC(=O)O,Glycine at low pH: the cation,Glycine at low pH: the cation,,False
+26,Glycine near neutral pH: the zwitterion,[NH3+]CC(=O)[O-],Glycine near neutral pH: the zwitterion,Glycine near neutral pH: the zwitterion,,False
+26,Glycine: the one achiral standard amino acid,NCC(=O)O,Glycine: the one achiral standard amino acid,Glycine: the one achiral standard amino acid,,False
+26,L-Alanine as it exists in water,C[C@H]([NH3+])C(=O)[O-],L-Alanine as it exists in water,L-Alanine as it exists in water,,False
+26,L-Alanine: the smallest chiral amino acid,C[C@H](N)C(=O)O,L-Alanine: the smallest chiral amino acid,L-Alanine: the smallest chiral amino acid,,False
+26,L-Aspartic acid: an acidic side chain,N[C@@H](CC(=O)O)C(=O)O,L-Aspartic acid: an acidic side chain,L-Aspartic acid: an acidic side chain,,False
+26,L-Cysteine: the L-amino acid whose CIP descriptor is R,N[C@@H](CS)C(=O)O,L-Cysteine: the L-amino acid whose CIP descriptor is R,L-Cysteine: the L-amino acid whose CIP descriptor is R,,False
+26,L-Glutamic acid: one CH₂ longer than aspartic acid,N[C@@H](CCC(=O)O)C(=O)O,L-Glutamic acid: one CH₂ longer than aspartic acid,L-Glutamic acid: one CH2 longer than aspartic acid,,False
+26,"L-Glutamine: an amide side chain, not an acid",NC(=O)CC[C@H](N)C(=O)O,"L-Glutamine: an amide side chain, not an acid","L-Glutamine: an amide side chain, not an acid",,False
+26,L-Histidine: the side chain that titrates near physiological pH,N[C@@H](Cc1c[nH]cn1)C(=O)O,L-Histidine: the side chain that titrates near physiological pH,L-Histidine: the side chain that titrates near physiological pH,,False
+26,L-Isoleucine: the other two-stereocenter residue,CC[C@H](C)[C@H](N)C(=O)O,L-Isoleucine: the other two-stereocenter residue,L-Isoleucine: the other two-stereocenter residue,,False
+26,L-Lysine: a basic side chain that is protonated at pH 7,NCCCC[C@H](N)C(=O)O,L-Lysine: a basic side chain that is protonated at pH 7,L-Lysine: a basic side chain that is protonated at pH 7,,False
+26,"L-Phenylalanine: an aromatic, hydrophobic side chain",N[C@@H](Cc1ccccc1)C(=O)O,"L-Phenylalanine: an aromatic, hydrophobic side chain","L-Phenylalanine: an aromatic, hydrophobic side chain",,False
+26,"L-Proline: a secondary amine, and a helix breaker",O=C(O)[C@@H]1CCCN1,"L-Proline: a secondary amine, and a helix breaker","L-Proline: a secondary amine, and a helix breaker",,False
+26,L-Serine: a polar side chain that can hydrogen bond,N[C@@H](CO)C(=O)O,L-Serine: a polar side chain that can hydrogen bond,L-Serine: a polar side chain that can hydrogen bond,,False
+26,"L-Threonine: two stereocenters, not one",C[C@@H](O)[C@H](N)C(=O)O,"L-Threonine: two stereocenters, not one","L-Threonine: two stereocenters, not one",,False
+26,"L-Tryptophan: the largest side chain, and the one hydrolysis destroys",N[C@@H](Cc1c[nH]c2ccccc12)C(=O)O,"L-Tryptophan: the largest side chain, and the one hydrolysis destroys","L-Tryptophan: the largest side chain, and the one hydrolysis destroys",,False
+26,L-Valine: a branched hydrophobic side chain,CC(C)[C@H](N)C(=O)O,L-Valine: a branched hydrophobic side chain,L-Valine: a branched hydrophobic side chain,,False
+26,Lysine at low pH: both nitrogens protonated,[NH3+]CCCC[C@H]([NH3+])C(=O)O,Lysine at low pH: both nitrogens protonated,Lysine at low pH: both nitrogens protonated,,False
+26,Phenyl isothiocyanate: the Edman reagent,S=C=Nc1ccccc1,Phenyl isothiocyanate: the Edman reagent,Phenyl isothiocyanate: the Edman reagent,,False
+26,PTH-alanine: what one Edman cycle releases,C[C@@H]1NC(=S)N(c2ccccc2)C1=O,PTH-alanine: what one Edman cycle releases,PTH-alanine: what one Edman cycle releases,,False
+27,"alpha-Linolenic acid (18:3 cis,cis,cis-delta-9,12,15)",CC/C=C\C/C=C\C/C=C\CCCCCCCC(=O)O,"alpha-Linolenic acid (18:3 cis,cis,cis-delta-9,12,15)","18:3 cis,cis,cis-delta-9,12,15 | alpha-Linolenic acid | alpha-Linolenic acid (18:3 cis,cis,cis-delta-9,12,15)",,False
+27,"alpha-Pinene, a bicyclic monoterpene",CC1=CC[C@H]2C[C@@H]1C2(C)C,"alpha-Pinene, a bicyclic monoterpene","alpha-Pinene, a bicyclic monoterpene",,False
+27,"Arachidonic acid (20:4 delta-5,8,11,14)",CCCCC/C=C\C/C=C\C/C=C\C/C=C\CCCC(=O)O,"Arachidonic acid (20:4 delta-5,8,11,14)","20:4 delta-5,8,11,14 | Arachidonic acid | Arachidonic acid (20:4 delta-5,8,11,14)",Arachidonic acid,True
+27,Aspirin (acetylsalicylic acid),CC(=O)Oc1ccccc1C(=O)O,Aspirin (acetylsalicylic acid),Aspirin | Aspirin (acetylsalicylic acid) | acetylsalicylic acid,,False
+27,"beta-Carotene, a tetraterpene",CC1=C(/C=C/C(C)=C/C=C/C(C)=C/C=C/C=C(C)/C=C/C=C(C)/C=C/C2=C(C)CCCC2(C)C)C(C)(C)CCC1,"beta-Carotene, a tetraterpene","beta-Carotene, a tetraterpene",,False
+27,Calcium stearate - hard-water scum,CCCCCCCCCCCCCCCCCC(=O)[O-].CCCCCCCCCCCCCCCCCC(=O)[O-].[Ca+2],Calcium stearate - hard-water scum,Calcium stearate - hard-water scum,,False
+27,"Cetyl palmitate, a wax",CCCCCCCCCCCCCCCCOC(=O)CCCCCCCCCCCCCCC,"Cetyl palmitate, a wax","Cetyl palmitate, a wax",,False
+27,Cholesterol,CC(C)CCC[C@@H](C)[C@H]1CC[C@H]2[C@@H]3CC=C4C[C@@H](O)CC[C@]4(C)[C@H]3CC[C@]12C,Cholesterol,Cholesterol,Cholesterol,True
+27,Elaidic acid (18:1 trans-delta-9),CCCCCCCC/C=C/CCCCCCCC(=O)O,Elaidic acid (18:1 trans-delta-9),18:1 trans-delta-9 | Elaidic acid | Elaidic acid (18:1 trans-delta-9),Elaidic acid,True
+27,Estradiol,C[C@]12CC[C@@H]3c4ccc(O)cc4CC[C@H]3[C@@H]1CC[C@@H]2O,Estradiol,Estradiol,Estradiol,True
+27,"Farnesol, a sesquiterpene",CC(C)=CCC/C(C)=C/CC/C(C)=C/CO,"Farnesol, a sesquiterpene","Farnesol, a sesquiterpene",,False
+27,"Glycerol (propane-1,2,3-triol)",OCC(O)CO,"Glycerol (propane-1,2,3-triol)","Glycerol | Glycerol (propane-1,2,3-triol) | propane-1,2,3-triol",Glycerol,True
+27,Ibuprofen,CC(C)Cc1ccc(C(C)C(=O)O)cc1,Ibuprofen,Ibuprofen,,False
+27,"Isoprene (2-methyl-1,3-butadiene)",C=CC(=C)C,"Isoprene (2-methyl-1,3-butadiene)","2-methyl-1,3-butadiene | Isoprene | Isoprene (2-methyl-1,3-butadiene)",,False
+27,"Limonene, a cyclic monoterpene",C=C(C)[C@H]1CC=C(C)CC1,"Limonene, a cyclic monoterpene","Limonene, a cyclic monoterpene",,False
+27,"Linoleic acid (18:2 cis,cis-delta-9,12)",CCCCC/C=C\C/C=C\CCCCCCCC(=O)O,"Linoleic acid (18:2 cis,cis-delta-9,12)","18:2 cis,cis-delta-9,12 | Linoleic acid | Linoleic acid (18:2 cis,cis-delta-9,12)",Linoleic acid,True
+27,"Myrcene, an acyclic monoterpene",C=CC(=C)CCC=C(C)C,"Myrcene, an acyclic monoterpene","Myrcene, an acyclic monoterpene",,False
+27,Oleic acid (18:1 cis-delta-9),CCCCCCCC/C=C\CCCCCCCC(=O)O,Oleic acid (18:1 cis-delta-9),18:1 cis-delta-9 | Oleic acid | Oleic acid (18:1 cis-delta-9),Oleic acid,True
+27,Palmitic acid (16:0),CCCCCCCCCCCCCCCC(=O)O,Palmitic acid (16:0),16:0 | Palmitic acid | Palmitic acid (16:0),Palmitic acid,True
+27,Phosphatidylcholine (dipalmitoyl),CCCCCCCCCCCCCCCC(=O)OC[C@H](COP(=O)([O-])OCC[N+](C)(C)C)OC(=O)CCCCCCCCCCCCCCC,Phosphatidylcholine (dipalmitoyl),Phosphatidylcholine | Phosphatidylcholine (dipalmitoyl) | dipalmitoyl,Phosphatidylcholine,True
+27,Phosphatidylethanolamine,CCCCCCCCCCCCCCCC(=O)OC[C@H](COP(=O)([O-])OCC[NH3+])OC(=O)CCCCCCCCCCCCCCC,Phosphatidylethanolamine,Phosphatidylethanolamine,Phosphatidylethanolamine,True
+27,Prostaglandin E2,CCCCC[C@H](O)/C=C/[C@H]1[C@H](O)CC(=O)[C@@H]1C/C=C\CCCC(=O)O,Prostaglandin E2,Prostaglandin E2,Prostaglandin E2,True
+27,Sphingomyelin,CCCCCCCCCCCCC/C=C/[C@@H](O)[C@H](COP(=O)([O-])OCC[N+](C)(C)C)NC(=O)CCCCCCCCCCCCCCC,Sphingomyelin,Sphingomyelin,,False
+27,Sphingosine,CCCCCCCCCCCCC/C=C/[C@@H](O)[C@@H](N)CO,Sphingosine,Sphingosine,Sphingosine,True
+27,"Squalene, the triterpene that becomes cholesterol",CC(C)=CCC/C(C)=C/CC/C(C)=C/CC/C=C(\C)CC/C=C(\C)CCC=C(C)C,"Squalene, the triterpene that becomes cholesterol","Squalene, the triterpene that becomes cholesterol",,False
+27,"Stearate ion, a soap",CCCCCCCCCCCCCCCCCC(=O)[O-],"Stearate ion, a soap","Stearate ion, a soap",,False
+27,Stearic acid (18:0),CCCCCCCCCCCCCCCCCC(=O)O,Stearic acid (18:0),18:0 | Stearic acid | Stearic acid (18:0),Stearic acid,True
+27,Testosterone,C[C@]12CC[C@H]3[C@@H](CCC4=CC(=O)CC[C@@]43C)[C@@H]1CC[C@@H]2O,Testosterone,Testosterone,Testosterone,True
+27,trans-Decalin: the locked case,C1CC[C@H]2CCCC[C@@H]2C1,trans-Decalin: the locked case,trans-Decalin: the locked case,,False
+27,"Tributyrin, a short-chain triacylglycerol",CCCC(=O)OCC(COC(=O)CCC)OC(=O)CCC,"Tributyrin, a short-chain triacylglycerol","Tributyrin, a short-chain triacylglycerol",,False
+27,"Triolein, the triacylglycerol of oleic acid",CCCCCCCC/C=C\CCCCCCCC(=O)OCC(COC(=O)CCCCCCC/C=C\CCCCCCCC)OC(=O)CCCCCCC/C=C\CCCCCCCC,"Triolein, the triacylglycerol of oleic acid","Triolein, the triacylglycerol of oleic acid",,False
+27,"Tristearin, a simple triacylglycerol",CCCCCCCCCCCCCCCCCC(=O)OCC(COC(=O)CCCCCCCCCCCCCCCCC)OC(=O)CCCCCCCCCCCCCCCCC,"Tristearin, a simple triacylglycerol","Tristearin, a simple triacylglycerol",,False
+28,"2',3'-Dideoxyadenosine, the sequencing terminator",Nc1ncnc2c1ncn2[C@H]1CC[C@@H](CO)O1,"2',3'-Dideoxyadenosine, the sequencing terminator","2',3'-Dideoxyadenosine, the sequencing terminator",,False
+28,"2'-Deoxyadenosine 5'-monophosphate, a nucleotide",Nc1ncnc2c1ncn2[C@H]1C[C@H](O)[C@@H](COP(=O)(O)O)O1,"2'-Deoxyadenosine 5'-monophosphate, a nucleotide","2'-Deoxyadenosine 5'-monophosphate, a nucleotide",,False
+28,"2'-Deoxyadenosine, the DNA nucleoside",Nc1ncnc2c1ncn2[C@H]1C[C@H](O)[C@@H](CO)O1,"2'-Deoxyadenosine, the DNA nucleoside","2'-Deoxyadenosine, the DNA nucleoside",,False
+28,"2-Deoxy-beta-D-ribofuranose, the DNA sugar",OC[C@H]1O[C@@H](O)C[C@@H]1O,"2-Deoxy-beta-D-ribofuranose, the DNA sugar","2-Deoxy-beta-D-ribofuranose, the DNA sugar",,False
+28,Acyclovir: guanine on an acyclic chain,Nc1nc2c(ncn2COCCO)c(=O)[nH]1,Acyclovir: guanine on an acyclic chain,Acyclovir: guanine on an acyclic chain,,False
+28,"Adenine, a purine base",Nc1ncnc2[nH]cnc12,"Adenine, a purine base","Adenine, a purine base",,False
+28,"Adenosine 5'-triphosphate: alpha, beta, and gamma phosphorus",Nc1ncnc2c1ncn2[C@@H]1O[C@H](COP(=O)(O)OP(=O)(O)OP(=O)(O)O)[C@@H](O)[C@H]1O,"Adenosine 5'-triphosphate: alpha, beta, and gamma phosphorus","Adenosine 5'-triphosphate: alpha, beta, and gamma phosphorus",,False
+28,Adenosine: a nucleoside with the beta-N-glycosidic bond,Nc1ncnc2c1ncn2[C@@H]1O[C@H](CO)[C@@H](O)[C@H]1O,Adenosine: a nucleoside with the beta-N-glycosidic bond,Adenosine: a nucleoside with the beta-N-glycosidic bond,,False
+28,"beta-D-Ribofuranose, the RNA sugar",OC[C@H]1O[C@@H](O)[C@H](O)[C@@H]1O,"beta-D-Ribofuranose, the RNA sugar","beta-D-Ribofuranose, the RNA sugar",,False
+28,"Cytidine, a ribonucleoside of a pyrimidine",Nc1ccn([C@@H]2O[C@H](CO)[C@@H](O)[C@H]2O)c(=O)n1,"Cytidine, a ribonucleoside of a pyrimidine","Cytidine, a ribonucleoside of a pyrimidine",,False
+28,"Cytosine, a pyrimidine base",Nc1cc[nH]c(=O)n1,"Cytosine, a pyrimidine base","Cytosine, a pyrimidine base",,False
+28,Guanine drawn as the minor lactim tautomer,Nc1nc(O)c2nc[nH]c2n1,Guanine drawn as the minor lactim tautomer,Guanine drawn as the minor lactim tautomer,,False
+28,Guanine in its lactam form,Nc1nc2[nH]cnc2c(=O)[nH]1,Guanine in its lactam form,Guanine in its lactam form,,False
+28,"Thymidine, showing pyrimidine attachment at N1",Cc1cn([C@H]2C[C@H](O)[C@@H](CO)O2)c(=O)[nH]c1=O,"Thymidine, showing pyrimidine attachment at N1","Thymidine, showing pyrimidine attachment at N1",,False
+28,"Thymine, the DNA pyrimidine",Cc1c[nH]c(=O)[nH]c1=O,"Thymine, the DNA pyrimidine","Thymine, the DNA pyrimidine",,False
+28,"Uracil, the RNA pyrimidine",O=c1cc[nH]c(=O)[nH]1,"Uracil, the RNA pyrimidine","Uracil, the RNA pyrimidine",,False
+28,"Uridine 2',3'-cyclic phosphate, the RNA cleavage intermediate",O=c1ccn([C@@H]2O[C@H](CO)[C@H]3OP(=O)(O)O[C@H]32)c(=O)[nH]1,"Uridine 2',3'-cyclic phosphate, the RNA cleavage intermediate","Uridine 2',3'-cyclic phosphate, the RNA cleavage intermediate",,False
+28,"Uridine, the RNA residue that carries the 2'-hydroxyl",O=c1ccn([C@@H]2O[C@H](CO)[C@@H](O)[C@H]2O)c(=O)[nH]1,"Uridine, the RNA residue that carries the 2'-hydroxyl","Uridine, the RNA residue that carries the 2'-hydroxyl",,False
+28,Zidovudine (AZT): azide in place of the 3'-hydroxyl,Cc1cn([C@H]2C[C@H](N=[N+]=[N-])[C@@H](CO)O2)c(=O)[nH]c1=O,Zidovudine (AZT): azide in place of the 3'-hydroxyl,AZT | Zidovudine (AZT): azide in place of the 3'-hydroxyl | Zidovudine : azide in place of the 3'-hydroxyl,,False
+29,Acetyl coenzyme A,CC(=O)SCCNC(=O)CCNC(=O)[C@H](O)C(C)(C)COP(=O)(O)OP(=O)(O)OC[C@H]1O[C@@H](n2cnc3c(N)ncnc32)[C@H](O)[C@@H]1OP(=O)(O)O,Acetyl coenzyme A,Acetyl coenzyme A,Acetyl coenzyme A,True
+29,Adenosine triphosphate,Nc1ncnc2c1ncn2[C@@H]1O[C@H](COP(=O)(O)OP(=O)(O)OP(=O)(O)O)[C@@H](O)[C@H]1O,Adenosine triphosphate,Adenosine triphosphate,Adenosine triphosphate,True
+29,"Flavin adenine dinucleotide, the oxidized form",Cc1cc2nc3c(=O)[nH]c(=O)nc-3n(C[C@H](O)[C@H](O)[C@H](O)COP(=O)(O)OP(=O)(O)OC[C@H]3O[C@@H](n4cnc5c(N)ncnc54)[C@H](O)[C@@H]3O)c2cc1C,"Flavin adenine dinucleotide, the oxidized form","Flavin adenine dinucleotide, the oxidized form",,False
+29,"Nicotinamide adenine dinucleotide, the oxidized form",NC(=O)c1ccc[n+]([C@@H]2O[C@H](COP(=O)([O-])OP(=O)(O)OC[C@H]3O[C@@H](n4cnc5c(N)ncnc54)[C@H](O)[C@@H]3O)[C@@H](O)[C@H]2O)c1,"Nicotinamide adenine dinucleotide, the oxidized form","Nicotinamide adenine dinucleotide, the oxidized form",,False
+29,"Palmitic acid, a typical saturated fatty acid",CCCCCCCCCCCCCCCC(=O)O,"Palmitic acid, a typical saturated fatty acid","Palmitic acid, a typical saturated fatty acid",,False
+29,Phosphoenolpyruvate,C=C(OP(=O)(O)O)C(=O)O,Phosphoenolpyruvate,Phosphoenolpyruvate,Phosphoenolpyruvate,True
+29,Pyridoxal 5'-phosphate,Cc1ncc(COP(=O)(O)O)c(C=O)c1O,Pyridoxal 5'-phosphate,Pyridoxal 5'-phosphate,,False
+29,Thiamine diphosphate,Cc1ncc(C[n+]2csc(CCOP(=O)(O)OP(=O)([O-])O)c2C)c(N)n1,Thiamine diphosphate,Thiamine diphosphate,,False
+30,"(2E,4E)-Hexa-2,4-diene",C/C=C/C=C/C,"(2E,4E)-Hexa-2,4-diene","(2E,4E)-Hexa-2,4-diene",,False
+30,"(2E,4Z)-Hexa-2,4-diene",C/C=C\C=C\C,"(2E,4Z)-Hexa-2,4-diene","(2E,4Z)-Hexa-2,4-diene",,False
+30,"(2E,4Z,6E)-Octa-2,4,6-triene",C/C=C/C=C\C=C\C,"(2E,4Z,6E)-Octa-2,4,6-triene","(2E,4Z,6E)-Octa-2,4,6-triene",,False
+30,"(3E)-Penta-1,3-diene",C=C/C=C/C,"(3E)-Penta-1,3-diene","(3E)-Penta-1,3-diene",,False
+30,"1,3-Butadiene",C=CC=C,"1,3-Butadiene","1,3-Butadiene","1,3-Butadiene",True
+30,2-Allylphenol,C=CCc1ccccc1O,2-Allylphenol,2-Allylphenol,,False
+30,"5-Methylcyclopenta-1,3-diene",CC1C=CC=C1,"5-Methylcyclopenta-1,3-diene","5-Methylcyclopenta-1,3-diene",,False
+30,7-Dehydrocholesterol (provitamin D3),CC(C)CCC[C@@H](C)[C@H]1CC[C@H]2C3=CC=C4C[C@@H](O)CC[C@]4(C)[C@H]3CC[C@]12C,7-Dehydrocholesterol (provitamin D3),7-Dehydrocholesterol | 7-Dehydrocholesterol (provitamin D3) | provitamin D3,7-Dehydrocholesterol,True
+30,Allyl vinyl ether,C=CCOC=C,Allyl vinyl ether,Allyl vinyl ether,,False
+30,Chorismate,C=C(O[C@@H]1C=C(C(=O)O)C=C[C@H]1O)C(=O)O,Chorismate,Chorismate,Chorismate,True
+30,"cis-3,4-Dimethylcyclobutene",C[C@@H]1C=C[C@@H]1C,"cis-3,4-Dimethylcyclobutene","cis-3,4-Dimethylcyclobutene","cis-3,4-Dimethylcyclobutene",True
+30,"cis-5,6-Dimethylcyclohexa-1,3-diene",C[C@@H]1C=CC=C[C@@H]1C,"cis-5,6-Dimethylcyclohexa-1,3-diene","cis-5,6-Dimethylcyclohexa-1,3-diene",,False
+30,Cyclobutene,C1=CCC1,Cyclobutene,Cyclobutene,Cyclobutene,True
+30,Cyclopentadiene,C1=CCC=C1,Cyclopentadiene,Cyclopentadiene,Cyclopentadiene,True
+30,Maleic anhydride,O=C1C=CC(=O)O1,Maleic anhydride,Maleic anhydride,,False
+30,Prephenate,O=C(O)C(=O)C[C@]1(C(=O)O)C=C[C@@H](O)C=C1,Prephenate,Prephenate,Prephenate,True
+30,Previtamin D3,CC1=C(/C=C\C2=CCC[C@]3(C)[C@@H]([C@H](C)CCCC(C)C)CC[C@@H]23)C[C@@H](O)CC1,Previtamin D3,Previtamin D3,,False
+30,The endo Diels–Alder adduct of cyclopentadiene and maleic anhydride,O=C1OC(=O)[C@H]2[C@@H]1[C@H]1C=C[C@@H]2C1,The endo Diels–Alder adduct of cyclopentadiene and maleic anhydride,The endo Diels-Alder adduct of cyclopentadiene and maleic anhydride,,False
+30,"trans-3,4-Dimethylcyclobutene",C[C@@H]1C=C[C@H]1C,"trans-3,4-Dimethylcyclobutene","trans-3,4-Dimethylcyclobutene","trans-3,4-Dimethylcyclobutene",True
+30,"trans-5,6-Dimethylcyclohexa-1,3-diene",C[C@@H]1C=CC=C[C@H]1C,"trans-5,6-Dimethylcyclohexa-1,3-diene","trans-5,6-Dimethylcyclohexa-1,3-diene",,False
+30,Vitamin D3 (cholecalciferol),C=C1CC[C@H](O)C/C1=C/C=C1\CCC[C@]2(C)[C@@H]([C@H](C)CCCC(C)C)CC[C@@H]12,Vitamin D3 (cholecalciferol),Vitamin D3 | Vitamin D3 (cholecalciferol) | cholecalciferol,Vitamin D3 | cholecalciferol,True
+31,"1,3-Butadiene",C=CC=C,"1,3-Butadiene","1,3-Butadiene","1,3-Butadiene",True
+31,Acrylonitrile,C=CC#N,Acrylonitrile,Acrylonitrile,Acrylonitrile,True
+31,"Adipic acid, a difunctional monomer",O=C(O)CCCCC(=O)O,"Adipic acid, a difunctional monomer","Adipic acid, a difunctional monomer",,False
+31,"AIBN, a radical initiator",CC(C)(C#N)/N=N/C(C)(C)C#N,"AIBN, a radical initiator","AIBN, a radical initiator",,False
+31,Bisphenol A,CC(C)(c1ccc(O)cc1)c1ccc(O)cc1,Bisphenol A,Bisphenol A,Bisphenol A,True
+31,Caprolactam,O=C1CCCCCN1,Caprolactam,Caprolactam,Caprolactam,True
+31,"cis-1,4-Polyisoprene, the structure of natural rubber",C/C=C(/C)CC/C=C(/C)CCC=C(C)C,"cis-1,4-Polyisoprene, the structure of natural rubber","cis-1,4-Polyisoprene, the structure of natural rubber",,False
+31,Ethylene glycol,OCCO,Ethylene glycol,Ethylene glycol,Ethylene glycol,True
+31,"Ethylene, the simplest monomer",C=C,"Ethylene, the simplest monomer","Ethylene, the simplest monomer",,False
+31,"Hexane-1,6-diamine, the partner monomer",NCCCCCCN,"Hexane-1,6-diamine, the partner monomer","Hexane-1,6-diamine, the partner monomer",,False
+31,Isobutylene,C=C(C)C,Isobutylene,Isobutylene,Isobutylene,True
+31,Isoprene,C=CC(=C)C,Isoprene,Isoprene,Isoprene,True
+31,"L-Lactide, the cyclic dimer of lactic acid",C[C@@H]1OC(=O)[C@H](C)OC1=O,"L-Lactide, the cyclic dimer of lactic acid","L-Lactide, the cyclic dimer of lactic acid",,False
+31,Methyl methacrylate,C=C(C)C(=O)OC,Methyl methacrylate,Methyl methacrylate,Methyl methacrylate,True
+31,"Norbornene, a strained cyclic alkene",C1=CC2CCC1C2,"Norbornene, a strained cyclic alkene","Norbornene, a strained cyclic alkene",,False
+31,Propylene,C=CC,Propylene,Propylene,Propylene,True
+31,Styrene,C=Cc1ccccc1,Styrene,Styrene,Styrene,True
+31,Terephthalic acid,O=C(O)c1ccc(C(=O)O)cc1,Terephthalic acid,Terephthalic acid,Terephthalic acid,True
+31,Tetrafluoroethylene,FC(F)=C(F)F,Tetrafluoroethylene,Tetrafluoroethylene,,False
+31,The tertiary carbocation at a growing cationic chain end,C[C+](C)C,The tertiary carbocation at a growing cationic chain end,The tertiary carbocation at a growing cationic chain end,,False
+31,Vinyl chloride,C=CCl,Vinyl chloride,Vinyl chloride,Vinyl chloride,True

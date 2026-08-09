@@ -1,0 +1,1457 @@
+{
+ "chapter_id": "biomolecules-nucleic-acids",
+ "chapter_version": "1",
+ "run_at": "2026-07-30T14:25:00Z",
+ "personas": [
+ {
+ "persona": "Organic Chemistry Instructor",
+ "persona_version": "1.0.0",
+ "chapter_id": "biomolecules-nucleic-acids",
+ "chapter_version": "1",
+ "model": "claude-opus-5",
+ "summary": "Chemically this is one of the strongest chapters I have reviewed. I independently re-parsed every SMILES in the package with RDKit: all 20 structures parse, and the InChIKeys of adenosine, 2'-deoxyadenosine, thymidine, cytidine, uridine, dAMP, ATP, zidovudine, acyclovir and the five free bases match the authentic compounds; beta-D-ribofuranose and 2-deoxy-beta-D-ribofuranose carry the same C1'/C3'/C4' configurations as the corresponding nucleosides, so the beta-anomeric and D-sugar claims are correct throughout; the dinucleotide really is dA(3'->5')dT with a free 5'-OH on the adenine residue and a free 3'-OH on the thymine residue; the uridine 2',3'-cyclic phosphate is a genuine cis-fused five-membered cyclic diester that embeds in 3D; the cAMP distractor in the RNA-cleavage question is a real 3',5'-cyclic phosphate; and both hotspot answer keys point at the chemically correct atom [redacted]. Base tautomers are uniformly the lactam form, donor/acceptor assignments along both pairing edges are right, N9/N1 attachment is right, 3'-to-5' directionality is right, the 2'-alkoxide/in-line/2',3'-cyclic-phosphate mechanism is right, and attack is correctly placed at the alpha phosphorus with pyrophosphate hydrolysis correctly identified as the driving force rather than the substitution itself. The prose repeatedly builds mechanistic 'why' rather than asserting outcomes, and the wrong-answer explanations are among the best in the corpus. My verdict is NOT-GO as it stands, for one narrow reason and a set of fixable gaps: the two strand-directionality questions name DNA residues as ribonucleosides ('the adenosine residue', 'the cytidine residue') inside the keyed-correct option, directly contradicting the rule the chapter itself teaches in its very first practice check, and one of their distractors places a 2'-oxygen on a DNA residue that cannot have one. Beyond that, the chapter never shows a base pair with its hydrogen bonds anywhere, never shows an arrow-pushing step for either of its two flagship mechanisms (all four video briefs are deferred with empty URLs), and the one figure in the advanced section compiles to an empty image. Fix the naming, and this is a go with those visual gaps scheduled.",
+ "overall_score": 7.8,
+ "publication_blockers": [
+ "instr-001"
+ ],
+ "findings": [
+ {
+ "finding_id": "instr-001",
+ "location": {
+ "question_slug": "ch28-strand-directionality",
+ "concept_slug": "phosphodiester-backbone",
+ "anchor_text": "The adenosine residue's 3'-oxygen is esterified to the linking phosphate"
+ },
+ "severity": "blocker",
+ "category": "chemical-accuracy",
+ "observation": "Both strand-directionality questions describe DNA residues using ribonucleoside names. In ch28-strand-directionality the strand is DNA, and both the keyed-correct option and a distractor misname the DNA residue with a ribonucleoside term ('adenosine' rather than '2'-deoxyadenosine'), and the distractor additionally describes a 2'-oxygen a DNA residue cannot have. In ch28-strand-directionality-v2 the same ribonucleoside-naming error recurs in the keyed-correct option. The correct compounds are 2'-deoxyadenosine and 2'-deoxycytidine. This contradicts the chapter's own teaching: the practice check on nugget-nucleoside-and-nucleotide-anatomy states explicitly that a cytidine residue 'could not appear in DNA, because the sugar is D-ribose and still carries a 2'-hydroxyl', and the parallel practice check on nugget-phosphodiester-backbone gets the same molecule right by writing 'the 2'-deoxyadenosine residue'.",
+ "learner_impact": "A student who answers correctly is shown a confirmation that names a compound the chapter has just told them cannot exist in DNA, so the single most important structural distinction in the chapter (ribose vs 2'-deoxyribose, concept 1) is undermined by the assessment that follows it. A student who has internalised the rule will read the keyed answer as wrong and lose confidence in the bank; a student who has not will learn the wrong name from an autograded item.",
+ "evidence": "ch28-strand-directionality options a and c ('The adenosine residue's 3'-oxygen...', 'The adenosine residue's 2'-oxygen...'); ch28-strand-directionality-v2 option a ('Only the cytidine residue, because it sits at the right-hand end...'); versus nugget-nucleoside-and-nucleotide-anatomy practice_check answer ('It could not appear in DNA, because the sugar is D-ribose and still carries a 2'-hydroxyl') and nugget-phosphodiester-backbone practice_check answer ('the 3'-hydroxyl of the 2'-deoxyadenosine residue').",
+ "recommended_outcome": "Every residue of a DNA strand must be named as the 2'-deoxy compound wherever the chapter names it, including inside option text and feedback, and the 2'-oxygen distractor needs to be either re-anchored on an RNA strand or replaced with a distractor that is possible for DNA, so that the assessment stops contradicting the chapter's own ribose/deoxyribose rule.",
+ "confidence": 0.94
+ },
+ {
+ "finding_id": "instr-002",
+ "location": {
+ "nugget_id": "nugget-base-pairing-and-hydrogen-bonding",
+ "concept_slug": "base-pairing-and-hydrogen-bonding",
+ "asset_id": "video-base-pairing"
+ },
+ "severity": "high",
+ "category": "visual-opportunity",
+ "observation": "The chapter's headline skill is deriving A-T and G-C from the donor/acceptor pattern rather than memorising them, and the prose walks each edge position by position. But no representation anywhere in the chapter shows two bases facing each other with the hydrogen bonds drawn. The section's assets are the four isolated bases (mol-adenine, mol-thymine, mol-guanine, mol-cytosine), each rendered on its own; the only asset that could have shown a pair, video-base-pairing, has production_status 'deferred' and compiles into the reader as a video block with url '' and is_hidden true. The same is true of the mismatch cases (A opposite C, G opposite T) that the prose asks students to work through themselves.",
+ "learner_impact": "Reading 'the adenine NH2 reaches the thymine C4 oxygen while the thymine N3-H reaches adenine N1' and then being handed two separate molecules leaves the student to do the mental rotation and juxtaposition unaided. This is precisely the step where students substitute memorisation for derivation, which is the misconception the section is written to prevent, and the two rejected pairs (donor-against-donor, acceptor-against-acceptor) are almost impossible to see without a facing-pair depiction.",
+ "evidence": "nugget-base-pairing-and-hydrogen-bonding asset_ids = [mol-adenine, mol-thymine, mol-guanine, mol-cytosine]; video-base-pairing production_status 'deferred'; compiled reader section nugget-base-pairing-and-hydrogen-bonding contains one text block, four molecule blocks, one hidden video block and one link block, and no paired representation.",
+ "recommended_outcome": "The chapter needs a representation in which two bases sit in their pairing orientation with each hydrogen bond, donor and acceptor identified, including at least one of the rejected combinations - available to a student who never plays a video, since the video is deferred indefinitely.",
+ "confidence": 0.92
+ },
+ {
+ "finding_id": "instr-003",
+ "location": {
+ "nugget_id": "nugget-rna-versus-dna-hydrolytic-stability",
+ "concept_slug": "chain-extension-at-phosphorus",
+ "asset_id": "video-rna-cleavage"
+ },
+ "severity": "high",
+ "category": "visual-opportunity",
+ "observation": "Neither of the chapter's two mechanisms is drawn anywhere. For RNA cleavage the assets are uridine, uridine 2',3'-cyclic phosphate and the dinucleotide - start and end states with nothing between them - and the objective on that concept literally reads 'Draw the mechanism by which base cleaves an RNA backbone through the 2'-alkoxide and a 2',3'-cyclic phosphate intermediate', while the prose says 'it is worth drawing for yourself rather than reading'. For chain extension the assets are ATP, dAMP and the dinucleotide. Both video briefs that would have carried the arrows (video-rna-cleavage, video-chain-extension) are production_status 'deferred' and compile to hidden blocks with empty URLs. No curved-arrow, mechanism-path or reaction-coordinate asset exists in the package.",
+ "learner_impact": "In-line attack at phosphorus with a trigonal-bipyramidal arrangement and inversion, and the geometric point that a nucleophile two atoms away is held in position by the furanose ring, are spatial claims that prose alone cannot carry. Students who cannot construct the arrows will fall back on memorising 'RNA has a 2'-OH so it is unstable' - exactly the non-mechanistic account the concept's trouble_spots warn against.",
+ "evidence": "nugget-rna-versus-dna-hydrolytic-stability learning_objectives[0]; expanded text 'it is worth drawing for yourself rather than reading'; video-rna-cleavage and video-chain-extension both production_status 'deferred'; assets[] contains no curved_arrow or mechanism asset type for this chapter.",
+ "recommended_outcome": "Both substitutions at phosphorus need a step-resolved arrow-pushing representation - nucleophile, in-line trajectory, leaving group, and for RNA the five-membered cyclic intermediate - available in the reader without depending on the deferred videos.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "instr-004",
+ "location": {
+ "asset_id": "roadmap-phosphoramidite-cycle",
+ "nugget_id": "nugget-reading-and-writing-dna",
+ "section_id": "nugget-reading-and-writing-dna"
+ },
+ "severity": "high",
+ "category": "media-equivalence",
+ "observation": "The synthesis_roadmap asset roadmap-phosphoramidite-cycle compiles into the reader as an image block whose url is the empty string. The section it serves - Sanger sequencing plus the four-step phosphoramidite cycle, the chapter's only multi-step synthetic sequence - therefore renders with a broken/empty figure followed by two molecule figures (dideoxyadenosine and dAMP) that illustrate the sequencing half but not the cycle at all. The roadmap's spec, notes and long_description are all well authored; only the rendered artefact is missing. (This is a recurring compile behaviour: carbonyl-alpha-substitution, alkynes-organic-synthesis, carboxylic-acids-and-nitriles and alkanes-and-stereochemistry show the same empty-image pattern.)",
+ "learner_impact": "The four operations of the cycle and their obligatory order - detritylate, couple, cap, oxidise - are the assessable content of this section (ch28-phosphoramidite-step-order asks exactly for that order), and students meet them only as running prose. Anyone scanning for a diagram sees an empty frame and concludes the figure failed to load.",
+ "evidence": "frontend/public/reader/topic-chapters/biomolecules-nucleic-acids.json, section nugget-reading-and-writing-dna, block blk-07do3m2b: {\"url\": \"\", \"alt_text\": \"A four-step linear roadmap for adding one residue by phosphoramidite synthesis...\", \"caption\": \"One turn of the phosphoramidite synthesis cycle\"}.",
+ "recommended_outcome": "The four-step cycle needs a figure that actually renders in the reader, or the roadmap must be replaced by a representation the compiler can emit; an empty image frame is worse for the student than no figure at all.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "instr-005",
+ "location": {
+ "question_slug": "ch28-mismatch-failure-mode",
+ "anchor_text": "Working from the structures rather than from memory, which statement gives the reason it fails?"
+ },
+ "severity": "medium",
+ "category": "assessment-readiness",
+ "observation": "Several questions instruct the student to reason from structures but show none. ch28-mismatch-failure-mode says 'Working from the structures rather than from memory' and offers four text-only options. ch28-pairing-donors-acceptors says 'Select every statement below that reads that pattern correctly off the structures' and shows no structures. ch28-purine-pyrimidine-sort-v2 says 'Drawn in its predominant tautomer, each nucleic acid base either does or does not carry an exocyclic amino group' but presents five bare base names. ch28-chain-terminator-design asks the student to choose a C3' modification with no structure of thymidine present. The accessibility_bundle for each of these correctly records 'No structures are shown' / 'Text-only question', confirming the omission is real rather than a rendering issue.",
+ "learner_impact": "These items silently convert a structure-reading task into a recall task. A student who has learned the derivation is given no structure to derive from, and one who has memorised the pairs answers correctly without ever reading an edge - so the question no longer discriminates on the skill the chapter is trying to build.",
+ "evidence": "ch28-mismatch-failure-mode and ch28-pairing-donors-acceptors student_config.options contain no structure_smiles; ch28-purine-pyrimidine-sort student_config.items are name-only; contrast with ch28-base-pair-comparison and ch28-nucleoside-vs-nucleotide, which do carry structure_smiles on every option.",
+ "recommended_outcome": "Any question whose prompt tells the student to work from the structures must put those structures in front of them, so the assessed behaviour matches the instruction given.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "instr-006",
+ "location": {
+ "concept_slug": "n-glycosidic-bond",
+ "nugget_id": "nugget-n-glycosidic-bond",
+ "anchor_text": "Assign the beta configuration at the anomeric carbon and explain what beta means in terms of the face the base occupies relative to C5'."
+ },
+ "severity": "medium",
+ "category": "objective-alignment",
+ "observation": "The second learning objective of the N-glycosidic-bond concept - assign the beta configuration and say what beta means relative to C5' - is taught carefully in prose ('Because C1' is a stereocentre, this is a genuine stereochemical statement and not a naming convention: the alpha and beta nucleosides are diastereomers') but is assessed by none of the six questions on that concept (attachment site x2, depurination x2, acid/base stability x2), and no asset shows the alpha anomer for contrast. Every nucleoside figure in the package is beta, so the student never sees the thing beta is being distinguished from.",
+ "learner_impact": "Students can pass every item on this concept while carrying the misconception the concept's own trouble_spots list first: 'treating the anomeric configuration as a free choice rather than a fixed structural fact'. Without a contrast case and without an item that requires the assignment, 'beta' remains a word attached to every drawing rather than a stereochemical claim.",
+ "evidence": "concepts[].slug 'n-glycosidic-bond' learning_objectives[1]; question_sets with concept_slug 'n-glycosidic-bond' = ch28-glycosidic-attachment-site(+v2), ch28-depurination-short(+v2), ch28-glycoside-acid-base-stability(+v2), none of which mentions alpha or beta; assets mol-adenosine, mol-2-deoxyadenosine, mol-thymidine, mol-cytidine are all beta.",
+ "recommended_outcome": "The chapter needs both a way to see the alpha and beta anomers side by side and at least one item that requires the student to assign or select the natural configuration, so the stated objective is actually exercised.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "instr-007",
+ "location": {
+ "concept_slug": "reading-and-writing-dna",
+ "anchor_text": "so a course short on time can teach the chapter's structural and mechanistic core without it and lose nothing that later material depends on"
+ },
+ "severity": "medium",
+ "category": "sequencing",
+ "observation": "The teacher_optional metadata is internally inconsistent. nucleoside-analogue-drugs is marked teacher_optional with why_optional stating that dropping it loses 'nothing that later material depends on'. But reading-and-writing-dna lists nucleoside-analogue-drugs in its prerequisites, and its prose depends on it explicitly: 'add a small proportion of dideoxynucleoside triphosphates - the 2',3'-dideoxy analogues from the previous section'. An instructor who uses the removable-concept machinery to drop concept 9 while keeping concept 10 gets a section whose declared prerequisite is absent and whose text refers back to material the student never saw.",
+ "learner_impact": "Instructors trust why_optional when trimming a course. Acting on this one produces a Sanger-sequencing section that assumes a chain terminator the class has not met, and the sequencing rank_order question (ch28-phosphoramidite-step-order-v2) then asks about dideoxynucleoside triphosphates cold.",
+ "evidence": "concepts[8] nucleoside-analogue-drugs why_optional; concepts[9] reading-and-writing-dna prerequisites = ['chain-extension-at-phosphorus', 'nucleoside-analogue-drugs']; nugget-reading-and-writing-dna expanded text 'the 2',3'-dideoxy analogues from the previous section'.",
+ "recommended_outcome": "The optionality claim and the prerequisite graph must agree - either the two optional concepts need to be declared as a single removable unit, or the why_optional wording must stop promising that nothing downstream depends on concept 9.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "instr-008",
+ "location": {
+ "concept_slug": "base-pairing-and-hydrogen-bonding",
+ "anchor_text": "The two sugar-phosphate strands of a duplex run at a fixed separation"
+ },
+ "severity": "medium",
+ "category": "sequencing",
+ "observation": "Two concepts assume material they do not declare as prerequisites. base-pairing-and-hydrogen-bonding lists only purine-and-pyrimidine-bases, yet its central geometric argument is built on the sugar-phosphate backbone running at a fixed separation - that is phosphodiester-backbone material. chain-extension-at-phosphorus lists only phosphodiester-backbone, yet its expanded text repeatedly leans on the previous section: 'This is the same substitution-at-phosphorus chemistry as the RNA cleavage in the previous section, run constructively rather than destructively.' The linear reading order happens to satisfy both, so nothing breaks in the reader, but the declared graph is what drives concept maps, prerequisite checks and any non-linear assembly of these nuggets.",
+ "learner_impact": "Any surface that reorders or subsets concepts using prerequisites - concept maps, deck assembly, adaptive review - can present the base-pairing geometry argument before the backbone exists, or the chain-extension analogy before the reader has met substitution at phosphorus.",
+ "evidence": "concepts[4] base-pairing-and-hydrogen-bonding prerequisites = ['purine-and-pyrimidine-bases']; concepts[7] chain-extension-at-phosphorus prerequisites = ['phosphodiester-backbone']; nugget-base-pairing expanded 'The two sugar-phosphate strands of a duplex run at a fixed separation'; nugget-chain-extension expanded 'the same substitution-at-phosphorus chemistry as the RNA cleavage in the previous section'.",
+ "recommended_outcome": "The prerequisite lists need to name every concept the prose actually assumes, so the declared graph matches the argument the student is asked to follow.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "instr-009",
+ "location": {
+ "nugget_id": "nugget-nucleoside-and-nucleotide-anatomy",
+ "anchor_text": "of uracil uridine, and of thymine thymidine - purines take the ending -osine, pyrimidines take -idine. Prefix a nucleoside name with 2'-deoxy and you have named the DNA version"
+ },
+ "severity": "medium",
+ "category": "notation-consistency",
+ "observation": "The naming rule as stated makes thymidine the ribonucleoside of thymine and 2'-deoxythymidine the DNA version. Everywhere else in the chapter - the mol-thymidine asset, the dinucleotide, zidovudine, and the matching question that keys 'Thymidine' to '2'-Deoxyribonucleoside of a pyrimidine' - the unprefixed name is used for the 2'-deoxy compound, which is the correct convention. The exception is stated exactly once, and only inside a wrong-answer explanation on ch28-sugar-and-base-identity-v2 ('By convention the unprefixed name thymidine already means the 2'-deoxy compound'), so a student sees it only if they get that item wrong.",
+ "learner_impact": "A student applying the reader's stated rule will conclude that thymidine carries a 2'-OH, then meet mol-thymidine (which does not) and a matching item that keys the opposite. Given that the ribose/deoxyribose distinction is the chapter's first concept and the axis on which several items turn, an unflagged nomenclature exception in the naming rule is a predictable source of wrong answers.",
+ "evidence": "nugget-nucleoside-and-nucleotide-anatomy expanded text naming pattern; asset mol-thymidine SMILES Cc1cn([C@H]2C[C@H](O)[C@@H](CO)O2)c(=O)[nH]c1=O (2'-deoxy, InChIKey IQFYYKKMVGJFEH-XLPZGREQSA-N); ch28-sugar-and-base-identity answer_key l3->r1 ('2'-Deoxyribonucleoside of a pyrimidine'); the convention note appears only in ch28-sugar-and-base-identity-v2 feedback.",
+ "recommended_outcome": "The thymidine exception belongs in the reader prose where the naming rule is stated, not only in a wrong-answer explanation, so that the rule the student is given matches the names the rest of the chapter uses.",
+ "confidence": 0.87
+ },
+ {
+ "finding_id": "instr-010",
+ "location": {
+ "concept_slug": "reading-and-writing-dna",
+ "anchor_text": "the OpenStax sections 28.1 to 28.8 map one to one onto the print McMurry sections"
+ },
+ "severity": "medium",
+ "category": "missing-example",
+ "observation": "textbook_matching claims a one-to-one map onto McMurry/OpenStax chapter 28 and lists 'polymerase chain reaction' among its matching terms, and the compiled reader emits an mcmurry_link to https://openstax.org/books/organic-chemistry/pages/28-why-this-chapter. But no concept, nugget, asset or question in the package covers the polymerase chain reaction (OpenStax 28.8) or translation / protein biosynthesis (OpenStax 28.5). Chain extension does cover the chemistry common to replication and transcription, so 28.3 and 28.4 are served; PCR and translation are simply absent.",
+ "learner_impact": "An instructor assigning this chapter alongside McMurry or OpenStax chapter 28 will find two textbook sections with no ChemIllusion prose, figures or practice, after the package has told them the mapping is one to one. Students following the mcmurry_link land on a chapter containing PCR and will look for the corresponding ChemIllusion section.",
+ "evidence": "textbook_matching.terms includes 'polymerase chain reaction'; textbook_matching.overrides['openstax-organic-chemistry-current'].note 'the OpenStax sections 28.1 to 28.8 map one to one onto the print McMurry sections'; concepts[] contains no PCR or translation concept; grep of the package finds no occurrence of PCR, primer amplification or genetic code outside the Sanger-primer context.",
+ "recommended_outcome": "Either the coverage gap needs closing for PCR (which is a direct application of the chain-extension chemistry already taught and would cost little) or the textbook-matching note must stop claiming a one-to-one mapping and say explicitly which textbook sections are out of scope.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "instr-011",
+ "location": {
+ "concept_slug": "dna-double-helix-and-base-stacking",
+ "question_slug": "ch28-duplex-stability-reasoning",
+ "anchor_text": "Describe the B-form double helix: two antiparallel strands, a right-handed twist, bases stacked in the interior and the charged backbone outside."
+ },
+ "severity": "medium",
+ "category": "objective-alignment",
+ "observation": "Several stated objectives are taught but never assessed. The first objective of the double-helix concept - describe the B form, two antiparallel strands, right-handed, bases inside and backbone outside - is not touched by either question on that concept (ch28-duplex-stability-reasoning covers stacking, its v2 covers the grooves, and the two rank_order items cover melting). Antiparallelity, which the chapter argues is a structural necessity rather than a convention and which it links to leading/lagging strand synthesis, is assessed by no item in the bank. Similarly, the second objective of nucleoside-and-nucleotide-anatomy ('State what the prime marks in a locant such as C3'') and the 'Draw the 3'-to-5' phosphodiester linkage' objective are assessed only by recognition items; the only structure_scaffold questions in the whole 46-item bank ask for thymine and uracil.",
+ "learner_impact": "An instructor using this bank as the chapter's assessment gets no evidence that students can describe the duplex, state why the strands must run antiparallel, or construct a phosphodiester linkage on paper - all of which the chapter's objectives promise. Recognition items on multi-part structural facts overstate mastery.",
+ "evidence": "concepts[5] dna-double-helix-and-base-stacking learning_objectives[0]; question_sets with that concept_slug = ch28-duplex-stability-reasoning(+v2), ch28-melting-temperature-rank(+v2); structure_scaffold questions in the bank = ch28-draw-thymine, ch28-draw-thymine-v2 only.",
+ "recommended_outcome": "The bank needs at least one item that requires the student to produce or assemble structure beyond a single base - a linkage, a nucleoside, or the antiparallel arrangement - so that the chapter's drawing and description objectives are actually evidenced.",
+ "confidence": 0.83
+ },
+ {
+ "finding_id": "instr-012",
+ "location": {
+ "question_slug": "ch28-alpha-phosphorus-hotspot",
+ "anchor_text": "Attacking it would cut the triphosphate between alpha and beta, delivering a phosphate group to the end of the growing chain"
+ },
+ "severity": "low",
+ "category": "chemical-accuracy",
+ "observation": "The wrong-answer explanation for selecting the beta phosphorus (atom_19) misstates the product. If the chain's 3'-oxygen attacks P-beta and expels the alpha-side bridging oxygen, the leaving group is the nucleoside 5'-monophosphate (correctly stated) but the group delivered to the chain end is a diphosphate carrying both the beta and the gamma phosphorus, not 'a phosphate group'. The corresponding explanation for gamma is correct as written ('transfers one phosphate: the chain end would be phosphorylated and the nucleoside diphosphate would drift away').",
+ "learner_impact": "Students working through the alpha/beta/gamma reasoning by bookkeeping - which the hints explicitly ask them to do ('Draw the product of attack at beta') - will find their own correct answer contradicted by the feedback, in the one place the chapter insists the atoms be tracked exactly.",
+ "evidence": "ch28-alpha-phosphorus-hotspot feedback_bundle.wrong_answer_explanations, match region_ids contains atom_19.",
+ "recommended_outcome": "The beta-attack feedback needs its product bookkeeping corrected so it agrees with the arrow-pushing the hints ask the student to perform.",
+ "confidence": 0.86
+ },
+ {
+ "finding_id": "instr-013",
+ "location": {
+ "nugget_id": "nugget-n-glycosidic-bond",
+ "anchor_text": "purine nucleosides undergo this hydrolysis far faster than pyrimidine nucleosides - by roughly two orders of magnitude under comparable conditions"
+ },
+ "severity": "low",
+ "category": "chemical-accuracy",
+ "observation": "The purine-over-pyrimidine rate ratio for N-glycosidic hydrolysis is given as 'roughly two orders of magnitude' in the nugget and repeated as 'by roughly two orders of magnitude' and 'by about a hundredfold' in the feedback of ch28-glycoside-acid-base-stability-v2. The figure usually quoted for DNA is a factor of about 20 (depyrimidination proceeds at roughly 5 percent of the depurination rate), so the chapter overstates the ratio by about fivefold. The qualitative claim - purines are lost, pyrimidines largely stay - is correct and is what the questions actually turn on.",
+ "learner_impact": "Low: no item is keyed on the number. But the value is asserted three times with apparent precision, and a student who carries '100-fold' into a biochemistry course will be repeating a figure that does not match the standard one.",
+ "evidence": "nugget-n-glycosidic-bond expanded text; ch28-glycoside-acid-base-stability-v2 generic_incorrect_explanation ('by roughly two orders of magnitude') and option-c explanation ('by about a hundredfold').",
+ "recommended_outcome": "Either soften the quantitative claim to the qualitative one the questions rely on, or bring the stated ratio into line with the value normally quoted for DNA.",
+ "confidence": 0.72
+ },
+ {
+ "finding_id": "instr-014",
+ "location": {
+ "nugget_id": "nugget-rna-versus-dna-hydrolytic-stability",
+ "anchor_text": "exactly as a nucleophile approaches a carbon in an S_N2 reaction"
+ },
+ "severity": "low",
+ "category": "notation-consistency",
+ "observation": "The chapter uses two different renderings of the SN2 label. The expanded prose of nugget-rna-versus-dna-hydrolytic-stability writes 'S_N2' with a literal underscore, which is carried verbatim into the compiled reader markdown (two occurrences in frontend/public/reader/topic-chapters/biomolecules-nucleic-acids.json) and will render either as raw 'S_N2' or with the underscore consumed as markdown emphasis. Elsewhere in the package - ch28-glycoside-acid-base-stability option b and its feedback - the same label is written 'SN2'.",
+ "learner_impact": "Minor, but it is the one mechanism label the chapter borrows from earlier chapters, and an inconsistent or mangled rendering in the reader undermines the deliberate cross-chapter link the sentence is making.",
+ "evidence": "package occurrences: 'S_N2' x1 (nugget prose), 'SN2' x2 (ch28-glycoside-acid-base-stability option and feedback); compiled reader contains 'S_N2' twice.",
+ "recommended_outcome": "One SN2 rendering should be used throughout prose, options and feedback, and it must be one that survives the markdown pipeline into the reader.",
+ "confidence": 0.8
+ },
+ {
+ "finding_id": "instr-015",
+ "location": {
+ "question_slug": "ch28-capping-purpose",
+ "anchor_text": "Name the functional group that this step converts into an ester, thereby retiring the chains that carry it."
+ },
+ "severity": "low",
+ "category": "assessment-readiness",
+ "observation": "The accepted-answer list for ch28-capping-purpose contains only variants that include the 5' locant ('the unreacted 5'-hydroxyl', '5'-OH', '5' hydroxyl', and so on). A student who answers the question exactly as asked - 'the hydroxyl group', 'a free hydroxyl', 'an alcohol' - is marked wrong even though the prompt asks for the functional group rather than its position, and even though only one kind of free hydroxyl exists on the support at that point in the cycle.",
+ "learner_impact": "A short-answer item that autogrades a correct answer as wrong erodes trust in the bank and, on this concept, punishes the student who has understood capping but not guessed the required phrasing.",
+ "evidence": "ch28-capping-purpose answer_key [redacted].",
+ "recommended_outcome": "Either the accepted-answer set must cover the answer the prompt literally asks for, or the prompt must ask for the position as well as the group.",
+ "confidence": 0.78
+ }
+ ],
+ "strengths": [
+ "Every SMILES in the package is chemically correct on independent RDKit verification: 20/20 parse, and the InChIKeys of adenine, guanine, cytosine, thymine, uracil, beta-D-ribofuranose, 2-deoxy-beta-D-ribofuranose, adenosine, 2'-deoxyadenosine, thymidine, cytidine, uridine, dAMP, ATP, zidovudine, acyclovir and 2',3'-dideoxyadenosine all match the authentic compounds, including the stereochemistry.",
+ "The beta-N-glycosidic configuration is right in every nucleoside, and the CIP descriptors that change between related structures (C3' S->R on cyclisation to the 2',3'-cyclic phosphate, C4' R->S in dideoxyadenosine and zidovudine) are all priority-swap artefacts rather than configurational errors - the underlying D-sugar geometry is preserved throughout.",
+ "The dinucleotide mol-dinucleotide-dapdt is genuinely dA(3'->5')dT: free 5'-OH on the deoxyadenosine residue, phosphate bridging its 3'-oxygen to the thymidine 5'-oxygen, free 3'-OH on the thymidine. Directionality and the 'never the 2' position' rule are both structurally enforced, not merely asserted.",
+ "The RNA cleavage account is mechanistically complete and correct: deprotonation to the 2'-alkoxide, in-line attack on the phosphorus of its own 3'-phosphodiester, departure of the neighbouring 5'-oxygen, a cis-fused five-membered 2',3'-cyclic phosphate (which embeds cleanly in 3D), and opening at either ester bond to the 2'/3' monophosphate mixture that is correctly identified as the classical evidence for the intermediate.",
+ "Chain extension is correctly placed at the alpha phosphorus with pyrophosphate as leaving group, in-line through a trigonal bipyramid with inversion, two-metal-ion assistance correctly divided, and - unusually well handled - the substitution itself identified as close to thermoneutral with pyrophosphate hydrolysis named as the actual driving force. Both hotspot answer keys point at the correct atom.",
+ "The lactam/lactim treatment is exactly right and, crucially, refuses the usual bad argument: the chapter states plainly that both tautomers are aromatic so aromaticity cannot decide it, and settles the question on amide-versus-enol bonding. The donor/acceptor consequences are then read off correctly for both legitimate pairs and both rejected ones.",
+ "The chapter repeatedly corrects standard oversimplifications rather than propagating them - hydrogen bonding supplies specificity while stacking supplies stability; GC melting is not just a hydrogen-bond count; melting temperature is meaningless without stating the buffer; direction of growth is a consequence of where the activation sits, demonstrated by contrasting the polymerase with the 3'-to-5' phosphoramidite cycle.",
+ "Wrong-answer explanations teach rather than scold, and several are genuinely excellent - the cAMP distractor explanation, the 3'-amino chain-terminator explanation (small enough but still nucleophilic, giving a phosphoramidate), and the capping explanation that capping does not improve yield but converts a hard purification into an easy one.",
+ "Twelve question types across ten concepts with 23 distinct stems, each with a differentiated v2, three-level hint ladders on every item, and structure-bearing options on the identification questions."
+ ],
+ "open_questions": [
+ "The 1BNA figure is served from an external CDN (https://cdn.rcsb.org/images/structures/1bna_assembly-1.jpeg) rather than from the repo. Since the reader is an installable PWA, is that image expected to be available offline, and is the chapter's only atomic-resolution duplex figure acceptable as a remote dependency?",
+ "practice_check prompts and answers exist on all ten nuggets and are strong (the pH-3 depurination one and the 5'-ATG-3' directionality one especially), but they do not appear as blocks in the compiled reader. Which surface shows them to students, and does an instructor assigning the reader alone get them at all?",
+ "All four video briefs are production_status 'deferred' and compile to hidden blocks with empty URLs. Is the deferral expected to persist through publication, in which case the base-pairing and mechanism content needs a non-video carrier (see instr-002, instr-003), or is production scheduled?",
+ "ch28-rna-stability-error-repair and its v2 rely on the grader consuming target_id / category_id / repair_option_id; earlier chapters in this corpus recorded that error_repair keys do not reach the grader. Has that been resolved, and are these two items actually autogradable as authored?",
+ "ch28-alpha-phosphorus-hotspot keys 'atom_15' and its v2 keys 'atom_7'; both are correct against RDKit's 0-based atom indices for the given SMILES. Is that indexing contract guaranteed by the renderer, or could canonicalisation at render time shift it?"
+ ]
+ },
+ {
+ "persona": "Struggling Student",
+ "persona_version": "1.0.0",
+ "chapter_id": "biomolecules-nucleic-acids",
+ "chapter_version": "1",
+ "model": "claude-opus-5",
+ "summary": "The prose in this chapter is unusually good for a shaky student: it repeatedly refuses to let me memorise, names the wrong move before I make it (\"Hydrogen bonding is not what holds the duplex together\", \"Students look for the reactive carbon and there is not one\"), and every one of the 23 surfaced questions carries a genuinely progressive three-level hint ladder plus wrong-answer explanations that diagnose the specific error rather than restating the prompt. Where I stall is the visual layer, and I stall in exactly the places the chapter itself says are the important ones. The base-pairing section is built entirely on \"bring the two edges together\" and \"reading down adenine's pairing edge\", but the page shows four unrelated base structures in independent orientations and nothing that shows two bases facing each other; the asset meant to fix that is a video whose url is empty. The two mechanisms in the chapter — the 2'-alkoxide cutting RNA, and the 3'-hydroxyl attacking the alpha phosphorus — have no mechanism drawing at all, even though the text tells me the RNA one \"is worth drawing for yourself rather than reading\". Every figure caption asks me to find C2', C3', N9 or the 3'-oxygen, and not one figure carries those numbers. The phosphoramidite section is the densest text in the chapter and its only figure is an image block with url:\"\" — it renders as nothing. There is no self-check anywhere inside the reader (the well-written practice_check for each nugget never reaches the compiled chapter), no objectives or depth labels to tell me which of the ten sections are core and which are advanced, and four of the ten concepts have no core-difficulty question to start me off — nucleoside-analogue-drugs has exactly one question in the whole bank and it is an advanced two-field structured_reasoning. I would finish this chapter feeling like I had read something very clear and still be unable to draw a base pair.",
+ "overall_score": 6.4,
+ "publication_blockers": [
+ "stu-004"
+ ],
+ "findings": [
+ {
+ "finding_id": "stu-001",
+ "location": {
+ "section_id": "nugget-base-pairing-and-hydrogen-bonding",
+ "concept_slug": "base-pairing-and-hydrogen-bonding",
+ "nugget_id": "nugget-base-pairing-and-hydrogen-bonding",
+ "asset_id": "video-base-pairing",
+ "anchor_text": "Bring the two edges together and the pattern reads donor-acceptor against acceptor-donor."
+ },
+ "severity": "high",
+ "category": "cognitive-load",
+ "observation": "The entire section is written as an instruction to perform a spatial operation on two structures at once — \"Reading down adenine's pairing edge\", \"Bring the two edges together\", \"Acceptor-donor-donor faces donor-acceptor-acceptor\" — but nothing on the page shows two bases facing one another. The reader section contains four independent molecule blocks (mol-adenine, mol-thymine, mol-guanine, mol-cytosine), each rendered from SMILES in whatever orientation the layout engine chooses, so their 'pairing edges' do not point at anything. The only asset that was meant to show a pair, video-base-pairing (\"Reading donors and acceptors into a base pair\"), has production_status \"deferred\" and compiles into the reader with url: \"\".",
+ "learner_impact": "I cannot do the operation the text is describing, so I fall back on the exact behaviour the concept's own trouble_spots warn against — memorising \"A goes with T, G goes with C, two bonds and three bonds\" — and then guess on ch28-pairing-donors-acceptors and ch28-mismatch-failure-mode, which are graded on reading the pattern off structures rather than recalling it. The A-with-C failure (\"puts adenine's exocyclic NH2 opposite cytosine's exocyclic NH2\") is even harder: I am asked to visualise a pair that is never drawn even in words' worth of geometry.",
+ "evidence": "Reader section nugget-base-pairing-and-hydrogen-bonding blocks: text, molecule x4 (adenine, thymine, guanine, cytosine), video (url \"\"), external_link. Package video_briefs[] video-base-pairing: production_status \"deferred\". Concept trouble_spot: \"Memorising the pair count without reading it off the structures\".",
+ "recommended_outcome": "A student needs to see the two bases of a pair positioned edge to edge with the donor and acceptor positions marked, for at least A-with-T, G-with-C, and one rejected combination, so that the derivation the prose demands is actually performable on the page rather than only in the head.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "stu-002",
+ "location": {
+ "section_id": "nugget-rna-versus-dna-hydrolytic-stability",
+ "concept_slug": "rna-versus-dna-hydrolytic-stability",
+ "nugget_id": "nugget-rna-versus-dna-hydrolytic-stability",
+ "asset_id": "video-rna-cleavage",
+ "anchor_text": "neighbouring-group participation**, and it is worth drawing for yourself rather than reading."
+ },
+ "severity": "high",
+ "category": "worked-example-gap",
+ "observation": "Both mechanisms in the chapter are taught with no mechanism representation of any kind. The RNA cleavage section states the mechanism \"is worth drawing for yourself rather than reading\" and its learning objective is \"Draw the mechanism by which base cleaves an RNA backbone through the 2'-alkoxide and a 2',3'-cyclic phosphate intermediate\", yet the section's assets are static endpoint structures only (mol-uridine, mol-uridine-23-cyclic-phosphate, mol-dinucleotide-dapdt) plus a deferred video with url: \"\". The chain-extension section is the same: objective \"Write the chain-extension step as a nucleophilic substitution at phosphorus\", assets mol-atp / mol-dinucleotide-dapdt / mol-damp, video url: \"\". The compiled chapter contains no reaction, reaction_coordinate or curved-arrow block of any type (block-type census: text 10, molecule 34, image 4, video 4, external_link 10, mcmurry_link 1).",
+ "learner_impact": "I am told to draw something I have never been shown drawn. I skip the drawing, re-read the paragraph instead, and arrive at ch28-rna-cleavage-intermediate having to choose between a five-membered 2',3'-cyclic phosphate and a six-membered 3',5'-cyclic phosphate purely from a verbal atom count (\"O2', C2', C3', O3' and P\") in hint level 2 — which is where I guess.",
+ "evidence": "Reader sections nugget-rna-versus-dna-hydrolytic-stability and nugget-chain-extension-at-phosphorus; video_briefs video-rna-cleavage and video-chain-extension both production_status \"deferred\", compiled video blocks have url \"\"; question ch28-rna-cleavage-intermediate hint level 2: \"Count the atoms in the ring that closes: O2', C2', C3', O3' and P.\"",
+ "recommended_outcome": "A student needs a step-resolved visual of each of the two mechanisms — where the nucleophile starts, which bond forms, which leaves, and what the intermediate looks like — not just the starting material and the product side by side. The stated objectives ask for drawing, so the chapter has to model the drawing at least once.",
+ "confidence": 0.93
+ },
+ {
+ "finding_id": "stu-003",
+ "location": {
+ "section_id": "nugget-nucleoside-and-nucleotide-anatomy",
+ "concept_slug": "nucleoside-and-nucleotide-anatomy",
+ "asset_id": "mol-beta-d-ribofuranose",
+ "anchor_text": "Count the three hydroxyls at C2', C3', and C5' and note the anomeric carbon that will bond to a base."
+ },
+ "severity": "high",
+ "category": "cognitive-load",
+ "observation": "Every molecule block in the chapter carries a reading instruction phrased in primed locants, but the rendered figure is a bare SMILES depiction with no atom numbering. Examples: \"Count the three hydroxyls at C2', C3', and C5'\" (mol-beta-d-ribofuranose), \"Trace the bond from N9 of adenine to C1' of ribose\" (mol-adenosine), \"Trace one phosphate esterified twice - to the 3' oxygen of one residue and the 5' oxygen of the next\" (mol-dinucleotide-dapdt), \"Identify the alpha phosphorus... and the beta and gamma pair\" (mol-atp). Learning the primed numbering system is itself one of the chapter's first objectives (\"State what the prime marks in a locant such as C3'\"), so the reader cannot be assumed to already know which ring carbon is which.",
+ "learner_impact": "I look at the picture, cannot tell which carbon is C2' versus C3', and either invent an assignment or stop trying to use the figures at all and read only the prose. That damage compounds: the 2'-versus-3' distinction is the whole content of the RNA-stability section, the 3'-versus-5' distinction is the whole content of the backbone and chain-extension sections, and the alpha/beta/gamma labels are what ch28-alpha-phosphorus-hotspot is graded on.",
+ "evidence": "Reader block content for mol-beta-d-ribofuranose, mol-2-deoxy-beta-d-ribofuranose, mol-adenosine, mol-damp, mol-dinucleotide-dapdt, mol-atp — each has keys alt_text, description, generator_href, name, smiles and no labelling data. Nugget objective: \"State what the prime marks in a locant such as C3', and use primed and unprimed numbers without confusing sugar positions with base positions.\"",
+ "recommended_outcome": "At least the first sugar, the first nucleoside, the dinucleotide and the triphosphate need their positions identified on the figure itself, so that the numbering convention the chapter is teaching can be read off a picture rather than assumed. Without that, every instruction of the form 'find C3'' is unfollowable.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "stu-004",
+ "location": {
+ "section_id": "nugget-reading-and-writing-dna",
+ "concept_slug": "reading-and-writing-dna",
+ "asset_id": "roadmap-phosphoramidite-cycle",
+ "anchor_text": "One turn of the phosphoramidite synthesis cycle"
+ },
+ "severity": "high",
+ "category": "cognitive-load",
+ "observation": "The single figure in the densest section of the chapter does not render. The compiled image block (blk-07do3m2b) has url: \"\" while carrying a full caption and alt text for the four-step roadmap. This section is also the longest text block in the chapter at 6,842 characters (~1,150 words at the reader's default detail level) and introduces, in one pass: DMT, the triarylmethyl cation, controlled-pore glass, phosphoramidite, 2-cyanoethyl protection, diisopropylamino, tetrazole activation, phosphite triester, P(III) versus P(V), phosphorothioate/antisense, ammonia deprotection by E2, capillary electrophoresis and four-colour dye traces.",
+ "learner_impact": "I hit a caption with nothing above it, which reads as the page being broken, and then face the only ordering question in the chapter (ch28-phosphoramidite-step-order) with no diagram to check my order against. At that point I stop reading carefully and start skimming for the four bold words.",
+ "evidence": "frontend/public/reader/topic-chapters/biomolecules-nucleic-acids.json, section nugget-reading-and-writing-dna, image block: {\"url\":\"\",\"alt_text\":\"A four-step linear roadmap for adding one residue by phosphoramidite synthesis...\",\"caption\":\"One turn of the phosphoramidite synthesis cycle\"}. Three of the chapter's four image blocks have working urls; this one does not.",
+ "recommended_outcome": "The four-step cycle needs a working visual that a student can hold beside the prose while reading, and no image block should ship to a reader with an empty source. The section also needs the load broken up so that the four steps are not competing with a dozen first-time terms in one continuous block.",
+ "confidence": 0.97
+ },
+ {
+ "finding_id": "stu-005",
+ "location": {
+ "section_id": "nugget-nucleoside-and-nucleotide-anatomy",
+ "nugget_id": "nugget-nucleoside-and-nucleotide-anatomy",
+ "anchor_text": "Count the three hydroxyls at C2', C3', and C5'"
+ },
+ "severity": "medium",
+ "category": "retrieval-practice",
+ "observation": "Every nugget carries a well-written practice_check with a model answer — ten of them, and they are the best scaffolding in the package (e.g. the cytidine 5'-monophosphate disassembly, the pH 3 depurination account, the 5'-ATG-3' directionality walk-through). None of them reaches the compiled reader: a grep for \"practice_check\" in frontend/public/reader/topic-chapters/biomolecules-nucleic-acids.json returns zero hits, and the compiled section block types are only text / molecule / image / video / link. So the reader is ten sections of continuous exposition with no checkpoint between them, and the separate question bank is currently available: false.",
+ "learner_impact": "I read ten sections in a row with no point at which I am asked to produce anything, so I have no way to discover that I have lost the thread until I am already in a graded question. A low-confidence student in that situation reads the whole chapter, feels that it made sense, and then cannot start question one.",
+ "evidence": "Package nuggets[].practice_check present on all 10 nuggets; compiled reader chapter contains no practice_check and no callout/question block; compiled/question-set.json \"available\": false; publishing.available false.",
+ "recommended_outcome": "A student needs a short retrieval checkpoint inside the reading flow at the end of each section, with the model answer available, so that the practice_check content already authored actually becomes reachable rather than sitting only in the source package.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "stu-006",
+ "location": {
+ "section_id": "nugget-reading-and-writing-dna",
+ "concept_slug": "reading-and-writing-dna",
+ "anchor_text": "Dilute NaOH cuts RNA in minutes"
+ },
+ "severity": "medium",
+ "category": "conceptual-support",
+ "observation": "The reader carries no per-section learning objectives, no depth label and no time estimate, so all ten sections read as equally required. The package has all three on every nugget (three learning_objectives each; depth core / standard / advanced; duration_minutes 6–8), but the compiled section object has only the keys id, title and blocks. Nothing tells a reader that nucleoside-and-nucleotide-anatomy is core and reading-and-writing-dna is advanced. The chapter also carries a single McMurry/OpenStax link, in section 1 only, and it points at the generic \"28-why-this-chapter\" landing page rather than at any specific section.",
+ "learner_impact": "With nothing signalling relative importance I budget my attention evenly, which means I spend as long fighting the phosphoramidite cycle as I do on the nucleoside/nucleotide distinction, run out of energy, and never go back to consolidate the core material. When I do want a second explanation of, say, base pairing, there is no section-level textbook link to go to.",
+ "evidence": "Compiled sections[] keys: [\"blocks\",\"id\",\"title\"] for all 10 sections; package nuggets carry learning_objectives (3 each), depth (core/standard/advanced) and duration_minutes; only one mcmurry_link block in the whole chapter, on section nugget-nucleoside-and-nucleotide-anatomy, url https://openstax.org/books/organic-chemistry/pages/28-why-this-chapter.",
+ "recommended_outcome": "A student needs an explicit signal of what each section is for and how central it is — stated objectives and a core-versus-advanced marker visible while reading — plus more than one route to a second explanation when a section does not land.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "stu-007",
+ "location": {
+ "concept_slug": "nucleoside-analogue-drugs",
+ "question_slug": "ch28-chain-terminator-design",
+ "section_id": "nugget-nucleoside-analogue-drugs"
+ },
+ "severity": "medium",
+ "category": "retrieval-practice",
+ "observation": "The difficulty ladder has no bottom rung on most of the chapter. Of ten concepts, only three have a core-difficulty question (nucleoside-and-nucleotide-anatomy, purine-and-pyrimidine-bases, n-glycosidic-bond). nucleoside-analogue-drugs has exactly one question in the entire bank and it is ch28-chain-terminator-design, an advanced structured_reasoning item with two required fields and nine options. reading-and-writing-dna has two questions, both advanced. phosphodiester-backbone opens on a numeric charge count; base-pairing-and-hydrogen-bonding has three questions, all standard, the first a six-option multi_select.",
+ "learner_impact": "On four of the ten concepts my first contact with assessment is an item that assumes I already have the whole picture. I have no cheap win to confirm I understood the basics of, for example, what a chain terminator is, before being asked to design one and defend the design — so I guess on the claim field, get the evidence field wrong too, and read the result as 'I do not understand this topic' rather than 'I skipped a rung'.",
+ "evidence": "Per-concept difficulty distribution from topic.package.json question_sets (excluding -v2 variants): nucleoside-and-nucleotide-anatomy core,core; purine-and-pyrimidine-bases core,standard,standard,standard; n-glycosidic-bond core,standard,standard; phosphodiester-backbone standard,standard; base-pairing standard,standard,standard; dna-double-helix advanced,standard; rna-versus-dna standard,advanced; chain-extension standard,advanced; nucleoside-analogue-drugs advanced; reading-and-writing-dna advanced,advanced.",
+ "recommended_outcome": "Each concept needs at least one low-stakes entry-level check that a student can pass immediately after reading the section, especially on nucleoside-analogue-drugs and reading-and-writing-dna where the only available practice is advanced multi-field reasoning.",
+ "confidence": 0.87
+ },
+ {
+ "finding_id": "stu-008",
+ "location": {
+ "section_id": "nugget-phosphodiester-backbone",
+ "question_slug": "ch28-melting-temperature-rank",
+ "anchor_text": "raising the salt concentration of a solution raises the melting temperature of a duplex by screening that repulsion"
+ },
+ "severity": "medium",
+ "category": "conceptual-support",
+ "observation": "\"Melting temperature\" is used as a load-bearing quantity from section 4 onwards and is never defined anywhere in the chapter prose. It first appears in the phosphodiester-backbone section — three sections before the duplex has been described at all — then in the base-pairing section (\"a GC-rich sequence melts at a higher temperature\") and repeatedly in the double-helix section. The only place the chapter says what melting actually is appears inside a wrong-answer explanation on an advanced question: \"Melting a duplex separates the strands without breaking a single covalent bond\" (ch28-duplex-stability-reasoning, claim_covalent). \"Anneal\" is likewise used without introduction.",
+ "learner_impact": "I meet 'melting temperature' before I have met the double helix, so I have no referent for what is melting; the everyday sense of the word points me at a phase change or at bonds breaking. That wrong model survives into ch28-melting-temperature-rank, where I am asked to order four duplexes by Tm and I am ranking a quantity I cannot picture, and into the salt-screening argument, which only makes sense once you know the two strands come apart.",
+ "evidence": "Occurrences of \"melt\" in the compiled reader text: sections nugget-phosphodiester-backbone, nugget-base-pairing-and-hydrogen-bonding, nugget-dna-double-helix-and-base-stacking (x3); no definition present. Definition appears only in feedback_bundle.wrong_answer_explanations of ch28-duplex-stability-reasoning.",
+ "recommended_outcome": "A student needs 'melting' named as strand separation at the point of first use, and ideally not before the duplex exists in the chapter, so that the melting-temperature arguments and the ranking question rest on a picture rather than a word.",
+ "confidence": 0.86
+ },
+ {
+ "finding_id": "stu-009",
+ "location": {
+ "section_id": "nugget-n-glycosidic-bond",
+ "concept_slug": "n-glycosidic-bond",
+ "asset_id": "mol-adenosine",
+ "anchor_text": "In a Haworth-style drawing with the furanose ring in the plane of the paper, the ring oxygen at the back, and the C5' group pointing up, beta means the base also points up"
+ },
+ "severity": "medium",
+ "category": "conceptual-support",
+ "observation": "Beta configuration is defined exclusively in terms of a drawing convention the chapter never shows. The text specifies a Haworth-style depiction with a stated ring orientation, and the mol-adenosine block description then tells the student to \"confirm the base sits on the same face of the ring as the 5' group\" — but the figure is an RDKit render from the SMILES Nc1ncnc2c1ncn2[C@@H]1O[C@H](CO)[C@@H](O)[C@H]1O, which is not a Haworth projection and whose ring orientation is not controlled. The chapter contains no Haworth-style figure at all.",
+ "learner_impact": "I am given a test ('same face as C5'') and a picture the test does not apply to, so I either read the wedge/dash pattern wrong or decide beta is a naming rule I have to memorise — which is exactly the trouble spot the concept lists ('treating the anomeric configuration as a free choice rather than a fixed structural fact'). The chapter then tells me this is a real stereochemical statement, and I have no way to verify it for myself.",
+ "evidence": "Reader section nugget-n-glycosidic-bond text block; block description for mol-adenosine: \"Trace the bond from N9 of adenine to C1' of ribose and confirm the base sits on the same face of the ring as the 5' group.\"; asset mol-adenosine has only a smiles field, no depiction style. Objective: \"Assign the beta configuration at the anomeric carbon and explain what beta means in terms of the face the base occupies relative to C5'.\"",
+ "recommended_outcome": "A student needs the alpha/beta distinction shown in the same representation the definition uses, with both anomers side by side, so that 'same face as C5'' is something that can be checked on the page rather than accepted on trust.",
+ "confidence": 0.83
+ },
+ {
+ "finding_id": "stu-010",
+ "location": {
+ "question_slug": "ch28-phosphoramidite-step-order",
+ "concept_slug": "reading-and-writing-dna",
+ "anchor_text": "Treat with acetic anhydride and N-methylimidazole"
+ },
+ "severity": "medium",
+ "category": "worked-example-gap",
+ "observation": "The rank_order question names each step by a reagent recipe rather than by the name the prose uses, and two of those recipes are not in the chapter. \"N-methylimidazole\" appears nowhere in the topic package or the reader at all. \"Dichloroacetic acid in dichloromethane\" appears exactly once, in the expanded tier only — a reader who has lowered the detail level (a natural move when a section feels dense) sees only \"Mild acid removes it\". The question also has no wrong_answer_explanations at all — feedback_bundle.wrong_answer_explanations is absent, leaving only a generic paragraph — so a student who puts capping before coupling, or oxidation before capping, gets no targeted correction on either of the two orderings the section explicitly explains.",
+ "learner_impact": "I recognise acetic anhydride and iodine from the text but cannot map dichloroacetic acid onto 'mild acid' with confidence, so I order the cards by guessing which reagent sounds acidic. When the order is wrong I get a paragraph telling me to work out what each reagent does — the same thing I just failed at — rather than being told which two cards I swapped.",
+ "evidence": "ch28-phosphoramidite-step-order student_config cards: \"Treat with iodine in aqueous pyridine\", \"Add the nucleoside 3'-phosphoramidite together with tetrazole\", \"Treat with dichloroacetic acid in dichloromethane\", \"Treat with acetic anhydride and N-methylimidazole\". Compiled feedback counts: hints 3, wrong_answer_explanations 0. \"dichloroacetic\" occurs 0 times in nuggets[].text.standard and 1 time in nuggets[].text.expanded; \"N-methylimidazole\" occurs 0 times anywhere in the package.",
+ "recommended_outcome": "The ordering question needs to be answerable from what the chapter actually taught — either the cards name the operations the prose names, or the prose names the reagents the cards use — and a student who mis-orders needs feedback that identifies which pair of steps they swapped, since the dependency between coupling and capping is the whole point of the step.",
+ "confidence": 0.89
+ },
+ {
+ "finding_id": "stu-011",
+ "location": {
+ "question_slug": "ch28-pyrophosphate-driving-force",
+ "concept_slug": "chain-extension-at-phosphorus",
+ "anchor_text": "the reverse reaction has a name, pyrophosphorolysis"
+ },
+ "severity": "medium",
+ "category": "conceptual-support",
+ "observation": "Several facts that questions turn on live only in the expanded text tier, so a student who reduces the reader's detail level loses the material the assessment tests. \"Pyrophosphorolysis\" — named in two wrong-answer explanations of ch28-pyrophosphate-driving-force and gestured at by hint level 2 (\"The reverse reaction is real and has a name\") — appears only in the expanded tier. The aniline comparison that the correct option of ch28-base-weak-basicity depends on (\"conjugated into the ring from an exocyclic NH2 as in aniline\") likewise appears only in expanded. The pyrrole-type / pyridine-type distinction that ch28-pairing-donors-acceptors option f is scored on is defined only in expanded; the standard tier drops the phrase \"pyridine-type ring nitrogens\" with no explanation of what makes a ring nitrogen pyridine-type.",
+ "learner_impact": "Lowering the detail level is the obvious coping move when a section feels too dense, and it silently removes the exact sentences the questions are built on. I take the shorter version because I am struggling, then fail the questions because I was struggling — and nothing warns me that the shorter tier is not assessment-complete.",
+ "evidence": "Term counts across nuggets[].text tiers: \"pyrophosphorolysis\" standard 0 / expanded 1; \"aniline\" standard 0 / expanded 1; \"pyrrole-type\" standard 0 / expanded 1; \"pyridine-type\" standard 1 (undefined) / expanded 2. Corresponding questions: ch28-pyrophosphate-driving-force, ch28-base-weak-basicity option a, ch28-pairing-donors-acceptors option f.",
+ "recommended_outcome": "Whatever a question is graded on has to be present in every tier a student can select, or the tier switch has to make clear that it is a summary rather than a complete version. A struggling reader should not be penalised for choosing the shorter text.",
+ "confidence": 0.84
+ },
+ {
+ "finding_id": "stu-012",
+ "location": {
+ "question_slug": "ch28-alpha-phosphorus-hotspot",
+ "concept_slug": "chain-extension-at-phosphorus",
+ "asset_id": "mol-atp",
+ "anchor_text": "The structure shown is an incoming nucleoside 5'-triphosphate"
+ },
+ "severity": "low",
+ "category": "misconception",
+ "observation": "The hotspot question renders adenosine 5'-triphosphate — a ribose with hydroxyls at both C2' and C3' — as \"the incoming nucleoside 5'-triphosphate\" at a DNA-flavoured growing end, immediately after two sections whose central claim is that the DNA sugar has no 2'-hydroxyl and that this is why DNA survives. Nothing in the prompt or the surrounding prose flags that this particular structure is the RNA/transcription case.",
+ "learner_impact": "Having just been told that the presence or absence of one hydroxyl is the difference between a genome and a disposable message, I see a structure with that hydroxyl presented as the monomer for chain growth and either conclude I had the DNA/RNA distinction backwards, or decide the distinction does not matter much after all. Either way the one fact the chapter worked hardest to install gets loosened.",
+ "evidence": "ch28-alpha-phosphorus-hotspot student_config molecule_smiles: Nc1ncnc2c1ncn2[C@@H]1O[C@H](COP(=O)(O)OP(=O)(O)OP(=O)(O)O)[C@@H](O)[C@H]1O (2'-OH and 3'-OH both present); asset mol-atp title \"Adenosine 5'-triphosphate: alpha, beta, and gamma phosphorus\"; preceding section nugget-rna-versus-dna-hydrolytic-stability.",
+ "recommended_outcome": "When a figure deliberately shows the ribo case in a section that has just made the deoxy case the point, the student needs that said out loud, so the structure reinforces rather than undercuts the distinction it sits next to.",
+ "confidence": 0.7
+ },
+ {
+ "finding_id": "stu-013",
+ "location": {
+ "section_id": "nugget-n-glycosidic-bond",
+ "concept_slug": "n-glycosidic-bond",
+ "anchor_text": "Everything established about glycoside reactivity transfers, and it is worth transferring deliberately rather than learning the nucleoside case as a separate fact."
+ },
+ "severity": "medium",
+ "category": "conceptual-support",
+ "observation": "The chapter's key reactivity arguments are handed off to earlier chapters by assertion rather than by bridge. The acid/base behaviour of the glycosidic bond rests entirely on \"That makes it an N,O-acetal\" plus \"Everything established about glycoside reactivity transfers\" — acetals are never re-characterised in the chapter, and the anomeric carbon's stability to base is asserted rather than derived on the page. Similarly, the tautomer argument that decides every base pair rests on \"for the same reason an ordinary amide does not sit as its enol\" with no restatement of that reason, the backbone section leans on \"the closest relative is a polyester\", and the basicity argument leans on aromatic-amine conjugation. All four are prerequisite chapters (carbohydrates, carbonyl chemistry, esters, aromaticity/amines) invoked by name without a refresher.",
+ "learner_impact": "If any one of those earlier chapters did not stick — and for me they did not all stick — the sentence lands as a fact to memorise rather than as a transfer, which is exactly what the text says it does not want. On ch28-glycoside-acid-base-stability I then have to decide whether hydroxide can attack C1' with no working model of why acetals are base-stable, so I pick the option that sounds most like a mechanism I recognise.",
+ "evidence": "Reader section nugget-n-glycosidic-bond: \"That makes it an **N,O-acetal**... Everything established about glycoside reactivity transfers\"; nugget-purine-and-pyrimidine-bases: \"for the same reason an ordinary amide does not sit as its enol\"; nugget-phosphodiester-backbone: \"the closest relative is a polyester\". Concepts[] prerequisites list only within-chapter slugs — no cross-chapter prerequisites are recorded anywhere in the package.",
+ "recommended_outcome": "A student needs a one- or two-sentence in-place refresher at each of these hand-off points — what an acetal is and why base cannot touch it, and why the amide form beats the enol — so that 'transfer it deliberately' is an instruction I can actually carry out rather than a reminder of what I have forgotten.",
+ "confidence": 0.8
+ }
+ ],
+ "strengths": [
+ "Every one of the 23 surfaced questions carries a complete three-level hint ladder, and the hints genuinely teach a route forward instead of restating the prompt — ch28-backbone-charge-count moves from 'charge comes only from phosphorus' to 'twelve beads need eleven links' to the pKa argument, and ch28-alpha-phosphorus-hotspot's level-2 hint highlights C4', C5' and the 5'-oxygen on the structure itself.",
+ "Wrong-answer explanations diagnose the specific wrong move rather than saying 'not quite': ch28-purine-pyrimidine-sort names the error as 'sorting on substituents', ch28-mismatch-failure-mode explains that size is precisely what is not wrong with A·C, and ch28-melting-temperature-rank tells a student whose ladder is inverted that every comparison was right and only the direction was wrong.",
+ "The prose names the misconception before the student makes it, in bold and in advance: 'Hydrogen bonding is not what holds the duplex together', 'Students look for the reactive carbon and there is not one', 'capping does not increase the yield of correct full-length product at all'. That is exactly the move a shaky reader needs.",
+ "The chapter consistently frames rules as derivable rather than memorisable and then actually does the derivation in the text (the two-condition argument for base pairing, the n-minus-one charge count, the alpha-versus-beta-versus-gamma argument), so there is a model of the reasoning even where the figure is missing.",
+ "Each molecule block carries a 'description' telling the reader what to look for in that structure rather than just naming it — a genuine reading instruction, and the reason the missing atom labels in stu-003 are frustrating rather than fatal."
+ ],
+ "open_questions": [
+ "The brief for this review stated that the reader shows the standard tier by default, but [internal source reference — not in this repo] sets detailLevel: \"expanded\" as the default and the compiled block markdown is the expanded text. I have written stu-011 on the assumption that expanded is the default and that lowering the tier is the risk; if the default is in fact standard, stu-011 becomes considerably more severe.",
+ "Empty video urls appear to be the platform norm at this stage (biomolecules-carbohydrates, biomolecules-lipids and amines-and-heterocycles all have zero non-empty video urls), so stu-001 and stu-002 are written about the missing mechanism/base-pair representation rather than about the video pipeline itself. The empty image url in stu-004, by contrast, is specific to this chapter — its other three image blocks resolve.",
+ "practice_check never reaching the compiled reader (stu-005) and sections carrying no objectives or depth (stu-006) both look like schema-level limitations rather than authoring omissions — the compiled section object only supports id/title/blocks. Is a reader-side checkpoint or objective surface planned, or should the practice_check content be re-expressed as reader blocks?",
+ "The reader-side .questions.json exposes only prompt_text and metadata (no student_config, answer_key or feedback_bundle), matching live chapters such as ethers-epoxides-thiols-and-sulfides. I have assumed the hints and wrong-answer explanations I reviewed do reach the student through the seeded bank rather than this file; if they do not, most of what I listed as strengths is invisible to the learner.",
+ "Should ch28-base-pair-comparison show both partners? It renders only the purine of each pair and names the pyrimidine in text, which asks a struggling student to recall thymine and cytosine from memory in a question about reading structures — I judged this too minor to file, but it points the same way as stu-001."
+ ]
+ },
+ {
+ "persona": "Accessibility Persona",
+ "persona_version": "1.0.0",
+ "chapter_id": "biomolecules-nucleic-acids",
+ "chapter_version": "1",
+ "model": "claude-opus-5",
+ "summary": "The authored accessibility metadata in this package is among the best I have reviewed: every one of the 24 assets carries both an alt_text and a long_description that convey real chemistry (ring sizes, numbered positions, stereocentre counts, donor/acceptor patterns) and that are honest about what the image does NOT show, and all 46 questions carry an accessible_description that describes the stimulus and the task without leaking the answer. Nothing in the prose or the items depends on colour, motion, hover, or spatial position as a sole carrier of meaning; the two colour mentions are chemistry facts, not required distinctions. The deferred video briefs are handled well — their production notes pre-commit to captions, transcripts, and narration that names every visual change, and the compiled reader marks all four video blocks is_hidden so no learner meets an unproduced media stub. The problems are all in delivery, not authoring. Two required activity types cannot be completed without sight and a pointing device: the two hotspot items expose atom targets whose only accessible names are element-plus-index (\"P atom 16\"), with no mapping from any chemical position named in the prompt or the description to a specific target, and the two structure_scaffold items offer no answer channel except an embedded Ketcher drawing canvas. Compounding both, the authored accessible_description is not surfaced by the renderers that serve these question types, and the compiler drops every asset long_description on the way into the reader, so the richest non-visual descriptions in the package never reach a learner. A smaller structural defect: the reader's RichText renderer does not implement markdown headings or ordered lists, so the longest section emits literal \"###\" strings and loses its only heading landmarks.",
+ "overall_score": 6.4,
+ "publication_blockers": [
+ "access-001",
+ "access-002"
+ ],
+ "findings": [
+ {
+ "finding_id": "access-001",
+ "location": {
+ "question_slug": "ch28-alpha-phosphorus-hotspot",
+ "concept_slug": "chain-extension-at-phosphorus",
+ "anchor_text": "Select the phosphorus atom that the free 3'-hydroxyl of the growing strand attacks."
+ },
+ "severity": "blocker",
+ "category": "interactive-fallback",
+ "observation": "Both hotspot items (ch28-alpha-phosphorus-hotspot, ch28-alpha-phosphorus-hotspot-v2) require selecting one specific heavy atom on a rendered structure. The atom targets are real keyboard-focusable buttons — that part is fine — but their only accessible name is generated as `${atom.symbol} atom ${atom.index + 1}` from the RDKit heavy-atom index ([internal source reference — not in this repo]). For the ATP stimulus the three phosphorus targets announce as \"P atom 16\", \"P atom 20\", \"P atom 24\"; the answer key is atom_15, the alpha phosphorus. Nothing in the prompt, the student_config, the rendered payload (atoms carry only id/index/x/y/symbol — [internal source reference — not in this repo]), or the accessible_description maps a chemical position (alpha phosphorus, C5', the free 3'-hydroxyl) onto an atom number. A learner who cannot see the drawing knows exactly which atom is chemically correct and still cannot tell which button it is; the only way to recover the mapping is to know the SMILES traversal order, which is never disclosed. The v2 item is worse: the answer is atom_7, one of two free hydroxyls, and its accessible_description says only \"Each sugar carries one further free hydroxyl\" without saying which of the two announced oxygen buttons is the 3' one.",
+ "learner_impact": "A blind or low-vision learner, or anyone using a screen reader or switch access, can tab to every target and still has no non-guessing route to the correct one — a 1-in-31 (v1) or 1-in-33 (v2) selection. The chemistry is fully understood and the item is still unanswerable. Learners with cognitive or motor differences who rely on the accessible name rather than the picture are affected the same way.",
+ "evidence": "student_config.molecule_smiles \"Nc1ncnc2c1ncn2[C@@H]1O[C@H](COP(=O)(O)OP(=O)(O)OP(=O)(O)O)[C@@H](O)[C@H]1O\" with answer_key.correct_option_ids [redacted]; [internal source reference — not in this repo] aria-label=`${atom.symbol} atom ${atom.index + 1}`; accessibility_bundle.accessible_description \"Every heavy atom in the drawing is a clickable region. The task is to select the single atom named in the question.\" Only the level-2 hint (\"Highlighted are the sugar's C4' and C5' carbons together with the 5'-oxygen\") names positions, and reaching it costs a hint rung.",
+ "recommended_outcome": "A learner who cannot see the structure needs a disclosed, stable correspondence between the chemical positions the prompt names and the selectable targets — the target's accessible name must carry its chemical identity, or the item must offer an equivalent non-spatial route to the same answer. Note that ch28-pyrophosphate-driving-force-v2 already assesses the same 'why alpha' reasoning in text-only form, so an equivalent route exists at concept level but not for this item.",
+ "confidence": 0.93
+ },
+ {
+ "finding_id": "access-002",
+ "location": {
+ "question_slug": "ch28-draw-thymine",
+ "concept_slug": "purine-and-pyrimidine-bases",
+ "anchor_text": "Draw thymine as it exists at equilibrium."
+ },
+ "severity": "blocker",
+ "category": "interactive-fallback",
+ "observation": "The two structure_scaffold items (ch28-draw-thymine, ch28-draw-thymine-v2) are graded on a drawn structure (grading_rules.structure_engine \"rdkit\", answer_key.smiles). The only answer surface the activity shell provides is StructureWorkspaceRenderer, which embeds the generator's Ketcher drawing canvas in an iframe (`/generator?embed=1&toolbarProfile=lti_drawing`) and reads back ket/molfile/smiles over a postMessage bridge. There is no SMILES text field, no named-fragment builder, and no alternate submission channel anywhere in that renderer; its entire non-canvas UI is the sentence \"Draw your answer in the {label} tool above\" plus a link that opens the same canvas full-screen. The authored accessible_description (\"A blank drawing canvas is provided…\") correctly describes the task but offers no way to perform it.",
+ "learner_impact": "A learner who cannot use a pointing device, or who cannot see a canvas, cannot submit any answer at all — not a degraded answer, none. The two items are the chapter's only drawing assessment; the concept has other item types, but this particular skill (produce the lactam tautomer with both N-H hydrogens explicit) has no accessible equivalent in the bank.",
+ "evidence": "student_config [redacted]; grading_rules {\"structure_engine\": \"rdkit\"}; [internal source reference — not in this repo] (iframe-only, no text input path).",
+ "recommended_outcome": "The 'produce a structure' skill needs an answer channel that does not require pointer input or vision — some equivalent way for the learner to express the same structure and be graded on it, or an equivalent item that assesses the same lactam/ring/substituent decisions without drawing.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "access-003",
+ "location": {
+ "question_slug": "ch28-alpha-phosphorus-hotspot-v2",
+ "anchor_text": "accessibility_bundle.accessible_description"
+ },
+ "severity": "high",
+ "category": "media-equivalence",
+ "observation": "All 46 questions carry a well-written accessible_description (195–623 characters, none empty, none leaking), and the field survives compilation into compiled/question-set.json and is carried into the served envelope ([internal source reference — not in this repo] sets accessibilityBundle). But only two renderers in the whole frontend read it — ReactionCoordinateQuestionRenderer and MolecularGeometryRenderer — plus the standalone QuestionTypeDemoPage. None of the question types this chapter actually uses (hotspot, structure_scaffold, comparison_matrix, error_repair, matching_pairs, categorize_groups, rank_order, multi_select, single_select, short_answer, numeric_with_units, structured_reasoning) consumes it. The descriptions are therefore inert at the point of delivery.",
+ "learner_impact": "Every learner who depends on a described stimulus — screen reader users above all — gets the raw rendered structure with a generic or label-only alt string instead of the chemically substantive description that was written for exactly this purpose. This is also what turns access-001 from a hard problem into an impossible one, since the hotspot description is the only place the stimulus is narrated at all.",
+ "evidence": "Grep across frontend/src for accessible_description / accessibilityBundle returns only [internal source reference — not in this repo], [internal source reference — not in this repo], [internal source reference — not in this repo], and type declarations. Compiled question-set.json questions[] all include an accessibility_bundle key.",
+ "recommended_outcome": "The stimulus description a learner needs must actually reach the learner on the surfaces where these question types are answered; authored descriptions that no delivery path renders provide no access.",
+ "confidence": 0.87
+ },
+ {
+ "finding_id": "access-004",
+ "location": {
+ "asset_id": "mol-atp",
+ "section_id": "nugget-chain-extension-at-phosphorus",
+ "anchor_text": "Adenosine 5'-triphosphate: alpha, beta, and gamma phosphorus"
+ },
+ "severity": "high",
+ "category": "media-equivalence",
+ "observation": "Every asset in the package carries both accessibility.alt_text and accessibility.long_description, but the reader compiler emits only alt_text. Reader molecule blocks contain {name, smiles, alt_text, description, generator_href} and image blocks contain {url, alt_text, caption, attribution} — long_description appears nowhere in frontend/public/reader/topic-chapters/biomolecules-nucleic-acids.json, and StructureCard/ReaderProviderImage have no field to render it. For the simple bases the alt_text is nearly sufficient, but for the structures that carry the chapter's hardest ideas the long_description holds information the alt_text does not: that the alpha phosphorus is the atom attacked and that beta and gamma leave as pyrophosphate (mol-atp); which hydroxyl defines which strand end and that the linkage carries one negative charge at pH 7 (mol-dinucleotide-dapdt); how the cyclic intermediate forms and why the products are a 2'/3' mixture (mol-uridine-23-cyclic-phosphate); that the groove asymmetry follows from both glycosidic bonds leaving the pair on the same side (pdb-b-dna-dodecamer); and the reagent for each of the four cycle steps (roadmap-phosphoramidite-cycle).",
+ "learner_impact": "A learner working from descriptions alone gets a correct but shallower reading of exactly the five figures that carry the mechanistic payload, while a sighted learner can interrogate the drawing for as long as they like. The gap is largest at the two places the chapter treats as its climax — substitution at the alpha phosphorus and the 2'-OH cleavage intermediate.",
+ "evidence": "topic.package.json assets[].accessibility.long_description exists for all 24 assets; jq over the compiled reader shows block content keys {name, smiles, alt_text, description, generator_href} for molecule and {url, alt_text, caption, attribution} for image — no long_description key anywhere in the file.",
+ "recommended_outcome": "The longer structured description that was written for each figure needs to be reachable by a learner in the reader, not only present in the source package; the five mechanism-bearing figures named above are where the loss is material.",
+ "confidence": 0.92
+ },
+ {
+ "finding_id": "access-005",
+ "location": {
+ "question_slug": "ch28-rna-stability-error-repair",
+ "anchor_text": "Structure for the flawed step"
+ },
+ "severity": "medium",
+ "category": "alt-text-quality",
+ "observation": "Structures rendered inside question stimuli get alt text that names the image rather than describing it. ErrorRepairRenderer hard-codes alt=\"Structure for the flawed step\" for the uridine 2',3'-cyclic phosphate that is the whole point of ch28-rna-stability-error-repair. MatchingRenderer sets alt={item.text}, so the four nucleoside drawings in ch28-sugar-and-base-identity announce as \"Adenosine\", \"2'-Deoxyadenosine\", \"Thymidine\", \"Cytidine\" — the visible label repeated, with no structural content. ComparisonMatrixRenderer does the same with the case label (\"The A·T pair: adenine (structure shown) paired with thymine\"). Per the rubric, alt text that only names an image is a failure, not a pass.",
+ "learner_impact": "For the matching item the effect is to silently change the task: a screen reader user answers from the compound name (which fully determines the answer) while a sighted learner reads the structure, so the two are not doing the same exercise. For the error_repair item the stimulus structure is simply unavailable — the learner must reconstruct the cyclic phosphate from the draft prose alone.",
+ "evidence": "[internal source reference — not in this repo]; [internal source reference — not in this repo]; [internal source reference — not in this repo]. The enrichment that produces these images ([internal source reference — not in this repo]) attaches imageUrl but no description.",
+ "recommended_outcome": "Structures shown inside a question need alt text that conveys the chemistry the sighted learner reads off the drawing, without disclosing the answer — a repeated label is not an equivalent.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "access-006",
+ "location": {
+ "section_id": "nugget-reading-and-writing-dna",
+ "nugget_id": "nugget-reading-and-writing-dna",
+ "anchor_text": "### Reading: Sanger sequencing"
+ },
+ "severity": "medium",
+ "category": "keyboard-operability",
+ "observation": "The reader's RichText component implements only paragraph splitting, **bold**, and `code` — it has no handling for markdown headings or lists. The default (expanded) text of nugget-reading-and-writing-dna contains three `###` subheadings and a four-item numbered list, so the longest section of the chapter renders \"### Reading: Sanger sequencing\", \"### Writing: the phosphoramidite cycle\", and \"### Why the direction is reversed\" as literal paragraph text, and \"1. **Detritylation.** … 2. **Coupling.** … 3. **Capping.** … 4. **Oxidation.**\" as four ordinary paragraphs. The document heading outline is therefore h1 (chapter) → h2 (section) → h4 (structure card names) with nothing in between, and the section's internal structure is invisible to assistive technology.",
+ "learner_impact": "Screen reader users navigating by heading cannot jump to the sequencing or synthesis subsections of the chapter's densest section and must read it linearly. The list semantics that would announce \"list of 4 items, item 1 of 4\" are lost, which matters here because the four steps are an ordered cycle and the chapter's rank_order item assesses exactly that order. Sighted learners also see raw \"###\" characters, and the h2→h4 jump is a heading-order irregularity for everyone.",
+ "evidence": "[internal source reference — not in this repo] (regex handles only `**` and backticks; paragraphs split on blank lines). Compiled reader nugget-reading-and-writing-dna markdown contains three `### …` lines and `1.`–`4.` list markers. StructureCard uses `Heading as=\"h4\"`; TopicPackageChapterRenderer uses h1 for the chapter and h2 for each section.",
+ "recommended_outcome": "The subsection and step structure the author wrote needs to survive into the rendered page as real structure a learner can navigate and an assistive technology can announce, in correct heading order.",
+ "confidence": 0.94
+ },
+ {
+ "finding_id": "access-007",
+ "location": {
+ "question_slug": "ch28-alpha-phosphorus-hotspot",
+ "anchor_text": "Click an atom to circle it; click a bonded neighbor to grow the circle"
+ },
+ "severity": "medium",
+ "category": "keyboard-operability",
+ "observation": "Three smaller issues in the same workspace. (a) The authored student_config sets select_count \"one\", but nothing reads select_count — grep finds it only in demo fixtures and the mechanism hotspot service — so the renderer's contiguous-growth logic lets a learner accumulate a multi-atom selection on a single-answer item. (b) The workspace instruction is pointer-only phrasing (\"Click an atom to circle it; click a bonded neighbor to grow the circle; click a distant atom to start over\"), which is both inaccurate for keyboard users and the only place the growth behaviour is explained. (c) The selection readout that names the current selection (\"selected: P16\") sits in a plain <Text>, not an aria-live region, so a screen reader user who activates a target hears the button's own aria-pressed change but gets no announcement of the resulting selection set.",
+ "learner_impact": "A keyboard or screen reader user exploring the targets by activating them — the natural way to find out what is there when you cannot see the drawing — silently builds a multi-atom answer on an item that expects one atom, and gets no announced confirmation of what is currently selected. Combined with access-001 this makes the workspace not just hard to answer but hard to inspect safely.",
+ "evidence": "[internal source reference — not in this repo] (adds an atom when it touches the existing selection; no select_count check) and the instruction/readout <Text> at the end of the molecule branch; student_config [redacted] in both hotspot items.",
+ "recommended_outcome": "The single-answer constraint the item declares needs to be enforced and announced on the surface the learner actually operates, and the operating instructions need to describe the keyboard route, not only clicking.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "access-008",
+ "location": {
+ "asset_id": "roadmap-phosphoramidite-cycle",
+ "section_id": "nugget-reading-and-writing-dna",
+ "anchor_text": "One turn of the phosphoramidite synthesis cycle"
+ },
+ "severity": "low",
+ "category": "media-equivalence",
+ "observation": "The synthesis_roadmap asset has image_url null, so the compiled reader emits an image block with url \"\". ReaderProviderImage falls back to rendering content.alt_text as an italic paragraph with the caption beneath it. No learner — sighted or not — receives a figure here; everyone receives the 60-word alt string. The four-stage narration with the reagent for each arrow lives only in the dropped long_description (see access-004), although the surrounding prose does state all four reagents.",
+ "learner_impact": "Low, because the prose covers the same reagents and every learner is in the same position. The residual issue is that the fallback paragraph is not identified as standing in for a figure, so a screen reader user encounters an unattributed italic sentence followed by a caption for an image that was never announced.",
+ "evidence": "topic.package.json asset roadmap-phosphoramidite-cycle image_url null; compiled reader block blk-07do3m2b content.url \"\"; [internal source reference — not in this repo] when resolved.imageUrl is falsy.",
+ "recommended_outcome": "When a figure is absent, the text standing in for it needs to be identifiable as the figure's substitute rather than appearing as stray prose next to an orphan caption.",
+ "confidence": 0.8
+ },
+ {
+ "finding_id": "access-009",
+ "location": {
+ "section_id": "nugget-purine-and-pyrimidine-bases",
+ "asset_id": "mol-adenine",
+ "anchor_text": "Described as:"
+ },
+ "severity": "low",
+ "category": "alt-text-quality",
+ "observation": "StructureCard sets the same string both as the rendered image's alt attribute and as visible body text prefixed \"Described as: \". Across this chapter's 34 molecule blocks that means every structure description is announced twice in a row by a screen reader.",
+ "learner_impact": "Verbosity rather than lost access — and the visible copy is a genuine benefit for sighted learners who want the readout. But on a chapter with 34 structure cards the duplication is substantial listening overhead.",
+ "evidence": "[internal source reference — not in this repo] followed by `<Text fontSize=\"xs\">Described as: {altText}</Text>`.",
+ "recommended_outcome": "The description should be available once to each learner in the form they use, without assistive technology hearing it twice per figure.",
+ "confidence": 0.83
+ },
+ {
+ "finding_id": "access-010",
+ "location": {
+ "section_id": "nugget-chain-extension-at-phosphorus",
+ "anchor_text": "One residue added: substitution at the alpha phosphorus"
+ },
+ "severity": "low",
+ "category": "media-equivalence",
+ "observation": "All four video_briefs are production_status \"deferred\" and the compiled reader still emits four video blocks whose content.url is \"\". They are suppressed only by is_hidden: true, which ReaderBlockRenderer honours (returns null) and ChapterReviewView filters. Nothing else guards them: the personalization layer filters video blocks on a separate showVideos preference, and the video branch of the renderer would emit a \"Watch →\" router link to an empty path if the block were ever rendered.",
+ "learner_impact": "None today — I confirmed no surface renders them. The risk is that a single flag change turns four dead media stubs live, and a dead \"Watch\" link is worse for a screen reader user than an absent one, because it is announced as an available alternative that does not exist.",
+ "evidence": "Compiled reader blocks blk-nagsj6cp, blk-lruv789u, blk-aoo702gd, blk-g9dfr0ap all have content.url \"\" and is_hidden true; [internal source reference — not in this repo].",
+ "recommended_outcome": "An unproduced video should not exist as a linkable block at all; suppression should not depend on a single flag whose removal would expose a link to nowhere.",
+ "confidence": 0.78
+ }
+ ],
+ "strengths": [
+ "Every one of the 24 assets carries both alt_text and long_description, and they describe chemistry rather than naming the picture — ring sizes, numbered ring positions, which nitrogen bonds to the sugar, stereocentre counts, and the donor/acceptor pattern along each pairing edge.",
+ "The image descriptions are explicitly honest about their own limits: clip-dna-double-helix states it 'does not depict individual atoms, the two grooves of differing width, or which base occupies any particular rung', and pdb-b-dna-dodecamer states it 'is a still rendering and conveys no motion or colour-coded sequence information'.",
+ "All 46 questions carry an accessible_description; none leaks the answer, and each names the task precisely. Text-only items say so explicitly ('no structures are shown'), which spares a screen reader user hunting for a figure that does not exist.",
+ "No distinction anywhere in the chapter rests on colour, motion, hover, or spatial position alone. The only colour references are chemistry facts (the orange DMT cation as a coupling-efficiency readout, the four-dye Sanger trace) and both are explained in words.",
+ "The base-pairing section deliberately carries no visual-only pairing diagram: donor/acceptor patterns are stated in prose and repeated in each base's alt text, so nothing about A·T versus G·C is available only to a viewer.",
+ "The deferred video briefs record their accessibility requirements up front — closed captions, narration naming every visual change, a text transcript, and an explicit rule that 'no distinction in this brief may rest on colour, highlight, or motion alone' — and each notes which reader nugget carries the same content.",
+ "rank_order, categorize_groups, matching_pairs, comparison_matrix and error_repair are all keyboard-complete by construction: native <Select> per item, native radios, a semantic table with scope'd headers, and move-up/move-down buttons with an aria-live position readout rather than drag-only reordering.",
+ "The hotspot's level-2 hints name the highlighted atoms in words ('Highlighted are the sugar's C4' and C5' carbons together with the 5'-oxygen'), so the hint ladder does not depend on seeing the highlight."
+ ],
+ "open_questions": [
+ "Does any production delivery surface (ChapterHomeworkPanel, PublicQuestionSetPanel, the LTI activity shell) render accessibility_bundle.accessible_description for these question types? I could only find ReactionCoordinateQuestionRenderer, MolecularGeometryRenderer, and the standalone QuestionTypeDemoPage consuming it, so access-003 is logged as a barrier rather than a pass — but a surface I did not inspect could change that.",
+ "Is there any non-canvas answer channel for structure_scaffold (an instructor-graded text alternative, an accommodation path, a SMILES entry mode in the embedded generator's lti_drawing toolbar profile)? I inspected StructureWorkspaceRenderer and found none, but I could not exercise the running generator embed.",
+ "How much of Ketcher's own keyboard support survives inside the `?embed=1&toolbarProfile=lti_drawing` profile? Even full keyboard support would not resolve access-002 for a non-visual learner, but it would change the severity for a pointer-limited one.",
+ "Both hotspot items and both structure_scaffold items are demo_eligible: false — are they nonetheless part of the assigned/required set for this chapter, or instructor-selectable? If a chapter assignment can be built without them, the blockers become conditional on the instructor's selection rather than unconditional.",
+ "access-003, access-005, access-006, and access-009 are platform-renderer defects rather than chapter-authoring defects; they are reported here because they determine whether this chapter's (excellent) authored metadata reaches a learner, but fixing them is not a chapter edit."
+ ]
+ },
+ {
+ "persona": "Learner with Visual Preference",
+ "persona_version": "1.0.0",
+ "chapter_id": "biomolecules-nucleic-acids",
+ "chapter_version": "1",
+ "model": "claude-opus-5",
+ "summary": "This chapter is figure-dense by count and figure-poor where it matters. Thirty-three molecule blocks (from 20 unique assets), two clipart drawings, one crystal-structure still and one roadmap are distributed across ten sections, and the individual structures are well chosen and carefully alt-texted. But almost every idea in the chapter that is inherently spatial is carried by prose alone: no figure anywhere shows two bases hydrogen bonded to each other, none shows antiparallel strand direction or the 120-degree glycosidic-bond geometry that produces the two grooves, and none shows the in-line attack geometry at phosphorus that both mechanisms in the chapter turn on. Two media containers ship broken — four video blocks compile with an empty url and a stage-direction sentence as their description, and the phosphoramidite roadmap compiles to an image block with url \"\" so its fully authored five-node, four-step spec never reaches a student. Compounding this, the reader renders plain skeletal structures with no atom numbering while nearly every caption instructs the reader to \"locate N9\", \"identify the 2' hydroxyl\", or \"identify the alpha phosphorus\" — the picture cannot answer the question its own caption asks. Layout works against the figures too: each section is one 3000-7000 character text block followed by a stack of unlabelled structures, so no figure is ever adjacent to the sentence it supports. The deliberate omission of a reaction-coordinate diagram is correct and should be kept; the omission of any arrow-pushing or geometry figure is not. Direction of fix is as much subtraction as addition — several structures repeat verbatim three and four times in sections where they teach nothing new.",
+ "overall_score": 5.4,
+ "publication_blockers": [
+ "vis-001",
+ "vis-002"
+ ],
+ "findings": [
+ {
+ "finding_id": "vis-001",
+ "location": {
+ "section_id": "nugget-base-pairing-and-hydrogen-bonding",
+ "asset_id": "video-base-pairing",
+ "anchor_text": "Show adenine and thymine facing one another with their pairing edges towards the centre; annotate each donor with the word donor"
+ },
+ "severity": "blocker",
+ "category": "figure-purpose",
+ "observation": "Four video blocks compile into the reader with an empty url and with the first sentence of the production storyboard as their student-facing description. In the reader they render as a card badged \"Video — ChemIllusion\" with a \"Watch →\" link whose target is the empty string ([internal source reference — not in this repo] case \"video\" builds a RouterLink to c.url with no empty-url guard, and TopicPackageChapterRenderer's applyPrefs filters nothing on url). All four video_briefs carry production_status \"deferred\".",
+ "learner_impact": "A reader sees four apparently-playable media affordances at the four highest-value moments in the chapter — nucleotide assembly, base pairing, RNA self-cleavage, and chain extension — clicks them, and nothing happens. The text they do get is written to an animator, not a student (\"Open with adenine and 2-deoxy-beta-D-ribofuranose drawn side by side and clearly separated\"), which reads as an editorial leak and tells the reader that a visual explanation exists somewhere they cannot reach.",
+ "evidence": "Reader blocks blk-nagsj6cp, blk-lruv789u, blk-aoo702gd, blk-g9dfr0ap each have content.url == \"\" and content.description == storyboard[0] of the corresponding brief. topic.package.json video_briefs: all four have production_status \"deferred\", status \"needs_review\".",
+ "recommended_outcome": "The four deferred animations must not occupy a live media slot in the reader. Either the slot is removed until an asset exists, or the moment is served by something a reader can actually consume; each of the four briefs describes a stepwise sequence, so a sequenced static treatment would satisfy the same learning goal. Whatever appears there must be addressed to the student, never a storyboard instruction.",
+ "confidence": 0.97
+ },
+ {
+ "finding_id": "vis-002",
+ "location": {
+ "section_id": "nugget-reading-and-writing-dna",
+ "asset_id": "roadmap-phosphoramidite-cycle",
+ "anchor_text": "One turn of the phosphoramidite synthesis cycle"
+ },
+ "severity": "blocker",
+ "category": "figure-purpose",
+ "observation": "The only genuinely sequential figure in the chapter compiles to an image block with url \"\" (blk-07do3m2b). The asset is fully authored — spec with five labelled nodes, four steps with reagents and notes, and three scientific caveats — but the reader has no block type that renders a synthesis_roadmap spec, so the spec is dropped and an empty image container is emitted. Nothing renders.",
+ "learner_impact": "The phosphoramidite cycle is the one topic in the chapter where the ordering of operations is the content: detritylate, couple, cap, oxidise, and the reader must see that capping sits between coupling and oxidation and that oxidation is what converts P(III) to P(V). That ordering is currently available only as four numbered prose paragraphs inside a 6842-character section, and the chapter's longest section is left with zero working figures. It is also the material for question ch28-phosphoramidite-step-order, which asks students to rank the steps.",
+ "evidence": "Compiled reader block blk-07do3m2b: {\"url\":\"\",\"alt_text\":\"A four-step linear roadmap...\",\"caption\":\"One turn of the phosphoramidite synthesis cycle\"}. topic.package.json asset roadmap-phosphoramidite-cycle carries a complete .spec (nodes n_dmt, n_free, n_phosphite, n_capped, n_phosphate; four steps; three caveats) and image_url is absent.",
+ "recommended_outcome": "The authored cycle content has to reach the student in a form that shows the four operations in order with their reagents; today it reaches them as nothing at all. Either the reader must be able to render the roadmap spec it is already given, or the spec must be turned into an asset the image block can serve.",
+ "confidence": 0.96
+ },
+ {
+ "finding_id": "vis-003",
+ "location": {
+ "section_id": "nugget-base-pairing-and-hydrogen-bonding",
+ "concept_slug": "base-pairing-and-hydrogen-bonding",
+ "anchor_text": "Bring the two edges together and the pattern reads donor-acceptor against acceptor-donor."
+ },
+ "severity": "high",
+ "category": "visual-opportunity",
+ "observation": "No figure anywhere in the chapter shows two bases paired. The base-pairing section supplies four separate single-base renders — adenine, thymine, guanine, cytosine — each drawn in isolation, in no particular orientation, and each a verbatim repeat of the same asset already shown in the preceding section. The two-versus-three hydrogen bond comparison, the interlocking donor/acceptor registry, the geometric width argument (purine roughly twice a pyrimidine), and the two failed pairs are all carried entirely by prose.",
+ "learner_impact": "The chapter's own thesis is that base pairing is \"something to read off the structures\", but the structures provided cannot be read that way: they are not facing one another, their pairing edges are not oriented toward each other, and nothing marks which edge is the pairing edge. A reader who cannot already mentally rotate and juxtapose two heterocycles is thrown back on memorising A-T and G-C, which is exactly the outcome the section says it is avoiding.",
+ "evidence": "Section nugget-base-pairing-and-hydrogen-bonding blocks: blk-88141f5t (mol-adenine), blk-29zfjge1 (mol-thymine), blk-01pzta96 (mol-guanine), blk-td6ho6r0 (mol-cytosine) — identical smiles, alt_text and description strings to blocks blk-svvsfaxs, blk-ycisjqh6, blk-ketx5kka, blk-cyqo8f3t in nugget-purine-and-pyrimidine-bases. No asset in the package has type reaction, pair, or any two-molecule figure; there is no A·T or G·C figure.",
+ "recommended_outcome": "The reader needs to see the two legitimate pairs as pairs, with each donor and acceptor identified in text (not by colour alone) and the two-versus-three bond count visible, plus at least one of the two rejected pairs shown failing. The four isolated single-base repeats in this section are not serving that need and could be replaced by it rather than added to.",
+ "confidence": 0.93
+ },
+ {
+ "finding_id": "vis-004",
+ "location": {
+ "asset_id": "mol-atp",
+ "section_id": "nugget-chain-extension-at-phosphorus",
+ "anchor_text": "Identify the alpha phosphorus that a growing chain attacks, and the beta and gamma pair that leave together as pyrophosphate."
+ },
+ "severity": "high",
+ "category": "figure-purpose",
+ "observation": "Nearly every molecule caption instructs the reader to find a numbered position, but the reader renders plain skeletal structures with no atom numbering, no position labels, and no highlighting. The reader's molecule block content carries only name, smiles, alt_text, description and generator_href; the shared render preferences file states explicitly that \"Wedge/dash bonds and atom indices are never exposed to viewers\", and none of the 20 molecule assets in this package authors any per-figure rdkit_options or highlight.",
+ "learner_impact": "The figure and its caption are out of contract. A reader told to \"identify the alpha phosphorus\" sees three chemically identical-looking P atoms in a row with nothing distinguishing them; told to \"locate N9\" sees five unlabelled nitrogens; told to \"identify the 2' hydroxyl\" sees three unlabelled hydroxyls on a furanose. The reader who could already do this without the figure does not need it, and the reader who needs it cannot use it — which inverts the point of having a figure at all.",
+ "evidence": "Captions requiring a position the render cannot show include mol-atp (\"Identify the alpha phosphorus\"), mol-adenine (\"locate N9\"), mol-uridine (\"Identify the 2' hydroxyl\"), mol-damp (\"note the free 3' hydroxyl\"), mol-dinucleotide-dapdt (\"find the free 5' and 3' ends\"), mol-beta-d-ribofuranose (\"Count the three hydroxyls at C2', C3', and C5'\"). [internal source reference — not in this repo] documents the atom-index lock; compiled molecule blocks contain no rdkit_options key.",
+ "recommended_outcome": "Where a caption names a position, the reader has to be able to find that position in the drawing. The chapter's whole primed/unprimed numbering apparatus is only teachable if the numbering is visible somewhere the student is looking. Any solution must not depend on colour alone, since several captions distinguish two positions at once (alpha versus beta/gamma; 2' versus 3').",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "vis-005",
+ "location": {
+ "section_id": "nugget-dna-double-helix-and-base-stacking",
+ "concept_slug": "dna-double-helix-and-base-stacking",
+ "asset_id": "pdb-b-dna-dodecamer",
+ "anchor_text": "they emerge from the same side, subtending an angle of about 120 degrees rather than 180"
+ },
+ "severity": "high",
+ "category": "visual-opportunity",
+ "observation": "The most spatial section in the chapter has the longest prose (5360 characters at the expanded tier) and exactly one figure: an unannotated crystal-structure still hotlinked from cdn.rcsb.org. Four inherently geometric claims are made with no visual support — that the strands are antiparallel, that the two glycosidic bonds of a pair subtend about 120 degrees and therefore produce one wide and one narrow groove, that base pairs stack 3.4 angstroms apart roughly perpendicular to the axis, and that the major groove presents four distinguishable donor/acceptor/methyl patterns while the minor groove does not.",
+ "learner_impact": "The 120-degree argument is the only derivation in the chapter that explains why grooves exist at all, and it is the sort of claim a reader either sees in one glance or never believes. On the supplied still, the major and minor grooves are present but unlabelled and, at that rendering size, not obviously unequal; the antiparallel direction is not marked at either end; and the major-groove readout pattern is not visible at all. The section that most needs a picture has the thinnest visual layer in the chapter.",
+ "evidence": "Section nugget-dna-double-helix-and-base-stacking contains exactly three blocks: blk-5o9wf2fc (text), blk-gs5dxm9v (image, url https://cdn.rcsb.org/images/structures/1bna_assembly-1.jpeg, no attribution field), blk-0rfpxvzk (external link). The asset's own long_description concedes \"The image is a still rendering and conveys no motion or colour-coded sequence information.\" The section-1 schematic helix asset clip-dna-double-helix likewise concedes it \"does not depict... the two grooves of differing width\", and it is not used in this section.",
+ "recommended_outcome": "A reader needs to see, at minimum, the strand-direction labels at both ends of a duplex and the geometric origin of groove asymmetry — the two glycosidic bonds leaving a pair on the same side. The stacking distance and the major-groove information argument are secondary. Note also that this single figure is the chapter's only externally hosted image, so it is the one figure that can fail to load in the installable reader.",
+ "confidence": 0.92
+ },
+ {
+ "finding_id": "vis-006",
+ "location": {
+ "section_id": "nugget-rna-versus-dna-hydrolytic-stability",
+ "concept_slug": "rna-versus-dna-hydrolytic-stability",
+ "anchor_text": "The alkoxide attacks phosphorus **in line** with the 5'-oxygen of the following residue"
+ },
+ "severity": "high",
+ "category": "visual-opportunity",
+ "observation": "Both mechanisms taught in the chapter turn on a spatial relationship that no figure depicts. For RNA cleavage: the 2'-alkoxide sits two atoms from its target, held rigid by the furanose, and attacks in line with the departing 5'-oxygen through a five-membered ring closure. For chain extension: the 3'-hydroxyl attacks the alpha phosphorus in line with the leaving pyrophosphate through a trigonal-bipyramidal arrangement with inversion at phosphorus. The only structural figures supplied are the isolated starting material (uridine) and the isolated product (uridine 2',3'-cyclic phosphate); the geometry between them is prose-only. The chapter itself concedes the point: \"it is worth drawing for yourself rather than reading.\"",
+ "learner_impact": "\"In line\" and \"two atoms apart\" and \"trigonal bipyramidal\" are claims about arrangement in space; a reader who cannot construct that arrangement from a sentence has nothing to fall back on, and the chapter's strongest explanatory move — that the reaction is fast because the nucleophile is tethered in the right orientation, not because it is a better nucleophile — becomes an assertion. Telling a reader to draw it themselves presumes the very skill the figure would build.",
+ "evidence": "Section nugget-rna-versus-dna-hydrolytic-stability figures: clip-rna-single-strand, mol-uridine, mol-uridine-23-cyclic-phosphate, mol-adenosine, mol-2-deoxyadenosine, mol-dinucleotide-dapdt — all single static structures, none showing the alkoxide, the attack trajectory, or the DNA control case side by side. Section nugget-chain-extension-at-phosphorus figures: mol-atp, mol-dinucleotide-dapdt, mol-damp — none shows the 3'-OH and the alpha phosphorus in the same drawing. No curved-arrow or transition-state asset exists in the package.",
+ "recommended_outcome": "The two substitutions at phosphorus need the nucleophile, the electrophilic phosphorus, and the leaving group visible in one frame with their relative arrangement apparent; the DNA control (hydrogen where the nucleophile would be) is the natural companion. The chapter's decision to omit a reaction-coordinate diagram is right and should be kept — no energy profile is taught — but the omission of any arrow-pushing or geometry figure is a genuine gap here rather than an appropriate restraint.",
+ "confidence": 0.91
+ },
+ {
+ "finding_id": "vis-007",
+ "location": {
+ "question_slug": "ch28-pairing-donors-acceptors",
+ "section_id": "nugget-base-pairing-and-hydrogen-bonding",
+ "anchor_text": "Select every statement below that reads that pattern correctly off the structures."
+ },
+ "severity": "high",
+ "category": "visual-opportunity",
+ "observation": "Two questions instruct the student to work from structures that the question does not show. ch28-pairing-donors-acceptors says \"reads that pattern correctly off the structures\" and ch28-mismatch-failure-mode says \"Working from the structures rather than from memory\", yet each item's own accessible_description states \"no structures are shown\". Across the whole 46-question set only four items carry any structure at all (two hotspot, two error_repair), plus two blank-canvas structure_scaffold items.",
+ "learner_impact": "The stem promises a reading task and delivers a recall task, which both misleads the student about how the item will be graded and quietly abandons the chapter's central pedagogical claim that the pairing rules are derivable. It also makes the assessment surface a poor rehearsal of the skill the reader prose is trying to build.",
+ "evidence": "compiled/question-set.json — ch28-pairing-donors-acceptors (multi_select, student_config keys: options only, accessible_description: \"...no structures are shown\"); ch28-mismatch-failure-mode (single_select, same). By contrast ch28-rna-cleavage-intermediate attaches structure_smiles to all four options and ch28-alpha-phosphorus-hotspot supplies molecule_smiles, so per-item structures are clearly supported by the platform.",
+ "recommended_outcome": "Items whose stems tell the student to read a structure must present the structure to read; otherwise the stems should stop claiming they do. The two questions in question are the ones that most directly rehearse the donor/acceptor skill, so they are the highest-value place to close the gap.",
+ "confidence": 0.94
+ },
+ {
+ "finding_id": "vis-008",
+ "location": {
+ "section_id": "nugget-nucleoside-analogue-drugs",
+ "asset_id": "mol-zidovudine",
+ "anchor_text": "Find the single change from thymidine and see why a chain that has incorporated this residue cannot be extended."
+ },
+ "severity": "medium",
+ "category": "figure-purpose",
+ "observation": "The analogue section asks for comparisons against reference structures it does not supply, and supplies a reference structure nobody asked for. Zidovudine's caption says \"Find the single change from thymidine\" but thymidine appears only in section 3, six sections earlier. Acyclovir's and dideoxyadenosine's captions likewise invite comparison. The reference structure that is provided, 2'-deoxyadenosine, is placed last — after all three analogues — and is the wrong comparator for two of them (AZT is a thymidine analogue, acyclovir a guanosine analogue).",
+ "learner_impact": "A one-change comparison only works if both structures are in view at once. As ordered, a reader must hold AZT in memory, scroll back six sections to thymidine, and return; most will simply accept the prose statement, which is precisely the memorise-don't-derive behaviour the section is arguing against.",
+ "evidence": "Section nugget-nucleoside-analogue-drugs block order: blk-m2dlphqz (mol-zidovudine), blk-82hw2jpe (mol-acyclovir), blk-ty9cuwzj (mol-dideoxyadenosine), blk-uorhywcp (mol-2-deoxyadenosine). mol-thymidine is bound only to nugget-n-glycosidic-bond; mol-guanine appears only in sections 2 and 5.",
+ "recommended_outcome": "Each analogue needs its actual natural counterpart adjacent to it at the moment of comparison, in the order reference-then-analogue. The trailing 2'-deoxyadenosine as currently placed is not doing that job for any of the three.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "vis-009",
+ "location": {
+ "asset_id": "mol-guanine-lactim",
+ "section_id": "nugget-purine-and-pyrimidine-bases",
+ "anchor_text": "Compare with the lactam figure and see that moving one hydrogen exchanges a donor for an acceptor at every position along the pairing edge."
+ },
+ "severity": "medium",
+ "category": "figure-purpose",
+ "observation": "The chapter's one deliberate side-by-side comparison is not side by side. The lactim tautomer's caption instructs the reader to compare it with the lactam figure, but the two are separated by four intervening structures: the order is adenine, guanine-lactam, cytosine, thymine, uracil, guanine-lactim. The tautomer discussion is also the last two paragraphs of the section's text block, so the reader meets the lactam figure long before the prose that motivates it.",
+ "learner_impact": "A donor/acceptor reversal that hinges on the position of a single hydrogen is only visible in direct juxtaposition. Separated by four other heterocycles that all look broadly similar at a glance, the comparison collapses into two unrelated pictures, and the chapter's stated stake — \"Draw the wrong tautomer and every base pair you construct from it will be wrong\" — is left unillustrated.",
+ "evidence": "Section nugget-purine-and-pyrimidine-bases block order: blk-svvsfaxs (adenine), blk-ketx5kka (guanine lactam), blk-cyqo8f3t (cytosine), blk-ycisjqh6 (thymine), blk-jpalo1sm (uracil), blk-t6apxlnl (guanine lactim). Compare with the correctly adjacent pairs elsewhere: ribofuranose then 2-deoxyribofuranose in section 1, adenosine then 2'-deoxyadenosine in section 3.",
+ "recommended_outcome": "The lactam and lactim need to be adjacent and explicitly marked as a matched pair, with the position of the moved hydrogen and the resulting donor/acceptor swap identifiable. The rest of the section's figure order is fine.",
+ "confidence": 0.89
+ },
+ {
+ "finding_id": "vis-010",
+ "location": {
+ "asset_id": "mol-damp",
+ "section_id": "nugget-reading-and-writing-dna",
+ "anchor_text": "See the phosphate ester at the 5' position that turns a nucleoside into a nucleotide, and note the free 3' hydroxyl left available for the backbone."
+ },
+ "severity": "medium",
+ "category": "visual-redundancy",
+ "observation": "Thirty-three molecule blocks are drawn from twenty unique assets, and the repeats carry byte-identical captions rather than a re-purposed one. mol-damp appears four times (sections 1, 4, 8, 10), mol-2-deoxyadenosine three times (3, 7, 9), mol-dinucleotide-dapdt three times (4, 7, 8), mol-adenosine three times (1, 3, 7), and the four bases twice each (2, 5). Several repeats are off-topic where they land: dAMP in the Sanger/phosphoramidite section teaches nothing about dideoxy terminators, DMT protection or P(III) coupling, and 2'-deoxyadenosine in the analogue section is the wrong comparator (see vis-008).",
+ "learner_impact": "Repeating a structure with the same caption trains the reader to skip figures, because by the third appearance the block predictably contains nothing new. That habit then costs them at the figures that do carry new information. It also inflates the apparent visual density of sections whose real visual coverage is thin.",
+ "evidence": "Reader block ids per asset — mol-damp: blk-jz9lu5iw, blk-arerx4at, blk-gs00xkkc, blk-7bw114vr, all with description \"See the phosphate ester at the 5' position that turns a nucleoside into a nucleotide...\"; mol-dinucleotide-dapdt: blk-hyi4aoq4, blk-4vzx6u4g, blk-egs4lnmd, all with the same description string.",
+ "recommended_outcome": "A repeated structure should either earn its second appearance by asking the reader to see something new in it, or be dropped. Trimming here also frees attention for the sections identified in vis-003, vis-005 and vis-006, which are genuinely under-illustrated.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "vis-011",
+ "location": {
+ "section_id": "nugget-phosphodiester-backbone",
+ "asset_id": "mol-dinucleotide-dapdt",
+ "anchor_text": "Every internucleotide linkage therefore carries one full negative charge"
+ },
+ "severity": "medium",
+ "category": "figure-accuracy",
+ "observation": "Every phosphorus-containing figure is drawn in the neutral, fully protonated form, while the surrounding prose insists on the anionic form as its central teaching point. The package's long_description for each of these assets explains the choice (\"the neutral form is drawn here so that every bond to phosphorus is visible\"), but the compiled reader molecule block carries only name, smiles, alt_text and description — long_description is not among the emitted fields — so that reconciliation never reaches the student.",
+ "learner_impact": "The backbone section's argument, and four of its downstream consequences (electrophoresis mobility, counterion requirement, salt-dependent melting, lysine/arginine-rich DNA-binding proteins), all rest on one negative charge per linkage. The reader is looking at P–OH while reading that the group is completely deprotonated at any physiological pH, with nothing on the page to reconcile the two. The same mismatch recurs for the triphosphate in the chain-extension section, where the prose calls it \"essentially fully deprotonated\".",
+ "evidence": "mol-dinucleotide-dapdt, mol-damp, mol-atp, mol-uridine-23-cyclic-phosphate SMILES all use P(=O)(O)O neutral forms; each asset's long_description contains the explanation, and none of that text appears in the compiled blocks (blk-hyi4aoq4, blk-arerx4at, blk-wx90p1gy, blk-o366pb0x each have content keys alt_text, description, generator_href, name, smiles only).",
+ "recommended_outcome": "The student needs the drawn protonation state reconciled with the prose at the point of use — either by drawing the ionised form where the charge is the lesson, or by making the drawing convention explicit in text the reader actually sees. Silently contradicting the section's headline claim is the one outcome to avoid.",
+ "confidence": 0.87
+ },
+ {
+ "finding_id": "vis-012",
+ "location": {
+ "section_id": "nugget-dna-double-helix-and-base-stacking",
+ "anchor_text": "Antiparallel strands, two grooves, and the role of stacking"
+ },
+ "severity": "medium",
+ "category": "cognitive-load",
+ "observation": "Every section is compiled as one long text block followed by a stack of figures at the end, so no figure is ever adjacent to the sentence it supports. At the default expanded detail tier the text blocks run 3300 to 6842 characters; a reader working through the donor/acceptor derivation in section 5 must scroll past roughly 4400 characters before reaching the adenine structure that derivation is about.",
+ "learner_impact": "The reader has to hold a structural description in working memory across a long scroll and then reconstruct which paragraph each trailing figure belongs to — the reconstruction cost the figure was supposed to remove. It also means the detail-tier control has an odd effect: a reader on the terse tier (515-792 characters) gets the same full stack of figures with captions written for the expanded narrative.",
+ "evidence": "All ten sections have exactly one text block in first position followed by media; _detail_texts lengths per section (terse/standard/expanded) run 515/1614/3300 up to 792/2771/6842. Section nugget-dna-double-helix-and-base-stacking has 5360 expanded characters ahead of its single figure.",
+ "recommended_outcome": "Figures need to sit near the prose they serve, or the prose needs an explicit in-text pointer to the figure below it. This is a layout/compilation need rather than an authoring one, and it affects every section in the chapter.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "vis-013",
+ "location": {
+ "section_id": "nugget-nucleoside-and-nucleotide-anatomy",
+ "asset_id": "clip-dna-double-helix",
+ "anchor_text": "Fix the overall shape in mind before taking a single residue apart"
+ },
+ "severity": "low",
+ "category": "figure-purpose",
+ "observation": "The chapter's opening figure is a stylised ribbon helix placed in the section that is about taking one residue apart into base, sugar and phosphate — three things the drawing does not show. Its own long_description concedes it \"does not depict individual atoms, the two grooves of differing width, or which base occupies any particular rung\", and its alt text asserts a right-handed spiral that a reader cannot verify from a stylised drawing. The same asset is absent from section 6, the section that actually teaches helix geometry.",
+ "learner_impact": "As an advance organiser the figure is defensible, but as placed it is the only figure a reader meets before four unlabelled structures, and it carries no information the section uses. Meanwhile the section that would benefit from a schematic-versus-crystal-structure contrast has only the crystal structure.",
+ "evidence": "clip-dna-double-helix is bound to concept nucleoside-and-nucleotide-anatomy only; rendered as blk-181nbgat in section 1. The section-1 prose covers base/sugar/phosphate identity, nucleoside-versus-nucleotide naming, ribose-versus-deoxyribose, prime numbering, and alpha/beta/gamma phosphates — none of which the drawing depicts.",
+ "recommended_outcome": "Either this figure earns its slot by carrying something section 1 actually teaches — the three-part decomposition of one residue, which no current figure shows — or it belongs alongside the crystal structure in section 6 where schematic and real geometry can be contrasted.",
+ "confidence": 0.78
+ },
+ {
+ "finding_id": "vis-014",
+ "location": {
+ "asset_id": "mol-atp",
+ "section_id": "nugget-chain-extension-at-phosphorus",
+ "anchor_text": "dATP, dGTP, dCTP, or dTTP for DNA"
+ },
+ "severity": "low",
+ "category": "figure-accuracy",
+ "observation": "The incoming monomer for the chain-extension section is illustrated with adenosine 5'-triphosphate — the ribo compound, carrying a 2'-hydroxyl — in a chapter whose preceding section has just established that the 2'-hydroxyl is the single feature that makes a nucleic acid self-destruct, and whose worked mechanism is framed around DNA polymerases. The same ribo structure is the stimulus for the hotspot question ch28-alpha-phosphorus-hotspot.",
+ "learner_impact": "A reader who has been trained across two sections to look for the 2' position will find one on the structure labelled as the incoming monomer, in a section that names dATP/dGTP/dCTP/dTTP in its second paragraph. It is a small mismatch but it lands exactly on the feature the chapter has made most salient.",
+ "evidence": "mol-atp SMILES Nc1ncnc2c1ncn2[C@@H]1O[C@H](COP(=O)(O)OP(=O)(O)OP(=O)(O)O)[C@@H](O)[C@H]1O (2'-OH present); reader block blk-wx90p1gy in nugget-chain-extension-at-phosphorus; ch28-alpha-phosphorus-hotspot molecule_smiles is the same string.",
+ "recommended_outcome": "The figure carrying the alpha/beta/gamma lesson should not silently contradict the DNA framing of the section it sits in, or the text should say plainly that ATP is being used as the generic triphosphate and that the DNA case lacks the 2'-hydroxyl.",
+ "confidence": 0.72
+ }
+ ],
+ "strengths": [
+ "Every asset carries specific, structural alt text rather than a generic label — mol-adenine's names the fused bicycle, the exocyclic amino group and the N-H position, and the reader block preserves it.",
+ "Both tautomers of guanine are actually drawn. The chapter does not merely assert that the lactam dominates; it supplies the lactim so the donor/acceptor reversal is a visible comparison (placement aside, see vis-009).",
+ "Two one-atom comparisons are correctly built as adjacent pairs: ribofuranose then 2-deoxyribofuranose in section 1, and adenosine then 2'-deoxyadenosine in section 3. That is the right pattern and it works.",
+ "The RNA cleavage intermediate is given a structure of its own (mol-uridine-23-cyclic-phosphate), so the classical 2'/3' mixture evidence has something concrete attached to it.",
+ "ch28-rna-cleavage-intermediate attaches structure_smiles to all four options, and ch28-alpha-phosphorus-hotspot supplies molecule_smiles — the two items where structural discrimination is genuinely the task do show structures.",
+ "The decision to include no reaction-coordinate diagram is correct restraint, not a gap. The chapter's only energetic claims are that the polymerisation step is near thermoneutral and that pyrophosphate hydrolysis pulls it forward; an energy profile would add a spurious barrier picture the chapter never argues for.",
+ "Each deferred video brief records a production_note naming the reader section that carries the same content in prose, so the authoring intent was explicitly not to strand the material behind an animation."
+ ],
+ "open_questions": [
+ "Does the reader support any block type capable of rendering a synthesis_roadmap spec, or is a pre-rendered static image the only route for roadmap-phosphoramidite-cycle? This decides whether vis-002 is a compiler fix or an asset-production fix.",
+ "Can authored per-figure rdkit_options or reactive-site highlight parameters reach reader molecule blocks? The compiler emitted none for any of the 20 molecule assets, and I could not determine whether the reader block schema plumbs anything beyond rdkit_options through to the render endpoint. This bears directly on vis-004.",
+ "Is the cdn.rcsb.org hotlink for pdb-b-dna-dodecamer intended to be cached for the installable reader, and does the image block need an attribution field? The two clipart image blocks carry attribution and this one does not — flagged as an observation, not a rights judgement.",
+ "The NIAID schematic's alt text asserts a right-handed spiral. I inspected the PNG and could not confidently confirm handedness from the stylised drawing; someone should verify rather than take the alt text's word for it.",
+ "vis-012 is filed under cognitive-load because no figure-placement category exists in the schema. If figure placement recurs across chapters it may deserve its own id."
+ ]
+ }
+ ],
+ "publication_readiness": "blocked",
+ "executive_summary": "Chemically this is the strongest chapter reviewed to date: the instructor persona independently re-parsed all 20 SMILES with RDKit and confirmed every InChIKey, every beta-anomeric assignment, the dinucleotide's 3'-to-5' connectivity and free-end identity, and both hotspot answer keys. All 46 answer keys pass referential integrity, no accessible_description leaks an answer, and no hint contains its own answer. One chemical blocker exists and is chapter-authored and bounded: two strand-directionality questions name DNA residues with ribonucleoside names (\"the adenosine residue\" in a strand containing thymine), and one distractor describes a 2'-oxygen that a DNA residue does not have — which contradicts the chapter's own practice check. The verdict is nonetheless blocked rather than major revision, because two required-access blockers are unresolved and are platform-level: the hotspot items expose atom targets whose only accessible name is an element-plus-index string with no disclosed mapping to the chemical position the prompt names, and the structure_scaffold items offer no answer channel except a pointer-driven drawing canvas. Both recur from chapters 1, 11, and 15 through 19. The dominant non-blocking theme is unanimous across all four personas: the chapter teaches two mechanisms and a hydrogen-bonded pair entirely in prose, and no figure anywhere shows two bases facing each other, either mechanism's electron flow, or the in-line geometry at phosphorus — while the one genuinely sequential figure that was authored, the phosphoramidite roadmap, reaches the reader as an empty image container.",
+ "consensus_strengths": [
+ "Chemical accuracy is exceptional: 20/20 SMILES verified by independent RDKit re-parse, correct lactam tautomers throughout, correct donor/acceptor assignments on both pairing edges, correct N9/N1 attachment, and both hotspot atom indices correct.",
+ "Every one of the 23 surfaced questions carries a genuinely progressive three-level hint ladder and wrong-answer explanations that diagnose the specific error rather than restating the prompt.",
+ "The prose names each misconception before the student can make it, in bold and in advance ('Hydrogen bonding is not what holds the duplex together'; 'Students look for the reactive carbon and there is not one').",
+ "All 24 assets carry both alt_text and long_description that convey real chemistry and are explicitly honest about what the image does not show.",
+ "Nothing in the chapter depends on colour, motion, hover, or spatial position as a sole carrier of meaning; rank_order, categorize_groups, matching_pairs, comparison_matrix and error_repair are keyboard-complete by construction.",
+ "The decision to author no reaction-coordinate diagram is correct restraint rather than an omission — the chapter makes no energy-profile argument that one would serve."
+ ],
+ "ranked_recommendations": [
+ {
+ "rec_id": "rec-001",
+ "title": "DNA residues are named as ribonucleosides in both strand-directionality questions",
+ "need": "Assessment must stop contradicting the chapter's own teaching that a ribonucleoside cannot appear in DNA; and a distractor must describe a structure that is wrong rather than impossible.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "The chemistry, the keys and the reasoning are all correct — only the residue names and one distractor's premise are wrong. Renaming to the 2'-deoxy compounds and re-anchoring the 2'-oxygen distractor fully resolves the contradiction without touching the item design, so no rewrite or replacement is warranted.",
+ "target_surface": "assessment",
+ "severity": "blocker",
+ "source_findings": [
+ "instr-001"
+ ]
+ },
+ {
+ "rec_id": "rec-002",
+ "title": "Hotspot atom targets carry no chemical identity for a non-visual learner",
+ "need": "A learner who cannot see the structure needs a disclosed, stable correspondence between the chemical positions the prompt names and the selectable targets.",
+ "chosen_intervention": "keyboard-alternative",
+ "rationale": "Platform-level: the renderer generates accessible names from the RDKit heavy-atom index. No chapter edit can supply the mapping, because the atom numbering is a traversal artefact rather than a chemical locant. Escalated as the same ticket already open from ch11/15/16.",
+ "target_surface": "interactive",
+ "severity": "blocker",
+ "source_findings": [
+ "access-001",
+ "access-007"
+ ]
+ },
+ {
+ "rec_id": "rec-003",
+ "title": "structure_scaffold has no non-pointer, non-visual answer channel",
+ "need": "The 'produce a structure' skill needs an answer route that does not require a pointing device or sight, or an equivalent item assessing the same decisions.",
+ "chosen_intervention": "alternate-activity",
+ "rationale": "Platform-level and identical to the open ticket from ch1/11/15/16/17/18/19. Within the chapter the least-complex mitigation is that the same lactam/ring/substituent decisions are already assessed by ch28-lactam-tautomer and ch28-purine-pyrimidine-sort, so an instructor can build a complete assignment without the drawing items.",
+ "target_surface": "interactive",
+ "severity": "blocker",
+ "source_findings": [
+ "access-002"
+ ]
+ },
+ {
+ "rec_id": "rec-004",
+ "title": "No figure shows two bases hydrogen bonded to each other",
+ "need": "The chapter's headline skill is deriving A-T and G-C by reading donor/acceptor patterns off structures; that derivation is currently performable only in the head.",
+ "chosen_intervention": "new-figure",
+ "rationale": "All four personas independently reached this. A description cannot substitute, because the thing to be learned is a spatial registry between two edges — the one case in this chapter where prose provably cannot carry the idea. Needs A-T, G-C and at least one rejected pair, with donors and acceptors labelled in text rather than by colour.",
+ "target_surface": "figure",
+ "severity": "high",
+ "source_findings": [
+ "vis-003",
+ "stu-001",
+ "instr-002"
+ ]
+ },
+ {
+ "rec_id": "rec-005",
+ "title": "Neither mechanism is drawn anywhere",
+ "need": "Two concepts carry objectives that begin 'Draw the mechanism...' and 'Write the chain-extension step...', and the chapter models neither; only start and end states are shown.",
+ "chosen_intervention": "static-image-sequence",
+ "rationale": "A stepwise static sequence satisfies both objectives and, unlike the deferred animations, is producible now and is accessible without motion. Full animation is not required — the objectives ask the student to draw, so what they need is a worked drawing to model.",
+ "target_surface": "figure",
+ "severity": "high",
+ "source_findings": [
+ "vis-006",
+ "stu-002",
+ "instr-003"
+ ]
+ },
+ {
+ "rec_id": "rec-006",
+ "title": "The phosphoramidite roadmap reaches the reader as an empty image container",
+ "need": "The chapter's only multi-step sequence, in its densest section, must reach the student in a form that shows the four operations in order.",
+ "chosen_intervention": "new-figure",
+ "rationale": "The spec is fully authored (five nodes, four steps, reagents, caveats) but no reader block type renders a synthesis_roadmap, so the compiler emits url \"\" and ReaderProviderImage falls back to alt text. Severity reconciled to high rather than the visual persona's blocker: the alt text does state all four operations in order and the prose names every reagent, so no learner is blocked — but the authored figure reaches nobody.",
+ "target_surface": "figure",
+ "severity": "high",
+ "source_findings": [
+ "vis-002",
+ "stu-004",
+ "instr-004",
+ "access-008"
+ ]
+ },
+ {
+ "rec_id": "rec-007",
+ "title": "Captions instruct the reader to find positions the render does not label",
+ "need": "Where a caption names a position, the reader must be able to find that position — or the caption must stop implying the figure shows it.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Enabling RDKit atom indices would actively mislead: they are 0-based traversal order, not chemical locants, so 'N9' would display as '8'. Each asset's alt_text and long_description already map every named position correctly, and long_description now reaches the reader. Rewriting the six offending captions to state the fact and defer to the description is therefore the least-complex fix that fully closes the caption/figure contract gap.",
+ "target_surface": "figure",
+ "severity": "high",
+ "source_findings": [
+ "vis-004",
+ "stu-003"
+ ]
+ },
+ {
+ "rec_id": "rec-008",
+ "title": "Two stems promise a structure-reading task and show no structure",
+ "need": "An item whose stem tells the student to read a structure must present one, or must stop claiming it does.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Both items' options are prose statements about donor/acceptor patterns rather than structures to compare, so attaching structures would not change what the student actually evaluates. Rewording the two stems fully removes the false promise; adding a paired-base figure (rec-004) is the real remedy for the underlying skill.",
+ "target_surface": "assessment",
+ "severity": "medium",
+ "source_findings": [
+ "vis-007",
+ "instr-005"
+ ]
+ },
+ {
+ "rec_id": "rec-009",
+ "title": "Markdown headings and list markers do not survive into the reader",
+ "need": "The subsection and step structure the author wrote must render as structure, not as literal '###' characters.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "RichText implements only bold and code by design. ch28 is the only package in the repo that used markdown headings, so this is a self-inflicted authoring defect rather than a platform gap; converting the three headings and four list markers to bold lead-ins is exact and immediate.",
+ "target_surface": "prose",
+ "severity": "medium",
+ "source_findings": [
+ "access-006"
+ ]
+ },
+ {
+ "rec_id": "rec-010",
+ "title": "Wikipedia titles use spaces, producing malformed links",
+ "need": "Every generated external link must resolve.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Seven concepts carry a wikipedia_title containing a space; the compiler interpolates it straight into a /wiki/ URL. House convention across the repo is underscores by 100 to 10, and all seven target pages return 200 when correctly encoded. Found by the orchestrator integrity check, not by a persona.",
+ "target_surface": "prose",
+ "severity": "medium",
+ "source_findings": [
+ "orchestrator-001"
+ ]
+ },
+ {
+ "rec_id": "rec-011",
+ "title": "Terms the assessment turns on are missing, under-defined, or untaught",
+ "need": "A student must not meet a graded term the chapter never defines, nor a reagent the chapter never names.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Bounded vocabulary repairs: define melting temperature at first substantive use; name pyrophosphorolysis in the standard tier; name dichloroacetic acid where detritylation is taught; drop N-methylimidazole from a rank_order card since it appears nowhere in the chapter; state the thymidine naming exception in the prose rather than only in a wrong-answer explanation; widen the ch28-capping-purpose accepted answers or tighten its prompt.",
+ "target_surface": "prose",
+ "severity": "medium",
+ "source_findings": [
+ "stu-008",
+ "stu-010",
+ "stu-011",
+ "instr-009",
+ "instr-015"
+ ]
+ },
+ {
+ "rec_id": "rec-012",
+ "title": "teacher_optional metadata contradicts the prerequisite graph",
+ "need": "The optionality claim and the prerequisite graph must agree, or an instructor who drops concept 9 gets a concept 10 whose declared prerequisite is absent.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Two metadata defects of the same kind. concept 9's why_optional promises that nothing downstream depends on it while concept 10 lists it as a prerequisite and its prose refers back to 'the 2',3'-dideoxy analogues from the previous section'. Correcting the why_optional wording to declare the two optional concepts a single removable unit is exact and avoids touching the prerequisite graph the mastery gating uses. Separately, base-pairing-and-hydrogen-bonding does not declare phosphodiester-backbone as a prerequisite despite building its geometric argument on it, and chain-extension-at-phosphorus does not declare rna-versus-dna-hydrolytic-stability despite leaning on it explicitly; the linear reading order hides this, but concept maps and adaptive review read the declared graph.",
+ "target_surface": "instructor-support",
+ "severity": "medium",
+ "source_findings": [
+ "instr-007",
+ "instr-008"
+ ]
+ },
+ {
+ "rec_id": "rec-013",
+ "title": "Three small chemical and notational defects",
+ "need": "A wrong-answer explanation must not misstate a product; a quantitative claim should match the literature; one SN2 rendering should be used throughout.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "All three are bounded factual corrections: beta-phosphorus attack delivers a diphosphate to the chain end, not 'a phosphate group'; the depurination-over-depyrimidination ratio is about 20-fold for DNA rather than two orders of magnitude, and the questions only rely on the qualitative claim; and 'S_N2' with a literal underscore reaches the compiled reader where 'SN2' is used everywhere else.",
+ "target_surface": "prose",
+ "severity": "low",
+ "source_findings": [
+ "instr-012",
+ "instr-013",
+ "instr-014"
+ ]
+ },
+ {
+ "rec_id": "rec-014",
+ "title": "The ribo ATP figure sits in a DNA-framed section without comment",
+ "need": "A figure that deliberately shows the ribo case immediately after two sections that made the deoxy case the point must say so, or it undercuts the distinction it sits beside.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "One sentence naming ATP as the generic triphosphate and noting that a DNA polymerase is handed the 2'-deoxy version turns an apparent inconsistency into a reinforcement. Swapping the figure to dATP would also work but would lose ATP's familiarity, which is why it was chosen.",
+ "target_surface": "prose",
+ "severity": "low",
+ "source_findings": [
+ "vis-014",
+ "stu-012"
+ ]
+ },
+ {
+ "rec_id": "rec-015",
+ "title": "Beta configuration is defined by a drawing convention the chapter never shows",
+ "need": "The alpha/beta test ('same face as C5'') must be checkable on a figure that uses the representation the definition assumes.",
+ "chosen_intervention": "new-figure",
+ "rationale": "A Haworth-style pair showing both anomers is the only way to make the stated test performable; the current RDKit renders do not control ring orientation, so the test cannot be applied to them. Deferred as a recommendation rather than corrected, since it requires a new figure type for this package.",
+ "target_surface": "figure",
+ "severity": "medium",
+ "source_findings": [
+ "stu-009",
+ "instr-006"
+ ]
+ },
+ {
+ "rec_id": "rec-016",
+ "title": "Authored practice checks and section metadata never reach the reader",
+ "need": "Ten authored practice checks, three learning objectives per section, and the core/standard/advanced depth labels exist in the package and are dropped by the compiler.",
+ "chosen_intervention": "added-practice",
+ "rationale": "Platform-level: the compiled section object supports only id/title/blocks. Recorded rather than corrected because it affects every chapter and needs a schema change, not a chapter edit.",
+ "target_surface": "practice",
+ "severity": "medium",
+ "source_findings": [
+ "stu-005",
+ "stu-006"
+ ]
+ },
+ {
+ "rec_id": "rec-017",
+ "title": "Four concepts have no entry-level question",
+ "need": "Each concept needs one low-stakes check a student can pass right after reading, especially the two whose only practice is advanced multi-field reasoning.",
+ "chosen_intervention": "added-practice",
+ "rationale": "nucleoside-analogue-drugs has exactly one item and it is advanced structured_reasoning; reading-and-writing-dna has two, both advanced. Recorded as a described recommendation rather than auto-corrected, since expanding the bank is a scope decision rather than an error repair.",
+ "target_surface": "practice",
+ "severity": "medium",
+ "source_findings": [
+ "stu-007",
+ "instr-011"
+ ]
+ },
+ {
+ "rec_id": "rec-018",
+ "title": "Question-stimulus alt text names the image instead of describing it",
+ "need": "Structures shown inside a question need alt text conveying what the sighted learner reads off the drawing, without disclosing the answer.",
+ "chosen_intervention": "structured-chemical-description",
+ "rationale": "Platform-level: ErrorRepairRenderer hard-codes alt='Structure for the flawed step', and MatchingRenderer/ComparisonMatrixRenderer repeat the visible label. For the matching item this silently changes the task, since the compound name fully determines the answer.",
+ "target_surface": "interactive",
+ "severity": "medium",
+ "source_findings": [
+ "access-005"
+ ]
+ },
+ {
+ "rec_id": "rec-019",
+ "title": "accessible_description is authored everywhere and rendered almost nowhere",
+ "need": "The stimulus description a learner needs must reach the surfaces where these question types are answered.",
+ "chosen_intervention": "text-equivalent",
+ "rationale": "Platform-level and the multiplier on rec-002: only ReactionCoordinateQuestionRenderer and MolecularGeometryRenderer consume the field, and this chapter uses neither type. All 46 descriptions are well-written and inert at delivery.",
+ "target_surface": "interactive",
+ "severity": "high",
+ "source_findings": [
+ "access-003"
+ ]
+ },
+ {
+ "rec_id": "rec-020",
+ "title": "The compiled reader emits an inline link to the generic chapter landing page",
+ "need": "A chapter-level 'why this chapter' link tells a reader nothing and is explicitly disallowed by the production standard.",
+ "chosen_intervention": "instructor-note",
+ "rationale": "Compiler-generated for every chapter from the chapter number, not authored here; this chapter's own curated Additional Reading correctly carries four specific verified §28.x section links on a different surface. Recorded as a platform observation so it is not mistaken for an authoring defect.",
+ "target_surface": "prose",
+ "severity": "low",
+ "source_findings": [
+ "stu-006"
+ ]
+ },
+ {
+ "rec_id": "rec-021",
+ "title": "textbook_matching claims a one-to-one map that the chapter does not deliver",
+ "need": "An instructor assigning this chapter alongside OpenStax 28 must be told which textbook sections are out of scope rather than promised full coverage.",
+ "chosen_intervention": "instructor-note",
+ "rationale": "The package's own note says OpenStax 28.1 to 28.8 map one to one, and lists 'polymerase chain reaction' among the matching terms, but no concept, nugget, asset or question covers PCR (28.8) or translation (28.5). Correcting the note is exact and honest; adding PCR content is a scope decision, and the Additional Reading panel already links both absent sections precisely so a reader can reach them.",
+ "target_surface": "instructor-support",
+ "severity": "medium",
+ "source_findings": [
+ "instr-010"
+ ]
+ }
+ ],
+ "accessibility_blockers": [
+ "access-001",
+ "access-002"
+ ],
+ "visual_opportunities": [
+ "A hydrogen-bonded base pair shown as a pair, for A-T, G-C and one rejected combination (rec-004).",
+ "A stepwise drawing of each of the two substitutions at phosphorus, showing nucleophile, electrophile and leaving group in one frame (rec-005).",
+ "A working render of the four-step phosphoramidite cycle (rec-006).",
+ "A Haworth-style alpha/beta pair so the anomeric test is checkable on the page (rec-015).",
+ "Strand-direction labels and the 120-degree glycosidic-bond geometry that produces the two grooves (vis-005)."
+ ],
+ "sufficient_as_is": [
+ "The 20 molecule assets' alt_text and long_description are sufficient and need no enrichment — they name ring sizes, numbered positions, stereocentre counts and donor/acceptor patterns, and they are honest about what the drawing omits. Only the learning_goal captions needed repair (rec-007).",
+ "The two clipart figures' descriptions are sufficient; both explicitly disclose what the stylised drawing does not show, which is the correct treatment for decorative-orienting art.",
+ "The pdb-b-dna-dodecamer description is sufficient for the figure as supplied; the gap in that section is the absent geometry figure (vis-005), not the description of the crystal structure.",
+ "All 46 accessible_description strings are well-formed, non-leaking and task-accurate. They need a delivery path (rec-019), not rewriting.",
+ "The four deferred video briefs' production notes are sufficient — they pre-commit to captions, transcripts, and a no-colour-alone rule, and each names the nugget carrying the same content.",
+ "No reaction-coordinate diagram is needed; all four personas or the orchestrator agreed the omission is correct restraint."
+ ],
+ "disagreements": [
+ {
+ "topic": "Do the four deferred video blocks present learners with dead media affordances?",
+ "positions": {
+ "Learner with Visual Preference": "vis-001, blocker: 'A reader sees four apparently-playable media affordances... clicks them, and nothing happens', citing that ReaderBlockRenderer's video case builds a link to c.url with no empty-url guard and that applyPrefs filters nothing on url.",
+ "Accessibility Persona": "access-010, low: 'None today — I confirmed no surface renders them', citing [internal source reference — not in this repo]."
+ },
+ "resolution": "Accessibility is correct and vis-001 is rejected as a blocker. I verified independently: the compiled blocks all carry is_hidden true; the guard at [internal source reference — not in this repo] precedes the switch, so the video case at line 491 is unreachable; and TopicPackageChapterRenderer delegates to that same renderer, so both surfaces suppress them. The visual persona inspected the video case and the compiled JSON but missed the guard. The residual risk it identifies is real and is retained at low severity: suppression depends on a single flag, and removing it would expose four links to nowhere. The minority position is preserved verbatim above."
+ },
+ {
+ "topic": "How severe is the non-rendering phosphoramidite roadmap?",
+ "positions": {
+ "Learner with Visual Preference": "vis-002, blocker: the authored five-node, four-step spec 'never reaches a student' and the chapter's longest section is left with zero working figures.",
+ "Struggling Student": "stu-004, high: 'I hit a caption with nothing above it, which reads as the page being broken.'",
+ "Accessibility Persona": "access-008, low: 'No learner — sighted or not — receives a figure here; everyone receives the 60-word alt string', and the surrounding prose states all four reagents."
+ },
+ "resolution": "Reconciled to high. Accessibility is right that nobody is blocked — ReaderProviderImage falls back to rendering alt_text, and that alt text does name all four operations in the correct order, with the prose naming every reagent. But the visual and student personas are right that an authored figure reaching nobody, in the densest section, beside an orphan caption, is a real defect. High preserves both readings: it must be fixed before instructor use, and it is not a publication blocker."
+ },
+ {
+ "topic": "Which text tier does a reader see by default, and does that change the tier-gap findings?",
+ "positions": {
+ "Struggling Student": "stu-011 filed on the premise that lowering the tier silently removes assessed material, with an open question noting that useReaderPersonalization defaults to 'expanded', not 'standard' as the briefing stated.",
+ "Orchestrator": "The briefing I gave all four personas was wrong."
+ },
+ "resolution": "The student persona is right and I was wrong: [internal source reference — not in this repo] sets detailLevel 'expanded' as the default. This lowers stu-011 from a live gap to a risk borne only by students who deliberately shorten the text — which is precisely the coping move a struggling reader makes, so the finding stands at medium rather than being dismissed. It also means the four tier-deepening edits made during the production coherence pass were prudent rather than repairs. Recorded here because it is a correction to my own instrumentation, not to the chapter."
+ }
+ ],
+ "orchestrator_findings": [
+ {
+ "finding_id": "orchestrator-001",
+ "location": {
+ "concept_slug": "base-pairing-and-hydrogen-bonding",
+ "anchor_text": "wikipedia_title"
+ },
+ "severity": "medium",
+ "category": "notation-consistency",
+ "observation": "Seven of the ten concepts carry a wikipedia_title containing a literal space (\"Base pair\", \"DNA replication\", \"Glycosidic bond\", \"Nucleic acid double helix\", \"Nucleoside analogue\", \"Oligonucleotide synthesis\", \"Phosphodiester bond\"). The compiler interpolates the value directly into an en.wikipedia.org/wiki/ URL, so each produces a malformed link. The house convention across the repo is underscores by 100 titles to 10.",
+ "learner_impact": "Seven of the ten per-section Wikipedia links in the compiled reader are malformed. All seven target pages exist and return 200 when correctly encoded, so the only thing standing between the learner and the article is the space.",
+ "evidence": "Compiled reader external_link blocks: 5 of 12 external URLs returned 200; the seven failures all contain a raw space. Verified separately that all seven underscore forms return 200. Found by the orchestrator integrity check before persona dispatch.",
+ "recommended_outcome": "Every generated external link must resolve; the concept metadata needs to use the URL-safe form the rest of the corpus uses.",
+ "confidence": 1.0
+ }
+ ],
+ "regression": {
+ "resolved": [],
+ "unchanged": [],
+ "worsened": [],
+ "new": []
+ },
+ "corrections": {
+ "status": "applied-and-verified-without-second-persona-run",
+ "post_correction_readiness_estimate": "blocked",
+ "estimate_note": "Not a new persona verdict. The chemical blocker and every chapter-authored verified error are resolved, and the figure cluster all four personas identified (rec-004, rec-005, rec-006) is now drawn and rendering. The estimate stays blocked solely because access-001 and access-002 are platform tickets no chapter edit can clear. Setting those aside, the estimated state would be ready with minor revisions; the remaining figure recommendation is rec-015, the Haworth alpha/beta pair.",
+ "applied": [
+ {
+ "change": "Named both strand-directionality strands as DNA, renamed every residue to its 2'-deoxy compound in options and feedback, and replaced the impossible 2'-oxygen distractor with a possible direction-reversal claim plus matching feedback.",
+ "resolves": [
+ "instr-001"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Underscored seven wikipedia_title values so the compiled links resolve.",
+ "resolves": [
+ "orchestrator-001"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Converted three markdown headings and four ordered-list markers to bold lead-ins that RichText renders.",
+ "resolves": [
+ "access-006"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Rewrote six learning_goal captions so none instructs the reader to locate a position the render does not label.",
+ "resolves": [
+ "vis-004",
+ "stu-003"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Reworded the two stems that promised a structure-reading task while showing no structure.",
+ "resolves": [],
+ "partially_addresses": [
+ "vis-007",
+ "instr-005"
+ ]
+ },
+ {
+ "change": "Defined melting temperature at first substantive use in the standard tier.",
+ "resolves": [
+ "stu-008"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Named pyrophosphorolysis in the standard tier.",
+ "resolves": [],
+ "partially_addresses": [
+ "stu-011"
+ ]
+ },
+ {
+ "change": "Named dichloroacetic acid where detritylation is taught, and removed N-methylimidazole from the rank_order card since it appears nowhere in the chapter.",
+ "resolves": [
+ "stu-010"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Stated the thymidine naming exception in the prose where the naming rule is given.",
+ "resolves": [
+ "instr-009"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Corrected the beta-attack feedback: a diphosphate, not a phosphate group, is delivered to the chain end.",
+ "resolves": [
+ "instr-012"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Removed the overstated two-orders-of-magnitude depurination ratio, leaving the qualitative claim the questions rely on.",
+ "resolves": [
+ "instr-013"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Replaced S_N2 with SN2 so one rendering is used throughout.",
+ "resolves": [
+ "instr-014"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Reworded the ch28-capping-purpose prompt to ask for the position it grades on, and widened the accepted-answer set.",
+ "resolves": [
+ "instr-015"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Rewrote why_optional to declare the two optional concepts a single removable unit, and added the two missing prerequisite edges.",
+ "resolves": [
+ "instr-007",
+ "instr-008"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Corrected the textbook-matching note to name OpenStax 28.5 and 28.8 as out of scope, and dropped the PCR matching term.",
+ "resolves": [
+ "instr-010"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Added a sentence reconciling the ribo ATP figure with the DNA framing of its section.",
+ "resolves": [
+ "vis-014",
+ "stu-012"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Recompiled, which picked up the compiler's new long_description emission; 38 long_description fields now reach the reader.",
+ "resolves": [
+ "access-004"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Downgraded vis-001 from blocker to low after verifying the is_hidden guard suppresses all four video blocks on both rendering surfaces. No edit made; recorded as a rejected blocker with evidence.",
+ "resolves": [],
+ "partially_addresses": [
+ "vis-001"
+ ]
+ },
+ {
+ "change": "Drew the A-T and G-C base pairs and the failed A-C pair with RDKit, each in pairing orientation with every hydrogen bond dashed and every donor/acceptor role written in words; added as three `diagram` assets leading the base-pairing section.",
+ "resolves": [
+ "vis-003",
+ "stu-001",
+ "instr-002"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Drew both substitutions at phosphorus as arrow-pushing schemes with curved arrows anchored to real atoms (2'-alkoxide onto phosphorus and the 5'-oxygen leaving; the chain 3'-oxygen onto the alpha phosphorus and pyrophosphate leaving), reactants to products; added as two `diagram` assets leading their sections.",
+ "resolves": [
+ "vis-006",
+ "stu-002",
+ "instr-003"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Rendered the authored synthesis_roadmap spec to an SVG and set image_url on it, so the phosphoramidite cycle now draws its five stages and four labelled arrows instead of compiling to an empty image container. Every image block in the chapter now resolves (9 of 9).",
+ "resolves": [
+ "vis-002",
+ "stu-004",
+ "instr-004",
+ "access-008"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Added a `diagram` asset type for ChemIllusion-generated static figures: requires an image_url (a generated figure with no render is an empty frame), maps to an image block, and carries generated provenance rather than the third-party credit `clipart` needs.",
+ "resolves": [],
+ "partially_addresses": []
+ },
+ {
+ "change": "Removed N-methylimidazole from the roadmap spec's capping reagents and subscripted its formulas, keeping the rendered figure consistent with the prose and with the corrected rank_order card.",
+ "resolves": [],
+ "partially_addresses": [
+ "stu-010"
+ ]
+ }
+ ],
+ "remaining_high_priority": [
+ "rec-002 / access-001 — hotspot atom targets carry no chemical identity (platform ticket, unresolved required-access blocker).",
+ "rec-003 / access-002 — structure_scaffold has no non-pointer, non-visual answer channel (platform ticket, unresolved required-access blocker).",
+ "rec-019 / access-003 — accessible_description reaches no renderer for any question type this chapter uses."
+ ],
+ "verification": [
+ "Automated test suite — 75 passed
+ "pytest over the seven backend question suites — 177 passed",
+ "npx vitest run [internal source reference — not in this repo] [internal source reference — not in this repo] — 11 passed",
+ "[internal source reference — not in this repo] --write-runtime — 46 questions validated against the live registry, 0 errors",
+ "HEAD check of all 12 compiled external URLs — 12/12 returned 200 (was 5/12 before correction)",
+ "grep of the compiled reader for literal '###' — 0 occurrences (was 3)",
+ "grep of the compiled reader for 'S_N2' — 0 occurrences (was 2); 'SN2' — 2",
+ "grep of the compiled question set for 'the adenosine residue' / 'the cytidine residue' — 0 occurrences each (was 3 combined)",
+ "grep of the compiled reader for 'long_description' — 38 fields present (was 0)",
+ "accessibility leak guard over all 46 questions — 0 leaking",
+ "answer-key referential integrity over all 46 questions — 0 problems",
+ "textbook profiles restored after the compiler clobber — 13 textbooks, 299 chapter entries",
+ "Automated test suite — 143 passed
+ "every image block in the compiled reader resolves — 9 of 9, zero empty urls (was 1 empty)",
+ "each figure visually inspected as a raster before wiring in; three defects found and fixed that way (mojibake from RDKit's ISO-8859-1 header, captions colliding with rings, and an atomLabel that had overwritten adenine's exocyclic amino group)"
+ ]
+ }
+}

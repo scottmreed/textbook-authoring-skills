@@ -1,0 +1,1094 @@
+{
+ "chapter_id": "carbonyl-alpha-substitution",
+ "chapter_version": "1",
+ "run_at": "2026-07-29T21:33:47Z",
+ "personas": [
+ {
+ "persona": "Organic Chemistry Instructor",
+ "persona_version": "1.0.0",
+ "chapter_id": "carbonyl-alpha-substitution",
+ "chapter_version": "1",
+ "model": "claude-fable-5",
+ "summary": "Go, after minor revisions. This is a chemically sound chapter: I verified all ~60 SMILES structures atom-by-atom with RDKit (assets, question options, synthesis-roadmap nodes) and found zero structural errors; every one of the 50 answer keys is chemically correct, including the subtle ones (2-bromo-3-pentanone + pyridine correctly gives pent-1-en-3-one since the other flanking carbon is the carbonyl; kinetic vs thermodynamic enolate SMILES of 2-methylcyclohexanone are drawn on the correct sides; haloform chain-shortening products, HVZ regiochemistry, and both named-synthesis carbon counts are right). The pKa ladder (17/19/25/30 singly activated; 9/11/13 doubly activated) is used consistently across prose, figures, hints, and numeric answer keys, and quantitative claims are accurate. The findings are refinements, not corrections: one mislabeled distractor ('allylic' for a homoallylic alcohol), one overstated carbanion-stability analogy, two small sequencing/prerequisite wrinkles, two unassessed learning objectives, a missing kinetic-alkylation payoff question, and the absence of any mechanism-level visual for enolization itself now that all three video briefs are deferred.",
+ "overall_score": 8.4,
+ "publication_blockers": [],
+ "findings": [
+ {
+ "finding_id": "inst-001",
+ "location": {
+ "question_slug": "ch22-identify-enol-tautomer",
+ "concept_slug": "keto-enol-tautomerism",
+ "anchor_text": "This allylic alcohol has the right molecular formula"
+ },
+ "severity": "low",
+ "category": "chemical-accuracy",
+ "observation": "The wrong-answer explanation for option c calls the structure OC1CC=CCC1 (cyclohex-3-en-1-ol) an 'allylic alcohol.' It is homoallylic: the OH-bearing carbon is not adjacent to either alkene carbon (the option text itself correctly says the double bond sits two bonds away).",
+ "learner_impact": "Feedback is where students absorb terminology; teaching 'allylic' for a homoallylic relationship will surface as errors in later chapters where allylic vs homoallylic distinctions carry mechanistic weight.",
+ "evidence": "student_config option c structure_smiles 'OC1CC=CCC1' vs feedback_bundle.wrong_answer_explanations for option 'c': 'This allylic alcohol has the right molecular formula, but the OH is not on a doubly bonded carbon...'",
+ "recommended_outcome": "The feedback needs a correct descriptor for this distractor (homoallylic, or simply 'an isomeric ring alcohol'), or the distractor could be the genuinely allylic cyclohex-2-en-1-ol, which is also the more tempting near-miss.",
+ "confidence": 0.97
+ },
+ {
+ "finding_id": "inst-002",
+ "location": {
+ "nugget_id": "nugget-haloform-reaction",
+ "section_id": "haloform-reaction",
+ "anchor_text": "three iodines make the charge bearable, roughly as stabilized as a carboxylate's"
+ },
+ "severity": "low",
+ "category": "chemical-accuracy",
+ "observation": "The expanded text claims the trihalomethyl carbanion is 'roughly as stabilized as a carboxylate's' charge. Haloform conjugate-acid pKa values (~13-14 for CHX3-type C-H acidity) sit some eight to ten units above carboxylic acids (~5); the anion is far more like a stabilized C-H acid conjugate base than a carboxylate.",
+ "learner_impact": "Students who take the comparison quantitatively will misjudge leaving-group ability and basicity comparisons, a misconception that must be un-taught in acyl substitution reasoning.",
+ "evidence": "nugget-haloform-reaction text.expanded: 'Expelling a carbanion is normally forbidden — carbon is a hopeless leaving group — but three iodines make the charge bearable, roughly as stabilized as a carboxylate's.'",
+ "recommended_outcome": "The stabilization claim needs softening to a qualitative statement rather than a quantitative equivalence with carboxylate.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "inst-003",
+ "location": {
+ "nugget_id": "nugget-enols-as-nucleophiles",
+ "section_id": "enols-as-nucleophiles",
+ "anchor_text": "The enol is the neutral analogue of an enolate"
+ },
+ "severity": "low",
+ "category": "sequencing",
+ "observation": "The expanded text — which the compiled reader uses as the section's primary markdown — describes the enol as 'the neutral analogue of an enolate, with the same electronic bias but muted charge' in section 2, but enolates are only defined in section 5 (alpha-hydrogen-acidity).",
+ "learner_impact": "A student reading linearly meets an undefined term at the exact moment the chapter is building its central resonance argument; the analogy that is meant to clarify instead assumes the later material.",
+ "evidence": "concepts[enols-as-nucleophiles].prerequisites = ['keto-enol-tautomerism']; reader block blk-lkajteqf carries the expanded text verbatim; 'enolate' is first defined in nugget-alpha-hydrogen-acidity (order 5).",
+ "recommended_outcome": "The forward reference needs either a one-clause in-place gloss or rewording that does not lean on the enolate concept.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "inst-004",
+ "location": {
+ "concept_slug": "haloform-reaction",
+ "nugget_id": "nugget-haloform-reaction",
+ "anchor_text": "The divergence between acid and base conditions is one of the chapter's best case studies"
+ },
+ "severity": "low",
+ "category": "sequencing",
+ "observation": "The haloform concept lists only alpha-hydrogen-acidity as a prerequisite, but the nugget's organizing contrast presumes the acid-catalyzed halogenation mechanism from concept 3.",
+ "learner_impact": "Prerequisite metadata drives concept maps and remediation routing; a student sent to this section after reviewing only acidity will lack the acid-side mechanism the contrast depends on.",
+ "evidence": "concepts[haloform-reaction].prerequisites = ['alpha-hydrogen-acidity']; nugget-haloform-reaction expanded text contrasts protonation-first (acid) vs deprotonation-first (base) slow steps, taught in nugget-alpha-halogenation.",
+ "recommended_outcome": "The prerequisite list needs alpha-halogenation-of-ketones added so navigation and remediation reflect what the prose actually assumes.",
+ "confidence": 0.8
+ },
+ {
+ "finding_id": "inst-005",
+ "location": {
+ "nugget_id": "nugget-keto-enol-tautomerism",
+ "concept_slug": "keto-enol-tautomerism",
+ "anchor_text": "Predict qualitatively where the keto-enol equilibrium lies"
+ },
+ "severity": "medium",
+ "category": "objective-alignment",
+ "observation": "Learning objective 3 of the opening nugget — predict qualitatively where the keto-enol equilibrium lies for simple carbonyl compounds versus 1,3-dicarbonyl compounds — is never assessed. All ten keto-enol questions test enol identification, tautomer-vs-resonance classification, alpha-H census, bond bookkeeping, or drawing; none asks which compound has higher enol content or why.",
+ "learner_impact": "The equilibrium-position reasoning is the part of this section that recurs in later condensation chemistry; without a retrieval opportunity, students leave the section able to draw enols but not to rank their stability.",
+ "evidence": "nugget-keto-enol-tautomerism.learning_objectives[2]; question set for concept keto-enol-tautomerism contains no equilibrium-position item.",
+ "recommended_outcome": "The chapter needs at least one practice item assessing qualitative enol-content prediction (e.g., ranking acetone, 2,4-pentanedione, and phenol by enol fraction with reasoning about conjugation/H-bonding/aromaticity).",
+ "confidence": 0.92
+ },
+ {
+ "finding_id": "inst-006",
+ "location": {
+ "nugget_id": "nugget-acetoacetic-ester-synthesis",
+ "concept_slug": "acetoacetic-ester-synthesis",
+ "anchor_text": "Recognize the same enolate logic operating in biological acyl chemistry"
+ },
+ "severity": "low",
+ "category": "objective-alignment",
+ "observation": "The third learning objective of the final nugget (biological enolate logic) is taught only in the closing paragraph of the expanded prose and assessed by nothing; acetoacetic-ester-synthesis carries only 2 questions.",
+ "learner_impact": "Instructors assigning by objective will find one objective with no aligned practice; students get no signal that the biological connection is assessable content rather than an aside.",
+ "evidence": "nugget-acetoacetic-ester-synthesis.learning_objectives[2]; concept question count = 2, neither touching biological chemistry.",
+ "recommended_outcome": "Either the objective should be demoted to enrichment framing, or one low-stakes item connecting acetyl-CoA/malonyl-CoA logic to the named syntheses is needed.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "inst-007",
+ "location": {
+ "concept_slug": "enolate-formation-choice-of-base",
+ "nugget_id": "nugget-enolate-formation-bases",
+ "anchor_text": "kinetic control lets you alkylate the less hindered side on demand"
+ },
+ "severity": "medium",
+ "category": "assessment-readiness",
+ "observation": "The kinetic/thermodynamic enolate distinction is assessed only at the enolate-identity level. No question anywhere in the set carries the regiochemistry through to an alkylation product — e.g., 2-methylcyclohexanone treated with LDA at -78 °C then CH3I gives 2,6- rather than 2,2-dimethylcyclohexanone — even though the nugget explicitly promises this payoff.",
+ "learner_impact": "The synthesis-level skill instructors actually examine (choose conditions to set alkylation regiochemistry on an unsymmetrical ketone) goes unpracticed; students can answer each half but have never combined them.",
+ "evidence": "nugget-enolate-formation-bases text.expanded final sentence; enolate-alkylation questions all use symmetric substrates.",
+ "recommended_outcome": "The question set needs one item integrating enolate regiochemistry with alkylation outcome on an unsymmetrical ketone.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "inst-008",
+ "location": {
+ "question_slug": "ch22-alkylation-arrow",
+ "concept_slug": "enolate-alkylation",
+ "anchor_text": "Draw the single curved arrow for the carbon-carbon bond-forming attack"
+ },
+ "severity": "low",
+ "category": "misconception",
+ "observation": "Both curved-arrow items cap max_arrows at 1 and ask only for the nucleophilic-attack arrow of an SN2 step; the C-X to halide arrow is never drawn anywhere in the chapter's practice, only mentioned verbally in feedback.",
+ "learner_impact": "Students rehearsing a one-arrow SN2 can internalize an incomplete electron-flow model — concerted displacement requires the leaving-group arrow — and will drop it on paper exams that grade full arrow-pushing.",
+ "evidence": "student_config.max_arrows = 1 in both items; expected_arrows contain only the attack arrow; feedback mentions departure but no second arrow is drawable.",
+ "recommended_outcome": "The two-arrow character of the displacement needs to be visible somewhere — either a two-arrow variant, or explicit feedback/hint text stating that the complete step includes the C-X to halide arrow omitted here by design.",
+ "confidence": 0.8
+ },
+ {
+ "finding_id": "inst-009",
+ "location": {
+ "section_id": "keto-enol-tautomerism",
+ "nugget_id": "nugget-keto-enol-tautomerism",
+ "anchor_text": "Interconversion needs a catalyst, and either acid or base works"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The chapter's central mechanistic process — enolization itself and the enol's attack on an electrophile — exists only as prose plus static endpoint structures. All three video briefs are deferred, and the chapter's mechanism-level practice covers only enolate alkylation.",
+ "learner_impact": "Learners have no step-through representation of the pattern the chapter names as its unifying idea; the ordering difference between acid and base catalysis — which two later questions and the haloform contrast depend on — is carried entirely by text.",
+ "evidence": "video_briefs all have production_status 'deferred'; curved_arrow questions exist only for enolate-alkylation; no mechanism-sequence asset among the assets.",
+ "recommended_outcome": "A non-animated learner and a mechanism-first learner both need a stepwise representation of acid- and/or base-catalyzed enolization; the enol-attacks-Br2 step would benefit from the same treatment.",
+ "confidence": 0.85
+ }
+ ],
+ "strengths": [
+ "Zero chemistry errors found under rigorous verification: all ~60 SMILES across assets, question options, and roadmap nodes are valid and structurally correct (RDKit-confirmed), and all 50 answer keys are right — including the regiochemically subtle ones.",
+ "The pKa ladder is quantitatively self-consistent everywhere it appears, and quantitative prose claims check out.",
+ "Wrong-answer explanations consistently teach mechanism rather than restate correctness.",
+ "Assessment breadth is strong: 25 surfaced questions plus 25 staged variants across 15 types, every concept assessed by at least two items; no lone-illustrated-option answer tells.",
+ "Compile fidelity is exact, and both compiler defects found in earlier chapters are avoided here: error_repair keys carry the expected_* forms the grader reads, and numeric tolerances are {mode, amount} dicts.",
+ "Prerequisite ordering of the ten concepts is essentially correct and the acid-vs-base halogenation divergence is an outstanding piece of conceptual support that the matching and rate-law questions then genuinely assess.",
+ "The four deep OpenStax section links for this chapter (22.1, 22.4, 22.5, 22.7) with specific context sentences are present in MCMURRY_SECTIONS, satisfying the house Additional Reading standard."
+ ],
+ "open_questions": [
+ "demo_eligible is false for all 50 questions. Is that intended pre-publication state, or should a handful be demo-eligible to feed the public reader HW preview panel as in chapters 1-6?",
+ "Both synthesis_roadmap assets compile to reader image blocks with an empty url. Other chapters show the same pattern, so this looks platform-wide rather than chapter-specific — but please confirm the reader resolves roadmap specs at runtime."
+ ]
+ },
+ {
+ "persona": "Struggling Student",
+ "persona_version": "1.0.0",
+ "chapter_id": "carbonyl-alpha-substitution",
+ "chapter_version": "1",
+ "model": "claude-fable-5",
+ "summary": "The prose is unusually well written for a struggling reader in places — the pKa arithmetic is taught as a reusable procedure, every one of the 50 questions carries a 3-level hint ladder, and wrong-answer explanations name and correct the exact mistakes I would make. But the scaffolding that was authored largely fails to reach me in the compiled reader: all ten per-nugget practice checks are absent from the reader, the two synthesis-roadmap figures compile as image blocks with empty URLs, all three mechanism videos are deferred, and the visible text of each section is the 'expanded' deep-dive tier that often analyzes a reaction before any visible sentence has stated what the reaction is. The result is a chapter I would read passively for eight dense sections with no checkpoint, no worked mechanism drawing anywhere, and several spots where I would stall on the first paragraph.",
+ "overall_score": 6.4,
+ "publication_blockers": [],
+ "findings": [
+ {
+ "finding_id": "ss-001",
+ "location": {
+ "section_id": "nugget-keto-enol-tautomerism",
+ "nugget_id": "nugget-keto-enol-tautomerism",
+ "anchor_text": "2,2-Dimethylpropanal, (CH₃)₃CCHO, is stirred in acidified D₂O for a day. How many hydrogens exchange for deuterium, and why?"
+ },
+ "severity": "high",
+ "category": "retrieval-practice",
+ "observation": "Every nugget in the topic package carries an authored practice_check (10 total, each with a worked answer), but not one appears in the compiled reader chapter. The reader's sections contain only text, molecule, link, hidden-video, and image blocks — there is no self-check block anywhere in frontend/public/reader/topic-chapters/carbonyl-alpha-substitution.json.",
+ "learner_impact": "A low-confidence student reads eight dense sections with zero embedded checkpoints. I never find out mid-chapter that I misunderstood alpha hydrogens or the enol's attack site; I only discover it in the graded question bank, at which point I assume I 'can't do this chapter' rather than one section.",
+ "evidence": "topic.package.json nuggets[].practice_check exists for all 10 nuggets; the compiled reader JSON contains no block type carrying any of these prompts.",
+ "recommended_outcome": "The per-nugget self-check content needs to reach the student at the point of reading, as an inline checkpoint at the end of each section, so misconceptions are caught before the next section builds on them.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "ss-002",
+ "location": {
+ "section_id": "nugget-haloform-reaction",
+ "nugget_id": "nugget-haloform-reaction",
+ "anchor_text": "The divergence between acid and base conditions is one of the chapter's best case studies in reading electronic effects."
+ },
+ "severity": "high",
+ "category": "cognitive-load",
+ "observation": "The compiled reader's visible markdown for every section is the 'expanded' tier, which was written as a follow-on to the 'standard' tier — but the standard tier (which contains the plain statement of what each reaction is) is tucked into _detail_texts. The haloform section's visible text opens with an acid-vs-base kinetics compare-and-contrast and never plainly states the sequence; that sentence exists only in the hidden standard tier. Similarly, nugget-alpha-halogenation's visible text opens 'The mechanism has three stages, and only the first is slow' before any visible sentence states the overall transformation.",
+ "learner_impact": "I hit mechanism commentary about a reaction I have not yet been shown. I reread the first paragraph two or three times looking for the sentence that says what actually happens, don't find it, and either skip the section or carry a half-formed picture into the questions.",
+ "evidence": "Reader blocks blk-zfuccs53 and blk-cqjsx35q: content.markdown equals _detail_texts.expanded verbatim; the reaction-statement sentences live only in _detail_texts.standard.",
+ "recommended_outcome": "Each section's default visible prose needs to state the reaction — substrate, reagents, product — before any analysis of it; either the reader must default to the standard tier or the expanded tier needs an opening statement of the transformation.",
+ "confidence": 0.6
+ },
+ {
+ "finding_id": "ss-003",
+ "location": {
+ "section_id": "nugget-alpha-halogenation",
+ "nugget_id": "nugget-enolate-alkylation",
+ "anchor_text": "Write the mechanism of acid-catalyzed alpha halogenation through the enol."
+ },
+ "severity": "high",
+ "category": "worked-example-gap",
+ "observation": "Learning objectives repeatedly demand producing mechanisms, but the chapter contains no worked mechanism figure of any kind: no curved-arrow diagram, no stepwise scheme, no annotated intermediate sequence. All three video briefs that would have shown electron flow are deferred. Every mechanism exists only as prose. The single curved-arrow question (ch22-alkylation-arrow) asks for one arrow of a mechanism the student has never seen drawn.",
+ "learner_impact": "I cannot go from prose like 'the carboxyl proton reaches the beta carbonyl oxygen through a six-membered cyclic transition state' to a drawing I could reproduce on an exam. I memorize word patterns instead of electron flow, and I stall completely at the ledger and curved-arrow questions because no example in the chapter models what a correct answer looks like.",
+ "evidence": "video_briefs all deferred; no asset of a mechanism type exists in assets[]; reader blocks blk-l5m4b9xg, blk-orvtoxcf, blk-7icn6rvp hidden.",
+ "recommended_outcome": "Students need at least one visible, stepwise worked mechanism for the enol halogenation pattern and one for the enolate alkylation / decarboxylation — some static representation of the electron flow the deferred videos were meant to carry, showing each intermediate in order.",
+ "confidence": 0.92
+ },
+ {
+ "finding_id": "ss-004",
+ "location": {
+ "section_id": "nugget-malonic-ester-synthesis",
+ "asset_id": "roadmap-malonic-ester",
+ "anchor_text": "Malonic ester synthesis of pentanoic acid"
+ },
+ "severity": "high",
+ "category": "missing-example",
+ "observation": "The two synthesis_roadmap assets — the chapter's only multi-step worked examples — compile into the reader as image blocks with an empty url (blk-olste5s9 and blk-52lplyxe both have url \"\"). Unlike the deferred videos, these blocks are NOT marked is_hidden, so the student is presented a caption attached to a blank or broken image.",
+ "learner_impact": "The one figure that would let me see the whole deprotonate→alkylate→hydrolyze/decarboxylate sequence at a glance renders as nothing. I assume the content failed to load, lose trust in the page, and try to reconstruct the sequence from prose alone.",
+ "evidence": "Reader blk-olste5s9 (malonic) and blk-52lplyxe (acetoacetic): block_type 'image', content.url \"\", no is_hidden flag; the rich spec exists only in topic.package.json.",
+ "recommended_outcome": "The roadmap content authored in the package needs to actually render for the reader student — or the empty blocks must not be shown as broken figures.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "ss-005",
+ "location": {
+ "question_slug": "ch22-tautomer-vs-resonance",
+ "concept_slug": "keto-enol-tautomerism",
+ "anchor_text": "The conjugate base of acetone drawn with the charge on carbon, and drawn with the charge on oxygen"
+ },
+ "severity": "medium",
+ "category": "sequencing",
+ "observation": "This question belongs to the chapter's first concept, but items i2 and i4 require classifying the resonance forms of enolates which the chapter does not introduce until concept 5 (alpha-hydrogen-acidity). The v2 variant repeats this with the acetophenone conjugate base and the allyl anion.",
+ "learner_impact": "Working questions in concept order, I meet 'conjugate base of acetone drawn with the charge on carbon' having only ever seen neutral keto/enol pairs. I guess 'tautomers' for the anion pairs and encode exactly the confusion the question is meant to cure.",
+ "evidence": "concepts[] order: keto-enol-tautomerism is order 1; enolate resonance forms are taught in nugget-alpha-hydrogen-acidity (order 5). Question set ch22-tautomer-vs-resonance is tagged concept_slug keto-enol-tautomerism.",
+ "recommended_outcome": "The concept-1 sorting task needs either to use only species already introduced by that point, or the enolate items need to be deferred to the acidity concept where the anion has been taught.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "ss-006",
+ "location": {
+ "section_id": "nugget-alpha-halogenation",
+ "question_slug": "ch22-halogenation-profile",
+ "anchor_text": "The mechanism has three stages, and only the first is slow"
+ },
+ "severity": "medium",
+ "category": "conceptual-support",
+ "observation": "The visible reader text says 'The mechanism has three stages, and only the first is slow.' As listed, the first stage is protonation of the oxygen, but the rate-determining event the chapter elsewhere names is enolization (spanning stages one and two); and the advanced question ch22-halogenation-profile presents the same reaction as a two-step profile with answer_key step_count = 2. A student who anchors on 'three stages' will answer 3, or distrust either the text or the diagram.",
+ "learner_impact": "I count stages the way the text told me to, get the profile question wrong, and cannot tell whether the book or I made the error — the point where a shaky student stops trusting their own reading.",
+ "evidence": "Reader blk-cqjsx35q markdown vs question ch22-halogenation-profile student_config.profile (two maxima) and answer_key expected {step_count: 2, rate_determining_step: 1}; v2 identical.",
+ "recommended_outcome": "The prose and the energy profile need one consistent step-accounting: either the text should say the two protonation/deprotonation events together constitute the single slow enolization step shown as one barrier, or the profile question needs a note reconciling 'stages' with 'steps'.",
+ "confidence": 0.8
+ },
+ {
+ "finding_id": "ss-007",
+ "location": {
+ "section_id": "nugget-alpha-halogenation",
+ "asset_id": "mol-acetophenone",
+ "anchor_text": "it alone can be carried to CX₃ and expelled, so acetophenone tests positive with iodine and base"
+ },
+ "severity": "medium",
+ "category": "sequencing",
+ "observation": "In the acid-halogenation section (section 3), the acetophenone figure's caption is written entirely in terms of the haloform reaction — three sections before the haloform reaction is taught (section 6). The single shared asset caption serves its haloform nugget but is a forward reference in its halogenation placement, where the text uses acetophenone as the acid-bromination example instead.",
+ "learner_impact": "Reading section 3, I hit 'haloform reaction', 'CX₃', and 'tests positive' with no referent. I assume I missed a section, page back, find nothing, and lose a few minutes and some confidence — or I skip the figure that was supposed to anchor the acid-bromination substrate.",
+ "evidence": "Reader blk-2y9lusmm (section nugget-alpha-halogenation) description text; haloform is taught in section nugget-haloform-reaction, which is 6th of 8 sections.",
+ "recommended_outcome": "The acetophenone figure needs a placement-appropriate caption in the halogenation section (its role as the acid-bromination substrate), with the haloform-specific caption reserved for the haloform section.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "ss-008",
+ "location": {
+ "section_id": "nugget-enolate-formation-bases",
+ "asset_id": "mol-2-methylcyclohexanone",
+ "anchor_text": "For 2-methylcyclohexanone the kinetic enolate forms toward the unsubstituted carbon and the thermodynamic enolate toward the methyl-bearing carbon"
+ },
+ "severity": "medium",
+ "category": "conceptual-support",
+ "observation": "The kinetic-vs-thermodynamic enolate distinction — a stated learning objective — is carried entirely by prose. The only related figure in the reader is the neutral ketone 2-methylcyclohexanone. The two regioisomeric enolate structures a student must learn to tell apart are never shown side by side anywhere in the chapter; they first appear as unlabelled structure options inside an advanced graded question (ch22-kinetic-enolate).",
+ "learner_impact": "As someone who struggles to convert words into structures, 'the enolate with the double bond toward the unsubstituted alpha carbon' stays abstract. The first time I actually see the two enolates is inside a graded advanced question, where I must simultaneously decode the drawings and apply the rule — I guess between options a and b.",
+ "evidence": "Section nugget-enolate-formation-bases blocks: LDA, 2-methylcyclohexanone (ketone only), acetone enolate; kinetic/thermodynamic enolate SMILES exist only in question options.",
+ "recommended_outcome": "Students need to see the two enolates of 2-methylcyclohexanone as labelled structures at the point where kinetic vs thermodynamic control is taught, before being assessed on distinguishing them.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "ss-009",
+ "location": {
+ "section_id": "nugget-enols-as-nucleophiles",
+ "anchor_text": "It is worth pausing on the direction of this chapter compared with the two before it."
+ },
+ "severity": "medium",
+ "category": "conceptual-support",
+ "observation": "The chapter has no opening overview and no closing summary. The best orienting idea — that this chapter inverts the roles of the previous two — is buried in the final paragraph of section 2. The reagent-signature catalogue sits at the end of the HVZ section rather than anywhere a student would look for a chapter-level roadmap or recap.",
+ "learner_impact": "I start the chapter in the weeds of tautomer populations without knowing why enols matter, and I finish it with five reactions and two named syntheses but no single place that tells me which distinctions matter most; everything reads equally weighted, so I revise by rereading everything.",
+ "evidence": "Reader sections array: first section is nugget-keto-enol-tautomerism with no preceding overview block; last section is nugget-acetoacetic-ester-synthesis with no summary block; role-inversion paragraph is paragraph 3 of blk-lkajteqf; reagent catalogue is the final sentence of blk-kmq9otcl.",
+ "recommended_outcome": "The chapter needs its orienting frame surfaced at the start, and a compact end-of-chapter recap of the five reactions with their reagent signatures and the malonic/acetoacetic pairing.",
+ "confidence": 0.8
+ },
+ {
+ "finding_id": "ss-010",
+ "location": {
+ "question_slug": "ch22-tautomerization-ledger",
+ "anchor_text": "Record every bond made, broken, or changed in order, comparing the keto starting material with the enol product."
+ },
+ "severity": "low",
+ "category": "assessment-readiness",
+ "observation": "The prompt says 'in order', but the task compares a starting material with a product of an equilibrium — there is no time order in a before/after comparison, and the mechanism's order differs between the acid path and base path the chapter just taught. Whether the grader enforces row order is not visible to the student.",
+ "learner_impact": "I freeze on which order counts as correct. If grading is order-sensitive, correct chemistry in a different row order reads as failure and I conclude I don't understand tautomerization when I actually do.",
+ "evidence": "ch22-tautomerization-ledger and -v2 prompt_text vs answer_key.expected_rows in topic.package.json and compiled/question-set.json.",
+ "recommended_outcome": "The prompt needs to either drop 'in order' or state the intended ordering convention, matched to the grader's actual behavior.",
+ "confidence": 0.6
+ },
+ {
+ "finding_id": "ss-011",
+ "location": {
+ "section_id": "nugget-malonic-ester-synthesis",
+ "anchor_text": "the malonate anion is a stabilized, soft nucleophile"
+ },
+ "severity": "low",
+ "category": "cognitive-load",
+ "observation": "Several terms are dropped once in the visible text without setup anywhere in the chapter: 'soft nucleophile' (hard/soft theory is never introduced), 'ambident nucleophiles' (defined only implicitly), and 'tosylates comparable to iodides' (relying on recall from the substitution chapter).",
+ "learner_impact": "Each unknown term costs a pause and a flicker of 'should I know this?'. None is load-bearing, but for a low-confidence reader they accumulate into the impression that the chapter assumes a stronger student.",
+ "evidence": "Reader blk-heuh51qc ('stabilized, soft nucleophile'), blk-y0dqwe8h ('ambident nucleophiles'), blk-jq9skylq ('tosylates comparable to iodides').",
+ "recommended_outcome": "Each of these one-off terms needs either a five-word in-line gloss or removal; 'soft' in particular can be cut without loss since 'stabilized' carries the point.",
+ "confidence": 0.75
+ }
+ ],
+ "strengths": [
+ "Every one of the 50 questions ships a 3-level progressive hint ladder and (where applicable) option-specific wrong-answer explanations that name and correct the classic mistakes.",
+ "The pKa comparison method is taught as an explicit, reusable procedure rather than assumed, and questions like ch22-lda-vs-ethoxide rehearse the same arithmetic.",
+ "The chapter's biggest traps are rehearsed by dedicated error_repair questions that mirror the text's own warnings.",
+ "Concept prerequisites are ordered sensibly, and both named syntheses explicitly inherit the alkylation rules.",
+ "Reagent-signature disambiguation (Br₂/PBr₃ vs Br₂/FeBr₃ vs NBS/light) is both taught and directly assessed."
+ ],
+ "open_questions": [
+ "Which detail tier (terse/standard/expanded) does the reader UI display by default, and can students switch? ss-002's severity assumes the compiled content.markdown (= expanded) is what students see first; if the UI defaults to 'standard', ss-002 drops to low.",
+ "Do the empty-url image blocks for the two synthesis roadmaps render as broken images, or does the reader suppress images with empty URLs at render time?",
+ "Is bond_change_ledger grading order-sensitive with respect to expected_rows?",
+ "Do the authored practice_checks surface on any other student-facing surface even though they are absent from the compiled reader blocks?"
+ ]
+ },
+ {
+ "persona": "Accessibility Persona",
+ "persona_version": "1.0.0",
+ "chapter_id": "carbonyl-alpha-substitution",
+ "chapter_version": "1",
+ "model": "claude-fable-5",
+ "summary": "This chapter is one of the strongest accessibility performances in the series at the authoring layer: all 20 assets carry chemically substantive alt text plus a longer atom-by-atom description, every one of the 50 questions ships an accessibility_bundle whose description conveys the task, every structure-bearing option in every question is paired with a descriptive text label (the ch15/ch16 'lone illustrated option' failure mode is absent), the three deferred videos are hidden in the reader rather than shipped uncaptioned, and no concept is assessed solely by a drawing or arrow task. The blocking problem is concentrated in the two reaction_coordinate_reasoning questions: both the prompt and the accessible description hand over two of the four graded answers (step count and rate-determining step), while the description simultaneously omits all energy information, leaving the two remaining graded sub-tasks (overall energetics and step classification) unattemptable by a learner who cannot see the plotted curve unless the profile widget itself exposes its data non-visually. Secondary gaps: the four blank-canvas drawing questions have no declared non-visual/non-pointer alternative, the authored long_description fields are dropped by the reader compiler and reach no surface, and the two synthesis-roadmap figures compile to image blocks with empty URLs whose step notes and caveats appear on no student surface.",
+ "overall_score": 7.2,
+ "publication_blockers": [
+ "access-001"
+ ],
+ "findings": [
+ {
+ "finding_id": "access-001",
+ "location": {
+ "section_id": "alpha-halogenation-of-ketones",
+ "concept_slug": "alpha-halogenation-of-ketones",
+ "question_slug": "ch22-halogenation-profile",
+ "anchor_text": "A two-step free-energy profile is presented"
+ },
+ "severity": "blocker",
+ "category": "alt-text-quality",
+ "observation": "Both reaction_coordinate_reasoning questions grade four items (ask: step_count, rate_determining_step, overall, step_types), but two of the four answers are handed over before the learner reads the profile. The accessible_description opens 'A two-step free-energy profile is presented' and enumerates exactly three labelled minima — directly answering step_count (answer_key expects 2). The prompt_text compounds it for all learners: 'slow enolization, then fast capture of the enol by Br₂' states which step is slow, answering rate_determining_step (answer_key expects step 1). The same defect appears verbatim in ch22-halogenation-profile-v2.",
+ "learner_impact": "Every learner — sighted or not — receives two of four graded answers for free, and a screen-reader learner receives the step count answer stated verbatim in the description that is supposed to be the neutral task statement. The question cannot function as an assessment of profile-reading for anyone.",
+ "evidence": "topic.package.json ch22-halogenation-profile: ask=[step_count, rate_determining_step, overall, step_types]; answer_key expected {step_count: 2, rate_determining_step: 1}; accessible_description 'A two-step free-energy profile… with labelled minima for the starting ketone plus bromine, the enol intermediate, and the product'; prompt_text 'slow enolization, then fast capture'. Identical pattern in ch22-halogenation-profile-v2.",
+ "recommended_outcome": "The graded sub-answers (number of steps, which step is slow) must not appear in the prompt or the accessible description. The description needs to convey the curve's geometry neutrally — e.g., the sequence of rises and falls with their labelled stationary points and relative heights — so that counting steps and locating the larger barrier remains the learner's work in both modalities.",
+ "confidence": 0.93
+ },
+ {
+ "finding_id": "access-002",
+ "location": {
+ "section_id": "alpha-halogenation-of-ketones",
+ "concept_slug": "alpha-halogenation-of-ketones",
+ "question_slug": "ch22-halogenation-profile",
+ "anchor_text": "classify each step and the overall reaction as energy-releasing or energy-consuming, based on reading the profile"
+ },
+ "severity": "high",
+ "category": "media-equivalence",
+ "observation": "The remaining two graded items on both profile questions (overall = exergonic; step_types = [endergonic, exergonic]) can only be answered from the relative energies plotted in the figure, but the accessible_description carries no energy information at all. The underlying student_config does contain structured control points with y-values and text labels, but nothing in the package indicates that the rendered profile widget exposes those values to assistive technology.",
+ "learner_impact": "A learner using a screen reader, or any learner who cannot perceive the plotted curve, can attempt at most the two sub-questions whose answers are already leaked (access-001) and has no path to the two sub-questions that are genuinely assessed. If the widget does not expose its data, this required activity is impossible without vision.",
+ "evidence": "ch22-halogenation-profile accessible_description contains no energy values or relative-height statements; answer_key requires overall='exergonic' and step_types=['endergonic','exergonic'], which are derivable only from y-values (0 → 10 → −16) present in student_config.profile.control but absent from the description. Same in ch22-halogenation-profile-v2 (0 → 11 → −14).",
+ "recommended_outcome": "A non-visual learner needs equivalent access to the profile's energetic content: either the accessible description must state the relative energies/heights of the labelled minima and maxima (without pre-classifying them), or the profile interaction must verifiably expose its labelled control points and values to assistive technology.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "access-003",
+ "location": {
+ "concept_slug": "keto-enol-tautomerism",
+ "question_slug": "ch22-draw-the-enol",
+ "anchor_text": "the task is to draw on a blank canvas"
+ },
+ "severity": "high",
+ "category": "interactive-fallback",
+ "observation": "Four questions (ch22-draw-the-enol, ch22-draw-the-enol-v2, ch22-haloform-acid-product, ch22-haloform-acid-product-v2) are structure_scaffold items with scaffold 'blank_canvas': the only response mode is freehand structure drawing. Nothing in the package or compiled question set declares a text/SMILES entry or other non-visual, non-pointer alternative, and prior chapter reviews in this series recorded the drawing scaffold's lack of a non-visual alternative as an open platform ticket.",
+ "learner_impact": "Learners who cannot use vision or fine pointer input cannot complete these four bank items if they are assigned. The concepts they assess are also covered by accessible types, so learning access survives at the concept level, but the specific activities remain uncompletable.",
+ "evidence": "student_config for all four: {\"scaffold\": \"blank_canvas\"}; answer_key is a SMILES string. No alternative input mode is declared in accessibility_bundle or student_config.",
+ "recommended_outcome": "Learners who cannot draw need an equivalent way to supply the answer structure for these four items — some non-pointer, non-visual entry path or an alternate equivalent activity per item. Concept-level redundancy already exists, so the need is per-activity, not per-concept.",
+ "confidence": 0.7
+ },
+ {
+ "finding_id": "access-004",
+ "location": {
+ "section_id": "nugget-keto-enol-tautomerism",
+ "asset_id": "mol-acetone-keto",
+ "anchor_text": "Acetone: a central carbon double-bonded to oxygen and bonded to two methyl groups"
+ },
+ "severity": "medium",
+ "category": "media-equivalence",
+ "observation": "Every one of the 20 assets in the topic package carries an accessibility.long_description with genuinely useful structural narration, but the compiled reader chapter contains zero occurrences of long_description. Reader molecule blocks ship only the one-sentence alt_text plus the learning-goal caption; the authored longer descriptions reach no student surface.",
+ "learner_impact": "Screen-reader users in the reader get a serviceable short alt text but lose the atom-by-atom narration that was specifically authored for them — for the enolate, roadmap, and dione figures that narration carries the alpha-position and activation content the chapter is about.",
+ "evidence": "grep of frontend/public/reader/topic-chapters/carbonyl-alpha-substitution.json: 0 blocks contain 'long_description'; molecule blocks carry only name, smiles, alt_text, description. All 20 assets in topic.package.json have populated accessibility.long_description.",
+ "recommended_outcome": "The authored long descriptions need a delivery path to the learner — the reader's molecule blocks should surface the longer structural description, not silently drop it at compile.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "access-005",
+ "location": {
+ "section_id": "nugget-malonic-ester-synthesis",
+ "asset_id": "roadmap-malonic-ester",
+ "anchor_text": "Malonic ester synthesis of pentanoic acid"
+ },
+ "severity": "medium",
+ "category": "media-equivalence",
+ "observation": "The two synthesis_roadmap assets compile into reader 'image' blocks whose url is the empty string, with only alt_text and a caption. The roadmap spec's per-step reagent strings, mechanistic step notes, and three scientific_caveats per roadmap appear on no reader surface in any modality; visually there is nothing to render at all.",
+ "learner_impact": "All learners lose the roadmap's step-labelled visual; the alt text plus the nugget prose partially compensate, but the caveat content authored into the figure reaches nobody through the reader.",
+ "evidence": "Reader blocks in sections nugget-malonic-ester-synthesis and nugget-acetoacetic-ester-synthesis: block_type image with url \"\". topic.package.json roadmap specs contain steps[].reagents, steps[].note, and scientific_caveats[] not present anywhere in the compiled reader.",
+ "recommended_outcome": "The reader needs the roadmap content in some working form — a rendered figure with its equivalent text (steps, reagents, caveats), or the same information delivered as structured prose; an image block with an empty URL serves neither sighted nor non-sighted learners.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "access-006",
+ "location": {
+ "question_slug": "ch22-identify-enol-tautomer",
+ "anchor_text": "The ring alcohol with a double bond starting at the carbon that carries the OH group"
+ },
+ "severity": "low",
+ "category": "alt-text-quality",
+ "observation": "In ch22-identify-enol-tautomer, the correct option's text label restates the definition of an enol, and hint level 3 then states that definition verbatim. After that hint the option text is a direct string-level match to the answer. This affects all learners equally, so it is a mild leak in the hint ladder rather than an accessibility differential.",
+ "learner_impact": "A learner who takes the third hint can answer by matching words rather than structures; the assessed discrimination collapses at hint level 3.",
+ "evidence": "student_config option a text vs feedback_bundle.hints[2].text in ch22-identify-enol-tautomer; the -v2 variant avoids this by keying on 'the enol of the wrong parent'.",
+ "recommended_outcome": "The final hint should guide without reproducing the correct option's wording — the learner still needs to map the definition onto a candidate rather than string-match it.",
+ "confidence": 0.6
+ }
+ ],
+ "strengths": [
+ "Every structure-bearing option, matching target, route intermediate, and rank card across all 50 questions is paired with a descriptive text name or formula — the 'lone illustrated option' and structure-only-choice failure modes found in earlier chapters are completely absent.",
+ "All 50 questions carry an accessibility_bundle with a task-conveying, and (outside the two profile questions) leak-neutral, accessible_description, and the bundles survive into compiled/question-set.json for every question.",
+ "All 20 assets have both a content-bearing alt_text and an authored long_description that narrates chemically relevant structure rather than merely naming the figure.",
+ "The three deferred videos are hidden in the reader (is_hidden: true, empty url) instead of shipping uncaptioned media, and each production_note records closed captions, change-naming narration, and a text transcript as production requirements.",
+ "Curved-arrow questions expose each selectable site with a text label, and bond_change_ledger questions use text-labelled atoms with structured row entry — both are accessible-by-design patterns for mechanism assessment.",
+ "No concept is assessed solely by structure_scaffold or curved_arrow; every concept has at least one fully text-mediated question type.",
+ "The reader's prose redundantly carries the content of every figure and of the deferred videos, so the chapter's chemistry is fully reachable through text."
+ ],
+ "open_questions": [
+ "Does the rendered reaction_coordinate_reasoning widget expose its labelled control points and y-values to assistive technology? If yes, access-002 reduces to the leak in access-001; if no, ch22-halogenation-profile and -v2 are uncompletable without vision and access-002 escalates to a blocker.",
+ "Is there any keyboard/text (e.g., SMILES or name entry) alternative to freehand drawing for structure_scaffold blank-canvas questions on the platform, and what is the status of the previously ticketed scaffold-accessibility work?",
+ "Is the curved_arrow interaction operable by keyboard alone?",
+ "Prior live review of ch16 found that the platform did not deliver accessibility_bundle content to students at all. The bundles here are present in the compiled question set — has the delivery gap been closed?",
+ "How does the reader render an image block whose url is the empty string — hidden, broken-image icon, or alt-text-only?",
+ "Are rank_order cards operable without drag (keyboard reordering or position entry)?"
+ ]
+ },
+ {
+ "persona": "Learner with Visual Preference",
+ "persona_version": "1.0.0",
+ "chapter_id": "carbonyl-alpha-substitution",
+ "chapter_version": "1",
+ "model": "claude-fable-5",
+ "summary": "The prose is excellent and every one of the 20 authored assets is chemically correct with a purposeful caption, but the chapter is visually thin for its subject: all reader figures are single static molecules, and the chapter's actual content — mechanisms, equilibria, a pKa ladder, kinetic-vs-thermodynamic regiochemistry, and two multi-step named syntheses — is carried almost entirely in dense paragraphs. Worst, the two flagship synthesis_roadmap assets compile to image blocks with empty URLs, so in the reader the malonic and acetoacetic roadmaps render as an italicized alt-text sentence inside a box rather than as diagrams. The reader renderer supports reaction and reaction_coordinate blocks, but the compiler used none of them. The question set, by contrast, is visually strong and avoids the lone-illustrated-option answer tell seen in earlier chapters.",
+ "overall_score": 6.3,
+ "publication_blockers": [],
+ "findings": [
+ {
+ "finding_id": "visual-001",
+ "location": {
+ "section_id": "nugget-malonic-ester-synthesis",
+ "asset_id": "roadmap-malonic-ester",
+ "anchor_text": "Malonic ester synthesis of pentanoic acid"
+ },
+ "severity": "high",
+ "category": "figure-purpose",
+ "observation": "Both synthesis_roadmap assets compile into reader image blocks with url: \"\" (blocks blk-olste5s9 and blk-52lplyxe). [internal source reference — not in this repo] renders an empty-URL image block as the alt text in small italic type inside a bordered box — no diagram at all. The chapter's two most important multi-structure visuals therefore do not exist on the student surface.",
+ "learner_impact": "The named syntheses are the chapter's capstone, and their whole point is a two-step structural transformation with reagent-labeled arrows. A student scanning the section sees three disconnected single molecules plus an italic sentence where the roadmap should be, and must reassemble the sequence mentally from prose. The carefully authored roadmap spec is invisible.",
+ "evidence": "topic.package.json roadmap assets contain full spec.nodes/steps; compiled reader blocks blk-olste5s9 and blk-52lplyxe have block_type image with url \"\"; ReaderProviderImage falls back to italic alt text when no imageUrl resolves.",
+ "recommended_outcome": "The two named-synthesis roadmaps need to actually render as multi-structure figures in the reader — the compiled chapter currently delivers only their alt text, so the deprotonate → alkylate → hydrolyze/decarboxylate sequence is never shown.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "visual-002",
+ "location": {
+ "section_id": "nugget-enols-as-nucleophiles",
+ "anchor_text": "form the enol, attack through the alpha carbon, deprotonate oxygen"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The chapter's organizing scheme — the three-stage alpha-substitution pattern — and the three-stage acid-catalyzed halogenation mechanism exist only as prose. The reader contains zero reaction, mechanism, or sequence figures anywhere in the chapter, even though the renderer supports reaction and reaction_coordinate block types; every figure is one isolated molecule.",
+ "learner_impact": "Every reaction in the first half of the chapter is claimed to follow one pattern, but that pattern is never shown once as a structure sequence. Learners who benefit from seeing a transformation must build the enol → oxocarbenium → product chain from three paragraphs.",
+ "evidence": "Section nugget-enols-as-nucleophiles has one text block and two single-molecule blocks; nugget-alpha-halogenation shows only 2-bromocyclohexanone, cyclohexenone, and acetophenone as isolated endpoints of a mechanism described in three prose paragraphs.",
+ "recommended_outcome": "The enolize → attack → deprotonate sequence is asserted as the pattern behind half the chapter but is never once shown as a connected sequence of structures; the chapter needs at least one place where the pattern is visible rather than narrated.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "visual-003",
+ "location": {
+ "section_id": "nugget-alpha-hydrogen-acidity",
+ "nugget_id": "nugget-alpha-hydrogen-acidity",
+ "anchor_text": "The numbers deserve memorizing as a ladder"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The text explicitly frames roughly ten pKa values as \"a ladder\", but the ladder is never drawn — the values are dispersed across two dense paragraphs and five separate single-molecule figures whose captions each carry one number.",
+ "learner_impact": "Ordering and relative spacing on a scale is exactly the relationship a one-glance vertical scale makes trivial and prose makes laborious. The learner must extract and mentally sort numbers from paragraph text to get what the chapter itself calls a ladder; the rank_order question then assesses that ordering.",
+ "evidence": "Reader text block blk-y0dqwe8h and standard-detail variant list all values in running prose; the five molecule figures in the section each mention a pKa only in a caption sentence.",
+ "recommended_outcome": "The chapter names a ladder it never shows; the pKa hierarchy needs a representation in which the ordering and gaps are visible at once rather than recovered from prose.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "visual-004",
+ "location": {
+ "section_id": "nugget-enolate-formation-bases",
+ "asset_id": "mol-2-methylcyclohexanone",
+ "anchor_text": "the kinetic enolate forms toward the unsubstituted carbon and the thermodynamic enolate toward the methyl-bearing carbon"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The kinetic-vs-thermodynamic regiochemistry of 2-methylcyclohexanone is described verbally, but the two enolates are never drawn in the reader — the only figure is the neutral ketone. The concept's declared trouble spot is precisely \"mixing up the regiochemistry\". The two enolate structures do exist as SMILES, but only inside the options of question ch22-kinetic-enolate.",
+ "learner_impact": "Which side the double bond forms on is a spatial fact about a specific molecule. A learner must translate \"toward the unsubstituted carbon\" into a structure unaided, then meet the drawn structures for the first time inside an assessment.",
+ "evidence": "Section nugget-enolate-formation-bases blocks: LDA, 2-methylcyclohexanone, acetone enolate — no 2-methylcyclohexanone enolate. Question ch22-kinetic-enolate options carry [O-]C1=CCCCC1C and [O-]C1=C(C)CCCC1.",
+ "recommended_outcome": "The two regiochemically distinct enolates of 2-methylcyclohexanone are the point of the section and are never shown in the teaching surface; the side-by-side contrast needs to be visible before it is assessed.",
+ "confidence": 0.92
+ },
+ {
+ "finding_id": "visual-005",
+ "location": {
+ "section_id": "nugget-keto-enol-tautomerism",
+ "anchor_text": "connected by an equilibrium arrow rather than a double-headed resonance arrow"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The keto⇌enol relationship is presented as two separate single-molecule cards with no paired representation showing the equilibrium, which proton moved, or which bond relocated. The tautomer-vs-resonance distinction is explicitly hung on an arrow convention that is never shown, only named; likewise the enolate's second resonance form exists only in prose and alt text.",
+ "learner_impact": "The declared trouble spot is confusing tautomers with resonance forms because \"the drawings look deceptively similar\" — yet the chapter never places the deceptively similar drawings side by side with their distinguishing arrows. The learner is told the visual convention instead of being shown it.",
+ "evidence": "Section nugget-keto-enol-tautomerism blocks are independent cards; no reaction/equilibrium block exists. mol-acetone-enolate long_description describes the alternative form but does not depict it. Question ch22-tautomer-vs-resonance then asks students to classify \"pairs of drawings\" given only verbal descriptions of those drawings.",
+ "recommended_outcome": "The keto/enol pair and the resonance-form pair need to be seen as pairs — with their respective arrow conventions — since the chapter's own diagnosis is that students confuse the two kinds of drawing.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "visual-006",
+ "location": {
+ "section_id": "nugget-haloform-reaction",
+ "anchor_text": "One substituent, two opposite kinetic verdicts"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The haloform section carries two strongly visual ideas entirely in prose: the acid-vs-base divergence, and the three-stage sequence CH3 → CI3 → hydroxide addition → C-C cleavage. The section's only figures are the two endpoints, acetophenone and iodoform — nothing between them.",
+ "learner_impact": "The mechanism's most surprising event, a carbon-carbon bond breaking via a carbanion leaving group, and the accelerating exhaustive halogenation that sets it up, must be imagined from paragraphs. The endpoints alone cannot show why or how one becomes the other.",
+ "evidence": "Section nugget-haloform-reaction blocks: one text block, acetophenone, iodoform, and a Wikipedia link. The tetrahedral alkoxide intermediate and triiodomethyl ketone appear only in prose.",
+ "recommended_outcome": "The acid/base kinetic divergence and the exhaustive-halogenation-then-cleavage sequence are asserted in prose only; at least the sequence between the two endpoint molecules needs to become visible.",
+ "confidence": 0.87
+ },
+ {
+ "finding_id": "visual-007",
+ "location": {
+ "section_id": "nugget-hvz-bromination",
+ "anchor_text": "let the substrate decide: ketone with acid catalysis for monohalogenation"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The HVZ section's sole figure is the final product; the acid → acyl bromide → enol → alpha-bromo acyl bromide → hydrolysis relay, including the catalytic bromide exchange, is prose-only. The section also closes with a five-way decision list that is a natural conditions-vs-position comparison panel but is delivered as one long sentence.",
+ "learner_impact": "A learner cannot see the functional-group detour that is the entire trick of HVZ — the product figure looks like a one-step bromination, visually reinforcing the exact misconception the concept lists first. The five-condition disambiguation is a lookup task ill-served by a sentence.",
+ "evidence": "Section nugget-hvz-bromination has one text block, one molecule block (mol-2-bromopropanoic-acid), one Wikipedia link. Trouble spot: \"Trying to brominate the acid directly...\"",
+ "recommended_outcome": "The acid-to-acyl-bromide detour and return is the substance of HVZ and is invisible in the figures; the multi-stage relay, and separately the reagent-signature comparison, need representations that show the routes rather than narrate them.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "visual-008",
+ "location": {
+ "section_id": "nugget-malonic-ester-synthesis",
+ "anchor_text": "the carboxyl proton reaches the beta carbonyl oxygen through a six-membered cyclic transition state"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The six-membered cyclic transition state of beta-keto acid decarboxylation — an inherently geometric, cyclic arrangement — is conveyed only in prose; the video brief that would have shown it is production-deferred and hidden in the reader, and the roadmap figure that mentions it in a step note renders as empty (see visual-001). The same TS is reused verbally in the acetoacetic section.",
+ "learner_impact": "\"The proton reaches the beta carbonyl oxygen through a six-membered ring\" is a spatial claim about atoms folding into a cycle. Without any drawing, learners routinely fail the concept's own listed trouble spot: understanding why only beta-carbonyl acids decarboxylate.",
+ "evidence": "video_briefs entry video-malonic-decarboxylation has production_status \"deferred\"; reader block blk-7icn6rvp is is_hidden: true with empty url; no TS figure exists among assets.",
+ "recommended_outcome": "The cyclic transition state — the mechanistic heart of both named syntheses' exit step — currently has no visual carrier at all after the video deferral; the geometry needs a static representation the deferred animation was going to provide.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "visual-009",
+ "location": {
+ "section_id": "nugget-keto-enol-tautomerism",
+ "asset_id": "mol-24-pentanedione-enol",
+ "anchor_text": "held flat by an intramolecular hydrogen bond"
+ },
+ "severity": "low",
+ "category": "figure-purpose",
+ "observation": "The learning goal and body text credit the 2,4-pentanedione enol's stability partly to an intramolecular hydrogen bond forming a six-membered ring, but the figure is drawn as an open chain; its own long_description concedes the H-bonded ring \"is drawn open here.\" The figure therefore does not show the feature it is captioned to teach.",
+ "learner_impact": "A learner inspecting the figure to find the claimed stabilization sees ordinary conjugation only; the most visually distinctive part of the explanation (the closed six-membered chelate) is absent from the visual.",
+ "evidence": "Asset mol-24-pentanedione-enol: smiles CC(=O)C=C(C)O (open form); learning_goal cites \"an internal hydrogen bond\"; long_description: \"...form a six-membered hydrogen-bonded ring, which is drawn open here.\"",
+ "recommended_outcome": "The figure's stated teaching point (H-bond-closed six-membered ring) and its drawing disagree; either the drawing should show the chelated arrangement or the caption should stop leaning on a feature the drawing omits.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "visual-010",
+ "location": {
+ "section_id": "nugget-alpha-halogenation",
+ "asset_id": "mol-acetophenone",
+ "anchor_text": "so acetophenone tests positive with iodine and base"
+ },
+ "severity": "low",
+ "category": "figure-purpose",
+ "observation": "In the acid-catalyzed halogenation section, the acetophenone figure's caption is written for the haloform reaction — a topic four sections later. The section's displayed (expanded) text never mentions acetophenone; the acid-bromination-of-acetophenone framing lives only in the standard-detail variant. The same asset with the same caption reappears, correctly placed, in the haloform section.",
+ "learner_impact": "A reader in the halogenation section meets a figure whose caption discusses a reaction they have not yet reached and that contradicts the section's message (acid conditions stop at ONE halogen; the caption is about exhaustive halogenation in base). Figure and surrounding text are desynchronized.",
+ "evidence": "Reader block blk-2y9lusmm sits in section nugget-alpha-halogenation; its description text matches the haloform learning goal; the section's expanded markdown uses cyclohexanone examples and mentions the haloform only as a forward contrast.",
+ "recommended_outcome": "The acetophenone figure in the halogenation section needs a caption aligned with what that section teaches (acid-catalyzed monobromination), reserving the haloform framing for its own section.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "visual-011",
+ "location": {
+ "asset_id": "mol-cyclohexanone-enol",
+ "anchor_text": "whose upper carbon carries a hydroxyl group"
+ },
+ "severity": "low",
+ "category": "alt-text-quality",
+ "observation": "The cyclohexanone-enol alt text asserts an orientation (\"whose upper carbon carries a hydroxyl group\") that depends entirely on RDKit's layout of OC1=CCCCC1 and is not guaranteed by anything in the asset. If the rendered depiction places the OH elsewhere, the description misdirects.",
+ "learner_impact": "A learner using the description to locate the hydroxyl-bearing carbon versus the alpha carbon may be pointed at the wrong ring position if the auto-layout differs from the author's assumption.",
+ "evidence": "Asset mol-cyclohexanone-enol accessibility.alt_text: \"...a six-membered ring with one double bond, whose upper carbon carries a hydroxyl group.\" No rdkit_options fix the orientation.",
+ "recommended_outcome": "Position-dependent language in alt text needs to either be guaranteed by the rendering or replaced with orientation-free structural language (as the same asset's long_description already does).",
+ "confidence": 0.75
+ },
+ {
+ "finding_id": "visual-012",
+ "location": {
+ "asset_id": "mol-acetone-enolate",
+ "section_id": "nugget-enolate-alkylation",
+ "anchor_text": "The enolate of acetone, drawn with the charge on oxygen"
+ },
+ "severity": "low",
+ "category": "visual-redundancy",
+ "observation": "The identical acetone-enolate card — same structure, same caption, word for word — appears in three sections, and the prop-1-en-2-ol and cyclohexanone-enol cards repeat verbatim across sections 1 and 2. None of the repeats adds a section-specific annotation or teaching angle.",
+ "learner_impact": "Repeated identical figures with identical captions start to read as filler; the third encounter costs attention without adding information, and it masks the fact that no NEW visual appears in the later sections.",
+ "evidence": "Reader blocks blk-i7kw8192, blk-cnqs1y98, blk-0ztainbi are byte-identical content; blk-k2y8fkl4/blk-4y9a92x7 and blk-5ley9m1z/blk-bmcqqsdb likewise.",
+ "recommended_outcome": "Repeated figures need to earn each placement — either a caption angle specific to the section's point, or fewer repeats in favor of a visual the later section actually lacks.",
+ "confidence": 0.7
+ },
+ {
+ "finding_id": "visual-013",
+ "location": {
+ "question_slug": "ch22-enol-attack-site",
+ "anchor_text": "Which atom of the enol forms the new bond to bromine?"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "ch22-enol-attack-site asks which atom of the cyclohexanone enol bonds to bromine, but displays no structure; all four options are verbal position descriptions. Similarly, ch22-tautomer-vs-resonance asks students to classify \"pairs of drawings\" while showing no drawings — every pair is a verbal description of a drawing.",
+ "learner_impact": "Both questions assess spatial/graphical discriminations through language about pictures. Students must first reconstruct the structures from words before they can even apply the concept, which shifts the difficulty from chemistry to parsing.",
+ "evidence": "ch22-enol-attack-site student_config options a-d carry text only, no structure_smiles, and no molecule display field exists on the compiled question; ch22-tautomer-vs-resonance prompt: \"Each entry describes a pair of drawings.\"",
+ "recommended_outcome": "Questions whose target skill is locating an atom on, or comparing, specific drawings need the drawing present in the stem, keeping options text-only to avoid leaking the key.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "visual-014",
+ "location": {
+ "question_slug": "ch22-tautomerization-ledger",
+ "anchor_text": "Record every bond made, broken, or changed in order"
+ },
+ "severity": "low",
+ "category": "figure-purpose",
+ "observation": "The bond-change ledger's reference figure is only the keto form (molecule_smiles CC(C)=O, implicit hydrogens), while the task is to compare keto against enol. The atom-label legend includes \"4: The alpha hydrogen that moves\" — a hydrogen that is not visible in the rendered reference structure — and the enol side of the comparison is never displayed.",
+ "learner_impact": "Students ledger changes against a product they cannot see, and one legend entry points at an atom absent from the figure.",
+ "evidence": "student_config: molecule_smiles \"CC(C)=O\" with no show_hydrogens option; atom_labels id 4 = \"The alpha hydrogen that moves\"; reaction_display is a prose sentence, not a second structure.",
+ "recommended_outcome": "The ledger's reference visual needs to let students see both sides of the comparison and every labeled atom — including the migrating hydrogen — rather than labeling atoms the figure does not show.",
+ "confidence": 0.8
+ }
+ ],
+ "strengths": [
+ "Every molecule asset pairs a purposeful, section-specific learning_goal caption with alt_text plus a genuinely structural long_description — no decorative figures anywhere.",
+ "The question set is visually strong where it counts: ch22-kinetic-enolate illustrates all four options, avoiding the lone-illustrated-option answer tell found in earlier chapters; iodoform-substrate and matching-pairs attach structures to every candidate; malonic-route carries SMILES on start, target, and all intermediates.",
+ "Native visual question types are well used: a correctly shaped two-step reaction_coordinate profile, a curved_arrow item with accurately indexed sites, structure_scaffold drawing tasks, and a bond_change_ledger — the interactive practice is more visual than the reader itself.",
+ "All spot-checked SMILES are chemically correct, and the three deferred videos are hidden in the reader rather than rendered as broken placeholders, with production notes recording caption/transcript requirements."
+ ],
+ "open_questions": [
+ "Is a registry-provided image expected to fill the roadmap image blocks' empty url at seed time, or is the empty url a compile gap? The compiled blocks carry no asset_id either, so the registry path also cannot resolve.",
+ "Do bond_change_ledger reference figures ever receive rendered atom numbering, and if so at what stage — the compiled question-set carries only molecule_smiles.",
+ "The reader renderer supports 'reaction' and 'reaction_coordinate' block types, but this chapter's compiler emitted none; is the topic-package compiler currently capable of emitting them from authored assets?"
+ ]
+ }
+ ],
+ "publication_readiness": "major revision",
+ "executive_summary": "The chemistry is verified clean: the instructor persona RDKit-checked every structure and answer key and found zero chemical errors, and the pKa framework is quantitatively self-consistent across prose, figures, hints, and numeric keys. The chapter's accessibility authoring layer is the strongest in the series (no lone-illustrated-option tells, every question bundled, every asset double-described). One blocker forces the major-revision verdict: both reaction_coordinate_reasoning questions leak two of their four graded answers — the prompt states which step is slow and the accessible description states the step count — while the description omits the energy information a non-visual learner needs for the other two. The remaining findings split into (a) bounded chapter-local refinements (terminology, prerequisites, caption placement, question sequencing, two unassessed learning objectives) and (b) platform-wide delivery gaps confirmed identical in ch21 (practice checks and long descriptions never emitted to the reader; synthesis-roadmap figures compile to empty-URL image blocks) plus the standing deferral of mechanism-sequence visuals, which the prose deliberately carries in full.",
+ "consensus_strengths": [
+ "Zero chemistry errors under rigorous verification: all ~60 SMILES RDKit-validated, all 50 answer keys correct including regiochemically subtle ones (instructor); all spot-checked structures confirmed by the visual persona independently.",
+ "Accessibility authoring is series-best: every question has a task-conveying accessibility_bundle, every asset has alt text plus a structural long description, no lone-illustrated-option answer tells anywhere (three personas independently).",
+ "Every question ships a 3-level hint ladder and mistake-naming wrong-answer explanations; error_repair items rehearse the chapter's own declared trouble spots (struggling student + instructor).",
+ "The pKa ladder is taught as a reusable procedure and used consistently everywhere it appears; reagent-signature disambiguation is both taught and assessed.",
+ "The three deferred videos are hidden rather than shipped broken, with caption/transcript requirements recorded; deferral notes are in place."
+ ],
+ "ranked_recommendations": [
+ {
+ "rec_id": "rec-001",
+ "title": "Energy-profile questions leak two graded answers and omit energetics from the accessible description",
+ "need": "The prompt must not state which step is slow, the accessible description must not state the step count, and a non-visual learner needs the curve's geometry (labelled stationary points with relative heights) to attempt the two genuinely assessed items.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Rewriting prompt_text and accessible_description on both questions fully removes the leak and supplies the neutral geometric narration; no new asset or platform change is required for the content side. Widget-level AT exposure remains a platform question and is recorded separately.",
+ "target_surface": "assessment",
+ "severity": "blocker",
+ "source_findings": [
+ "access-001",
+ "access-002"
+ ]
+ },
+ {
+ "rec_id": "rec-002",
+ "title": "Synthesis-roadmap figures render as empty image blocks in the reader",
+ "need": "The two named-synthesis roadmaps — the chapter's only multi-structure figures — must actually render for students; currently the compiled image blocks carry an empty URL and fall back to italic alt text.",
+ "chosen_intervention": "instructor-note",
+ "rationale": "Verified platform-wide: ch21's roadmap compiles identically (empty url). The fix belongs in the topic-package compiler/reader (emit a renderable roadmap block or resolve an image at compile), not in this chapter's content. The alt text plus nugget prose carry the sequence in the interim. Recorded for the platform backlog; not a chapter edit.",
+ "target_surface": "figure",
+ "severity": "high",
+ "source_findings": [
+ "visual-001",
+ "access-005",
+ "ss-004"
+ ]
+ },
+ {
+ "rec_id": "rec-003",
+ "title": "Authored practice checks and long descriptions never reach the reader",
+ "need": "All ten per-nugget practice checks and all twenty long descriptions are authored but dropped by the reader compiler, so students get no inline checkpoints and screen-reader users lose the atom-by-atom narration.",
+ "chosen_intervention": "instructor-note",
+ "rationale": "Verified platform-wide (ch21 identical: zero practice_check or long_description occurrences in its compiled reader). Emitting these is a compiler feature affecting every chapter; the authored content is ready the moment the platform ships the block types. Not correctable per-chapter.",
+ "target_surface": "prose",
+ "severity": "high",
+ "source_findings": [
+ "ss-001",
+ "access-004"
+ ]
+ },
+ {
+ "rec_id": "rec-004",
+ "title": "No step-through mechanism representation anywhere (videos deferred, no sequence figures)",
+ "need": "Enolization, enol attack, haloform cleavage, the HVZ relay, and the decarboxylation cyclic transition state are carried entirely by prose; learners asked to produce mechanisms never see one drawn.",
+ "chosen_intervention": "instructor-note",
+ "rationale": "The three video briefs are in the standing chalk-pipeline deferral class (ch12-21), and the only multi-structure asset type (synthesis_roadmap) currently renders empty in the reader (rec-002), so adding mechanism roadmaps today would produce nothing student-visible. The accessibility persona confirmed the prose carries the full content. Recorded as the chapter's top visual opportunity once either the video pipeline or roadmap rendering lands; not force-fixable now with any intervention that would actually reach students.",
+ "target_surface": "figure",
+ "severity": "high",
+ "source_findings": [
+ "ss-003",
+ "inst-009",
+ "visual-002",
+ "visual-005",
+ "visual-006",
+ "visual-007",
+ "visual-008"
+ ]
+ },
+ {
+ "rec_id": "rec-005",
+ "title": "Kinetic and thermodynamic enolates of 2-methylcyclohexanone are never shown before being assessed",
+ "need": "The two regioisomeric enolate structures — the point of the base-choice section and its declared trouble spot — must be visible in the teaching surface before students meet them inside an advanced question.",
+ "chosen_intervention": "new-figure",
+ "rationale": "Two ordinary molecule assets (which do render in the reader, unlike roadmaps) attached to nugget-enolate-formation-bases close the gap with existing machinery; found independently by two personas.",
+ "target_surface": "figure",
+ "severity": "medium",
+ "source_findings": [
+ "visual-004",
+ "ss-008"
+ ]
+ },
+ {
+ "rec_id": "rec-006",
+ "title": "Two learning objectives are unassessed and the kinetic-alkylation payoff is never practiced",
+ "need": "Qualitative enol-content prediction (objective of nugget 1) and carrying enolate regiochemistry through to an alkylation product (promised by nugget 6) have no practice items; the biological-enolate objective of nugget 10 is aspirational relative to its coverage.",
+ "chosen_intervention": "added-practice",
+ "rationale": "One rank_order pair (enol content: phenol / 1,3-dicarbonyl / simple ketone / no-alpha-H) and one single_select pair (LDA-then-MeI product on 2-methylcyclohexanone) close the two assessable gaps at minimum scope; the biological objective is reframed to match what is actually assessed rather than expanding the bank further.",
+ "target_surface": "practice",
+ "severity": "medium",
+ "source_findings": [
+ "inst-005",
+ "inst-007",
+ "inst-006"
+ ]
+ },
+ {
+ "rec_id": "rec-007",
+ "title": "Stage-count prose conflicts with the two-step energy profile, and two expanded tiers analyze before stating the reaction",
+ "need": "The visible text says the halogenation mechanism has 'three stages' while the profile question grades step_count = 2; the haloform and halogenation expanded tiers open with analysis before any visible sentence states the overall transformation.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Rewording the expanded-tier openings to state the transformation first and to reconcile elementary events vs profile steps fixes both findings without touching the questions (whose profiles are correct).",
+ "target_surface": "prose",
+ "severity": "medium",
+ "source_findings": [
+ "ss-006",
+ "ss-002"
+ ]
+ },
+ {
+ "rec_id": "rec-008",
+ "title": "Concept-1 sorting question uses enolate species taught four sections later",
+ "need": "The tautomer-vs-resonance classifier must not require the enolate concept before it is taught; resonance examples must come from material the student already has.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Swapping the enolate items for resonance pairs from earlier chapters (Kekulé benzene, carboxylate, allyl anion) preserves the question's discrimination while removing the forward dependency; cheaper than re-homing the question and reordering the bank.",
+ "target_surface": "assessment",
+ "severity": "medium",
+ "source_findings": [
+ "ss-005"
+ ]
+ },
+ {
+ "rec_id": "rec-009",
+ "title": "Acetophenone figure caption is haloform-specific in the acid-halogenation section",
+ "need": "The shared asset's caption must serve both placements; in section 3 it forward-references a reaction taught three sections later and contradicts the section's stop-at-one-halogen message.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "One rewritten learning_goal covering both roles (acid monobromination site; later haloform substrate) fixes both placements without duplicating the asset.",
+ "target_surface": "figure",
+ "severity": "medium",
+ "source_findings": [
+ "ss-007",
+ "visual-010"
+ ]
+ },
+ {
+ "rec_id": "rec-010",
+ "title": "Blank-canvas drawing questions have no non-visual, non-pointer alternative",
+ "need": "Learners who cannot draw need an equivalent way to answer the four structure_scaffold items if assigned.",
+ "chosen_intervention": "alternate-activity",
+ "rationale": "Concept-level equivalents already exist for both affected concepts (the accessibility persona confirmed no concept is scaffold-only), and per-item text entry is the standing platform ticket recorded in prior reviews. The chapter-side mitigation — accessible alternatives per concept — is already in place; the per-activity fix is platform work.",
+ "target_surface": "interactive",
+ "severity": "high",
+ "source_findings": [
+ "access-003"
+ ]
+ },
+ {
+ "rec_id": "rec-011",
+ "title": "Terminology, caption, and feedback refinements",
+ "need": "A homoallylic alcohol is called allylic in feedback; the trihalomethyl-carbanion stability is equated with carboxylate; 'enolate' is used before definition; a hint string-matches the correct option; a ledger prompt implies a nonexistent ordering; one alt text is orientation-dependent; one caption leans on an H-bond the drawing omits; 'soft nucleophile' is undefined; the one-arrow SN2 items never acknowledge the omitted leaving-group arrow.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Nine small text edits, each fully resolving its finding; no structural changes.",
+ "target_surface": "prose",
+ "severity": "low",
+ "source_findings": [
+ "inst-001",
+ "inst-002",
+ "inst-003",
+ "access-006",
+ "ss-010",
+ "visual-011",
+ "visual-009",
+ "ss-011",
+ "inst-008"
+ ]
+ },
+ {
+ "rec_id": "rec-012",
+ "title": "Haloform concept prerequisites omit the acid-halogenation mechanism its prose contrasts against",
+ "need": "Concept-map routing must reflect that the haloform nugget's organizing contrast assumes concept 3.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "One metadata addition to the prerequisites list.",
+ "target_surface": "prose",
+ "severity": "low",
+ "source_findings": [
+ "inst-004"
+ ]
+ },
+ {
+ "rec_id": "rec-013",
+ "title": "The pKa ladder named by the text is never drawn",
+ "need": "The ordering-and-gaps relationship across ~10 pKa values needs an at-a-glance representation rather than recovery from prose.",
+ "chosen_intervention": "instructor-note",
+ "rationale": "No current asset type renders a numeric scale figure; the five captioned molecule figures plus the rank_order items carry the ordering in the interim. Recorded as a visual opportunity pending a suitable figure kind.",
+ "target_surface": "figure",
+ "severity": "medium",
+ "source_findings": [
+ "visual-003"
+ ]
+ },
+ {
+ "rec_id": "rec-014",
+ "title": "No chapter overview or closing recap",
+ "need": "The chapter's orienting frame (roles inverted vs prior chapters; one pattern underlies the first half) and a compact recap of the five reactions and two syntheses need surfacing at the start and end.",
+ "chosen_intervention": "instructor-note",
+ "rationale": "A structural addition (new overview/summary nuggets) rather than a correction; deferred to a content revision pass rather than smuggled into a QA correction cycle. The role-inversion paragraph already exists in section 2 and the reagent catalogue in section 4.",
+ "target_surface": "prose",
+ "severity": "medium",
+ "source_findings": [
+ "ss-009"
+ ]
+ },
+ {
+ "rec_id": "rec-015",
+ "title": "Question-stem visuals and ledger hydrogen visibility",
+ "need": "The enol-attack-site and tautomer-vs-resonance stems describe drawings without showing them; the ledger's labelled alpha hydrogen is not visible on the implicit-H reference structure.",
+ "chosen_intervention": "instructor-note",
+ "rationale": "Stimulus-molecule display on select-type stems and ledger hydrogen rendering are question-type platform capabilities, not per-chapter content; the text-described versions remain answerable (and are the accessible path). Recorded for the question-type backlog.",
+ "target_surface": "interactive",
+ "severity": "medium",
+ "source_findings": [
+ "visual-013",
+ "visual-014"
+ ]
+ },
+ {
+ "rec_id": "rec-016",
+ "title": "Identical figure cards repeat across sections",
+ "need": "Repeated identical enolate/enol cards should each earn their placement or yield to a section-specific visual.",
+ "chosen_intervention": "sufficient-alt-text",
+ "rationale": "The repeats are deliberate anchoring of the same species across contexts and each placement's nugget references it; with rec-005 adding new figures to the weakest section, the repetition cost is acceptable. Explicitly judged sufficient as is.",
+ "target_surface": "figure",
+ "severity": "low",
+ "source_findings": [
+ "visual-012"
+ ]
+ }
+ ],
+ "accessibility_blockers": [
+ "access-001"
+ ],
+ "visual_opportunities": [
+ "Step-through mechanism sequence for enolization / enol attack / haloform cleavage / HVZ relay / decarboxylation TS, once the video pipeline or a renderable sequence asset exists (rec-004).",
+ "pKa ladder as a one-glance vertical scale (rec-013).",
+ "Keto⇌enol and resonance pairs shown as pairs with their distinguishing arrow conventions (subsumed in rec-004).",
+ "Roadmap rendering in the reader unlocks the two authored named-synthesis figures (rec-002)."
+ ],
+ "sufficient_as_is": [
+ "All 20 asset alt texts except mol-cyclohexanone-enol's orientation-dependent phrase (fixed under rec-011); long descriptions are authored and ready for the platform delivery path.",
+ "Curved-arrow site labels and bond-change-ledger text-labelled rows as accessible mechanism assessment.",
+ "Deferred videos hidden with production notes — correct handling, no action needed.",
+ "Repeated enolate/enol figure cards (rec-016).",
+ "Prose coverage of all figure and video content — the accessibility persona confirmed the chapter is fully reachable through text."
+ ],
+ "disagreements": [
+ {
+ "topic": "Is the chapter's visual thinness a launch problem?",
+ "positions": {
+ "Learner with Visual Preference": "The chapter is visually thin for its subject; mechanisms, the pKa ladder, and the named syntheses need figures (eight findings).",
+ "Accessibility Persona": "The reader's prose redundantly carries the content of every figure and of the deferred videos, so the chapter's chemistry is fully reachable through text (listed as a strength).",
+ "Organic Chemistry Instructor": "Go, after minor revisions — zero chemistry errors; the mechanism-visual gap is one medium finding, not a block."
+ },
+ "resolution": "Both are right at different layers: content access is complete (prose), presentation is prose-heavy. The genuinely actionable subset (two enolate figures that render today) is corrected now (rec-005); the rest is recorded as visual opportunities gated on platform capabilities (rec-002, rec-004, rec-013) rather than blocking a chemically clean chapter."
+ },
+ {
+ "topic": "Severity of the expanded-tier default (ss-002, high per struggling student)",
+ "positions": {
+ "Struggling Student": "High — the visible text analyzes reactions before stating them.",
+ "Orchestrator": "The reader's tier system is by design (default 'expanded', user-switchable, standard tier preserved in _detail_texts), so the platform-level component is not a defect; the chapter-local component — expanded tiers that never state the transformation up front — is real."
+ },
+ "resolution": "Downgraded to medium and folded into rec-007: fix the two expanded-tier openings; the tier default itself is platform design, noted for the reader team."
+ }
+ ],
+ "regression": {
+ "resolved": [],
+ "unchanged": [],
+ "worsened": [],
+ "new": []
+ },
+ "corrections": {
+ "status": "applied-and-verified-without-second-persona-run",
+ "post_correction_readiness_estimate": "ready with minor revisions",
+ "estimate_note": "Not a new persona verdict. The access-001 blocker is resolved by the question-text corrections; remaining high-severity items are platform-level delivery gaps (roadmap rendering, practice-check/long-description emission, scaffold input alternative) outside chapter scope.",
+ "applied": [
+ {
+ "change": "Rewrote prompt_text and accessible_description of ch22-halogenation-profile and -v2: prompts no longer state which step is slow; descriptions narrate the curve's labelled stationary points and relative rises/falls without stating step count, rate-determining step, or energetic classifications.",
+ "resolves": [
+ "access-001"
+ ],
+ "partially_addresses": [
+ "access-002"
+ ]
+ },
+ {
+ "change": "ch22-identify-enol-tautomer: option-c feedback now calls the distractor a homoallylic/isomeric ring alcohol; hint 3 reworded to formula-and-reversion guidance that no longer string-matches the correct option's label.",
+ "resolves": [
+ "inst-001",
+ "access-006"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "nugget-haloform-reaction expanded tier: carboxylate-equivalence claim softened to qualitative carbanion stabilization with explicit 'far more basic than a carboxylate'; opening sentence added stating the overall base-conditions transformation before the acid/base contrast.",
+ "resolves": [
+ "inst-002"
+ ],
+ "partially_addresses": [
+ "ss-002"
+ ]
+ },
+ {
+ "change": "nugget-enols-as-nucleophiles expanded tier: 'enolate' now glossed in place as the deprotonated anionic form developed later in the chapter.",
+ "resolves": [
+ "inst-003"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "haloform-reaction concept prerequisites now include alpha-halogenation-of-ketones.",
+ "resolves": [
+ "inst-004"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "nugget-alpha-halogenation expanded tier: opens with the overall transformation and recounts the mechanism as two chemical steps (enolization = two proton transfers = one profile barrier; fast halogen capture), consistent with the profile questions' step_count of 2.",
+ "resolves": [
+ "ss-006"
+ ],
+ "partially_addresses": [
+ "ss-002"
+ ]
+ },
+ {
+ "change": "mol-acetophenone learning_goal rewritten placement-neutral (acid monobromination site first, haloform framed as 'taken up later in the chapter').",
+ "resolves": [
+ "ss-007",
+ "visual-010"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "ch22-tautomer-vs-resonance: enolate items replaced with prior-chapter resonance pairs (Kekulé benzene, acetate) and v2's acetophenone conjugate base replaced with benzoate carboxylate; accessible description updated.",
+ "resolves": [
+ "ss-005"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "ch22-tautomerization-ledger prompt no longer says 'in order'.",
+ "resolves": [
+ "ss-010"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "mol-24-pentanedione-enol learning_goal now acknowledges the chain is drawn open; mol-cyclohexanone-enol alt text made orientation-free; 'soft' dropped from the malonate nucleophile sentence.",
+ "resolves": [
+ "visual-009",
+ "visual-011",
+ "ss-011"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Both curved-arrow prompts now state that the complete mechanism includes the carbon-halogen-to-halide arrow omitted from the one-arrow item.",
+ "resolves": [
+ "inst-008"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Added mol-kinetic-enolate-2mcx and mol-thermo-enolate-2mcx (rendered molecule assets) to nugget-enolate-formation-bases so both regioisomeric enolates are visible in the teaching surface before assessment.",
+ "resolves": [
+ "visual-004",
+ "ss-008"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Added question pairs ch22-enol-content-rank(+v2) (qualitative enol-content ranking incl. phenol and no-alpha-H cases) and ch22-kinetic-alkylation-product(+v2) (enolate regiochemistry carried through to the alkylation product); reframed acetoacetic objective 3 to the assessed decarboxylation/atom-origin content. Bank now 54 questions (27 surfaced + 27 staged).",
+ "resolves": [
+ "inst-005",
+ "inst-007",
+ "inst-006"
+ ],
+ "partially_addresses": []
+ }
+ ],
+ "remaining_high_priority": [
+ "rec-002: synthesis-roadmap assets render as empty image blocks in the reader (platform-wide; ch21 identical).",
+ "rec-003: practice_check and long_description content never emitted to the reader (platform-wide compiler gap).",
+ "rec-010: structure_scaffold blank-canvas items lack a non-visual/non-pointer input alternative (standing platform ticket).",
+ "access-002 residue: confirm the profile widget exposes labelled control points/values to assistive technology; the corrected description now carries relative heights, closing the content gap if the widget does not."
+ ],
+ "verification": [
+ "PYTHONPATH=<repo> Proprietary toolchain verification (not in this repo)
+ "Automated test suite — 62 passed
+ "backend pytest question-pipeline suites (7 files) — 177 passed",
+ "RDKit parse check on 8 new SMILES (2 assets + 6 option structures) — all valid",
+ "topic-package-textbook-profiles.json re-merged after compiler clobber — 17 topics present incl. carbonyl-alpha-substitution",
+ "public question summaries leak-grep (answer_key/correct_*/expected_*) — clean"
+ ]
+ }
+}

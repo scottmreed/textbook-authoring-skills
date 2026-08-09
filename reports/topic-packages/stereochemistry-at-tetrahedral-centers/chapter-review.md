@@ -1,0 +1,1154 @@
+# Chapter review — Stereochemistry at Tetrahedral Centers (`stereochemistry-at-tetrahedral-centers`)
+
+_Reviewed 2026-07-31 · chapter version 1 · personas: Instructor, Struggling Student, Accessibility, Visual Preference_
+
+**Publication readiness: blocked**
+
+The chemistry is the best-verified in the series so far: the instructor persona machine-verified all 29 SMILES (13 assets, 14 question options, 2 answer keys) against formula, canonical connectivity and InChIKey, independently re-derived all 10 CIP descriptors and all 22 answer keys, and found zero wrong structures and zero wrong keys - in a chapter that is entirely about stereodescriptors. The (R,R)-versus-meso tartaric pair, which no formula check can distinguish, was confirmed computationally in both directions. What fails is delivery, not chemistry. Six blockers were raised across three personas and they cluster into four problems: (1) two graded Fischer/D-L items and two graded wedge/dash drawing items rest on conventions the prose never introduces - 'Fischer', 'wedge' and 'dash' each appear ZERO times in all three text tiers; (2) both structure_scaffold items set typed_structure_entry 'blocked', switching OFF the platform's only keyboard route into a drawing question - and 25 of 26 sibling packages set 'allowed', so unlike ch1/11/15-19 this barrier is chapter-authored and chapter-fixable, not the standing platform ticket; (3) seven accessible_descriptions and nine hint rungs hand over the graded answer, and the compile-time leak guard returns clean on all 22 because these are semantic restatements rather than the answer ids it matches on; (4) the enantiomer pairs - the figures whose entire reason to exist is non-superimposability - are described in interchangeable words, and 0 of 13 assets carry a long_description. The orchestrator additionally found that ALL SIX Wikipedia 'Additional Reading' links are 404: no concept authors a wikipedia_title, so [internal source reference — not in this repo] minted article names from prose section titles. Two structural defects compound the reading experience: the core priority-arrow scaffold compiles LAST, four sections after the CIP rules it exists to support (nugget order is authored per-section here while the compiler and all 25 sibling packages treat it as global), and the chapter's whole subject - three-dimensional handedness - is drawn exclusively as flat 2D single molecules, so the tetrahedron, the mirror plane, the superimposability test, the viewpoint reversal and the polarimeter are each argued in prose and depicted nowhere.
+
+### Top blockers
+
+- **[BLOCKER] `instr-002` — Fischer projections and the D/L convention are graded twice but appear in no prose tier** (Organic Chemistry Instructor, `ch5-fischer-d-glyceraldehyde`)
+- **[BLOCKER] `ss-001` — Same gap from the student side: the only route to the answer is the hint, which states it outright** (Struggling Student, `ch5-fischer-d-glyceraldehyde`)
+- **[BLOCKER] `ss-002` — Nine hint ladders terminate in the literal graded answer, so taking a hint ends the reasoning** (Struggling Student, `ch5-identify-chiral-molecule`)
+- **[BLOCKER] `access-001` — Enantiomer pairs carry interchangeable alt text, so chirality and R/S are undeterminable without sight** (Accessibility Persona, `mol-s-2-butanol`)
+- **[BLOCKER] `access-003` — Both drawing items set `typed_structure_entry: "blocked"`, leaving no non-pointer input path at all** (Accessibility Persona, `ch5-draw-s-2-butanol`)
+- **[BLOCKER] `access-004` — Seven accessible_descriptions state the graded answer; the compile-time guard misses all seven** (Accessibility Persona, `ch5-fischer-d-glyceraldehyde`)
+
+### Top 5 recommended changes
+
+1. **Fischer projections and the D/L convention are graded but never taught** — Two graded items require building a Fischer projection and applying D/L; the words 'Fischer' and the D/L convention appear zero times in any of the three prose tiers, so a student who reads the chapter completely cannot derive the answer. → **prose-edit** (prose, blocker)
+2. **Both drawing items switch off the platform's only keyboard input path** — ch5-draw-s-2-butanol and its v2 set typed_structure_entry 'blocked', and typedEntryAllowed() fails closed, so a learner who cannot use a pointer on a Ketcher canvas has no input path at all for the only two items assessing configuration drawing. → **keyboard-alternative** (assessment, blocker)
+3. **Seven accessible_descriptions state the graded answer** — Seven of 22 accessible_descriptions restate the answer, the decision rule, or the correct option; the compile-time guard returns clean on all 22 because these are semantic restatements rather than answer ids. → **structured-chemical-description** (assessment, blocker)
+4. **Hint ladders terminate in the graded answer** — Nine hint ladders end by naming the keyed option, the correct ordering, or the answer placement, so taking a hint ends the reasoning instead of narrowing it; four advanced items ship a single rung that resolves every cell at once. → **prose-edit** (assessment, blocker)
+5. **Enantiomer pairs are described in interchangeable words, and no asset carries a long_description** — mol-r-2-butanol's alt text states a constitution equally true of its enantiomer and mol-s-2-butanol's says only 'the mirror image of the R alcohol', so a learner who cannot see the figures cannot determine chirality or assign R/S; 0 of 13 assets carry a long_description, which the reader already renders and prefers as the images-off substitute. → **structured-chemical-description** (figure, blocker)
+
+### Persona status cards
+
+| Persona | Score | Blockers | Headline |
+|---|---|---|---|
+| Organic Chemistry Instructor | 7.0/10 | 1 | Zero wrong structures and zero wrong answer keys across 29 SMILES and 22 keys — but two graded items rest on a notation the prose never introduces. |
+| Struggling Student | 4.3/10 | 2 | Every checkpoint the package authored is stripped at compile, every background-reading link is dead, and the hint ladders end in the answer. |
+| Accessibility Persona | 5.2/10 | 3 | 20 of 22 items are keyboard-complete, yet the chapter switches OFF the one keyboard path into its drawing items and describes enantiomer pairs in interchangeable words. |
+| Learner with Visual Preference | 4.6/10 | 0 | A chapter about three-dimensional handedness in which the tetrahedron, the mirror plane and the viewpoint reversal are drawn nowhere. |
+
+### Affected sections & assets
+
+**Sections:** `nugget-chirality`, `nugget-diastereomers`, `nugget-nature`, `nugget-optical-activity`, `nugget-racemates`, `nugget-rs`, `nugget-rs-arrow`
+
+**Concepts:** `chirality-and-enantiomers`, `diastereomers-and-meso-compounds`, `optical-activity`, `prochirality-and-chirality-in-nature`, `r-s-configuration`, `racemates-and-resolution`
+
+**Assets:** `mol-d-glyceraldehyde`, `mol-l-alanine`, `mol-meso-tartaric`, `mol-r-chlorofluorobromomethane`, `mol-rs-arrow-r`, `mol-rs-arrow-s`, `mol-s-2-butanol`, `mol-s-chlorofluorobromomethane`, `video-rs-assignment`
+
+**Questions:** `ch5-assign-configuration-2-bromobutane`, `ch5-count-stereoisomers-3-bromo-2-butanol-v2`, `ch5-draw-s-2-butanol`, `ch5-draw-s-2-butanol-v2`, `ch5-enantiomers-vs-diastereomers-properties`, `ch5-fischer-d-glyceraldehyde`, `ch5-identify-chiral-molecule`, `ch5-match-stereochem-terms`, `ch5-rank-cip-priorities`, `ch5-select-all-chiral`, `ch5-select-all-chiral-v2`
+
+### Consensus strengths
+
+- Zero wrong structures and zero wrong answer keys, machine-verified twice: 29/29 SMILES match the compound their title or prompt claims by formula and InChIKey, all 10 explicit CIP claims re-derive correctly, and all 22 answer keys are right. In a chapter about stereodescriptors this is the expensive half of correctness and it is already done.
+- The meso/(R,R) tartaric distinction - invisible to a formula check - is genuinely correct: mol-rr-tartaric is (R,R) and NOT superimposable on its mirror image; mol-meso-tartaric has canonical SMILES byte-identical to its mirror image.
+- The priority-arrow figure pair is a real working teaching device, independently render-verified by three parties (orchestrator, instructor, visual): despite carrying identical stereo-free SMILES, _orient_conformer_for_config reflects the 2D layout so R genuinely sweeps clockwise and S counterclockwise, with correct CIP priority atoms.
+- Keyboard operability is unusually strong for 20 of 22 items, verified at renderer level rather than from registry flags: rank_order ships per-card Move up/Move down buttons with an aria-live position readout, and categorize, matching, comparison_matrix and fischer all expose labelled selects alongside their drag affordances.
+- Wrong-answer feedback authoring is the cleanest in the tally: 16 patterns use the canonical selected_option_ids form and both multi_selects correctly use $contains/$missing, so unlike ch27 - where 91 patterns were silently dead - every distractor-specific explanation here actually fires.
+- The expanded tier is a true self-contained rewrite carrying every load-bearing definition, so the ch23/ch30/ch31 default-tier trap does not recur.
+- Every item ships a -v2 variant on a different molecule, giving a genuine second attempt rather than the same question again.
+- The known R/S-glyph defect class is absent: no asset sets annotation_font_scale, so stereo labels cannot render oversized on top of the structure.
+
+### Sufficient as is — do not over-build here
+
+- nugget-rs-arrow's body prose narrates both arrow figures explicitly in all three tiers ('In the R figure the arrow curls clockwise; in the S figure the identical priority order curls counterclockwise'), so this figure pair already has a working text equivalent and needs no additional description.
+- Both R/S short-answer items put the full stereochemical situation into the prompt, so they are answerable with no figure at all - the accessibility persona named this the model for the rest of the chapter. (It is simultaneously an assessment weakness under rec-009; the access property itself is sufficient.)
+- mol-rr-tartaric and mol-meso-tartaric alt texts already differentiate correctly ('both stereocenters R' vs 'one R and one S related by an internal mirror plane') - these two need no rewrite under rec-005.
+- All 45 hints are kind 'text', so the hint ladder is already fully available non-visually; no hint depends on seeing a highlight, region or animation.
+- The two arrow figures render correctly as true mirror images with correctly opposite sweeps - verified independently three times. No re-render or figure rebuild is needed.
+
+---
+
+## Full evidence
+
+### Orchestrator integrity check
+
+Run before dispatch, on compiled external links, identifiers, artifact paths and cross-surface consistency. Recorded as findings in their own right.
+
+#### `orchestrator-001` — high / conceptual-support
+
+- **Location:** `{"section_id": "nugget-chirality", "anchor_text": "Wikipedia - Chirality, stereocenters, and enantiomers"}`
+- **Observation:** All six distinct Wikipedia 'Additional Reading' URLs in the compiled chapter return 404. No concept in the package authors a wikipedia_title, and [internal source reference — not in this repo] falls back to concept['title'], so the compiler minted Wikipedia article names out of prose section titles (e.g. /wiki/Multiple_stereocenters:_diastereomers_and_meso_compounds). HTTP-verified all seven outbound links: the single OpenStax mcmurry_link returns 200 and is the only working outbound link in the chapter; the other six are dead. This is the same mechanism recorded as a near-miss on ch4, where setting two wikipedia_titles revealed the rest were being derived from concept titles - here none was ever set, so all six shipped dead.
+- **Learner impact:** Six of seven sections offer 'Background reading' as the only visible escape hatch when a student is stuck, and every one of them lands on a Wikipedia 'article does not exist' page.
+- **Evidence:** curl -o /dev/null -w '%{http_code}' on each compiled external_link URL returned 404 six times; control /wiki/Chirality_(chemistry) returned 200. [internal source reference — not in this repo] 'title = concept.get("wikipedia_title") or concept["title"]'. grep for wikipedia_title in topic.package.json returns zero hits.
+- **Recommended outcome:** Every outbound reference must resolve to a real, topic-relevant page, and the target must be chosen and verified rather than derived mechanically from a section title.
+- **Confidence:** 0.99
+
+#### `orchestrator-002` — low / notation-consistency
+
+- **Location:** `{"asset_id": "mol-d-glyceraldehyde", "nugget_id": "nugget-nature"}`
+- **Observation:** Asset/nugget membership disagrees in one direction: nugget-nature lists mol-d-glyceraldehyde in its asset_ids, but that asset's own nugget_ids does not claim nugget-nature. This is the bidirectional-drift class first recorded on ch26, where stale membership was the mechanism behind captions describing a section the figure did not belong to.
+- **Learner impact:** No direct learner impact today, but it is the drift mechanism that produces mis-scoped captions, and it makes asset-to-section reasoning unreliable during review.
+- **Evidence:** topic.package.json nuggets[id=nugget-nature].asset_ids contains 'mol-d-glyceraldehyde'; assets[id=mol-d-glyceraldehyde].nugget_ids does not contain 'nugget-nature'.
+- **Recommended outcome:** Asset-to-nugget membership needs to agree in both directions so section scoping is derivable from either side.
+- **Confidence:** 0.95
+
+#### `orchestrator-003` — low / assessment-readiness
+
+- **Location:** `{"question_slug": "ch5-identify-chiral-molecule", "anchor_text": "single-answer key distribution"}`
+- **Observation:** All four single-answer selected-response items key option 'a' (4 of 4). Separately, 0 of 22 questions are demo_eligible, so nothing from this bank surfaces in the reader homework preview.
+- **Learner impact:** A uniform key position is guessable across a short bank and rewards pattern-matching over reasoning; the demo_eligible gap means the chapter's practice is invisible on the reader surface a student is most likely to meet first.
+- **Evidence:** Counter over answer_key.correct_option_ids for single-answer items: [redacted]. Counter over demo_eligible: 0/22 true.
+- **Recommended outcome:** Key positions need to vary across the bank, and the chapter needs a decision about whether any of its items should surface in the reader preview.
+- **Confidence:** 0.9
+
+#### Verified NOT defects (adjudication material)
+
+These were checked by the orchestrator and found sound; they are recorded so a later run does not re-open them, and so persona claims to the contrary can be adjudicated.
+
+- **The `expanded` tier is a true self-contained rewrite.** Sentence-level containment of `standard` in `expanded` is 0% across all 7 nuggets, but every load-bearing term (chiral, achiral, enantiomer, stereocenter, racemate, meso, diastereomer, optical activity, specific rotation, CIP, priority, resolution, prochiral, superimposable, plane of symmetry) appears in `expanded`, which additionally adds isotope tie-breaking that `standard` lacks. The ch23/ch30/ch31 default-tier trap does **not** recur.
+- **The two priority-arrow figures render correctly.** Rendered both through `deck_creator.render_molecule_png` with the authored `rdkit_options`: distinct PNGs, and visual inspection confirms R sweeps clockwise (Br bottom → ethyl upper-left → methyl upper-right) and S is the true reflection sweeping counterclockwise. Priorities `[4,1,3]` = Br, ethyl-C, methyl are correct for 2-bromobutane.
+- **The ch27 dead wrong-answer-pattern class does not recur.** 16 patterns use the canonical `selected_option_ids` form and both multi_selects correctly use `$contains`/`$missing`; all are reachable against the real submission shape.
+- **Four apparent `accessible_description` leaks are false positives.** Four items list every option name in the description — required for non-visual answerability — without marking which is correct. (Distinct from the seven genuine leaks in `access-004`.)
+
+### Independent persona reports
+
+Presented separately and never merged. Each persona saw only its own rubric.
+
+#### Organic Chemistry Instructor — 7.0/10
+
+**Summary.** The chemistry in this chapter is clean. I machine-verified all 29 SMILES strings in the package (13 asset structures, 14 question-option structures, 2 answer-key structures) with RDKit: every one parses, every molecular formula and InChIKey matches the compound the title/prompt claims, and all 10 explicit configuration/chirality claims re-derive correctly under FindMolChiralCenters(useLegacyImplementation=False). The (R,R)-tartaric asset really is (2R,3R) and the meso asset really is meso (canonical SMILES identical to its mirror image). I re-derived all 22 answer keys independently and all 22 are correct. I also rendered the two priority-arrow figures through the actual reader render path and confirmed they are true mirror images with a clockwise sweep for R and counterclockwise for S. Zero wrong chemistry. The problems are instructional, not chemical: two of the 22 graded items require Fischer projections and the D/L system, which the chapter's prose never introduces at any depth tier; the entire advanced prochirality concept is unassessed; the core priority-rotation arrow section is compiled to the very end of the reader; not a single question in the bank requires a student to read a drawn stereocenter; specific rotation is defined without an equation, units, or a single number; and every one of the seven sections ships a 404 Wikipedia link. Verdict: NOT-GO as-is for graded assignment, but a clear GO after a targeted revision - the chemistry is already right, which is the expensive part.
+
+**Publication blockers:** `instr-002`
+
+**Strengths.**
+
+- Machine verification: parsed all 29 SMILES in the package (13 asset structures, 14 question-option structures, 2 answer-key structures) with RDKit. 29/29 parse, and 29/29 have a molecular formula and InChIKey consistent with the compound the title, caption, or prompt claims. Zero structural errors.
+- CIP re-derivation: independently re-derived every stereodescriptor with Chem.AssignStereochemistry(force=True) and FindMolChiralCenters(useLegacyImplementation=False). All 10 explicit configuration/chirality claims are correct: (R)- and (S)-bromochlorofluoromethane, (R)- and (S)-butan-2-ol, (R)-2-bromobutane, D-glyceraldehyde as R, L-alanine as S, and propan-2-ol as achiral. Not one wrong descriptor in a chapter that is entirely about descriptors.
+- Tartaric acid verified computationally, which formula checks cannot do: mol-rr-tartaric is genuinely (R,R) with InChIKey FEWJPZIEWOKRBE-JCYAYHJZSA-N and is NOT superimposable on its mirror image; mol-meso-tartaric is genuinely meso with InChIKey FEWJPZIEWOKRBE-XIXRPRMCSA-N and its canonical SMILES is byte-identical to that of its mirror image. The two are distinct diastereomers, exactly as the prose says.
+- All 22 answer keys re-derived independently: 22/22 correct. This includes both CIP ranking orders, both R/S short answers, both structure_scaffold SMILES (CC[C@H](C)O verified S, CC[C@@H](C)Br verified R, each matching its prompt), both Fischer states, both stereoisomer counts, and every matrix, matching, and categorization cell.
+- Both numeric claims in the prose confirmed by RDKit stereoisomer enumeration: 3-bromobutan-2-ol enumerates to exactly 4 stereoisomers (no meso, since the two centers differ), tartaric acid to exactly 3 (meso present), and meso-2,3-dibromobutane used as a distractor is genuinely achiral.
+- Rendered the two priority-arrow figures through the real reader render path and inspected the output: the R figure numbers Br=1, ethyl attachment carbon=2, methyl=3 and sweeps clockwise; the S figure is the true horizontal reflection and sweeps counterclockwise. The atom indices [4,1,3] in the authored rdkit_options are the correct CIP priority order for CCC(C)Br. The figures a student actually sees are chemically right.
+- The prose builds understanding rather than rules to memorize. Resolution is explained mechanistically rather than asserted; meso is derived from the internal mirror plane rather than presented as an exception; and the chapter is careful and repeatedly explicit that optical inactivity does not prove achirality.
+- Assessment breadth is genuinely good on the type axis: 10 distinct question types with 2 items each, including two structure_scaffold items that require drawing wedge/dash stereochemistry with typed SMILES entry deliberately blocked and the reason documented. Wrong-answer explanations are specific and chemistry-bearing rather than generic.
+
+**Findings.**
+
+##### `instr-002` — blocker / objective-alignment
+
+- **Location:** `{"question_slug": "ch5-fischer-d-glyceraldehyde", "nugget_id": "nugget-rs", "concept_slug": "r-s-configuration", "anchor_text": "Build the Fischer projection of D-glyceraldehyde"}`
+- **Observation:** Two graded questions (ch5-fischer-d-glyceraldehyde and ch5-fischer-d-glyceraldehyde-v2) require the student to build a Fischer projection and to know the D/L convention (D = stereocenter OH on the right). The word 'Fischer' appears nowhere in any nugget's terse, standard, or expanded prose, and the D/L system is never defined. The only prose contact with D/L is one clause in nugget-nature ('proteins are assembled almost exclusively from L-amino acids and nucleic acids from D-sugars'), which uses the labels without explaining them - and that section is sequenced after the section these questions are tagged to. Both questions are tagged concept_slug r-s-configuration, whose nugget teaches only the CIP wedge/dash method.
+- **Learner impact:** A student who reads this chapter conscientiously and completely cannot answer 2 of 22 graded items - not because the material is hard, but because the notation was never introduced. Students will either guess or conclude they missed something. An instructor who assigns this bank as homework will field complaints they cannot defend.
+- **Evidence:** grep for 'Fischer' across nuggets[].text returns zero hits; it appears only in question_sets prompt_text, feedback, and accessibility_bundle. Questions ch5-fischer-d-glyceraldehyde (answer_key [redacted]) and ch5-fischer-d-glyceraldehyde-v2 (rows = [{left: OH, right: H}]) - both answer keys are chemically correct, but the convention behind them is untaught.
+- **Recommended outcome:** Either the chapter must teach the Fischer projection and the D/L relative-configuration convention (including how a Fischer drawing encodes 3D and how D/L relates to, and differs from, R/S), or these two items must be removed from the assessable bank. A graded item may not depend on a notation the chapter does not introduce.
+- **Confidence:** 0.97
+
+##### `instr-001` — high / conceptual-support
+
+- **Location:** `{"section_id": "nugget-chirality", "anchor_text": "Wikipedia - Chirality, stereocenters, and enantiomers"}`
+- **Observation:** All seven reader sections carry an 'Additional Reading' external_link whose URL was built by slugifying the concept title into a Wikipedia path. None of the six distinct URLs exist. I checked each with curl: Chirality,_stereocenters,_and_enantiomers (404), Optical_activity_and_specific_rotation (404), Assigning_R_and_S_configuration_with_the_CIP_rules (404, used in two sections), Multiple_stereocenters:_diastereomers_and_meso_compounds (404), Racemic_mixtures_and_the_resolution_of_enantiomers (404), Prochirality_and_the_biological_consequences_of_handedness (404). [Persona coined category 'resource-link-integrity'; normalised to conceptual-support by the orchestrator.]
+- **Learner impact:** Every student who follows the supplementary reading in any section lands on a Wikipedia 'article does not exist' page. It reads as a broken product and removes the only outside-reading support the chapter offers beyond a single OpenStax link.
+- **Evidence:** Compiled reader blocks blk-uojuzuvc, blk-r4kb4391, blk-usm8hm4n, blk-lclxha22, blk-qg1onlp0, blk-87mdjemb, blk-9yo28cj9; each provenance.source_url is a concept title with spaces replaced by underscores.
+- **Recommended outcome:** Every outbound reference in the chapter needs to resolve to a real page, and the reference targets need to be chosen (and verified) rather than derived mechanically from a section title.
+- **Confidence:** 0.99
+
+##### `instr-003` — high / objective-alignment
+
+- **Location:** `{"concept_slug": "prochirality-and-chirality-in-nature", "nugget_id": "nugget-nature", "section_id": "nugget-nature"}`
+- **Observation:** The sixth concept, 'Prochirality and the biological consequences of handedness', carries three learning objectives and a full advanced-depth nugget introducing pro-R/pro-S and Re/Si faces. Zero of the 22 questions carry concept_slug 'prochirality-and-chirality-in-nature'. The question distribution is r-s-configuration 8, chirality-and-enantiomers 6, diastereomers-and-meso-compounds 4, optical-activity 2, racemates-and-resolution 2, prochirality 0.
+- **Learner impact:** The most conceptually demanding section of the chapter - and the one that motivates why any of this matters biologically - carries no retrieval or feedback loop. Students will correctly infer it is not assessed and skip it, losing the payoff section. pro-R/pro-S and Re/Si are also the exact terms they will be expected to already own in later carbonyl and enzymology chapters.
+- **Evidence:** Counter over question_sets[].concept_slug; nugget-nature learning_objectives[0..2]; nuggets[].practice_check for nugget-nature exists but practice_checks are not compiled into the reader.
+- **Recommended outcome:** The prochirality/biological-chirality objectives need assessable retrieval - at minimum an item that makes a student identify a prochiral center and assign pro-R vs pro-S, and one that makes the enantiomer-vs-receptor consequence explicit.
+- **Confidence:** 0.95
+
+##### `instr-004` — high / sequencing
+
+- **Location:** `{"section_id": "nugget-rs-arrow", "nugget_id": "nugget-rs-arrow", "concept_slug": "r-s-configuration"}`
+- **Observation:** nugget-rs (depth core, order 1) and nugget-rs-arrow (depth core, order 2) both declare section_id 'r-s-configuration' and belong to concept order 3. In the compiled reader they became two separate top-level sections, and nugget-rs-arrow is emitted LAST - after nugget-diastereomers, nugget-racemates, and the advanced nugget-nature. A student reading the reader top to bottom meets diastereomers, meso compounds, resolution, and enzymatic prochirality before reaching the core 'how to actually read the clockwise/counterclockwise sweep' tutorial that the R/S section depends on.
+- **Learner impact:** The two core R/S sections are separated by four sections, one of which is explicitly advanced. Students hit the diastereomer and meso material - which requires fluent R/S assignment at two centers simultaneously - before the visual reading method has been taught. This is the single most likely place for a student to fall off.
+- **Evidence:** Compiled reader sections in order: nugget-chirality, nugget-optical-activity, nugget-rs, nugget-diastereomers, nugget-racemates, nugget-nature, nugget-rs-arrow. Package nuggets both carry section_id 'r-s-configuration' with order 1 and 2 respectively.
+- **Recommended outcome:** The two core R/S nuggets need to render adjacently and before the multi-stereocenter material, so the reading order the author declared is the order the student experiences.
+- **Confidence:** 0.93
+
+##### `instr-005` — high / assessment-readiness
+
+- **Location:** `{"question_slug": "ch5-select-all-chiral", "concept_slug": "chirality-and-enantiomers", "anchor_text": "Select every molecule below that is chiral."}`
+- **Observation:** Not one of the 22 questions requires a student to read a drawn molecular structure. Four selected-response items carry structure_smiles on every option, but [internal source reference — not in this repo] renders only option.text and option.imageUrl - it has no structure_smiles path at all, so the student sees plain names ('Butan-2-ol', 'meso-Tartaric acid'). The two categorize_groups items ship text-only items with no structures. Both R/S items hand the geometry to the student in words ('the path Br to ethyl to methyl turns clockwise'), so they test the definition of R, not CIP application. The only items that touch a structure are the two structure_scaffold draws, which run in the productive direction.
+- **Learner impact:** The bank never exercises the receptive skill this chapter exists to teach: look at a wedge/dash drawing, rank the four groups, orient, and assign. Students can score well on all 22 items without ever assigning a configuration from a picture, then fail the first exam question that shows a structure. The authored structure_smiles also give the false impression the visual task is covered.
+- **Evidence:** [internal source reference — not in this repo] lines 155-180 render only imageUrl and text; grep for structure_smiles across frontend/src returns only reasoningEpisodes types, lessonPanel Ketcher questions, and editor write paths - never a selected-response option render. Question ch5-assign-configuration-2-bromobutane prompt_text states the rotation sense verbatim.
+- **Recommended outcome:** The bank needs at least one core and one standard item where the stimulus is a rendered stereocenter with explicit wedge/dash and the student must produce R or S; and the chirality-identification items need their molecules actually shown rather than named, since 'is this chiral' from a name is a nomenclature exercise, not a stereochemistry one.
+- **Confidence:** 0.94
+
+##### `instr-006` — high / missing-example
+
+- **Location:** `{"nugget_id": "nugget-optical-activity", "concept_slug": "optical-activity", "anchor_text": "the observed rotation is divided by concentration and path length to give the specific rotation"}`
+- **Observation:** Specific rotation is the second learning objective of the optical-activity nugget, but it is treated entirely verbally at all three depth tiers. There is no equation ([alpha] = alpha_obs / (c x l)), no units, no statement of the conventional c in g/mL and l in dm, no worked calculation, and not a single numeric specific-rotation value anywhere in the chapter - not even for (R)- or (S)-butan-2-ol, whose figures sit directly in this section and are described as rotating light 'by an equal and opposite amount'. Correspondingly, no question asks the student to compute or use a specific rotation.
+- **Learner impact:** Students cannot do the standard polarimetry calculation every organic course assigns, and cannot interpret a literature [alpha]D value, despite the chapter claiming to have taught specific rotation. The two butan-2-ol figures are asserted to have equal and opposite rotations with no number attached, so the claim stays abstract.
+- **Evidence:** nugget-optical-activity text.terse/standard/expanded contain no digits; regex scan for numbers across all nuggets returns only '2^n', '1:1', and '3-Bromobutan-2-ol'. No question carries concept_slug optical-activity with a numeric answer_key.
+- **Recommended outcome:** The definition of specific rotation needs to become operational - the standardizing relationship, its units and conventions, at least one real measured value anchored to a molecule already in the chapter, and a practice item where the student converts an observed rotation to a specific rotation.
+- **Confidence:** 0.92
+
+##### `instr-007` — medium / objective-alignment
+
+- **Location:** `{"concept_slug": "optical-activity", "nugget_id": "nugget-optical-activity", "anchor_text": "A common error is to expect the sign of rotation to track the R/S configuration."}`
+- **Observation:** The optical-activity concept declares as its first trouble_spot 'Expecting the sign of rotation (+ or -) to follow from the R/S label; the two are independent and must be measured', and the prose states this emphatically in two separate nuggets. No question in the bank tests it. The two questions tagged optical-activity are comparison matrices about enantiomer/diastereomer properties and about racemate vs pure enantiomer; neither presents an R- or S-labelled compound and asks about the sign of its rotation.
+- **Learner impact:** The chapter names this as a top misconception, teaches against it, and then never checks whether the student actually let go of it. Students routinely leave a stereochemistry unit still believing R is (+).
+- **Evidence:** concepts[1].trouble_spots[0]; nugget-optical-activity standard and expanded tiers; question_sets tagged optical-activity are ch5-enantiomers-vs-diastereomers-properties and its -v2, neither of which mentions R/S.
+- **Recommended outcome:** The R/S-versus-sign independence needs a retrieval item that forces the student to commit - for example, giving a configuration and a measured sign for one enantiomer and asking what can and cannot be predicted about the other.
+- **Confidence:** 0.9
+
+##### `instr-008` — medium / figure-accuracy
+
+- **Location:** `{"asset_id": "mol-rs-arrow-s", "nugget_id": "nugget-rs-arrow", "anchor_text": "Tracing CIP priorities on (S)-2-bromobutane"}`
+- **Observation:** mol-rs-arrow-r and mol-rs-arrow-s carry byte-identical SMILES 'CCC(C)Br' - a molecule with no stereochemistry specified (RDKit: one unassigned center, InChIKey UPSXAPQYNGXVBF-UHFFFAOYSA-N for both, superimposable on its own mirror image). The (R) and (S) claims live only in rdkit_options.priority_arrow.config, which the render path uses to reflect the 2D conformer. I rendered both through the actual reader path and confirmed the output is correct: the R figure numbers Br=1 / ethyl-CH2=2 / methyl=3 and sweeps clockwise, the S figure is the horizontal reflection and sweeps counterclockwise. So the pixels a student sees are right. The stored data is not: the titles assert configurations the SMILES does not encode, the generator_href hands the student an unspecified structure, and the reader's own SMILES fallback would display 'CCC(C)Br' under a heading that says (S)-2-bromobutane.
+- **Learner impact:** Any surface that consumes the SMILES without the render knobs - the code fallback on render failure, a copy into the generator, a downstream export - shows a student an achiral drawing labelled as a specific enantiomer. That is precisely the confusion the section exists to prevent.
+- **Evidence:** assets mol-rs-arrow-r and mol-rs-arrow-s, identical smiles 'CCC(C)Br'; compiled blocks blk-wb0k3hkl and blk-e8mnbdgk; render verification: clockwise arrow for config R, counterclockwise for config S, layout reflected as intended by _orient_conformer_for_config.
+- **Recommended outcome:** The two figures' stored structures need to carry the configuration they are titled with, so that the claim survives independently of the render-time arrow overlay and of the surface doing the rendering.
+- **Confidence:** 0.9
+
+##### `instr-009` — medium / worked-example-gap
+
+- **Location:** `{"nugget_id": "nugget-rs-arrow", "concept_slug": "r-s-configuration", "anchor_text": "an apparent clockwise sweep is in fact S, and an apparent counterclockwise sweep is in fact R"}`
+- **Observation:** The chapter identifies the lowest-priority-group-toward-the-viewer inversion as 'the single recurring error' and as a declared trouble_spot, and makes it a learning objective in two nuggets. It is supported only by a paragraph of prose and by nugget-rs-arrow's practice_check - and practice_checks are not compiled into the reader at all. There is no figure showing the same molecule drawn both ways, and no question in the bank presents the inverted orientation: both short_answer items explicitly pre-orient the lowest-priority group away. Both of the chapter's arrow figures also draw only three bonds at the stereocenter with no wedge/dash and no drawn H, so the student is asked to accept on faith that the invisible hydrogen points back.
+- **Learner impact:** The error the chapter says is most common is the one it gives students no chance to practise and no chance to see. Students will meet it first on an exam.
+- **Evidence:** nugget-rs learning_objectives[2]; nugget-rs-arrow learning_objectives[2] and expanded tier paragraph 3; concepts[2].trouble_spots[1]; both short_answer items explicitly pre-orient the lowest-priority group away.
+- **Recommended outcome:** The inverted-viewpoint case needs a worked demonstration a student can see (one molecule, both orientations, both readings, one answer) and at least one assessable item where the lowest-priority group points toward the viewer.
+- **Confidence:** 0.93
+
+##### `instr-010` — medium / visual-opportunity
+
+- **Location:** `{"concept_slug": "r-s-configuration", "asset_id": "mol-rs-arrow-r", "anchor_text": "the lowest-priority group, usually a hydrogen, must point directly away from the viewer"}`
+- **Observation:** The whole R/S method is a claim about a viewpoint - reorient the tetrahedron until the lowest-priority group points back, then read the sweep. The chapter conveys this with two static flat drawings and a paragraph asking the student to imagine the rotation. Nothing in the chapter lets a student actually perform the reorientation and watch the apparent sweep flip.
+- **Learner impact:** Students who cannot yet build the mental 3D rotation - the majority at this point in the course - have no way to test their own reasoning. They fall back on memorizing 'clockwise = R' and then misapply it whenever a drawing puts H on a wedge.
+- **Evidence:** assets mol-rs-arrow-r / mol-rs-arrow-s are static molecule renders; nugget-rs-arrow expanded tier instructs 'Redrawing the molecule so the lowest-priority group points back, or mentally swapping to place it there and inverting once'.
+- **Recommended outcome:** This section needs a manipulable representation in which the student controls the orientation of the lowest-priority group and observes the 1-2-3 sweep change sense, so that the inversion rule is derived rather than asserted.
+- **Confidence:** 0.85
+
+##### `instr-011` — medium / assessment-readiness
+
+- **Location:** `{"question_slug": "ch5-enantiomers-vs-diastereomers-properties", "anchor_text": "Separable by ordinary distillation"}`
+- **Observation:** This comparison_matrix grades 'Separable by ordinary distillation' as 'yes' for a pair of diastereomers. Diastereomers do have different boiling points in principle, but the chapter's own prose never claims distillation as the separation route - nugget-diastereomers says diastereomers 'generally differ in melting point, solubility, chromatographic behavior, and rotation', and nugget-racemates describes crystallization and chromatography. The chapter's own canonical diastereomer pair, (R,R)- and meso-tartaric acid, are non-volatile solids that cannot be distilled at all.
+- **Learner impact:** A student who reasons from the chapter's own tartaric acid example, or who knows that most diastereomeric pairs in practice are separated by crystallization or chromatography, is marked wrong for a defensible answer. Items that punish correct reasoning erode trust in the whole bank.
+- **Evidence:** ch5-enantiomers-vs-diastereomers-properties answer_key [redacted]; nugget-diastereomers expanded tier; nugget-racemates expanded tier.
+- **Recommended outcome:** The separability row needs to be stated in terms the chapter actually teaches (separable by ordinary achiral physical methods / by crystallization or chromatography) rather than naming a technique the chapter never endorses and its own example cannot undergo.
+- **Confidence:** 0.82
+
+##### `instr-012` — medium / retrieval-practice
+
+- **Location:** `{"nugget_id": "nugget-chirality", "anchor_text": "Propan-2-ol has a carbon bonded to four groups yet is achiral. Why?"}`
+- **Observation:** All seven nuggets carry a well-written practice_check (prompt + answer) - including the only coverage of the lowest-priority-toward-viewer inversion and the only coverage of the prochirality definition. None of them appear in the compiled reader. Searching the compiled chapter for 'practice' returns a single hit, and that is the word 'practice' inside a prose sentence; the practice_check prompts and answers are absent from every section's blocks.
+- **Learner impact:** The chapter reads as seven blocks of continuous exposition with figures and a dead link, and no point at which the student is asked to produce anything. The authored self-check questions - the cheapest retrieval practice in the package, and the only assessment touching two objectives - never reach the learner.
+- **Evidence:** nuggets[].practice_check present for all 7 nuggets in topic.package.json; compiled reader sections contain only text, molecule, external_link, mcmurry_link, and one hidden video block.
+- **Recommended outcome:** The authored self-check prompts need a place in the student-facing reading flow, so each section closes with a retrieval attempt rather than more prose.
+- **Confidence:** 0.95
+
+##### `instr-013` — medium / assessment-readiness
+
+- **Location:** `{"question_slug": "ch5-select-all-chiral", "anchor_text": "meso-Tartaric acid"}`
+- **Observation:** Because option structures are not rendered, the student sees only names - and two of the distractor names embed their own answer. 'meso-Tartaric acid' is the achiral option in ch5-select-all-chiral and the achiral item in ch5-sort-chiral-achiral; 'meso-2,3-Dibromobutane' is the achiral item in ch5-sort-chiral-achiral-v2. In each case the level-2 hint then restates the rule verbatim. A student who has learned only the sentence 'meso means achiral' answers correctly without ever locating a mirror plane.
+- **Learner impact:** The item measures whether the student recognizes the prefix, not whether they can find internal symmetry in a structure - which is the actual skill and the declared trouble_spot for the diastereomers concept. It inflates apparent mastery of the hardest idea in the chapter.
+- **Evidence:** ch5-select-all-chiral option c text 'meso-Tartaric acid' with hints[1]; ch5-sort-chiral-achiral item i2; ch5-sort-chiral-achiral-v2 item i4 with hints[1]. RDKit confirms the underlying chemistry is right in every case - the defect is the tell, not the answer.
+- **Recommended outcome:** At least one meso item needs to present the structure without the 'meso' label, so the student must establish the internal mirror plane themselves rather than read it off the name.
+- **Confidence:** 0.88
+
+##### `instr-014` — medium / missing-example
+
+- **Location:** `{"concept_slug": "racemates-and-resolution", "nugget_id": "nugget-racemates", "anchor_text": "an equimolar mixture of them, called a racemate, is optically inactive"}`
+- **Observation:** The chapter covers racemates and resolution thoroughly but never introduces enantiomeric excess or optical purity - the quantitative bridge between 'pure enantiomer' and 'racemate' that every downstream asymmetric-synthesis discussion assumes. Related gap: there is no example of a meso compound or of chirality in a ring system anywhere in the chapter (both meso examples are acyclic 1,2-disubstituted chains), even though ring cases such as the cis/trans 1,2-dimethylcyclohexane pair are where students most often fail to spot an internal mirror plane.
+- **Learner impact:** Students leave with a binary model - a sample is either enantiopure or racemic - and no vocabulary for the 80/20 mixtures that real syntheses produce. They also arrive at ring stereochemistry without having seen symmetry analysis applied to anything but a straight chain.
+- **Evidence:** Regex scan across all nuggets for 'enantiomeric excess', 'optical purity', 'ee' returns zero hits; assets mol-rr-tartaric, mol-meso-tartaric, mol-3-bromo-2-butanol are all acyclic.
+- **Recommended outcome:** The chapter needs a quantitative handle on partially resolved mixtures, and at least one meso/chirality case set in a ring so the symmetry test is exercised on something other than an open chain.
+- **Confidence:** 0.85
+
+##### `instr-015` — low / sequencing
+
+- **Location:** `{"nugget_id": "nugget-optical-activity", "concept_slug": "optical-activity", "anchor_text": "the sign is an experimental measurement, while R and S come from the priority rules"}`
+- **Observation:** The optical-activity concept is order 2 and its prerequisites list only 'chirality-and-enantiomers'. Its standard and expanded prose nevertheless lean on R/S three times, and R/S is not introduced until concept order 3.
+- **Learner impact:** A first-time reader meets a warning about confusing two labels when they have only been given one of them. The warning has nothing to attach to and will be forgotten before the R/S section arrives, which is exactly where it is needed.
+- **Evidence:** concepts[1] (optical-activity, order 2, prerequisites ['chirality-and-enantiomers']) vs concepts[2] (r-s-configuration, order 3); nugget-optical-activity standard and expanded tiers.
+- **Recommended outcome:** Either the R/S-versus-sign warning should sit where R/S has already been defined, or the optical-activity concept should declare the dependency it actually has.
+- **Confidence:** 0.8
+
+##### `instr-016` — low / notation-consistency
+
+- **Location:** `{"question_slug": "ch5-draw-s-2-butanol-v2", "asset_id": "mol-r-chlorofluorobromomethane", "anchor_text": "Draw (R)-2-bromobutane, including its stereochemistry."}`
+- **Observation:** Several identifiers disagree with the content they name. ch5-draw-s-2-butanol-v2 asks the student to draw (R)-2-bromobutane, not S-butan-2-ol. ch5-count-stereoisomers-3-bromo-2-butanol-v2 asks about tartaric acid, not 3-bromobutan-2-ol. Assets mol-r-chlorofluorobromomethane / mol-s-chlorofluorobromomethane are titled '(R)-Bromochlorofluoromethane' / '(S)-Bromochlorofluoromethane', and every prose and question mention uses 'bromochlorofluoromethane' - only the ids use the other substituent order. All of the chemistry underneath is correct in each case.
+- **Learner impact:** None directly on students, since slugs and asset ids are not student-facing. It costs instructor and author time: anyone triaging an item report by slug, or cross-referencing an asset id to a figure, will look at the wrong thing.
+- **Evidence:** question_sets slugs ch5-draw-s-2-butanol-v2 (prompt_text 'Draw (R)-2-bromobutane', answer_key.smiles CC[C@@H](C)Br, verified R) and ch5-count-stereoisomers-3-bromo-2-butanol-v2 (prompt_text 'Tartaric acid...', answer 3); assets[0].id vs assets[0].title.
+- **Recommended outcome:** Identifiers should name what they contain, so a slug or asset id is a reliable pointer during review and item triage.
+- **Confidence:** 0.9
+
+##### `instr-017` — low / assessment-readiness
+
+- **Location:** `{"question_slug": "ch5-count-stereoisomers-3-bromo-2-butanol-v2", "anchor_text": "Tartaric acid has two stereocenters that carry identical sets of substituents. How many stereoisomers does it have?"}`
+- **Observation:** Difficulty labels are not calibrated to cognitive demand. ch5-count-stereoisomers-3-bromo-2-butanol-v2 is tagged 'advanced' but its answer (3) is stated verbatim in the nugget the student just read, and the prompt itself supplies the decisive premise ('carry identical sets of substituents'). Conversely ch5-draw-s-2-butanol, tagged 'advanced', is a straightforward core drawing task. The overall spread is 4 core / 13 standard / 5 advanced.
+- **Learner impact:** Adaptive or difficulty-filtered delivery will hand students recall items labelled advanced and withhold nothing genuinely harder, so a 'hard set' is not actually hard. Instructors selecting by difficulty get a misleading picture of rigor.
+- **Evidence:** ch5-count-stereoisomers-3-bromo-2-butanol-v2 difficulty 'advanced'; nugget-diastereomers expanded tier final sentence; ch5-draw-s-2-butanol difficulty 'advanced'.
+- **Recommended outcome:** Difficulty tags need to reflect the reasoning required beyond direct recall from the section the item is attached to.
+- **Confidence:** 0.78
+
+##### `instr-018` — low / conceptual-support
+
+- **Location:** `{"section_id": "nugget-chirality", "anchor_text": "Read in McMurry (OpenStax) - Chapter 5"}`
+- **Observation:** The chapter ships exactly one textbook link, in the first section, pointing at the OpenStax chapter's 'why this chapter' front matter (verified 200 OK). The six remaining sections - CIP rules, diastereomers and meso, racemates and resolution, prochirality, the priority arrow - have no textbook anchor at all, even though the package's textbook_matching block maps this topic confidently onto thirteen textbooks.
+- **Learner impact:** A student who wants a second explanation of, say, meso compounds gets a link to the chapter's opening motivation page and a 404 Wikipedia link. The chapter's careful textbook crosswalk delivers no value at the point of use.
+- **Evidence:** Compiled reader: one mcmurry_link block (blk-ti6v4iza) in nugget-chirality only, url .../5-why-this-chapter; textbook_matching.overrides covers 13 texts with chapter-level mappings.
+- **Recommended outcome:** Each major section needs a specific outside-reading target at the section level rather than one chapter-level pointer for the whole topic.
+- **Confidence:** 0.85
+
+##### `instr-019` — low / misconception
+
+- **Location:** `{"nugget_id": "nugget-chirality", "concept_slug": "chirality-and-enantiomers", "anchor_text": "the ordinary origin of chirality is a stereocenter"}`
+- **Observation:** The chapter consistently and correctly hedges ('the usual cause', 'the most common source', 'a common indicator of chirality but not a guarantee of it') and gives the right universal test. But it never states the converse case explicitly: that a molecule can be chiral with no tetrahedral stereocenter at all (allenes, hindered biaryls, and stereogenic nitrogen/phosphorus). Nothing here is wrong; the omission is what students will fill in themselves.
+- **Learner impact:** Students routinely compress the hedged statement into the biconditional 'chiral if and only if it has a stereocenter', which then has to be un-taught in the axial-chirality and amine-inversion discussions later in the course.
+- **Evidence:** nugget-chirality standard and expanded tiers; concepts[0].trouble_spots cover the two false-positive directions but not the false-negative direction.
+- **Recommended outcome:** The chapter needs one explicit statement, at the point the stereocenter definition is given, that the absence of a stereocenter does not establish achirality - so the mirror-image test is understood as the definition and the stereocenter as a heuristic.
+- **Confidence:** 0.75
+
+**Open questions.**
+
+- I coined one category id, 'resource-link-integrity' (finding instr-001), because none of the schema's existing ids fit a dead outbound reference. The orchestrator normalised it to 'conceptual-support'.
+- The 404 Wikipedia URLs are mechanically derived from concept titles, which suggests a compiler/authoring-pipeline defect rather than an authoring slip in this chapter. Do other recently compiled topic packages carry the same pattern?
+- SelectedResponseRenderer has no structure_smiles path. Is that a deliberate product decision - meaning authors should use imageUrl instead - or a renderer gap? The answer determines whether the fix belongs in this chapter or in the renderer.
+- Are the two Fischer items intended to be delivered from this chapter at all, or are they staged here for a later carbohydrates chapter that teaches Fischer projections? If the latter, gating them out of this chapter's assessable bank resolves instr-002 without new prose.
+- nugget-rs-arrow and nugget-rs both declare section_id 'r-s-configuration' yet compiled to separate top-level sections in emission order. Is section_id intended to group nuggets into one reader section, in which case this is a compiler bug affecting every multi-nugget concept?
+
+#### Struggling Student — 4.3/10
+
+**Summary.** The prose is clear, correctly ordered at the concept level, and it names the right misconceptions - but almost none of the scaffolding a shaky student needs survives into what actually reaches them. The reader is seven blocks of continuous exposition plus pre-labelled figures, with zero checkpoints: all 18 learning objectives, all 12 trouble spots, and all 7 practice checks are stripped at compile, and every one of the seven 'Background reading' links returns 404. The chapter's central skill - reading R or S off a structure - is never modelled end to end (the one step-by-step video compiles hidden with an empty URL), never figured for the case students actually fail (lowest priority toward the viewer), and never assessed: both short-answer items hand the student the rotation sense in the prompt, so the graded task collapses to recalling 'clockwise is R'. The scaffold section that would fix this, the priority-arrow nugget, is compiled dead last, four sections after the CIP rules it exists to support, behind prochirality. Two representations are graded that the chapter never teaches at all - Fischer projections with D/L, and wedge/dash bonds. And the hint ladders repeatedly hand over the graded answer, so the one place a struggling student is supposed to be pulled up a rung instead ends the thinking. I would finish this chapter feeling like I had read about stereochemistry without ever having done it.
+
+**Publication blockers:** `ss-001`, `ss-002`
+
+**Strengths.**
+
+- The prose itself is genuinely readable and the expanded tier is well paragraphed - each section builds from a definition to a worked idea to a caution, without hedging or filler.
+- The chapter names the right misconceptions in plain language: 'four attachments alone are not enough', 'Optical inactivity therefore does not by itself prove that a sample is achiral', and 'The single recurring error is viewpoint' are exactly the traps a struggling student falls into.
+- Wrong-answer explanations are specific and per-option rather than generic - for example the propan-2-ol and 2-methylpropan-2-ol distractors each get a distinct, structurally grounded correction.
+- The enantiomer-versus-diastereomer physical-property contrast is drawn explicitly and then reused to motivate resolution, which makes the resolution section land as a consequence rather than a new fact.
+- Every item has a -v2 variant on a different molecule, so a student who fails once has a genuine second attempt rather than the same question again.
+- The authored trouble_spots are well chosen and would fix several findings above if they were actually delivered to the reader.
+
+**Findings.**
+
+##### `ss-001` — blocker / conceptual-support
+
+- **Location:** `{"question_slug": "ch5-fischer-d-glyceraldehyde", "concept_slug": "r-s-configuration", "anchor_text": "Build the Fischer projection of D-glyceraldehyde: place H and OH on the single stereocenter."}`
+- **Observation:** Two graded items (ch5-fischer-d-glyceraldehyde and ch5-fischer-d-glyceraldehyde-v2) require building a Fischer projection and applying the D/L convention. The word 'Fischer' appears 13 times in the question set and zero times in any nugget text tier; the D/L convention is never defined either. The prose mentions 'L-amino acids' and 'D-sugars' in nugget-nature and the figure is titled 'D-(R)-Glyceraldehyde', but nothing anywhere explains what a Fischer projection is, that horizontal bonds point toward the viewer and vertical bonds away, or what D and L mean or how they relate to R and S.
+- **Learner impact:** A student working only from this chapter cannot derive the answer from anything shown; the only route is to already know the convention or to read the hint, which states it outright. I would open the projection builder, not understand what the grid means, take both hints, copy the placement, and move on having learned a keystroke rather than a representation.
+- **Evidence:** topic.package.json question_sets ch5-fischer-d-glyceraldehyde / -v2 (question_type 'fischer', answer_key.expected_state.rows). Grep of all nuggets[].text tiers: 'Fischer' = 0 occurrences, no definition of D/L. Hint level 2: 'For the D configuration the hydroxyl sits on the right of the horizontal bonds.'
+- **Recommended outcome:** Before any item grades a Fischer projection or a D/L label, the chapter needs the projection convention and the D/L reference itself delivered to the student in the reader - what the cross means in three dimensions, and how D/L is defined relative to glyceraldehyde. Alternatively the two Fischer items must be removed from this chapter until that teaching exists.
+- **Confidence:** 0.95
+
+##### `ss-002` — blocker / retrieval-practice
+
+- **Location:** `{"question_slug": "ch5-identify-chiral-molecule", "anchor_text": "Only butan-2-ol has a carbon carrying four distinct groups (OH, H, CH3, C2H5)."}`
+- **Observation:** Hint ladders across the bank terminate in the literal graded answer, violating the repo's own standard ('Never name the answer: no answer option ids, correct orderings, key values'). Verified instances: ch5-identify-chiral-molecule L3 names the correct option; ch5-rank-cip-priorities L2 states the correct ordering verbatim ('Bromine outranks oxygen outranks carbon outranks hydrogen'); ch5-assign-configuration-2-bromobutane L3 = 'Clockwise is R' (the prompt already states the path is clockwise); ch5-assign-configuration-2-bromobutane-v2 L2 (final rung) = 'Counterclockwise is S'; ch5-fischer-d-glyceraldehyde L2 = the answer-key placement; ch5-fischer-d-glyceraldehyde-v2 L2 likewise; ch5-count-stereoisomers-3-bromo-2-butanol-v2 L2 gives 4 minus one = 3; ch5-resolve-racemate-method L3 restates option a; ch5-resolve-racemate-method-v2 L2 restates option a. Both binary categorize items break the few-option rule by naming the verdict for the meso item ('A meso compound has stereocenters but is achiral'), as does ch5-select-all-chiral L2 and ch5-select-all-chiral-v2 at rung 1 ('An alpha carbon with two hydrogens cannot be a stereocenter'). Both single-rung comparison_matrix items give away every cell.
+- **Learner impact:** A hint is the exact affordance a low-confidence student reaches for first. Here, taking one or two hints ends the reasoning instead of narrowing it, so I get the item right, believe I understood it, and arrive at the exam with no skill and no signal that I lacked one. It also makes the bank useless as a self-check, which is the only feedback loop this chapter has.
+- **Evidence:** topic.package.json feedback_bundle.hints on the slugs listed; contrast with skills/question-hint-authoring/SKILL.md 'The ladder contract' - 'Never name the answer' and the few-option rule for <=2 option/category spaces.
+- **Recommended outcome:** Every ladder needs its final rung to stop one reasoning step short of the key: the criterion, not the verdict; the comparison to make, not the ordering; the convention to apply, not the placement. Items whose ladder currently is the answer need a genuine orient -> constraint -> feature progression instead.
+- **Confidence:** 0.93
+
+##### `ss-003` — high / sequencing
+
+- **Location:** `{"section_id": "nugget-rs-arrow", "nugget_id": "nugget-rs-arrow", "concept_slug": "r-s-configuration", "anchor_text": "The priority-rotation arrow: reading R and S at a glance"}`
+- **Observation:** The package authors nugget-rs-arrow as section_id 'r-s-configuration', order 2 - i.e. immediately after the CIP rules nugget it scaffolds. The compiled reader emits it as the seventh and last section, after diastereomers, racemates and prochirality. Compiled section order is: nugget-chirality, nugget-optical-activity, nugget-rs, nugget-diastereomers, nugget-racemates, nugget-nature, nugget-rs-arrow.
+- **Learner impact:** I meet the abstract rule ('trace 1 to 2 to 3 with the lowest priority pointing away') with no picture of what that sweep looks like, then get four sections of new material, then finally see the arrow figures after I have already stopped trying. In practice I would guess my way through diastereomers and meso compounds - both of which need R/S - before the visual that unlocks R/S ever appears.
+- **Evidence:** topic.package.json nuggets[] nugget-rs-arrow: section_id 'r-s-configuration', order 2. frontend/public/reader/topic-chapters/stereochemistry-at-tetrahedral-centers.json sections[] order places id 'nugget-rs-arrow' last, after 'nugget-nature'.
+- **Recommended outcome:** The arrow scaffold has to reach the student adjacent to the CIP rules it supports, not at the end of the chapter - the compile step needs to honour the authored intra-section ordering, or the two nuggets need to be merged so they cannot be separated.
+- **Confidence:** 0.97
+
+##### `ss-004` — high / worked-example-gap
+
+- **Location:** `{"section_id": "nugget-rs", "nugget_id": "nugget-rs", "asset_id": "video-rs-assignment", "anchor_text": "Assigning R and S at a stereocenter, step by step"}`
+- **Observation:** The chapter's only end-to-end worked example of R/S assignment is the video brief video-rs-assignment, whose storyboard walks exactly the steps a struggling student needs (highlight the four groups, break the ethyl/methyl tie at the first point of difference, rotate H to the back, trace the sweep, then repeat with H toward the viewer). It compiles into the reader as block blk-6ljmjs4e with url '' and is_hidden true, so it reaches nobody. Its status in the package is 'needs_review'. Nothing else in the chapter substitutes: the four figures in nugget-rs are titled and alt-texted with their answers already ('(R)-2-Bromobutane', 'Butan-2-ol in the R configuration'), so they show the result of the procedure, never the procedure.
+- **Learner impact:** I am told a two-stage method in prose and then shown finished answers. When I try it on my own structure I stall at exactly the step the video would have shown - breaking the ethyl-vs-methyl tie, and getting the hydrogen to the back - and with no worked model I guess between R and S.
+- **Evidence:** topic.package.json video_briefs[0] status 'needs_review'; compiled reader block {'id': 'blk-6ljmjs4e', 'block_type': 'video', 'content': {'url': ''}, 'is_hidden': true}.
+- **Recommended outcome:** The student needs one fully worked assignment on a real structure, visible in the reader - every intermediate step from four groups to a letter, including the tie-break - not a hidden placeholder and not pre-labelled result figures.
+- **Confidence:** 0.94
+
+##### `ss-005` — high / misconception
+
+- **Location:** `{"nugget_id": "nugget-rs-arrow", "concept_slug": "r-s-configuration", "question_slug": "ch5-assign-configuration-2-bromobutane", "anchor_text": "the arrow's apparent rotation is reversed relative to the true configuration"}`
+- **Observation:** The chapter correctly identifies the lowest-priority-toward-the-viewer reversal as 'the single recurring error' and states the fix in three places in prose. It is never shown and never assessed. Both priority-arrow figures depict the lowest-priority-away case only (rdkit_options.priority_arrow config R and S, both with the hydrogen assumed behind the page). Both short-answer items explicitly place the lowest-priority group away ('with hydrogen pointing away from the viewer'; 'with the lowest priority group pointing away from the viewer'). No item in the 22-question bank presents the toward-the-viewer case, and the practice_check that does ('A curved arrow ... runs clockwise, but the lowest-priority group is drawn pointing toward you') does not compile into the reader.
+- **Learner impact:** This is the single move that most often turns a correct ranking into a wrong letter. Being told 'invert it' without ever seeing an inverted case or being made to do one means that on the first exam structure drawn with H on a wedge I will read the sweep directly and confidently give the opposite answer.
+- **Evidence:** topic.package.json assets mol-rs-arrow-r / mol-rs-arrow-s (both 'points behind the page'); question_sets ch5-assign-configuration-2-bromobutane prompt_text and -v2 prompt_text; nugget-rs-arrow practice_check absent from the compiled reader (grep 'practice_check' in the reader JSON = 0).
+- **Recommended outcome:** The reversal case needs to be both shown and practised: a worked instance where the lowest-priority group faces the viewer, and at least one graded item where a student who reads the sweep directly gets it wrong and is told why.
+- **Confidence:** 0.94
+
+##### `ss-006` — high / assessment-readiness
+
+- **Location:** `{"question_slug": "ch5-assign-configuration-2-bromobutane", "concept_slug": "r-s-configuration", "anchor_text": "the path Br to ethyl to methyl turns clockwise"}`
+- **Observation:** Both R/S short-answer items state the rotation sense in the prompt itself. ch5-assign-configuration-2-bromobutane tells the student the priorities, the orientation, and that the path 'turns clockwise'; the v2 item does the same for counterclockwise without even naming a molecule. What is actually graded is the recall of 'clockwise = R'. Of the 22 items, none requires deriving priorities and reading geometry from a depicted structure: the only items that touch the full skill are the two advanced structure_scaffold drawing tasks, which run in the opposite direction (label to structure).
+- **Learner impact:** The bank tells me I have mastered R/S assignment when I have only memorised two words. I would use these as my self-check, score well, and be blindsided by the first exam question that shows a structure and asks for a letter.
+- **Evidence:** topic.package.json question_sets: ch5-assign-configuration-2-bromobutane prompt_text and ch5-assign-configuration-2-bromobutane-v2 prompt_text; compiled question-set.json shows 22 items with no structure-to-label assignment item.
+- **Recommended outcome:** At least one graded item per difficulty band must require the student to perform the whole assignment from a depicted stereocenter - rank the four groups themselves and read the geometry - rather than being handed the sweep direction.
+- **Confidence:** 0.92
+
+##### `ss-007` — high / misconception
+
+- **Location:** `{"question_slug": "ch5-select-all-chiral", "concept_slug": "diastereomers-and-meso-compounds", "anchor_text": "meso-Tartaric acid"}`
+- **Observation:** Spotting a meso compound is a stated chapter skill, but every meso item is pre-labelled 'meso-' in the option text and carries no usable stereochemistry. In ch5-select-all-chiral the meso option's structure_smiles is 'OC(=O)C(O)C(O)C(=O)O' - no stereocenters specified, so the rendered structure shows no internal mirror plane to find. In ch5-sort-chiral-achiral the item is text-only ('meso-Tartaric acid'), and in the v2 categorize item 'meso-2,3-Dibromobutane' is likewise text-only. The hints then complete the shortcut: 'meso compounds contain stereocenters yet are achiral', 'The meso dibromide has stereocenters but is achiral'.
+- **Learner impact:** I learn a word-matching rule - if the label says meso, tick achiral - instead of the skill of finding an internal mirror plane in a structure I was not told about. Handed an unlabelled R,S-tartaric acid on an exam, I will count two stereocenters and call it chiral.
+- **Evidence:** topic.package.json question_sets ch5-select-all-chiral option c (structure_smiles without stereo tags), ch5-sort-chiral-achiral item i2, ch5-sort-chiral-achiral-v2 item i4; hints at level 2 of both categorize items.
+- **Recommended outcome:** At least one item must present a fully specified stereo structure that is meso without saying so, so the student has to locate the internal mirror plane rather than read the prefix.
+- **Confidence:** 0.9
+
+##### `ss-008` — high / conceptual-support
+
+- **Location:** `{"question_slug": "ch5-draw-s-2-butanol", "concept_slug": "r-s-configuration", "anchor_text": "Showing configuration with wedge and dash bonds is the skill being assessed"}`
+- **Observation:** Both structure_scaffold items block typed SMILES entry on the explicit grounds that wedge/dash drawing is the assessed skill. The words 'wedge' and 'dash' appear zero times in any nugget text tier - they occur only inside the question metadata and hints. No figure in the chapter is described as showing a wedge or a dash, and no prose explains that a bold wedge means toward the viewer and a hashed bond away.
+- **Learner impact:** The chapter grades a drawing convention it never taught me. Faced with a blank canvas I would draw the right skeleton, be unable to encode the configuration, and either submit a flat structure or give up on the item entirely - and the hints ('set the wedge/dash at C2') assume the very knowledge I am missing.
+- **Evidence:** topic.package.json ch5-draw-s-2-butanol and ch5-draw-s-2-butanol-v2 student_config.typed_structure_entry_note; grep of nuggets[].text: 'wedge' = 0, 'dash' = 0.
+- **Recommended outcome:** The wedge/dash convention has to be delivered in the reader - stated and shown on a structure - before any item grades a student's ability to draw with it.
+- **Confidence:** 0.93
+
+##### `ss-009` — high / retrieval-practice
+
+- **Location:** `{"section_id": "nugget-chirality", "nugget_id": "nugget-chirality", "anchor_text": "Propan-2-ol has a carbon bonded to four groups yet is achiral. Why?"}`
+- **Observation:** All the in-chapter scaffolding authored in the package is stripped by the compiler: the 7 practice_check pairs, the 18 learning_objectives across nuggets, and the 12 trouble_spots across concepts appear zero times in the compiled reader. What reaches the student is seven sections of continuous expository prose plus static figures and dead links. There is no checkpoint, no self-test, no worked question, and no summary anywhere in the chapter (the word 'summary' occurs nowhere in the package).
+- **Learner impact:** I read three paragraphs of dense prose, have no way to find out whether any of it stuck, and by section four I am reading words without processing them. With no checkpoint to catch me, I discover I understood nothing at the first graded assessment - which is a separate bank I may never open, since the compiled chapter is available:false.
+- **Evidence:** grep 'practice_check|learning_objectives|trouble_spot' in frontend/public/reader/topic-chapters/stereochemistry-at-tetrahedral-centers.json = 0 matches; topic.package.json nuggets[].practice_check present for all 7 nuggets.
+- **Recommended outcome:** The reader needs periodic retrieval opportunities and an end-of-section recap that actually reach the student - the authored practice checks and objectives already exist and are simply not being delivered.
+- **Confidence:** 0.96
+
+##### `ss-010` — high / conceptual-support
+
+- **Location:** `{"section_id": "nugget-chirality", "anchor_text": "Background reading on Chirality, stereocenters, and enantiomers. Opens on Wikipedia."}`
+- **Observation:** Every 'Background reading' link in the compiled chapter is a dead URL. All seven Wikipedia external_link blocks were built by slugifying the concept title, producing article names that do not exist. Verified by HTTP: /wiki/Chirality,_stereocenters,_and_enantiomers -> 404; /wiki/Optical_activity_and_specific_rotation -> 404; /wiki/Assigning_R_and_S_configuration_with_the_CIP_rules -> 404; /wiki/Multiple_stereocenters:_diastereomers_and_meso_compounds -> 404; /wiki/Racemic_mixtures_and_the_resolution_of_enantiomers -> 404; /wiki/Prochirality_and_the_biological_consequences_of_handedness -> 404. The only working outbound link in the whole chapter is a single OpenStax 'why this chapter' intro link, present in section 1 only, which points at the chapter preface rather than at the section I am stuck on.
+- **Learner impact:** When a section loses me, the visible escape hatch is 'Background reading' - and it takes me to a Wikipedia error page. Six sections out of seven have no working way out. After the second dead link I stop clicking and stop looking for help.
+- **Evidence:** compiled reader blocks blk-uojuzuvc, blk-r4kb4391, blk-usm8hm4n, blk-lclxha22, blk-qg1onlp0, blk-87mdjemb, blk-9yo28cj9; curl -o /dev/null -w '%{http_code}' on each URL returned 404 (control: /wiki/Chirality_(chemistry) -> 200).
+- **Recommended outcome:** Every outbound 'more help' link a stuck student can click must resolve to a real page relevant to that section, and the per-section external reading needs to point at the specific topic rather than a chapter preface.
+- **Confidence:** 0.99
+
+##### `ss-011` — medium / sequencing
+
+- **Location:** `{"section_id": "nugget-optical-activity", "nugget_id": "nugget-optical-activity", "anchor_text": "A common error is to expect the sign of rotation to track the R/S configuration"}`
+- **Observation:** The optical-activity section is delivered second, before R/S is defined in section three, yet it argues at length about the relationship between the sign of rotation and the R/S label ('the sign is an experimental measurement, while R and S come from the priority rules'). The R and S labels are also used in the section-two figure titles ('(R)-Butan-2-ol', '(S)-Butan-2-ol') before any explanation of what they mean.
+- **Learner impact:** I am warned off a misconception about two things when I only know one of them, so the warning does not land. Worse, seeing '(R)' and '(S)' on figures before they are defined makes me assume I have already missed something and should go back - which for a low-confidence reader means rereading section one rather than continuing.
+- **Evidence:** topic.package.json concepts[] order: optical-activity order 2, r-s-configuration order 3; compiled reader section order places nugget-optical-activity before nugget-rs; assets mol-r-2-butanol / mol-s-2-butanol appear in both sections.
+- **Recommended outcome:** Either the R/S-versus-sign discussion needs to come after R/S has been defined, or the optical-activity section needs a brief forward pointer telling the student that R/S is defined next and that no prior knowledge is assumed here.
+- **Confidence:** 0.85
+
+##### `ss-012` — medium / cognitive-load
+
+- **Location:** `{"section_id": "nugget-nature", "nugget_id": "nugget-nature", "concept_slug": "prochirality-and-chirality-in-nature", "anchor_text": "the two faces of a planar sp2 carbon, such as the carbonyl carbon of a ketone, are designated Re and Si"}`
+- **Observation:** The final concept section introduces homochirality, chiral receptor discrimination, prochirality, the pro-R/pro-S labelling rule, and Re/Si face nomenclature in three paragraphs, with no figure of a prochiral centre or a labelled face (the two attached figures are L-alanine and D-glyceraldehyde, both ordinary stereocentres, and D-glyceraldehyde is a repeat from section three). Re/Si is introduced in a single sentence with no procedure for determining which face is which. Zero of the 22 questions carry concept_slug 'prochirality-and-chirality-in-nature', so nothing here is ever practised.
+- **Learner impact:** Five new ideas, four new labels, no picture and no practice, at the point in the chapter where I have the least energy left. I would skim it, decide it is 'the extra bit at the end', and carry away nothing - which is the right guess given that nothing assesses it, but I have no way to know that.
+- **Evidence:** topic.package.json nugget-nature expanded text (three paragraphs, pro-R/pro-S and Re/Si both introduced); asset_ids ['mol-l-alanine','mol-d-glyceraldehyde']; compiled question-set.json concept_slug distribution contains no prochirality item.
+- **Recommended outcome:** This section needs its load reduced and its abstractions anchored - a visible prochiral centre with the paired groups distinguished, at minimum - or it needs to be explicitly framed to the student as enrichment that is not assessed, so a struggling reader knows where to spend effort.
+- **Confidence:** 0.88
+
+##### `ss-013` — medium / conceptual-support
+
+- **Location:** `{"nugget_id": "nugget-diastereomers", "question_slug": "ch5-match-stereochem-terms", "anchor_text": "Stereoisomers that are not mirror images"}`
+- **Observation:** 'Stereoisomer' is the genus term on which the chapter's entire taxonomy rests, is used 13 times across the nuggets, is never defined, and is then graded. Its first appearance is in nugget-diastereomers ('A single stereocenter produces two stereoisomers'), by which point the reader has already met enantiomers defined without it. The matching_pairs item grades 'Diastereomers = stereoisomers that are not mirror images'. The listed prerequisite 'constitutional-isomerism' is never revisited, so the contrast between same-connectivity/different-arrangement and different-connectivity - the exact place students conflate the two - is never drawn.
+- **Learner impact:** I am asked to distinguish two subcategories of a category nobody named. In the matching item I pair by surface wording rather than meaning, and when an exam asks whether two structures are constitutional isomers, diastereomers or identical, I have no framework to sort them.
+- **Evidence:** topic.package.json nuggets: 'stereoisomer' appears 13 times with no defining sentence; concepts[0].prerequisites includes 'constitutional-isomerism'; ch5-match-stereochem-terms right option r_dia.
+- **Recommended outcome:** The chapter needs to define stereoisomer explicitly, and to place the enantiomer/diastereomer/meso vocabulary inside a single visible hierarchy against constitutional isomers, before any item grades the distinctions.
+- **Confidence:** 0.87
+
+##### `ss-014` — medium / worked-example-gap
+
+- **Location:** `{"nugget_id": "nugget-chirality", "concept_slug": "chirality-and-enantiomers", "anchor_text": "construct the mirror image and ask whether it is superimposable on the original"}`
+- **Observation:** The chapter names superimposability as 'the reliable test' and repeats it as the decision rule, but never demonstrates it. There is no procedure for constructing a mirror image, no worked case of rotating one onto the other, no mention of a physical or on-screen model, and no example of a molecule where the naive answer is wrong. The practical substitute - searching for an internal mirror plane - is asserted but never applied to a drawn structure anywhere in the chapter.
+- **Learner impact:** Mental rotation of tetrahedra is precisely what I cannot do. Told to 'construct the mirror image and ask whether it is superimposable', I have no way to carry out either half, so I fall back on the unreliable shortcut the chapter warns against - count stereocentres and guess.
+- **Evidence:** topic.package.json nugget-chirality expanded, final paragraph; the three attached figures (mol-r-chlorofluorobromomethane, mol-s-chlorofluorobromomethane, mol-2-propanol-achiral) are static single depictions, none showing the two forms being compared or a mirror plane drawn in.
+- **Recommended outcome:** The superimposability test needs to be operationalised for the student - a demonstrated comparison of a molecule with its mirror image, and a demonstrated internal-mirror-plane search on a real structure - rather than stated as a rule.
+- **Confidence:** 0.86
+
+##### `ss-015` — medium / cognitive-load
+
+- **Location:** `{"asset_id": "mol-rs-arrow-s", "nugget_id": "nugget-rs-arrow", "anchor_text": "The second figure is the mirror image"}`
+- **Observation:** The two priority-arrow figures carry the identical SMILES 'CCC(C)Br' - no stereocentre specified in either - and differ only in rdkit_options.priority_arrow.config (R vs S), which the renderer uses to reflect the layout and reverse the drawn arrow. Neither figure depicts the lowest-priority hydrogen at all, yet the entire reading rests on where that hydrogen points, and the prose asserts the hydrogen 'is taken to point behind the page' and calls the second figure 'the mirror image'.
+- **Learner impact:** I am asked to accept an invisible premise about an atom that is not drawn, on a pair of pictures whose only visible difference is which way an orange arrow curls. If I try to verify the claim - 'where is the hydrogen? which one is the mirror image?' - the figure cannot answer me, and I conclude I am missing something and stop trusting the figure that is supposed to be the chapter's key scaffold.
+- **Evidence:** topic.package.json assets mol-rs-arrow-r and mol-rs-arrow-s, both smiles 'CCC(C)Br'; [internal source reference — not in this repo] _orient_conformer_for_config comment: 'A flat 2D drawing with an implicit lowest-priority group does not itself fix a handedness'.
+- **Recommended outcome:** The figures need the lowest-priority group made visible and its orientation shown, so the stated convention is something the student can see and check rather than something they must take on faith.
+- **Confidence:** 0.84
+
+##### `ss-016` — medium / retrieval-practice
+
+- **Location:** `{"question_slug": "ch5-enantiomers-vs-diastereomers-properties", "anchor_text": "Enantiomers are identical except the sign of rotation; diastereomers are effectively different compounds."}`
+- **Observation:** Four items ship a single hint rather than a ladder: both matching_pairs items and both comparison_matrix items. The two comparison_matrix items are the bank's hardest (difficulty 'advanced', a six-cell and a four-cell grid) and their one hint resolves every cell at once - 'Enantiomers are identical except the sign of rotation; diastereomers are effectively different compounds' determines all six cells of the v1 grid.
+- **Learner impact:** On the items where I most need to be walked up a ladder, there is only one rung and it is the whole answer. I either get no help at all or all the help at once, and never experience the intermediate step where I work something out with a nudge.
+- **Evidence:** compiled question-set.json hint counts: ch5-match-stereochem-terms 1, ch5-match-stereochem-terms-v2 1, ch5-enantiomers-vs-diastereomers-properties 1, ch5-enantiomers-vs-diastereomers-properties-v2 1.
+- **Recommended outcome:** The advanced grid and matching items need multi-rung ladders that narrow attention one feature or one pairing at a time without settling the remaining cells.
+- **Confidence:** 0.88
+
+##### `ss-017` — medium / misconception
+
+- **Location:** `{"nugget_id": "nugget-optical-activity", "concept_slug": "optical-activity", "anchor_text": "there is no general correspondence between them"}`
+- **Observation:** The independence of the R/S label from the (+)/(-) sign of rotation is flagged as a named misconception in the concept trouble_spots and stated twice in prose, but it is never tested. The nearest item, ch5-enantiomers-vs-diastereomers-properties, asks only whether the magnitude of specific rotation is identical; no question asks a student to predict, or decline to predict, the sign from a configuration label, and no wrong-answer explanation anywhere addresses the belief.
+- **Learner impact:** A misconception that is only ever contradicted in a sentence I read once, and never in a moment where I commit to an answer and get corrected, does not get dislodged. I would still assume R means (+) when it matters.
+- **Evidence:** topic.package.json concepts[1].trouble_spots[0]; nugget-optical-activity expanded paragraph 2; compiled question-set.json - no item on sign-versus-label.
+- **Recommended outcome:** The R-does-not-mean-(+) belief needs a moment where the student acts on it and is corrected, not just a sentence of prose asserting the independence.
+- **Confidence:** 0.85
+
+##### `ss-019` — medium / conceptual-support
+
+- **Location:** `{"section_id": "nugget-nature", "anchor_text": "Chiral environments distinguish enantiomers, and prochirality selects between paired groups"}`
+- **Observation:** The package carries clear weighting metadata - concepts marked core/standard/advanced, nuggets marked depth core/standard/advanced with duration_minutes - and none of it reaches the reader. The compiled sections carry only id, title and blocks, so the advanced prochirality section, the core CIP section and the standard resolution section are presented as seven visually identical bodies of prose of similar length.
+- **Learner impact:** With nothing marking what matters most, I distribute my limited attention evenly and run out of it before the end. I cannot tell that R/S assignment is the skill the rest of the course depends on and prochirality is enrichment, so I under-invest in the one and over-worry about the other.
+- **Evidence:** topic.package.json concepts[].difficulty and nuggets[].depth / duration_minutes; compiled reader sections carry keys ['id','title','blocks'] only.
+- **Recommended outcome:** The student needs a visible signal of relative importance and expected effort per section - the weighting is already authored and simply is not delivered.
+- **Confidence:** 0.82
+
+##### `ss-018` — low / conceptual-support
+
+- **Location:** `{"question_slug": "ch5-select-all-chiral-v2", "anchor_text": "An alpha carbon with two hydrogens cannot be a stereocenter."}`
+- **Observation:** 'Alpha carbon' is used in the level-1 hint and in the wrong-answer explanation of ch5-select-all-chiral-v2 ('Alanine is chiral: its alpha carbon carries an amino group, H, methyl, and carboxyl'). The term appears zero times in any nugget text tier; the chapter never introduces amino-acid positional nomenclature.
+- **Learner impact:** The very first rung of help on that item is phrased in a word I have not been given. I read the hint, do not know which carbon is meant, and gain nothing from having spent a hint.
+- **Evidence:** topic.package.json ch5-select-all-chiral-v2 hints level 1 and wrong_answer_explanations for option b; grep of nuggets[].text for 'alpha carbon' = 0.
+- **Recommended outcome:** Hints and feedback must be phrased only in vocabulary the chapter has delivered, or the term needs introducing where the amino-acid example is used.
+- **Confidence:** 0.9
+
+**Open questions.**
+
+- Does the reader surface the topic-package question bank anywhere a student can reach it? The compiled chapter and bank both carry available:false, so as reviewed, the chapter reaches the student as prose and figures with no practice at all - several findings above would soften if the bank is embedded inline.
+- Is the compiled section order (nugget-rs-arrow appended last) a compiler behaviour that affects every topic package, or something specific to this chapter's nugget section_id/order values?
+- Is the hidden video block (url '', is_hidden true) the standard compile output for a video_brief with status 'needs_review', i.e. is a produced video expected to land here later?
+- Are the fabricated Wikipedia 'Background reading' URLs generated per-chapter from concept titles? If so this is a pipeline defect rather than an authoring one and will affect other chapters.
+- Do the reader's molecule blocks render RDKit stereo annotations (the '(R)' / '(S)' tags) on figures? If they do, finding ss-004's point about answers being visible with the figures is stronger than the titles alone indicate.
+
+#### Accessibility Persona — 5.2/10
+
+**Summary.** This chapter is unusually strong on keyboard operability and unusually weak on non-visual equivalence for the exact thing it teaches. 20 of 22 questions are genuinely completable without a pointer - the registry marks every type used here keyboard_complete=True except structure_scaffold, and the renderers back that claim. The prose is a real asset: nugget-rs-arrow narrates both arrow figures in words in all three detail tiers, and the two short_answer items put the entire stereochemical geometry into the prompt so R/S is assessable with no figure at all. But the figure layer collapses on the chapter's core content. All 13 assets carry alt_text only and none carries a long_description, and the enantiomer pairs - the figures whose whole reason to exist is that two structures are NOT superimposable - are described in interchangeable words. A learner who cannot see the figures cannot determine chirality, cannot assign R/S, and cannot tell a diastereomer from an enantiomer from those descriptions. Both structure_scaffold questions actively set typed_structure_entry 'blocked', switching off the platform's only keyboard route into a drawing question. Seven accessibility_bundle descriptions hand over the graded answer - and I ran the compile-time guard against all 22 questions, which returns clean on every one, so nothing catches these. Compounding all of it, accessible_description is currently rendered by no renderer used in this chapter.
+
+**Publication blockers:** `access-001`, `access-003`, `access-004`
+
+**Strengths.**
+
+- 20 of 22 questions are genuinely completable without a pointer, verified at the renderer level rather than trusting the registry flag: rank_order gives every card Move up / Move down IconButtons with aria-labels announcing card text and position, plus an aria-live readout; categorize_groups, matching_pairs and comparison_matrix each expose a labelled Select per row or cell; the Fischer builder offers a Select for every substituent slot alongside the drag affordance rather than instead of it.
+- ch5-assign-configuration-2-bromobutane and its v2 put the whole stereochemical situation into the prompt text, so R/S assignment is fully assessable with no figure at all. This is the model the rest of the chapter's stereochemistry questions should follow.
+- nugget-rs-arrow narrates both arrow figures explicitly in all three detail tiers, so the one genuinely spatial figure pair in the chapter has a working text equivalent in the body copy.
+- The two arrow figures are real mirror images, not the same picture twice: _orient_conformer_for_config reflects the 2D conformer so the on-screen sweep encodes the declared configuration, and the alt text's claim of clockwise versus counterclockwise is accurate to what renders.
+- All 45 hints across the 22 questions are kind 'text'. No hint depends on seeing a highlight, region focus, or animation, so the progressive-hint ladder is fully available non-visually.
+- All three detail tiers are authored for all 7 nuggets and the reader honours prefs.detailLevel via _detail_texts, giving learners genuine control over reading load.
+- mol-rr-tartaric and mol-meso-tartaric are the one pair whose alt texts do differentiate, showing the author can write the distinguishing description when the difference is constitutional rather than purely spatial.
+
+**Findings.**
+
+##### `access-001` — blocker / media-equivalence
+
+- **Location:** `{"asset_id": "mol-s-2-butanol", "concept_slug": "optical-activity", "nugget_id": "nugget-optical-activity", "anchor_text": "Butan-2-ol in the S configuration, the mirror image of the R alcohol."}`
+- **Observation:** The enantiomer pairs are described in words that do not distinguish them. mol-r-2-butanol's alt_text is 'Butan-2-ol in the R configuration: C2 bears a hydroxyl, a hydrogen, a methyl, and an ethyl group' - a constitution exactly as true of the S enantiomer - and mol-s-2-butanol's alt_text is purely relational: 'the mirror image of the R alcohol'. Neither states which group sits on a wedge and which on a dash. The same pattern holds for mol-r-chlorofluorobromomethane / mol-s-chlorofluorobromomethane, which differ only by the asserted letter, and mol-3-bromo-2-butanol carries no configuration at all in its alt text even though its SMILES fixes a specific diastereomer that RDKit will stereo-annotate on the rendered image.
+- **Learner impact:** A learner using a screen reader, or any learner who turns figures off, receives the conclusion ('this one is R') without any of the geometry that produces it. They cannot test superimposability, cannot trace a 1-2-3 sweep, and cannot verify or practise the chapter's central skill. The failure is sharpest where it matters most: the two butan-2-ol figures sit consecutively to demonstrate equal-and-opposite rotation, and their descriptions convey no difference between them whatsoever.
+- **Evidence:** topic.package.json assets mol-r-2-butanol, mol-s-2-butanol, mol-r-chlorofluorobromomethane, mol-s-chlorofluorobromomethane, mol-3-bromo-2-butanol; the same strings compile into reader blocks blk-p6vg1w3o / blk-4fskln3s. [internal source reference — not in this repo]::textEquivalentBlock substitutes long_description || alt_text for the whole figure when showImages is off, so with images off these two figures become two callouts that say the same thing.
+- **Recommended outcome:** Each member of an enantiomer or diastereomer pair needs a non-visual description that independently fixes its three-dimensional arrangement - stating for each figure which substituents are toward the viewer and which behind, so the two descriptions differ in the same way the structures do.
+- **Confidence:** 0.95
+
+##### `access-003` — blocker / interactive-fallback
+
+- **Location:** `{"question_slug": "ch5-draw-s-2-butanol", "concept_slug": "r-s-configuration", "anchor_text": "typed_structure_entry: blocked"}`
+- **Observation:** Both structure_scaffold questions set student_config.typed_structure_entry = 'blocked'. The platform's structure_scaffold type declares keyboard_complete=False with keyboard_complete_via_config='typed_structure_entry', and the only keyboard route that exists - TypedStructureRenderer, a SMILES field with a spoken read-back that explicitly requests the stereochemistry section so a correct answer and the wrong enantiomer do not read back identically - 'fails closed': typedEntryAllowed() returns true only for the exact string 'allowed'. With 'blocked', the component renders the dead end 'This question is answered by drawing in the workspace.' These two items are therefore impossible for a learner who cannot use a pointer on a Ketcher canvas.
+- **Learner impact:** A learner using only a keyboard, a switch, voice control, or a screen reader cannot attempt either drawing question at all - not attempt-and-fail, but no input path. They are the only two items in the bank assessing the wedge/dash three-dimensional drawing skill named in nugget-rs's learning objectives, so that objective becomes wholly unassessable for those learners.
+- **Evidence:** topic.package.json question_sets ch5-draw-s-2-butanol and -v2, student_config.typed_structure_entry = 'blocked' with note 'Showing configuration with wedge and dash bonds is the skill being assessed'. [internal source reference — not in this repo] lines 45-49 and 116-129; [internal source reference — not in this repo] lines 67-80.
+- **Recommended outcome:** The wedge/dash drawing skill needs an equivalent non-pointer route to demonstrate configuration - either the typed path with a stereochemistry-aware read-back, or an alternate activity that elicits the same three-dimensional reasoning through a keyboard-operable response. The author's rationale for blocking typed entry is legitimate, so the need is an equivalent alternative, not simply unblocking.
+- **Confidence:** 0.96
+
+##### `access-004` — blocker / alt-text-quality
+
+- **Location:** `{"question_slug": "ch5-fischer-d-glyceraldehyde", "concept_slug": "r-s-configuration", "anchor_text": "Place the hydroxyl on the right and hydrogen on the left for the D enantiomer."}`
+- **Observation:** Seven accessible_descriptions state the graded answer. (1) ch5-fischer-d-glyceraldehyde: 'Place the hydroxyl on the right and hydrogen on the left for the D enantiomer' is verbatim the answer_key. (2) ch5-fischer-d-glyceraldehyde-v2: 'Place the hydroxyl on the left for the L enantiomer'. (3) ch5-resolve-racemate-method: 'Choose the method that forms separable diastereomeric salts with a chiral resolving agent rather than an achiral physical method' uniquely identifies option a. (4) ch5-resolve-racemate-method-v2 restates option a almost word for word. (5) ch5-count-stereoisomers-3-bromo-2-butanol: 'which is two raised to the number of stereocenters' supplies the rule the prompt withholds. (6) ch5-count-stereoisomers-3-bromo-2-butanol-v2: 'accounting for the meso form' is the whole advanced insight being tested. (7) ch5-identify-chiral-molecule: 'Select the one whose carbon bears four different groups and is therefore chiral' hands over the decision criterion - and its own v2 correctly says only 'Select the chiral one'. I ran [internal source reference — not in this repo]::find_accessibility_leaks over all 22 items: it returns [] for every one, because these are semantic restatements, not the answer ids the guard is built to catch.
+- **Learner impact:** Two opposite harms at once. A screen-reader user is handed the solution and loses the reasoning practice the sighted student gets. And where the leak is graded, the accommodation becomes an unearned advantage, which is precisely the reason instructors distrust accessible alternates. The compile-time guard passing gives false assurance that this class of problem was checked.
+- **Evidence:** topic.package.json question_sets: the seven accessibility_bundle.accessible_description strings quoted above, against their answer_key values. Guard run: find_accessibility_leaks(desc, answer_key, student_config, prompt_text) -> [] for all 22 slugs.
+- **Recommended outcome:** Each of these seven descriptions needs to convey the stimulus and the task only - what is shown and what the student must decide - with the rule, the placement, and the correct option withheld. The semantic class of leak also needs to be caught somewhere, since the mechanical guard cannot see it.
+- **Confidence:** 0.93
+
+##### `access-002` — high / alt-text-quality
+
+- **Location:** `{"asset_id": "mol-meso-tartaric", "concept_slug": "diastereomers-and-meso-compounds", "anchor_text": "meso-Tartaric acid: one R and one S stereocenter related by an internal mirror plane"}`
+- **Observation:** 0 of 13 assets carry a long_description; alt_text is the only key present in every asset's accessibility object. The reader supports and renders long_description on molecule blocks and prefers it over alt_text as the images-off substitute, and the renderer's own comment records that a 2026-07-30 chapter review added exactly this. This chapter reproduces the pre-fix state on every figure. Even the well-written descriptions stop at one sentence: mol-meso-tartaric names the internal mirror plane but never says which stereocenter is R, which is S, or how the plane bisects the molecule.
+- **Learner impact:** Non-visual learners get a one-line species summary where the chapter's content is atom-level spatial relationship. There is no channel in which the chapter's figures are actually taught to someone who cannot see them, and no tactile/Braille-ready structured form is derivable from a single descriptive sentence.
+- **Evidence:** topic.package.json - every assets[].accessibility contains only the key 'alt_text' (verified across all 13). [internal source reference — not in this repo] longDescription prop and rendered paragraph; [internal source reference — not in this repo]::textEquivalentBlock.
+- **Recommended outcome:** Every figure in this chapter needs a longer structured description in addition to alt text - enough to reconstruct the stereocenter and its substituent geometry - because the platform already renders that field and this is the topic where a species list is furthest from sufficient.
+- **Confidence:** 0.94
+
+##### `access-005` — high / media-equivalence
+
+- **Location:** `{"question_slug": "ch5-rank-cip-priorities", "anchor_text": "Four substituents are shown as cards: bromine, hydroxyl, methyl, and hydrogen."}`
+- **Observation:** The accessible_description authored on all 22 questions is not rendered by any renderer this chapter's question types route to. Only MolecularGeometryRenderer and ReactionCoordinateQuestionRenderer read accessibilityBundle.accessible_description; none of the ten types used here does. LmsPromptPanel renders only question.promptText plus prompt_stimulus assets. The one page that does display it, QuestionTypeDemoPage, shows demo fixtures - and every question here is demo_eligible: false.
+- **Learner impact:** The chapter's entire authored non-visual channel for assessment currently reaches no learner. Whatever the descriptions say - good or leaking - a screen-reader user working these questions today gets prompt text and option labels only. It also means the leaks in access-004 are latent rather than live, and will go live the moment the field is surfaced.
+- **Evidence:** grep across frontend/src for accessible_description returns [internal source reference — not in this repo], [internal source reference — not in this repo], [internal source reference — not in this repo] and type declarations only; [internal source reference — not in this repo] renders promptText and asset images only; all 22 questions carry demo_eligible: false.
+- **Recommended outcome:** The chapter's per-question non-visual descriptions need to actually reach the learner on the surfaces where these questions are delivered. This is a platform-side gap rather than an authoring error, but it changes what this chapter delivers today.
+- **Confidence:** 0.88
+
+##### `access-006` — medium / alt-text-quality
+
+- **Location:** `{"asset_id": "mol-d-glyceraldehyde", "concept_slug": "r-s-configuration", "anchor_text": "an aldehyde carbon at top, a central R stereocenter bearing a hydroxyl on the right"}`
+- **Observation:** The alt text for mol-d-glyceraldehyde describes a Fischer-projection layout - 'an aldehyde carbon at top, a central R stereocenter bearing a hydroxyl on the right, and a terminal hydroxymethyl group' - but the block renders an ordinary RDKit line-angle depiction built from AllChem.Compute2DCoords on 'OC[C@@H](O)C=O'. There is no vertical chain and no meaningful 'right' in the drawn figure.
+- **Learner impact:** The non-visual learner is given a spatial layout that does not match what sighted learners see. Worse, this asset backs the r-s-configuration concept that the two fischer questions assess, so a learner who builds their mental model from this description will carry a Fischer convention attached to a non-Fischer drawing into exactly the question where left/right placement is graded.
+- **Evidence:** topic.package.json asset mol-d-glyceraldehyde (smiles 'OC[C@@H](O)C=O', no rdkit_options); compiled reader blocks blk-ftxoj072 and blk-jq6j0al4; render path [internal source reference — not in this repo] (Compute2DCoords, no projection handling).
+- **Recommended outcome:** The description needs to match the representation actually rendered, or the figure needs to be the representation the description assumes.
+- **Confidence:** 0.85
+
+##### `access-007` — medium / color-motion-only
+
+- **Location:** `{"asset_id": "mol-rs-arrow-r", "concept_slug": "r-s-configuration", "nugget_id": "nugget-rs-arrow", "anchor_text": "a curved orange arrow traces 1 to 2 to 3 clockwise"}`
+- **Observation:** The priority numerals '1', '2', '3' on the two arrow figures are drawn as text in the same single orange as the arrow - RGB (231, 88, 11), i.e. #E7580B - directly on the white RDKit figure background, at Pillow's default bitmap font at size 22. Against white that is roughly 3.6:1. The curved arrow itself is a non-text graphic and clears the 3:1 expectation for graphical objects, but the numerals are text below the 4.5:1 threshold for body-size text, and they are the sole carrier of which substituent holds which CIP rank. The reader forces the figure background to white, so a dark-mode viewer gets no relief. [Persona coined category 'contrast-legibility'; orchestrator normalised to color-motion-only.]
+- **Learner impact:** A low-vision learner, or anyone on a low-quality display or projector, may be unable to resolve which atom is priority 1 versus 2 versus 3 - which reduces the figure to an arrow curling in some direction around an unlabelled structure, exactly the information the figure was added to supply.
+- **Evidence:** [internal source reference — not in this repo]::_overlay_priority_arrow - color=(231, 88, 11), font = ImageFont.load_default(size=22), draw.text(..., fill=rgba, font=font); assets supply labels ['1','2','3'] with no color override; [internal source reference — not in this repo] sets bg='white'.
+- **Recommended outcome:** The priority numerals need to be legible independently of the arrow's accent colour - they carry graded information and should not inherit a colour chosen for a line stroke.
+- **Confidence:** 0.8
+
+##### `access-008` — medium / media-equivalence
+
+- **Location:** `{"asset_id": "video-rs-assignment", "concept_slug": "r-s-configuration", "anchor_text": "Rotate the model so hydrogen, the lowest priority group, points away from the viewer."}`
+- **Observation:** video-rs-assignment has a narration_outline of three bullets that state the method but never describe the visual change the video exists to show. The load-bearing storyboard beat - 'Rotate the model so hydrogen points away from the viewer' - is a pure spatial motion, and the narration outline's corresponding bullet asserts the instruction without describing what the rotation looks like. Nothing in the brief commits to captions, a transcript, an audio description, or a static stepped-image equivalent. The compiled block currently has url '' and is_hidden true, so the barrier is prospective rather than live.
+- **Learner impact:** When the video ships, a learner who cannot see it will get a narrated restatement of the rules they already have in prose, not the thing the video adds. A learner who cannot hear it gets no captions. A learner who needs to step through motion slowly has no stated control.
+- **Evidence:** topic.package.json video_briefs[0] storyboard bullets 3-5 and narration_outline; compiled reader block blk-6ljmjs4e {url: '', is_hidden: true}; status 'needs_review'.
+- **Recommended outcome:** Before this video ships it needs a non-visual equivalent of the rotation itself - a described sequence of the intermediate orientations, not a restatement of the rule - plus captions and a way to step or replay the motion.
+- **Confidence:** 0.82
+
+##### `access-009` — low / alt-text-quality
+
+- **Location:** `{"question_slug": "ch5-identify-chiral-molecule", "anchor_text": "Three alcohols are shown: butan-2-ol, propan-2-ol, and 2-methylpropan-2-ol."}`
+- **Observation:** Six accessible_descriptions say structures are 'shown' or 'listed' when nothing is drawn. The single_select and multi_select options carry structure_smiles, but SelectedResponseRenderer renders only option.imageUrl and never reads structure_smiles, so every option is a bare name for every learner. The descriptions therefore narrate a stimulus that does not exist.
+- **Learner impact:** A screen-reader user is told three alcohols are shown and may reasonably wait for, or hunt for, structures that were never rendered, and may assume they are missing visual information when they are not.
+- **Evidence:** topic.package.json question_sets ch5-identify-chiral-molecule, ch5-select-all-chiral (+v2), ch5-sort-chiral-achiral - options carry structure_smiles; [internal source reference — not in this repo] renders option.imageUrl and option.text only.
+- **Recommended outcome:** The description needs to match the stimulus that is actually delivered - either the structures need to reach the page, or the description should describe a list of names.
+- **Confidence:** 0.86
+
+##### `access-010` — low / notation-consistency
+
+- **Location:** `{"nugget_id": "nugget-diastereomers", "concept_slug": "diastereomers-and-meso-compounds", "anchor_text": "A molecule with n stereocenters has at most 2^n stereoisomers."}`
+- **Observation:** '2^n' appears literally in all three detail tiers of nugget-diastereomers and survives to the reader unchanged: text blocks go through InlineMd, which handles only links and bold and applies no sub/superscript conversion. A screen reader voices the caret literally. The same nugget's standard tier is internally inconsistent: it writes '2 raised to the power n' in one sentence and 'The 2^n count is a maximum' two sentences later. Separately, nugget-optical-activity carries the rotation signs as bare '(+)' and '(-)'.
+- **Learner impact:** The stereoisomer-counting rule - the single most quotable formula in the chapter - is voiced as 'two caret n' at the moment it is introduced, and a learner who then meets the correct spoken form two sentences later has to reconcile two renderings of one idea.
+- **Evidence:** Compiled reader, section nugget-diastereomers, all three _detail_texts tiers contain '2^n'; [internal source reference — not in this repo] parseInline regex handles only links and bold; renderChemFormula is applied to name/description/longDescription, not to text blocks.
+- **Recommended outcome:** The exponent needs a form that voices correctly in the reader's prose pipeline and one consistent rendering across all three detail tiers.
+- **Confidence:** 0.83
+
+##### `access-011` — low / keyboard-operability
+
+- **Location:** `{"section_id": "nugget-chirality", "anchor_text": "(R)-Bromochlorofluoromethane, the simplest chiral molecule"}`
+- **Observation:** Heading level 3 is skipped throughout the chapter. TopicPackageChapterRenderer emits the chapter title as h1 and each section title as h2; every block card inside a section is emitted as h4 by ReaderBlockRenderer. Every figure in this chapter is therefore an h4 whose nearest ancestor heading is an h2.
+- **Learner impact:** A screen-reader user navigating by heading level, or generating a document outline, sees a two-level gap at every figure and cannot rely on level to infer nesting. With 13 figures across 7 sections this repeats often enough to make heading navigation less trustworthy than it should be.
+- **Evidence:** [internal source reference — not in this repo] line 172 (h1) and line 194 (h2); [internal source reference — not in this repo] lines 188, 304, 382, 404, 514, 541, 584 (all h4).
+- **Recommended outcome:** Figure and card headings need to sit one level below their section so the document outline is contiguous. This is a platform-level renderer behaviour, not chapter content.
+- **Confidence:** 0.87
+
+##### `access-012` — low / assessment-readiness
+
+- **Location:** `{"concept_slug": "prochirality-and-chirality-in-nature", "nugget_id": "nugget-nature"}`
+- **Observation:** Checking the per-concept keyboard-complete requirement: five of six concepts retain at least one keyboard-complete question. prochirality-and-chirality-in-nature has zero questions of any kind, so the check is vacuous there rather than failed. Note also that optical-activity's only assessment is the two comparison_matrix items - a single response mode with no redundancy if that renderer regresses.
+- **Learner impact:** No access barrier as such, since no learner can be assessed on prochirality. Recorded so the per-concept keyboard-coverage check is not later read as having passed on six of six.
+- **Evidence:** topic.package.json question_sets - concept_slug values across all 22 items contain no 'prochirality-and-chirality-in-nature'; backend/app/question_types/types/*.py accessibility blocks.
+- **Recommended outcome:** If prochirality is to be assessed at all, whatever is added needs to be keyboard-complete from the start; and optical-activity would benefit from a second response mode.
+- **Confidence:** 0.9
+
+**Open questions.**
+
+- I coined the category id 'contrast-legibility' for access-007; the orchestrator normalised it to 'color-motion-only'. None of the schema's categories fits a text-contrast barrier cleanly.
+- Is accessible_description surfaced on any delivery surface I did not read - IMSCC/LTI export alt fields, the PDF export, or the Live Questions path? If one does render it, access-005 downgrades and access-004's leaks are live today rather than latent.
+- The external_link block in every section points at a Wikipedia URL built from the nugget's own title. These look synthesized rather than verified and are very likely 404s. I did not resolve them and it is not strictly an access finding since it fails identically for all learners.
+- When the reader's showImages preference is off, the figure is replaced by a callout headed '<name> (described)'. I could not confirm whether that substitution is announced to a screen reader in a way that makes clear a figure was replaced rather than simply absent.
+- structure_scaffold's typed path was deliberately blocked here with a defensible pedagogical rationale. Whether the right resolution is unblocking, an alternate activity, or accepting the barrier for two advanced items is a product call above this persona - I have reported it as a blocker because no non-pointer route exists today.
+
+#### Learner with Visual Preference — 4.6/10
+
+**Summary.** The prose is excellent and the figures are chemically correct, but this is a chapter about three-dimensional arrangement rendered entirely in the plane. All 13 assets are type molecule; all six concepts declare preferred_representations ['molecule']; there is no 3D view, no animation, no annotated overlay, and no comparison panel. What that costs is specific and nameable: the non-superimposability test that defines the chapter is asked for in prose but never depicted; the internal mirror plane that makes meso-tartaric acid achiral is never drawn on the meso figure, which is otherwise a near-twin of the (R,R) figure; the tetrahedron is described and never shown; and the viewpoint rule is named as the recurring error in four places and drawn in none. The two priority-arrow figures are the chapter's best idea and they half-work: the backend genuinely reflects the layout so R sweeps clockwise and S counterclockwise, but both carry the stereochemistry-free SMILES CCC(C)Br, so the molecule under the arrow has no wedge, no dash, no (R)/(S) glyph and no visible hydrogen. On the assessment side, not one of the 22 questions shows the student a structure to look at; four author structure_smiles that SelectedResponseRenderer never reads, and the single R/S-assignment item opens 'The structure shown is...' when nothing is shown. Two credited strengths worth protecting: no asset sets annotation_font_scale, and every stereo-bearing SMILES carries a correct chiral tag, so with addStereoAnnotation defaulting on, mirror-image pairs do render distinguishably.
+
+**Publication blockers:** _none_
+
+**Strengths.**
+
+- The known R/S-glyph defect class is absent: no asset in this package sets annotation_font_scale, and _apply_font_scale_options clamps annotation scale against an absolute pixel ceiling, so stereo labels cannot be rendered oversized on top of the structure.
+- Mirror-image pairs are genuinely distinguishable on screen, not two identical pictures. addStereoAnnotation defaults to True server-side and every stereo-bearing asset carries a correct chiral tag - RDKit CIP verification of all 13 SMILES returns exactly the configuration each title claims - so wedge/dash bonds and (R)/(S) glyphs both render.
+- The priority-arrow figures are a real, working teaching device rather than a decoration: _orient_conformer_for_config reflects the 2D layout so the sweep genuinely reads clockwise for R and counterclockwise for S, _overlay_priority_arrow draws numbered labels at each priority atom, and _resolve_show_hydrogens deliberately keeps the skeleton bare so the arrow stays legible.
+- Every figure is titled and captioned: StructureCard renders the asset title as a heading, the learning_goal as an on-card description, and the alt text as visible 'Described as:' copy, so no figure in the chapter is anonymous or unexplained even before its render resolves.
+- Each asset is bound to a specific nugget and concept via nugget_ids/concept_slugs, and with one exception each figure has an identifiable instructional job rather than being ambient chemistry decoration.
+
+**Findings.**
+
+##### `visual-001` — high / visual-opportunity
+
+- **Location:** `{"section_id": "nugget-chirality", "concept_slug": "chirality-and-enantiomers", "asset_id": "mol-s-chlorofluorobromomethane", "anchor_text": "construct the mirror image and ask whether it is superimposable on the original"}`
+- **Observation:** The operation the chapter names as the definitive test of chirality - build the mirror image, try to superimpose it - is never shown as a relationship between two things. The two assets compile to two separate molecule blocks which TopicPackageChapterRenderer renders as two independently bordered StructureCards stacked in a single-column VStack. Nothing draws a mirror axis between them, nothing forces a shared orientation that would make the reflection legible, and nothing supports an attempted superimposition. Each card is drawn by RDKit from its own SMILES with independent 2D coordinates, so the two depictions are not even guaranteed to be laid out as reflections of each other.
+- **Learner impact:** The learner must perform the whole 3D mental operation unaided, from two flat drawings that were not laid out to be compared, at the exact moment the concept is introduced. The (R)/(S) annotation glyphs tell them the two are different; nothing shows them WHY, which is the point of the section.
+- **Evidence:** topic.package.json assets mol-r-chlorofluorobromomethane and mol-s-chlorofluorobromomethane; compiled blocks blk-ra9hw9pl and blk-o1zg6kt6; [internal source reference — not in this repo] renders blocks in a VStack; [internal source reference — not in this repo] StructureCard wraps each in its own bordered Box. Chapter-wide: all 13 assets are type molecule, zero 3D or animated assets.
+- **Recommended outcome:** The learner needs the mirror relationship itself to be visible - the two enantiomers presented as one comparison with a shared reference frame and the reflection made explicit, rather than as two unrelated figure cards.
+- **Confidence:** 0.93
+
+##### `visual-002` — high / figure-accuracy
+
+- **Location:** `{"section_id": "nugget-rs-arrow", "asset_id": "mol-rs-arrow-s", "nugget_id": "nugget-rs-arrow", "anchor_text": "The second figure is the mirror image; the same 1 to 2 to 3 path now curls counterclockwise"}`
+- **Observation:** Both priority-arrow figures carry the identical, stereochemistry-free SMILES CCC(C)Br. Because there is no chiral tag, RDKit draws no wedge or dash bond and emits no (R)/(S) stereo annotation on either figure, and _resolve_show_hydrogens deliberately suppresses explicit hydrogens on any figure carrying a priority_arrow, so the lowest-priority hydrogen is invisible too. The backend does reflect the 2D layout per config, so the arrows really do run in opposite senses - but the reflection of a flat, tag-free depiction is the same achiral drawing in a different orientation. The prose tells the learner the handedness lives in the arrangement; on screen the only thing that carries handedness is the orange arrow.
+- **Learner impact:** A learner who compares the two figures to find what makes one R and the other S will find no structural difference to point at - the bonds look the same, the atoms look the same, and nothing marks the hydrogen whose position behind the page is the entire premise. The figure teaches 'clockwise arrow = R' as an arbitrary caption rather than as a consequence of a spatial arrangement.
+- **Evidence:** topic.package.json mol-rs-arrow-r and mol-rs-arrow-s both smiles 'CCC(C)Br', differing only in rdkit_options.priority_arrow.config; [internal source reference — not in this repo] _orient_conformer_for_config (line 682) reflects in-plane, and _resolve_show_hydrogens (line 262) returns False for any priority_arrow figure; nugget-rs-arrow expanded text.
+- **Recommended outcome:** The learner needs the figure to carry the same claim the prose makes - that the two arrangements differ in handedness, with the lowest-priority group's position behind the page visible rather than implied. Either the structures must encode the configuration they are captioned with, or the prose must stop attributing the difference to the drawn arrangement.
+- **Confidence:** 0.9
+
+##### `visual-003` — high / visual-opportunity
+
+- **Location:** `{"section_id": "nugget-rs-arrow", "concept_slug": "r-s-configuration", "anchor_text": "When a structure is drawn with the lowest-priority group toward the viewer rather than away, the arrow's apparent rotation is reversed relative to the true configuration."}`
+- **Observation:** The viewpoint/inversion rule is flagged as the single recurring error in four separate places - the concept trouble_spots, learning objective 3 of nugget-rs, learning objective 3 of nugget-rs-arrow, and the nugget-rs-arrow practice_check - and it is the one step in the CIP procedure that is purely spatial. No figure in the chapter shows a stereocenter with the lowest-priority group pointing toward the viewer, and no figure shows the same molecule in both orientations so the reversal can be seen happening. The one asset that would have shown it is the video brief, whose storyboard step 5 is exactly that - and that block is hidden.
+- **Learner impact:** The learner is asked to trust a counterintuitive rule ('read it, then invert it') on verbal assertion alone, and then tested on it in the practice check. This is the highest-frequency R/S error in the subject and the chapter's treatment of it is entirely non-visual.
+- **Evidence:** topic.package.json concepts[2].trouble_spots[1]; nugget-rs.learning_objectives[2] and nugget-rs-arrow.learning_objectives[2]; nugget-rs-arrow.practice_check; video_briefs[0].storyboard[4]. Asset audit: no asset depicts a toward-viewer orientation.
+- **Recommended outcome:** The learner needs to SEE one stereocenter in both viewpoints with the read-off sense changing between them, so the inversion rule is observed rather than asserted.
+- **Confidence:** 0.92
+
+##### `visual-004` — high / visual-opportunity
+
+- **Location:** `{"section_id": "nugget-diastereomers", "asset_id": "mol-meso-tartaric", "concept_slug": "diastereomers-and-meso-compounds", "anchor_text": "the arrangement in which one is R and the other S contains an internal mirror plane"}`
+- **Observation:** The internal mirror plane is the whole explanation for why meso-tartaric acid is achiral and why the isomer count drops from 4 to 3, and it is not drawn. mol-rr-tartaric and mol-meso-tartaric render through the same RDKit path into the same horizontal zig-zag layout, so the two figures differ visually only in the direction of two wedge/dash bonds and in the small (R)/(S) annotation glyphs. Nothing marks the plane, nothing pairs the two halves, nothing shows the reflection that relates them.
+- **Learner impact:** These are the two most confusable figures in the chapter and they are the two the learner most needs to tell apart. A learner scanning the section sees two nearly identical pictures and has to fall back on reading the tiny stereo labels, which converts a spatial insight into a label-matching exercise.
+- **Evidence:** topic.package.json assets mol-rr-tartaric and mol-meso-tartaric; RDKit verification gives CIP [(3,'R'),(5,'R')] and [(3,'S'),(5,'R')] respectively (both correct as titled) with the same Compute2DCoords zig-zag layout; compiled blocks blk-sotkzxuo and blk-z4yo652n.
+- **Recommended outcome:** The learner needs the internal mirror plane made visible on the meso structure, and the meso/(R,R) contrast presented so the difference is findable without reading annotation glyphs.
+- **Confidence:** 0.9
+
+##### `visual-005` — high / figure-accuracy
+
+- **Location:** `{"asset_id": "mol-d-glyceraldehyde", "section_id": "nugget-rs", "anchor_text": "an aldehyde carbon at top, a central R stereocenter bearing a hydroxyl on the right, and a terminal hydroxymethyl group"}`
+- **Observation:** The alt text describes a Fischer projection; the figure is a horizontal zig-zag. Rendering OC[C@@H](O)C=O through the same path the reader uses puts the hydroxymethyl oxygen at the far LEFT (x = -2.60), the aldehyde carbon and its oxygen at the RIGHT (x = +1.30 and +2.60), and the stereocenter's hydroxyl pointing UP (y = +1.50). Nothing is 'at top' and the hydroxyl is not 'on the right'. The described figure and the rendered figure disagree on every positional claim.
+- **Learner impact:** The figure is the visual anchor for two graded Fischer items whose correct answer is 'OH on the right'. A learner who looks at the figure, reads the caption's 'hydroxyl on the right', and then looks back at a drawing where the OH points up and the CHO sits on the right, gets contradictory spatial cues on the one molecule that is supposed to be the reference point for the whole D/L convention.
+- **Evidence:** topic.package.json mol-d-glyceraldehyde.accessibility.alt_text; compiled blocks blk-ftxoj072 and blk-jq6j0al4; RDKit Compute2DCoords on OC[C@@H](O)C=O yields O(-2.60,0.00) C(-1.30,-0.75) C*(0.00,0.00) O(0.00,1.50) C(1.30,-0.75) O(2.60,0.00).
+- **Recommended outcome:** The learner needs the description and the rendered figure to make the same positional claims, and needs the Fischer layout the caption promises to actually exist somewhere before it is graded.
+- **Confidence:** 0.88
+
+##### `visual-006` — high / visual-opportunity
+
+- **Location:** `{"question_slug": "ch5-fischer-d-glyceraldehyde", "concept_slug": "r-s-configuration", "anchor_text": "Showing configuration with wedge and dash bonds is the skill being assessed"}`
+- **Observation:** Two representational conventions are graded but never taught or depicted. Across all seven compiled section texts (expanded tier, the reader's default), 'Fischer' appears 0 times, 'wedge' 0 times and 'dash' 0 times. Yet two fischer items require building Fischer projections, and both structure_scaffold items explicitly block typed SMILES entry on the grounds that wedge and dash drawing is the skill being assessed. The only place the Fischer convention is stated anywhere in the product is the aria-label inside the grading widget itself. No asset shows the wedge/dash-to-Fischer translation, and no asset shows a wedge/dash structure being read for configuration.
+- **Learner impact:** The learner meets two new drawing conventions for the first time inside a graded item, with no worked visual to refer back to. The wedge/dash convention is the notation every other figure in the chapter silently uses, so it is being used constantly and explained never.
+- **Evidence:** Text scan of the compiled reader text blocks: Fischer 0, wedge 0, dash 0, polarimeter 1, 'mirror plane' 3. compiled/question-set.json question_type fischer x2, structure_scaffold x2 with typed_structure_entry 'blocked'. [internal source reference — not in this repo] line 228.
+- **Recommended outcome:** The learner needs the wedge/dash convention and the Fischer convention introduced and shown before they are graded on producing them - specifically, one visible translation between a three-dimensional wedge/dash depiction and its flat Fischer equivalent.
+- **Confidence:** 0.94
+
+##### `visual-008` — high / figure-purpose
+
+- **Location:** `{"question_slug": "ch5-identify-chiral-molecule", "concept_slug": "chirality-and-enantiomers", "anchor_text": "Which of these molecules is chiral?"}`
+- **Observation:** Not one of the 22 compiled questions shows the learner a structure to inspect. Four of them try: all author structure_smiles on their options. SelectedResponseRenderer reads only option.imageUrl and never structure_smiles; a repo-wide search shows structure_smiles is referenced only in the question-bank editor and reasoning-part forms. So 'Which of these molecules is chiral?' is presented as a list of names. CategorizeRenderer, MatchingRenderer and ComparisonMatrixRenderer are the same - all three read imageUrl only. The four remaining visual surfaces are workspaces, not stimuli.
+- **Learner impact:** Every chirality-identification item in the chapter is answerable by recalling what a name implies, not by looking at a structure and finding a carbon with four different groups - which is the stated skill in nugget-chirality's first learning objective. A learner who reasons from pictures gets no picture; a learner who has memorised names is rewarded.
+- **Evidence:** compiled/question-set.json: structure_smiles present in student_config for exactly ch5-identify-chiral-molecule, ch5-select-all-chiral, and their v2 variants; imageUrl present in zero. [internal source reference — not in this repo] line 169; [internal source reference — not in this repo] lines 41-43; [internal source reference — not in this repo] lines 41-43; [internal source reference — not in this repo] line 108.
+- **Recommended outcome:** The learner needs to be looking at structures when asked to judge structures. Note explicitly for the orchestrator: authoring MORE structure_smiles on these question types would change nothing on screen - the gap is that these renderers have no path from an authored SMILES to a rendered image, so this needs a rendering path (or pre-rendered images), not more authoring.
+- **Confidence:** 0.95
+
+##### `visual-009` — high / figure-purpose
+
+- **Location:** `{"question_slug": "ch5-assign-configuration-2-bromobutane", "concept_slug": "r-s-configuration", "anchor_text": "The structure shown is 2-bromobutane with bromine, ethyl, methyl, and hydrogen arranged so that, with hydrogen pointing away from the viewer, the path Br to ethyl to methyl turns clockwise."}`
+- **Observation:** The chapter's only R/S-assignment item opens by referring to 'the structure shown' when no structure is shown. It is a short_answer question whose entire student_config is {placeholder: 'R or S', maxLength: 4}. Worse, the stem hands over every step of the procedure: the priorities are given in order, the orientation is given as already correct, and the sense is given. The v2 variant drops the molecule entirely. Nothing is left for the learner but the lookup clockwise -> R.
+- **Learner impact:** The one place a learner would demonstrate the chapter's core skill is reduced to recalling a two-item mapping, and the prompt's opening phrase primes them to look for a figure that never appears.
+- **Evidence:** compiled/question-set.json ch5-assign-configuration-2-bromobutane (short_answer, student_config [redacted] only) and its v2; [internal source reference — not in this repo] renders only the input. The chapter does own a suitable figure - mol-r-2-bromobutane, verified R - but the question does not reference it.
+- **Recommended outcome:** The learner needs the R/S item to present a stereocenter they must read, rather than a sentence that has already read it for them. The stem's promise of a shown structure must either be honoured or removed.
+- **Confidence:** 0.93
+
+##### `visual-007` — medium / figure-purpose
+
+- **Location:** `{"concept_slug": "r-s-configuration", "section_id": "nugget-rs", "anchor_text": "preferred_representations"}`
+- **Observation:** Platform constraint the orchestrator needs before choosing an intervention: stereochemistry_conversion is in ALLOWED_ASSET_TYPES but is absent from _ASSET_TYPE_TO_BLOCK in [internal source reference — not in this repo], so _asset_block returns None and such an asset compiles to no reader block at all. diagram, clipart, newman_projection, orbital_overlay and protein_structure map to an image block whose content is {url: asset.image_url or ''}, so without a hosted image_url the reader falls back to printing alt text where the figure should be. Meanwhile all six concepts declare preferred_representations ['molecule'], which is the authoring-side reason every asset is a flat 2D render.
+- **Learner impact:** Indirect but decisive: a recommendation of the form 'add a stereochemistry_conversion figure' would change nothing on the learner's screen, and 'add a diagram' changes nothing unless the asset also carries a hosted render.
+- **Evidence:** [internal source reference — not in this repo] _ASSET_TYPE_TO_BLOCK (lines 15-33) and _asset_block (lines 121-124); _LIVE_RENDERED_FIELDS (lines 106-110); [internal source reference — not in this repo] ALLOWED_ASSET_TYPES includes 'stereochemistry_conversion'. topic.package.json concepts[0..5].preferred_representations all ['molecule'].
+- **Recommended outcome:** The orchestrator needs to pick an intervention that can actually be delivered to the reader for this chapter, and the chapter needs its concepts' representation preferences to admit something other than a flat molecule.
+- **Confidence:** 0.95
+
+##### `visual-010` — medium / visual-redundancy
+
+- **Location:** `{"section_id": "nugget-rs", "asset_id": "mol-s-2-butanol", "anchor_text": "Provide the enantiomer that rotates plane-polarized light by an equal and opposite amount."}`
+- **Observation:** The compiler emits 17 molecule blocks from 13 assets: four cards are verbatim repeats, and they carry captions written for the other section. (R)- and (S)-Butan-2-ol appear in nugget-optical-activity and again in nugget-rs still described as 'Anchor optical activity in a familiar single-stereocenter alcohol' and 'Provide the enantiomer that rotates plane-polarized light by an equal and opposite amount' - claims about optical rotation sitting inside the CIP section, whose prose never mentions butan-2-ol at all. L-Alanine repeats in nugget-racemates and nugget-nature; D-glyceraldehyde repeats in nugget-rs and nugget-nature. The result is a five-figure stack in nugget-rs where the prose works exclusively from 2-bromobutane.
+- **Learner impact:** The section where the learner most needs to focus on one worked stereocenter presents five figure cards, three of which the surrounding text never refers to, and two of which are captioned about a different topic.
+- **Evidence:** Compiled reader: 17 blocks of block_type molecule across 7 sections; unique (name, smiles) pairs = 13. nugget-rs expanded text references only the generic procedure and 2-bromobutane.
+- **Recommended outcome:** The learner needs each section's figure set to match what that section's prose actually argues; repeated figures should either be dropped or re-captioned to the purpose they serve in the new section. This is a case for removing/simplifying, not adding.
+- **Confidence:** 0.9
+
+##### `visual-011` — medium / visual-opportunity
+
+- **Location:** `{"section_id": "nugget-optical-activity", "concept_slug": "optical-activity", "anchor_text": "The instrument that measures the angle of rotation is a polarimeter."}`
+- **Observation:** The optical-activity section is entirely about an experiment - polarized light entering a sample tube, the plane emerging rotated, the angle scaling with concentration and path length, and the two enantiomers' rotations cancelling in a racemate - and none of it is depicted. The section's two figures are flat RDKit renders of (R)- and (S)-butan-2-ol, which show the molecules but nothing about light, rotation, sign, path length, or cancellation. The word polarimeter appears exactly once in the whole chapter and is not attached to any figure.
+- **Learner impact:** The learner has to hold a four-variable physical setup in working memory from prose alone, and then reason about why two opposite rotations sum to zero - the point tested by ch5-enantiomers-vs-diastereomers-properties-v2 and by the section's own practice_check.
+- **Evidence:** Compiled section nugget-optical-activity contains: 1 text, 2 molecule, 1 external_link. nugget-optical-activity expanded text; practice_check; question ch5-enantiomers-vs-diastereomers-properties-v2.
+- **Recommended outcome:** The learner needs the polarimeter experiment - light in, plane rotated, sign of the rotation, and the racemate cancelling to zero - to be shown as a setup rather than narrated.
+- **Confidence:** 0.88
+
+##### `visual-012` — medium / figure-purpose
+
+- **Location:** `{"section_id": "nugget-racemates", "asset_id": "mol-l-alanine", "concept_slug": "racemates-and-resolution", "anchor_text": "A common implementation uses an enantiopure amine to form ammonium salts with a racemic carboxylic acid."}`
+- **Observation:** The resolution section describes a four-step transformation and its single figure is L-alanine, a molecule the section's prose never mentions and which plays no part in the described process. mol-l-alanine is tagged to both racemates-and-resolution and prochirality-and-chirality-in-nature, but its learning_goal belongs to the latter; in the resolution section it is decorative.
+- **Learner impact:** The section with the most steps to track has the least useful figure: a structure that does not appear in its argument. A learner scanning for the racemate-to-diastereomer conversion finds an amino acid instead, and the sequence itself has to be reconstructed from prose.
+- **Evidence:** topic.package.json nugget-racemates.asset_ids = ['mol-l-alanine'] only; nugget-racemates expanded text mentions no specific compound beyond 'an enantiopure amine' and 'a racemic carboxylic acid'.
+- **Recommended outcome:** The learner needs the resolution sequence itself to be visible as a sequence, and the section's one figure to belong to the argument it sits in. Removing the off-topic figure is as legitimate an outcome as adding a sequence figure.
+- **Confidence:** 0.87
+
+##### `visual-013` — medium / visual-opportunity
+
+- **Location:** `{"section_id": "nugget-rs", "asset_id": "video-rs-assignment", "anchor_text": "Rotate the model so hydrogen, the lowest priority group, points away from the viewer."}`
+- **Observation:** The chapter's only authored motion asset is exactly the missing 3D step, and it does not reach the reader. Verified against the renderer as instructed: [internal source reference — not in this repo] line 374 is 'if (block.is_hidden) return null;', placed BEFORE the block-type switch - so this is NOT a dead affordance and the learner is not shown a broken 'Watch' link. The finding is the opposite one: the block renders as nothing, so the chapter's only planned depiction of the rotation and the viewpoint reversal is simply absent, surviving only as prose.
+- **Learner impact:** Steps 3 and 5 of the storyboard are precisely the content flagged in visual-003 as undepicted. Their absence is invisible to the learner - nothing signals that a demonstration was intended - so the gap reads as 'this step just is verbal' rather than 'this is pending'.
+- **Evidence:** topic.package.json video_briefs[0] (status needs_review, storyboard steps 3 and 5); [internal source reference — not in this repo] _video_block sets url '' and is_hidden True; compiled block blk-6ljmjs4e; [internal source reference — not in this repo] line 374 honours is_hidden before the switch.
+- **Recommended outcome:** The learner needs the rotation-to-put-H-away step and the viewpoint reversal to exist in some rendered form. The rubric's own preference is for a well-designed static sequence unless motion adds information.
+- **Confidence:** 0.9
+
+##### `visual-014` — medium / visual-opportunity
+
+- **Location:** `{"section_id": "nugget-chirality", "concept_slug": "chirality-and-enantiomers", "anchor_text": "Because the four bonds point to the corners of a tetrahedron, exchanging any two of the groups produces an arrangement that is a mirror image of the original and cannot be rotated back into it."}`
+- **Observation:** The chapter is titled 'Stereochemistry at Tetrahedral Centers' and the tetrahedron is never drawn. The claim above is the chapter's foundational geometric argument, and every figure that could carry it is a plane drawing in which the stereocenter's bonds are laid out at roughly 120 degrees in the page. The tetrahedral-geometry prerequisite is declared on the first concept and assumed rather than re-shown.
+- **Learner impact:** A learner whose grasp of the tetrahedral arrangement is shaky - the exact learner the prerequisite declaration is warning about - has nothing to look at while reading the argument that depends on it. Every subsequent claim in the chapter inherits that unshown geometry.
+- **Evidence:** topic.package.json concepts[0].prerequisites includes tetrahedral-geometry; nugget-chirality expanded text; all 13 assets are type molecule rendered through RDKit Compute2DCoords, which produces planar layouts (verified coordinates all z = 0).
+- **Recommended outcome:** The learner needs the tetrahedral arrangement itself shown once, early, so the mirror-image and lowest-priority-group arguments have a geometry to attach to. One depiction would serve the whole chapter.
+- **Confidence:** 0.85
+
+##### `visual-015` — low / visual-opportunity
+
+- **Location:** `{"question_slug": "ch5-draw-s-2-butanol", "concept_slug": "r-s-configuration", "anchor_text": "For S, the 1 to 2 to 3 path is counterclockwise with H pointing away."}`
+- **Observation:** Every hint in all 22 questions is kind 'text' - 45 hints, zero of any other kind. The hint panel supports an image channel ([internal source reference — not in this repo] renders hint.imageUrl), and the repo's hint-authoring guidance recognises structure, highlight and projection-label hint kinds. On a topic where the stuck point is almost always spatial, the escalation ladder restates the rule in words.
+- **Learner impact:** A learner who is stuck because they cannot picture the arrangement is handed the same sentence they were already stuck on, one level louder. The hint ladder does not change representation at any level, so it offers no new way in.
+- **Evidence:** compiled/question-set.json: all feedback_bundle.hints[].kind values are 'text' across all 22 questions; [internal source reference — not in this repo] line 36 shows the image channel exists and is unused here.
+- **Recommended outcome:** The learner needs at least the deepest hint on the spatial items to change representation rather than repeat the rule.
+- **Confidence:** 0.82
+
+**Open questions.**
+
+- All six external_link blocks point at Wikipedia URLs built by slugifying the concept title, which are not real article titles, and no concept authors a wikipedia_title override. Outside my rubric's categories; flagging for whichever persona owns link integrity.
+- Is a structure_smiles -> rendered-image path planned for SelectedResponseRenderer / CategorizeRenderer / MatchingRenderer? The answer decides whether visual-008 is a chapter-authoring fix or a platform fix.
+- Should the missing reader path for stereochemistry_conversion be treated as in scope for this chapter's review, or routed as a platform issue? It is the asset type named for this exact topic and it currently compiles to nothing in the reader.
+- The reader chapter carries available: false and science_review.status: not_reviewed, so nothing here is live. I have therefore recorded no publication blockers, but several high findings would become publication-relevant the moment availability flips.
+
+### Orchestrator decisions
+
+One decision per recommendation: the need, the **least-complex intervention that fully addresses it**, and why.
+
+#### `rec-001` — Fischer projections and the D/L convention are graded but never taught (blocker)
+
+- **Need:** Two graded items require building a Fischer projection and applying D/L; the words 'Fischer' and the D/L convention appear zero times in any of the three prose tiers, so a student who reads the chapter completely cannot derive the answer.
+- **Chosen intervention:** `prose-edit` → target surface `prose`
+- **Why this is least-complex:** Least-complex option that fully addresses the need: the items are chemically correct and well built, and the gap is purely that the convention behind them is undelivered. Adding the convention to the prose preserves two good items; deleting them would lose assessment coverage and leave the D-glyceraldehyde figure still captioned in Fischer terms.
+- **Consolidates:** `instr-002`, `ss-001`, `visual-006`
+
+#### `rec-002` — Both drawing items switch off the platform's only keyboard input path (blocker)
+
+- **Need:** ch5-draw-s-2-butanol and its v2 set typed_structure_entry 'blocked', and typedEntryAllowed() fails closed, so a learner who cannot use a pointer on a Ketcher canvas has no input path at all for the only two items assessing configuration drawing.
+- **Chosen intervention:** `keyboard-alternative` → target surface `assessment`
+- **Why this is least-complex:** Least-complex option that fully addresses the need. The author's rationale for blocking (wedge/dash drawing is the assessed skill) is legitimate but the cost is total exclusion, and it is based on a false premise: typed SMILES CAN express configuration, the answer keys ARE stereo-tagged SMILES, and TypedStructureRenderer's read-back deliberately speaks the stereochemistry section so a correct answer and the wrong enantiomer do not read back identically. 25 of 26 sibling packages set 'allowed'. Unblocking restores a gradeable keyboard path without weakening the key.
+- **Consolidates:** `access-003`
+
+#### `rec-003` — Seven accessible_descriptions state the graded answer (blocker)
+
+- **Need:** Seven of 22 accessible_descriptions restate the answer, the decision rule, or the correct option; the compile-time guard returns clean on all 22 because these are semantic restatements rather than answer ids.
+- **Chosen intervention:** `structured-chemical-description` → target surface `assessment`
+- **Why this is least-complex:** Least-complex option: each description must still make the item answerable non-visually, so deletion is wrong. Rewriting them to convey stimulus and task only preserves access and removes the unearned advantage. The chapter already contains the correct model - ch5-identify-chiral-molecule-v2 says only 'Select the chiral one' while its v1 twin hands over the criterion.
+- **Consolidates:** `access-004`
+
+#### `rec-004` — Hint ladders terminate in the graded answer (blocker)
+
+- **Need:** Nine hint ladders end by naming the keyed option, the correct ordering, or the answer placement, so taking a hint ends the reasoning instead of narrowing it; four advanced items ship a single rung that resolves every cell at once.
+- **Chosen intervention:** `prose-edit` → target surface `assessment`
+- **Why this is least-complex:** Least-complex option that fully addresses the need: the ladders exist and are well placed, so only the final rung's wording needs to stop one reasoning step short of the key. No new items or hint kinds are required to remove the leak.
+- **Consolidates:** `ss-002`, `ss-016`
+
+#### `rec-005` — Enantiomer pairs are described in interchangeable words, and no asset carries a long_description (blocker)
+
+- **Need:** mol-r-2-butanol's alt text states a constitution equally true of its enantiomer and mol-s-2-butanol's says only 'the mirror image of the R alcohol', so a learner who cannot see the figures cannot determine chirality or assign R/S; 0 of 13 assets carry a long_description, which the reader already renders and prefers as the images-off substitute.
+- **Chosen intervention:** `structured-chemical-description` → target surface `figure`
+- **Why this is least-complex:** Least-complex option that fully addresses the need. The platform already renders long_description on molecule blocks, so this needs no new asset kind, no new figure and no renderer change - only descriptions that independently fix each structure's three-dimensional arrangement so the two members of a pair differ in words the way they differ in space.
+- **Consolidates:** `access-001`, `access-002`
+
+#### `rec-006` — All six Wikipedia Additional Reading links are 404 (high)
+
+- **Need:** No concept authors a wikipedia_title, so the compiler derived Wikipedia article names from prose section titles; every one of the six distinct URLs is dead, leaving one working outbound link in the whole chapter.
+- **Chosen intervention:** `prose-edit` → target surface `prose`
+- **Why this is least-complex:** Least-complex option: the compiler behaviour is correct and shared with every other package, so the fix belongs in the chapter. Authoring an explicit, HTTP-verified wikipedia_title per concept resolves all six without touching shared code.
+- **Consolidates:** `orchestrator-001`, `instr-001`, `ss-010`
+
+#### `rec-007` — The core priority-arrow scaffold compiles last, four sections after the rules it supports (high)
+
+- **Need:** nugget-rs-arrow is authored as section r-s-configuration order 2, immediately after the CIP rules, but the compiled reader emits it seventh and last, after diastereomers, racemates and the advanced prochirality section.
+- **Chosen intervention:** `prose-edit` → target surface `prose`
+- **Why this is least-complex:** Least-complex option with zero blast radius. [internal source reference — not in this repo] sorts nuggets by 'order' alone, which is correct for the 25 sibling packages that number order globally; ch5 alone numbers it per-section (1,1,1,1,1,1,2), so the stable sort appends the lone order-2 nugget last. Renumbering this chapter to the universal global convention fixes it without changing shared compiler behaviour that other chapters depend on.
+- **Consolidates:** `ss-003`, `instr-004`
+
+#### `rec-008` — The chapter's whole subject - three-dimensional handedness - is drawn nowhere (high)
+
+- **Need:** All 13 assets are flat 2D single molecules. The tetrahedron, the superimposability test as a relationship, the internal mirror plane in meso-tartaric acid, the lowest-priority-toward-viewer reversal, and the polarimeter experiment are each argued in prose and depicted by no figure.
+- **Chosen intervention:** `static-image-sequence` → target surface `figure`
+- **Why this is least-complex:** Recorded as an open need rather than applied. The visual persona established the binding platform constraint: stereochemistry_conversion - the asset type named for this exact topic - is in ALLOWED_ASSET_TYPES but absent from _ASSET_TYPE_TO_BLOCK, so it compiles to no reader block at all, and diagram/clipart types render an empty image without a hosted image_url. A correct fix therefore requires building and hosting figures, which is beyond a correction pass and needs sign-off.
+- **Consolidates:** `visual-001`, `visual-003`, `visual-004`, `visual-011`, `visual-014`, `ss-005`, `ss-014`, `instr-009`, `instr-010`
+
+#### `rec-009` — No question in the bank shows the student a structure to read (high)
+
+- **Need:** The chapter's central receptive skill - look at a stereocenter, rank, orient, assign - is never assessed. Four items author structure_smiles on their options, but SelectedResponseRenderer, CategorizeRenderer, MatchingRenderer and ComparisonMatrixRenderer all read only imageUrl, and both R/S short-answer items state the rotation sense in the prompt.
+- **Chosen intervention:** `instructor-note` → target surface `assessment`
+- **Why this is least-complex:** Recorded, not applied. The visual persona explicitly established that authoring MORE structure_smiles would change nothing on screen, so the authoring-side fix is a no-op; a real fix needs either a renderer path from SMILES to image or pre-rendered option images, plus new items. Both exceed a correction pass. The prompt-level giveaway in the two R/S items is correctable but removing it without a rendered structure would leave the items unanswerable.
+- **Consolidates:** `instr-005`, `visual-008`, `visual-009`, `access-009`
+
+#### `rec-010` — The D-glyceraldehyde figure description contradicts what renders (high)
+
+- **Need:** The alt text describes a Fischer layout ('aldehyde carbon at top, hydroxyl on the right') but the block renders an ordinary RDKit zig-zag in which the OH points up and the aldehyde sits on the right - and this figure is the reference point for the two graded Fischer items.
+- **Chosen intervention:** `sufficient-alt-text` → target surface `figure`
+- **Why this is least-complex:** Least-complex option that fully addresses the need: the render is chemically correct and the item keys are correct, so only the description is wrong. Correcting it to describe the depiction that actually renders removes the contradiction; the separate need for a genuine Fischer depiction is carried by rec-001 and rec-008.
+- **Consolidates:** `visual-005`, `access-006`
+
+#### `rec-011` — Prochirality is taught with three objectives and assessed by nothing (high)
+
+- **Need:** Concept 6 carries three learning objectives and an advanced nugget introducing pro-R/pro-S and Re/Si faces; zero of the 22 questions carry its concept_slug.
+- **Chosen intervention:** `added-practice` → target surface `assessment`
+- **Why this is least-complex:** Recorded, not applied. The coherence-pass record documents this as a deliberate scoping decision ('advanced reading rather than assessed items in an Organic I core set'), so it is a considered trade-off rather than an oversight - but three authored objectives that no item touches is still an objective-alignment gap. Bank expansion needs sign-off, so this is surfaced for a decision rather than silently changed.
+- **Consolidates:** `instr-003`, `ss-012`, `access-012`
+
+#### `rec-012` — The meso identification skill is short-circuited by the label (high)
+
+- **Need:** Every meso item is pre-labelled 'meso-' in its option text and carries no rendered stereochemistry, so the student matches a prefix instead of locating an internal mirror plane - the declared trouble spot for that concept.
+- **Chosen intervention:** `added-practice` → target surface `assessment`
+- **Why this is least-complex:** Recorded, not applied. The fix requires an item presenting a fully specified meso structure without the prefix, which depends on the same missing SMILES-to-image renderer path as rec-009; renaming the option alone would make the item unanswerable, since nothing else identifies the compound.
+- **Consolidates:** `ss-007`, `instr-013`, `visual-004`
+
+#### `rec-013` — Specific rotation is defined without an equation, units, or a single number (high)
+
+- **Need:** Specific rotation is a stated learning objective but is treated entirely verbally in all three tiers - no relationship, no units, no conventions, no worked value, and no item computing one - while the two butan-2-ol figures are asserted to rotate light equally and oppositely with no number attached.
+- **Chosen intervention:** `prose-edit` → target surface `prose`
+- **Why this is least-complex:** Least-complex option for the teaching half of the need: stating the standardizing relationship, its units and conventions, and one real anchored value is a bounded prose edit. The matching practice item is left as an open recommendation because bank expansion needs sign-off.
+- **Consolidates:** `instr-006`
+
+#### `rec-014` — The authored scaffolding reaches no student surface (high)
+
+- **Need:** 7 practice_checks, 12 trouble_spots and 21 learning_objectives are authored and none appears anywhere in the compiled reader, so the chapter arrives as seven blocks of continuous prose with no checkpoint - and the practice checks are the only coverage of two objectives.
+- **Chosen intervention:** `instructor-note` → target surface `prose`
+- **Why this is least-complex:** Recorded, not applied. This is a compiler/reader emission gap identical to the one recorded on ch4, ch30 and ch31, not an authoring omission - the content already exists and is simply not emitted. Fixing it means changing shared compiler and reader behaviour for every package, which is beyond a chapter correction pass.
+- **Consolidates:** `ss-009`, `instr-012`, `ss-019`
+
+#### `rec-015` — A comparison-matrix cell punishes correct reasoning (medium)
+
+- **Need:** 'Separable by ordinary distillation' is keyed 'yes' for diastereomers, but the chapter never endorses distillation and its own canonical diastereomer pair - (R,R)- and meso-tartaric acid - are non-volatile solids that cannot be distilled.
+- **Chosen intervention:** `prose-edit` → target surface `assessment`
+- **Why this is least-complex:** Least-complex option: restating the row in the terms the chapter actually teaches keeps the pedagogical point (diastereomers differ physically, enantiomers do not) while no longer marking a well-reasoned student wrong.
+- **Consolidates:** `instr-011`
+
+#### `rec-016` — The two arrow figures store a stereochemistry-free structure under a configuration title (medium)
+
+- **Need:** mol-rs-arrow-r and mol-rs-arrow-s both store SMILES 'CCC(C)Br' with no chiral tag while titled '(R)-' and '(S)-2-bromobutane', so any surface consuming the SMILES without the render knobs shows an unspecified structure labelled as a specific enantiomer.
+- **Chosen intervention:** `instructor-note` → target surface `figure`
+- **Why this is least-complex:** Recorded, not applied, on render evidence. Three independent render checks (orchestrator, instructor, visual) confirm the figures a student actually sees are correct mirror images with correctly opposite sweeps, and [internal source reference — not in this repo] documents the stereo-free SMILES as deliberate: a flat depiction with an implicit lowest-priority group does not itself fix handedness, so reflecting the layout is how the arrow is made to read correctly. Adding a chiral tag would make RDKit draw a wedge that the reflection step could then contradict, converting a correct figure into a wrong one. The residual risk is real but narrower than stated, and fixing it safely requires render re-verification rather than a data edit.
+- **Consolidates:** `instr-008`, `visual-002`, `ss-015`
+
+#### `rec-017` — Optical activity is taught before R/S but argues about R/S (medium)
+
+- **Need:** The optical-activity section is second and leans on the R/S label three times, and its figures are titled '(R)-' and '(S)-Butan-2-ol', while R/S is not defined until the third section.
+- **Chosen intervention:** `prose-edit` → target surface `prose`
+- **Why this is least-complex:** Least-complex option: a brief forward pointer telling the reader that R/S is defined in the next section, and that nothing here assumes it, preserves the concept ordering the package declares while removing the impression that the reader has missed something.
+- **Consolidates:** `ss-011`, `instr-015`
+
+#### `rec-018` — 'Stereoisomer' is the genus term of the chapter's taxonomy and is never defined (medium)
+
+- **Need:** 'Stereoisomer' is used 13 times across the nuggets, is never defined, and is then graded in a matching item; the declared constitutional-isomerism prerequisite is never revisited, so the contrast students most often conflate is never drawn.
+- **Chosen intervention:** `prose-edit` → target surface `prose`
+- **Why this is least-complex:** Least-complex option that fully addresses the need: one defining sentence placing stereoisomers against constitutional isomers, before the enantiomer/diastereomer split is used, costs nothing and anchors the whole taxonomy.
+- **Consolidates:** `ss-013`
+
+#### `rec-019` — Duplicate figure cards carry captions written for another section (medium)
+
+- **Need:** 17 molecule blocks are emitted from 13 assets; (R)/(S)-butan-2-ol reappear in the CIP section still captioned about optical rotation, in a section whose prose works exclusively from 2-bromobutane, and L-alanine appears in the resolution section whose argument never mentions it.
+- **Chosen intervention:** `prose-edit` → target surface `figure`
+- **Why this is least-complex:** Least-complex option, and it removes rather than adds: dropping the off-topic repeats from the nuggets' asset_ids reduces a five-figure stack in the section that most needs focus, and costs no information because each figure still appears in the section it belongs to.
+- **Consolidates:** `visual-010`, `visual-012`
+
+#### `rec-020` — The R-does-not-mean-(+) misconception is taught and never tested (medium)
+
+- **Need:** The independence of the R/S label from the sign of rotation is a declared trouble spot stated twice in prose, and no item makes a student commit to it.
+- **Chosen intervention:** `added-practice` → target surface `assessment`
+- **Why this is least-complex:** Recorded, not applied - bank expansion needs sign-off. Noted as the single cheapest assessment addition available, since the prose already carries the full teaching.
+- **Consolidates:** `instr-007`, `ss-017`
+
+#### `rec-021` — Notation and identifier defects (low)
+
+- **Need:** '2^n' voices as 'two caret n' and is inconsistent with the same nugget's own 'two raised to the power n'; 'alpha carbon' is used in a level-1 hint but never introduced; two question slugs name a different compound than their prompt; one asset claims a nugget that does not list it; all four single-answer keys are option 'a'.
+- **Chosen intervention:** `prose-edit` → target surface `prose`
+- **Why this is least-complex:** Least-complex option for a cluster of small, unambiguous, individually bounded defects that are cheap to correct together and each of which is a real (if minor) reader- or maintainer-facing error.
+- **Consolidates:** `access-010`, `ss-018`, `instr-016`, `orchestrator-002`, `orchestrator-003`
+
+#### `rec-022` — Platform-level accessibility gaps this chapter cannot clear (medium)
+
+- **Need:** accessible_description is read by no renderer any of this chapter's ten question types route to; figure card headings are h4 under an h2 section, skipping h3 on all 13 figures; the priority numerals inherit the arrow's orange (~3.6:1) though they are the sole carrier of CIP rank.
+- **Chosen intervention:** `instructor-note` → target surface `instructor-support`
+- **Why this is least-complex:** Recorded, not applied. All three are shared renderer behaviours; no chapter edit changes them. Recorded so the chapter's remaining accessibility posture is not misread as an authoring failure - and so the rec-003 leak fixes are understood as latent-until-surfaced rather than live today.
+- **Consolidates:** `access-005`, `access-011`, `access-007`
+
+### Merged duplicates
+
+Findings from different personas about the same location, kept at the strongest severity with every learner impact retained.
+
+| Location | Personas | Merged into |
+|---|---|---|
+| Fischer / D-L graded but untaught | Instructor `instr-002` (blocker), Struggling Student `ss-001` (blocker), Visual `visual-006` (high) | `rec-001` |
+| `nugget-rs-arrow` compiled last | Struggling Student `ss-003` (high), Instructor `instr-004` (high) | `rec-007` |
+| Dead Wikipedia links | Orchestrator `orchestrator-001` (high), Instructor `instr-001` (high), Struggling Student `ss-010` (high) | `rec-006` |
+| No question shows a structure | Instructor `instr-005` (high), Visual `visual-008`/`visual-009` (high), Accessibility `access-009` (low) | `rec-009` |
+| Viewpoint-reversal never shown or assessed | Struggling Student `ss-005` (high), Visual `visual-003` (high), Instructor `instr-009` (medium) | `rec-008` |
+| meso identification short-circuited by the label | Struggling Student `ss-007` (high), Visual `visual-004` (high), Instructor `instr-013` (medium) | `rec-012` |
+| Authored scaffolding never delivered | Struggling Student `ss-009` (high), Instructor `instr-012` (medium), Struggling Student `ss-019` (medium) | `rec-014` |
+| D-glyceraldehyde description contradicts its render | Visual `visual-005` (high), Accessibility `access-006` (medium) | `rec-010` |
+| Arrow figures store a stereo-free structure | Visual `visual-002` (high), Instructor `instr-008` (medium), Struggling Student `ss-015` (medium) | `rec-016` |
+| Optical activity sequenced before R/S | Struggling Student `ss-011` (medium), Instructor `instr-015` (low) | `rec-017` |
+| R-does-not-mean-(+) taught, never tested | Instructor `instr-007` (medium), Struggling Student `ss-017` (medium) | `rec-020` |
+| Prochirality unassessed | Instructor `instr-003` (high), Struggling Student `ss-012` (medium), Accessibility `access-012` (low) | `rec-011` |
+
+### Retained disagreements
+
+Minority positions are preserved verbatim with the orchestrator's resolution. None was erased.
+
+#### Whether the chapter has any publication blockers at all
+
+- **Learner with Visual Preference:** Recorded zero publication blockers, reasoning that the reader chapter carries available:false and science_review.status not_reviewed, so nothing is live; several high findings 'would become publication-relevant the moment availability flips'.
+- **Accessibility Persona:** Recorded three blockers; Struggling Student two; Instructor one - all judged against the chapter's content state rather than its live status.
+
+**Resolution.** Blockers stand and readiness is computed as blocked. Publication readiness in this workflow is a judgement about whether the chapter MAY publish, so assessing it against content is correct and assessing it against the current availability flag would make every unpublished chapter trivially unblocked. The visual persona's underlying observation is preserved and matters for sequencing: nothing here is currently harming a live learner, so this is a pre-publication gate rather than an incident.
+
+#### Whether the two priority-arrow figures fail to convey handedness
+
+- **Learner with Visual Preference:** visual-002 (high, figure-accuracy): both figures carry stereo-free CCC(C)Br, so no wedge, no dash, no (R)/(S) glyph and no visible hydrogen - 'the only thing that carries handedness is the orange arrow'.
+- **Struggling Student:** ss-015 (medium): asked to accept an invisible premise about an atom that is not drawn; the two pictures differ only in which way an arrow curls.
+- **Organic Chemistry Instructor:** instr-008 (medium): rendered both through the real path and confirmed the pixels are right; the defect is the stored data, not the figure.
+- **Accessibility Persona:** Listed the pair as a STRENGTH - 'real mirror images, not the same picture twice' - having confirmed the reflection is applied.
+
+**Resolution.** Split decision on evidence. The claim that the figures are visually inadequate or identical is REJECTED: I rendered both myself, and the R figure sweeps clockwise (Br bottom, ethyl upper-left, methyl upper-right) while the S figure is the true reflection sweeping counterclockwise - three independent render checks agree, and [internal source reference — not in this repo] documents the design. The claim that the STORED SMILES misrepresents its title is UPHELD as a real but narrower defect (rec-016), and is deliberately not auto-corrected because adding a chiral tag would introduce a drawn wedge that the reflection step could contradict - turning a currently-correct figure into a wrong one. The persona disagreement is genuine and is preserved because it marks exactly where the risk sits: the pixels are right, the data is not, and the safe fix is render-verified rather than mechanical.
+
+#### Whether the structure_scaffold barrier should be cleared by unblocking typed entry
+
+- **Accessibility Persona:** 'The author's rationale for blocking typed entry is legitimate, so the need is an equivalent alternative, not simply unblocking.'
+- **Struggling Student:** ss-008 notes the chapter grades a wedge/dash convention it never teaches, so the assessed skill is itself unsupported.
+
+**Resolution.** Unblocking chosen, against the accessibility persona's stated preference, on evidence it did not have. The rationale for blocking rests on the premise that typed entry cannot demonstrate configuration - but the answer keys are stereo-tagged SMILES, the grader accepts them, and TypedStructureRenderer's read-back deliberately speaks the stereochemistry section precisely so a correct answer and the wrong enantiomer do not read back identically. 25 of 26 sibling packages set 'allowed'. What typed entry loses is only the drawing convention, and since ss-008 establishes that convention is never taught here anyway, blocking excludes learners to protect a skill the chapter does not deliver. An 'equivalent alternate activity' would be the better long-term answer and is recorded as still open.
+
+### Visual opportunities
+
+- The tetrahedron itself, in a chapter titled 'Stereochemistry at Tetrahedral Centers' - one depiction would serve every later argument.
+- The superimposability test shown as a relationship between two structures rather than two independently laid-out figure cards.
+- The internal mirror plane drawn on meso-tartaric acid, whose figure is otherwise a near-twin of the (R,R) figure.
+- One stereocenter shown in both viewpoints so the lowest-priority-toward-viewer reversal is observed rather than asserted - the chapter's own declared most-common error.
+- The polarimeter experiment as a setup: light in, plane rotated, sign, and the racemate cancelling to zero.
+- A wedge/dash-to-Fischer translation, since both conventions are graded and neither is depicted.
+
+### Regression
+
+No prior `chapter-review.json` existed for this package, so this run is the **baseline**; regression buckets are empty by construction. A later run should diff against it by `finding_id`.
+
+
+---
+
+## Post-correction record
+
+_Applied after the baseline report above was written and validated. The baseline verdict (**blocked**) and every baseline finding are preserved unchanged; this section records what was then fixed._
+
+**Status:** `applied-and-verified-without-second-persona-run`
+
+**Post-correction readiness estimate: major revision** — Not a new persona verdict. All six baseline blockers are resolved and machine-verified, but the estimate stays at major revision rather than ready-with-minor because two large clusters were deliberately left unapplied and neither is purely a platform gap: the chapter's subject is still drawn nowhere (rec-008 — tetrahedron, mirror plane, superimposability, viewpoint reversal, polarimeter), and no question in the bank shows a structure to read (rec-009), with prochirality still unassessed (rec-011) and the meso label still a tell (rec-012). Both clusters need figure building or bank expansion, which require sign-off. A new verdict requires a separate four-persona regression run.
+
+### All six baseline blockers are resolved
+
+| Blocker | Persona | Resolved by |
+|---|---|---|
+| `instr-002` | Instructor | Fischer projection + D/L convention now taught in `nugget-rs` (standard and expanded) |
+| `ss-001` | Struggling Student | same prose addition; the item is no longer answerable only via the hint |
+| `ss-002` | Struggling Student | 13 hint rungs rewritten; 0 hints now name the keyed option |
+| `access-001` | Accessibility | 11 alt texts rewritten so each enantiomer is independently determinable, + 13 long_descriptions |
+| `access-003` | Accessibility | `typed_structure_entry` "blocked" → "allowed" on both drawing items, restoring a gradeable keyboard path |
+| `access-004` | Accessibility | all seven answer-stating `accessible_description`s rewritten to stimulus-and-task only |
+
+### Applied changes
+
+**1.** Authored an explicit, HTTP-verified `wikipedia_title` on all six concepts (Chirality (chemistry), Optical rotation, Cahn–Ingold–Prelog priority rules, Diastereomer, Chiral resolution, Prochirality). The compiler had been falling back to `concept["title"]` at [internal source reference — not in this repo], minting article names out of prose section titles. Compiled links went from 1 of 7 resolving to 7 of 7 (re-verified 200 after recompile).
+
+- Resolves: `orchestrator-001`, `instr-001`, `ss-010`
+- Partially addresses: `instr-018`
+
+**2.** Renumbered nugget `order` from the per-section convention (1,1,1,1,1,1,2) to the global convention used by all 25 sibling packages, so the compiler's sort by `order` alone now yields the authored reading order. `nugget-rs-arrow` moved from 7th (last, after the advanced prochirality section) to 4th, directly after the CIP-rules nugget it scaffolds. No compiler change was needed, so blast radius is zero.
+
+- Resolves: `ss-003`, `instr-004`
+
+**3.** Changed `typed_structure_entry` from "blocked" to "allowed" on both structure_scaffold items and rewrote the accompanying note. `typedEntryAllowed()` fails closed, so "blocked" left keyboard, switch, voice and screen-reader users with no input path at all on the only two items assessing configuration drawing. The answer keys are stereo-tagged SMILES that the grader accepts, and the typed read-back deliberately speaks the stereochemistry section, so configuration is still demonstrated and graded; the note now tells instructors that a typed submission shows configuration but not the drawing convention.
+
+- Resolves: `access-003`
+
+**4.** Rewrote all seven `accessible_description` values that stated the graded answer (both fischer items, both racemate items, both stereoisomer-count items, and ch5-identify-chiral-molecule) so each conveys the stimulus and the task only. The platform guard `find_accessibility_leaks` now returns 0 leaks across all 22 — but it did so before the fix as well, because these were semantic restatements rather than answer ids, so the guard is not the thing that verifies this.
+
+- Resolves: `access-004`
+
+**5.** Rewrote 13 hint rungs that terminated in the graded answer so each stops one reasoning step short: the criterion instead of the verdict, the atomic numbers instead of the ranking, the naming convention instead of the letter, the symmetry test instead of the count. Independent re-scan now finds 0 hints containing the keyed option's text.
+
+- Resolves: `ss-002`
+
+**6.** Expanded the four single-rung ladders (both comparison_matrix and both matching_pairs items, the bank's hardest) into three-rung ladders that narrow attention one feature or one split at a time; the former single hint, which resolved every cell at once, is now the final rung. No item ships fewer than two hints.
+
+- Resolves: `ss-016`
+
+**7.** Authored a `long_description` on all 13 assets (previously 0 of 13 — the pre-ch24 cohort gap) and rewrote 11 alt texts so each member of an enantiomer or diastereomer pair is independently determinable. Each description now states the four groups, the CIP priority order with its tie-break reasoning, and the sweep direction with the lowest-priority group pointing away, so a non-visual learner can derive the configuration rather than being told it. Descriptions are deliberately renderer-independent: they assert no wedge/dash screen positions, which is the defect that produced access-006/visual-005. 14 reader blocks now carry a long_description.
+
+- Resolves: `access-001`, `access-002`
+
+**8.** Corrected the `mol-d-glyceraldehyde` alt text, which described a Fischer layout ('aldehyde carbon at top, hydroxyl on the right') for a block that renders an ordinary RDKit zig-zag where the hydroxyl points up and the aldehyde sits on the right. It now describes the line-angle depiction that actually renders, derives the R assignment from CIP, and states separately what the Fischer redraw would look like.
+
+- Resolves: `visual-005`, `access-006`
+
+**9.** Taught the Fischer projection and the D/L convention in `nugget-rs` (standard and expanded tiers): the cross with vertical bonds pointing away and horizontal bonds toward the viewer, the chain drawn vertically with the most oxidized carbon at top, and D/L defined against glyceraldehyde. Added that D/L is relative and does not track R/S, with L-cysteine (R) as the counterexample. 'Fischer' previously appeared 0 times in all three tiers while being graded twice.
+
+- Resolves: `instr-002`, `ss-001`
+- Partially addresses: `visual-006`
+
+**10.** Taught the wedge/dash convention in `nugget-chirality` (standard and expanded): bold wedge toward the viewer, hashed bond away, plain lines in the plane, and the note that two structures differing only in which bond is wedged are different compounds. 'wedge' and 'dash' previously appeared 0 times in the prose while both drawing items blocked typed entry specifically because wedge/dash was 'the skill being assessed'.
+
+- Resolves: `ss-008`
+- Partially addresses: `visual-006`
+
+**11.** Defined 'stereoisomer' explicitly in `nugget-chirality` against constitutional isomers, and stated that enantiomers, diastereomers and meso compounds are all kinds of stereoisomer. The term was used 13 times and graded in a matching item without ever being defined.
+
+- Resolves: `ss-013`
+
+**12.** Made specific rotation operational in `nugget-optical-activity`: stated the standardizing relationship (observed rotation divided by concentration and path length), its conventional units (g/mL and dm), and anchored it with a real measured value on a molecule already in the chapter — butan-2-ol, about -13.5 for (R) and +13.5 for (S), neat at 20 °C on the sodium D line, with the neat-liquid density caveat. Deliberately chosen so the R enantiomer is the levorotatory one, reinforcing that the label does not predict the sign. The chapter previously contained no equation, no units and no numeric rotation anywhere.
+
+- Resolves: —
+- Partially addresses: `instr-006`
+
+**13.** Added a forward pointer at the head of `nugget-optical-activity` stating that R and S are defined in the next section and that nothing here assumes them, so the R/S-versus-sign warning no longer lands on a reader who has met only one of the two labels.
+
+- Resolves: `ss-011`, `instr-015`
+
+**14.** Replaced all six literal '2^n' occurrences across the three tiers of nugget-diastereomers with 'two raised to the power n', which a screen reader voices correctly and which matches the wording the same nugget already used two sentences later.
+
+- Resolves: `access-010`
+
+**15.** Rewrote the level-1 hint of ch5-select-all-chiral-v2 to say 'a carbon carrying two hydrogens cannot be a stereocenter', removing 'alpha carbon' — a term the chapter never introduces — from the first rung of help.
+
+- Resolves: `ss-018`
+
+**16.** Relabelled the comparison_matrix row 'Separable by ordinary distillation' (keyed yes for diastereomers) to 'Separable from each other by ordinary achiral methods (crystallization or chromatography)', updating the feature id and the answer key together. The chapter never endorses distillation and its own canonical diastereomer pair, (R,R)- and meso-tartaric acid, are non-volatile solids, so a student reasoning from the chapter was marked wrong.
+
+- Resolves: `instr-011`
+
+**17.** Added one sentence to nugget-chirality stating that the absence of a stereocenter does not establish achirality, naming allenes and hindered biaryls, so the mirror-image test reads as the definition and the stereocenter as a heuristic.
+
+- Resolves: `instr-019`
+
+**18.** Removed the off-topic duplicate figure cards: (R)- and (S)-butan-2-ol from nugget-rs (where they appeared with optical-rotation captions in a section whose prose works exclusively from 2-bromobutane) and L-alanine from nugget-racemates. Asset `nugget_ids` were kept in sync in both directions. nugget-racemates is now deliberately figure-less pending a resolution-sequence figure (see remaining_high_priority) rather than carrying a decorative structure its argument never mentions.
+
+- Resolves: `visual-010`
+- Partially addresses: `visual-012`
+
+**19.** Reconciled asset/nugget membership: mol-d-glyceraldehyde now claims nugget-nature, which had listed it one-directionally. This is the drift mechanism recorded on ch26.
+
+- Resolves: `orchestrator-002`
+
+**20.** Rotated the displayed option order on ch5-identify-chiral-molecule and ch5-resolve-racemate-method so the keyed option is no longer first, without changing option ids, answer keys or wrong-answer match patterns. All four single-answer keys were option 'a'.
+
+- Resolves: —
+- Partially addresses: `orchestrator-003`
+
+### Remaining high priority (not applied)
+
+- rec-008 — The chapter's whole subject is undrawn. All 13 assets remain flat 2D single molecules; the tetrahedron, the superimposability test as a relationship, the internal mirror plane on meso-tartaric acid, the lowest-priority-toward-viewer reversal, and the polarimeter experiment are each argued in prose and depicted by nothing. BLOCKED ON A PLATFORM FACT the visual persona established: `stereochemistry_conversion` — the asset type named for this exact topic — is in ALLOWED_ASSET_TYPES but absent from `_ASSET_TYPE_TO_BLOCK`, so it compiles to no reader block at all, and `diagram`/`clipart` render an empty image without a hosted image_url. Needs figures built and hosted (the ch28 pattern), which is beyond a correction pass.
+- rec-009 — No question shows the student a structure to read, so the chapter's central receptive skill is never assessed. Authoring more `structure_smiles` would change nothing: SelectedResponseRenderer, CategorizeRenderer, MatchingRenderer and ComparisonMatrixRenderer all read only `imageUrl`. Needs a renderer path or pre-rendered option images.
+- rec-011 — Prochirality (concept 6) carries three learning objectives and zero questions. The coherence-pass record documents this as a deliberate scoping decision, so it is surfaced for a decision rather than silently changed; bank expansion needs sign-off.
+- rec-012 — Every meso item is pre-labelled 'meso-' in its option text, so the student matches a prefix instead of finding an internal mirror plane. Depends on the same missing SMILES-to-image path as rec-009; renaming the option alone would make the item unanswerable.
+- rec-014 — 7 practice_checks, 12 trouble_spots and 21 learning_objectives still reach no reader surface. Compiler/reader emission gap identical to ch4/ch30/ch31; fixing it changes shared behaviour for every package.
+- rec-016 — The two arrow assets still store stereo-free `CCC(C)Br` under '(R)-' and '(S)-' titles. Deliberately not auto-corrected: three independent render checks confirm the figures a student sees are correct, and adding a chiral tag would introduce a drawn wedge that `_orient_conformer_for_config`'s reflection could contradict, turning a correct figure into a wrong one. Needs a render-verified fix.
+- rec-020 — The R-does-not-mean-(+) misconception is now taught with a real numeric example but still tested by no item.
+- rec-022 — Platform accessibility gaps no chapter edit clears: `accessible_description` is read by no renderer any of this chapter's ten question types route to (so the seven leak fixes are latent-until-surfaced); figure cards are h4 under an h2, skipping h3; the priority numerals inherit the arrow's orange at roughly 3.6:1 while being the sole carrier of CIP rank.
+- instr-014 — Enantiomeric excess / optical purity is never introduced, and every meso and chirality example is acyclic, so the symmetry test is never exercised on a ring.
+- instr-016 — Two variant slugs name a different compound than their prompt (ch5-draw-s-2-butanol-v2 asks for (R)-2-bromobutane; ch5-count-stereoisomers-3-bromo-2-butanol-v2 asks about tartaric acid). NOT APPLIED: the `-v2` stem ties a variant to its parent, and renaming would obscure that link for a cosmetic, non-student-facing gain on a low finding.
+- orchestrator-003 — 0 of 22 questions are demo_eligible, so nothing from this bank surfaces in the reader homework preview. Also note only 11 of 22 items are surfaced; the other 11 are staged variants.
+
+### Verification
+
+- Topic-package compiler (proprietary toolchain, not in this repo) — clean
+- Automated test suite — 147 passed
+- curl over all 7 compiled outbound links — 7/7 return 200 (was 1/7; the six Wikipedia links were all 404)
+- Compiled reader section order — nugget-chirality, nugget-optical-activity, nugget-rs, nugget-rs-arrow, nugget-diastereomers, nugget-racemates, nugget-nature (nugget-rs-arrow moved 7th to 4th)
+- app.question_types.accessibility_guard.find_accessibility_leaks over all 22 questions — 0 leaks (note: also 0 before the fix; the guard cannot see semantic restatement, so this is not the verifying check)
+- Independent re-scan for the keyed option's text inside any hint — 0 hits (was 1 mechanical + 8 semantic)
+- Hints-per-item distribution — {3: 9, 2: 13}; no item ships a single rung (was 4 single-rung items)
+- Asset accessibility coverage — alt_text 13/13, long_description 13/13 (was 0/13); 14 reader blocks carry a long_description (was 0)
+- typed_structure_entry — 'allowed' on both structure_scaffold items (was 'blocked' on both)
+- Literal '2^n' remaining across all nugget tiers — 0 (was 6)
+- RDKit re-derivation of all 13 asset structures before authoring descriptions — 13/13 formula, CIP and InChIKey confirmed, including mol-rr-tartaric (R,R) not-superimposable and mol-meso-tartaric meso by canonical-SMILES-equals-mirror-image, and mol-3-bromo-2-butanol as specifically (2S,3S)
+- Automated cross-check of every stated count in an accessible_description against its config list length — 0 mismatches (this caught a factual error I introduced: two racemate descriptions said 'Four ... offered' where the items have three options; corrected before recompile)
+- Generated-diff inspection — my compile refreshed three shared aggregates (reader catalog.json, deck-creator manifest.json, topic-package-registry.json). The only non-ch5 change is orbitals-and-pericyclic-reactions flipping available false->true, which propagates a CONCURRENT SESSION's edit to that package's own publishing.available (its source and reader chapter were written at 08:00, before this compile at 08:19). Left as-is deliberately: hand-editing derived aggregates to contradict their source is the ch4 'fix lives only in the build artifact' hazard in reverse. FLAGGED for the user.
+

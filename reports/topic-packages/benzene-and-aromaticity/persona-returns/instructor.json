@@ -1,0 +1,252 @@
+{
+ "persona": "Organic Chemistry Instructor",
+ "persona_version": "1.0.0",
+ "chapter_id": "benzene-and-aromaticity",
+ "chapter_version": "1",
+ "model": "claude-opus-5",
+ "summary": "Not-go as written, but only barely — this is a strong chapter with one hard error. I verified every number in the prose against my own knowledge (139/154/134 pm bond lengths; 118, 230, 206 kJ/mol heats of hydrogenation and the ~148 kJ/mol difference; 255 kJ/mol for naphthalene; pKa 16 for cyclopentadiene, 43 for propene, 5.25 for pyridinium; tropylium bromide mp 203 °C; COT bonds at 133/146 pm; delta 7.37, delta 6.5-8.0, delta 110-140, 3030 cm-1, 1500/1600 cm-1, 690-900 cm-1 OOP bands, 204/254 nm, m/z 91) and all 46 answer keys, including both hotspot atom indices, which are correctly 0-indexed against the backend's molecule_visuals convention. Every SMILES parses and canonicalizes correctly, including the charged aromatic ions. The single publication blocker is a garbled sentence in nugget-benzene-structure that inverts the classic isomer-count evidence for delocalization — it says two ortho isomers can be isolated when the point is that only one can. Beyond that, the chapter's biggest instructional weakness is that its most abstract section, the pi molecular orbitals, has no orbital representation of any kind: the energy ladder and the inscribed-polygon construction exist only as prose, the one video brief for it is production-deferred and compiles into the reader as an empty hidden block, and no question in the 46-item bank tests the construction the learning objective names. The pyridine-versus-pyrrole lone-pair distinction — the load-bearing idea of that section and the basis of two surfaced questions — is likewise carried entirely by flat 2-D structures that show no orbitals. One surfaced question (the acidity ranking) keys an order that the chapter's own text argues against. Fix the isomer sentence and the acidity ranking, give the MO and heterocycle sections an orbital representation, and I would assign this chapter without reservation.",
+ "overall_score": 7.2,
+ "publication_blockers": ["inst-001"],
+ "findings": [
+ {
+ "finding_id": "inst-001",
+ "location": {
+ "section_id": "benzene-structure-and-stability",
+ "concept_slug": "benzene-structure-and-stability",
+ "nugget_id": "nugget-benzene-structure",
+ "anchor_text": "Only two disubstituted isomers of the 1,2 type can be isolated"
+ },
+ "severity": "blocker",
+ "category": "chemical-accuracy",
+ "observation": "The sentence stating the classical isomer-count evidence for delocalization is factually inverted and internally self-contradictory. Benzene yields exactly ONE ortho-disubstituted isomer; a structure with fixed alternating single and double bonds would predict TWO (one with a double bond between the substituted carbons, one with a single bond). The text asserts that two 1,2-isomers can be isolated, 'not the two that alternating single and double bonds would predict' — which is both wrong and says 'two ... not the two.'",
+ "learner_impact": "Every student reading at expanded depth gets the single most famous piece of structural evidence for benzene's delocalization exactly backwards, and the sentence as written is unparseable, so a careful student cannot self-correct. It sits two sentences after the correct bond-length argument, so it also undermines confidence in the surrounding correct material. It is present verbatim in the compiled reader.",
+ "evidence": "topic.package.json nugget-benzene-structure text.expanded, and frontend/public/reader/topic-chapters/benzene-and-aromaticity.json section nugget-benzene-structure: 'All six carbon-carbon bonds are identical, each 139 pm long ... Only two disubstituted isomers of the 1,2 type can be isolated, not the two that alternating single and double bonds would predict.'",
+ "recommended_outcome": "The isomer-count evidence must state that only one ortho-disubstituted benzene exists where a fixed-alternating-bond structure predicts two, and must be phrased so the count and the contrast are unambiguous.",
+ "confidence": 0.97
+ },
+ {
+ "finding_id": "inst-002",
+ "location": {
+ "section_id": "molecular-orbitals-of-benzene",
+ "concept_slug": "molecular-orbitals-of-benzene",
+ "nugget_id": "nugget-benzene-mos",
+ "asset_id": "mol-benzene",
+ "anchor_text": "The vertex must sit at the bottom of the circle rather than an edge"
+ },
+ "severity": "high",
+ "category": "visual-opportunity",
+ "observation": "The entire pi MO section is delivered as prose with a single flat 2-D benzene structure as its only asset. There is no representation anywhere in the chapter of the six-level energy ladder, the node counts of psi1-psi6*, the two degenerate pairs, the electron filling, the inscribed-polygon (Frost) construction, or the array of six perpendicular p orbitals — even though the prose asserts all of them and even warns about a geometric detail ('the vertex must sit at the bottom of the circle rather than an edge') that is purely visual. The one video brief that would carry this, video-benzene-mo-filling, has production_status 'deferred' and compiles into the reader as a video block with url '' and is_hidden true, so a student sees nothing. Sibling chapters in the same reader directory do ship non-molecule figure types (reaction_coordinate, image); this chapter ships only text, molecule, link, and the empty video.",
+ "learner_impact": "Students must build a two-dimensional energy diagram, a node-counting scheme, and a geometric construction entirely from a verbal description. This is the section most students already find hardest, and it is the section given the least support. Learners who cannot mentally render the ladder cannot execute the inscribed-polygon procedure on cyclobutadiene in the next section, which is where the antiaromaticity argument is actually made.",
+ "evidence": "nugget-benzene-mos asset_ids = ['mol-benzene'] only; video_briefs[0].production_status = 'deferred' with note 'the molecule-video-creator chalk pipeline cannot produce it ... The reader carries the same content in nugget-benzene-mos prose'; compiled reader block [video] hidden=true url=''.",
+ "recommended_outcome": "The chapter needs an orbital-level representation of benzene's pi MO ladder — relative energies, node counts, the two degeneracies, the nonbonding reference line, and the six electrons filling only the bonding set — plus the same construction applied to the four-membered ring, in a form that does not depend on a deferred video.",
+ "confidence": 0.93
+ },
+ {
+ "finding_id": "inst-003",
+ "location": {
+ "question_slug": "ch15-acidity-ranking",
+ "concept_slug": "aromatic-ions",
+ "nugget_id": "nugget-aromatic-ions",
+ "anchor_text": "is antiaromatic and is not formed under comparable conditions"
+ },
+ "severity": "high",
+ "category": "objective-alignment",
+ "observation": "The surfaced rank_order question keys cyclohepta-1,3,5-triene as MORE acidic than propene (order: cyclopentadiene > cycloheptatriene > propene > ethane). That order is experimentally defensible (cycloheptatriene pKa approx 36 vs allylic propene approx 43), but the chapter teaches the opposite inference: nugget-aromatic-ions states that deprotonating cycloheptatriene gives 'an eight-electron anion with a 4n count, which is antiaromatic and is not formed under comparable conditions.' A student applying the chapter's own reasoning must rank cycloheptatriene LAST among the delocalized anions. Neither the cycloheptatriene nor the ethane pKa appears anywhere in the chapter, and the three-level hint ladder ('separate the anions that are delocalized from the one that is not'; 'check which one also satisfies the 4n + 2 count') leads a student straight to the keyed-wrong answer.",
+ "learner_impact": "A student who has correctly learned the chapter's antiaromaticity argument is marked wrong, and the feedback bundle offers no reconciliation. This punishes exactly the students who understood the section best and teaches them to distrust the 4n rule they just learned.",
+ "evidence": "ch15-acidity-ranking answer_key [redacted]; feedback_bundle hints 2 and 3; contradicting prose in nugget-aromatic-ions text.expanded. The question is in the surfaced 23.",
+ "recommended_outcome": "The ranking item and the aromatic-ions prose must agree: either the chapter needs to explain why cycloheptatriene is still more acidic than propene despite its antiaromatic planar anion, or the item needs cards whose ordering follows only from what the chapter actually teaches.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "inst-004",
+ "location": {
+ "section_id": "aromatic-heterocycles",
+ "concept_slug": "aromatic-heterocycles",
+ "nugget_id": "nugget-aromatic-heterocycles",
+ "asset_id": "mol-pyridine",
+ "question_slug": "ch15-pyridine-lone-pair"
+ },
+ "severity": "high",
+ "category": "visual-opportunity",
+ "observation": "The whole section turns on one three-dimensional distinction — pyridine's lone pair in an in-plane sp2 orbital perpendicular to the pi cloud, versus pyrrole's lone pair in a p orbital parallel to and part of that cloud. The only assets are flat 2-D line structures of pyridine, pyrrole, and imidazole with no orbital content at all; their alt text and learning_goal describe the orbitals verbally but the rendered figures show none of it. Two of the 23 surfaced questions test precisely this geometry.",
+ "learner_impact": "Students who cannot construct the orbital picture unaided default to the memorized pair 'pyridine basic, pyrrole not,' which is the memorization outcome the chapter otherwise works hard to avoid. It also blocks transfer: the imidazole/histidine and purine/pyrimidine applications later in the chapter all require applying the same in-plane-versus-p-orbital test to a new ring.",
+ "evidence": "nugget-aromatic-heterocycles asset_ids = ['mol-pyridine','mol-pyrrole','mol-imidazole'], all type 'molecule' with plain SMILES; prose 'it occupies an sp2 hybrid orbital lying in the ring plane, at right angles to the pi cloud' has no corresponding figure.",
+ "recommended_outcome": "The chapter needs a representation that shows lone-pair orbital orientation relative to the ring plane and the pi system for the pyridine-type and pyrrole-type nitrogen side by side, so the basicity difference is read off geometry rather than recalled as a fact.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "inst-005",
+ "location": {
+ "section_id": "spectroscopy-of-aromatic-compounds",
+ "concept_slug": "spectroscopy-of-aromatic-compounds",
+ "nugget_id": "nugget-aromatic-spectroscopy",
+ "anchor_text": "a para-disubstituted ring shows only two"
+ },
+ "severity": "medium",
+ "category": "chemical-accuracy",
+ "observation": "The 13C signal-counting claim is stated without its necessary condition. 'A monosubstituted benzene shows four distinct ring signals ... and a para-disubstituted ring shows only two' is true only when the two para substituents are identical (p-xylene: 2 ring signals). With two different substituents the para ring gives four ring signals. The chapter's own para example, mol-4-bromotoluene, is a counterexample to the rule as stated: it has four distinct ring carbons.",
+ "learner_impact": "Students are handed a signal-counting shortcut that fails on the very compound the chapter uses as its para archetype. In structure-determination problems this produces a confident wrong elimination of the correct para isomer.",
+ "evidence": "nugget-aromatic-spectroscopy text.expanded; contrast with asset mol-4-bromotoluene (SMILES Cc1ccc(Br)cc1), used in the same nugget's asset_ids list.",
+ "recommended_outcome": "The 13C signal-count rule needs its symmetry condition made explicit — how many distinct ring carbons a para ring shows depends on whether the two substituents are the same — ideally worked against the chapter's own 1-bromo-4-methylbenzene example.",
+ "confidence": 0.94
+ },
+ {
+ "finding_id": "inst-006",
+ "location": {
+ "section_id": "huckel-rule-and-antiaromaticity",
+ "concept_slug": "huckel-rule-and-antiaromaticity",
+ "nugget_id": "nugget-huckel-rule",
+ "asset_id": "mol-cyclobutadiene",
+ "anchor_text": "The molecule has an open shell with two unpaired electrons"
+ },
+ "severity": "medium",
+ "category": "misconception",
+ "observation": "Two incompatible pictures of cyclobutadiene are asserted in consecutive sentences with no reconciliation. The text says the four pi electrons singly occupy the two degenerate nonbonding orbitals so that 'the molecule has an open shell with two unpaired electrons,' and then says 'its structure is a rectangle with alternating short and long bonds rather than a square.' The rectangular distortion is precisely what lifts the degeneracy and pairs those electrons; the real ground state is a closed-shell singlet rectangle, not a square diradical.",
+ "learner_impact": "Students form a durable 'cyclobutadiene is a ground-state triplet diradical' model that has to be un-taught in any later treatment of Jahn-Teller distortion. It also obscures the actual causal chain — degeneracy is the problem, and distortion is the molecule's escape — which is the same logic the chapter uses one paragraph later for cyclooctatetraene's tub.",
+ "evidence": "nugget-huckel-rule text.expanded paragraph 2; asset mol-cyclobutadiene learning_goal; contrast the handling of mol-cyclooctatetraene, whose alt_text does carry the caveat 'drawn flat although the molecule itself is tub-shaped.'",
+ "recommended_outcome": "The square-degenerate-open-shell analysis needs to be marked as the idealized starting point and explicitly connected to the rectangular distortion that relieves it, so students see one causal story rather than two contradictory descriptions of the same molecule.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "inst-007",
+ "location": {
+ "concept_slug": "spectroscopy-of-aromatic-compounds",
+ "nugget_id": "nugget-aromatic-spectroscopy",
+ "section_id": "spectroscopy-of-aromatic-compounds"
+ },
+ "severity": "medium",
+ "category": "sequencing",
+ "observation": "The declared prerequisites do not match what the prose assumes. spectroscopy-of-aromatic-compounds lists only h1-shifts-and-integration, characteristic-ir-absorptions, and uv-spectroscopy-and-conjugation, but the nugget teaches 13C chemical shifts and symmetry-based 13C signal counting (requires c13-nmr-and-dept) and closes with mass-spectral benzylic cleavage and the m/z 91 tropylium fragment (requires fragmentation-patterns). Separately, aromatic-heterocycles lists bronsted-lowry-framework but not pka-and-acid-strength, while its prose reasons quantitatively from pKa values; and benzene-structure-and-stability opens with 'four degrees of unsaturation' without that skill appearing in its prerequisites.",
+ "learner_impact": "Instructors relying on prerequisite metadata to sequence assignments or to build concept maps will place this chapter before the 13C and mass-spectrometry material it silently depends on. Students arriving through a prerequisite-gated path hit three unannounced dependencies in a single section.",
+ "evidence": "concepts[].prerequisites for spectroscopy-of-aromatic-compounds, aromatic-heterocycles, and benzene-structure-and-stability; slugs c13-nmr-and-dept (nuclear-magnetic-resonance-spectroscopy), fragmentation-patterns (mass-spectrometry-and-infrared-spectroscopy), pka-and-acid-strength (acids-bases-and-curved-arrows).",
+ "recommended_outcome": "Prerequisite lists need to enumerate every skill the prose actually exercises, so downstream sequencing and concept-map tools reflect the real dependency graph.",
+ "confidence": 0.87
+ },
+ {
+ "finding_id": "inst-008",
+ "location": {
+ "asset_id": "mol-benzene",
+ "concept_slug": "benzene-structure-and-stability",
+ "nugget_id": "nugget-benzene-structure",
+ "anchor_text": "drawn as a regular hexagon with alternating double and single bonds"
+ },
+ "severity": "medium",
+ "category": "figure-accuracy",
+ "observation": "The benzene figure contradicts its own caption and the section it illustrates. mol-benzene's learning_goal reads 'all six carbon-carbon bonds equal at 139 pm' while its alt_text — and the rendered Kekule structure it describes — reads 'a regular hexagon with alternating double and single bonds,' with no note that this is a drawing convention rather than the molecule's actual bonding. The authors demonstrably know how to handle this: mol-cyclooctatetraene's alt_text carries exactly the caveat mol-benzene lacks.",
+ "learner_impact": "The figure that accompanies 'all six bonds are identical' visually asserts three double and three single bonds. This is the precise misconception the section exists to defeat, and it is reinforced on the same screen.",
+ "evidence": "assets mol-benzene (alt_text vs learning_goal, both in the compiled reader payload); prose in nugget-benzene-structure text.expanded on Kekule structures and the circle representation; contrast asset mol-cyclooctatetraene alt_text.",
+ "recommended_outcome": "Wherever the Kekule drawing of benzene appears next to the equal-bond-length claim, the reader needs the drawing identified as a convention and needs the delocalized picture represented, not only described.",
+ "confidence": 0.82
+ },
+ {
+ "finding_id": "inst-009",
+ "location": {
+ "concept_slug": "molecular-orbitals-of-benzene",
+ "nugget_id": "nugget-benzene-mos",
+ "question_slug": "ch15-benzene-mo-count",
+ "anchor_text": "Use the inscribed-polygon construction to predict the orbital pattern of any monocyclic conjugated ring"
+ },
+ "severity": "medium",
+ "category": "objective-alignment",
+ "observation": "Several declared learning objectives are never assessed. (1) nugget-benzene-mos LO3 names the inscribed-polygon construction, but none of the 46 questions asks a student to build or read an orbital ladder. (2) nugget-aromatic-spectroscopy LO2 says 'List the infrared, 13C, and ultraviolet signatures'; no question in the bank touches 13C shifts or UV absorption. (3) nugget-benzene-structure LO3 is assessed only by a staged variant, so the 23-question surfaced set never assesses it.",
+ "learner_impact": "The objectives a student is told to master and the practice they receive diverge on three counts. The inscribed-polygon gap is the most costly: it is the chapter's only transferable procedure for predicting orbital patterns in an unfamiliar ring, and a student can complete every question in the bank without ever executing it once.",
+ "evidence": "nuggets[].learning_objectives for nugget-benzene-mos, nugget-aromatic-spectroscopy, nugget-benzene-structure; the 46-item question_sets[] contains no orbital-ladder, 13C, or UV item.",
+ "recommended_outcome": "Each declared objective needs at least one item in the surfaced set that requires the objective's actual performance — in particular, an item that makes a student produce or interpret the orbital-energy pattern of a ring rather than recognize a description of it.",
+ "confidence": 0.89
+ },
+ {
+ "finding_id": "inst-010",
+ "location": {
+ "concept_slug": "huckel-rule-and-antiaromaticity",
+ "nugget_id": "nugget-huckel-rule",
+ "section_id": "huckel-rule-and-antiaromaticity",
+ "anchor_text": "four requirements that must be checked in order"
+ },
+ "severity": "medium",
+ "category": "worked-example-gap",
+ "observation": "The chapter's central transferable skill is a four-step decision procedure, and the prose is explicit that order matters 'because failing an earlier one makes the electron count irrelevant.' But the procedure is never demonstrated step by step on a single molecule. The closest thing is the pair of error_repair questions, which ask students to run the procedure in an assessment before they have seen it run once.",
+ "learner_impact": "Students meet the ordered check as a rule to recite rather than a routine to execute, then are asked to diagnose someone else's failure of it. Weaker students will jump straight to counting pi electrons — the exact failure mode both error_repair items target — because counting is the only step ever shown producing an answer.",
+ "evidence": "nugget-huckel-rule text.expanded; compiled reader block_type set for this chapter is limited to text, molecule, mcmurry_link, external_link, video; ch15-cyclooctatetraene-error-repair and its variant target t_planarity and t_conjugation respectively.",
+ "recommended_outcome": "The aromaticity test needs at least one fully worked traversal — an unfamiliar ring taken through all four checks in order, including at least one case that fails at an early check so the 'stop here' logic is visible before students are assessed on it.",
+ "confidence": 0.8
+ },
+ {
+ "finding_id": "inst-011",
+ "location": {
+ "question_slug": "ch15-aromatic-ir-band",
+ "concept_slug": "spectroscopy-of-aromatic-compounds",
+ "anchor_text": "a monosubstituted ring shows two bands, near 690-710 and 730-770 cm"
+ },
+ "severity": "medium",
+ "category": "figure-accuracy",
+ "observation": "The IR stimulus for the surfaced toluene question is inconsistent with the substitution-pattern rule the chapter teaches. The prose states that a monosubstituted ring shows TWO out-of-plane C-H bending bands, near 690-710 and 730-770 cm-1, but the spectrum drawn for toluene has a single low-wavenumber peak at 728 cm-1 and no partner near 694 cm-1. Separately, the standard-depth text promises the OOP bands 'can distinguish monosubstituted from ortho-, meta-, and para-disubstituted rings,' but the expanded text gives ranges only for mono, ortho, and para — the meta case is never given a value.",
+ "learner_impact": "A student applying the taught two-band criterion to the displayed toluene spectrum would conclude the ring is not monosubstituted. And the promised four-way discrimination cannot actually be performed, because one of the four patterns has no quoted range anywhere in the chapter.",
+ "evidence": "ch15-aromatic-ir-band student_config.spectrum.peaks = [3030, 2925, 1605, 1495, 728]; nugget-aromatic-spectroscopy text.standard and text.expanded.",
+ "recommended_outcome": "The toluene spectrum stimulus and the taught monosubstituted signature need to agree on band count, and the substitution-pattern table needs a value for every pattern the prose claims it can distinguish.",
+ "confidence": 0.83
+ },
+ {
+ "finding_id": "inst-012",
+ "location": {
+ "concept_slug": "aromatic-heterocycles",
+ "nugget_id": "nugget-aromatic-heterocycles",
+ "anchor_text": "the pKa of protonated pyrrole is about 0.4"
+ },
+ "severity": "medium",
+ "category": "chemical-accuracy",
+ "observation": "The pKa quoted for protonated pyrrole, about 0.4, is the value carried by one common textbook lineage, but the widely cited experimental value for the pyrrolium ion is approximately -3.8, and protonation occurs preferentially at C2 rather than at nitrogen. The chapter's derived claim, 'about five orders of magnitude weaker than pyridinium,' follows from the 0.4 figure; with the -3.8 value the gap is about nine orders of magnitude. The same five-orders framing is repeated in the practice_check.",
+ "learner_impact": "A student who cross-checks against another text or a data table finds a nine-order discrepancy in a number the chapter uses as its quantitative punchline, and finds no note about the site of protonation. The qualitative conclusion is unaffected, so this is an accuracy and sourcing issue rather than a conceptual one.",
+ "evidence": "nugget-aromatic-heterocycles text.standard and text.expanded; nugget-aromatic-heterocycles practice_check answer.",
+ "recommended_outcome": "The pyrrole basicity figure needs either a cited source for the 0.4 value or replacement with the commonly reported experimental value, and the derived 'five orders of magnitude' comparison needs to follow whichever number is kept.",
+ "confidence": 0.62
+ },
+ {
+ "finding_id": "inst-013",
+ "location": {
+ "question_slug": "ch15-fused-ring-stabilization-v2",
+ "concept_slug": "polycyclic-aromatic-compounds",
+ "nugget_id": "nugget-polycyclic-aromatics",
+ "anchor_text": "the central ring of anthracene undergoes addition far more readily than benzene does"
+ },
+ "severity": "low",
+ "category": "conceptual-support",
+ "observation": "The keyed explanation for the anthracene item — 'addition at the central ring leaves two intact benzene rings, so less delocalization energy is given up than when benzene itself adds' — appears nowhere in the chapter. The prose states the observation as a bare fact and offers no mechanism for it.",
+ "learner_impact": "The item is answerable only by elimination or by importing outside knowledge, so it tests recognition of a plausible-sounding statement rather than reasoning the chapter built. It is a staged variant rather than a surfaced question, which limits the immediate impact.",
+ "evidence": "ch15-fused-ring-stabilization-v2 options and answer_key [redacted]; nugget-polycyclic-aromatics text.expanded, which gives no reason.",
+ "recommended_outcome": "The chapter needs to supply the reasoning behind differential reactivity of fused rings — what an addition at the central ring costs versus what it preserves — before an item is keyed on that reasoning.",
+ "confidence": 0.78
+ },
+ {
+ "finding_id": "inst-014",
+ "location": {
+ "question_slug": "ch15-fused-ring-stabilization",
+ "concept_slug": "polycyclic-aromatic-compounds",
+ "anchor_text": "Its resonance stabilization, about 255 kJ/mol"
+ },
+ "severity": "low",
+ "category": "notation-consistency",
+ "observation": "Two names are used for the same quantity without ever being equated. nugget-benzene-structure introduces benzene's 150 kJ/mol as its 'aromatic stabilization energy'; nugget-polycyclic-aromatics calls naphthalene's 255 kJ/mol its 'resonance stabilization'; and ch15-fused-ring-stabilization then compares them in one sentence. The chapter never states that aromatic stabilization energy, resonance stabilization, and delocalization energy are the same measured quantity.",
+ "learner_impact": "Students who learned '150 kJ/mol = aromatic stabilization energy' may not recognize it under 'resonance stabilization' in the question that asks them to compare the two numbers, which is the one place the comparison carries the instructional point.",
+ "evidence": "nugget-benzene-structure text.standard/expanded; nugget-polycyclic-aromatics text.standard/expanded; ch15-fused-ring-stabilization prompt_text.",
+ "recommended_outcome": "The chapter needs one named quantity for the delocalization stabilization measured by heats of hydrogenation, with any synonyms explicitly identified as the same thing at first use.",
+ "confidence": 0.75
+ }
+ ],
+ "strengths": [
+ "Every quantitative claim checked is correct: 139 pm ring bonds against 154 and 134 pm references; 118, 230, and 206 kJ/mol heats of hydrogenation with a correctly computed ~148 kJ/mol difference; 255 kJ/mol for naphthalene; cyclooctatetraene at 133 and 146 pm; pKa 16 for cyclopentadiene, 43 for propene, 5.25 for pyridinium; tropylium bromide mp 203 C; delta 7.37 for benzene, delta 6.5-8.0 aromatic, delta 2.3-3.0 benzylic, delta 110-140 for 13C; 3030, 1500/1600, 690-900 cm-1 OOP with correct mono/ortho/para ranges; UV at 204 and 254 nm; m/z 91 tropylium.",
+ "All 46 answer keys verify correct, including the two computed numerics with sensible tolerances, both three-way sorts, the cyclopentadienyl-cation and cycloheptatrienyl-anion antiaromatic classifications, and both comparison matrices.",
+ "Both hotspot keys are right and non-obvious: atom_2 for C1=CCC=C1 and atom_4 for C1=CC=CCC=C1 are exactly the sp3 carbons under the backend's 0-indexed convention.",
+ "Every SMILES in the assets and in the question stimuli parses and canonicalizes correctly, including the charged aromatic ions.",
+ "The four aromaticity requirements are taught as an ordered procedure with an explicit rationale for the order, and the two error_repair items target precisely the two ways students skip that order.",
+ "Distractors are diagnostic rather than filler, and the wrong_answer_explanations name the specific misreading.",
+ "The question bank is unusually broad for a single chapter: 13 question types across 46 items with an even 23 surfaced / 23 staged split and uniform concept coverage.",
+ "The counterexample set is complete and well chosen — cyclobutadiene for antiaromatic, cyclooctatetraene for nonaromatic-by-distortion, cyclopentadiene for nonaromatic-by-sp3-carbon, and the cyclopropenyl cation for n = 0."
+ ],
+ "open_questions": [
+ "All 46 questions carry demo_eligible: false. Is that deliberate for this chapter or an unset default?",
+ "The eight authored practice_checks do not appear in the compiled reader, which matches every other chapter. Are practice_checks intended for a non-reader surface?",
+ "video-benzene-mo-filling is deferred and compiles to a hidden video block with an empty url. Is that block expected to be produced before publication?",
+ "The pyrrole conjugate-acid pKa of 0.4 matches one textbook lineage but not the commonly cited experimental value near -3.8. Is there a house source-of-record for pKa values?",
+ "ch15-benzene-mo-count-v2 keys 8 pi molecular orbitals for cyclooctatetraene, which is the correct Huckel-count answer, but the chapter elsewhere insists cyclooctatetraene is nonplanar with localized bonds. Should the item say 'if it were planar'?"
+ ]
+}

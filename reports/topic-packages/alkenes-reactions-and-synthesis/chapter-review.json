@@ -1,0 +1,1652 @@
+{
+ "chapter_id": "alkenes-reactions-and-synthesis",
+ "chapter_version": "1",
+ "run_at": "2026-07-31T17:03:54Z",
+ "personas": [
+ {
+ "persona": "Organic Chemistry Instructor",
+ "persona_version": "1.0.0",
+ "chapter_id": "alkenes-reactions-and-synthesis",
+ "chapter_version": "1",
+ "model": "claude-opus-5[1m]",
+ "summary": "Not-go as written; this needs a revision pass before I would assign it. The underlying chemistry is mostly sound — I machine-verified all 13 asset SMILES and every structure inside all 32 questions with RDKit (formulas, InChIKeys, CIP labels) and found no invalid or misidentified compound, and I re-derived every answer key and found the intended outcomes correct. But two graded items are chemically wrong as depicted: ch8-epox-product-v2 keys a single enantiomer (2R,3R, InChIKey PQXKWPLDPFFDJP-QWWZWVQMSA-N) as THE product of epoxidizing achiral (E)-2-butene with an achiral peroxyacid, when the reaction must give the racemate and the equally correct (2S,3S) answer is neither offered nor accepted; and ch8-diol-syn keys an option labeled 'A syn (cis) 1,2-diol' whose drawn structure is OCCO, ethane-1,2-diol, a molecule with no stereocenters that cannot be cis or anything else. Beyond those, the deeper instructional problem is that this is a reaction chapter with no reactions in it: every one of the six sections presents a substrate molecule and a product molecule as two unlinked static blocks with no arrow, no reagents, and no mechanism, even though five of the six nuggets are typed 'mechanism' and the prose names intermediates (organoborane, five-membered osmate ester, ozonide, concerted oxygen transfer) that are never drawn. Worse, all three reactions whose entire teaching point is stereochemistry are illustrated on substrates where the stereochemistry is invisible — but-2-ene to butane, propene to methyloxirane, propene to propane-1,2-diol — so a student can read the whole chapter and never once see what 'syn' looks like. Assessment breadth is genuinely strong (32 items, 11 question types, every concept covered, targeted wrong-answer feedback and hint ladders throughout), but several graded answers depend on content this chapter never teaches (epoxide anti ring-opening, 9-BBN, hot concentrated KMnO4, alkyne hydrogenation), two prompts state their own answers, and all six practice_checks vanish in compilation — the reader a student actually sees contains zero retrieval practice. Four of the six 'background reading' links in the compiled reader return HTTP 404.",
+ "overall_score": 5.4,
+ "publication_blockers": [
+ "instr-001",
+ "instr-002"
+ ],
+ "findings": [
+ {
+ "finding_id": "instr-001",
+ "location": {
+ "question_slug": "ch8-epox-product-v2",
+ "concept_slug": "alkene-epoxidation",
+ "anchor_text": "trans-2,3-dimethyloxirane (the trans epoxide)"
+ },
+ "severity": "blocker",
+ "category": "chemical-accuracy",
+ "observation": "The keyed-correct option is [redacted — specific enantiomer], which RDKit resolves to a single, fully specified enantiomer: (2R,3R)-2,3-dimethyloxirane (InChIKey [redacted]). (E)-2-butene is achiral and mCPBA is achiral, so the reaction cannot produce a single enantiomer — it must give a racemic 1:1 mixture of (2R,3R) and (2S,3S). The (2S,3S) enantiomer (InChIKey [redacted]) is neither offered as an option nor listed in answer_key.correct_option_ids, so a student who correctly reasons to the other enantiomer of the trans epoxide has no way to be right. The cis distractor [redacted] is correctly the meso (2R,3S) isomer, and the trans/cis labels themselves are correct, so the defect is specifically the single-enantiomer depiction and keying, not the syn/stereospecificity teaching point.",
+ "learner_impact": "Students in Organic 1 form the durable misconception that an achiral alkene plus an achiral oxidant can deliver one enantiomer. This is precisely the misconception the reaction-stereochemistry section of a standard chapter 8 exists to prevent, and it will have to be un-taught when optical activity and racemates are formalized. Students who write the (2S,3S) answer are marked wrong for correct chemistry.",
+ "evidence": "ch8-epox-product-v2 student_config.options[0].structure_smiles [redacted]; RDKit rdCIPLabeler gives atom 1 = R, atom 3 = R. answer_key [redacted]. No nugget in the package mentions racemic products or the stereochemical consequence of achiral reagents.",
+ "recommended_outcome": "The chapter needs the epoxidation stereochemistry item to represent the actual product composition — a racemate, not one enantiomer — and it needs the accompanying principle (achiral starting material plus achiral reagent cannot give a single enantiomer) stated somewhere in the prose that the item draws on.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "instr-002",
+ "location": {
+ "question_slug": "ch8-diol-syn",
+ "concept_slug": "syn-dihydroxylation",
+ "anchor_text": "A syn (cis) 1,2-diol"
+ },
+ "severity": "blocker",
+ "category": "chemical-accuracy",
+ "observation": "The keyed-correct option carries a stereochemistry label [redacted] attached to a structure [redacted] that is actually achiral ethane-1,2-diol. Ethylene glycol has no stereocenters and no cis/trans relationship whatsoever; calling it a syn (cis) diol is a false statement of chemistry that the student sees rendered next to the correct answer. Compounding it, the 'anti (trans) 1,2-diol' distractor (option b) carries no structure at all, so the two options a student is asked to discriminate between on stereochemical grounds are presented asymmetrically — one with an irrelevant drawing, one with nothing.",
+ "learner_impact": "The one graded item that introduces the syn-diol concept teaches, visually, that any vicinal diol is 'syn.' Students who reason from the picture rather than the words conclude that syn/anti is a property of the connectivity (two adjacent OH groups) rather than of the face of delivery, which is exactly the trouble_spot the concept declares ('Assigning anti stereochemistry to a syn addition'). It also makes option b unselectable on visual grounds and cues the answer non-chemically.",
+ "evidence": "ch8-diol-syn student_config.options[0] = {'id':'a','text':'A syn (cis) 1,2-diol','structure_smiles':'OCCO'}; options[1] = {'id':'b','text':'An anti (trans) 1,2-diol'} with no structure_smiles; answer_key [redacted]. RDKit: OCCO has zero stereocenters (CIP=[]).",
+ "recommended_outcome": "The syn/anti discrimination item needs structures on which syn and anti are actually distinguishable and drawn, applied consistently to every option in the set, so the visual a student grades against agrees with the stereochemical label it carries.",
+ "confidence": 0.93
+ },
+ {
+ "finding_id": "instr-003",
+ "location": {
+ "question_slug": "ch8-diol-syn-v2",
+ "concept_slug": "syn-dihydroxylation",
+ "anchor_text": "Which reagent system converts cyclopentene into cis-cyclopentane-1,2-diol?"
+ },
+ "severity": "high",
+ "category": "figure-accuracy",
+ "observation": "The prompt asks specifically for the cis diol, but the structure attached to the correct reagent option is 'OC1CCCC1O' — cyclopentane-1,2-diol with no stereochemistry specified (RDKit: no CIP codes, no wedge/dash information). The cis (meso) isomer would require defined relative configuration. The distractor options b and c carry no structures at all.",
+ "learner_impact": "The one item in the chapter that could show a student what a cis ring diol looks like shows an undifferentiated flat structure instead. A student trying to check their stereochemical reasoning against the rendered answer gets no confirmation, and the cis/trans distinction that the whole question turns on is never made visible.",
+ "evidence": "ch8-diol-syn-v2 student_config.options[0] = {'id':'a','text':'OsO₄, then NaHSO₃','structure_smiles':'OC1CCCC1O'}; RDKit CIP = [] (no stereocenters assigned). Prompt text names 'cis-cyclopentane-1,2-diol' explicitly.",
+ "recommended_outcome": "Where a question's answer turns on cis versus trans, the depicted structure needs to carry the relative configuration; the chapter needs its ring-diol example to show the cis relationship rather than leaving it undefined.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "instr-004",
+ "location": {
+ "asset_id": "mol-butane",
+ "nugget_id": "nugget-hydrogenation",
+ "section_id": "nugget-hydrogenation",
+ "anchor_text": "Identify the alkane formed by syn addition of H2 to but-2-ene."
+ },
+ "severity": "high",
+ "category": "figure-purpose",
+ "observation": "All three reactions in this chapter whose central teaching point is stereochemistry are illustrated with substrate/product pairs on which the stereochemistry is undetectable. Hydrogenation: but-2-ene (CC=CC, no E/Z even specified) to butane (CCCC) — butane is achiral with no stereocenters, so syn versus anti delivery gives literally the same molecule. Epoxidation: propene (CC=C) to 2-methyloxirane (CC1CO1) — one stereocenter, so stereospecificity is invisible. Dihydroxylation: propene to propane-1,2-diol (CC(O)CO) — one stereocenter, so syn and anti addition give the identical (racemic) product. The asset learning_goals nonetheless assert the stereochemistry ('the alkane formed by syn addition', 'the vicinal (1,2) diol from syn dihydroxylation of propene').",
+ "learner_impact": "A student can read the entire chapter, look at every figure, and never once see what 'syn addition' produces. The word 'syn' remains a label attached to a reagent rather than a spatial claim about a product, which is exactly why students later assign anti stereochemistry to OsO4 or forget that both hydrogens land on one face. The declared trouble_spots for catalytic-hydrogenation and syn-dihydroxylation both name this failure mode, and no figure in the chapter counters it.",
+ "evidence": "assets mol-hydrog-butene (CC=CC) / mol-butane (CCCC); mol-propene-ep (CC=C) / mol-methyloxirane (CC1CO1); mol-propene-diol (CC=C) / mol-propane-1-2-diol (CC(O)CO). RDKit confirms zero stereocenters in CCCC and a single stereocenter in CC1CO1 and CC(O)CO. nugget-hydrogenation prose: 'for a disubstituted alkene the two new carbon–hydrogen bonds are formed on the same side' — no figure shows this.",
+ "recommended_outcome": "Each syn-addition concept needs at least one worked substrate on which the two faces are actually distinguishable (a cyclic or 1,2-disubstituted alkene), so that the stereochemical claim in the prose is something a student can see and reproduce rather than memorize.",
+ "confidence": 0.94
+ },
+ {
+ "finding_id": "instr-005",
+ "location": {
+ "nugget_id": "nugget-dihydroxylation",
+ "section_id": "nugget-dihydroxylation",
+ "anchor_text": "form a five-membered cyclic osmate ester"
+ },
+ "severity": "high",
+ "category": "conceptual-support",
+ "observation": "Five of the six nuggets carry type 'mechanism', but no mechanism appears anywhere in the package or the compiled reader — there is not a single curved arrow, transition state, or intermediate structure. The prose names four intermediates as the causal explanation for the observed outcome and draws none of them: the five-membered cyclic osmate ester (nugget-dihydroxylation), the organoborane and its concerted four-centre addition (nugget-hydroboration), the ozonide (nugget-ozonolysis), and the concerted oxygen transfer from the peroxyacid O–O bond (nugget-epoxidation). Because the cyclic intermediate IS the reason for syn delivery, removing it reduces every stereochemical claim in the chapter to an assertion.",
+ "learner_impact": "Students are given the outcome ('syn because a cyclic ester forms on one face') without the object that makes it inevitable, so the chapter becomes a reagent-to-product lookup table. This is the memorization failure mode: students who cannot picture the osmate ester have no way to reconstruct syn selectivity under exam pressure, and no basis for predicting a reaction they have not memorized. It also leaves ch8-stereo-categorize's hint ('Reactions through a cyclic intermediate on one face are syn') pointing at something the chapter never showed.",
+ "evidence": "nuggets nugget-hydrogenation, nugget-hydroboration, nugget-epoxidation, nugget-dihydroxylation, nugget-ozonolysis all have type='mechanism'. The compiled reader contains only block_type 'text', 'molecule', 'reaction_coordinate', 'video' (hidden), 'external_link', 'mcmurry_link'. The only non-molecule figure in the whole chapter is rc-epoxidation.",
+ "recommended_outcome": "The mechanism-typed sections need the intermediates and the electron flow their own prose relies on to be visible, so that syn delivery, retention at the boron-bearing carbon, and complete C=C cleavage are derivable rather than asserted.",
+ "confidence": 0.92
+ },
+ {
+ "finding_id": "instr-006",
+ "location": {
+ "section_id": "nugget-hydroboration",
+ "asset_id": "mol-1-butene",
+ "anchor_text": "Hydroboration substrate: 1-butene"
+ },
+ "severity": "high",
+ "category": "visual-opportunity",
+ "observation": "In the compiled reader, every transformation is presented as two independent molecule blocks with no connecting arrow, no reagents or conditions over an arrow, and no combined caption. For example, section nugget-hydroboration renders blk-2zpgo66v ('Hydroboration substrate: 1-butene') followed by blk-udsl7aee ('Anti-Markovnikov product: butan-1-ol') as two separate figures; nothing in the figure layer states BH3-THF then H2O2/NaOH. The same pattern holds in all six sections. The chapter therefore contains zero reaction schemes.",
+ "learner_impact": "Students learn reactions as substrate-product pairs to be matched rather than as transformations with conditions, which is why reagent-recall questions like ch8-reagent-match and ch8-synth-route feel disconnected from the reading. It also means the reagent strings a student is graded on (BH3.THF; H2O2/NaOH; OsO4 then NaHSO3; O3 then Zn) appear only in question text, never in the chapter's figures.",
+ "evidence": "Compiled reader sections nugget-hydrogenation, nugget-hydroboration, nugget-epoxidation, nugget-dihydroxylation, nugget-ozonolysis, nugget-synthesis — every asset is type 'molecule' with a standalone SMILES; assets[] contains no reaction-scheme asset of any kind. Reagent strings appear only in question_sets student_config.",
+ "recommended_outcome": "Each reaction section needs its transformation shown as one connected scheme carrying substrate, arrow, reagents/conditions, and product, so the reading and the assessment refer to the same object.",
+ "confidence": 0.91
+ },
+ {
+ "finding_id": "instr-007",
+ "location": {
+ "question_slug": "ch8-epox-diol-name",
+ "concept_slug": "alkene-epoxidation",
+ "anchor_text": "When an epoxide is opened by aqueous acid, water attacks from the opposite face"
+ },
+ "severity": "high",
+ "category": "objective-alignment",
+ "observation": "Several graded answers depend on chemistry this chapter never teaches. (1) ch8-epox-diol-name and ch8-stereo-categorize (item i_epox, keyed to g_anti) both require anti stereochemistry of epoxide ring-opening; the epoxidation nugget says only that 'the ring can afterward be opened by a range of nucleophiles under either basic or acidic conditions' and never states the stereochemistry, and the alkene-epoxidation concept lists only 'alkene-structure-pi-bond' as a prerequisite. Epoxide opening lives in the downstream 'epoxides'/'ethers-epoxides-thiols-and-sulfides' packages. (2) ch8-antimarkovnikov-select keys 9-BBN as correct; 9-BBN appears nowhere in any nugget. (3) ch8-stereo-categorize-v2 keys hot concentrated KMnO4 as a cleaving reagent; the prose mentions only cold, dilute, basic KMnO4 for syn dihydroxylation. (4) ch8-hydrog-equiv-v2 grades alkyne hydrogenation (propyne, 2 equiv); alkynes are a later chapter and are not a listed prerequisite.",
+ "learner_impact": "A student who has read this chapter carefully and mastered its objectives will still miss these items, and will not know whether the gap is their understanding or the reading. Instructors assigning the bank as written will field complaints, and the misses land disproportionately on the advanced-difficulty items that are meant to discriminate real synthetic reasoning.",
+ "evidence": "ch8-epox-diol-name answer_key [redacted]; ch8-stereo-categorize answer_key [redacted]; ch8-antimarkovnikov-select answer_key [redacted] where b = '9-BBN, then H2O2 / NaOH'; ch8-stereo-categorize-v2 correct_assignments.i_hotkmno4 = 'g_cleave'; ch8-hydrog-equiv-v2 prompt 'propyne (CH3-C#CH)'. None of '9-BBN', 'hot', 'alkyne', or the anti stereochemistry of ring-opening appears in any nuggets[].text.",
+ "recommended_outcome": "Either the chapter needs to teach these four points (anti ring-opening, bulky boranes, hot versus cold permanganate, alkyne reduction stoichiometry) or the items that grade them need to be scoped out; as it stands the assessment measures content the chapter does not deliver.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "instr-008",
+ "location": {
+ "question_slug": "ch8-epox-diol-name",
+ "anchor_text": "giving a 1,2-diol whose two -OH groups are on opposite faces. What one-word (or two-word) term describes the stereochemical relationship"
+ },
+ "severity": "high",
+ "category": "assessment-readiness",
+ "observation": "Two short_answer prompts state their own answers in plain English before asking for them. ch8-epox-diol-name says the OH groups are 'on opposite faces' and then asks for the term describing that relationship — the accepted answers are exactly 'anti' and 'trans', i.e. a synonym for the phrase already supplied. ch8-ozon-use says the fragments 'reveal exactly where the double bond was' and then asks the student to fill in the blank, with accepted answers 'location', 'position', 'placement'. Neither item requires any chemical reasoning; both are vocabulary substitutions off the stem.",
+ "learner_impact": "These are two of only four short_answer items and they generate no diagnostic signal — a student who understands nothing about epoxide opening or ozonolysis answers both correctly by paraphrase. Instructors get inflated mastery estimates on the epoxidation and ozonolysis concepts, and the chapter's stated ozonolysis objective ('use them to locate the original double bond') appears mastered when it was never tested.",
+ "evidence": "ch8-epox-diol-name prompt_text plus answer_key [redacted]; ch8-ozon-use prompt_text plus answer_key [redacted].",
+ "recommended_outcome": "These two items need stems that withhold the answer, so the student must supply the stereochemical relationship or the analytical inference rather than restate a phrase already given.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "instr-009",
+ "location": {
+ "section_id": "nugget-hydrogenation",
+ "nugget_id": "nugget-hydrogenation",
+ "anchor_text": "What is the stereochemistry of catalytic hydrogenation, and why?"
+ },
+ "severity": "high",
+ "category": "retrieval-practice",
+ "observation": "All six nuggets author a practice_check (prompt plus answer), and none of them survives compilation: the string 'practice' appears zero times in the compiled reader chapter. The reader also contains no question blocks — the 32 compiled questions live only in compiled/question-set.json. The chapter a student actually opens is therefore six blocks of expository prose, twelve static molecules, one energy diagram, and two hidden empty videos, with no place to test themselves at any point.",
+ "learner_impact": "Students read six reaction mechanisms with zero interleaved retrieval, which is the reading pattern that produces confident fluency illusions and poor exam transfer. The authored practice_checks — which are well-targeted, especially 'What is the stereochemistry of catalytic hydrogenation, and why?' — are exactly what the reading needs and the student never sees them.",
+ "evidence": "topic.package.json nuggets[].practice_check present on all six nuggets (nugget-hydrogenation, nugget-hydroboration, nugget-epoxidation, nugget-dihydroxylation, nugget-ozonolysis, nugget-synthesis). grep -c 'practice' on frontend/public/reader/topic-chapters/alkenes-reactions-and-synthesis.json returns 0. No block in any section has a question/practice block_type.",
+ "recommended_outcome": "The reading surface needs the authored self-check items to reach the student in-line at the end of each section, so the chapter supports retrieval rather than continuous exposition.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "instr-010",
+ "location": {
+ "nugget_id": "nugget-hydroboration",
+ "section_id": "nugget-hydroboration",
+ "anchor_text": "Because boron is electron-deficient, it becomes bonded to the less hindered, less substituted carbon"
+ },
+ "severity": "medium",
+ "category": "conceptual-support",
+ "observation": "This is the only causal explanation of anti-Markovnikov regiochemistry in the chapter, and it is a non-sequitur: boron's electron deficiency is why borane is electrophilic and adds at all, but it does not by itself explain why boron lands on the less substituted carbon. The two standard reasons — sterics (the bulky boron avoids the more substituted carbon) and, more importantly, the partial positive charge developing on the MORE substituted carbon in the four-centre transition state — are conflated into one clause, and the transition-state charge argument is absent entirely. The sentence effectively pairs an electronic premise with a steric conclusion.",
+ "learner_impact": "This is the concept whose own declared trouble_spot is 'Applying Markovnikov regiochemistry to an anti-Markovnikov reaction.' Students who learned from the prior chapter that electrophiles add so as to give the more stable carbocation will read 'boron is electron-deficient' and predict the opposite regiochemistry, because the chapter never explains why the same charge-stability logic that put H+ on the terminal carbon in HBr addition puts H on the internal carbon here. Without the TS argument, anti-Markovnikov becomes an arbitrary exception to memorize.",
+ "evidence": "nugget-hydroboration text.expanded, second paragraph; identical wording compiled into reader block blk-ketrqpgu. The hint ladders in ch8-hb-regio and ch8-hb-hotspot use only the steric framing ('Boron adds to the less hindered carbon'), so the electronic argument is nowhere in the chapter or its assessment.",
+ "recommended_outcome": "The regiochemistry needs a stated 'why' that connects to the carbocation-stability reasoning students already own — where the partial positive charge sits in the concerted transition state — so anti-Markovnikov reads as a consequence of the same principle rather than an exception to it.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "instr-011",
+ "location": {
+ "concept_slug": "oxidative-cleavage-ozonolysis",
+ "anchor_text": "\"prerequisites\": [\"catalytic-hydrogenation\"]"
+ },
+ "severity": "medium",
+ "category": "sequencing",
+ "observation": "Two concepts declare prerequisites that do not match what their prose and questions assume. (1) oxidative-cleavage-ozonolysis lists catalytic-hydrogenation as its only prerequisite; there is no chemical dependency between them — nothing in the ozonolysis nugget uses hydrogenation. The real assumed knowledge is recognizing and naming aldehydes versus ketones, which is unlisted, yet the questions require the student to name acetone, acetaldehyde, pentanedial, butanal, 2-butanone and formaldehyde and to know that a fully substituted carbon gives a ketone. (2) alkene-synthesis-retrosynthesis lists only hydroboration-oxidation, syn-dihydroxylation and oxidative-cleavage-ozonolysis, but its own prose depends on acid-catalyzed hydration, halogenation and catalytic hydrogenation, and its questions (ch8-reagent-match-v2) grade HBr and Br2 outcomes. I verified the externally-referenced slugs (alkene-structure-pi-bond, markovnikov-hbr-addition, acid-catalyzed-hydration, alkene-halogenation-anti) all resolve correctly to the alkenes-structure-and-reactivity package, so the machinery works — these two entries are simply wrong.",
+ "learner_impact": "Any sequencing or remediation tool that trusts the prerequisite graph will route students to hydrogenation before ozonolysis (useless) and will not flag missing carbonyl nomenclature (the actual blocker for six ozonolysis questions). Students entering the synthesis section may not have hydration or halogenation activated, yet the section's entire argument is the complementary-pairs table built from them.",
+ "evidence": "concepts[4].prerequisites = ['catalytic-hydrogenation']; concepts[5].prerequisites = ['hydroboration-oxidation','syn-dihydroxylation','oxidative-cleavage-ozonolysis'] versus nugget-synthesis text.expanded 'Acid-catalyzed hydration gives the Markovnikov alcohol... Halogenation adds two halogens anti... Catalytic hydrogenation removes the double bond'. ch8-reagent-match-v2 grades l_br2 and l_hbr.",
+ "recommended_outcome": "The prerequisite graph needs to state what each section actually assumes — carbonyl recognition for ozonolysis, and the full set of complementary reactions for the synthesis section — rather than a nominal upstream link.",
+ "confidence": 0.87
+ },
+ {
+ "finding_id": "instr-012",
+ "location": {
+ "asset_id": "mol-2-methylbut-2-ene",
+ "question_slug": "ch8-ozon-products",
+ "anchor_text": "2-Methyl-2-butene ((CH3)2C=CHCH3)"
+ },
+ "severity": "medium",
+ "category": "notation-consistency",
+ "observation": "Three notation conventions drift across the chapter. (1) Nomenclature style is mixed: assets and prose use current IUPAC locants ('but-2-ene', 'butan-1-ol', '2-methylbut-2-ene', 'propane-1,2-diol') while questions use pre-1993 style ('1-Butene', 'cis-2-Butene', '2-Methyl-2-butene', '1,3-butadiene', '2-Butanone'). The same compound is 'mol-2-methylbut-2-ene' in the asset layer and '2-Methyl-2-butene' in ch8-ozon-products/ch8-ozon-draw. (2) cis/trans and E/Z are used interchangeably for the same structural class — ch8-hydrog-product and ch8-heat-of-hydrogenation-rank say 'cis-2-Butene'/'trans-2-Butene' while ch8-epox-product-v2 says '(E)-2-butene' — with no statement anywhere that they are equivalent here. (3) Subscript rendering is mixed inside a single answer list: ch8-antimarkovnikov-select-v2 offers 'OsO₄, then NaHSO₃' (Unicode) alongside 'cold, dilute KMnO4 (basic)' (plain), and ch8-synth-route offers 'BH₃.THF; then H₂O₂, NaOH' alongside 'dilute H3O+'.",
+ "learner_impact": "Students searching the reading for the compound named in a question ('2-Methyl-2-butene') will not find the figure that shows it ('2-methylbut-2-ene') and may believe they are different molecules. The unexplained cis/trans-versus-E/Z switch invites the belief that the epoxidation question is about a different kind of isomerism than the hydrogenation question. Mixed subscript rendering inside one option list reads as an authoring error and draws attention away from the chemistry being discriminated.",
+ "evidence": "assets[10].title 'Ozonolysis substrate: 2-methylbut-2-ene' versus ch8-ozon-products prompt_text '2-Methyl-2-butene'; ch8-heat-of-hydrogenation-rank cards 'cis-2-Butene'/'trans-2-Butene' versus ch8-epox-product-v2 prompt '(E)-2-butene'; ch8-antimarkovnikov-select-v2 options a/b; ch8-synth-route reagents r_hb/r_acid.",
+ "recommended_outcome": "The chapter needs one nomenclature convention, one stereodescriptor convention (or an explicit statement of equivalence at first use), and one subscript rendering applied uniformly across prose, figures and every option list.",
+ "confidence": 0.86
+ },
+ {
+ "finding_id": "instr-013",
+ "location": {
+ "section_id": "nugget-hydrogenation",
+ "anchor_text": "Read in McMurry (OpenStax) — Chapter 8"
+ },
+ "severity": "medium",
+ "category": "missing-example",
+ "observation": "The compiled reader declares mcmurry_chapter_number 8 and links students to the full OpenStax chapter 8, but the chapter (together with its stated companion, alkenes-structure-and-reactivity, whose six concepts I checked) covers only hydrogenation, hydroboration, epoxidation, dihydroxylation, ozonolysis, HBr addition, hydration and halogenation. Absent are halohydrin formation, oxymercuration-demercuration, carbene addition/cyclopropanation, radical addition and polymerization, biological additions, alkene preparation by elimination (which is what the word 'Synthesis' in the chapter title normally denotes), and the reaction-stereochemistry section that establishes racemic outcomes.",
+ "learner_impact": "An instructor who assigns this reader as chapter 8 will find roughly half of the sections in the linked textbook chapter unsupported, and students following the OpenStax link will encounter reactions the reader never mentions. The missing reaction-stereochemistry material is also the direct cause of finding instr-001. The title promise of 'Synthesis' is met only by a reagent-selection section, not by any route to making an alkene.",
+ "evidence": "Compiled reader mcmurry_chapter_number = 8, block blk-ne7x82ea links https://openstax.org/books/organic-chemistry/pages/8-why-this-chapter. concepts[] in this package (6) plus concepts[] in alkenes-structure-and-reactivity (alkene-structure-pi-bond, alkene-ez-stereochemistry, electrophilic-addition-carbocation, markovnikov-hbr-addition, acid-catalyzed-hydration, alkene-halogenation-anti).",
+ "recommended_outcome": "The chapter needs either coverage of the remaining chapter-8 transformations and the racemic-product principle, or an explicit scope statement to the instructor about which textbook sections it does and does not support, so assignment decisions are informed.",
+ "confidence": 0.82
+ },
+ {
+ "finding_id": "instr-014",
+ "location": {
+ "nugget_id": "nugget-hydrogenation",
+ "concept_slug": "catalytic-hydrogenation",
+ "anchor_text": "Predict the product of catalytic hydrogenation and identify its syn stereochemistry."
+ },
+ "severity": "medium",
+ "category": "objective-alignment",
+ "observation": "Two stated learning objectives are not assessed by any item that actually requires them. (1) nugget-hydrogenation's objective includes identifying syn stereochemistry, but its six questions test product identity (ch8-hydrog-product, -v2), H2 stoichiometry (ch8-hydrog-equiv, -v2) and alkene stability ranking (ch8-heat-of-hydrogenation-rank, -v2); none asks for a stereochemical product. The only place hydrogenation's syn character is graded is a single sorting card in ch8-stereo-categorize, which is filed under the dihydroxylation concept. (2) nugget-ozonolysis's objective 'use them to locate the original double bond' is assessed only by the fill-in-the-blank ch8-ozon-use, whose answer is the word 'location' — no item asks the student to work backward from a pair of carbonyl products to the parent alkene, which is the actual skill.",
+ "learner_impact": "Concept-level mastery reporting for catalytic-hydrogenation will read as mastered by students who cannot predict a syn product, and for ozonolysis by students who cannot run the analysis backward. The backward-inference skill is the one most likely to appear on an exam and is the one the chapter's own video brief (video-ozonolysis, storyboard step 3 'Recombine the fragments') was designed to teach — and that video compiles to an empty, hidden block.",
+ "evidence": "nuggets[0].learning_objectives; the six questions with concept_slug 'catalytic-hydrogenation'. nuggets[4].learning_objectives; ch8-ozon-use answer_key [redacted]. Compiled reader block blk-d83qw7fc has url '' and is_hidden true.",
+ "recommended_outcome": "Each concept needs at least one item that cannot be answered without exercising its stated objective — a stereochemical hydrogenation product, and a reverse-inference ozonolysis item that starts from the carbonyl fragments.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "instr-015",
+ "location": {
+ "section_id": "nugget-epoxidation",
+ "anchor_text": "Wikipedia — Epoxidation with a peroxyacid"
+ },
+ "severity": "medium",
+ "category": "media-equivalence",
+ "observation": "Four of the six 'background reading' links in the compiled reader are dead. I fetched all six: en.wikipedia.org/wiki/Catalytic_hydrogenation (200) and /wiki/Hydroboration-oxidation (200) resolve, but /wiki/Epoxidation_with_a_peroxyacid (404), /wiki/Syn_dihydroxylation (404), /wiki/Oxidative_cleavage_(ozonolysis) (404) and /wiki/Choosing_reactions_in_synthesis (404) do not exist. The URLs appear to have been generated mechanically from the concept titles rather than from real article names, which is why the last one — a slug derived from an internal pedagogical concept, not a chemical topic — could never have existed.",
+ "learner_impact": "Four of six sections offer the student a labelled 'Background reading' affordance that dead-ends. Students who are struggling are precisely the ones who click it, and they lose trust in the chapter's other external links, including the OpenStax assignment link that does work. An instructor who spot-checks one link and finds it fine will ship four broken ones.",
+ "evidence": "Compiled reader blocks blk-ato1wt8z, blk-e3lw8c4e, blk-8p0uocch, blk-4m78mkhx. curl HTTP status codes: 200, 200, 404, 404, 404, 404 for the six /wiki/ targets in section order.",
+ "recommended_outcome": "Every external reading link in the chapter needs to resolve to a real, on-topic page before publication, and the section whose concept has no encyclopedic counterpart needs no link at all rather than a fabricated one.",
+ "confidence": 0.97
+ },
+ {
+ "finding_id": "instr-016",
+ "location": {
+ "asset_id": "rc-epoxidation",
+ "nugget_id": "nugget-epoxidation",
+ "anchor_text": "Show epoxidation as a single concerted step rather than a two-step ionic addition."
+ },
+ "severity": "medium",
+ "category": "figure-purpose",
+ "observation": "The one non-molecule figure in the chapter is a single-barrier energy profile whose spec contains one exergonic step and two minima labels ('Propene + peroxyacid', 'Epoxide + carboxylic acid'). It correctly shows the absence of an intermediate, but its stated learning goal is to establish the concerted mechanism, and the transition state — the butterfly TS in which the O–O bond breaks while both C–O bonds form — carries no label, no structure, and no annotation. The figure therefore conveys 'one hump' but not what is happening at the top of it.",
+ "learner_impact": "The declared trouble_spot for this concept is 'Treating epoxidation as a two-step ionic addition rather than a concerted transfer.' A student who sees one hump learns that there is no intermediate but still has no picture of simultaneous bond making and breaking, so the concerted claim remains a shape rather than a mechanism — and it is the single fact that explains the stereospecificity the chapter grades in ch8-epox-product-v2.",
+ "evidence": "assets[6].spec = {'steps':[{'type':'exergonic','barrier':'medium'}], 'minima_labels':[...], 'minima_molecules':{'0':'CC=C','1':'CC1CO1'}}; no transition-state label or structure. accessibility.alt_text likewise describes only 'one barrier from reactants to the epoxide'.",
+ "recommended_outcome": "The energy profile needs its maximum identified as the concerted transition state with the simultaneous bond changes made explicit, so the diagram delivers the mechanistic claim its learning goal states rather than only the count of steps.",
+ "confidence": 0.83
+ },
+ {
+ "finding_id": "instr-017",
+ "location": {
+ "nugget_id": "nugget-synthesis",
+ "section_id": "nugget-synthesis",
+ "anchor_text": "The complementary pairs established across these two chapters make the choice explicit."
+ },
+ "severity": "low",
+ "category": "sequencing",
+ "observation": "The synthesis section refers to 'these two chapters' and then relies on hydration, halogenation and Markovnikov HBr addition, all of which live in the separate alkenes-structure-and-reactivity package. The compiled reader for this chapter contains no link, cross-reference, or recap pointing to that chapter — its only navigational affordances are the OpenStax chapter-8 link and four Wikipedia links, none of which points at the companion chapter.",
+ "learner_impact": "A student reading this chapter standalone (which is how a reader chapter is consumed) hits a dangling reference to a chapter they cannot navigate to, and must take on faith the half of the complementary-pairs table that was never presented here. This is the capstone section, so the missing half is load-bearing for the synthesis reasoning the section is meant to build.",
+ "evidence": "nugget-synthesis text.expanded, second paragraph, compiled into reader block blk-aghq6md3. The nugget-synthesis section's blocks are: one text block, mol-butan-1-ol, mol-butan-2-ol, and one (404) Wikipedia link.",
+ "recommended_outcome": "The capstone section needs the reactions it relies on to be reachable or recapped in place — at minimum a resolvable pointer to the companion chapter — so the complementary-pairs argument is complete for a student reading this chapter alone.",
+ "confidence": 0.84
+ },
+ {
+ "finding_id": "instr-018",
+ "location": {
+ "question_slug": "ch8-hydrog-product",
+ "anchor_text": "\"demo_eligible\": false"
+ },
+ "severity": "low",
+ "category": "assessment-readiness",
+ "observation": "All 32 compiled questions carry demo_eligible false, so no item from this chapter can surface in a demo or preview surface, and the compiled bank reports available with science_review.status 'not_reviewed' / current false. Additionally, the two hotspot items key a single atom (atom_0) while student_config.select_count is 'one_or_more', which permits a multi-atom submission against a single-atom key.",
+ "learner_impact": "Instructors evaluating whether to adopt the chapter cannot preview any item, and the unreviewed science flag means no subject-matter sign-off is recorded on a bank whose two verified chemical errors (instr-001, instr-002) would have been caught by one. The hotspot select_count mismatch is a small grading ambiguity on two of the six hydroboration items.",
+ "evidence": "compiled/question-set.json: all 32 questions demo_eligible false; reader science_review = {'status':'not_reviewed','current':false}; ch8-hb-hotspot and ch8-hb-hotspot-v2 student_config.select_count = 'one_or_more' with answer_key [redacted].",
+ "recommended_outcome": "The bank needs at least a few items exposed for instructor preview and a recorded subject-matter review before adoption, and the hotspot items need their permitted selection count to match the size of their key.",
+ "confidence": 0.8
+ }
+ ],
+ "strengths": [
+ "Structural fidelity is high: I machine-verified all 13 asset SMILES and every structure embedded in all 32 questions with RDKit — every one parses, and every molecular formula and InChIKey matches the compound its label claims (e.g. mol-2-methylbut-2-ene CC=C(C)C = C5H10, BKOOMYPCSUNDGP; mol-acetone CC(C)=O = C3H6O, CSCPPACGZOOCGX). The E/Z distractors in ch8-heat-of-hydrogenation-rank are correctly encoded (C/C=C\\C = Z, C/C=C/C = E), and the cis/trans labels on the 2,3-dimethyloxirane options are chemically correct ((R,R) = trans, (R,S) meso = cis).",
+ "I re-derived every answer key independently and all intended chemical outcomes are correct: 2 equivalents of H2 for butadiene and for propyne, 1-butene and cyclopentene to butane/cyclopentane, propene and 2-methylpropene to the primary alcohols, 2-methylbut-2-ene to acetone plus acetaldehyde, cyclopentene to pentanedial (ring-opening, not two fragments), and the full acid-hydration-versus-hydroboration comparison matrices.",
+ "Assessment breadth is genuinely strong for a first version: 32 items across 11 question types (single_select, multi_select, numeric_with_units, rank_order, comparison_matrix, hotspot, short_answer, categorize_groups, structure_scaffold, synthesis_route, matching_pairs), every concept carries at least four items, and two structure_scaffold items require the student to draw a product rather than recognize one.",
+ "Feedback is diagnostic rather than generic: nearly every distractor carries a chemistry-specific explanation naming the misconception (e.g. ch8-ozon-products option c, 'Formaldehyde only forms from a terminal =CH2. This alkene has no =CH2 group'), and every item has a graduated two- or three-level hint ladder that narrows rather than reveals.",
+ "The complementary-pairs framing in nugget-synthesis (Markovnikov/anti-Markovnikov, syn/anti, add/cleave) is good synthesis pedagogy — it reduces reagent selection to two explicit decisions, regiochemistry and face, and the paired ch8-synth-route / ch8-synth-route-v2 items assess exactly that discrimination on the same substrate.",
+ "The cross-chapter prerequisite wiring is real, not decorative: I resolved alkene-structure-pi-bond, markovnikov-hbr-addition, acid-catalyzed-hydration and alkene-halogenation-anti and all four exist as concepts in the alkenes-structure-and-reactivity package."
+ ],
+ "open_questions": [
+ "Category substitution on instr-015 for regression diffing: I originally coined `broken-resource-link` for the four HTTP 404 Wikipedia links in the compiled reader and, on validator rejection, remapped it to the schema id `media-equivalence` (closest fit: a resource presented to the learner delivers no content). The fit is imperfect — `media-equivalence` normally means a figure or media element lacks a non-visual equivalent, not that an external resource is dead — so if dead-link defects recur across chapters, the schema may warrant a dedicated id. Next regression run should treat instr-015 as `media-equivalence`, not `broken-resource-link`.",
+ "Are video-hydration-complement and video-ozonolysis intended to ship in version 1? Both compile to blocks with url '' and is_hidden true. This matters for grading: video-ozonolysis's storyboard step 3 ('Recombine the fragments to show how the products identify the original alkene') is the only place in the chapter that teaches the reverse-inference skill named in the ozonolysis learning objective (see instr-014), so if the videos are deferred, that objective has no delivery vehicle at all.",
+ "The two hotspot answer keys (atom_0) assume the renderer assigns atom ids from the input SMILES atom order. For 'C=C(C)C' and 'C=CC' atom 0 is the terminal CH2 under RDKit's default (input-order) indexing, so the keys are correct under that assumption, but I could not confirm whether the hotspot payload builder canonicalizes the SMILES before indexing. If it does, both keys silently point at the wrong carbon. Worth one runtime check.",
+ "Is the reader chapter expected to surface questions at all? All 32 compiled items live only in compiled/question-set.json and the reader has no question or practice block of any type, so I could not tell whether instr-009 is a compilation gap or an intended separation of reading and assessment surfaces."
+ ]
+ },
+ {
+ "persona": "Struggling Student",
+ "persona_version": "1.0.0",
+ "chapter_id": "alkenes-reactions-and-synthesis",
+ "chapter_version": "1",
+ "model": "claude-opus-5[1m]",
+ "summary": "Sentence by sentence this chapter is clear and correct, and the three authored detail tiers are a real kindness. But as compiled, it is six near-identical blocks of three dense paragraphs each, with no chapter overview, no summary, no worked example, no misconception callout, and zero practice inside the reading itself — every practice_check and every trouble_spot the author wrote was dropped in compilation. The chapter's entire point is which face a group is delivered to (syn vs anti), yet not one of its thirteen figures shows a face: they are flat SMILES structures of starting material and product, so 'same face' stays a phrase I have to take on faith. No reagent or intermediate is ever drawn — I am told a 'five-membered cyclic osmate ester' explains syn addition and a peroxyacid has a 'weak, electrophilic oxygen–oxygen bond', but I never see either. The question bank is worse for a student like me: hints hand over the answer instead of unsticking me (level 2 for ch8-hydrog-product is literally the product), the correct choice is the first option in all ten single-selects and the given order in every rank/match/categorize item, so I can score well by guessing position, and several graded items (bromonium anti addition, anti epoxide opening, 9-BBN, alkyne hydrogenation) test content this chapter never contains. I would read this, feel like I understood it, and then discover on the exam that I only memorized sentences.",
+ "overall_score": 4.3,
+ "publication_blockers": [
+ "stud-002"
+ ],
+ "findings": [
+ {
+ "finding_id": "stud-001",
+ "location": {
+ "section_id": "nugget-hydrogenation",
+ "concept_slug": "catalytic-hydrogenation",
+ "asset_id": "mol-butane",
+ "anchor_text": "the two hydrogen atoms are transferred to the same face of the double bond"
+ },
+ "severity": "high",
+ "category": "conceptual-support",
+ "observation": "Syn vs anti — 'which face the groups are delivered to' — is the organizing idea of all six sections, but no figure in the chapter shows a face, a wedge/dash, or any three-dimensional relationship. All thirteen molecule blocks are flat 2D line structures of a substrate and a product with no stereochemistry in the SMILES (mol-butane 'CCCC', mol-propane-1-2-diol 'CC(O)CO', mol-methyloxirane 'CC1CO1'). The asset mol-butane even carries the learning_goal 'Identify the alkane formed by syn addition of H2 to but-2-ene', but butane drawn as CCCC cannot display syn anything.",
+ "learner_impact": "I cannot picture 'same face'. I convert it into a word I memorize — 'hydrogenation = syn' — with no mental image behind it, so when a question shows a ring or an (E)-alkene and asks for the stereochemical outcome I have nothing to reason from and I guess. This is the single place I would form a durable wrong mental model (that syn/anti is a label attached to reagents rather than a geometric fact).",
+ "evidence": "Reader blocks blk-u0agrki8, blk-kw1rj1ri, blk-v7kbfya4, blk-1u0rwpbn, blk-g0qp30q7; package assets mol-hydrog-butene, mol-butane, mol-propene-diol, mol-propane-1-2-diol. Prose asserting the geometry: 'both oxygen atoms are delivered to the same face' (nugget-dihydroxylation), 'both new carbon–oxygen bonds form at the same time and on the same face' (nugget-epoxidation).",
+ "recommended_outcome": "A learner needs to actually see the two faces of a specific alkene and see two groups arriving on one of them versus on opposite ones, for at least one worked substrate, rather than inferring geometry from the word 'face'.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "stud-002",
+ "location": {
+ "question_slug": "ch8-stereo-categorize",
+ "concept_slug": "syn-dihydroxylation",
+ "anchor_text": "Bromine addition (Br₂) through a bromonium ion"
+ },
+ "severity": "blocker",
+ "category": "conceptual-support",
+ "observation": "Graded items require content that appears nowhere in the chapter. ch8-stereo-categorize asks me to classify 'Epoxidation then aqueous acid (net diol)' and 'Bromine addition (Br₂) through a bromonium ion' as anti; the word 'bromonium' occurs zero times in the compiled reader, and the chapter's only statement about epoxide opening is 'the ring can afterward be opened by a range of nucleophiles under either basic or acidic conditions' — it never says the opening is anti/back-side. The word 'anti' as an addition mode appears exactly once in the whole reader ('the anti addition seen in halogenation'), never defined, in a section about a reaction the chapter does not teach. Same pattern in ch8-antimarkovnikov-select option b ('9-BBN' — zero occurrences in the reader) and ch8-hydrog-equiv-v2 (propyne, an alkyne — 'alkyne' and 'triple' both zero occurrences).",
+ "learner_impact": "I reach a graded item whose answer is genuinely not derivable from anything I was given. I scroll back through all six sections looking for the missing paragraph, do not find it, conclude the fault is mine, and either guess or stop. On a term that appears in the correct-answer group label itself ('Anti (opposite faces) addition'), I learn the definition from the quiz after being graded on it.",
+ "evidence": "grep of frontend/public/reader/topic-chapters/alkenes-reactions-and-synthesis.json: 'bromonium' 0 hits, '9-BBN' 0 hits, 'alkyne' 0 hits, 'triple' 0 hits; 'anti addition' 1 rendered occurrence. Affected items: ch8-stereo-categorize (i_epox→g_anti, i_br2→g_anti), ch8-diol-syn-v2 option b feedback 'Epoxidation then acidic opening gives the trans (anti) diol', ch8-antimarkovnikov-select-v2 option c, ch8-antimarkovnikov-select option b, ch8-hydrog-equiv-v2.",
+ "recommended_outcome": "Either the chapter must teach anti addition (back-side opening of a cyclic intermediate, with halogenation/bromonium and acidic epoxide opening) before grading it, or those items must be scoped to what the chapter actually contains. A term must be defined in the reading before it is scored.",
+ "confidence": 0.96
+ },
+ {
+ "finding_id": "stud-003",
+ "location": {
+ "question_slug": "ch8-hydrog-product",
+ "anchor_text": "Adding H-H across CH2=CHCH2CH3 gives CH3CH2CH2CH3."
+ },
+ "severity": "high",
+ "category": "retrieval-practice",
+ "observation": "The hint ladders end by handing over the answer rather than by unsticking the reasoning. ch8-hydrog-product level 2 states the product; ch8-ozon-use-v2 level 2 is 'Its formula is O3' when the answer is 'ozone/O3'; ch8-epox-diol-name-v2 level 2 is \"Its common name starts with 'epox...' and its IUPAC parent is 'oxirane'\" when the accepted answers are epoxide/oxirane; ch8-stereo-categorize level 2 is the complete answer key ('H2/Pd and OsO4 are syn; bromonium opening and epoxide opening are anti'); ch8-reagent-match and ch8-antimarkovnikov-select-v2 level 2 likewise restate the full key; ch8-ozon-draw level 3 is 'Draw (CH3)2C=O, acetone.'",
+ "learner_impact": "Hints are the first thing a low-confidence student reaches for. Two clicks gets me the answer, I type it, I get a green check, and I have practiced nothing — I leave believing I know the material. The one scaffold built for me is the one that most reliably prevents me from learning.",
+ "evidence": "feedback_bundle.hints in ch8-hydrog-product, ch8-ozon-use-v2, ch8-epox-diol-name-v2, ch8-stereo-categorize, ch8-reagent-match, ch8-antimarkovnikov-select-v2, ch8-ozon-draw, ch8-ozon-draw-v2.",
+ "recommended_outcome": "Hint ladders need to stay procedural to the last rung — pointing at the next decision to make (which carbon is less substituted? which face did the cyclic intermediate occupy?) — so a stuck student is moved forward without the answer being conceded.",
+ "confidence": 0.93
+ },
+ {
+ "finding_id": "stud-004",
+ "location": {
+ "question_slug": "ch8-diol-syn-v2",
+ "anchor_text": "OsO₄, then NaHSO₃"
+ },
+ "severity": "high",
+ "category": "assessment-readiness",
+ "observation": "The answer key is positionally predictable across the entire bank. All ten single_select items have correct_option_ids [redacted] (the first option); both multi_select items are ['a','b'] (the first two); both rank_order keys equal the order the cards are listed in; both matching_pairs keys pair left[i] with right[i]; both categorize_groups keys assign the items in contiguous listed order. Separately, ch8-diol-syn-v2 gives structure_smiles only to the correct option 'a' — the two distractors have no structure at all — and ch8-diol-syn omits the structure only from distractor 'b'.",
+ "learner_impact": "When I am unsure I look for a tell, and this bank has two: pick the top choice / leave the cards as given, and pick the one with a picture. I would score well without doing chemistry, get no signal that I do not understand syn vs anti, and skip the review I actually need.",
+ "evidence": "compiled/question-set.json answer keys: ch8-hydrog-product, ch8-hydrog-product-v2, ch8-hb-regio, ch8-hb-regio-v2, ch8-epox-product, ch8-epox-product-v2, ch8-diol-syn, ch8-diol-syn-v2, ch8-ozon-products, ch8-ozon-products-v2 all = ['a']; ch8-heat-of-hydrogenation-rank key ['c_1butene','c_cis','c_trans'] = card order; ch8-reagent-match key l_h2→r_alkane, l_oso4→r_diol, l_o3→r_carbonyl, l_mcpba→r_epoxide = index order.",
+ "recommended_outcome": "Correctness must not be inferable from position or from which option happens to have a rendered structure; option order needs to vary and every option in a set needs the same representational treatment.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "stud-005",
+ "location": {
+ "section_id": "nugget-hydrogenation",
+ "nugget_id": "nugget-hydrogenation",
+ "anchor_text": "What is the stereochemistry of catalytic hydrogenation, and why?"
+ },
+ "severity": "high",
+ "category": "retrieval-practice",
+ "observation": "The compiled reader contains no practice of any kind. Block types present across all six sections are: 6 text, 13 molecule, 1 reaction_coordinate, 2 video (both hidden), 6 external_link, 1 mcmurry_link — and nothing else. Every nugget authored a practice_check (e.g. nugget-hydrogenation's 'What is the stereochemistry of catalytic hydrogenation, and why?') and none of them survived compilation; the 32-item question set is a separate artifact with available:false and is not referenced from any section.",
+ "learner_impact": "I read six sections of dense prose end to end with no point at which I am asked to produce anything. Fluent reading feels like understanding, so I close the chapter confident and untested. There is no checkpoint that would tell me — or my instructor — that I have not internalized a single reaction.",
+ "evidence": "frontend/public/reader/topic-chapters/alkenes-reactions-and-synthesis.json block_type census; compiled/question-set.json 'available': false; practice_check present on all six nuggets in topic.package.json.",
+ "recommended_outcome": "A shaky reader needs a low-stakes retrieval checkpoint at the end of each section, in the reading flow, before the graded bank — the authored practice_checks already exist and are not reaching the student.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "stud-006",
+ "location": {
+ "section_id": "nugget-hydroboration",
+ "concept_slug": "hydroboration-oxidation",
+ "anchor_text": "Applying Markovnikov regiochemistry to an anti-Markovnikov reaction"
+ },
+ "severity": "high",
+ "category": "misconception",
+ "observation": "Every concept carries an authored trouble_spot naming exactly the wrong move a student makes, and not one of them appears in the compiled reader. 'Applying Markovnikov regiochemistry to an anti-Markovnikov reaction', 'Assigning anti stereochemistry to a syn addition', 'Keeping the carbon skeleton intact instead of cleaving the double bond', 'Treating epoxidation as a two-step ionic addition rather than a concerted transfer', 'Forgetting that both hydrogens are delivered to the same face' — the prose states the correct fact each time but never names the mistake or warns me against it.",
+ "learner_impact": "These are precisely the errors I make, and I only find out I made them after being graded on them (the wrong-answer explanations are where the traps are finally named). Nothing in the reading interrupts me at the moment I am forming the wrong idea, so I carry it into the quiz and then into the exam.",
+ "evidence": "topic.package.json concepts[].trouble_spots (all six populated); zero occurrences of any trouble-spot text in the compiled reader; the same errors appear as distractor explanations in ch8-hb-regio option b, ch8-diol-syn option b, ch8-ozon-products option b, ch8-stereo-categorize match i_br2→g_syn.",
+ "recommended_outcome": "The named common errors need to be surfaced to the student at the point of learning, not only inside post-answer feedback, so the trap is disarmed before it is sprung.",
+ "confidence": 0.92
+ },
+ {
+ "finding_id": "stud-007",
+ "location": {
+ "section_id": "nugget-ozonolysis",
+ "question_slug": "ch8-ozon-draw",
+ "anchor_text": "For example, 2-methylbut-2-ene is cleaved to acetone and acetaldehyde."
+ },
+ "severity": "high",
+ "category": "worked-example-gap",
+ "observation": "The chapter contains no worked example. Its only instance of a procedure being carried out is the single sentence 'For example, 2-methylbut-2-ene is cleaved to acetone and acetaldehyde' — the result with none of the intermediate steps (locate the C=C, cut it, cap each former alkene carbon with =O, decide aldehyde vs ketone from the H count). The reverse use, which the chapter advertises ('identifying the carbonyl products of cleavage reveals the position of the original double bond, since the two fragments join at the carbons that had been doubly bonded'), is never demonstrated on any example at all; the only place it is worked is a storyboard line in video_brief video-ozonolysis, whose video block has an empty url and is_hidden true. Students are then asked to execute both procedures cold in ch8-ozon-draw (draw the ketone), ch8-ozon-use, and ch8-synth-route.",
+ "learner_impact": "I can recite that 2-methylbut-2-ene gives acetone and acetaldehyde because it is one sentence I can memorize, but faced with any other alkene I have no procedure to imitate — I do not know where to make the cut or how to decide which fragment is the ketone. On the draw item I open a blank canvas with nothing to model, and I go straight to the hints (which then give me the answer, see stud-003).",
+ "evidence": "nugget-ozonolysis expanded text; question ch8-ozon-draw student_config.scaffold 'blank_canvas'; video block blk-d83qw7fc content.url '' with is_hidden true.",
+ "recommended_outcome": "At least one fully stepped-out example per reaction family — showing the intermediate decisions, not just the outcome — and one worked instance of the backwards (fragments → original alkene) reasoning the chapter claims as ozonolysis's main analytic value.",
+ "confidence": 0.94
+ },
+ {
+ "finding_id": "stud-008",
+ "location": {
+ "section_id": "nugget-dihydroxylation",
+ "concept_slug": "syn-dihydroxylation",
+ "anchor_text": "form a five-membered cyclic osmate ester, so both oxygen atoms are delivered to the same face"
+ },
+ "severity": "high",
+ "category": "conceptual-support",
+ "observation": "Every causal explanation in the chapter rests on a species that is never drawn. The cyclic osmate ester is the entire reason dihydroxylation is syn; mCPBA's 'weak, electrophilic oxygen–oxygen bond' is the entire reason a peroxyacid transfers oxygen; the organoborane is the entire reason the OH ends up where boron was; the ozonide is the species the workup cleaves. None of OsO4, mCPBA, BH3, the organoborane, the osmate ester or the ozonide has a structure asset anywhere in the package — the thirteen molecule figures are all substrates and final products.",
+ "learner_impact": "The 'why' sentences pass over me as vocabulary. I cannot check whether a five-membered ring across one face is even geometrically possible, so I stop trying to understand and fall back to memorizing reagent→product pairs — which is exactly the strategy that collapses on ch8-hydration-compare, where I am asked to reason about mechanism (carbocation vs concerted) rather than recall products.",
+ "evidence": "topic.package.json assets[] contains no reagent or intermediate structures; prose 'The reagent is a peroxyacid, most commonly meta-chloroperoxybenzoic acid (mCPBA), which contains a weak, electrophilic oxygen–oxygen bond' (nugget-epoxidation) and 'form a five-membered cyclic osmate ester' (nugget-dihydroxylation).",
+ "recommended_outcome": "The intermediates and reagents that carry the explanations need to be visible as structures, at least for the osmate ester and the peroxyacid O–O bond, or the mechanistic reasoning stays inaccessible and the chapter reduces to a reagent table.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "stud-009",
+ "location": {
+ "section_id": "nugget-synthesis",
+ "concept_slug": "alkene-synthesis-retrosynthesis",
+ "anchor_text": "The complementary pairs established across these two chapters make the choice explicit."
+ },
+ "severity": "high",
+ "category": "cognitive-load",
+ "observation": "The synthesis section's middle paragraph asserts five complementary reaction pairs in three sentences, two of which (acid-catalyzed hydration; anti halogenation) are not taught anywhere in this chapter, and refers to 'these two chapters' — a second chapter the reader gives no link or name for. The same unstated dependencies are declared in the package (hydroboration-oxidation requires prerequisites 'markovnikov-hbr-addition' and 'acid-catalyzed-hydration'; syn-dihydroxylation requires 'alkene-halogenation-anti') but the compiled reader offers no route to any of them.",
+ "learner_impact": "This paragraph is where I most need to consolidate, and instead it tells me the material was 'established' somewhere I have not been. I do not know whether I missed a chapter or forgot it, and there is no link to check, so I skim the paragraph and arrive at the synthesis questions (ch8-synth-route, ch8-reagent-match-v2, which grade HBr and Br2) with the comparison never actually built.",
+ "evidence": "nugget-synthesis expanded text, reader block blk-aghq6md3; topic.package.json concepts[].prerequisites listing markovnikov-hbr-addition, acid-catalyzed-hydration, alkene-halogenation-anti, none of which resolve to content in this chapter.",
+ "recommended_outcome": "A student needs the prerequisite reactions either recapped in place or reachable by an explicit pointer before a paragraph builds a five-way comparison on top of them, and 'these two chapters' must resolve to something the reader can open.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "stud-010",
+ "location": {
+ "section_id": "nugget-hydrogenation",
+ "question_slug": "ch8-heat-of-hydrogenation-rank",
+ "anchor_text": "a more stable, more highly substituted alkene releases less heat on hydrogenation than a less stable isomer that gives the same alkane"
+ },
+ "severity": "medium",
+ "category": "cognitive-load",
+ "observation": "Heat of hydrogenation and alkene stability are introduced in one sentence, in the last paragraph of the hydrogenation section, only in the expanded tier — the terse and standard tiers drop it entirely — with no figure, no numbers, and no example. Two advanced questions (ch8-heat-of-hydrogenation-rank, -v2) then grade the inverse relationship, cis/trans strain ordering, and substitution effects; the v2 explanation attributes stability to 'hyperconjugation', a word that appears nowhere in the chapter.",
+ "learner_impact": "This is a genuinely inverted relationship (more stable → releases less heat) and it is the hardest sentence in the chapter, tucked in as an aside after the section's real topic. I read it as trivia, do not notice it is assessed, and on the ranking item I invert it — which is exactly the error the authored distractor anticipates. If I have set the detail slider to terse or standard to cope with the density, I have never seen it at all.",
+ "evidence": "nugget-hydrogenation _detail_texts: 'heat of hydrogenation' present only in expanded; ch8-heat-of-hydrogenation-rank-v2 generic_incorrect_explanation cites 'hyperconjugation'; zero occurrences of 'hyperconjug' in the compiled reader.",
+ "recommended_outcome": "A relationship that is both counterintuitive and assessed needs its own treatment with a concrete comparison, and it must not live only in the tier a struggling student is most likely to turn off.",
+ "confidence": 0.87
+ },
+ {
+ "finding_id": "stud-011",
+ "location": {
+ "section_id": "nugget-hydrogenation",
+ "anchor_text": "Catalytic hydrogenation converts an alkene to an alkane by adding one molecule of H2 across the double bond."
+ },
+ "severity": "medium",
+ "category": "conceptual-support",
+ "observation": "The chapter opens cold on its first reaction's first sentence — there is no introduction, no statement of what the five reactions have in common or how they are organized (add across / cleave; syn / anti; Markovnikov / anti-Markovnikov), and no summary or reagent overview at the end. All six sections are structurally identical (three paragraphs, two or three flat structures, a Wikipedia link) with no emphasis, callouts, or key-point marking, and only section 1 carries the McMurry/OpenStax reading link.",
+ "learner_impact": "Everything reads as equally weighted, so I cannot tell that 'which face' and 'which carbon' are the two questions the whole chapter answers — that framing only appears in the last paragraph of the last section, after I needed it. With nothing marked as important, I highlight everything, which is the same as highlighting nothing, and when I revise I re-read all six sections rather than the four facts that matter.",
+ "evidence": "Compiled reader sections[] — first block blk-xkocydu9 begins the chapter; no overview or summary section exists; blk-ne7x82ea (mcmurry_link) appears only under nugget-hydrogenation; the organizing frame 'two decisions: which carbon must bear the new group (regiochemistry) and on which face it must be delivered (stereochemistry)' occurs only in blk-aghq6md3.",
+ "recommended_outcome": "The learner needs the organizing frame and the relative importance of items signalled up front and consolidated at the end, so revision can be targeted rather than a full re-read.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "stud-012",
+ "location": {
+ "section_id": "nugget-hydroboration",
+ "asset_id": "video-hydration-complement",
+ "anchor_text": "Two routes to an alcohol: hydration versus hydroboration"
+ },
+ "severity": "medium",
+ "category": "conceptual-support",
+ "observation": "Both video blocks in the compiled reader have content.url '' and is_hidden true (blk-1kcvkqh6, blk-d83qw7fc). The suppressed one in the hydroboration section is the side-by-side Markovnikov/anti-Markovnikov comparison — the exact confusion the concept's own trouble_spot names — and the other is the ozonolysis fragment-recombination walkthrough. The chapter's most confusable contrast therefore exists only as one prose sentence and two flat structures in a later section.",
+ "learner_impact": "The regiochemistry contrast is the thing I most need to see happen rather than read about; butan-1-ol and butan-2-ol drawn side by side in the synthesis section do not show me why the reagent decides which one forms. I fall back on memorizing 'BH3 = 1-ol', which fails the moment the substrate is not 1-butene.",
+ "evidence": "Reader blocks blk-1kcvkqh6 and blk-d83qw7fc: content.url '' with is_hidden true; video_briefs video-hydration-complement and video-ozonolysis both status 'needs_review'.",
+ "recommended_outcome": "The Markovnikov vs anti-Markovnikov contrast needs a representation that shows the two outcomes arising from the same alkene under different reagents; right now the planned support is authored but reaches the student as nothing.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "stud-013",
+ "location": {
+ "question_slug": "ch8-epox-diol-name",
+ "anchor_text": "water attacks from the opposite face, giving a 1,2-diol whose two -OH groups are on opposite faces"
+ },
+ "severity": "medium",
+ "category": "assessment-readiness",
+ "observation": "This item states its own answer in the stem — 'on opposite faces' — and then asks for the one-word term for that relationship, accepting only anti/trans and their variants. It simultaneously tests a term the chapter never introduced (see stud-002) and concedes the concept, so the only thing actually assessed is whether I happen to know the vocabulary word for a phrase already supplied. A student who types 'opposite' or 'opposite faces' is marked wrong for the same understanding.",
+ "learner_impact": "I either guess the word and get credit for nothing, or I give a correct-in-substance answer in different words and am told I am wrong — which for a low-confidence student reads as 'I don't understand epoxides' rather than 'I used a synonym'. Either way the item teaches me nothing about back-side attack.",
+ "evidence": "ch8-epox-diol-name prompt_text and answer_key.answer_text ['anti','trans','anti diol','trans diol','anti-diol','trans-diol'].",
+ "recommended_outcome": "The stem should not contain the answer, and the term needs to be taught in the reading before a free-text item grades exact wording; accepted-answer breadth should match the understanding being tested.",
+ "confidence": 0.86
+ },
+ {
+ "finding_id": "stud-014",
+ "location": {
+ "question_slug": "ch8-ozon-draw",
+ "anchor_text": "The (CH3)2C= end of the alkene becomes a ketone: acetone, (CH3)2C=O."
+ },
+ "severity": "medium",
+ "category": "assessment-readiness",
+ "observation": "Eight items — all four short_answer, both numeric_with_units, and both structure_scaffold — have an empty wrong_answer_explanations array, so the only feedback that can fire on a wrong response is the generic explanation, which states the correct answer outright. On ch8-ozon-draw, a student who draws acetaldehyde (the other, equally valid fragment, just not the one asked for) gets the same paragraph as a student who drew an alcohol, and both are simply told the answer is acetone.",
+ "learner_impact": "When I get one of these wrong I never find out *what I did* wrong — whether I cut the bond in the wrong place, mixed up aldehyde and ketone, or misread which product was requested. I copy the given answer, cannot diagnose my own error, and repeat it next time.",
+ "evidence": "compiled/question-set.json: ch8-hydrog-equiv, ch8-hydrog-equiv-v2, ch8-epox-diol-name, ch8-epox-diol-name-v2, ch8-ozon-draw, ch8-ozon-draw-v2, ch8-ozon-use, ch8-ozon-use-v2 all have wrong_answer_explanations: [].",
+ "recommended_outcome": "The open-response items need error-specific feedback for their predictable wrong answers (wrong fragment, wrong carbonyl class, wrong equivalence count) so a wrong attempt diagnoses the misstep instead of just revealing the key.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "stud-015",
+ "location": {
+ "section_id": "nugget-epoxidation",
+ "asset_id": "rc-epoxidation",
+ "anchor_text": "Show epoxidation as a single concerted step rather than a two-step ionic addition."
+ },
+ "severity": "medium",
+ "category": "figure-purpose",
+ "observation": "The chapter's only non-molecule figure is a one-step energy profile whose stated learning goal is to show epoxidation 'as a single concerted step rather than a two-step ionic addition' — but no two-step profile appears anywhere in the chapter for it to contrast with, and the figure carries no numbers, only 'barrier: medium'. A single hump with two labelled minima cannot by itself convey 'not two steps' to someone who does not already know what a two-step profile looks like.",
+ "learner_impact": "I see one hill and take away 'reactants go to products', which I already knew. The distinction the figure exists to make — the epoxidation trouble_spot, 'Treating epoxidation as a two-step ionic addition' — passes me by entirely, and I have no way to tell whether one hump means one step or just a simplified drawing.",
+ "evidence": "Asset rc-epoxidation spec.steps = single exergonic step, barrier 'medium'; reader block blk-hnpaxwq5; concept alkene-epoxidation trouble_spot 'Treating epoxidation as a two-step ionic addition rather than a concerted transfer'.",
+ "recommended_outcome": "A one-step profile only teaches 'concerted' against a visible two-step alternative; the learner needs the contrast made explicit rather than implied by a lone diagram.",
+ "confidence": 0.83
+ },
+ {
+ "finding_id": "stud-016",
+ "location": {
+ "section_id": "nugget-ozonolysis",
+ "question_slug": "ch8-ozon-products",
+ "anchor_text": "2-methylbut-2-ene is cleaved to acetone and acetaldehyde"
+ },
+ "severity": "medium",
+ "category": "notation-consistency",
+ "observation": "The same compounds are named differently between the reading and the questions with no bridge: the prose and asset say 'but-2-ene' and '2-methylbut-2-ene' while the questions say 'cis-2-Butene' and '2-Methyl-2-butene'; the ozonolysis workup is 'zinc and aqueous acid' in the expanded tier, 'zinc in acid' in the standard tier, and 'Zn/H2O' in every question. Additionally, the two surfaced ozonolysis items (ch8-ozon-products, ch8-ozon-draw) use the identical substrate and identical answer as the prose's one-line example.",
+ "learner_impact": "I do not reliably know that 2-methylbut-2-ene and 2-methyl-2-butene are the same molecule, so I spend working memory re-deriving the name instead of doing the chemistry, and I second-guess whether Zn/H2O is the workup I read about. And because the graded ozonolysis items reuse the sentence I memorized, I pass them without ever transferring the skill to a new substrate.",
+ "evidence": "Asset mol-2-methylbut-2-ene title vs ch8-ozon-products/ch8-ozon-draw prompt_text; nugget-ozonolysis _detail_texts standard ('zinc in acid') vs expanded ('zinc and aqueous acid') vs question wording ('Zn/H2O'); ch8-ozon-draw answer_key 'CC(C)=O' = the prose example's product.",
+ "recommended_outcome": "One naming convention across prose, figures and questions (or an explicit equivalence note), and at least one surfaced ozonolysis item on a substrate other than the worked example.",
+ "confidence": 0.84
+ },
+ {
+ "finding_id": "stud-017",
+ "location": {
+ "section_id": "nugget-synthesis",
+ "anchor_text": "Wikipedia — Choosing reactions in synthesis"
+ },
+ "severity": "medium",
+ "category": "conceptual-support",
+ "observation": "The 'Background reading' Wikipedia URLs appear to be generated mechanically from concept titles rather than from real article names: https://en.wikipedia.org/wiki/Choosing_reactions_in_synthesis, /wiki/Epoxidation_with_a_peroxyacid, /wiki/Syn_dihydroxylation, /wiki/Oxidative_cleavage_(ozonolysis), /wiki/Hydroboration-oxidation. 'Choosing reactions in synthesis' is a chapter section heading, not an encyclopedia topic, and the others do not match Wikipedia's actual article titles. Five of the six sections carry one of these as their only supplementary help; only section 1 also has the OpenStax link.",
+ "learner_impact": "When I am stuck, the link labelled 'Background reading' is what I click. Landing on a 'Wikipedia does not have an article with this exact name' page at the moment I am already struggling is where I stop working and switch to memorizing the reagent list — and it quietly costs the chapter its only per-section escape hatch to an explanation in different words.",
+ "evidence": "Reader blocks blk-6ybo2gd3, blk-n9buxh42, blk-ato1wt8z, blk-e3lw8c4e, blk-8p0uocch, blk-4m78mkhx; only blk-ne7x82ea (nugget-hydrogenation) links to OpenStax.",
+ "recommended_outcome": "Every outbound 'background reading' target needs to resolve to a real page before publication, and each section needs at least one working alternate explanation to fall back on. (I could not fetch the URLs from this environment — see open_questions.)",
+ "confidence": 0.72
+ }
+ ],
+ "strengths": [
+ "Three genuine detail tiers (terse / standard / expanded) are authored for every one of the six sections, and the reader exposes them through a detail-level slider — a student who is drowning can shorten the text without losing the section.",
+ "The prose itself is plain, unhedged and jargon-light at the sentence level; each section states the transformation, the reagent and the stereochemical outcome in that order, which is a predictable and learnable shape.",
+ "Wrong-answer explanations on the multiple-choice and matrix items are specific rather than generic — 'That is the Markovnikov product you would get from acid-catalyzed hydration' (ch8-hb-regio) and 'Formaldehyde only forms from a terminal =CH2. This alkene has no =CH2 group' (ch8-ozon-products) name the actual misstep.",
+ "ch8-hydration-compare and ch8-reagent-match force the cross-reaction comparison that the chapter is really about, rather than testing one reaction in isolation — these are the two items that would most help me if the underlying prose supported them.",
+ "Every molecule figure carries alt text and a learning_goal, and concept-level prerequisites and trouble_spots are explicitly authored — the pedagogical intent is present in the package even where it does not reach the compiled reader."
+ ],
+ "open_questions": [
+ "Does the question runtime shuffle option, card and match order at delivery? If it does, stud-004's positional pattern is mitigated; as authored in compiled/question-set.json the key is fully predictable from presentation order.",
+ "Are nugget practice_check items meant to compile into the reader as blocks? They are authored on all six nuggets and appear nowhere in the compiled chapter, which is what drives stud-005.",
+ "Is the 32-item question set intended to be reachable from the reader chapter, or only from a separate assessment surface? Both artifacts are available:false, so I could not tell what a student's actual practice path is.",
+ "Are outbound external_link URLs validated at compile time? I had no network access to confirm the Wikipedia targets in stud-017 return real articles; that finding's confidence reflects the pattern of the URLs, not a fetch.",
+ "Are the 16 '-v2' staged variants ever shown to students, or are they reserve items? Several of my concerns (propyne/alkyne in ch8-hydrog-equiv-v2, the picture-only-on-the-correct-answer cue in ch8-diol-syn-v2) sit in variants, and their severity depends on whether a student ever sees them."
+ ]
+ },
+ {
+ "persona": "Accessibility Persona",
+ "persona_version": "1.0.0",
+ "chapter_id": "alkenes-reactions-and-synthesis",
+ "chapter_version": "1",
+ "model": "claude-opus-5[1m]",
+ "summary": "The reading side of this chapter is genuinely accessible: every reaction's regiochemistry and stereochemistry is carried in prose (three detail levels), no figure is a sole carrier of meaning, the twelve molecule figures are simple enough that their one-line alt text is a fair equivalent, and the platform renderers behind all eleven question types are keyboard-complete (rank_order has Move up/down buttons, matching/categorize/comparison_matrix use selects, the route builder uses selects, hotspot atoms are real buttons, and both structure_scaffold items correctly set typed_structure_entry='allowed' with a SMILES answer key). The assessment side, however, fails badly on answer-leak neutrality: nine of the thirty-two authored questions have an accessible_description that states the answer outright — the two draw items name the product molecule ('Draw acetone, (CH3)2C=O'), both hotspot items name the atom to select, three short-answer items list their accepted answers, and both synthesis_route items map each reagent to the product it gives. None of these are caught by the compile-time guard, which only matches answer ids, verdict vocabulary, and computed numbers. Compounding this, the hotspot items have no neutral non-visual orientation at all: the rendered structure carries alt='Structure for this question' and the atom buttons are labelled only 'C atom 1'..'C atom 4', so once the leak is removed a screen-reader user has no way to map atom index to chemical position — the item becomes uncompletable rather than merely hard. The reaction-coordinate figure's alt text also under-describes what is drawn, and the two video briefs carry no transcript or audio-description plan. Publication should be blocked until the leaks and the hotspot orientation gap are fixed.",
+ "overall_score": 4.5,
+ "publication_blockers": [
+ "access-001",
+ "access-002",
+ "access-003",
+ "access-004",
+ "access-005"
+ ],
+ "findings": [
+ {
+ "finding_id": "access-001",
+ "location": {
+ "question_slug": "ch8-ozon-draw",
+ "concept_slug": "oxidative-cleavage-ozonolysis",
+ "anchor_text": "Draw acetone, (CH3)2C=O, the ketone formed when 2-methyl-2-butene undergoes ozonolysis."
+ },
+ "severity": "blocker",
+ "category": "alt-text-quality",
+ "observation": "Both structure_scaffold items name the exact product a student is being asked to draw inside accessibility_bundle.accessible_description. ch8-ozon-draw's description is 'Draw acetone, (CH3)2C=O, the ketone formed when 2-methyl-2-butene undergoes ozonolysis' against answer_key.smiles 'CC(C)=O'; ch8-ozon-draw-v2's is 'Draw acetaldehyde, CH3CHO, the aldehyde formed when 2-methyl-2-butene undergoes ozonolysis' against answer_key.smiles 'CC=O'. The prompts themselves say only 'Draw the KETONE product' / 'Draw the ALDEHYDE product'.",
+ "learner_impact": "A screen-reader user is handed the graded answer before attempting the item, so the question measures nothing for them and their attempt data is invalid; instructors who notice will disable the accessible description rather than the leak, which is worse. This escapes the compile guard because answer_key.smiles is not under an answer-marked key name and 'CC(C)=O' is not id-like, so nothing fails the build.",
+ "evidence": "topic.package.json question_sets ch8-ozon-draw accessibility_bundle.accessible_description vs answer_key [redacted]; ch8-ozon-draw-v2 vs {"smiles": "[redacted]"}. Mirrored into compiled/question-set.json unchanged.",
+ "recommended_outcome": "Both draw items need a non-visual description that conveys the task and the stimulus (which alkene, which fragment is wanted, that typed SMILES entry is available) without naming or drawing the product; the graded chemistry must still have to be reasoned out non-visually.",
+ "confidence": 0.97
+ },
+ {
+ "finding_id": "access-002",
+ "location": {
+ "question_slug": "ch8-hb-hotspot",
+ "concept_slug": "hydroboration-oxidation",
+ "anchor_text": "select the terminal CH2 carbon of the double bond, which becomes the carbon bearing OH"
+ },
+ "severity": "blocker",
+ "category": "alt-text-quality",
+ "observation": "Both hotspot items state which atom to select. ch8-hb-hotspot: 'On a structure of 2-methylpropene, select the terminal CH2 carbon of the double bond, which becomes the carbon bearing OH after anti-Markovnikov hydroboration-oxidation' (answer atom_0). ch8-hb-hotspot-v2: 'On a structure of propene, select the terminal CH2 carbon, which becomes the carbon bearing OH after anti-Markovnikov hydroboration-oxidation'. The prompt asks only 'click the carbon atom that ends up bearing the -OH group'.",
+ "learner_impact": "The entire cognitive task — deciding which carbon boron adds to — is performed for the screen-reader user. The guard does not fire because the description never contains the literal id 'atom_0'.",
+ "evidence": "topic.package.json ch8-hb-hotspot / ch8-hb-hotspot-v2 accessibility_bundle vs answer_key.correct_option_ids [redacted].",
+ "recommended_outcome": "The hotspot descriptions need to convey the stimulus structure and the selection task only, with the regiochemical decision left to the student.",
+ "confidence": 0.96
+ },
+ {
+ "finding_id": "access-003",
+ "location": {
+ "question_slug": "ch8-ozon-use",
+ "concept_slug": "oxidative-cleavage-ozonolysis",
+ "anchor_text": "Type the word describing what ozonolysis reveals about a double bond in an unknown alkene: its location or position."
+ },
+ "severity": "blocker",
+ "category": "alt-text-quality",
+ "observation": "Three short-answer items list their own accepted answers in the accessible description. ch8-ozon-use ends '...: its location or position' against answer_text ['location','position','placement']; ch8-ozon-use-v2 ends '...: ozone, O3' against answer_text ['ozone','o3','o_3']; ch8-epox-diol-name-v2 ends '...formed by epoxidation: epoxide or oxirane' against answer_text ['epoxide','oxirane',...]. By contrast ch8-epox-diol-name (the base item of that pair) is correctly neutral, which shows the authoring standard was known and inconsistently applied.",
+ "learner_impact": "Screen-reader users receive the graded fill-in answer verbatim. The guard misses all three: 'location'/'position'/'epoxide'/'oxirane' are not in VERDICT_VOCABULARY, and 'o3' is under three characters so it is not treated as id-like.",
+ "evidence": "topic.package.json ch8-ozon-use, ch8-ozon-use-v2, ch8-epox-diol-name-v2 accessibility_bundle vs their answer_key.answer_text arrays.",
+ "recommended_outcome": "These three descriptions need to state what the student must supply (a one-word term, a reagent name) without enumerating the accepted strings — matching the neutral pattern already used in ch8-epox-diol-name.",
+ "confidence": 0.96
+ },
+ {
+ "finding_id": "access-004",
+ "location": {
+ "question_slug": "ch8-synth-route",
+ "concept_slug": "alkene-synthesis-retrosynthesis",
+ "anchor_text": "hydroboration-oxidation gives the primary alcohol; acid hydration gives the secondary alcohol; hydrogenation gives butane"
+ },
+ "severity": "blocker",
+ "category": "alt-text-quality",
+ "observation": "Both synthesis_route descriptions supply the full reagent-to-product mapping the student is being graded on. ch8-synth-route: '...hydroboration-oxidation gives the primary alcohol; acid hydration gives the secondary alcohol; hydrogenation gives butane', where the prompt already identifies the target as 'butan-1-ol (a primary alcohol)' — so the description names the correct reagent by construction. ch8-synth-route-v2 does the same for the secondary-alcohol target.",
+ "learner_impact": "A screen-reader user only has to pattern-match the target descriptor already in the prompt to the mapping in the description; no retrosynthetic reasoning is required. Sighted students must recall the regiochemistry. Guard misses it because the leak is semantic, not an id or number.",
+ "evidence": "topic.package.json ch8-synth-route / ch8-synth-route-v2 accessibility_bundle vs answer_key.accepted_routes [[{reagent_id r_hb, product_id m_1ol}]] and [[{r_acid, m_2ol}]].",
+ "recommended_outcome": "Both route items need a description that lists the available reagents and candidate products as an inventory of the workspace, without asserting which reagent produces which product.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "access-005",
+ "location": {
+ "question_slug": "ch8-hb-hotspot-v2",
+ "concept_slug": "hydroboration-oxidation",
+ "anchor_text": ""molecule_smiles": "[redacted]""
+ },
+ "severity": "blocker",
+ "category": "interactive-fallback",
+ "observation": "The hotspot items give a screen-reader user no neutral way to identify the atoms. HotspotActivityRenderer renders the structure image with a fixed alt of 'Structure for this question' and labels each atom button only as `${symbol} atom ${index+1}` — 'C atom 1', 'C atom 2', 'C atom 3' for C=CC. Nothing in the question package maps an atom index to its position in the molecule. Today the only text that does so is the leaked answer flagged in access-002; once that leak is removed (as it must be) there is no non-visual path to a correct selection at all.",
+ "learner_impact": "A blind or low-vision student either gets the answer for free or cannot answer at all — never a valid attempt. The buttons are keyboard-reachable and correctly use aria-pressed, so this is not an operability failure; it is a missing equivalent for the structure the interaction is performed on.",
+ "evidence": "[internal source reference — not in this repo] lines ~236 (alt=\"Structure for this question\") and ~268 (aria-label={`${atom.symbol} atom ${atom.index + 1}`}); topic.package.json ch8-hb-hotspot student_config [redacted] and ch8-hb-hotspot-v2 {"molecule_smiles": "[redacted]"} carry no per-atom description; answer_key.correct_option_ids [redacted].",
+ "recommended_outcome": "Both hotspot items need a neutral, question-scoped connectivity readout that ties each selectable atom index to its chemical environment (substituents, which two atoms are the double-bond carbons) so a non-visual learner can reason to a selection — supplied without stating which atom is correct.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "access-006",
+ "location": {
+ "asset_id": "rc-epoxidation",
+ "section_id": "nugget-epoxidation",
+ "anchor_text": "Single-step energy profile for concerted peroxyacid epoxidation of propene, with one barrier from reactants to the epoxide."
+ },
+ "severity": "medium",
+ "category": "alt-text-quality",
+ "observation": "The chapter's only non-molecule figure is described by a single sentence that omits most of what the rendered diagram shows. The spec declares energy_axis 'free_energy', an 'exergonic' step, minima_labels ['Propene + peroxyacid', 'Epoxide + carboxylic acid'], and minima_molecules that draw the propene and methyloxirane structures on the diagram itself. The alt text names none of the axis, neither minimum label, the fact that products sit below reactants, the medium barrier, or the two inline structures, and carries no schematic/not-to-scale caveat. The asset has no long_description, even though the reader renders one when present (ReaderBlockRenderer StructureCard/ReactionCoordinateCard) and falls back to it entirely when a learner turns images off.",
+ "learner_impact": "A screen-reader user, or any learner reading with images suppressed, gets the concerted/one-barrier point but loses the thermodynamic reading (exergonic, products lower) and the labelled species — which is the part of the figure that goes beyond what the prose already says. The alt text does carry the figure's stated learning goal, so this is a degradation rather than a total loss.",
+ "evidence": "topic.package.json assets rc-epoxidation spec + accessibility.alt_text; frontend reader block blk-hnpaxwq5 renders 'Described as: {alt_text}' with no long_description present.",
+ "recommended_outcome": "This diagram needs a fuller text equivalent covering axis meaning, both labelled minima and the structures drawn at them, the downhill (exergonic) direction, the single barrier, and a not-to-scale caveat — the level of detail the twelve simple molecule figures do not require.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "access-007",
+ "location": {
+ "asset_id": "video-hydration-complement",
+ "section_id": "nugget-hydroboration",
+ "anchor_text": "Place the two products side by side to make the regiochemical complement explicit."
+ },
+ "severity": "medium",
+ "category": "media-equivalence",
+ "observation": "Neither video brief carries a transcript, caption text, or audio-description plan. video-hydration-complement's storyboard is purely spatial ('Place the two products side by side to make the regiochemical complement explicit') while its narration_outline never names a structure ('State that the two reactions give opposite regiochemistry'); video-ozonolysis is the same shape. As compiled, both reader video blocks (blk-1kcvkqh6, blk-d83qw7fc) have url:\"\" and is_hidden:true, and their 'description' is a verbatim production storyboard line ('Start from 1-butene and show acid-catalyzed hydration giving butan-2-ol') rather than learner-facing text.",
+ "learner_impact": "Nothing is broken for students today because the blocks are hidden, but as briefed these videos would ship with narration that talks over the structures instead of describing them, and with no caption or transcript track — leaving deaf/hard-of-hearing and blind learners without the regiochemical comparison the video exists to make. The storyboard's meaning is carried entirely by spatial arrangement.",
+ "evidence": "topic.package.json video_briefs video-hydration-complement and video-ozonolysis (storyboard, narration_outline, formats mp4/gif, status needs_review); compiled reader blocks blk-1kcvkqh6 and blk-d83qw7fc with empty url and is_hidden true.",
+ "recommended_outcome": "Before either video is produced, each brief needs a narration/caption plan in which the spoken track itself names the structures and the change being shown, plus a time-independent text equivalent for the side-by-side comparison, and the reader block needs a learner-facing description rather than a storyboard instruction.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "access-008",
+ "location": {
+ "question_slug": "ch8-diol-syn-v2",
+ "concept_slug": "syn-dihydroxylation",
+ "anchor_text": "\"text\": \"OsO₄, then NaHSO₃\", \"structure_smiles\": \"OC1CCCC1O\""
+ },
+ "severity": "medium",
+ "category": "media-equivalence",
+ "observation": "Structure images are attached to some answer options and not others, and in ch8-diol-syn-v2 only the correct option carries one: option a ('OsO₄, then NaHSO₃') has structure_smiles 'OC1CCCC1O' — a picture of the target diol — while the two distractors have none. ch8-diol-syn has structures on options a and c but not b. SelectedResponseRenderer sets the option image alt to option.text, so a screen-reader user never learns that a structure was shown at all.",
+ "learner_impact": "Sighted students get a visual cue (the only illustrated reagent, showing the product being asked about) that non-visual students cannot perceive, so the two populations are answering different questions. The accessible_description correctly enumerates all three options, which makes the asymmetry invisible to the compile checks.",
+ "evidence": "topic.package.json ch8-diol-syn-v2 student_config.options and ch8-diol-syn student_config.options; [internal source reference — not in this repo] line ~173 alt={option.text}.",
+ "recommended_outcome": "Option-level illustration needs to be consistent within an item and must not sit only on the key; where a structure genuinely carries information, its content needs to reach non-visual users rather than being aliased to the option label.",
+ "confidence": 0.82
+ },
+ {
+ "finding_id": "access-009",
+ "location": {
+ "question_slug": "ch8-hydrog-equiv",
+ "concept_slug": "catalytic-hydrogenation",
+ "anchor_text": "one mole of 1,3-butadiene, which contains two double bonds"
+ },
+ "severity": "medium",
+ "category": "alt-text-quality",
+ "observation": "The accessible description performs the graded counting step: 'Enter the number of moles of hydrogen needed to fully hydrogenate one mole of 1,3-butadiene, which contains two double bonds', where the answer is 2.0 equiv and hint level 1 is 'One mole of H2 is needed per carbon-carbon double bond.' A sighted student must parse CH2=CH-CH=CH2 from the prompt to reach the same count. The paired variant ch8-hydrog-equiv-v2 handles this correctly ('which contains one triple bond' against an answer of 2), so the neutral pattern exists.",
+ "learner_impact": "Screen-reader users skip the one inference the item tests. The guard's number check does not fire because the count is written as the word 'two' and because '2' also appears in the student_config placeholder.",
+ "evidence": "topic.package.json ch8-hydrog-equiv accessibility_bundle vs answer_key [redacted] and feedback_bundle.hints level 1.",
+ "recommended_outcome": "This description needs to render the condensed formula in a screen-reader-parsable way without stating how many double bonds it contains.",
+ "confidence": 0.86
+ },
+ {
+ "finding_id": "access-010",
+ "location": {
+ "question_slug": "ch8-stereo-categorize",
+ "concept_slug": "syn-dihydroxylation",
+ "anchor_text": "H2/Pd and OsO4 are syn; bromonium opening and epoxide opening are anti."
+ },
+ "severity": "medium",
+ "category": "assessment-readiness",
+ "observation": "Across the set, the final hint routinely states the complete answer key rather than a last scaffold: ch8-stereo-categorize level 2 gives all four assignments; ch8-stereo-categorize-v2 level 2 gives all four; ch8-reagent-match-v2 level 2 gives all four pairs ('BH3 = primary alcohol; H3O+ = secondary alcohol; Br2 = dibromide; HBr = one Br'); ch8-antimarkovnikov-select-v2 level 2 resolves every option; ch8-hydrog-product level 2 writes out the product formula. Only the two draw items use a three-level ladder where the bottom-out answer arrives at level 3.",
+ "learner_impact": "This matters disproportionately for learners who rely on hints as a processing support rather than a reasoning nudge — students with reading, attention or working-memory differences open hints routinely, and here the second click ends the item instead of unblocking it. It also removes the diagnostic value of hint telemetry for exactly those students.",
+ "evidence": "topic.package.json feedback_bundle.hints for ch8-stereo-categorize, ch8-stereo-categorize-v2, ch8-reagent-match, ch8-reagent-match-v2, ch8-antimarkovnikov-select-v2, ch8-diol-syn-v2, ch8-hydrog-product.",
+ "recommended_outcome": "The multi-item sorting and matching questions need an intermediate rung between 'general principle' and 'here is the key' — a partial worked case or a decision rule applied to one item — so a student using hints as an access support still completes the reasoning.",
+ "confidence": 0.8
+ },
+ {
+ "finding_id": "access-011",
+ "location": {
+ "section_id": "nugget-hydrogenation",
+ "anchor_text": "Hydrogenation substrate: but-2-ene"
+ },
+ "severity": "low",
+ "category": "keyboard-operability",
+ "observation": "Heading levels skip a rank in every section of the compiled chapter. TopicPackageChapterRenderer emits the chapter title as h1 and each section title as h2, while ReaderBlockRenderer emits every figure, video and link card heading as h4 — there is no h3 anywhere. With five sections and roughly twenty h4 cards, the chapter's outline is h1 > h2 > h4 throughout.",
+ "learner_impact": "Screen-reader users navigating by heading level, or using a headings list to skim, get a structure that misreports nesting depth; the figure cards appear two levels below their section rather than one. This is a rendering-layer defect that this chapter's data cannot fix on its own, but it manifests in every section here.",
+ "evidence": "[internal source reference — not in this repo] lines 172 and 195 (h1, h2); [internal source reference — not in this repo] lines 188, 304, 382, 404, 515, 542, 586 (all as=\"h4\").",
+ "recommended_outcome": "The reader's block-card headings need to sit one level below the section heading so the chapter exposes a continuous outline; flag to platform rather than to chapter authoring.",
+ "confidence": 0.83
+ }
+ ],
+ "strengths": [
+ "Every stereochemical and regiochemical claim in the chapter is carried in prose, not in a picture: syn delivery from the catalyst surface, boron at the less-substituted carbon, the concerted single-face oxygen transfer, the cyclic osmate ester, and the cleavage-to-carbonyls rule are all stated in the standard and expanded nugget texts, so no non-visual learner depends on a figure to learn the chemistry.",
+ "The three detail levels (terse / standard / expanded) are compiled into the reader as _detail_texts and swapped by the personalization preference, giving learners with reading or attention differences a real density control rather than an all-or-nothing toggle.",
+ "Both structure_scaffold items correctly set student_config.typed_structure_entry='allowed' with a SMILES answer key, which is the platform's declared keyboard-complete path for drawing questions — no required activity in this chapter is pointer-only.",
+ "The renderers behind all eleven question types in this set are keyboard-operable: rank_order exposes per-card Move up/Move down buttons with an aria-live position readout instead of drag-only reordering, matching_pairs and categorize_groups use labelled selects, comparison_matrix cells are selects with per-cell accessible names, synthesis_route uses selects and buttons, and hotspot atoms are real buttons with aria-pressed rather than color-only selection state.",
+ "Nothing in the chapter uses color, motion, or hover as a sole carrier of meaning; there are no animations requiring pause/step controls, and all option distinctions are stated in the option text.",
+ "For the twelve simple molecule figures (three to five heavy atoms, no stereocentres drawn), the one-line alt text is a genuinely sufficient equivalent — these need no longer description, and adding one would be redundant.",
+ "ch8-epox-diol-name and ch8-hydrog-equiv-v2 show correctly neutral accessible descriptions, demonstrating that the leaking descriptions elsewhere are an inconsistency rather than an absent standard."
+ ],
+ "open_questions": [
+ "The compiled reader question manifest (frontend/public/reader/topic-chapters/alkenes-reactions-and-synthesis.questions.json) keeps only slug/title/type/prompt_text and strips student_config, answer_key, feedback_bundle and accessibility_bundle for all 16 surfaced questions. The same is true of the alkyl-halide and epoxides chapters, so this looks like an intentional manifest-only shape — but it means the authored accessible_description never reaches a reader-surface learner. Which surface actually consumes accessibility_bundle: LMS/LTI delivery only, or is a reader question player planned?",
+ "ch8-hb-hotspot's answer key is 'atom_0' while HotspotActivityRenderer announces buttons as one-based ('C atom 1'). Is the index-to-label offset guaranteed stable across the RDKit render path, and does the correct atom always come out as index 0 for these SMILES? If not, a non-visual learner reasoning to 'the terminal CH2' could still select the wrong button.",
+ "Do the ozonolysis and hydration/hydroboration videos have a production caption or audio-description workflow attached elsewhere, or does status 'needs_review' with formats mp4/gif mean they would ship from these briefs as-is?",
+ "I used category 'assessment-readiness' for the hint-ladder finding (access-010) because the rubric assigns no category to hint giveaways; it is a listed id, so no new category was coined, but a future rubric revision may want an explicit one."
+ ]
+ },
+ {
+ "persona": "Learner with Visual Preference",
+ "persona_version": "1.0.0",
+ "chapter_id": "alkenes-reactions-and-synthesis",
+ "chapter_version": "1",
+ "model": "claude-opus-5[1m]",
+ "summary": "This is a reactions chapter in which no reaction is drawn. All 13 assets are standalone flat structures (12 `molecule` cards plus one single-step reaction coordinate); the compiled reader contains zero `reaction` blocks even though the reader's block renderer supports them (ReaderBlockRenderer case \"reaction\" with reaction_smiles). Every transformation therefore reaches the student as two or three vertically stacked, unconnected structure cards, with the reagents (Pd/C, BH3 then H2O2/NaOH, mCPBA, OsO4 then NaHSO3, O3 then Zn) living only in prose. The chapter's central stereochemical claims — syn delivery of H2, syn addition of H and OH, stereospecific epoxidation, syn (cis) diol — are asserted in every nugget and named in the concepts' own trouble_spots, yet no figure carries a wedge, a dash, a face, or a stereocenter; worse, the chosen examples are ones in which syn/anti is structurally unshowable (but-2-ene to butane has no stereocenter; propene to propane-1,2-diol and propene to 2-methyloxirane each give a single stereocenter). Both planned videos compile to `url: \"\"` with `is_hidden: true`, so they render as nothing and the two comparisons they carried (hydration vs. hydroboration; fragment-to-alkene-carbon mapping in ozonolysis) exist nowhere visually. In the question bank the visual quality is uneven: the two hotspot items and the (E)-2-butene epoxidation item are genuinely structure-dependent and good, but two single_select items attach a rendered structure only to the correct option, and one of those renders ethane-1,2-diol for an option whose text claims 'syn (cis)'. The chapter's prose is clear; the figure layer is doing far less work than the content demands.",
+ "overall_score": 5.0,
+ "publication_blockers": [],
+ "findings": [
+ {
+ "finding_id": "visual-001",
+ "location": {
+ "section_id": "nugget-hydrogenation",
+ "asset_id": "mol-hydrog-butene",
+ "anchor_text": "H2 adds across a carbon–carbon double bond to give an alkane"
+ },
+ "severity": "high",
+ "category": "visual-opportunity",
+ "observation": "No transformation is drawn anywhere in the chapter. All six sections present a reaction as two or three separate `molecule` cards stacked vertically (substrate card, then product card[s]) with no arrow, no reagent label, and no visual link between them. The compiled reader block census is molecule 13, text 6, external_link 6, video 2 (both hidden), mcmurry_link 1, reaction_coordinate 1 — zero `reaction` blocks, despite ReaderBlockRenderer supporting a `reaction` block type that renders reaction_smiles through StructureCard.",
+ "learner_impact": "A student scanning the page sees a gallery of unrelated structures rather than six transformations. The reagent that defines each reaction (Pd/C, BH3·THF then H2O2/NaOH, mCPBA, OsO4 then NaHSO3, O3 then Zn) is recoverable only by reading the paragraph above the figures, so the figures cannot be used for review, and nothing on the page distinguishes 'propene becomes an epoxide' from 'here are two molecules'. This puts the entire explanatory burden back on prose in exactly the chapter whose subject is change.",
+ "evidence": "Reader blocks blk-u0agrki8 (but-2-ene) / blk-kw1rj1ri (butane); blk-2zpgo66v (1-butene) / blk-udsl7aee (butan-1-ol); blk-di3wpm1j (propene) / blk-g0qp30q7 (2-methyloxirane); blk-v7kbfya4 / blk-1u0rwpbn; blk-yzju274m / blk-lnqcar4u / blk-97kxjcdh. Every one is block_type \"molecule\" with a bare SMILES and a caption; none carries reagents or an arrow.",
+ "recommended_outcome": "Each of the six transformations needs to be legible as a transformation at a glance — substrate, reagent/conditions, and product visually joined — rather than as adjacent independent structures whose relationship exists only in prose.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "visual-002",
+ "location": {
+ "section_id": "nugget-dihydroxylation",
+ "concept_slug": "syn-dihydroxylation",
+ "asset_id": "mol-propane-1-2-diol",
+ "anchor_text": "both hydroxyl groups lie on the same face — a syn, or cis, diol"
+ },
+ "severity": "high",
+ "category": "figure-accuracy",
+ "observation": "Every stereochemical claim in the chapter is told and never shown, and the specific examples chosen make it unshowable. Hydrogenation's syn delivery is illustrated with but-2-ene (CC=CC, no E/Z specified) going to butane (CCCC), a product with no stereocenter at all. Syn dihydroxylation is illustrated with propene going to propane-1,2-diol (CC(O)CO), a single stereocenter formed as a racemate, where 'both OH on the same face' has no visible referent. Epoxidation's stereospecificity is illustrated with propene going to 2-methyloxirane (CC1CO1), again one stereocenter. Hydroboration's syn addition ends at butan-1-ol (CCCCO), an achiral primary alcohol. Not one asset SMILES in the package contains a stereo descriptor.",
+ "learner_impact": "The stereochemical distinction is the graded outcome of four of the six concepts and is named verbatim in their trouble_spots ('Forgetting that both hydrogens are delivered to the same face (syn)', 'Assigning anti stereochemistry to a syn addition'). A student who works from the figures sees flat structures that are equally consistent with syn and anti addition, so the misconception the chapter names is the one the figures reinforce. The word 'syn' becomes a term to memorize rather than a spatial fact to see.",
+ "evidence": "assets mol-hydrog-butene (CC=CC) / mol-butane (CCCC); mol-propene-diol (CC=C) / mol-propane-1-2-diol (CC(O)CO); mol-propene-ep (CC=C) / mol-methyloxirane (CC1CO1); mol-1-butene / mol-butan-1-ol (CCCCO). Concept trouble_spots for catalytic-hydrogenation and syn-dihydroxylation. Nugget text: 'the two new carbon–hydrogen bonds are formed on the same side'; 'the two hydroxyl groups are syn (cis)'.",
+ "recommended_outcome": "The syn/anti distinction needs at least one worked case per stereochemical claim in which the two faces are actually distinguishable in the drawn structure — which requires substrates (internal or cyclic alkenes) whose products can express the relationship, not just an added notation on the current examples.",
+ "confidence": 0.93
+ },
+ {
+ "finding_id": "visual-003",
+ "location": {
+ "section_id": "nugget-hydroboration",
+ "asset_id": "blk-1kcvkqh6",
+ "anchor_text": "Two routes to an alcohol: hydration versus hydroboration"
+ },
+ "severity": "high",
+ "category": "media-equivalence",
+ "observation": "Both video blocks compile to empty and render nothing. blk-1kcvkqh6 (hydroboration section) and blk-d83qw7fc (ozonolysis section) each have content.url = \"\" and is_hidden = true; ReaderBlockRenderer returns null on block.is_hidden, so the student sees no video, no poster, and no text stub. Their `description` fields are also truncated to storyboard step 1 only ('Start from 1-butene and show acid-catalyzed hydration giving butan-2-ol.'), losing steps 2 and 3 of each brief.",
+ "learner_impact": "The two comparisons these briefs were designed to carry are the two the chapter most needs and now shows nowhere: the Markovnikov / anti-Markovnikov contrast from one alkene, and the mapping of ozonolysis fragments back onto the original alkene carbons. Because the block renders as literally nothing rather than as a described placeholder, a learner has no signal that a planned explanation is missing, and neither does an instructor previewing the chapter.",
+ "evidence": "video_briefs video-hydration-complement (status needs_review, storyboard 3 steps) and video-ozonolysis (status needs_review); compiled blocks blk-1kcvkqh6 and blk-d83qw7fc with url \"\" and is_hidden true; [internal source reference — not in this repo]",
+ "recommended_outcome": "Either the two planned explanations need to reach the student in some form, or the chapter needs to not carry blocks that silently vanish; the regiochemistry contrast and the fragment-to-carbon mapping need a visible home regardless of whether motion is ever produced.",
+ "confidence": 0.96
+ },
+ {
+ "finding_id": "visual-004",
+ "location": {
+ "question_slug": "ch8-diol-syn",
+ "concept_slug": "syn-dihydroxylation",
+ "anchor_text": "A syn (cis) 1,2-diol"
+ },
+ "severity": "high",
+ "category": "figure-accuracy",
+ "observation": "In ch8-diol-syn the correct option a is labelled 'A syn (cis) 1,2-diol' but renders structure_smiles \"OCCO\" — ethane-1,2-diol, which has no stereocenters and therefore cannot be syn or anti. Option b ('An anti (trans) 1,2-diol') carries no structure at all, and option c (epoxide) carries \"C1CO1\". So the item asks a student to choose a stereochemical outcome while showing a picture that cannot express stereochemistry, next to a distractor with no picture.",
+ "learner_impact": "A student reading the drawn option learns that 'syn diol' looks like HOCH2CH2OH — a structure with no faces — which actively undercuts the concept the item assesses. The mixed render (two of three options drawn) also makes the option set visually incoherent, so structure and text carry contradictory information at the moment of decision.",
+ "evidence": "compiled/question-set.json, ch8-diol-syn student_config.options: a {text: 'A syn (cis) 1,2-diol', structure_smiles: 'OCCO'}, b {text: 'An anti (trans) 1,2-diol'} (no structure), c {structure_smiles: 'C1CO1'}. Same pattern in ch8-diol-syn-v2, where option a 'OsO₄, then NaHSO₃' renders 'OC1CCCC1O' — cyclopentane-1,2-diol with no stereo — for a prompt that asks specifically for cis-cyclopentane-1,2-diol.",
+ "recommended_outcome": "Where an item's answer is a stereochemical relationship, the rendered structures must be able to express that relationship (or no structure should be rendered on any option); a picture that contradicts its own label needs to go.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "visual-005",
+ "location": {
+ "question_slug": "ch8-diol-syn-v2",
+ "anchor_text": "Which reagent system converts cyclopentene into cis-cyclopentane-1,2-diol?"
+ },
+ "severity": "high",
+ "category": "figure-purpose",
+ "observation": "In both ch8-diol-syn and ch8-diol-syn-v2 a rendered structure is attached only to the correct option. In v2 the options are reagent systems; option a ('OsO₄, then NaHSO₃', correct) carries structure_smiles 'OC1CCCC1O' while options b (mCPBA then aqueous acid) and c (O3 then Zn) carry no structure. In v1, of the three options only the correct one and one distractor are drawn.",
+ "learner_impact": "The figure becomes a visual answer cue: a student who cannot reason about the chemistry can select the only option that renders a picture. This inflates measured mastery on precisely the syn-dihydroxylation concept the chapter flags as a trouble spot, and it teaches students to answer from layout rather than structure.",
+ "evidence": "compiled/question-set.json ch8-diol-syn-v2 student_config.options — only option 'a' has structure_smiles; answer_key [redacted]. ch8-diol-syn — options a (correct) and c drawn, option b undrawn; answer_key [redacted].",
+ "recommended_outcome": "Option rendering within a single item needs to be uniform so that the presence of a structure carries no information about correctness.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "visual-006",
+ "location": {
+ "section_id": "nugget-ozonolysis",
+ "concept_slug": "oxidative-cleavage-ozonolysis",
+ "anchor_text": "the two fragments join at the carbons that had been doubly bonded"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The ozonolysis section shows three unconnected cards — 2-methylbut-2-ene, acetone, acetaldehyde — with nothing indicating that the two carbonyls are co-products of one cleavage, which alkene carbon became which product, or where the bond broke. The analytic use stated in the prose ('identifying the carbonyl products reveals the position of the original double bond') depends entirely on that mapping, and the ozonide intermediate named in the prose is never drawn.",
+ "learner_impact": "Three stacked structures read equally well as 'three possible products'. Students who must run the logic backwards — which the chapter assesses in ch8-ozon-use and in the analytic framing of the nugget — have no picture of the join to reason from, so the reverse direction is memorized as a rule instead of read off a diagram.",
+ "evidence": "Reader blocks blk-yzju274m, blk-lnqcar4u, blk-97kxjcdh in section nugget-ozonolysis; nugget-ozonolysis expanded text; the only asset that would have shown the mapping (video-ozonolysis storyboard step 3, 'Recombine the fragments to show how the products identify the original alkene') compiles hidden — see visual-003.",
+ "recommended_outcome": "The correspondence between each alkene carbon and its carbonyl fragment — in both directions — needs to be visible on the page, including which end gives the ketone and which the aldehyde.",
+ "confidence": 0.87
+ },
+ {
+ "finding_id": "visual-007",
+ "location": {
+ "section_id": "nugget-hydroboration",
+ "concept_slug": "hydroboration-oxidation",
+ "anchor_text": "boron adds at the less substituted carbon"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The two-stage nature of hydroboration–oxidation is invisible in the figures: only 1-butene and butan-1-ol are drawn. The organoborane intermediate, the position boron takes, the separate H2O2/NaOH oxidation step, and the retention of configuration at that carbon are all prose-only. The Markovnikov counterpart (butan-2-ol, mol-butan-2-ol) exists in the package but is placed four sections later in nugget-synthesis, so the contrast the section text makes is never visible in the section that makes it.",
+ "learner_impact": "The concept's own trouble_spot is 'Applying Markovnikov regiochemistry to an anti-Markovnikov reaction' — a discrimination between two products of the same alkene. Showing one product alone gives the learner nothing to discriminate against at the point of instruction, and the reason for the outcome (where boron goes) has no visual anchor. The chapter assesses the contrast directly in ch8-hydration-compare and ch8-synth-route.",
+ "evidence": "nugget-hydroboration asset_ids = [mol-1-butene, mol-butan-1-ol]; mol-butan-2-ol assigned to nugget-synthesis only; nugget text 'boron becomes bonded to the less hindered, less substituted carbon, and hydrogen adds to the more substituted carbon on the same face'.",
+ "recommended_outcome": "Where boron lands, and how that fixes the alcohol's position relative to acid-catalyzed hydration, needs to be visible at the point the contrast is taught — not only in a later section.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "visual-008",
+ "location": {
+ "section_id": "nugget-synthesis",
+ "concept_slug": "alkene-synthesis-retrosynthesis",
+ "anchor_text": "The complementary pairs established across these two chapters make the choice explicit."
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The closing synthesis section states three complementary pairs in a single dense paragraph (hydration vs. hydroboration–oxidation; halogenation anti vs. dihydroxylation syn; hydrogenation vs. ozonolysis) and carries exactly two figures — butan-1-ol and butan-2-ol. There is no chapter-level summary that shows all six reactions, their reagents, and their regio/stereo outcomes in one spatial arrangement.",
+ "learner_impact": "This section's task is selection among reactions, which is inherently a comparison across the whole chapter, and the chapter is assessed that way (ch8-reagent-match matches four reagents to four product classes; ch8-antimarkovnikov-select and its v2 span three reactions). A learner doing that task has to hold six transformations in memory from six separate scrolled sections, because nothing on the page lays them side by side.",
+ "evidence": "nugget-synthesis expanded text (three complementary pairs in one paragraph); nugget-synthesis asset_ids = [mol-butan-1-ol, mol-butan-2-ol]; reader section nugget-synthesis contains blk-aghq6md3 (text), blk-hals58lj, blk-jtotl7f7, blk-4m78mkhx.",
+ "recommended_outcome": "The chapter needs one place where all of its reactions, reagents, and regio/stereo outcomes can be compared simultaneously rather than recalled sequentially.",
+ "confidence": 0.86
+ },
+ {
+ "finding_id": "visual-009",
+ "location": {
+ "section_id": "nugget-hydrogenation",
+ "question_slug": "ch8-heat-of-hydrogenation-rank",
+ "anchor_text": "the heat of hydrogenation, provides a quantitative measure of the relative stability of isomeric alkenes"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "Heat of hydrogenation as a stability measure is asserted in one prose sentence with no figure, yet it is assessed at 'advanced' difficulty by a three-card ranking item (ch8-heat-of-hydrogenation-rank: 1-butene, cis-2-butene, trans-2-butene, ranked by heat released) and again in ch8-heat-of-hydrogenation-rank-v2. The argument is that isomers converging on the same product sit at different starting energies — a relationship about relative levels. The chapter contains a reaction_coordinate asset type (rc-epoxidation), so the energy-diagram capability is present but is not applied here.",
+ "learner_impact": "Ranking three isomers by ΔH requires holding the 'same product, different starting heights' picture in the head; a student who cannot construct that picture from one sentence is left ranking by a memorized substitution rule, which is exactly what v2 then also tests. The strongest available support for the item is absent from the section it assesses.",
+ "evidence": "nugget-hydrogenation expanded text, final paragraph; questions ch8-heat-of-hydrogenation-rank (cards with structure_smiles C=CCC, C/C=C\\\\C, C/C=C/C; correct_order 1-butene > cis > trans) and ch8-heat-of-hydrogenation-rank-v2; nugget-hydrogenation asset_ids = [mol-hydrog-butene, mol-butane] only.",
+ "recommended_outcome": "The relative-energy relationship among isomeric alkenes converging on one alkane needs to be visible, not inferred from a single sentence, given that the chapter grades it.",
+ "confidence": 0.84
+ },
+ {
+ "finding_id": "visual-010",
+ "location": {
+ "asset_id": "rc-epoxidation",
+ "section_id": "nugget-epoxidation",
+ "anchor_text": "Show epoxidation as a single concerted step rather than a two-step ionic addition."
+ },
+ "severity": "medium",
+ "category": "figure-purpose",
+ "observation": "The chapter's only energy diagram states its purpose as distinguishing concerted from stepwise, but it shows only one profile: a single exergonic step with a generic 'medium' barrier, no transition-state structure or label, and no two-step profile to contrast against. Its minima_labels name 'Propene + peroxyacid' and 'Epoxide + carboxylic acid' while minima_molecules draws only 'CC=C' and 'CC1CO1' — the peroxyacid and the carboxylic acid byproduct named in the labels are never drawn.",
+ "learner_impact": "A single hump does not read as 'concerted' to a student who has not already internalized what a two-step profile looks like — the meaning of one barrier is only available by comparison. The unlabeled maximum also skips the one image that actually carries concertedness (both C–O bonds forming at once at the transition state), which is the specific misconception the concept records: 'Treating epoxidation as a two-step ionic addition rather than a concerted transfer'.",
+ "evidence": "asset rc-epoxidation spec: steps [{type: 'exergonic', barrier: 'medium'}], minima_labels ['Propene + peroxyacid', 'Epoxide + carboxylic acid'], minima_molecules {0: 'CC=C', 1: 'CC1CO1'}; concept alkene-epoxidation trouble_spots; compiled block blk-hnpaxwq5.",
+ "recommended_outcome": "The 'one step, not two' point needs to be readable as a contrast and needs the transition state to be identified; a lone unlabeled barrier does not carry the claim it is captioned with.",
+ "confidence": 0.82
+ },
+ {
+ "finding_id": "visual-011",
+ "location": {
+ "question_slug": "ch8-stereo-categorize",
+ "concept_slug": "syn-dihydroxylation",
+ "anchor_text": "Classify each alkene reaction by whether the two new groups are delivered to the same face (syn) or to opposite faces (anti)."
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "Several items whose answers are inherently spatial or structural are entirely text-only. ch8-stereo-categorize sorts four reactions into syn vs. anti with no structure anywhere. ch8-hydration-compare includes the row 'Adds H and OH to the same face (syn addition)' with zero structures in the item. ch8-reagent-match and ch8-reagent-match-v2 match reagents to product classes ('Epoxide', 'Vicinal (1,2-) dibromide', 'Primary (anti-Markovnikov) alcohol') with no structures on either column. ch8-ozon-draw and ch8-ozon-draw-v2 give the substrate only as condensed text '(CH3)2C=CHCH3' next to a blank canvas, so a student must parse a linear formula before drawing.",
+ "learner_impact": "These items can be answered by matching remembered phrases ('OsO4 → syn') without ever picturing a face or a product, so they measure vocabulary recall rather than the structural understanding stated in the objectives — and they give students no structural feedback loop. In the draw-the-product items the substrate parsing is an extra, unrelated obstacle stacked in front of the assessed skill.",
+ "evidence": "compiled/question-set.json: ch8-stereo-categorize (0 structure_smiles), ch8-hydration-compare (0), ch8-reagent-match / -v2 (0), ch8-antimarkovnikov-select / -v2 (0), ch8-ozon-draw / -v2 (student_config [redacted], 0 structures). Of 32 compiled questions, 14 contain no rendered structure of any kind.",
+ "recommended_outcome": "Items that assess a spatial or structural outcome need the structural information present in the item, so the answer comes from reading chemistry rather than from recalling a phrase pairing.",
+ "confidence": 0.83
+ },
+ {
+ "finding_id": "visual-012",
+ "location": {
+ "question_slug": "ch8-ozon-products-v2",
+ "anchor_text": "Two molecules of propanal"
+ },
+ "severity": "low",
+ "category": "figure-accuracy",
+ "observation": "Multi-molecule options use inconsistent conventions and one renders a structure that contradicts its own text. In ch8-ozon-products-v2, option b reads 'Two molecules of propanal' but structure_smiles is 'CCC=O' — a single molecule will be drawn. In ch8-ozon-products, the analogous multi-product options use dot-separated fragment SMILES ('CC(C)=O.CC=O', 'CCC(C)=O.C=O'), which do render two species.",
+ "learner_impact": "A distractor whose picture shows one molecule while its text says two either quietly signals that the option is wrong or teaches an incorrect reading of the drawing. In a cleavage question, 'how many product molecules' is precisely the discrimination being tested.",
+ "evidence": "compiled/question-set.json ch8-ozon-products-v2 option b {text: 'Two molecules of propanal', structure_smiles: 'CCC=O'}; compare ch8-ozon-products option a {structure_smiles: 'CC(C)=O.CC=O'}.",
+ "recommended_outcome": "Option text and option structure need to agree on species count, using one consistent convention for multi-product answers across the bank.",
+ "confidence": 0.8
+ },
+ {
+ "finding_id": "visual-013",
+ "location": {
+ "asset_id": "mol-propene-diol",
+ "section_id": "nugget-dihydroxylation",
+ "anchor_text": "Line structure of propene, a three-carbon chain with a terminal double bond."
+ },
+ "severity": "low",
+ "category": "alt-text-quality",
+ "observation": "Alt texts describe connectivity only and never the teaching point of the figure. mol-propene-ep and mol-propene-diol carry byte-identical alt text although they appear in sections where different features matter (the site of oxygen transfer vs. the two carbons that gain OH). None of the 13 alt texts names which carbon gains the new group, which bond breaks, or which face is involved. This matters more than usual here: the renderer's images-off path (applyPrefs / textEquivalentBlock in [internal source reference — not in this repo]) converts each figure into a callout built from long_description or alt_text, and no asset in this package has a long_description — so alt text becomes the whole figure.",
+ "learner_impact": "A learner who turns images off (or reads the alt) gets a structure inventory rather than the transformation, which compounds visual-001: with figures suppressed the chapter's six reactions reduce to twelve descriptions of unrelated line structures. Flagging for the Accessibility persona to dedupe.",
+ "evidence": "assets mol-propene-ep and mol-propene-diol have identical smiles 'CC=C' and identical accessibility.alt_text; no asset in topic.package.json defines long_description; [internal source reference — not in this repo] textEquivalentBlock() falls back to alt_text.",
+ "recommended_outcome": "Each figure's description needs to carry the point that figure is captioned with (its learning_goal), not just the molecule's connectivity — especially since the description is the entire figure when images are off.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "visual-014",
+ "location": {
+ "asset_id": "mol-butane",
+ "section_id": "nugget-hydrogenation",
+ "anchor_text": "Line structure of butane, a four-carbon chain with only single bonds."
+ },
+ "severity": "low",
+ "category": "visual-redundancy",
+ "observation": "Several cards add nothing beyond their own caption. mol-butane (CCCC), mol-acetaldehyde (CC=O) and the duplicated propene pair (mol-propene-ep / mol-propene-diol, identical SMILES and alt text) occupy full-width structure cards whose content is fully conveyed by the name already printed on the card. The chapter is thirteen figures long and none of them is annotated, so the figure layer is high in count and low in information density.",
+ "learner_impact": "Scrolling past near-empty cards trains a learner to skip figures, which costs attention that the one or two figures carrying real information (the epoxidation profile) need. The same rendering budget spent on drawn transformations would carry far more.",
+ "evidence": "assets mol-butane, mol-acetaldehyde, mol-propene-ep and mol-propene-diol (both 'CC=C' with identical alt_text); reader blocks blk-kw1rj1ri, blk-97kxjcdh, blk-di3wpm1j, blk-v7kbfya4.",
+ "recommended_outcome": "Isolated single-species cards that restate their own captions should be absorbed into the transformation they belong to or dropped, rather than retained as standalone figures.",
+ "confidence": 0.72
+ }
+ ],
+ "strengths": [
+ "ch8-hb-hotspot and ch8-hb-hotspot-v2 are genuinely structure-dependent: the student selects an atom on a rendered molecule (molecule_smiles 'C=C(C)C' and 'C=CC', correct answer atom_0), so the regiochemical answer must be read off a structure rather than recalled as a phrase.",
+ "ch8-epox-product-v2 is the one place in the chapter where stereochemistry is actually drawn — trans and cis 2,3-dimethyloxirane as distinct rendered options [SMILES redacted] — and it shows the package is capable of stereochemically explicit figures.",
+ "ch8-heat-of-hydrogenation-rank cards carry structures including explicit E/Z SMILES (C/C=C\\C, C/C=C/C), so the cis/trans distinction the ranking depends on is visible on the cards.",
+ "ch8-synth-route renders start structure, target structure, and all three candidate products (5 structures), making the retrosynthetic choice a comparison between drawn molecules.",
+ "Every figure block carries alt_text, and the reader's images-off path preserves it as a described callout rather than dropping the block, so suppressing figures does not silently delete content.",
+ "Each figure card carries a per-asset learning_goal as its description, so no figure is decorative or purposeless on its face; and because no figure uses overlaid annotation, no label obscures any structure.",
+ "All 13 authored assets surface in the compiled reader (13 molecule blocks including one intentional reuse of butan-1-ol, plus the reaction coordinate) — no orphaned or dropped figure assets."
+ ],
+ "open_questions": [
+ "Are the two video blocks (blk-1kcvkqh6, blk-d83qw7fc) intentionally staged as hidden pending production, or is url = \"\" a compile defect? Both video_briefs are status 'needs_review', which suggests staging, but the reader gives the student no placeholder either way.",
+ "Should a rendered structure appearing only on the correct option (visual-005, ch8-diol-syn and ch8-diol-syn-v2) count as an answer leak under the schema's blocker definition? I scored it high rather than blocker; the orchestrator may want a standing policy on visual answer cueing.",
+ "Does ReactionCoordinateCard actually render spec.minima_molecules inline in the reader? Whether rc-epoxidation shows propene and the epoxide at its minima changes how much of visual-010 remains after any TS labeling.",
+ "Three of the six Wikipedia external_link URLs look auto-generated from concept titles and are unlikely to resolve: /wiki/Syn_dihydroxylation, /wiki/Epoxidation_with_a_peroxyacid, /wiki/Choosing_reactions_in_synthesis. Outside my persona's remit (not a figure), but it affects the supporting-visual pathway students are pointed to, and only one section carries an OpenStax link.",
+ "publishing.available is false and science_review.status is 'not_reviewed' — I reviewed this as a pre-publication draft; if any of the flat-structure choices in visual-002 were deliberate scope decisions (deferring stereochemistry to a later chapter), that intent is not recorded anywhere in the package."
+ ]
+ }
+ ],
+ "publication_readiness": "blocked",
+ "executive_summary": "Baseline verdict: blocked. The chemistry is structurally sound — the instructor persona machine-verified all 13 asset SMILES and every structure in all 32 questions by formula and InChIKey and re-derived every answer key's intended outcome — but two graded items are chemically wrong as depicted (a single enantiomer keyed as THE epoxidation product of an achiral+achiral reaction; ethylene glycol labelled 'a syn (cis) 1,2-diol'), one blocker-level teach-before-grade gap spans five facts the chapter never contains, nine accessible_descriptions hand screen-reader users the graded answer (all invisible to the compile-time guard), and the hotspot items lose their only non-visual path the moment those leaks are fixed. Both rank_order items ship pre-solved and the whole bank is positionally predictable. The chapter is also the fourth confirmed instance of the recompile-revert class: [commit ref — not in this repo]'s four Wikipedia link fixes and [commit ref — not in this repo]'s hydroboration regiochemistry fix lived only in the compiled artifact and are absent from the package — the live reader 404s on 4 of 6 links today. The deepest instructional finding is unanimous across personas: this is a reactions chapter in which no reaction is drawn — every transformation is two unlinked flat structure cards, no intermediate or reagent is depicted, and all three syn-stereochemistry claims are illustrated on substrates where stereochemistry is invisible.",
+ "consensus_strengths": [
+ "Structural fidelity: all 13 asset SMILES and every question structure verify by formula and InChIKey; every answer key's intended chemical outcome re-derives correctly (both machine-checked).",
+ "Assessment breadth: 32 items across 11 question types with every concept covered by at least four items, including two draw items and two synthesis-route items.",
+ "Both structure_scaffold items set typed_structure_entry 'allowed' with SMILES keys — the ch5 chapter-authored access blocker does not recur, and all eleven renderers in use are keyboard-complete.",
+ "Three genuine prose detail tiers are authored for all six sections, and the sentence-level prose is plain, correctly ordered (transformation, reagent, outcome), and chemically accurate.",
+ "Diagnostic distractor feedback on the selected-response items names the actual misstep rather than restating the key.",
+ "The complementary-pairs synthesis framing (regiochemistry x face x add/cleave) is genuinely good pedagogy, and cross-chapter prerequisite slugs all resolve to real ch7 concepts."
+ ],
+ "ranked_recommendations": [
+ {
+ "rec_id": "rec-001",
+ "title": "ch8-epox-product-v2 keys a single enantiomer as THE product of an achiral+achiral reaction",
+ "need": "Epoxidation of achiral (E)-2-butene with achiral mCPBA must give the racemic (2R,3R)+(2S,3S) trans epoxide; the item keys one drawn enantiomer as the product and offers no way for a student reasoning to the other enantiomer to be right, and the racemate principle is taught nowhere in the prose.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Least-complex full fix: reframe the option texts to name the trans product as racemic (both enantiomers, one drawn as representative), keep the meso cis distractor, and add one prose sentence stating that achiral reactants cannot deliver a single enantiomer. No new asset needed.",
+ "target_surface": "assessment",
+ "severity": "blocker",
+ "source_findings": [
+ "instr-001"
+ ]
+ },
+ {
+ "rec_id": "rec-002",
+ "title": "ch8-diol-syn labels ethylene glycol 'syn (cis)' and illustrates only answer-adjacent options",
+ "need": "The keyed option's drawn structure (OCCO) has no stereocenters and cannot be syn; option illustration is asymmetric across the pair (v2 illustrates ONLY the key), so the one item introducing the syn-diol concept teaches a false visual and cues the answer non-chemically.",
+ "chosen_intervention": "alternate-activity",
+ "rationale": "The item must be re-based on a substrate where syn/anti is expressible (cyclopentene -> cis vs trans cyclopentane-1,2-diol with verified stereo-SMILES) with every option treated identically; a label fix alone would leave the discrimination unillustrable.",
+ "target_surface": "assessment",
+ "severity": "blocker",
+ "source_findings": [
+ "instr-002",
+ "instr-003",
+ "visual-004",
+ "visual-005",
+ "access-008"
+ ]
+ },
+ {
+ "rec_id": "rec-003",
+ "title": "Graded content the chapter never teaches (anti ring-opening, bromonium, 9-BBN, hot KMnO4, alkyne hydrogenation)",
+ "need": "Five graded facts appear zero times in any prose tier: the anti stereochemistry of epoxide opening, the bromonium ion, 9-BBN, the hot/concentrated-vs-cold-dilute KMnO4 distinction, and alkyne hydrogenation stoichiometry. A student who mastered the chapter still misses these items and cannot tell whether the gap is theirs.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Split by least complexity: teach anti epoxide opening and the KMnO4 temperature distinction in prose (each is one to two sentences the chapter already gestures at); re-scope the 9-BBN option and the alkyne variant to in-chapter content since bulky boranes and alkynes are later-chapter material.",
+ "target_surface": "prose",
+ "severity": "blocker",
+ "source_findings": [
+ "stud-002",
+ "instr-007"
+ ]
+ },
+ {
+ "rec_id": "rec-004",
+ "title": "Nine accessible_descriptions state the graded answer",
+ "need": "Both draw items name the product to draw, both hotspot items name the atom to select, three short-answer items list their accepted strings, both synthesis_route items give the reagent-to-product mapping, and one numeric item performs the graded counting. The compile-time guard is clean on all of them because the leaks are semantic.",
+ "chosen_intervention": "text-equivalent",
+ "rationale": "Rewrite each description to convey stimulus and task without the answer, matching the neutral pattern already present in ch8-epox-diol-name and ch8-hydrog-equiv-v2 — the standard existed and was inconsistently applied.",
+ "target_surface": "assessment",
+ "severity": "blocker",
+ "source_findings": [
+ "access-001",
+ "access-002",
+ "access-003",
+ "access-004",
+ "access-009"
+ ]
+ },
+ {
+ "rec_id": "rec-005",
+ "title": "Hotspot items have no neutral non-visual orientation once the leak is removed",
+ "need": "The renderer labels atoms only 'C atom 1..4' with alt 'Structure for this question'; with the leaking description fixed, a screen-reader user has no way to map atom index to chemical position, so the item becomes uncompletable rather than merely hard.",
+ "chosen_intervention": "structured-chemical-description",
+ "rationale": "Chapter-side mitigation proven on ch27: give each hotspot a neutral connectivity readout tying every selectable atom index to its bonding environment without stating which is correct. The renderer-level atom-naming gap remains a platform ticket (same as ch25/ch26/ch28).",
+ "target_surface": "assessment",
+ "severity": "blocker",
+ "source_findings": [
+ "access-005",
+ "access-002"
+ ]
+ },
+ {
+ "rec_id": "rec-006",
+ "title": "Both rank_order items ship pre-solved and the whole bank is positionally predictable",
+ "need": "Both rank_order card lists equal the answer key and the renderer submits the presented order untouched (the ch6 class); all ten single_selects key 'a', both multi_selects key 'a,b', and matching/categorize keys follow listed order — a student can score well from position alone.",
+ "chosen_intervention": "alternate-activity",
+ "rationale": "Reorder authored cards and options so no key equals the presented order and correct ids vary across the bank; no renderer change needed and no item content changes.",
+ "target_surface": "assessment",
+ "severity": "blocker",
+ "source_findings": [
+ "stud-004"
+ ]
+ },
+ {
+ "rec_id": "rec-007",
+ "title": "Four of six Wikipedia links are fabricated 404s; none of the six concepts authors a wikipedia_title",
+ "need": "The compiler mints article names from concept titles ('Choosing reactions in synthesis' can never resolve). Commit [commit ref — not in this repo] fixed all four in the artifact only and a recompile reverted them — the live reader 404s today.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Author an explicit, HTTP-verified wikipedia_title on every concept in the package (the ch4-proven fix), restoring the four curated targets (Prilezhaev reaction, Dihydroxylation, Ozonolysis, Organic synthesis) so no future recompile can revert them.",
+ "target_surface": "prose",
+ "severity": "high",
+ "source_findings": [
+ "instr-015",
+ "stud-017"
+ ]
+ },
+ {
+ "rec_id": "rec-008",
+ "title": "Back-port the artifact-only hydroboration regiochemistry fix; the current package explanation is a non-sequitur",
+ "need": "'Boron is electron-deficient' explains why borane adds, not why boron takes the less substituted carbon; the curated artifact carried the two-reason version (steric bulk + developing positive charge on the more substituted carbon in the four-centre TS) and a recompile reverted it to the weaker text now in the package.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Restore the curated paragraph into topic.package.json (both tiers), which simultaneously fixes the drift and connects anti-Markovnikov regiochemistry to the carbocation-stability logic students already own.",
+ "target_surface": "prose",
+ "severity": "high",
+ "source_findings": [
+ "instr-010"
+ ]
+ },
+ {
+ "rec_id": "rec-009",
+ "title": "Every stereochemical claim is told on substrates where it is invisible",
+ "need": "But-2-ene->butane, propene->methyloxirane and propene->propane-1,2-diol cannot display syn delivery (no or one stereocenter), so a student can read the whole chapter and never see what 'syn' looks like — the exact trouble_spot the concepts declare. Not one asset SMILES carries a stereo descriptor.",
+ "chosen_intervention": "new-figure",
+ "rationale": "At least one face-distinguishable worked case per syn claim (cyclic or 1,2-disubstituted substrates with verified wedge/dash stereo); a description cannot substitute because the claim is intrinsically spatial and it is graded.",
+ "target_surface": "figure",
+ "severity": "high",
+ "source_findings": [
+ "instr-004",
+ "visual-002",
+ "stud-001"
+ ]
+ },
+ {
+ "rec_id": "rec-010",
+ "title": "A reactions chapter with zero drawn transformations",
+ "need": "All six sections present substrate and product as unlinked molecule cards; reagents over an arrow appear nowhere in the figure layer, though the platform's reaction block type is wired end-to-end.",
+ "chosen_intervention": "new-figure",
+ "rationale": "Convert each section's substrate/product pair into one reaction asset carrying reagents and conditions — the platform already renders reaction_smiles, so this is data authoring, not platform work, and it directly serves the reagent-recall items.",
+ "target_surface": "figure",
+ "severity": "high",
+ "source_findings": [
+ "visual-001",
+ "instr-006",
+ "visual-014"
+ ]
+ },
+ {
+ "rec_id": "rec-011",
+ "title": "The intermediates that carry every causal explanation are never drawn",
+ "need": "The cyclic osmate ester, the peroxyacid O-O bond, the organoborane and the ozonide are each named as THE reason for an outcome and none is depicted; five of six nuggets are typed 'mechanism' with no mechanism shown.",
+ "chosen_intervention": "new-figure",
+ "rationale": "The osmate ester and peroxyacid are the two load-bearing cases (they explain syn delivery and concerted transfer, both graded); draw those two, and keep the organoborane/ozonide as follow-on. A prose gloss cannot carry a cyclic geometry argument.",
+ "target_surface": "figure",
+ "severity": "high",
+ "source_findings": [
+ "instr-005",
+ "stud-008"
+ ]
+ },
+ {
+ "rec_id": "rec-012",
+ "title": "All six practice_checks and all six trouble_spots reach no student",
+ "need": "The compiled reader contains zero callout blocks; the authored self-checks and misconception warnings vanish in compilation, leaving six sections of continuous exposition with no retrieval and no trap disarmed at the point of learning.",
+ "chosen_intervention": "added-practice",
+ "rationale": "The ch30 platform fix already emits practice_check/trouble_spot callouts on recompile; this artifact predates it, so the required recompile (after package fixes land) closes this for free — verify callouts appear.",
+ "target_surface": "practice",
+ "severity": "high",
+ "source_findings": [
+ "stud-005",
+ "stud-006",
+ "instr-009"
+ ]
+ },
+ {
+ "rec_id": "rec-013",
+ "title": "Hint ladders bottom out by handing over the answer",
+ "need": "On at least eight items the final hint states the complete key (ch8-stereo-categorize level 2 IS the answer key; ch8-hydrog-product level 2 is the product; ch8-ozon-draw level 3 is 'Draw (CH3)2C=O'). Hints are the first resort of exactly the students they betray, and hint telemetry loses diagnostic value.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Rewrite terminal rungs to stay procedural — point at the next decision (which carbon is less substituted, which face the cyclic intermediate occupied) without conceding the graded fact.",
+ "target_surface": "assessment",
+ "severity": "high",
+ "source_findings": [
+ "stud-003",
+ "access-010"
+ ]
+ },
+ {
+ "rec_id": "rec-014",
+ "title": "Eight open-response items have no wrong-answer explanations",
+ "need": "All four short_answer, both numeric and both draw items carry wrong_answer_explanations: [] — a wrong attempt gets only the generic fallback, which states the key, so a student never learns what they did wrong.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Author error-specific patterns for the predictable wrong answers (wrong fragment drawn, aldehyde/ketone swapped, wrong equivalence count) in the canonical match form the engine reads.",
+ "target_surface": "assessment",
+ "severity": "medium",
+ "source_findings": [
+ "stud-014"
+ ]
+ },
+ {
+ "rec_id": "rec-015",
+ "title": "Two short-answer stems contain their own answers",
+ "need": "ch8-epox-diol-name says the OH groups are 'on opposite faces' then asks for the word for that relationship; ch8-ozon-use says the fragments 'reveal exactly where the double bond was' then asks what ozonolysis reveals. Both are vocabulary substitution off the stem.",
+ "chosen_intervention": "alternate-activity",
+ "rationale": "Rewrite the stems to withhold the relationship/inference, and widen accepted phrasings so correct-in-substance answers are not marked wrong.",
+ "target_surface": "assessment",
+ "severity": "medium",
+ "source_findings": [
+ "instr-008",
+ "stud-013"
+ ]
+ },
+ {
+ "rec_id": "rec-016",
+ "title": "The prerequisite graph misstates what sections assume",
+ "need": "Ozonolysis lists catalytic-hydrogenation (no dependency) while its real prerequisite — recognizing aldehydes vs ketones — is unlisted; the synthesis capstone omits the hydration/halogenation/HBr concepts its comparison table and questions are built from, and 'these two chapters' resolves to nothing a reader can open.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Correct the two concepts' prerequisites to the verified ch7 slugs and add an in-prose pointer to the companion chapter; the external slugs all resolve, so this is data correction.",
+ "target_surface": "prose",
+ "severity": "medium",
+ "source_findings": [
+ "instr-011",
+ "stud-009",
+ "instr-017"
+ ]
+ },
+ {
+ "rec_id": "rec-017",
+ "title": "Notation drifts across prose, figures and questions",
+ "need": "Same compounds are named in current-IUPAC style in prose/assets and pre-1993 style in questions; cis/trans and E/Z are swapped without stating equivalence; Unicode and ASCII subscripts mix inside single option lists.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Normalize the question layer to the prose convention (or state equivalence at first use) and unify subscripts — mechanical edits with chapter-wide reach.",
+ "target_surface": "assessment",
+ "severity": "medium",
+ "source_findings": [
+ "instr-012",
+ "stud-016"
+ ]
+ },
+ {
+ "rec_id": "rec-018",
+ "title": "The chapter's one diagram under-delivers its own teaching goal",
+ "need": "rc-epoxidation exists to show 'one concerted step, not two' but shows a lone unlabeled hump: no transition state identified, no two-step contrast, an alt text that omits the axis, both minima labels, and the exergonic direction, and no long_description for the images-off path.",
+ "chosen_intervention": "longer-description",
+ "rationale": "A full text equivalent (axis, both labelled minima, single barrier, downhill direction, the butterfly TS at the maximum, not-to-scale caveat) closes the accessibility gap and carries the concerted claim; a redrawn two-panel contrast stays a recommendation.",
+ "target_surface": "figure",
+ "severity": "medium",
+ "source_findings": [
+ "access-006",
+ "instr-016",
+ "visual-010",
+ "stud-015"
+ ]
+ },
+ {
+ "rec_id": "rec-019",
+ "title": "Heat of hydrogenation is assessed at advanced difficulty but taught in one expanded-tier sentence",
+ "need": "The inverse stability relationship (more stable releases LESS heat) exists only in the expanded tier with no numbers or comparison; two ranking items grade it and one explanation cites 'hyperconjugation', a word the chapter never uses.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "State the relationship in the standard tier too with one concrete kJ/mol comparison, and remove or gloss the hyperconjugation reference; a figure ladder remains a visual opportunity.",
+ "target_surface": "prose",
+ "severity": "medium",
+ "source_findings": [
+ "stud-010",
+ "visual-009"
+ ]
+ },
+ {
+ "rec_id": "rec-020",
+ "title": "No overview, no summary, no comparison surface for a selection task",
+ "need": "The chapter opens cold and ends without consolidation; the organizing frame (which carbon, which face) appears only in the final paragraph, and the synthesis section demands cross-chapter comparison with nothing laid side by side.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Add a short organizing opener and a closing consolidation that names the two decisions and lists the reagent outcomes; a full comparison figure is retained as an opportunity, but the frame is deliverable in prose now.",
+ "target_surface": "prose",
+ "severity": "medium",
+ "source_findings": [
+ "stud-011",
+ "visual-008"
+ ]
+ },
+ {
+ "rec_id": "rec-021",
+ "title": "Option text and structure disagree on species count",
+ "need": "ch8-ozon-products-v2 option b reads 'Two molecules of propanal' but renders single-molecule 'CCC=O', while the sibling item correctly uses dot-separated fragments — in a cleavage question where product count IS the discrimination.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Change the SMILES to 'CCC=O.CCC=O' to match the convention the sibling item already uses.",
+ "target_surface": "assessment",
+ "severity": "medium",
+ "source_findings": [
+ "visual-012"
+ ]
+ },
+ {
+ "rec_id": "rec-022",
+ "title": "Hotspot select_count permits multi-atom submissions against single-atom keys",
+ "need": "Both hotspot items set select_count 'one_or_more' with a one-atom key, creating a grading ambiguity for a student who selects the right atom plus another.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Set select_count to the size of the key.",
+ "target_surface": "assessment",
+ "severity": "medium",
+ "source_findings": [
+ "instr-018"
+ ]
+ },
+ {
+ "rec_id": "rec-023",
+ "title": "Objective-assessment misalignment on the two stereochemistry-bearing objectives",
+ "need": "No hydrogenation item requires a stereochemical product (the objective says 'identify its syn stereochemistry'); the ozonolysis 'locate the double bond' objective is assessed only by a fill-in whose answer is the word 'location', and the two surfaced ozonolysis items reuse the prose's exact worked substrate.",
+ "chosen_intervention": "added-practice",
+ "rationale": "One reverse-inference ozonolysis item (given fragments, identify the alkene) on a fresh substrate and one stereochemical hydrogenation outcome item close both gaps; flagged for sign-off since it expands the bank.",
+ "target_surface": "assessment",
+ "severity": "medium",
+ "source_findings": [
+ "instr-014",
+ "stud-016"
+ ]
+ },
+ {
+ "rec_id": "rec-024",
+ "title": "Video briefs lack accessibility plans and learner-facing descriptions",
+ "need": "Both deferred videos would ship with purely spatial storyboards, narration that never names a structure, no caption/transcript plan, and compiled descriptions that are production instructions; the ozonolysis video is currently the only vehicle for the reverse-inference objective.",
+ "chosen_intervention": "instructor-note",
+ "rationale": "Videos stay deferred (not auto-built per policy); record the caption/audio-description requirement on both briefs so production cannot ship them inaccessible, and note that rec-023's added item removes the objective's dependency on the video.",
+ "target_surface": "instructor-support",
+ "severity": "medium",
+ "source_findings": [
+ "access-007",
+ "visual-003",
+ "stud-012"
+ ]
+ },
+ {
+ "rec_id": "rec-025",
+ "title": "OpenStax chapter-8 link promises coverage this chapter does not deliver",
+ "need": "The reader binds to McMurry ch8 but covers roughly half its sections (no halohydrin, oxymercuration, carbene, radical/polymerization, elimination-based synthesis, or the reaction-stereochemistry section that establishes racemic outcomes); only section 1 carries the reading link.",
+ "chosen_intervention": "instructor-note",
+ "rationale": "An explicit scope statement to instructors is the least-complex honest fix; expanding coverage is a curriculum decision beyond a review pass.",
+ "target_surface": "instructor-support",
+ "severity": "medium",
+ "source_findings": [
+ "instr-013",
+ "stud-011"
+ ]
+ },
+ {
+ "rec_id": "rec-026",
+ "title": "Reader heading hierarchy skips from h2 to h4",
+ "need": "Every figure/video/link card renders as h4 under h2 section titles with no h3, so screen-reader heading navigation misreports nesting across all sections.",
+ "chosen_intervention": "instructor-note",
+ "rationale": "Platform rendering ticket (TopicPackageChapterRenderer/ReaderBlockRenderer) — no chapter edit can fix it; recorded for the platform queue.",
+ "target_surface": "instructor-support",
+ "severity": "low",
+ "source_findings": [
+ "access-011"
+ ]
+ }
+ ],
+ "accessibility_blockers": [
+ "access-001",
+ "access-002",
+ "access-003",
+ "access-004",
+ "access-005",
+ "access-009"
+ ],
+ "visual_opportunities": [
+ "Draw each of the six transformations as a connected reaction scheme with reagents (platform reaction block already renders reaction_smiles).",
+ "At least one face-distinguishable syn-addition case with verified stereo (cyclic or 1,2-disubstituted substrate) per stereochemical claim.",
+ "The osmate ester and peroxyacid O-O structures that carry the chapter's two causal arguments.",
+ "A chapter-closing comparison surface for the reagent-selection task; a relative-energy ladder for heat of hydrogenation; a two-panel concerted-vs-stepwise contrast for rc-epoxidation."
+ ],
+ "sufficient_as_is": [
+ "The twelve simple molecule figures' one-line alt texts are genuine equivalents for 3-5-heavy-atom flat structures — no long_description needed on them (only rc-epoxidation needs one); the two identical propene alts should merely be differentiated by their section's teaching point.",
+ "Keyboard operability needs no chapter or platform work for these 11 types: rank_order has Move up/down with aria-live, matching/categorize/matrix/route use labelled selects, hotspot atoms are real buttons, and both draw items allow typed entry.",
+ "The regiochemistry and stereochemistry claims are all carried in prose (three tiers), so no figure is a sole carrier of meaning today; the figure work in rec-009/010/011 is about learnability, not access.",
+ "is_hidden on the two deferred video blocks is honoured by the renderer (verified ch28/ch31) — they render as nothing, not as dead affordances."
+ ],
+ "disagreements": [
+ {
+ "topic": "Are the one-line molecule alt texts sufficient?",
+ "positions": {
+ "Accessibility Persona": "For the twelve simple molecule figures the one-line alt is a genuinely sufficient equivalent; adding long descriptions would be redundant.",
+ "Learner with Visual Preference": "Alt texts describe connectivity only and never the teaching point; with images off the chapter reduces to descriptions of unrelated structures, so each figure's description should carry its learning_goal."
+ },
+ "resolution": "Adopt Accessibility's position for the simple molecules (no long_descriptions added there) but differentiate the two byte-identical propene alts and give the single complex figure (rc-epoxidation) the full text equivalent — the two claims target different figures and are both honoured."
+ },
+ {
+ "topic": "Are the hidden video blocks harmful today?",
+ "positions": {
+ "Learner with Visual Preference": "Both compile to url '' and render as nothing — the two most-needed comparisons silently vanish with no signal to student or instructor (scored high).",
+ "Accessibility Persona": "Nothing is broken for students today because is_hidden is honoured; the risk is in the briefs' missing caption/audio-description plans if produced as-is."
+ },
+ "resolution": "Renderer behaviour verified (is_hidden returns null before the switch — same evidence as ch28/ch31), so no dead affordance exists; the underlying content gap is real and is addressed structurally (rec-023 removes the objective's dependency on the deferred video; rec-024 records the accessibility plan requirement)."
+ },
+ {
+ "topic": "Severity of the picture-only-on-the-correct-option pattern",
+ "positions": {
+ "Learner with Visual Preference": "Scored high, asked the orchestrator for a standing policy on whether visual answer cueing is a blocker.",
+ "Organic Chemistry Instructor": "Treated the same items as blocker-level because the miskeyed/mislabelled structures make them chemically wrong, independent of the cueing."
+ },
+ "resolution": "The items are blockers via chemical accuracy (rec-002); the cueing pattern itself is folded into the same correction (uniform option treatment), consistent with how ch6/ch7 handled the illustrated-option tell."
+ }
+ ],
+ "regression": {
+ "resolved": [],
+ "unchanged": [],
+ "worsened": [],
+ "new": []
+ },
+ "corrections": {
+ "status": "applied-and-verified-without-second-persona-run",
+ "post_correction_readiness_estimate": "ready with minor revisions",
+ "estimate_note": "Not a new persona verdict — only a four-persona regression run can issue one. The estimate moves from major revision to ready-with-minor because the two clusters that held it there are now closed: the chapter draws its transformations (6 reaction assets, 3 with verified stereochemistry) and it draws every intermediate its causal arguments rest on (4 diagram figures). Every remaining item is either a platform gap no chapter edit can clear or a scoping decision for the maintainer.",
+ "applied": [
+ {
+ "change": "Authored HTTP-verified wikipedia_title on all six concepts (Catalytic_hydrogenation, Hydroboration-oxidation, Prilezhaev_reaction, Dihydroxylation, Ozonolysis, Retrosynthetic_analysis); 7/7 compiled outbound links now return 200 (was 3/7).",
+ "resolves": [
+ "instr-015",
+ "stud-017"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Back-ported the artifact-only [commit ref — not in this repo] hydroboration regiochemistry paragraph into topic.package.json (both tiers), extended with the bulk + four-centre-TS developing-charge reasoning bridged to Markovnikov logic, plus a 9-BBN sentence — a recompile can no longer revert it.",
+ "resolves": [
+ "instr-010"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "ch8-epox-product-v2 reframed: the trans epoxide is now presented and explained as racemic (both enantiomers, one drawn), and the epoxidation nugget teaches that achiral reactants cannot give a single enantiomer.",
+ "resolves": [
+ "instr-001"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "ch8-diol-syn rebuilt on cyclopentene with RDKit-verified stereo structures on ALL options (cis = meso S,R O[C@H]1CCC[C@H]1O; trans = S,S noted racemic; epoxide) — the \"syn (cis)\" label no longer sits on stereocenter-free ethylene glycol and the key is no longer the only illustrated option. ch8-diol-syn-v2 illustration made uniform (none) and its answer-stating hint replaced.",
+ "resolves": [
+ "instr-002",
+ "instr-003",
+ "visual-004",
+ "visual-005",
+ "access-008"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Teach-before-grade gaps closed in prose: anti back-side epoxide ring-opening (+ standard tier), the bromonium-ion definition of anti addition, hot-vs-cold KMnO4; 9-BBN taught; the alkyne variant ch8-hydrog-equiv-v2 rebased to isoprene.",
+ "resolves": [
+ "stud-002",
+ "instr-007"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Nine leaking accessible_descriptions rewritten answer-free; both hotspots now carry a neutral per-atom connectivity readout keyed to the renderer's announced \"C atom N\" names (input-SMILES atom order verified preserved by [internal source reference — not in this repo]), so a de-leaked non-visual attempt is possible.",
+ "resolves": [
+ "access-001",
+ "access-002",
+ "access-003",
+ "access-004",
+ "access-009"
+ ],
+ "partially_addresses": [
+ "access-005"
+ ]
+ },
+ {
+ "change": "Both rank_order card lists reordered away from the answer key (renderer submits presented order untouched); single_select key display positions now 2,3,2,2,3,2,3,3,2,1 (were all 1); multi_select, matching right-column, categorize items and synthesis_route listings shuffled off key order.",
+ "resolves": [
+ "stud-004"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "16 answer-stating hint rungs across 14 items rewritten to stay procedural.",
+ "resolves": [
+ "stud-003",
+ "access-010"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "All 8 open-response items gained error-diagnosing feedback via enriched generic explanations (always-firing form chosen deliberately: submission-pattern matching on these types risks the ch27 dead-pattern class).",
+ "resolves": [
+ "stud-014"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Two self-answering stems rewritten (ch8-epox-diol-name, ch8-ozon-use).",
+ "resolves": [
+ "instr-008",
+ "stud-013"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Prerequisites corrected (ozonolysis -> functional-groups-overview; synthesis concept now declares all six upstream reactions); \"these two chapters\" now names the companion chapter.",
+ "resolves": [
+ "instr-011",
+ "instr-017"
+ ],
+ "partially_addresses": [
+ "stud-009"
+ ]
+ },
+ {
+ "change": "Notation normalized across 116 student-facing fields: current-IUPAC names matching the prose, Unicode subscripts, cis/trans-vs-Z/E equivalence stated; SMILES and graded fields untouched (verified).",
+ "resolves": [
+ "instr-012",
+ "stud-016"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "rc-epoxidation given a full long_description (axis, minima, downhill direction, concerted butterfly TS, one-barrier-vs-two contrast, not-to-scale caveat) and an honest alt text.",
+ "resolves": [
+ "access-006"
+ ],
+ "partially_addresses": [
+ "instr-016",
+ "visual-010",
+ "stud-015"
+ ]
+ },
+ {
+ "change": "Heat of hydrogenation now taught in the standard tier too, with real values (but-1-ene 127, cis-but-2-ene 120, trans-but-2-ene 115 kJ/mol); hyperconjugation glossed where cited.",
+ "resolves": [
+ "stud-010"
+ ],
+ "partially_addresses": [
+ "visual-009"
+ ]
+ },
+ {
+ "change": "Organizing frame added at the chapter opening (both tiers) and a reagent consolidation paragraph added to the synthesis section.",
+ "resolves": [
+ "stud-011"
+ ],
+ "partially_addresses": [
+ "visual-008"
+ ]
+ },
+ {
+ "change": "Six reaction assets added — the chapter had zero drawn transformations; three carry verified stereochemistry (1,2-dimethylcyclohexene -> cis-1,2-dimethylcyclohexane; (E)-but-2-ene -> trans epoxide, noted racemic; cyclopentene -> cis-cyclopentanediol) so syn delivery and stereospecificity are finally visible. All SMILES RDKit-verified; no agent-form strings.",
+ "resolves": [
+ "visual-001",
+ "instr-006",
+ "instr-004",
+ "visual-002",
+ "stud-001"
+ ],
+ "partially_addresses": [
+ "instr-005",
+ "stud-008"
+ ]
+ },
+ {
+ "change": "Mechanical: \"Two molecules of propanal\" option now draws two molecules (CCC=O.CCC=O); hotspot select_count set to \"one\" matching the one-atom keys; the two byte-identical propene alt texts differentiated.",
+ "resolves": [
+ "visual-012",
+ "instr-018",
+ "visual-013"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Recompile emitted the authored scaffolding for the first time: 12 callout blocks (6 practice checks + 6 trouble spots) now reach the reader, plus the 6 reaction blocks.",
+ "resolves": [
+ "stud-005",
+ "stud-006",
+ "instr-009"
+ ],
+ "partially_addresses": [
+ "stud-012"
+ ]
+ },
+ {
+ "change": "Built and wired `diagram` figures (three retained) for the intermediates the chapter argued from but never drew ([internal source reference — not in this repo], RDKit + chemfig SvgCanvas, provenance recorded, ai_regeneration_allowed false): fig-osmate-ester, fig-hydroboration-ts, fig-ozonide-cleavage. Each figure derives its printed claims rather than asserting them — the osmate ester is stripped of osmium in software and the released diol is ASSERTED equal to the chapter cis (meso) diol and unequal to the trans one; the carbon the TS labels \"more substituted\" is read off the molecule; and aldehyde-vs-ketone is decided by counting hydrogens on each former alkene carbon. All rasterised and visually inspected before wiring in, which caught text overrunning the canvas on all of them and two label collisions that no schema check would see; a bottom-bound assertion now fails the build rather than shipping clipped captions. Reader image blocks 0 -> 3, all resolving. A fourth figure, the peroxyacid butterfly transition state, WAS built and then WITHDRAWN: the maintainer reviewed it and found the transition state depicted incorrectly, so the asset and its builder were removed rather than left to regenerate. The concerted argument it carried is still made in prose and in rc-epoxidation long_description; re-authoring needs the butterfly geometry settled first.",
+ "resolves": [
+ "instr-005",
+ "stud-008"
+ ],
+ "partially_addresses": [
+ "stud-015",
+ "instr-016",
+ "visual-010"
+ ]
+ },
+ {
+ "change": "Authored the two bank additions that needed sign-off, gated to admin/teacher/contractor preview rather than students: ch8-ozon-reverse-infer-v2 (reverse inference — cyclohexanone + propanal back to propylidenecyclohexane, with a formula-identical C9H16 in-ring-alkene trap) and ch8-hydrog-stereo-product-v2 (1,2-dimethylcyclopentene + H2 gives the cis/meso product). Both authored as `variant_of` a same-type parent, which the seeder keeps at review_status draft and never publishes, and which build_public_question_summary drops from the student-facing projection; both demo_eligible false and tagged needs-maintainer-review + admin-preview-only. Verified absent from the compiled student projection (16 surfaced, unchanged) and present in the compiled bank. Chemistry RDKit-verified: cis-1,2-dimethylcyclopentane is meso (S,R) with an InChIKey distinct from the trans (S,S); the ozonolysis retro-join and its C9H16 distractor both confirmed.",
+ "resolves": [],
+ "partially_addresses": [
+ "instr-014",
+ "stud-016"
+ ]
+ },
+ {
+ "change": "[internal source reference — not in this repo]: split the stale \"#00FF00 # F, Cl\" whitelist entry, adding #00CC00 as the green RDKit actually emits for chlorine. ch8 is the first chapter to draw a chlorine (mCPBA), so the guard had never fired; the entry's intent already covered Cl.",
+ "resolves": [],
+ "partially_addresses": []
+ },
+ {
+ "change": "PLATFORM: practice-check callouts no longer print their own answers. `_practice_check_block` now emits the worked answer as `content.reveal` with a `reveal_label` instead of appending '**Answer.** ...' to the visible markdown, and the reader renders it behind a click-to-reveal control (new `CalloutBlock` component; the answer is not placed in the DOM until opened, so it cannot be read ahead from the accessibility tree either). Found in manual reader review reading ch8's compiled reader. This was a standing defect recorded but never fixed on the epoxides supplement ('practice_check callouts print their own answers') and it affected EVERY chapter emitting callouts - 33 packages author practice checks, and each gets the reveal on its next recompile. The builder test was updated to assert the inverse of what it asserted before: the answer must be in `reveal` and must NOT appear in `markdown`.",
+ "resolves": [],
+ "partially_addresses": [
+ "stud-005",
+ "instr-009"
+ ]
+ }
+ ],
+ "remaining_high_priority": [
+ "Platform: accessible_description reaches no reader-surface learner (the questions manifest strips it — standing gap first proved on ch16); hotspot renderer still announces atoms only as \"C atom N\" (chapter-side connectivity readouts are the mitigation); reader heading hierarchy skips h1>h2>h4.",
+ "Awaiting maintainer approval: the two gated questions (ch8-ozon-reverse-infer-v2, ch8-hydrog-stereo-product-v2) are authored and preview-only — they surface to students only if promoted them off variant_of.",
+ "Both video briefs remain deferred with no caption/audio-description plan recorded on the briefs (rec-024); the OpenStax ch8 scope statement for instructors (rec-025) is not yet authored.",
+ "The two surfaced ozonolysis items still reuse the prose worked substrate; the gated reverse-inference item would close that if promoted."
+ ],
+ "verification": [
+ "curl all 7 compiled outbound links — 200/200/200/200/200/200/200 (was 4x 404)",
+ "Topic-package compiler (proprietary toolchain, not in this repo) — clean
+ "Automated test suite — 172 passed
+ "RDKit verification of every new/changed stereo SMILES: cis-cyclopentane-1,2-diol meso (S,R mirror-identical), trans (S,S) distinct InChIKey; cis-1,2-dimethylcyclohexane meso (S,R); trans-2,3-dimethyloxirane (R,R) InChIKey PQXKWPLDPFFDJP-QWWZWVQMSA-N; all 6 reaction SMILES parse",
+ "compiled question-set audit: 0 pre-solved rank_order, single_select key positions 2,3,2,2,3,2,3,3,2,1, 0 partial-illustration items, hotspot select_count \"one\"",
+ "compiled reader block census: 6 text, 12 callout, 13 molecule, 6 reaction, 1 reaction_coordinate, 6 external_link (all 200), 1 mcmurry_link, 2 video (hidden)",
+ "graded fields verified untouched by notation normalization (answer_text arrays and all SMILES fields ASCII-clean)",
+ "Proprietary toolchain verification (not in this repo)
+ "All four figures rasterised with cairosvg and visually inspected at 1180px before wiring in",
+ "Automated test suite — 213 passed
+ "Gating verified: both new questions absent from frontend/public/reader/topic-chapters/alkenes-reactions-and-synthesis.questions.json (16 surfaced, unchanged) and present in the compiled bank with variant_of set, demo_eligible false",
+ "Recompiled reader block census: 6 text, 12 callout, 13 molecule, 6 reaction, 4 image (all 4 figure URLs resolve), 1 reaction_coordinate, 6 external_link, 1 mcmurry_link, 2 video (hidden)",
+ "Automated test suite — 213 passed
+ "npx vitest run [internal source reference — not in this repo] — 10 passed, including 2 new: the answer is absent from the DOM until the control is clicked, and a callout with nothing to reveal renders no control",
+ "npx vitest run src/components/textbook/__tests__ src/components/readers — 84 passed",
+ "tsc: 0 errors in the two files touched ([internal source reference — not in this repo], [internal source reference — not in this repo])",
+ "Recompiled ch8: 6 practice-check callouts carry click-to-reveal answers, 0 print the answer inline; 3 image blocks all resolve"
+ ]
+ }
+}

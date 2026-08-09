@@ -1,0 +1,775 @@
+{
+ "chapter_id": "alkyl-halide-substitution-and-elimination",
+ "chapter_version": "1",
+ "run_at": "2026-07-25T01:55:52.858887+00:00",
+ "skill": "review-organic-chapter",
+ "baseline_run": true,
+ "personas": [
+ {
+ "persona": "Organic Chemistry Instructor",
+ "persona_version": "1.0.0",
+ "chapter_id": "alkyl-halide-substitution-and-elimination",
+ "chapter_version": "1",
+ "model": "claude-opus-4-8",
+ "summary": "Chemically strong, assignable chapter: every SMILES validates (SN2 inversion pair, tosylate, tert-butyl cation), prose builds the 'why', sequencing is clean, 30-item bank across 14 types teaches. NOT ready as-is: one wrong-chemistry item \u2014 the SN1 racemization video is scripted on tert-butyl chloride (achiral), which cannot racemize. Fix that and it is go; remainder are high/medium improvements (no chiral SN1 example, missing Newman/decision-grid figures, ambiguous energy diagram).",
+ "overall_score": 7.0,
+ "publication_blockers": [
+ "instr-001"
+ ],
+ "findings": [
+ {
+ "finding_id": "instr-001",
+ "location": {
+ "asset_id": "video-sn1-two-step-racemization",
+ "nugget_id": "nugget-sn1-mechanism",
+ "concept_slug": "sn1-mechanism-and-stereochemistry",
+ "anchor_text": "producing the two mirror-image capture events. Combine into the racemic alcohol product"
+ },
+ "severity": "blocker",
+ "category": "chemical-accuracy",
+ "observation": "SN1 video built on tert-butyl chloride -> tert-butyl cation -> 2-methyl-2-propanol (all achiral). Learning goal is 'show why a planar cation racemizes' and storyboard scripts 'two mirror-image capture events ... racemic alcohol product'. 2-methyl-2-propanol is achiral, the cation faces are homotopic, both faces give the identical achiral product \u2014 no enantiomers, no racemate.",
+ "learner_impact": "Every viewer of the flagship SN1 stereochemistry video is taught a false racemization picture that must be un-taught.",
+ "recommended_outcome": "The racemization demonstration needs a substrate with a stereocenter at the reacting carbon; the achiral tert-butyl system can show ionization/kinetics but must not teach racemization.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "instr-002",
+ "location": {
+ "concept_slug": "sn1-mechanism-and-stereochemistry",
+ "nugget_id": "nugget-sn1-mechanism",
+ "anchor_text": "Ionize, then capture: two steps and racemization"
+ },
+ "severity": "high",
+ "category": "worked-example-gap",
+ "observation": "SN1 section titled '...and racemization' and prose correctly says a single-enantiomer substrate gives a racemic product, but the only worked assets are achiral tert-butyl species \u2014 no molecule in the SN1 material carries a stereocenter, unlike the SN2 section's (S)->(R) pair.",
+ "learner_impact": "SN2 gets a concrete inversion picture but SN1 racemization is only asserted; the SN1-vs-SN2 stereochem contrast (core objective) is under-supported.",
+ "recommended_outcome": "A concrete SN1 example on a chiral secondary/tertiary substrate that visibly produces both enantiomers.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "instr-003",
+ "location": {
+ "concept_slug": "e2-elimination",
+ "nugget_id": "nugget-e2",
+ "anchor_text": "the breaking C-H and C-X bonds must lie in the same plane and point in opposite directions, the anti-periplanar arrangement"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "E2 anti-periplanar conveyed only by prose + video; static reader assets are 2D line structures that cannot show the coplanar anti alignment or required rotation.",
+ "learner_impact": "The hardest, most-missed E2 idea has no dihedral-accurate representation for a learner who can't use the video.",
+ "recommended_outcome": "A conformationally explicit (Newman-style) representation of the anti relationship between the breaking C-H and C-X bonds.",
+ "confidence": 0.72
+ },
+ {
+ "finding_id": "instr-004",
+ "location": {
+ "concept_slug": "predicting-substitution-vs-elimination",
+ "nugget_id": "nugget-predicting",
+ "anchor_text": "Building the decision grid"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "Prediction nugget describes a substrate-first 'decision grid' entirely in prose; reader carries only three individual molecule structures, no actual grid/table organizing substrate x reagent x solvent/temperature into a pathway call.",
+ "learner_impact": "The capstone procedural objective needs a scannable reference; prose without the tabular structure raises load.",
+ "recommended_outcome": "A structured decision table/matrix (substrate class vs reagent/solvent/temperature -> SN2/SN1/E2/E1).",
+ "confidence": 0.7
+ },
+ {
+ "finding_id": "instr-005",
+ "location": {
+ "question_slug": "ch11-sn1-energy-profile",
+ "concept_slug": "sn1-mechanism-and-stereochemistry",
+ "anchor_text": "The rate-determining step has the highest transition state."
+ },
+ "severity": "medium",
+ "category": "figure-accuracy",
+ "observation": "The SN1 reaction-coordinate question draws both transition states at identical energy (ts_1 y=2.8, ts_2 y=2.8) while the answer + hint say pick the RDS as 'the one with the highest transition state.' With equal maxima there is no single highest TS.",
+ "learner_impact": "A student reading the diagram literally sees a tie and cannot apply the given hint; it also models an atypical profile that muddies the standard SN1 picture.",
+ "recommended_outcome": "Draw the first (ionization) TS distinctly higher than the second so diagram, answer, and hint are consistent.",
+ "confidence": 0.68
+ },
+ {
+ "finding_id": "instr-006",
+ "location": {
+ "asset_id": "mol-sodium-methoxide-target",
+ "nugget_id": "nugget-predicting",
+ "anchor_text": "sodium ethoxide"
+ },
+ "severity": "low",
+ "category": "notation-consistency",
+ "observation": "asset id mol-sodium-methoxide-target names a reagent but its content is a product (methyl propyl ether, CCCOC); the nugget practice_check reasons about 'sodium ethoxide' while the attached asset derives from methoxide \u2014 reagent labels drift across prose, practice check, and asset id.",
+ "learner_impact": "Minor, but an id saying methoxide while showing an ether product alongside ethoxide prose erodes trust and complicates maintenance.",
+ "recommended_outcome": "Name the same species consistently across prose, practice check, and asset ids.",
+ "confidence": 0.6
+ }
+ ],
+ "strengths": [
+ "All 15 molecular assets validate, including stereochemistry ((S)-2-bromobutane -> (R)-2-butanol correctly encodes SN2 inversion; tosylate and tert-butyl cation correct).",
+ "Mechanistic prose consistently teaches the 'why' rather than asserting outcomes.",
+ "Concept prerequisites and section ordering are explicit and correctly sequenced.",
+ "The 30-question bank spans 14 types with correct answer keys, teaching feedback, and laddered hints."
+ ],
+ "open_questions": [
+ "The E2 hotspot answers depend on the rendered atom indexing of 2-bromobutane, unverifiable from the package alone; confirm atom ids map to the intended beta carbons.",
+ "Every question has demo_eligible:false \u2014 intentional for this chapter, or should some (curved_arrow / reaction_coordinate) be surfaced as demos?"
+ ]
+ },
+ {
+ "persona": "Struggling Student",
+ "persona_version": "1.0.0",
+ "chapter_id": "alkyl-halide-substitution-and-elimination",
+ "chapter_version": "1",
+ "model": "claude-opus-4-8",
+ "summary": "Prose clear and well-sequenced; question bank strong (hint ladders, targeted explanations, variants). But the reader itself works against a shaky learner: densest 'expanded' tier is the default, mechanism videos are hidden/empty, only isolated static structures (no curved arrows/TS), the promised decision grid is never drawn, and every section's Background-reading links point to non-existent Wikipedia pages. No embedded checkpoints/retrieval.",
+ "overall_score": 5.5,
+ "publication_blockers": [],
+ "findings": [
+ {
+ "finding_id": "struggle-001",
+ "location": {
+ "section_id": "nugget-overview",
+ "asset_id": "blk-k90x0wu4",
+ "anchor_text": "Within each family the distinction is the number of steps."
+ },
+ "severity": "high",
+ "category": "cognitive-load",
+ "observation": "Reader renders the 'expanded' tier by default; the first section packs sub-vs-elim, concerted-vs-stepwise, 2nd/1st order, RDS, and nucleophile/base dual character into three paragraphs before any practice or picture.",
+ "learner_impact": "Rereads repeatedly, cannot tell the load-bearing idea, starts behind; many disengage before mechanisms.",
+ "recommended_outcome": "Gentler default entry (lighter tier or short orienting overview) introducing one distinction at a time.",
+ "confidence": 0.82
+ },
+ {
+ "finding_id": "struggle-002",
+ "location": {
+ "section_id": "nugget-sn2-mechanism",
+ "asset_id": "blk-y25lt8km",
+ "anchor_text": "those three groups swing past the plane"
+ },
+ "severity": "high",
+ "category": "cognitive-load",
+ "observation": "SN2/SN1/E2 sections describe motion to visualize, but mechanism videos are is_hidden:true with empty url, so no animation plays.",
+ "learner_impact": "A student who can't already picture backside attack has nothing to look at; guesses stereochem.",
+ "recommended_outcome": "The dynamic mechanism content the prose depends on must be present/visible, or an equivalent step-by-step visual must stand in.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "struggle-003",
+ "location": {
+ "section_id": "nugget-sn2-mechanism",
+ "asset_id": "blk-4wb00wz5",
+ "anchor_text": "(S)-2-bromobutane with hydroxide ... gives (R)-2-butanol"
+ },
+ "severity": "high",
+ "category": "worked-example-gap",
+ "observation": "Only figures per mechanism are isolated static line structures of SM and product; no curved arrows, no nucleophile/base, no transition state.",
+ "learner_impact": "Sees bromide then alcohol but nothing showing how/where inversion happens; memorizes structures without the step.",
+ "recommended_outcome": "Each mechanism needs an arrow-pushing visual connecting substrate to product through the attacking species and TS/intermediate.",
+ "confidence": 0.86
+ },
+ {
+ "finding_id": "struggle-004",
+ "location": {
+ "section_id": "nugget-predicting",
+ "asset_id": "blk-rohm8q5l",
+ "anchor_text": "converts the four mechanisms into a single predictive tool"
+ },
+ "severity": "high",
+ "category": "worked-example-gap",
+ "observation": "Capstone repeatedly promises a decision 'grid' but the reader never shows a grid/table/flowchart; the four-variable procedure exists only as dense prose.",
+ "learner_impact": "Asked to cross substrate/reagent/solvent/temperature with no visual scaffold; gives up or memorizes condition sets.",
+ "recommended_outcome": "Present the promised decision aid as an actual grid/flowchart plus one fully worked prediction walking the four inputs in order.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "struggle-005",
+ "location": {
+ "section_id": "nugget-overview",
+ "asset_id": "blk-2gmvt0pe",
+ "anchor_text": "en.wikipedia.org/wiki/The_four_pathways_of_alkyl_halide_reactivity"
+ },
+ "severity": "high",
+ "category": "conceptual-support",
+ "observation": "Every section's 'Background reading' link is the literal concept title as a Wikipedia URL, producing pages that do not exist.",
+ "learner_impact": "A confused student clicking for help lands on a 'page does not exist' screen and loses trust in the chapter's resources.",
+ "recommended_outcome": "Background-reading links must resolve to real relevant pages or be removed.",
+ "confidence": 0.83
+ },
+ {
+ "finding_id": "struggle-006",
+ "location": {
+ "section_id": "nugget-sn2-mechanism",
+ "asset_id": "blk-3yfsam93",
+ "anchor_text": "electron pair enters the antibonding orbital"
+ },
+ "severity": "high",
+ "category": "conceptual-support",
+ "observation": "Mechanism prose relies on ungrounded prerequisite vocab (antibonding orbital, sp2 hybridized, heterolytically, solvation, polarizable, conjugate acid).",
+ "learner_impact": "Student without solid orbital background stalls at 'large lobe points away from the halogen' and accepts backside attack as an unexplained rule.",
+ "recommended_outcome": "Lightweight in-place plain-language glosses for the assumed orbital/bonding vocabulary at point of use.",
+ "confidence": 0.8
+ },
+ {
+ "finding_id": "struggle-007",
+ "location": {
+ "section_id": "nugget-overview",
+ "asset_id": "blk-k90x0wu4",
+ "anchor_text": "a base removes a beta hydrogen while the halide leaves"
+ },
+ "severity": "medium",
+ "category": "conceptual-support",
+ "observation": "'beta hydrogen' / alpha-beta carbons used from the first paragraph without being defined.",
+ "learner_impact": "Reads 'beta hydrogen' as jargon, can't identify which H, guesses which carbon loses H in elimination.",
+ "recommended_outcome": "Explicit early definition of alpha carbon (bearing leaving group) and beta carbon/hydrogen before the term carries weight.",
+ "confidence": 0.82
+ },
+ {
+ "finding_id": "struggle-008",
+ "location": {
+ "section_id": "nugget-sn2-mechanism",
+ "concept_slug": "sn2-mechanism-and-stereochemistry",
+ "anchor_text": "This inversion is the practical signature"
+ },
+ "severity": "medium",
+ "category": "retrieval-practice",
+ "observation": "Reader flow has no embedded checkpoints/summaries/retrieval; nuggets' practice_check pairs are not surfaced in the reader, and the question bank is a separate surface.",
+ "learner_impact": "Reads section after section with no self-test; doesn't notice being lost until much later.",
+ "recommended_outcome": "Low-stakes retrieval or short recap at the end of each mechanism section.",
+ "confidence": 0.75
+ },
+ {
+ "finding_id": "struggle-009",
+ "location": {
+ "section_id": "nugget-sn2-reactivity",
+ "concept_slug": "sn2-reactivity-factors",
+ "anchor_text": "tertiary substrates so crowded that the SN2 pathway is closed"
+ },
+ "severity": "medium",
+ "category": "misconception",
+ "observation": "Classic traps (ranking SN2 by carbocation stability, protic solvent speeding SN2, auto-Zaitsev with a bulky base) are corrected only in question feedback, not called out in prose.",
+ "learner_impact": "Forms the natural wrong model; reading never blocks it, so it's carried into questions.",
+ "recommended_outcome": "Explicit 'common mistake' callouts naming the tempting wrong move and correcting it in place.",
+ "confidence": 0.72
+ },
+ {
+ "finding_id": "struggle-010",
+ "location": {
+ "section_id": "nugget-sn1-mechanism",
+ "asset_id": "blk-3g6as7yu",
+ "anchor_text": "a small excess of inversion is often observed"
+ },
+ "severity": "low",
+ "category": "cognitive-load",
+ "observation": "The 'small excess of inversion' nuance arrives in the same paragraph as the core racemization rule.",
+ "learner_impact": "Unsure which fact to hold; some over-apply the exception and answer 'inversion' on SN1 items.",
+ "recommended_outcome": "Let racemization land first; place the partial-inversion nuance as a clearly-marked aside/advanced note.",
+ "confidence": 0.6
+ }
+ ],
+ "strengths": [
+ "Question bank is excellent scaffolding: three-level hint ladders + specific wrong-answer explanations.",
+ "Reader flags the highest-leverage difficulty (SN1 order is the reverse of SN2).",
+ "Same small substrate set reused across sections lowers example load.",
+ "Comparison-matrix and categorize questions give structured practice at the key contrasts."
+ ],
+ "open_questions": [
+ "Are the mechanism videos intended to be unhidden in the reader, or is static-only the intended ship state? (bug vs content gap)",
+ "Does the reader UI let a student switch text tier, and which tier is default? (friendlier analogies live in standard/terse)",
+ "Are compiled question items surfaced inside the reader flow or only a separate assessment surface? (affects struggle-008)"
+ ]
+ },
+ {
+ "persona": "Accessibility Persona",
+ "persona_version": "1.0.0",
+ "chapter_id": "alkyl-halide-substitution-and-elimination",
+ "chapter_version": "1",
+ "model": "claude-opus-4-8",
+ "summary": "Prose and static molecule figures are genuinely accessible (chemically meaningful alt text; prose fully narrates the mechanisms, so a screen-reader user has a real text equivalent even though the mechanism videos are empty/hidden). Text-based question types are operable non-visually and mostly task-focused. The serious problems are in graphical/interactive question types: four question families ship an accessible_description that hands the AT user the graded answer a sighted student must reason out (curved_arrow states source+destination; hotspot names the exact carbon; structure_scaffold states the product; synthesis_route names the azide reagent). Separately, the hotspot exposes no non-visual keyboard-selectable atom targets, and the reaction-coordinate description omits the barrier heights/TS positions a sighted student reads off the plot.",
+ "overall_score": 3.5,
+ "publication_blockers": [
+ "access-001",
+ "access-002",
+ "access-003",
+ "access-005"
+ ],
+ "findings": [
+ {
+ "finding_id": "access-001",
+ "location": {
+ "question_slug": "ch11-sn2-arrow",
+ "concept_slug": "sn2-mechanism-and-stereochemistry",
+ "anchor_text": "source is the hydroxide oxygen lone pair, destination is the carbon bearing bromine"
+ },
+ "severity": "blocker",
+ "category": "alt-text-quality",
+ "observation": "curved_arrow asks the student to DRAW the arrow, but accessible_description states 'source is the hydroxide oxygen lone pair, destination is the carbon bearing bromine' \u2014 exactly the graded answer (expected_arrows lone_pair site 0 -> atom site 1). v2 leaks identically (cyanide carbon lone pair -> C-Br carbon).",
+ "learner_impact": "A screen-reader user is handed the complete solution while a sighted student reasons which site is nucleophile vs electrophile; the leak also invalidates the item for that student.",
+ "recommended_outcome": "The non-visual equivalent must convey the labeled sites and the task 'draw the bond-forming arrow' WITHOUT stating which site is source or destination.",
+ "confidence": 0.96
+ },
+ {
+ "finding_id": "access-002",
+ "location": {
+ "question_slug": "ch11-e2-zaitsev-hotspot",
+ "concept_slug": "e2-elimination",
+ "anchor_text": "Click the internal beta carbon whose hydrogen loss gives the more substituted 2-butene"
+ },
+ "severity": "blocker",
+ "category": "alt-text-quality",
+ "observation": "hotspot task is to select the beta carbon giving the Zaitsev (v1)/Hofmann (v2) product; the accessible_description names the correct carbon ('internal beta carbon' -> atom_1; v2 'terminal beta carbon' -> atom_4). The prompt names the product but leaves the carbon choice to the student.",
+ "learner_impact": "A screen-reader user is told exactly which carbon to select, removing the regiochemical reasoning the item assesses.",
+ "recommended_outcome": "Identify the available beta positions neutrally and state the task, without labeling which one gives the named product.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "access-003",
+ "location": {
+ "question_slug": "ch11-draw-sn2-alcohol",
+ "concept_slug": "sn2-reactivity-factors",
+ "anchor_text": "Draw the product of 1-bromopropane reacting with sodium hydroxide by the SN2 pathway (expected: 1-propanol)"
+ },
+ "severity": "blocker",
+ "category": "alt-text-quality",
+ "observation": "Both structure_scaffold questions embed the answer in the accessible_description: v1 '(expected: 1-propanol)', v2 '(expected: ethyl methyl ether)'. The task is to DRAW that product; the name is not shown to a sighted student (blank canvas + prompt).",
+ "learner_impact": "A screen-reader user is told the product to draw, removing the entire exercise.",
+ "recommended_outcome": "Strip the parenthetical answer; present the starting material, reagent, and instruction, letting the AT user reason to the product.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "access-004",
+ "location": {
+ "question_slug": "ch11-halide-to-amine",
+ "concept_slug": "predicting-substitution-vs-elimination",
+ "anchor_text": "azide substitution, then reduction"
+ },
+ "severity": "high",
+ "category": "alt-text-quality",
+ "observation": "synthesis_route accessible_description names 'azide' as the substitution reagent; the graded route is r_azide -> m_azide -> reduce -> m_amine, so naming azide reveals the reagent choice distinguishing the correct route from NaOEt/PBr3 distractors. The prompt discloses the general strategy but not the azide reagent.",
+ "learner_impact": "A screen-reader user is pointed to the specific correct nucleophile among the options, reducing the item to reagent lookup; v2 leaks identically.",
+ "recommended_outcome": "Describe start/target structures and the two-step substitution-then-reduction task without naming the specific graded nucleophile (azide).",
+ "confidence": 0.78
+ },
+ {
+ "finding_id": "access-005",
+ "location": {
+ "question_slug": "ch11-e2-zaitsev-hotspot",
+ "concept_slug": "e2-elimination",
+ "anchor_text": "molecule_smiles CCC(Br)C, select_count one"
+ },
+ "severity": "blocker",
+ "category": "interactive-fallback",
+ "observation": "hotspot student_config provides only molecule_smiles and select_count with no enumerated labeled atom targets, while answer_key references opaque ids [redacted]. Unlike curved_arrow (which ships labeled 'sites'), hotspot gives no non-visual mapping from atom ids to identifiable positions. Absent a renderer-level keyboard atom picker, a non-pointer/AT user cannot locate/select the required carbon except via the answer-leaking description.",
+ "learner_impact": "Learners who cannot use a fine pointer or cannot see the structure have no exposed labeled way to select an atom \u2014 the required hotspot activity is not completable except by being told the answer.",
+ "recommended_outcome": "The hotspot activity needs a non-visual keyboard-operable way to enumerate and select candidate atoms (labeled targets equivalent to curved_arrow 'sites'), or an equivalent non-pointer alternative.",
+ "confidence": 0.7
+ },
+ {
+ "finding_id": "access-006",
+ "location": {
+ "question_slug": "ch11-sn1-energy-profile",
+ "concept_slug": "sn1-mechanism-and-stereochemistry",
+ "anchor_text": "reactants rise over a first barrier to a carbocation intermediate, then over a second barrier to product"
+ },
+ "severity": "high",
+ "category": "media-equivalence",
+ "observation": "reaction_coordinate description conveys the two-barrier shape but omits the relative energies/positions a sighted student reads off the plot (TS heights, intermediate/product heights, TS x-positions) that let one decide the RDS and early/late TS character (the asked ts_character).",
+ "learner_impact": "A screen-reader user is asked for rate_determining_step and ts_character but not given the barrier heights/TS positions a sighted student uses, so cannot derive the answer on equal footing.",
+ "recommended_outcome": "Expose the profile's relative energies and horizontal positions as a structured readout so the AT user can reason to RDS and TS character \u2014 without stating the verdicts.",
+ "confidence": 0.72
+ },
+ {
+ "finding_id": "access-007",
+ "location": {
+ "asset_id": "video-sn2-backside-inversion",
+ "section_id": "nugget-sn2-mechanism",
+ "anchor_text": "url empty, is_hidden true"
+ },
+ "severity": "medium",
+ "category": "media-equivalence",
+ "observation": "The three mechanism videos compile as blocks with empty url and is_hidden true; their 'description' carries only the first storyboard frame, not captions/audio description/transcript of the motion. Because hidden/unproduced, no learner sees them yet (no disparity now); risk is un-hiding them without captions and an audio-described transcript.",
+ "learner_impact": "As shipped, none (hidden for everyone). If surfaced later, deaf/HoH and blind learners would lack captions and a description of the meaningful motion.",
+ "recommended_outcome": "Before these videos are surfaced they need captions and a transcript/audio description conveying start/end states and what the motion teaches \u2014 not just the opening frame.",
+ "confidence": 0.6
+ }
+ ],
+ "strengths": [
+ "Every molecule block carries chemically substantive alt text (name + load-bearing structural feature), and stereochemistry molecules name their R/S and inversion relationship.",
+ "Mechanistic content is fully carried in prose, giving screen-reader users a real text equivalent independent of the unproduced videos.",
+ "Most question types are operable and answerable non-visually with task-focused (non-leaking) descriptions (categorize, comparison-matrix, select, rank, matching).",
+ "curved_arrow items expose labeled reacting 'sites' \u2014 a good keyboard/screen-reader pattern (the flaw is the leaking description, not the interaction model)."
+ ],
+ "open_questions": [
+ "Does the renderer provide a keyboard-operable labeled atom picker for hotspot (mapping atom_1/atom_4 to selectable targets)? If yes, access-005 downgrades to the answer-leak of access-002.",
+ "Does the reaction_coordinate renderer expose profile.control points as an accessible data table? If so, access-006 is largely mitigated.",
+ "Do structure_scaffold items offer a non-pointer input path (SMILES/text entry)?",
+ "Are the mechanism videos intended to remain hidden or be produced/surfaced? Determines whether access-007 becomes active."
+ ]
+ },
+ {
+ "persona": "Learner with Visual Preference",
+ "persona_version": "1.0.0",
+ "chapter_id": "alkyl-halide-substitution-and-elimination",
+ "chapter_version": "1",
+ "model": "claude-opus-4-8",
+ "summary": "Molecule figures are correct, labeled, and each has a learning_goal; the question bank is genuinely visual/interactive (hotspot, curved_arrow, comparison_matrix, reaction_coordinate, structure_scaffold). But the teaching reader leans on dense expanded prose + static 2D structures for ideas that are inherently spatial/relational: SN2 umbrella-flip inversion, E2 anti-periplanar alignment, SN1 two-step energy profile, and the culminating decision 'grid'. The three mechanism videos are hidden with empty URLs; the promised grid is never rendered. Nothing is a blocker; these are burden-reducing improvements.",
+ "overall_score": 6.5,
+ "publication_blockers": [],
+ "findings": [
+ {
+ "finding_id": "visual-001",
+ "location": {
+ "section_id": "nugget-predicting",
+ "concept_slug": "predicting-substitution-vs-elimination",
+ "anchor_text": "converts the four mechanisms into a single predictive tool"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "Capstone invokes a 'grid'/'single predictive tool' (substrate x reagent x solvent x temperature -> pathway) but reader shows only dense prose + three unrelated 2D molecule blocks; the matrix is never shown.",
+ "learner_impact": "Learner must hold a four-input decision structure in working memory from prose alone; the many-to-many mapping is exactly what a table makes legible.",
+ "recommended_outcome": "The decision structure named as a 'grid' needs an at-a-glance organized comparison.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "visual-002",
+ "location": {
+ "section_id": "nugget-sn2-mechanism",
+ "asset_id": "blk-y25lt8km",
+ "anchor_text": "exactly as an umbrella inverts in a strong wind"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The three storyboarded mechanism transformations appear in the reader only as hidden video blocks (empty url, is_hidden:true); nothing dynamic or sequenced replaces them, only isolated start/end 2D structures.",
+ "learner_impact": "Motion intuitions (umbrella inversion, attack from either face, rotate to anti) are what static structures cannot convey.",
+ "recommended_outcome": "The spatial/temporal transformations need a dynamic or static stepwise sequence in the reader (overlaps Accessibility).",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "visual-003",
+ "location": {
+ "section_id": "nugget-sn2-mechanism",
+ "asset_id": "mol-R-2-butanol",
+ "anchor_text": "gives (R)-2-butanol cleanly, not a racemic mixture"
+ },
+ "severity": "medium",
+ "category": "figure-purpose",
+ "observation": "Inversion of configuration (the section's central point) is two independent flat line drawings with no shared frame/arrow/spatial cue making the handedness flip visible.",
+ "learner_impact": "No visual signal the product is the mirror-image configuration; could read as unrelated bromide and alcohol.",
+ "recommended_outcome": "The inversion relationship needs to be made perceptible rather than inferred from separate endpoints.",
+ "confidence": 0.82
+ },
+ {
+ "finding_id": "visual-004",
+ "location": {
+ "section_id": "nugget-e2",
+ "concept_slug": "e2-elimination",
+ "anchor_text": "coplanar and anti to one another, an alignment called anti-periplanar"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "Anti-periplanar (the feature that 'most distinguishes E2') is purely spatial/conformational, but section figures are flat 2D structures that never show the dihedral alignment of the breaking C-H and C-X bonds.",
+ "learner_impact": "Learner cannot see what anti-periplanar looks like or why rotation is needed \u2014 the constraint governing whether elimination can occur is left to verbal imagination.",
+ "recommended_outcome": "The anti relationship (and the rotation achieving it) needs a representation that makes it visible (e.g. Newman/conformational).",
+ "confidence": 0.86
+ },
+ {
+ "finding_id": "visual-005",
+ "location": {
+ "section_id": "nugget-sn2-reactivity",
+ "concept_slug": "sn2-reactivity-factors",
+ "anchor_text": "methyl greater than primary greater than secondary"
+ },
+ "severity": "low",
+ "category": "figure-purpose",
+ "observation": "Six molecule blocks stacked; the teaching point is the reactivity ORDER methyl>1deg>2deg>3deg but structures are equally-weighted isolated drawings conveying neither order nor increasing crowding.",
+ "learner_impact": "Learner sees six separate structures rather than a gradient; the ranking is carried by prose, figures don't reinforce it.",
+ "recommended_outcome": "The substrate series needs to read as a ranked comparison showing increasing hindrance, not a list.",
+ "confidence": 0.72
+ },
+ {
+ "finding_id": "visual-006",
+ "location": {
+ "section_id": "nugget-overview",
+ "asset_id": "blk-v2u746zd",
+ "anchor_text": "four mechanisms that recur throughout organic chemistry"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The 2x2 taxonomy (two outcomes x two step-counts = SN2/SN1/E2/E1) is prose-only; the section's lone figure (bromomethane) does not support the framework it teaches.",
+ "learner_impact": "Learner builds the mental map from text alone; the lone figure doesn't scaffold the four-pathway structure.",
+ "recommended_outcome": "The outcome x step-count framework needs a visible organizing scaffold; reconsider the bromomethane figure's purpose here.",
+ "confidence": 0.75
+ },
+ {
+ "finding_id": "visual-007",
+ "location": {
+ "section_id": "nugget-sn1-mechanism",
+ "concept_slug": "sn1-mechanism-and-stereochemistry",
+ "anchor_text": "This step is difficult and slow, and it alone determines the rate"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "Concerted-vs-stepwise (one barrier/2nd-order vs slow ionization to carbocation then fast step) is prose-only in instruction; a reaction-coordinate/energy representation appears only in assessment (ch11-sn1-energy-profile), not the teaching that precedes it.",
+ "learner_impact": "Students are asked to read a two-step energy profile in the question bank but the teaching sections never show one; one-hump vs two-hump shapes make RDS concrete.",
+ "recommended_outcome": "The step-count/RDS distinction needs a visible energetic representation in instruction, not only assessment.",
+ "confidence": 0.78
+ },
+ {
+ "finding_id": "visual-008",
+ "location": {
+ "section_id": "nugget-e1",
+ "concept_slug": "e1-elimination",
+ "anchor_text": "The tert-butyl cation, a tertiary carbocation intermediate"
+ },
+ "severity": "low",
+ "category": "visual-redundancy",
+ "observation": "Several structures recur across sections as near-identical flat drawings (tert-butyl bromide x3, tert-butyl cation/chloride/(E)-2-butene x2, bromomethane x2); in dense sections this repetition doesn't always carry new information.",
+ "learner_impact": "Repeated near-identical structures dilute the signal and pull attention from the one new idea a section adds.",
+ "recommended_outcome": "Trim non-informative repeats or explicitly frame them as the shared species (e.g. the common SN1/E1 carbocation).",
+ "confidence": 0.6
+ }
+ ],
+ "strengths": [
+ "Every molecule asset has an explicit learning_goal and consistent descriptive alt_text; structures are correct and purposefully chosen.",
+ "The question bank is strongly visual/interactive (hotspot, curved_arrow, comparison_matrix, rank_order, structure_scaffold, reaction_coordinate).",
+ "comparison_matrix and reaction-coordinate items already model the visual scaffolds the teaching prose lacks \u2014 the formats exist in the package."
+ ],
+ "open_questions": [
+ "Are the three mechanism video blocks intended to be populated/un-hidden before publication? (gap vs pending asset)",
+ "Per-section external_link Wikipedia URLs don't resolve \u2014 is link integrity owned by another persona/step?",
+ "Can the reader render a true comparison table/decision matrix inline (vs stacked molecule/text blocks)? (affects least-complex fix for visual-001)"
+ ]
+ }
+ ],
+ "persona_scores": [
+ {
+ "persona": "Organic Chemistry Instructor",
+ "persona_version": "1.0.0",
+ "model": "claude-opus-4-8",
+ "overall_score": 7.0,
+ "blockers": [
+ "instr-001"
+ ]
+ },
+ {
+ "persona": "Struggling Student",
+ "persona_version": "1.0.0",
+ "model": "claude-opus-4-8",
+ "overall_score": 5.5,
+ "blockers": []
+ },
+ {
+ "persona": "Accessibility Persona",
+ "persona_version": "1.0.0",
+ "model": "claude-opus-4-8",
+ "overall_score": 3.5,
+ "blockers": [
+ "access-001",
+ "access-002",
+ "access-003",
+ "access-005"
+ ]
+ },
+ {
+ "persona": "Learner with Visual Preference",
+ "persona_version": "1.0.0",
+ "model": "claude-opus-4-8",
+ "overall_score": 6.5,
+ "blockers": []
+ }
+ ],
+ "publication_readiness": "blocked",
+ "readiness_rationale": "Two independent blocker classes: (1) wrong chemistry actively taught (instr-001, SN1 racemization on achiral tert-butyl chloride); (2) four graded questions leak the answer to AT users (access-001/002/003/004) and the E2 hotspot is not completable non-visually except via that leak (access-005, a required-access blocker forcing blocked). A high aggregate score cannot override these.",
+ "executive_summary": "Chemically strong, well-sequenced chapter with an excellent 30-item/14-type question bank, but not publishable as-is: it teaches incorrect SN1 racemization on an achiral substrate, and four question types plus one hotspot deny some learners either the reasoning or the ability to complete a graded activity. Remaining findings (undrawn decision grid, spatial ideas shown only in prose, energy profile only in assessment with equal-height TS, dead help links) are high/medium improvements.",
+ "ranked_recommendations": [
+ {
+ "rec_id": "rec-001",
+ "title": "Re-script the SN1 racemization video on a chiral substrate",
+ "need": "racemization must be demonstrated on a substrate that can actually racemize (a stereocenter at the reacting carbon)",
+ "chosen_intervention": "fix existing media",
+ "rationale": "the video exists; the fix is the substrate/script, not new infrastructure",
+ "target_surface": "figure",
+ "severity": "blocker",
+ "source_findings": [
+ "instr-001",
+ "instr-002",
+ "struggle-002",
+ "visual-002"
+ ]
+ },
+ {
+ "rec_id": "rec-002",
+ "title": "Strip leaked answers from four question accessible_descriptions",
+ "need": "the non-visual text must convey stimulus+task, not the verdict",
+ "chosen_intervention": "text-equivalent",
+ "rationale": "pure content edit; no renderer change; same rule the compile guard enforces for mechanical leaks",
+ "target_surface": "assessment",
+ "severity": "blocker",
+ "source_findings": [
+ "access-001",
+ "access-002",
+ "access-003",
+ "access-004"
+ ]
+ },
+ {
+ "rec_id": "rec-003",
+ "title": "Keyboard-operable labeled atom targets for the E2 hotspot",
+ "need": "select the beta carbon without pointer or sight",
+ "chosen_intervention": "keyboard-alternative",
+ "rationale": "prefer exposing labeled targets in the hotspot renderer (like curved_arrow sites) over authoring a parallel item",
+ "target_surface": "interactive",
+ "severity": "blocker",
+ "source_findings": [
+ "access-005"
+ ]
+ },
+ {
+ "rec_id": "rec-004",
+ "title": "Draw the promised decision grid",
+ "need": "an at-a-glance substrate x reagent x conditions -> pathway map",
+ "chosen_intervention": "new-figure",
+ "rationale": "the comparison_matrix format already exists in the package; a static table, not a new interactive",
+ "target_surface": "figure",
+ "severity": "high",
+ "source_findings": [
+ "struggle-004",
+ "visual-001",
+ "instr-004"
+ ]
+ },
+ {
+ "rec_id": "rec-005",
+ "title": "Teach the SN1 energy profile, fix equal-height TS, add accessible readout",
+ "need": "the concerted-vs-stepwise contrast, taught and accessible; ts_1 must exceed ts_2 to match the highest-TS hint",
+ "chosen_intervention": "animation-or-interactive",
+ "rationale": "one figure with a data-table equivalent serves instruction, the equal-TS fix, and the AT readout together",
+ "target_surface": "figure",
+ "severity": "high",
+ "source_findings": [
+ "visual-007",
+ "instr-005",
+ "access-006"
+ ]
+ },
+ {
+ "rec_id": "rec-006",
+ "title": "Static arrow-pushing SN2 figure + Newman anti-periplanar figure",
+ "need": "see the SN2 inversion and E2 anti-periplanar geometry",
+ "chosen_intervention": "static-image-sequence",
+ "rationale": "static labeled figures suffice; no animation needed to convey the relationship",
+ "target_surface": "figure",
+ "severity": "high",
+ "source_findings": [
+ "struggle-003",
+ "visual-003",
+ "visual-004",
+ "instr-003"
+ ]
+ },
+ {
+ "rec_id": "rec-007",
+ "title": "Fix or remove dead Background-reading links",
+ "need": "help links must resolve",
+ "chosen_intervention": "prose-edit",
+ "rationale": "content edit",
+ "target_surface": "prose",
+ "severity": "high",
+ "source_findings": [
+ "struggle-005"
+ ]
+ },
+ {
+ "rec_id": "rec-008",
+ "title": "Gentler entry tier + grounded vocabulary + recaps",
+ "need": "a shaky learner needs a lighter default and defined terms",
+ "chosen_intervention": "prose-edit",
+ "rationale": "content edit",
+ "target_surface": "prose",
+ "severity": "medium",
+ "source_findings": [
+ "struggle-001",
+ "struggle-006",
+ "struggle-007",
+ "struggle-008",
+ "struggle-009"
+ ]
+ },
+ {
+ "rec_id": "rec-009",
+ "title": "Frame the reactivity series as a gradient; trim redundant repeats",
+ "need": "the steric order should read visually; redundant structures compete for attention",
+ "chosen_intervention": "prose-edit",
+ "rationale": "layout/labeling, not new assets",
+ "target_surface": "figure",
+ "severity": "medium",
+ "source_findings": [
+ "visual-005",
+ "visual-006",
+ "visual-008"
+ ]
+ },
+ {
+ "rec_id": "rec-010",
+ "title": "Captions + audio description before any mechanism video ships",
+ "need": "produced videos need a non-visual equivalent",
+ "chosen_intervention": "transcript",
+ "rationale": "dormant until videos are produced/surfaced",
+ "target_surface": "figure",
+ "severity": "medium",
+ "source_findings": [
+ "access-007",
+ "struggle-010"
+ ]
+ }
+ ],
+ "accessibility_blockers": [
+ "access-001",
+ "access-002",
+ "access-003",
+ "access-005"
+ ],
+ "visual_opportunities": [
+ "visual-001",
+ "visual-004",
+ "visual-007",
+ "instr-003",
+ "instr-004"
+ ],
+ "sufficient_as_is": [
+ "static molecule figure alt_text (chemically substantive; keep)",
+ "text/select/rank/matrix/categorize/matching question descriptions (task-focused, non-leaking)",
+ "mechanism prose as the non-visual equivalent of the hidden videos"
+ ],
+ "disagreements": [
+ {
+ "topic": "energy profile: data readout vs visible diagram",
+ "positions": {
+ "Accessibility Persona": "structured readout of profile control points (access-006)",
+ "Learner with Visual Preference": "visible energy diagram in instruction (visual-007)"
+ },
+ "resolution": "not a conflict \u2014 rec-005 does both: add the diagram AND expose control points as an accessible data table"
+ },
+ {
+ "topic": "mechanism motion: animation vs text/static",
+ "positions": {
+ "Struggling Student / Visual Preference": "see the transformation (animation or sequence)",
+ "Accessibility Persona": "non-visual equivalent; a produced video needs captions/AD"
+ },
+ "resolution": "least-complex is a static labeled arrow-pushing sequence (rec-006) + existing prose; producing/captioning videos is optional polish, not the required fix"
+ },
+ {
+ "topic": "hotspot completability is contingent",
+ "positions": {
+ "Accessibility Persona": "required activity not completable non-visually (access-005, blocker)",
+ "Instructor": "atom_1/atom_4 map to unverified rendered indices"
+ },
+ "resolution": "treated as blocker pending renderer verification; if the hotspot renderer already exposes a keyboard-operable labeled atom picker, access-005 downgrades and readiness rises to major revision"
+ }
+ ],
+ "regression": {
+ "resolved": [],
+ "unchanged": [],
+ "worsened": [],
+ "new": [],
+ "note": "baseline run; recheck instr-001, access-001..005, instr-005, access-006, struggle-004/visual-001/instr-004, struggle-005 next run"
+ }
+}

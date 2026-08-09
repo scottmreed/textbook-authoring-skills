@@ -1,0 +1,273 @@
+{
+ "persona": "Struggling Student",
+ "persona_version": "1.0.0",
+ "chapter_id": "aldehydes-and-ketones",
+ "chapter_version": "1",
+ "model": "claude-opus-5[1m]",
+ "summary": "The prose is clear, well-organized, and unusually consistent in its central idea (polarized C=O → nucleophile attacks carbon), and the question bank's hint ladders and wrong-answer explanations are genuinely good. But as a reader experience for a shaky student this chapter is prose-plus-static-structures and almost nothing else: the compiled reader ships 11 expanded-prose blocks, 17 single-molecule pictures, 11 Wikipedia links, and three video blocks that are emitted with url:\"\" and is_hidden:true, so they render as nothing. Every mechanism in a chapter titled \"Nucleophilic Addition Reactions\" — the tetrahedral alkoxide, carbinolamine, iminium, oxocarbenium, oxaphosphetane, enolate — is named in sentences but never drawn anywhere in the package. The nuggets' practice_check prompts and learning_objectives exist in the source but are not compiled into the reader, and the question set is available:false with demo_eligible:0, so a student reading the chapter has zero checkpoints, zero worked examples, and zero retrieval practice between the opening sentence and the end. Several terms I would stall on (alpha carbon, the 1/4 counting in \"1,4 addition\", hard vs. soft nucleophiles, thermodynamic control, the 105° trajectory) are used at first appearance with no setup. I would finish this chapter able to recite the sentences and unable to do a single problem.",
+ "overall_score": 5.2,
+ "publication_blockers": [],
+ "findings": [
+ {
+ "finding_id": "stud-001",
+ "location": {
+ "section_id": "nugget-nucleophilic-addition",
+ "concept_slug": "nucleophilic-addition-mechanism",
+ "nugget_id": "nugget-nucleophilic-addition",
+ "asset_id": "video-nucleophilic-addition",
+ "anchor_text": "the π electrons shift entirely onto oxygen, the carbon rehybridizes from sp² to sp³, and the product is a tetrahedral alkoxide"
+ },
+ "severity": "high",
+ "category": "conceptual-support",
+ "observation": "The chapter's declared master mechanism has no depiction of the electron flow anywhere a student can see it. The only assets in this section are two static single-molecule renderings (mol-acetone, mol-benzaldehyde) of starting materials; the one mechanism animation (video-nucleophilic-addition) is compiled into the reader as block blk-r8gcfq5b with \"url\": \"\" and \"is_hidden\": true, and ReaderBlockRenderer returns null for hidden blocks. The tetrahedral alkoxide intermediate itself is never drawn.",
+ "learner_impact": "A student who cannot yet convert 'π electrons shift onto oxygen' into a picture has nothing to check their mental model against. I would reread the paragraph two or three times, decide I 'get it,' and then be unable to draw the intermediate on the first practice problem — the classic point where I stop reading and go look for a YouTube video instead.",
+ "evidence": "topic.package.json assets[] contains 14 entries, all type 'molecule' single structures; reader chapter section nugget-nucleophilic-addition blocks = text, molecule, molecule, video(url empty, is_hidden true), external_link.",
+ "recommended_outcome": "The step-by-step electron flow of the general nucleophilic addition — attack, π shift, tetrahedral alkoxide, protonation — needs to exist in a form a reader actually receives, not only as sentences and a suppressed video block.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "stud-002",
+ "location": {
+ "section_id": "nugget-imines-enamines",
+ "concept_slug": "imines-and-enamines",
+ "nugget_id": "nugget-imines-enamines",
+ "anchor_text": "the product is a carbinolamine — a tetrahedral intermediate with OH and NR₂ on the same carbon"
+ },
+ "severity": "high",
+ "category": "cognitive-load",
+ "observation": "Four named intermediates carry the multi-step condensations — carbinolamine, iminium ion, oxocarbenium ion, oxaphosphetane — and none of them is drawn in any asset. The assets for these sections show only the final products (mol-cyclohexanone-methylimine, mol-cyclohexanone-pyrrolidine-enamine, mol-cyclohexanone-ethylene-acetal, mol-methylenecyclohexane).",
+ "learner_impact": "I have to hold an unseen structure in working memory across a five-step sentence ('protonation of the hydroxyl converts it into water, which leaves to give a resonance-stabilized iminium ion; deprotonation of the nitrogen then delivers the imine'). I would guess at the intermediates, and I would very likely produce the enamine when asked for the imine because I never saw where the proton came off.",
+ "evidence": "topic.package.json assets[] — no asset for any intermediate; nugget-acetals text 'water departs to give an oxocarbenium ion stabilized by the remaining alkoxy oxygen'; nugget-wittig text 'forming a four-membered ring called an oxaphosphetane'.",
+ "recommended_outcome": "Students need the intermediates of imine, enamine, acetal, and Wittig formation made visible at each stage, not only the start and end structures.",
+ "confidence": 0.93
+ },
+ {
+ "finding_id": "stud-003",
+ "location": {
+ "section_id": "nugget-carbonyl-structure-naming",
+ "nugget_id": "nugget-carbonyl-structure-naming",
+ "anchor_text": "practice_check"
+ },
+ "severity": "high",
+ "category": "retrieval-practice",
+ "observation": "Every one of the 11 nuggets authors a practice_check {prompt, answer}, but the compiled reader contains no practice block of any kind: the block_type census for aldehydes-and-ketones.json is 11 text, 17 molecule, 11 external_link, 1 mcmurry_link, 3 video (all hidden). The separate question set is compiled with \"available\": false and \"demo_eligible\": 0.",
+ "learner_impact": "A reader gets eleven straight blocks of exposition with no checkpoint. With weak prerequisites I cannot tell whether I have understood section 4 before section 5 assumes it; I read passively to the end, feel vaguely fine, and discover on the exam that none of it stuck.",
+ "evidence": "topic.package.json nuggets[].practice_check present for all 11 nuggets; compiled/question-set.json counts: {questions: 36, surfaced: 18, demo_eligible: 0}, available: false.",
+ "recommended_outcome": "The chapter needs an in-place way for a reader to test recall at the end of each section rather than having all retrieval practice held in an unavailable bank.",
+ "confidence": 0.92
+ },
+ {
+ "finding_id": "stud-004",
+ "location": {
+ "section_id": "nugget-imines-enamines",
+ "nugget_id": "nugget-imines-enamines",
+ "anchor_text": "a proton is removed from the adjacent alpha carbon instead"
+ },
+ "severity": "high",
+ "category": "conceptual-support",
+ "observation": "'Alpha carbon' is used for the first time in this nugget and is never defined anywhere in the chapter. It then recurs as load-bearing vocabulary in nugget-carbonyl-spectroscopy ('protons on the alpha carbons ... 2.0–2.6 ppm'), in nugget-conjugate-addition, and in the distractor of question ch19-conjugate-addition-select-v2 ('The alpha carbon, between the two π systems'). Nugget-carbonyl-structure-naming, which teaches numbering, never introduces the alpha/beta labeling system.",
+ "learner_impact": "I do not know whether alpha means C1 or the carbon next to the carbonyl, so the enamine explanation becomes 'a proton comes off some carbon.' On ch19-conjugate-addition-select-v2 I would pick the alpha-carbon distractor because it is described as sitting 'between the two π systems,' which sounds like the activated position.",
+ "evidence": "Search of all 11 nuggets: 'alpha carbon' first appears in nugget-imines-enamines standard text with no definition; 'beta carbon' is only loosely glossed in nugget-conjugate-addition as 'two atoms away'.",
+ "recommended_outcome": "The alpha/beta position labels relative to a carbonyl need to be established before the first section that reasons with them.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "stud-005",
+ "location": {
+ "section_id": "nugget-conjugate-addition",
+ "concept_slug": "conjugate-addition",
+ "nugget_id": "nugget-conjugate-addition",
+ "anchor_text": "Direct addition at the carbonyl carbon is called 1,2 addition"
+ },
+ "severity": "high",
+ "category": "conceptual-support",
+ "observation": "The 1,2 / 1,4 numbering is used throughout the section (and in two question prompts) but the chapter never says what atoms 1 and 4 are — that the count starts at the carbonyl oxygen. The nearest thing to an explanation is 'bonds the nucleophile to the beta carbon; ... two atoms away', which uses a different counting origin than the 1,4 label does.",
+ "learner_impact": "Two incompatible numbering schemes in one paragraph is exactly where I stop and try to memorize the labels as arbitrary names. I would then be unable to answer 'which carbon does the nitrogen attack' (ch19-conjugate-addition-select-v2) by reasoning, and would guess from reagent recall alone.",
+ "evidence": "nugget-conjugate-addition expanded text; question ch19-conjugate-addition-select prompt 'delivers its methyl group to the beta carbon (conjugate, 1,4 addition)'.",
+ "recommended_outcome": "Students need the 1,2 versus 1,4 labels tied explicitly to positions counted from the carbonyl oxygen, reconciled with the alpha/beta labels used in the same paragraph.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "stud-006",
+ "location": {
+ "section_id": "nugget-preparation",
+ "concept_slug": "preparation-of-aldehydes-and-ketones",
+ "nugget_id": "nugget-preparation",
+ "anchor_text": "Mercury(II)-catalyzed hydration in aqueous sulfuric acid places the hydroxyl on the internal carbon (Markovnikov), and the resulting enol tautomerizes to a methyl ketone."
+ },
+ "severity": "high",
+ "category": "cognitive-load",
+ "observation": "One 7-minute 'core' nugget carries six distinct preparations (PCC/Dess–Martin, aqueous Cr(VI), ozonolysis with reductive workup, Hg(II) hydration, hydroboration–oxidation, Friedel–Crafts acylation) and silently reuses at least five prior-chapter concepts as known: Markovnikov/anti-Markovnikov regiochemistry, enol tautomerization, reductive workup, hindered borane, and the acylium electrophile. The section's only figure is mol-cyclohexanone, a single product structure. The concept record preparation-of-aldehydes-and-ketones lists only one prerequisite, carbonyl-structure-and-naming — none of the alkene/alkyne/aromatic chemistry it actually depends on.",
+ "learner_impact": "This is the point where a student with weak prerequisites quits and starts making a flashcard deck of reagent→product pairs, which is precisely the memorization the rest of the chapter is designed to avoid. Nothing signals that this section is a review of old material rather than new theory.",
+ "evidence": "nugget-preparation standard and expanded text; concepts[].prerequisites for preparation-of-aldehydes-and-ketones = ['carbonyl-structure-and-naming']; asset_ids = ['mol-cyclohexanone'].",
+ "recommended_outcome": "This section needs its prior-chapter dependencies named up front and its six transformations chunked or visually contrasted, so a shaky student can tell what is review and where to go refresh.",
+ "confidence": 0.87
+ },
+ {
+ "finding_id": "stud-007",
+ "location": {
+ "section_id": "nugget-preparation",
+ "concept_slug": "nucleophilic-addition-mechanism",
+ "nugget_id": "nugget-nucleophilic-addition",
+ "anchor_text": "Nearly every reaction of an aldehyde or ketone follows the same two-step pattern, which makes this the most economical mechanism in the course to learn well."
+ },
+ "severity": "medium",
+ "category": "sequencing",
+ "observation": "The unifying mechanism is section 4 of 11, placed after 'Where aldehydes and ketones come from' (six memorization-heavy preparations) and 'Aldehydes oxidize easily'. The two sections that precede it are the most prerequisite-dependent in the chapter and gain nothing from being read first.",
+ "learner_impact": "I spend my freshest attention on a reagent list, arrive at the actual organizing idea already tired, and never get the payoff of re-reading the earlier sections through it. Nothing in the reader tells me section 4 is the one to master.",
+ "evidence": "reader chapter sections order: nugget-carbonyl-structure-naming, nugget-preparation, nugget-aldehyde-oxidation, nugget-nucleophilic-addition, ...",
+ "recommended_outcome": "The reader needs the master mechanism to be reachable (or at least flagged as the load-bearing section) before the recall-heavy preparation material, or an explicit forward pointer telling a struggling student what to prioritize.",
+ "confidence": 0.75
+ },
+ {
+ "finding_id": "stud-008",
+ "location": {
+ "section_id": "nugget-carbonyl-structure-naming",
+ "nugget_id": "nugget-carbonyl-structure-naming",
+ "anchor_text": "learning_objectives"
+ },
+ "severity": "medium",
+ "category": "conceptual-support",
+ "observation": "Every nugget authors learning_objectives and a depth field, but neither is compiled into the reader — the reader block list per section is text + molecules + links only. All 11 nuggets are depth 'core', and the concepts[] entries all have objectives: null. There is also no chapter-opening roadmap block and no closing summary block.",
+ "learner_impact": "Nothing in what I actually read distinguishes 'you must be able to draw this' from 'nice to know'. With everything equally weighted I default to highlighting every sentence, which is what a low-confidence student does instead of prioritizing.",
+ "evidence": "topic.package.json nuggets[].learning_objectives populated (e.g. three objectives on nugget-nucleophilic-addition); compiled reader JSON contains no objective or summary block; concepts[].objectives is null for all 11 concepts.",
+ "recommended_outcome": "Readers need a visible signal of what each section requires them to be able to do, and a chapter-level entry/exit summary so importance is not flat.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "stud-009",
+ "location": {
+ "section_id": "nugget-carbonyl-spectroscopy",
+ "concept_slug": "spectroscopy-of-aldehydes-and-ketones",
+ "nugget_id": "nugget-carbonyl-spectroscopy",
+ "anchor_text": "Saturated aldehydes absorb near 1730 cm⁻¹ and saturated ketones near 1715 cm⁻¹"
+ },
+ "severity": "medium",
+ "category": "conceptual-support",
+ "observation": "The spectroscopy section asks the student to internalize roughly ten numeric landmarks (1730, 1715, −30 shift, 2720/2820, 9–10 ppm, 2.0–2.6 ppm, 190–205, 200–215, 206, 5–10 upfield) and its only asset is mol-acetaldehyde, a static structure. No IR trace and no NMR trace exists anywhere in the package, yet questions ch19-aldehyde-nmr-shift and ch19-aldehyde-nmr-shift-v2 ask for numeric shifts.",
+ "learner_impact": "Numbers with no picture to hang them on are pure rote for me; I would confuse the 1730/1715 pair with the 2720/2820 pair within a day and I have no way to see that 'downfield of the aromatic region' is a place on an axis rather than a phrase.",
+ "evidence": "nugget-carbonyl-spectroscopy asset_ids = ['mol-acetaldehyde']; question ch19-aldehyde-nmr-shift accessibility_bundle describes a purely numeric entry with no stimulus figure.",
+ "recommended_outcome": "The diagnostic IR and NMR landmarks need a spatial representation a student can point at, so the numbers are read off a picture instead of memorized as a list.",
+ "confidence": 0.86
+ },
+ {
+ "finding_id": "stud-010",
+ "location": {
+ "section_id": "nugget-nucleophilic-addition",
+ "nugget_id": "nugget-nucleophilic-addition",
+ "anchor_text": "attacks that carbon along a trajectory roughly 105° to the C=O axis"
+ },
+ "severity": "medium",
+ "category": "cognitive-load",
+ "observation": "A specific geometric fact (the Bürgi–Dunitz trajectory) is stated as a number in prose, unnamed and unillustrated, in the middle of the mechanism paragraph. Nothing tells the student whether it matters, and no figure shows an angle 'to the C=O axis'.",
+ "learner_impact": "I cannot picture an angle relative to an axis from a sentence, so I either try to memorize '105°' as a testable fact or skip it and lose confidence that I am reading carefully enough. Either way it costs attention that the actual mechanism needs.",
+ "evidence": "nugget-nucleophilic-addition expanded text, first paragraph.",
+ "recommended_outcome": "Either the attack geometry needs a representation a student can see, or it needs to be marked as background detail so it does not compete with the mechanism steps.",
+ "confidence": 0.78
+ },
+ {
+ "finding_id": "stud-011",
+ "location": {
+ "section_id": "nugget-conjugate-addition",
+ "nugget_id": "nugget-conjugate-addition",
+ "anchor_text": "Softer, more polarizable and less basic nucleophiles — primary and secondary amines, thiols, cyanide — prefer the beta carbon, where the reaction is under thermodynamic control"
+ },
+ "severity": "medium",
+ "category": "cognitive-load",
+ "observation": "Three unexplained frameworks land in two consecutive sentences: hard/soft nucleophile character, polarizability, and thermodynamic versus kinetic control. None is defined in this chapter, none appears in the concept prerequisites (conjugate-addition lists only nucleophilic-addition-mechanism), and 'kinetic control' is never named as the contrast partner even though the 1,2 pathway is the kinetic one.",
+ "learner_impact": "I would reduce the whole section to the memorized pair 'cuprate = 1,4, Grignard = 1,2' and be unable to place any new nucleophile. The generic feedback on ch19-conjugate-addition-select-v2 reuses the same undefined phrase ('thermodynamically controlled outcome'), so getting it wrong does not rescue me.",
+ "evidence": "nugget-conjugate-addition expanded text, paragraph 2; feedback_bundle.generic_incorrect_explanation of ch19-conjugate-addition-select-v2.",
+ "recommended_outcome": "The hard/soft and thermodynamic-versus-kinetic ideas either need enough setup to be usable for prediction, or the selectivity rule needs a form a student can apply without them.",
+ "confidence": 0.84
+ },
+ {
+ "finding_id": "stud-012",
+ "location": {
+ "section_id": "nugget-hydride-grignard",
+ "concept_slug": "hydride-and-grignard-addition",
+ "nugget_id": "nugget-hydride-grignard",
+ "question_slug": "ch19-grignard-product",
+ "anchor_text": "Predict the alcohol class formed when a hydride or Grignard reagent adds to a given carbonyl compound."
+ },
+ "severity": "medium",
+ "category": "worked-example-gap",
+ "observation": "The chapter contains no worked example anywhere — no solved problem that shows intermediate reasoning. The closest artifacts are the practice_check answers, which are one-sentence assertions ('3-Methylcyclohexanone. The cuprate adds its methyl group 1,4 at the beta carbon'), and they are not compiled into the reader. The hydride/Grignard concept, whose stated objective is prediction across four substrate cases (formaldehyde/other aldehyde/ketone, hydride vs. carbanion), gets only two questions and both are Grignard single_selects; NaBH₄/LiAlH₄ selection is never practiced.",
+ "learner_impact": "The step I actually get stuck on — deciding which substituents end up on the former carbonyl carbon, and therefore which alcohol class results — is the step that is never shown being done. I would answer the multiple-choice items by pattern-matching the option labels ('a secondary alcohol') rather than by working the structure out, and then fail an open-ended version.",
+ "evidence": "nugget-hydride-grignard practice_check answer; question_sets: only ch19-grignard-product and ch19-grignard-product-v2 for concept hydride-and-grignard-addition, both single_select, both CH₃MgBr.",
+ "recommended_outcome": "Students need at least one fully worked substrate-to-product derivation for the carbonyl→alcohol classes, plus practice that covers the hydride half of the stated objective.",
+ "confidence": 0.86
+ },
+ {
+ "finding_id": "stud-013",
+ "location": {
+ "concept_slug": "acetals-and-protecting-groups",
+ "nugget_id": "nugget-acetals",
+ "question_slug": "ch19-acetal-base-error",
+ "anchor_text": "Base leaves acetals completely untouched"
+ },
+ "severity": "medium",
+ "category": "misconception",
+ "observation": "The chapter's common wrong moves are corrected only inside question feedback, and the question bank is available:false with demo_eligible:0, so a reader never meets them. concepts[] has no misconceptions field populated for any of the 11 concepts, and no reader block names a typical error. The traps that do get corrected (base-hydrolysis of an acetal, one equivalent of methanol, Jones overshoot, Grignard alkoxide before workup) live in ch19-acetal-base-error, ch19-acetal-base-error-v2, ch19-ketone-routes-v2, and ch19-grignard-product feedback only.",
+ "learner_impact": "I only discover the trap by falling into it, and right now I cannot even do that because the questions are not surfaced. Reading the prose alone, I would keep the wrong model (e.g. that 'protecting group removal' means base) all the way to an exam.",
+ "evidence": "concepts[] entries contain no misconceptions; compiled/question-set.json available: false, counts.demo_eligible: 0; feedback_bundle of ch19-acetal-base-error.",
+ "recommended_outcome": "The named common errors already identified by the question authors need to reach a reader who never opens the question bank.",
+ "confidence": 0.82
+ },
+ {
+ "finding_id": "stud-014",
+ "location": {
+ "question_slug": "ch19-draw-cyanohydrin",
+ "concept_slug": "hydration-and-cyanohydrins",
+ "anchor_text": "Draw a central carbon bearing two methyls, an OH, and a C≡N group: CC(C)(O)C#N."
+ },
+ "severity": "medium",
+ "category": "assessment-readiness",
+ "observation": "All four structure_scaffold items end their hint ladder with the literal answer SMILES (ch19-draw-cyanohydrin, ch19-draw-cyanohydrin-v2 'N#CC(O)c1ccccc1', ch19-draw-wittig-product 'C=C1CCCCC1', ch19-draw-wittig-product-v2 'C=Cc1ccccc1'). These are also the only four items with three hint levels; every other item stops at two conceptual hints.",
+ "learner_impact": "As the student most likely to open every hint, I get handed the answer at level 3 and do no drawing reasoning at all, then believe I can do these problems. The hint ladder rewards exactly the avoidance behavior I need to be pulled out of.",
+ "evidence": "feedback_bundle.hints level 3 of all four structure_scaffold questions.",
+ "recommended_outcome": "The final hint on drawing items needs to constrain the answer without supplying it, so a stuck student still performs the construction step.",
+ "confidence": 0.8
+ },
+ {
+ "finding_id": "stud-015",
+ "location": {
+ "section_id": "nugget-wittig",
+ "nugget_id": "nugget-wittig",
+ "anchor_text": "With simple, unstabilized ylides the reaction favors the Z alkene where geometry is in question; stabilized ylides bearing an adjacent carbonyl group favor E."
+ },
+ "severity": "low",
+ "category": "cognitive-load",
+ "observation": "Stabilized versus unstabilized ylides and their E/Z outcomes are introduced in a single sentence, with no example, no structure, and no supporting question — the two Wittig drawing items both use the same unhindered CH₂ ylide where geometry does not arise, and neither Wittig learning objective mentions alkene geometry.",
+ "learner_impact": "One sentence naming two reagent classes and two stereochemical outcomes reads as something I am expected to memorize, but there is no way to practice it, so it becomes anxiety rather than knowledge.",
+ "evidence": "nugget-wittig expanded text paragraph 3; learning_objectives of nugget-wittig; ch19-draw-wittig-product and -v2 both use Ph₃P=CH₂.",
+ "recommended_outcome": "Either the E/Z selectivity needs enough support and practice to be learnable, or it should be marked as beyond what this chapter expects.",
+ "confidence": 0.72
+ },
+ {
+ "finding_id": "stud-016",
+ "location": {
+ "section_id": "nugget-carbonyl-structure-naming",
+ "anchor_text": "https://en.wikipedia.org/wiki/Carbonyl group"
+ },
+ "severity": "low",
+ "category": "conceptual-support",
+ "observation": "The only per-section supporting resource in the reader is a Wikipedia link (11 of them, one per section), and the URLs are emitted with unencoded spaces — e.g. '/wiki/Carbonyl group', '/wiki/Tollens' reagent', '/wiki/Nucleophilic addition'. Only one McMurry/OpenStax link exists for the whole chapter, attached to section 1.",
+ "learner_impact": "When I am stuck in section 6 the offered help is a Wikipedia article written above my level, and the assigned-textbook link is nine sections back where I will not look for it. Malformed URLs make the one escape hatch feel unreliable.",
+ "evidence": "reader chapter external_link blocks, 11 total; mcmurry_link block blk-daxpjnzn appears only in nugget-carbonyl-structure-naming.",
+ "recommended_outcome": "Per-section escape hatches should point at level-appropriate, correctly formed targets, and the assigned-textbook reading should be reachable from any section where a student stalls.",
+ "confidence": 0.7
+ }
+ ],
+ "strengths": [
+ "The chapter keeps one explanatory thread — polarized C=O, nucleophile attacks carbon — and genuinely reuses it in every later section, which is exactly the kind of consistency a shaky student can hold on to.",
+ "Every question in the bank has a two-level hint ladder that moves from orientation to strategy without giving the answer (e.g. ch19-classify-carbonyls level 1 'Find the C=O carbon and look at what else is bonded to it').",
+ "Wrong-answer explanations are specific and diagnostic rather than generic — ch19-grignard-product explains each distractor structurally, and ch19-aldehyde-nmr-shift explains why 7.3 and 2.2 ppm are the wrong regions.",
+ "The error_repair items (ch19-acetal-base-error, ch19-acetal-base-error-v2) are built around real student errors and explicitly confirm the part of the flawed work that was correct, which is unusually good for confidence.",
+ "Alt text on the molecule assets describes what is on the carbonyl carbon rather than just naming the compound, which makes the static figures usable as reasoning aids."
+ ],
+ "open_questions": [
+ "Three video briefs are compiled into the reader with url:\"\" and is_hidden:true, so they render as nothing ([internal source reference — not in this repo]). I scored the resulting mechanism gap as high rather than blocker because the prose does state every step — but if another persona treats the deferred mechanism videos as a required-access failure, this may need to escalate.",
+ "Is the reader intended to expose the terse/standard depth variants and the nugget practice_check at all? Only the expanded text is compiled today, so finding stud-003 assumes the practice prompts are genuinely unreachable rather than pending a renderer feature.",
+ "The question set is compiled with available:false and demo_eligible:0. Several of my findings (retrieval practice, named misconceptions) would soften considerably if the bank is surfaced to readers before publication — please confirm whether that is planned for version 1."
+ ]
+}

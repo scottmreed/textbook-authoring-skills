@@ -1,0 +1,1438 @@
+{
+ "chapter_id": "carboxylic-acid-derivatives",
+ "chapter_version": "1",
+ "run_at": "2026-07-30T06:40:00+00:00",
+ "personas": [
+ {
+ "persona": "Accessibility Persona",
+ "persona_version": "1.0.0",
+ "chapter_id": "carboxylic-acid-derivatives",
+ "chapter_version": "1",
+ "model": "claude-opus-5[1m]",
+ "summary": "The authoring in this package is unusually accessibility-aware: every asset carries both an alt_text and a long_description, every question carries an accessible_description, no activity is drag-only or hover-only, no option set uses positional \"Structure A/B/C/D\" labels, and every question type in the bank (categorize, matching, rank, route builder, curved arrow, bond-change ledger, comparison matrix, structured reasoning) is keyboard-complete through labelled Selects and IconButtons. The problem is almost entirely one of delivery and of one question type. Three barriers block publication. First, both reaction_coordinate_reasoning questions open their accessible_description with \"A two-maximum energy profile\", which hands over step_count — the first thing the question asks — while omitting the relative heights that the other three asks (rate-determining step, step types, overall) depend on. Second, that description never reaches the learner anyway: ReactionCoordinateQuestionRenderer looks up envelope.question.accessibilityBundle?.description while the package (and the compiled bundle) key is accessible_description, so the SVG falls back to the generic label \"Schematic reaction coordinate diagram\", and the minima labels sit in <text> inside an svg with role=\"img\", where assistive technology cannot reach them — the stimulus is simply absent non-visually. Third, four structure_scaffold questions require drawing on a blank Ketcher canvas embedded as an iframe with no typed, spoken, or keyboard-composed alternative offered by the renderer. Beyond the blockers, the compiler drops content the authors wrote specifically for non-visual access: all 23 assets' long_description fields are absent from the compiled reader (molecule and reaction_coordinate blocks carry alt_text only), the synthesis roadmap compiles to an image block with an empty url so no figure exists at all, all 11 nugget practice_checks vanish, and no question-workspace renderer consumes accessible_description — questionBankApi declares the field with zero consumers. The chapter is currently available:false, so none of this is live yet.",
+ "overall_score": 4.2,
+ "publication_blockers": [
+ "access-001",
+ "access-002",
+ "access-003"
+ ],
+ "findings": [
+ {
+ "finding_id": "access-001",
+ "location": {
+ "question_slug": "ch21-addition-elimination-profile",
+ "concept_slug": "nucleophilic-acyl-substitution-mechanism",
+ "anchor_text": "A two-maximum energy profile is displayed with its minima labelled."
+ },
+ "severity": "blocker",
+ "category": "alt-text-quality",
+ "observation": "Both reaction_coordinate_reasoning questions (ch21-addition-elimination-profile and ch21-addition-elimination-profile-v2 share a byte-identical accessible_description) open by stating the number of maxima on the curve. The `ask` list begins with `step_count`, the answer_key gives `step_count: 2`, and the question's own level-1 hint states the equivalence outright: \"Each maximum on the curve is one transition state and therefore one step.\" A learner reading the accessible description is handed the first sub-answer before attempting the item. The compile-time guard (find_accessibility_leaks) cannot catch this: the digit 2 is stimulus-visible in student_config.profile.step_count, and the leak is carried by the word \"two-maximum\", not by a flagged number or verdict token.",
+ "learner_impact": "A screen-reader user who does get the description (or any learner given the text equivalent) is scored on a reading-off-the-curve skill they were never asked to exercise, and the item stops measuring what it claims to measure for exactly the population the description exists to serve.",
+ "evidence": "topic.package.json question_sets[].accessibility_bundle.accessible_description for both profile questions: \"A two-maximum energy profile is displayed with its minima labelled. Answer the questions about step count, the rate-determining step, and whether each step and the overall reaction release or absorb energy; reading those features off the curve is the task.\" answer_key [redacted] in both.",
+ "recommended_outcome": "The non-visual equivalent for a reaction-coordinate item needs to convey the curve's geometry — the sequence of rises and falls and the relative heights of each maximum and minimum against the starting level — without stating how many steps there are, which step is rate-determining, or the endergonic/exergonic classifications the item asks for.",
+ "confidence": 0.94
+ },
+ {
+ "finding_id": "access-002",
+ "location": {
+ "question_slug": "ch21-addition-elimination-profile-v2",
+ "concept_slug": "nucleophilic-acyl-substitution-mechanism",
+ "asset_id": "rc-addition-elimination",
+ "anchor_text": "Schematic reaction coordinate diagram"
+ },
+ "severity": "blocker",
+ "category": "media-equivalence",
+ "observation": "The reaction-coordinate stimulus is not available in any non-visual form. Three defects compound. (1) Key mismatch: [internal source reference — not in this repo], but the package, the compiled question-set, and the backend passthrough ([internal source reference — not in this repo] accessibilityBundle=resolved.accessibility_bundle) all key it as `accessible_description` — so the lookup is undefined and the SVG's aria-label falls back to the hard-coded string \"Schematic reaction coordinate diagram\". (2) The curve's information — minima labels \"Acetyl chloride + methoxide\", \"Tetrahedral intermediate\", \"Methyl acetate + chloride\", the two ‡ maxima, and the y-values that distinguish v1 from v2 — lives in <text> elements inside an <svg role=\"img\">, whose children are not exposed to assistive technology. (3) Even the authored text would be insufficient: it says the minima are \"labelled\" but never states what the labels are or the relative heights, which is precisely the data rate_determining_step, step_types and overall require. That the two variants (RDS = step 1 at y=8.0 vs RDS = step 2 at y=25.0) carry identical descriptions is direct proof the text is not stimulus-specific.",
+ "learner_impact": "A blind or low-vision student receives a graph labelled only \"Schematic reaction coordinate diagram\" and four dropdowns asking about its shape. All four asks are unanswerable except by guessing. This is a required, graded activity that some learners cannot complete.",
+ "evidence": "[internal source reference — not in this repo] (`role=\"img\"`, `aria-label={(envelope.question.accessibilityBundle?.description as string | undefined) ?? \"Schematic reaction coordinate diagram\"}`); compiled question-set.json accessibility_bundle uses key `accessible_description`; student_config.profile.control y-values 0/8.0/3.0/6.0/-20.0 (v1) vs 0/22.0/14.0/25.0/-6.0 (v2) with one shared description.",
+ "recommended_outcome": "Each reaction-coordinate item needs a per-variant non-visual equivalent that actually reaches the learner — the labelled species at each minimum and the relative heights of every feature must be perceivable without seeing the SVG, and whatever field carries that text must be the field the renderer reads.",
+ "confidence": 0.93
+ },
+ {
+ "finding_id": "access-003",
+ "location": {
+ "question_slug": "ch21-tetrahedral-intermediate-draw",
+ "concept_slug": "nucleophilic-acyl-substitution-mechanism",
+ "anchor_text": "\"scaffold\": \"blank_canvas\""
+ },
+ "severity": "blocker",
+ "category": "interactive-fallback",
+ "observation": "Four graded questions — ch21-tetrahedral-intermediate-draw, ch21-tetrahedral-intermediate-draw-v2, ch21-amide-reduction-draw, ch21-amide-reduction-draw-v2 — are structure_scaffold items with student_config.scaffold = \"blank_canvas\". [internal source reference — not in this repo] satisfies these by embedding the generator as an iframe (`/generator?embed=1&toolbarProfile=lti_drawing`) and reading the drawn structure back over the postMessage bridge. The renderer offers no alternative input path: no SMILES or name text field, no atom/bond menu composer, no template picker. Compare [internal source reference — not in this repo], which explicitly ships a \"Keyboard/menu composer ([internal PRD reference — not in this repo].1) — collapsed accessible fallback\" for the same class of problem; structure_scaffold has no equivalent.",
+ "learner_impact": "A student who cannot use a pointer — blind, low-vision, motor-impaired, or working keyboard-only — cannot produce an answer to any of these four items and cannot demonstrate that they know the tetrahedral intermediate retains all four substituents or that amide reduction keeps the C–N bond. Two of the four are the only draw-type coverage of reactions-of-amides.",
+ "evidence": "topic.package.json: four question_sets entries with `"student_config": "[redacted]"` and answer_key smiles CC([O-])(O)OC, CC([O-])(Cl)OCC, CNCc1ccccc1, CCCC(=O)O; [internal source reference — not in this repo] (whole file — iframe plus a \"Draw your answer in the structure drawing tool above\" hint, no other input).",
+ "recommended_outcome": "Every draw-a-structure item needs a non-pointer route to the same answer, so that a keyboard-only or screen-reader user can express connectivity, substituents and formal charge and have it graded identically. Mitigation to note: both affected concepts are also assessed by accessible types (curved_arrow, bond_change_ledger for the mechanism; two single_selects for amides), so no concept is assessed *solely* through the blocked modality.",
+ "confidence": 0.86
+ },
+ {
+ "finding_id": "access-004",
+ "location": {
+ "asset_id": "mol-tetrahedral-intermediate",
+ "section_id": "nugget-addition-elimination",
+ "anchor_text": "The central carbon is sp³-hybridized and bears four different substituents"
+ },
+ "severity": "high",
+ "category": "media-equivalence",
+ "observation": "All 23 assets in the package carry an `accessibility.long_description` written specifically as the structured non-visual readout, and not one of them survives compilation. The compiled reader's molecule blocks contain only {name, smiles, alt_text, description, generator_href, rdkit_options}, and [internal source reference — not in this repo] to StructureCard; the reaction_coordinate card likewise renders `content.alt_text` twice (as the image alt and as \"Described as: …\") and never a long description. Grepping frontend/src for long_description/longDescription returns hits only in course-projects, orbitals and NMR code — no reader path. The dropped text is exactly the load-bearing content: the tetrahedral intermediate's four substituents and which two can be expelled, the shallow well of the rc-addition-elimination profile, why opening γ-butyrolactone yields one molecule with two groups, and that the succinic anhydride leaving group stays bonded to the chain.",
+ "learner_impact": "Non-visual learners get a one-sentence alt for every figure where the author wrote two to four sentences of the chemically decisive detail. Alt text like \"Acetic anhydride: two acetyl groups joined through a shared oxygen atom\" is adequate for identification but omits the authored consequence — that attack at either acyl carbon expels the other half as a carboxylate — which is the whole teaching point of the figure.",
+ "evidence": "topic.package.json assets[].accessibility.long_description present on all 23 assets; frontend/public/reader/topic-chapters/carboxylic-acid-derivatives.json contains zero occurrences of long_description; [internal source reference — not in this repo], :474, :301/:319.",
+ "recommended_outcome": "The authored longer descriptions need to reach the reader for every figure — a non-visual learner should be able to obtain the same level of structural detail the sighted learner reads off the drawing, not just the figure's identifying sentence.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "access-005",
+ "location": {
+ "asset_id": "roadmap-acid-to-amide",
+ "section_id": "nugget-acid-halide-reactions",
+ "anchor_text": "\"block_type\": \"image\""
+ },
+ "severity": "high",
+ "category": "media-equivalence",
+ "observation": "The chapter's only synthesis_roadmap asset compiles to a reader `image` block with `\"url\": \"\"` (block blk-w6qmft0f). [internal source reference — not in this repo] resolves no imageUrl and falls back to rendering content.alt_text as italic text. The result is that no figure exists for any learner, and everything the asset carried beyond the alt sentence is gone: the per-step notes (\"Sulfur dioxide and hydrogen chloride leave as gases, which drives the activation to completion\"; \"The second equivalent of amine neutralizes the hydrogen chloride released\"), the three scientific_caveats about pyridine/triethylamine substitution, direct thermal amidation, and oxalyl chloride, and the long_description. This is the same empty-image roadmap defect recorded for chapter 22.",
+ "learner_impact": "Sighted and non-visual learners alike lose the roadmap; the section that teaches \"you cannot make an amide from an acid and an amine directly\" is left with prose and two molecule cards. The alt sentence that does render names the reagents but not why they are chosen, so the reasoning the caveats carry is unavailable to everyone.",
+ "evidence": "frontend/public/reader/topic-chapters/carboxylic-acid-derivatives.json blk-w6qmft0f: {\"url\": \"\", \"alt_text\": \"A two-step forward synthesis: benzoic acid is treated with thionyl chloride…\", \"caption\": \"Benzoic acid to N-methylbenzamide by way of the acid chloride\"}; [internal source reference — not in this repo].",
+ "recommended_outcome": "The roadmap's content — the three species, the two reagent labels, why each drives the step, and the caveats about alternative acid scavengers and activating agents — needs to be delivered in the reader in some perceivable form rather than collapsing to a single alt sentence with no image behind it.",
+ "confidence": 0.92
+ },
+ {
+ "finding_id": "access-006",
+ "location": {
+ "question_slug": "ch21-classify-derivatives",
+ "anchor_text": "accessible_description"
+ },
+ "severity": "high",
+ "category": "media-equivalence",
+ "observation": "All 48 questions carry an authored accessible_description, the compiler preserves it (compiled/question-set.json accessibility_bundle.accessible_description is present on every item), and the backend passes the bundle through to the activity envelope — but no question-workspace renderer consumes it. [internal source reference — not in this repo] with zero readers anywhere in frontend/src. The only surface that renders it is [internal source reference — not in this repo], which is fed by publicQuestionDemosApi, a different data path that does not serve this chapter's bank. MolecularGeometryRenderer reads it from responseConfig (a different key path) and ReactionCoordinateQuestionRenderer reads the wrong key (see access-002). Net effect: the accessibility bundle is inert for this chapter.",
+ "learner_impact": "The entire non-visual scaffolding layer the authors built for this question bank is invisible in production. For question types whose stimulus is pure text (categorize, rank, multi_select) the loss is tolerable because the item text is itself readable; for anything with a rendered figure it means the learner gets whatever generic alt the renderer happens to emit and nothing else.",
+ "evidence": "grep of frontend/src for accessibleDescription returns only [internal source reference — not in this repo] (declaration), [internal source reference — not in this repo] (responseConfig path), and [internal source reference — not in this repo] (demo-only path); compiled/question-set.json carries accessibility_bundle on all 48 items.",
+ "recommended_outcome": "The authored per-question non-visual description needs an actual delivery path into the workspace a student answers in, otherwise the authoring effort and the compile-time leak guard both protect text nobody receives.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "access-007",
+ "location": {
+ "question_slug": "ch21-classify-derivatives-v2",
+ "concept_slug": "acyl-derivative-structure-and-naming",
+ "anchor_text": "CH₃CH₂CO₂COCH₂CH₃"
+ },
+ "severity": "medium",
+ "category": "notation-consistency",
+ "observation": "Several items make a Unicode-subscripted condensed formula the entire stimulus, and the renderers pass that string through unprocessed. [internal source reference — not in this repo] raw and sets `aria-label={`Category for ${item.text}`}`; SelectedResponseRenderer and MatchingRenderer do the same. None of the question renderers use the repo's own renderChemFormula / chemistryText normalization (which is applied in the reader and in the Newman/chair/geometry renderers but not here). Subscript code points U+2080–U+2089 are dropped or inconsistently announced by common screen readers, so \"CH₃CO₂COCH₃\" (i2, an anhydride) and \"CH₃CO₂CH₂CH₃\" (i3, an ester) can collapse to near-identical spoken strings, and \"CH₃CH₂CO₂COCH₂CH₃\" is a long unpunctuated run. The accessible_description does not enumerate or spell out any of the formulas — it only says six are listed.",
+ "learner_impact": "A screen-reader user answering ch21-classify-derivatives, its v2, ch21-name-ester and ch21-name-ester-v2 must reconstruct connectivity from an auditory stream that may not distinguish an anhydride from an ester, turning a functional-group recognition task into an audio-parsing task.",
+ "evidence": "student_config.items for ch21-classify-derivatives-v2: i1 CH₃CH₂CO₂CH₃, i3 CH₃CH₂CO₂COCH₂CH₃, i4 CH₃CH₂CON(CH₃)₂; prompt_text of ch21-name-ester: \"Give the IUPAC name of CH₃CH₂CH₂CO₂CH₂CH₃.\"; [internal source reference — not in this repo].",
+ "recommended_outcome": "Condensed formulas used as a sole stimulus need a spoken form that unambiguously conveys connectivity and atom counts, either through markup the screen reader handles reliably or through a per-item readout, so that family recognition rather than glyph decoding is what the item tests.",
+ "confidence": 0.78
+ },
+ {
+ "finding_id": "access-008",
+ "location": {
+ "nugget_id": "nugget-addition-elimination",
+ "section_id": "nugget-addition-elimination",
+ "anchor_text": "Methoxide adds to acetyl chloride. The tetrahedral intermediate carries both a chloride and a methoxy group"
+ },
+ "severity": "medium",
+ "category": "retrieval-practice",
+ "observation": "All 11 nuggets carry a `practice_check` with a prompt and a worked answer, and none of them appear in the compiled reader chapter. Every section compiles to a text block (with _detail_texts terse/standard/expanded, which are delivered correctly), molecule/RC/image blocks, and link blocks — there is no practice_check block type in the output at all. The same non-delivery was recorded for chapter 22.",
+ "learner_impact": "Every learner loses the section-level self-check, but the loss falls hardest on learners who cannot skim a figure to test recall and who depend on an explicit retrieval prompt with a stated answer to confirm they have understood the prose they just read linearly.",
+ "evidence": "topic.package.json nuggets[].practice_check present on all 11 nuggets (e.g. nugget-acid-halide-reactions: \"Benzoyl chloride is treated with one equivalent of methylamine. Why is the yield of N-methylbenzamide at most 50 percent…\"); zero occurrences of practice_check in frontend/public/reader/topic-chapters/carboxylic-acid-derivatives.json.",
+ "recommended_outcome": "The authored per-section retrieval prompts and their answers need to reach the reader, so that a learner working through a section sequentially has a checkpoint before moving on.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "access-009",
+ "location": {
+ "question_slug": "ch21-grignard-ester-error",
+ "concept_slug": "reactions-of-esters",
+ "anchor_text": "Structure for the flawed step"
+ },
+ "severity": "low",
+ "category": "alt-text-quality",
+ "observation": "Both error_repair items supply molecule_smiles (COC(=O)c1ccccc1 and CCOC(C)=O) which the backend renders into an SVG; [internal source reference — not in this repo] gives that image the fixed alt \"Structure for the flawed step\" regardless of what the structure is. The molecule is therefore announced by a placeholder rather than by its identity.",
+ "learner_impact": "Minor here, because the flawed_work prose names the compound (\"Methyl benzoate is treated with methylmagnesium bromide\"), so the structure is recoverable from context — but the alt itself conveys nothing chemical, and the same renderer would be a genuine barrier on any error_repair item whose prose does not name the substrate.",
+ "evidence": "[internal source reference — not in this repo]; student_config.molecule_smiles for ch21-grignard-ester-error and its v2.",
+ "recommended_outcome": "A rendered structure attached to an item needs an alt that identifies that specific structure rather than its role in the layout.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "access-010",
+ "location": {
+ "asset_id": "video-addition-elimination",
+ "section_id": "nugget-addition-elimination",
+ "anchor_text": "Open on acetyl chloride with the planar sp² acyl carbon highlighted"
+ },
+ "severity": "low",
+ "category": "interactive-fallback",
+ "observation": "The three video_briefs compile to reader `video` blocks with `\"url\": \"\"` and `\"is_hidden\": true`; [internal source reference — not in this repo] returns null for hidden blocks, so nothing renders. Two secondary observations: the compiled block's `description` is the first storyboard direction (\"Open on acetyl chloride with the planar sp² acyl carbon highlighted and the carbonyl π bond shaded\"), which is production stage-direction rather than learner-facing prose and would read as nonsense if the block were ever unhidden; and the deferral notes correctly pre-record the requirements (closed captions, narration naming every visual change, a text transcript, and — for the reactivity-ladder brief — that the electron-density colour overlay must be paired with a stated pKa so the comparison is never colour-only), but nothing carries those requirements into an asset record that would be checked at production time.",
+ "learner_impact": "No current barrier, since the blocks do not render and the production_notes state the reader carries equivalent content in the corresponding nuggets. The risk is deferred: if these animations are produced later without the recorded caption/transcript/no-colour-only requirements travelling with them, three mechanism animations ship with no non-visual equivalent.",
+ "evidence": "frontend/public/reader/topic-chapters/carboxylic-acid-derivatives.json blocks blk-06ro6yer, blk-1ndwval0, blk-fxlweqn3 (url \"\", is_hidden true); topic.package.json video_briefs[].production_note for all three.",
+ "recommended_outcome": "The accessibility requirements recorded at deferral (captions, narration that names each visual change, transcript, and no colour-only encoding of the donation comparison) need to be attached to these animations in a way that survives to whenever they are actually produced, and the learner-facing description of a video block needs to be prose rather than a storyboard cue.",
+ "confidence": 0.8
+ }
+ ],
+ "strengths": [
+ "No activity in this chapter is drag-only, hover-only, or motion-dependent. Every question type used is keyboard-complete through labelled form controls: categorize and matching expose one labelled Select per item, rank_order uses labelled move IconButtons, synthesis_route and curved_arrow build the answer from Selects, and bond_change_ledger and comparison_matrix are real tables with per-cell aria-labels.",
+ "The bond_change_ledger items are fully answerable without seeing the structure: atom_labels are self-describing text (\"1: Central tetrahedral carbon\", \"2: Negatively charged oxygen\", \"3: Chlorine\", \"4: Methoxy oxygen\") rendered as a role=\"list\", and the reaction_display sentence states the transformation. This is the model the other figure-bearing types should follow.",
+ "The curved_arrow items name every legal arrow endpoint in text (\"Methoxide oxygen (lone pair)\", \"Acyl carbon of acetyl chloride\"), and the site ids map correctly onto the SMILES atom indices in both variants, so arrow-drawing is achievable entirely from dropdowns.",
+ "No option set uses positional \"Structure A/B/C/D\" labels, and where structures are shown on single_select options they are shown on every option (ch21-recognize-lactone, ch21-ester-reduction-product, ch21-ir-identify-derivative all illustrate 4 of 4) — there is no lone-illustrated-option tell of the kind that has slipped past the leak guard in earlier chapters.",
+ "Molecule alt texts state connectivity rather than naming the image: \"A tetrahedral carbon carrying a methyl group, a negatively charged oxygen, a chlorine, and a methoxy group\" and \"γ-Butyrolactone: a five-membered ring containing one oxygen, with the carbon adjacent to that oxygen carrying a double-bonded oxygen outside the ring\" are usable readouts on their own.",
+ "The reader delivers all three detail levels (terse / standard / expanded) for every section, so a learner who needs a shorter linear pass has one without losing the section.",
+ "Aside from the two reaction_coordinate_reasoning descriptions, the accessible_descriptions are correctly task-shaped — they state the stimulus and the ask and stop (\"Six condensed formulas of acyl compounds are listed, together with four family names. Assign each compound to a family; deciding which family each formula belongs to is the task.\")."
+ ],
+ "open_questions": [
+ "Does the lti_drawing generator embed expose any non-pointer input path — a typed SMILES/name field, an atom-and-bond menu composer, or the voice structure editor referenced in [internal source reference — not in this repo] — that StructureWorkspaceRenderer simply does not advertise? I could not confirm one from the renderer or the toolbar profile; if such a path exists and is reachable from the embed, access-003 would drop from blocker to high.",
+ "Is there any surface other than the PWA reader (print/PDF export, LMS cartridge, instructor packet) that does deliver assets' long_description? If so, access-004's severity depends on which surface students are actually assigned.",
+ "Has a real screen-reader pass (NVDA/JAWS/VoiceOver) been run against the reaction_coordinate SVG and the raw Unicode-subscript question items? My findings for access-002 and access-007 are grounded in the code paths and code points, not in recorded assistive-technology output.",
+ "access-002 and access-006 are platform defects, not authoring defects — the same two would appear in any chapter using reaction_coordinate_reasoning or shipping accessibility bundles. If the orchestrator scopes this review to chapter content only, they should be routed as platform tickets rather than chapter revisions, but they still block this chapter's publication because the questions are unanswerable as delivered."
+ ]
+ },
+ {
+ "persona": "Learner with Visual Preference",
+ "persona_version": "1.0.0",
+ "chapter_id": "carboxylic-acid-derivatives",
+ "chapter_version": "1",
+ "model": "claude-opus-5[1m]",
+ "summary": "The chapter is figure-dense by count (21 assets, 30 figure cards in the compiled reader) but almost monotonously so by kind: 20 of the 21 assets are single static molecules, and the two non-molecule figures are the chapter's only attempt to show a relationship. One of those two — the synthesis roadmap that carries the chapter's central 'you can only run down the ladder, so activate first' idea — compiles to an image block with an empty URL and no asset_id, so a student sees italic alt text where the three-structure sequence should be. The other, the addition–elimination energy profile, renders with both end labels chopped off by the canvas edge ('etyl chloride + methoxide' on the left, 'Methyl acetate + c…' on the right). Beyond those two delivery defects, the pattern is that every idea in this chapter that is inherently a relationship — electron flow through the tetrahedral intermediate, the sp²→sp³ geometry change, the four-family reactivity ordering, amide C–N delocalization and its 20 kcal/mol rotation barrier, the carbonyl-stretch number line, the polymer repeat unit — is asserted in prose and illustrated with unannotated single structures that show none of it, with the three animations that would have carried it deferred and hidden. Meanwhile acetyl chloride and methyl acetate are each rendered five separate times with identical captions and alt text, and the spectroscopy section is four repeat structures with no spectral information at all. Legibility of the individual molecule renders is good (I rendered all 21 through the platform's own renderer): no annotation_font_scale anywhere, no oversized stereo glyphs, no label collisions — the one weak render is sodium stearate, a hairline 18-carbon chain whose carboxylate labels shrink to a few pixels at the reader's 180px card height. On the assessment side the option art is disciplined: across all 48 questions, every option/card/item list is either uniformly illustrated or uniformly text, so there is no lone-illustrated-option tell — but two lactone/lactam items give the answer away a different visual way, and six recognition and ranking items ask students to classify structures presented only as condensed formulas.",
+ "overall_score": 6.0,
+ "publication_blockers": [],
+ "findings": [
+ {
+ "finding_id": "visual-001",
+ "location": {
+ "asset_id": "roadmap-acid-to-amide",
+ "nugget_id": "nugget-acid-halide-reactions",
+ "section_id": "nugget-acid-halide-reactions",
+ "concept_slug": "reactions-of-acid-halides"
+ },
+ "severity": "high",
+ "category": "figure-purpose",
+ "observation": "The chapter's only sequential/transformation figure never renders. `roadmap-acid-to-amide` is authored with three structures (benzoic acid → benzoyl chloride → N-methylbenzamide), two labelled reagent arrows and three scientific caveats, but the reader builder maps `synthesis_roadmap` to an `image` block emitted with `\"url\": \"\"` and drops the spec entirely, so none of the node SMILES reach the reader. The emitted block also carries no `asset_id`, so the reader's image-variant registry has nothing to look up even if a rendered file existed. ReaderProviderImage falls back to rendering the alt text as italic body copy, so the student sees a bordered box of prose where the roadmap should be.",
+ "learner_impact": "The single idea the section is built around — that an acid and an amine cannot be combined directly, so the acid must first be raised up the ladder as the chloride and then run back down — is the one thing in the chapter that most needs to be seen as a left-to-right sequence with reagents over the arrows. Every learner instead gets a paragraph of prose plus a paragraph of alt text describing a picture that is not there, and the section's other two figures (benzoyl chloride, acetyl chloride) are isolated structures that show no transformation. The compiled reader for the whole chapter therefore contains zero figures depicting a reaction.",
+ "evidence": "frontend/public/reader/topic-chapters/carboxylic-acid-derivatives.json, section nugget-acid-halide-reactions: image block content = {\"url\": \"\", \"alt_text\": \"A two-step forward synthesis…\", \"caption\": \"Benzoic acid to N-methylbenzamide by way of the acid chloride\"} — no asset_id, no spec. [internal source reference — not in this repo] maps synthesis_roadmap→image and line 117 emits `\"url\": \"\", # populated when a rendered file exists`. [internal source reference — not in this repo] as italic text when no image resolves. Contrast the reaction_coordinate branch ([internal source reference — not in this repo]), which inlines its spec so the reader can draw it client-side.",
+ "recommended_outcome": "The acid → acid chloride → amide sequence needs to arrive at the reader as something a student can see, not as a description of an absent picture; whatever carries it must show the three structures in order with the reagent for each step. Either the roadmap asset type needs the same inline-spec path the reaction-coordinate type already has, or the chapter needs a delivery route for multi-structure sequences that does not depend on a pre-rendered file.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "visual-002",
+ "location": {
+ "asset_id": "rc-addition-elimination",
+ "nugget_id": "nugget-addition-elimination",
+ "section_id": "nugget-addition-elimination",
+ "anchor_text": "Acetyl chloride + methoxide"
+ },
+ "severity": "high",
+ "category": "figure-accuracy",
+ "observation": "The energy profile's two end-state labels are clipped by the canvas edge. Rendering the asset's exact spec through the same service the reader calls (`/graphs/reaction-coordinate` → reaction_coordinate_service.render_svg) produces a 760×470 viewBox in which 'Acetyl chloride + methoxide' is centred at x=64 and 'Methyl acetate + chloride' at x=732, both at font-size 13 with text-anchor=\"middle\". At ~160 px and ~150 px of text width the first is cut by roughly 16 px on the left (it reads 'etyl chloride + methoxide') and the second by roughly 47 px on the right. The inline structure at the intermediate minimum is also small and sits close to the curve.",
+ "learner_impact": "The figure's whole job is to show that this is a two-step process running from named reactants, through a shallow well, to named products well below the start. With both endpoint labels mangled, the one figure that carries the energetics no longer says what the start and end states are, and a student cannot tie the shallow minimum to the tetrahedral intermediate on either side of it. It also reads as a broken page, which undermines trust in the other figures.",
+ "evidence": "Rendered via backend/app/services/reaction_coordinate_service.render_reaction_coordinate with the asset's spec verbatim; SVG text nodes: `<text x=\"64.0\" y=\"382.9\" text-anchor=\"middle\" font-size=\"13\">Acetyl chloride + methoxide</text>` and `<text x=\"732.0\" … >Methyl acetate + chloride</text>` inside `viewBox=\"0 0 760 470\"`. The rasterised output shows both labels truncated at the frame edges. Reader path: [internal source reference — not in this repo] case \"reaction_coordinate\" → ReactionCoordinateCard → renderReactionCoordinate(content.spec).",
+ "recommended_outcome": "The reactant and product identities on this profile need to be fully legible in the delivered figure — either the labels must be short enough to fit the renderer's edge minima, or the diagram needs horizontal room for labels centred on its first and last minima. Whichever route is taken, the fix should be verified against the rendered SVG rather than the spec.",
+ "confidence": 0.93
+ },
+ {
+ "finding_id": "visual-003",
+ "location": {
+ "nugget_id": "nugget-addition-elimination",
+ "concept_slug": "nucleophilic-acyl-substitution-mechanism",
+ "section_id": "nugget-addition-elimination",
+ "anchor_text": "Two curved arrows record this step: one runs from the lone pair of the nucleophile to the carbonyl carbon, and a second runs from the carbon–oxygen π bond to the oxygen."
+ },
+ "severity": "high",
+ "category": "visual-opportunity",
+ "observation": "The chapter states outright that it teaches one mechanism for its entire length, and it describes the electron flow of that mechanism in words down to the origin and destination of each arrow — but no figure anywhere in the compiled reader shows a curved arrow. The section's figures are three disconnected static structures (acetyl chloride, tetrahedral intermediate, methyl acetate) plus the energy profile; the arrows exist only in prose and in a video brief that is deferred and compiled as `is_hidden: true` with an empty URL. The same is true of the other two mechanisms the chapter narrates step by step: saponification (nugget-ester-hydrolysis, video also deferred/hidden) and amide reduction, where the prose asserts the intermediate 'expels the oxygen, not the nitrogen' with nothing showing which bond breaks.",
+ "learner_impact": "Electron flow is the one thing in this chapter that is genuinely spatial, and a student who wants to see where the arrow starts and ends has nowhere to look; they must hold three separate structures in mind and infer the mapping between them. Two of the chapter's own trouble spots ('drawing a one-step backside displacement at the acyl carbon' and 'omitting the tetrahedral intermediate') are precisely the errors a student makes when they have never seen the arrows drawn. The chapter then asks them to produce arrows themselves in ch21-addition-elimination-arrow and to enumerate bond and charge changes in ch21-chloride-expulsion-ledger.",
+ "evidence": "topic.package.json nugget-addition-elimination.text.expanded (quoted above) and nugget-ester-hydrolysis.text.expanded; asset_ids for the section are mol-acetyl-chloride, mol-tetrahedral-intermediate, mol-methyl-acetate, rc-addition-elimination — all static single species. video-addition-elimination and video-saponification carry `production_status: \"deferred\"`; compiled reader video blocks have `\"url\": \"\"` and `is_hidden: true`. Every one of the chapter's 21 assets is of type molecule, reaction_coordinate or synthesis_roadmap; ALLOWED_ASSET_TYPES in [internal source reference — not in this repo] contains no reaction/mechanism kind.",
+ "recommended_outcome": "The two-arrow addition step and the two-arrow elimination step need to be visible somewhere in the reader, with the arrow origins and destinations shown on the structures rather than named in prose. The deferral notes claim the reader already carries the same content statically; it does not, and the gap should be closed at the reader rather than deferred with the video.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "visual-004",
+ "location": {
+ "nugget_id": "nugget-reactivity-ladder",
+ "concept_slug": "relative-reactivity-of-acyl-derivatives",
+ "section_id": "nugget-reactivity-ladder",
+ "anchor_text": "acid halide > anhydride > ester > amide"
+ },
+ "severity": "high",
+ "category": "visual-opportunity",
+ "observation": "The reactivity ladder is an ordering with two contributing quantitative axes (leaving-group basicity via conjugate-acid pKa, and π donation strength by the attached heteroatom), and the chapter's own trouble spot warns against 'treating the reactivity order as a list to memorize rather than as a consequence' of those two effects. What the reader actually delivers is four separate full-size structure cards stacked vertically — acetyl chloride, acetic anhydride, methyl acetate, acetamide — each with its own caption, none of them carrying a rank, a pKa, a donation indicator, or an arrow. The comparative video brief that would have carried the ordering is deferred and hidden.",
+ "learner_impact": "Nothing on the page is comparative, so the ordering has to be memorised from a sentence — exactly the failure mode the chapter names. The two effects the chapter insists reinforce one another are never shown reinforcing one another, and the directional consequence ('reactions proceed down the ladder; moving up requires returning to the acid') has no visual counterpart, which is the reasoning ch21-reactivity-rank, ch21-benzamide-synthesis-route and ch21-why-amide-least-reactive all depend on.",
+ "evidence": "topic.package.json nugget-reactivity-ladder.asset_ids = [mol-acetyl-chloride, mol-acetic-anhydride, mol-methyl-acetate, mol-acetamide]; compiled reader section nugget-reactivity-ladder = four independent molecule blocks plus a hidden video block. video-reactivity-ladder storyboard ('arranged left to right in order of reactivity… arrow thickness scaled to the strength of the donation… leaving-group anion below each structure with its conjugate-acid pKa') is exactly the missing comparison, and it is `production_status: \"deferred\"`.",
+ "recommended_outcome": "The four families need to be seen side by side in rank order with the two governing quantities attached to each, so the ordering is read off a comparison rather than recalled from a sentence. The permitted direction of interconversion should be visible in the same view.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "visual-005",
+ "location": {
+ "nugget_id": "nugget-spectroscopy-acyl-derivatives",
+ "concept_slug": "spectroscopy-of-acyl-derivatives",
+ "section_id": "nugget-spectroscopy-acyl-derivatives",
+ "asset_id": "mol-acetyl-chloride"
+ },
+ "severity": "medium",
+ "category": "visual-redundancy",
+ "observation": "Acetyl chloride is rendered five times in the compiled reader and methyl acetate five times, acetic anhydride and acetamide three times each — always the identical image with the identical caption and identical alt text, because the caption is the asset-level learning_goal and does not change with context. The spectroscopy section is the worst case: all four of its figure cards are repeats (the 5th, 5th, 3rd and 3rd appearance of structures the student has already scrolled past) and not one of them carries any spectroscopic information, so the section's figure strip adds nothing to the section's argument.",
+ "learner_impact": "Repeating an unchanged picture teaches nothing on the second through fifth showing and dilutes the signal of the figures that are new — a student scrolling the chapter learns that the pictures are decoration rather than content. In the spectroscopy section specifically, four structure cards occupy the space where the section's actual subject (band position) should be, so the student's attention is spent on structures they already know.",
+ "evidence": "Counted from frontend/public/reader/topic-chapters/carboxylic-acid-derivatives.json: CC(=O)Cl appears in nugget-acyl-derivative-naming, nugget-addition-elimination, nugget-reactivity-ladder, nugget-acid-halide-reactions, nugget-spectroscopy-acyl-derivatives; COC(C)=O in five sections likewise; CC(=O)OC(C)=O and CC(N)=O in three each. [internal source reference — not in this repo] sets content.description from asset.learning_goal, so the caption is byte-identical on every repeat.",
+ "recommended_outcome": "A structure that reappears should be doing new work at each appearance — carrying the annotation or highlight relevant to that section — or it should not reappear as a full card. The spectroscopy section in particular needs figures that carry spectral information rather than a fifth copy of structures already shown.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "visual-006",
+ "location": {
+ "concept_slug": "spectroscopy-of-acyl-derivatives",
+ "nugget_id": "nugget-spectroscopy-acyl-derivatives",
+ "question_slug": "ch21-carbonyl-ir-wavenumber",
+ "anchor_text": "an amide absorbs near 1660 cm⁻¹, an ester near 1735 cm⁻¹, and an acid chloride near 1800 cm⁻¹"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The spectroscopy concept is entirely about position on a one-dimensional wavenumber axis — five band positions in a fixed order, plus an anhydride doublet at 1820/1750 cm⁻¹ that the chapter calls 'diagnostic on its own', plus the N–H band count that separates primary, secondary and tertiary amides. None of it is drawn. There is no IR trace, no annotated wavenumber scale, and no depiction of two coupled bands, in either the reader or any of the six questions on this concept. Two of those questions (ch21-carbonyl-ir-wavenumber and its variant) ask the student to produce a numeric wavenumber, and two more (ch21-ir-identify-derivative and variant) ask them to identify a compound from band positions, without a spectrum ever having been shown.",
+ "learner_impact": "A number line with five marks on it is the cheapest possible visual and would replace the densest paragraph in the chapter; without it, a student has to hold five numbers, their order, and the physical reason for the order in memory simultaneously. The anhydride's two-band signature is a shape a student would recognise instantly if shown once, and asking for a numeric band position from someone who has never seen a spectrum makes the item a recall task rather than a reading task.",
+ "evidence": "topic.package.json nugget-spectroscopy-acyl-derivatives.asset_ids = four molecule assets, all repeats; text.expanded carries the full band list, the coupled-carbonyl explanation and the N–H band counts in prose. Compiled question set: ch21-carbonyl-ir-wavenumber (numeric, 1800 cm⁻¹ ±30), ch21-carbonyl-ir-wavenumber-v2 (1660 ±35), ch21-ir-identify-derivative and -v2 — none carries a spectrum in student_config; the option art is molecular structures only.",
+ "recommended_outcome": "The chapter needs the carbonyl-band ordering to be visible as positions on a shared axis, and the anhydride doublet to be seen as a doublet at least once, so band position becomes something read rather than recalled. The IR items would then be reading tasks against the same representation.",
+ "confidence": 0.87
+ },
+ {
+ "finding_id": "visual-007",
+ "location": {
+ "asset_id": "mol-acetic-anhydride",
+ "nugget_id": "nugget-reactivity-ladder",
+ "concept_slug": "relative-reactivity-of-acyl-derivatives"
+ },
+ "severity": "medium",
+ "category": "notation-consistency",
+ "observation": "Hydrogen display is inconsistent inside the chapter's two four-figure comparison sets. In both nugget-reactivity-ladder and nugget-spectroscopy-acyl-derivatives the same four structures appear together, and three of them (mol-acetyl-chloride, mol-methyl-acetate, mol-acetamide) carry `rdkit_options: {show_hydrogens: true}` while mol-acetic-anhydride carries none, so it renders in plain skeletal form beside three fully-explicit neighbours. The same split runs through the chapter: 5 of 21 molecule assets set show_hydrogens, including mol-tetrahedral-intermediate (six explicit methyl hydrogens that teach nothing about the four heavy substituents that are the point) while mol-n-methylacetamide, whose classification as a *secondary* amide depends on counting one H and one methyl on nitrogen, does not.",
+ "learner_impact": "In a side-by-side comparison, a difference in drawing convention reads as a difference in chemistry. A student comparing four derivatives sees one drawn in a visibly different style and has to work out that the difference is cosmetic before they can make the comparison the figures exist to support, and the explicit-H clutter on the small molecules makes the acyl carbon harder to pick out at the reader's card size.",
+ "evidence": "topic.package.json: mol-acetyl-chloride, mol-tetrahedral-intermediate, mol-methyl-acetate, mol-acetamide, mol-methyl-thioacetate have `rdkit_options.show_hydrogens = true`; mol-acetic-anhydride, mol-n-methylacetamide, mol-methyl-propanoate and the remaining 12 have none. I rendered all 21 through backend/app/api/deck_creator.render_molecule_png with the authored options: acetamide and methyl acetate show every C–H, acetic anhydride shows none.",
+ "recommended_outcome": "Within any set of figures a student is meant to compare, hydrogen display needs to be uniform, and explicit hydrogens should be reserved for the figures where a hydrogen count is the teaching point (the secondary/tertiary amide distinction) rather than applied to whichever assets happened to receive the option.",
+ "confidence": 0.92
+ },
+ {
+ "finding_id": "visual-008",
+ "location": {
+ "asset_id": "mol-methyl-propanoate",
+ "nugget_id": "nugget-acyl-derivative-naming",
+ "concept_slug": "acyl-derivative-structure-and-naming"
+ },
+ "severity": "medium",
+ "category": "figure-purpose",
+ "observation": "The figure's learning_goal claims a visual separation the image does not make: 'The name of an ester is assembled from two fragments, and this structure separates them: the methyl group came from methanol and the three-carbon acyl portion from propanoic acid.' Rendered, it is an unannotated skeletal ester with no division, no colour, no bracket and no labels — nothing distinguishes the alcohol-derived fragment from the acyl fragment. The same pattern recurs: mol-2-phenylpropan-2-ol's goal says the product 'carries two identical methyl groups from the Grignard reagent and one phenyl group from the ester', but the figure marks no provenance; mol-sodium-stearate's goal turns on 'a polar head and a long nonpolar tail' with neither region marked.",
+ "learner_impact": "The chapter's first named trouble spot for this concept is 'naming an ester from the wrong side'. A figure that visibly split the molecule at the ester oxygen would carry that whole point; as drawn, the split exists only in the caption, so the figure adds nothing the prose has not already said and the student is left doing the parsing that the figure was supposed to remove.",
+ "evidence": "topic.package.json assets mol-methyl-propanoate (learning_goal quoted above, smiles CCC(=O)OC, no rdkit_options), mol-2-phenylpropan-2-ol, mol-sodium-stearate. Rendered outputs confirm no annotation layer of any kind on any of the three.",
+ "recommended_outcome": "Where a figure's stated purpose is to distinguish two parts of a molecule — naming fragments, reagent provenance, polar head versus nonpolar tail — that distinction needs to be visible in the image, not asserted only in the caption. Figures whose purpose cannot be made visible should have their learning_goal restated to match what they actually show.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "visual-009",
+ "location": {
+ "nugget_id": "nugget-acyl-derivative-naming",
+ "concept_slug": "acyl-derivative-structure-and-naming",
+ "section_id": "nugget-acyl-derivative-naming",
+ "anchor_text": "The acyl group and the five families of carboxylic acid derivatives"
+ },
+ "severity": "medium",
+ "category": "figure-purpose",
+ "observation": "The section that introduces the five families illustrates three of them. Its four figures are acetyl chloride (acid halide), methyl propanoate (ester), N-methylacetamide (amide) and γ-butyrolactone (a second ester) — no anhydride and no nitrile, although both are named in the title and the learning objectives and the anhydride figure already exists in the package. A student meeting the families for the first time sees esters twice and two of the five families not at all; the anhydride does not appear until three sections later, in the reactivity ladder.",
+ "learner_impact": "The figure strip is the visual index of the section, and here it contradicts the section's own claim of five families. The families that go unillustrated are the two the chapter's trouble spots say students misparse — the anhydride's 'two acyl carbons sharing one oxygen' pattern is exactly what a condensed formula like CH₃CO₂COCH₃ hides, and that formula is then used as a classification item in ch21-classify-derivatives.",
+ "evidence": "topic.package.json nugget-acyl-derivative-naming.asset_ids = [mol-acetyl-chloride, mol-methyl-propanoate, mol-n-methylacetamide, mol-butyrolactone]; learning_objectives[0] = 'Recognize an acid halide, an acid anhydride, an ester, an amide, and a nitrile as substituted acyl compounds.' mol-acetic-anhydride exists in the package but its nugget_ids are [nugget-reactivity-ladder, nugget-anhydride-reactions, nugget-spectroscopy-acyl-derivatives]. No nitrile asset exists anywhere in the chapter.",
+ "recommended_outcome": "At the point where the families are introduced, each family the section names needs a structure a student can see, with the anhydride pattern and the nitrile represented at least once; a second ester is not a good use of a slot while two families are unillustrated.",
+ "confidence": 0.91
+ },
+ {
+ "finding_id": "visual-010",
+ "location": {
+ "nugget_id": "nugget-amide-reactions",
+ "concept_slug": "reactions-of-amides",
+ "question_slug": "ch21-amide-hydrolysis-conditions-v2",
+ "anchor_text": "rotation about it is hindered by a barrier close to 20 kcal/mol"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The amide section makes a chain of structural and energetic claims — the nitrogen lone pair delocalizes into the carbonyl, the nitrogen is planar rather than pyramidal, the C–N bond is 1.34 Å rather than 1.47 Å, rotation is hindered by ~20 kcal/mol, and the two methyls of DMF give separate NMR signals that coalesce on warming — and illustrates them with three flat single structures (acetamide, N-methylacetamide, benzamide) that show none of it. There is no resonance pair, no depiction of the planar nitrogen, and no picture of the two rotamer environments. The chapter then makes the DMF coalescence the subject of an advanced question, again with no figure.",
+ "learner_impact": "This is the densest stack of spatial and energetic assertions in the chapter and the one place where a static structure genuinely cannot carry the content: 'planar nitrogen' and 'restricted rotation' are shapes and motions, and a flat skeletal drawing of acetamide looks identical whether the nitrogen is planar or pyramidal. A student has to take all five claims on trust, and the DMF question then asks them to reason about two methyl environments they have never seen distinguished.",
+ "evidence": "topic.package.json nugget-amide-reactions.text.expanded (quoted); asset_ids = [mol-acetamide, mol-n-methylacetamide, mol-benzamide], all plain molecule renders. Question ch21-amide-hydrolysis-conditions-v2 asks why DMF's two methyl signals coalesce on warming; its student_config carries four text options and no structure. mol-n-methylacetamide's own long_description asserts 'the planar nitrogen shows the delocalization' — the render shows an ordinary 2D skeleton.",
+ "recommended_outcome": "The link from lone-pair delocalization to a planar nitrogen, a shortened C–N bond and a rotation barrier needs a representation in which those consequences are visible — at minimum the two contributing structures shown together, and the two methyl environments distinguished for the DMF item.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "visual-011",
+ "location": {
+ "asset_id": "mol-tetrahedral-intermediate",
+ "nugget_id": "nugget-addition-elimination",
+ "anchor_text": "the carbon becomes sp³-hybridized in a tetrahedral alkoxide intermediate"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The geometry change at the acyl carbon is the chapter's stated reason why substitution here cannot be a backside displacement — 'the carbonyl carbon is sp²-hybridized and planar' and then 'the carbon changes from trigonal planar to tetrahedral' — but the intermediate is drawn as an ordinary flat 2D skeleton with no wedge, no dash and no 3D cue. Rendered, mol-tetrahedral-intermediate is a flat four-substituent carbon that looks geometrically no different from any other structure in the chapter, and the same flat depiction is what appears at the well of the energy profile. The video brief that would have rotated the intermediate 'so that all four substituents on the central carbon are visible' is deferred and hidden.",
+ "learner_impact": "The word 'tetrahedral' is doing all the work: a student who has only seen the flat drawing has no reason to believe the carbon's shape changed at all, which is precisely what makes the one-step-displacement misconception survive. The 'planar sp² carbon cannot be attacked from behind' argument is a geometric argument delivered without geometry.",
+ "evidence": "topic.package.json mol-tetrahedral-intermediate: smiles CC([O-])(Cl)OC, rdkit_options {show_hydrogens: true}, no stereo/wedge options; rendered output is a flat depiction with six explicit hydrogens and no 3D indication. nugget-addition-elimination.text.expanded and video-addition-elimination.storyboard[2] ('rotating it once so that all four substituents on the central carbon are visible and labelled', production_status deferred).",
+ "recommended_outcome": "The change in shape at the acyl carbon — planar three-substituent to tetrahedral four-substituent — needs to be visible somewhere, since it is the argument the mechanism rests on; a flat depiction of the intermediate cannot carry it.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "visual-012",
+ "location": {
+ "asset_id": "mol-sodium-stearate",
+ "nugget_id": "nugget-ester-hydrolysis",
+ "concept_slug": "reactions-of-esters"
+ },
+ "severity": "medium",
+ "category": "cognitive-load",
+ "observation": "Sodium stearate renders as an 18-carbon zig-zag spanning nearly the full width of a 440×340 canvas, so the structure collapses into a thin horizontal hairline occupying about a fifth of the frame's height, with the carboxylate O and O⁻ labels drawn at a small fraction of the canvas. The reader constrains the image to maxH 180px, scaling the whole render to roughly 233px wide, at which point the charge label is a few pixels tall. The disconnected Na⁺ floats unattached in the middle of the empty upper area, visually unrelated to the anion. Nothing marks the polar head or the nonpolar tail.",
+ "learner_impact": "The figure exists to make one point — a charged head on a long greasy tail — and at delivered size that point is carried by a hairline whose charged end is the least legible thing in the frame. A student cannot read the charge that makes it a soap, and the free-floating sodium ion invites the reading that it is a separate species in the drawing rather than the counter-ion.",
+ "evidence": "topic.package.json mol-sodium-stearate: smiles CCCCCCCCCCCCCCCCCC(=O)[O-].[Na+], no rdkit_options; learning_goal cites 'a polar head and a long nonpolar tail'. Rendered through render_molecule_png at the platform default (440,340); [internal source reference — not in this repo] sets the reader image to maxH=\"180px\".",
+ "recommended_outcome": "The amphiphile figure needs its charged head legible at reader size and its two regions distinguishable — either by a depiction that does not force an 18-carbon chain across the full frame, or by marking the head and tail regions explicitly.",
+ "confidence": 0.86
+ },
+ {
+ "finding_id": "visual-013",
+ "location": {
+ "nugget_id": "nugget-step-growth-polymers",
+ "concept_slug": "step-growth-polymers",
+ "section_id": "nugget-step-growth-polymers",
+ "anchor_text": "Both ends remain reactive, so condensation continues, and the result is a polyamide."
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The polymer section illustrates four monomers (adipic acid, hexane-1,6-diamine, terephthalic acid, caprolactam) and never draws a polymer. There is no repeat unit, no chain fragment showing the amide or ester linkages that join the units, and no depiction of the step-growth-versus-chain-growth contrast that the section spends two paragraphs on — a contrast about how monomer concentration and chain length change over the course of the reaction, which is a graph-shaped idea delivered as prose.",
+ "learner_impact": "A student can end the section able to name the monomers but never having seen what a polyamide chain looks like or where the new bond sits, which is the thing the section is about. The step-versus-chain distinction is assessed twice (ch21-monomer-pairs-categorize and ch21-polyamide-monomers) on the basis of statements about monomer disappearance and molecular-weight growth that were never shown.",
+ "evidence": "topic.package.json nugget-step-growth-polymers.asset_ids = [mol-adipic-acid, mol-hexane-1-6-diamine, mol-terephthalic-acid, mol-caprolactam] — four isolated monomers; text.expanded contains the full kinetic contrast ('monomer disappears early while high molecular weight is reached only at very high conversion' versus 'full-length chains coexist with unreacted monomer throughout'). Compiled reader section nugget-step-growth-polymers = four molecule blocks and one external link.",
+ "recommended_outcome": "The section needs the linkage that joins two monomers, and the repeat unit that results, to be visible at least once; the step-growth versus chain-growth contrast needs a representation in which the difference in how chains build up can be seen rather than only read.",
+ "confidence": 0.87
+ },
+ {
+ "finding_id": "visual-014",
+ "location": {
+ "question_slug": "ch21-classify-derivatives",
+ "concept_slug": "acyl-derivative-structure-and-naming"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "Six items ask students to recognise or rank compounds by structural class while presenting those compounds only as condensed formulas, with no structures — even though the chapter already owns renderable structures for most of them. ch21-classify-derivatives and its variant list items such as 'CH₃CO₂COCH₃' and 'CH₃CH₂CO₂COCH₂CH₃' with 0 of 6 items illustrated; ch21-reactivity-rank and its variant present 0 of 4 cards illustrated; ch21-name-ester and its variant give 'CH₃CH₂CH₂CO₂CH₂CH₃' and 'CH₃CO₂CH(CH₃)₂' as the entire stimulus. The chapter's own preferred_representations for this concept is 'molecule'.",
+ "learner_impact": "The intended task is classification and ranking; parsing a condensed formula is a second, unrelated task layered on top, and it is the task the chapter's trouble spots say students fail ('naming an ester from the wrong side', 'confusing a secondary amide with an amine'). A student who cannot see that CH₃CO₂COCH₃ contains two acyl carbons sharing an oxygen is being assessed on notation decoding rather than on whether they know what an anhydride is.",
+ "evidence": "Compiled question-set.json: ch21-classify-derivatives items 0/6 with structure_smiles, ch21-classify-derivatives-v2 0/6, ch21-reactivity-rank cards 0/4, ch21-reactivity-rank-v2 0/4, ch21-name-ester and -v2 short_answer with a condensed formula in prompt_text only. topic.package.json concepts[0].preferred_representations = [\"molecule\"]; the platform enriches any entry carrying structure_smiles into a rendered image ([internal source reference — not in this repo]), which these items do not supply.",
+ "recommended_outcome": "Where the task is to recognise or rank a structural class, the student needs to see the structure, not decode a condensed string; the notation-parsing load should be separated from the classification being assessed.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "visual-015",
+ "location": {
+ "question_slug": "ch21-recognize-lactone",
+ "concept_slug": "acyl-derivative-structure-and-naming"
+ },
+ "severity": "medium",
+ "category": "assessment-readiness",
+ "observation": "In ch21-recognize-lactone the stem describes the target compound verbally ('a five-membered ring containing one oxygen, with a double-bonded oxygen on the ring carbon adjacent to it') and then attaches a *different* structure to each of the four options: option a is O=C1CCCO1 (exactly the described ring), b is cyclopentanone, c is tetrahydrofuran, d is succinic anhydride. Only one option's picture matches the stem's description, so the key can be selected by matching the drawn ring to the words without evaluating any of the four claims. ch21-recognize-lactone-v2 is built identically for caprolactam (option a = O=C1CCCCCN1, the only structure matching the described seven-membered N-containing ring).",
+ "learner_impact": "The item is meant to test whether a student knows that a cyclic ester is still an ester and what that implies for hydrolysis; as built, a student who can read a ring drawing gets it right without engaging the classification at all, and a student who reasons correctly but distrusts the picture-matching shortcut gets no benefit. The option art, which is otherwise a strength of this bank, here does the answering.",
+ "evidence": "topic.package.json question_sets ch21-recognize-lactone: prompt_text describes the compound; options a–d each carry a distinct structure_smiles (O=C1CCCO1 / O=C1CCCC1 / C1CCOC1 / O=C1CCC(=O)O1) and only a matches the stem. ch21-recognize-lactone-v2: options O=C1CCCCCN1 / C1CCCNCC1 / O=C1CCCCCO1 / C1CCCC=NCC1, only a matches. Both compiled with 4/4 options illustrated.",
+ "recommended_outcome": "These two items need the compound under discussion to be fixed once — shown in the stem or named — so the options differ in their claims rather than in which structure they depict; as built, the illustration set identifies the key independently of the chemistry.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "visual-016",
+ "location": {
+ "question_slug": "ch21-chloride-expulsion-ledger",
+ "concept_slug": "nucleophilic-acyl-substitution-mechanism"
+ },
+ "severity": "medium",
+ "category": "figure-accuracy",
+ "observation": "The bond-change ledger's atom numbering is delivered as a text legend beside an unnumbered picture, and one legend entry names the wrong atom. The renderer draws molecule_smiles through plain RDKit with no atom indices and lists the labels separately as '1: Central tetrahedral carbon … 5: Methyl carbon attached to the central carbon'. For CC([O-])(Cl)OC the RDKit indices are 0=acetyl methyl, 1=central C, 2=O⁻, 3=Cl, 4=methoxy O, 5=methoxy methyl — and the answer key's rows ('1-3', '1-2', charge on '2' and '3') confirm the ids are RDKit indices. Id 5 therefore points at the methyl on the methoxy oxygen, not at 'the methyl carbon attached to the central carbon'. The same label appears in the -v2 item on CC([O-])(N)OC with the same offset.",
+ "learner_impact": "A student must map legend numbers onto a drawing that carries no numbers; for the uniquely identifiable atoms (the chlorine, the charged oxygen) that is workable, but a student who follows the legend to locate the methyl on the central carbon is sent to the wrong atom, and any row they enter using number 5 describes a bond that is not there. It also quietly teaches a wrong reading of the structure at the exact moment the student is being asked to reason about which bond breaks.",
+ "evidence": "topic.package.json ch21-chloride-expulsion-ledger.student_config.atom_labels id '5' = 'Methyl carbon attached to the central carbon'; answer_key.expected_rows use atoms '1-3', '1-2', '2', '3'. [internal source reference — not in this repo] renders with rdMolDraw2D and no addAtomIndices; [internal source reference — not in this repo] shows the SVG and then the id:text legend as separate elements.",
+ "recommended_outcome": "The atom numbers the answer depends on need to be visible on the structure the student is looking at, and every legend entry must name the atom its number actually resolves to.",
+ "confidence": 0.82
+ },
+ {
+ "finding_id": "visual-017",
+ "location": {
+ "asset_id": "mol-acetyl-chloride",
+ "section_id": "nugget-acyl-derivative-naming",
+ "concept_slug": "acyl-derivative-structure-and-naming"
+ },
+ "severity": "medium",
+ "category": "alt-text-quality",
+ "observation": "Every one of the 21 assets carries a carefully written `accessibility.long_description` and none of them reaches the reader. The reader builder sets each figure block's `description` from the asset's `learning_goal` and emits only `alt_text` alongside it, so the longer structured description — which is where the figures' spatial content actually lives ('the ring holds four carbons and one oxygen…', 'two of these, the chlorine and the methoxy group, could be expelled…') — is dropped at compile time for the whole chapter, including for the reaction-coordinate profile and the roadmap.",
+ "learner_impact": "This falls hardest on the figures whose visual content is thin or absent: for the roadmap, whose image never renders, the long_description is the only thing that could have described the three-structure sequence, and it is discarded in favour of the one-line alt text. More generally, the reader's figure captions are all purpose statements, so a student who wants to know what they are looking at, rather than why, has nowhere to read it. (Overlaps the Accessibility persona — flagging per rubric.)",
+ "evidence": "[internal source reference — not in this repo] lines 78-104: `alt` comes from accessibility.alt_text and `description` from asset.learning_goal; `long_description` is never read. Confirmed in the compiled reader: mol-acetyl-chloride's block description is its learning_goal verbatim, and no block in the file contains any long_description text.",
+ "recommended_outcome": "The authored per-figure descriptions need a delivery path to the reader, or the chapter should stop authoring content into a field the pipeline discards; this matters most for figures whose image is missing or whose spatial content is not otherwise shown.",
+ "confidence": 0.94
+ },
+ {
+ "finding_id": "visual-018",
+ "location": {
+ "question_slug": "ch21-anhydride-acetylation",
+ "concept_slug": "reactions-of-acid-anhydrides"
+ },
+ "severity": "low",
+ "category": "figure-purpose",
+ "observation": "Several transformation questions carry no structural stimulus even though the chapter owns the relevant structures. ch21-anhydride-acetylation asks what becomes of acetic anhydride when it acetylates salicylic acid, with four text-only options and no structure, though mol-aspirin, mol-acetic-anhydride and mol-succinic-anhydride all exist; its variant does the same for succinic anhydride ring-opening. ch21-polyamide-monomers and ch21-monomer-pairs-categorize match and sort monomers with 0 of 4 and 0 of 6 entries illustrated, though all four monomer structures exist in the package. The four structure_scaffold items ('Hydroxide adds to methyl acetate. Draw the tetrahedral intermediate…') present a blank canvas with the substrate named only in words.",
+ "learner_impact": "Each of these asks the student to track atoms through a transformation — which half of the anhydride leaves, whether the expelled carboxylate is still tethered, which end of a monomer condenses — while giving them nothing to track the atoms on. For the draw-the-intermediate items in particular, the student must first reconstruct the substrate from its name before they can transform it, which adds recall load to a task meant to test the transformation.",
+ "evidence": "Compiled question-set.json: ch21-anhydride-acetylation and -v2 options 0/4 with structure_smiles; ch21-polyamide-monomers left 0/4 right 0/4; ch21-monomer-pairs-categorize items 0/6; ch21-tetrahedral-intermediate-draw, -v2, ch21-amide-reduction-draw and -v2 have student_config [redacted] with no molecule_smiles. By contrast ch21-grignard-ester-error and both curved_arrow items do supply molecule_smiles, showing the stimulus route is available.",
+ "recommended_outcome": "Questions that ask a student to follow atoms through a transformation need the starting structure visible; the substrate should not have to be reconstructed from its name before the assessed reasoning can begin.",
+ "confidence": 0.83
+ }
+ ],
+ "strengths": [
+ "No figure in the chapter carries the known annotation_font_scale defect — only 5 of 21 assets set any rdkit_options at all, and those set show_hydrogens alone, so there are no oversized stereo glyphs anywhere.",
+ "I rendered all 21 assets through the platform's own renderer (backend/app/api/deck_creator.render_molecule_png) with their authored options: every structure is chemically legible, with no labels sitting on bonds, no atom-label collisions, and no molecule too dense to parse. Aspirin, succinic anhydride, caprolactam and acetyl phosphate in particular read cleanly at card size.",
+ "Across all 48 compiled questions there is no lone-illustrated-option tell: every options/cards/items/left/right/cases list is either uniformly illustrated (4/4, 5/5, 2/2) or uniformly text-only. Option art is supplied consistently for single_select product choices, matching_pairs right-hand columns, comparison_matrix cases and synthesis_route intermediates.",
+ "Every asset referenced by a nugget reaches the compiled reader — 21 assets producing 30 figure blocks with no dangling asset_ids and no silently dropped figures (only the roadmap's image bytes are missing, not the block).",
+ "The three deferred videos compile as is_hidden with empty URLs, so the reader shows no dead 'Watch' links or broken players — the deferral is handled cleanly even though it leaves content gaps.",
+ "The reaction-coordinate asset inlines its full spec so the reader draws it client-side with structures at each minimum, including the tetrahedral intermediate at the shallow well — the one figure in the chapter that genuinely shows a relationship rather than a species.",
+ "Alt text is written per figure and is specific and structural throughout (e.g. mol-succinic-anhydride, rc-addition-elimination), not generic restatements of the title."
+ ],
+ "open_questions": [
+ "Is a rendered file for synthesis_roadmap assets ever produced in this pipeline? The compiled image block carries neither a URL nor an asset_id, so ReaderProviderImage cannot resolve a variant from the registry even if one were published — I could not find a path by which this figure ever becomes an image.",
+ "Are bond_change_ledger atom_labels ids intended to be RDKit atom indices? The answer keys are consistent with that reading, which is what makes id '5' a mislabel; if the ids are meant as free display keys, visual-016's mislabel claim weakens to a legend-wording issue but the 'numbers not shown on the figure' half still stands.",
+ "Is the reaction-coordinate label clipping expected to be fixed at the renderer (padding for edge minima) or at the authoring layer (shorter minima_labels)? Other chapters using two-species minima labels are likely to hit the same 760px edge, so this may be a platform-wide figure defect rather than a ch21 authoring choice.",
+ "The topic-package schema's ALLOWED_ASSET_TYPES has no reaction/mechanism kind, while the reader block renderer already supports a `reaction` block with reaction_smiles. Is that surface reachable from a topic package by any route? Several of my visual-opportunity findings would collapse into one intervention if it is."
+ ]
+ },
+ {
+ "persona": "Organic Chemistry Instructor",
+ "persona_version": "1.0.0",
+ "chapter_id": "carboxylic-acid-derivatives",
+ "chapter_version": "1",
+ "model": "claude-opus-5[1m]",
+ "summary": "NOT-GO as it stands, but the gap to publishable is small. I independently parsed and canonicalized all 21 asset SMILES, the 3 roadmap nodes, the 3 reaction-coordinate minima, and every structure_smiles/molecule_smiles/answer_key SMILES in all 48 question sets with RDKit: every one is valid, every molecular formula matches its stated identity, and every product/reactant claim I checked is mass- and charge-balanced (acetic anhydride C4H6O3 matches the C4H6O3 in the IR question; propanamide and DMF are correctly both C3H7NO so the N-H band count is genuinely load-bearing; sodium stearate is C18; the acid-chloride product ladder ethanol/acetone/tert-butanol/ethyl acetate is correct for LiAlH4 / Me2CuLi / excess MeMgBr / EtOH-pyridine). All 24 surfaced answer keys are chemically correct, the two reaction-coordinate profiles' rate-determining-step keys are correctly read off their own control points (step 1 for the 8-vs-6 profile, step 2 for the 22-vs-25 profile), the curved-arrow site indices map exactly onto the SMILES atom order, and the compiled question-set is byte-identical to the package. The reactivity ladder, saponification stoichiometry, DMF rotational barrier, thioester orbital argument, and the entire IR section are accurate. Two things block publication. First, one genuinely wrong chemistry claim: nugget-acid-halide-reactions tells students a Grignard reagent adds a second time because the ketone is 'more reactive' than the acid chloride, which inverts the chapter's own reactivity ladder. Second, both lactone/lactam recognition items render a different compound under each option, so the correct option is the only one whose picture matches the compound named in the prompt and can be chosen with no chemistry at all. Beyond those, the chapter over-generalizes two heuristics ('the weaker base is expelled', 'interconversions never run up the ladder') that its own later sections and its own distractor reagent list contradict, ships no worked example and no curved-arrow mechanism figure for its central mechanism, and delivers a broken empty image where the synthesis roadmap should be. Fix the two blockers and qualify the two heuristics and I would assign this chapter.",
+ "overall_score": 7.2,
+ "publication_blockers": [
+ "inst-001",
+ "inst-003"
+ ],
+ "findings": [
+ {
+ "finding_id": "inst-001",
+ "location": {
+ "concept_slug": "reactions-of-acid-halides",
+ "nugget_id": "nugget-acid-halide-reactions",
+ "section_id": "reactions-of-acid-halides",
+ "anchor_text": "first substituting to give a ketone and then adding to that more reactive ketone"
+ },
+ "severity": "blocker",
+ "category": "chemical-accuracy",
+ "observation": "The standard-depth text states that a Grignard reagent adds twice to an acid chloride 'first substituting to give a ketone and then adding to that more reactive ketone'. A ketone is not more reactive than an acid chloride toward a carbon nucleophile; the acid halide sits at the top of the reactivity ladder that this same chapter establishes two sections earlier (acid halide > anhydride > ester > amide). The expanded text repeats the error in a self-referential form: 'a ketone is more electrophilic than the acid chloride's substitution product would suggest' — the acid chloride's substitution product IS that ketone, so the sentence compares the ketone with itself and supplies no reason at all. The correct explanation for double addition from an acid chloride is kinetic and stoichiometric (the ketone formed in situ is still highly electrophilic and there is unconsumed Grignard reagent present), not a reversal of the reactivity order. Note that the analogous statement for esters, in nugget-ester-other-reactions and in the ch21-grignard-ester-error repair option, is correct and correctly justified ('it lacks the electron-donating alkoxy group'); the error is the illegitimate transfer of that ester argument to acid chlorides, where chlorine is not a net π donor strong enough to make the acyl carbon less electrophilic than a ketone's.",
+ "learner_impact": "A student reading the acid-halide section builds a reactivity order in which ketones outrank acid chlorides, directly contradicting the ladder they are asked to reproduce in ch21-reactivity-rank and to reason from in ch21-why-amide-least-reactive. On an exam they will predict that an acid chloride is attacked more slowly than the ketone it produces, and will mis-explain why a cuprate stops at the ketone.",
+ "evidence": "nugget-acid-halide-reactions text.standard: '...A Grignard reagent adds twice, first substituting to give a ketone and then adding to that more reactive ketone, so the isolated product is a tertiary alcohol.' text.expanded: 'The first addition of a Grignard reagent produces a ketone, but a ketone is more electrophilic than the acid chloride's substitution product would suggest and is attacked immediately by a second equivalent of the reagent...'. Compare nugget-reactivity-ladder text.standard: 'giving acid halide > anhydride > ester > amide'. Both depth variants are shipped to the reader (frontend/public/reader/topic-chapters/carboxylic-acid-derivatives.json carries all three in _detail_texts).",
+ "recommended_outcome": "The acid-halide section needs a correct, non-circular reason for the second Grignard addition — one that does not claim the ketone outranks the acid chloride, and that keeps the (correct) ester-case argument distinct from the acid-halide case. Both the standard and expanded depth texts must be corrected together.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "inst-003",
+ "location": {
+ "question_slug": "ch21-recognize-lactone",
+ "concept_slug": "acyl-derivative-structure-and-naming",
+ "anchor_text": "Which statement about this compound is correct?"
+ },
+ "severity": "blocker",
+ "category": "assessment-readiness",
+ "observation": "Both recognition items attach a different molecule to each option, and only the correct option's molecule is the compound named in the prompt. In ch21-recognize-lactone the prompt describes 'a five-membered ring containing one oxygen, with a double-bonded oxygen on the ring carbon adjacent to it'; option a carries O=C1CCCO1 (that exact compound), while b carries cyclopentanone, c carries tetrahydrofuran, and d carries succinic anhydride. In ch21-recognize-lactone-v2 the prompt describes caprolactam; option a carries O=C1CCCCCN1 (that exact compound), while b carries azepane, c carries a seven-membered lactone, and d carries an eight-membered cyclic imine. A student who can read a structure but knows nothing about ester/ketone/ether/anhydride or amide/amine/ester/imine classification selects the correct option by matching the picture to the prompt's word description. The distractor figures are also false as figures: each is captioned by a claim about 'this compound' while depicting a different compound.",
+ "learner_impact": "The item measures structure-reading, not the classification skill it is written to assess, and it will report mastery of the naming/recognition concept that a student does not have. Two of the three surfaced questions for the naming concept are affected (this item and its variant), so the concept's assessment signal is largely spurious.",
+ "evidence": "ch21-recognize-lactone.student_config.options[*].structure_smiles = O=C1CCCO1 / O=C1CCCC1 / C1CCOC1 / O=C1CCC(=O)O1 (RDKit formulas C4H6O2, C5H8O, C4H8O, C4H4O3 — four distinct compounds). ch21-recognize-lactone-v2 options = O=C1CCCCCN1 / C1CCCNCC1 / O=C1CCCCCO1 / C1CCCC=NCC1 (C6H11NO, C6H13N, C6H10O2, C7H13N). Prompt text names the compound and describes its ring size and heteroatoms explicitly.",
+ "recommended_outcome": "These two items need an option set in which the structure cannot discriminate — either every option shows the same subject compound (or no option shows a structure) and only the classification claim varies. The eight-membered imine distractor in the variant also needs to match the subject's ring size so ring-atom counting is not a second tell.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "inst-002",
+ "location": {
+ "asset_id": "roadmap-acid-to-amide",
+ "section_id": "reactions-of-acid-halides",
+ "nugget_id": "nugget-acid-halide-reactions"
+ },
+ "severity": "high",
+ "category": "figure-purpose",
+ "observation": "The synthesis_roadmap asset compiles into the reader as an image block with an empty url and is_hidden absent (i.e. visible): {\"url\": \"\", \"alt_text\": \"A two-step forward synthesis...\", \"caption\": \"Benzoic acid to N-methylbenzamide by way of the acid chloride\"}. The three deferred video briefs were correctly compiled with is_hidden: true; the roadmap was not. It is the only non-molecule figure in the acid-halide section and the only figure anywhere in the chapter that shows a multi-step transformation with reagents on the arrows.",
+ "learner_impact": "Students see a captioned empty frame in the section that most needs a sequence figure, and the roadmap's teaching content (why the acid must be activated before the amine is introduced, and why two equivalents of methylamine are used) reaches them only as prose. The paired question ch21-benzamide-synthesis-route asks them to reconstruct exactly this route with no worked visual to have studied.",
+ "evidence": "frontend/public/reader/topic-chapters/carboxylic-acid-derivatives.json, section nugget-acid-halide-reactions, block_type 'image', content.url == \"\" and no is_hidden flag, whereas the three video blocks in sections nugget-addition-elimination / nugget-reactivity-ladder / nugget-ester-hydrolysis carry is_hidden: true.",
+ "recommended_outcome": "The acid-halide section needs its acid-to-amide route to actually render, or the block needs to be suppressed the way deferred videos are so students are not shown a broken figure. Either way the roadmap's reagent/rationale content must reach the reader in some rendered form.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "inst-014",
+ "location": {
+ "concept_slug": "nucleophilic-acyl-substitution-mechanism",
+ "nugget_id": "nugget-addition-elimination",
+ "section_id": "nucleophilic-acyl-substitution-mechanism"
+ },
+ "severity": "high",
+ "category": "visual-opportunity",
+ "observation": "The chapter's stated organizing idea is that one mechanism explains everything in it, and the expanded text describes the arrow bookkeeping in words in detail ('one runs from the lone pair of the nucleophile to the carbonyl carbon, and a second runs from the carbon–oxygen π bond to the oxygen ... one from an oxygen lone pair back into the carbon–oxygen bond and one from the bond to the departing group'). No figure in the chapter shows a single curved arrow. The section's assets are three static molecule renders (acetyl chloride, the tetrahedral intermediate, methyl acetate) plus an energy profile; the one asset that would have animated the electron flow, video-addition-elimination, is production_status 'deferred' and compiles hidden.",
+ "learner_impact": "The electron-flow bookkeeping that ch21-addition-elimination-arrow and ch21-chloride-expulsion-ledger both grade is taught only in prose, so students must translate a paragraph of arrow prose into a drawn mechanism with no worked visual model. This is the single highest-leverage figure gap in the chapter.",
+ "evidence": "nugget-addition-elimination.asset_ids = [mol-acetyl-chloride, mol-tetrahedral-intermediate, mol-methyl-acetate, rc-addition-elimination]; video_briefs[0].production_status = 'deferred'; compiled reader section nugget-addition-elimination contains three molecule blocks, one reaction_coordinate block, and one hidden video block.",
+ "recommended_outcome": "The addition–elimination section needs a static, arrow-annotated depiction of both steps (source and destination of each electron pair, and the sp²→sp³→sp² geometry change) that does not depend on the deferred video pipeline.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "inst-004",
+ "location": {
+ "nugget_id": "nugget-addition-elimination",
+ "concept_slug": "nucleophilic-acyl-substitution-mechanism",
+ "anchor_text": "When the tetrahedral intermediate carries two potential leaving groups, the weaker base is expelled. That single principle sets both the direction of every interconversion in this chapter"
+ },
+ "severity": "medium",
+ "category": "conceptual-support",
+ "observation": "Nugget 2 states the expulsion rule as universal and calls it 'that single principle', and the concept's third learning objective is to 'Predict which group is expelled from a tetrahedral intermediate carrying two potential leaving groups'. Nugget 6 then presents the chapter's most important ester reaction as a case where the rule gives the wrong answer: in saponification the intermediate expels alkoxide, 'which is the more basic of the two available leaving groups'. Nugget 6 explains the local reason (expelling hydroxide merely returns starting material, and the subsequent proton transfer removes the product) but never flags that it has just overridden the principle stated in nugget 2, and nugget 2 is never amended.",
+ "learner_impact": "A student who has internalized 'the weaker base leaves' and applies it to hydroxide + ester predicts that hydroxide is re-expelled and that saponification does not occur. The rule is the chapter's central predictive tool, so an unmarked exception in its most-assessed application is a durable source of wrong predictions.",
+ "evidence": "nugget-addition-elimination text.standard: 'When the tetrahedral intermediate carries two potential leaving groups, the weaker base is expelled. That single principle sets both the direction of every interconversion in this chapter and the reactivity order of the derivatives.' nugget-ester-hydrolysis text.standard: 'The tetrahedral intermediate expels alkoxide, which is the more basic of the two available leaving groups but is nevertheless lost because the alternative is expelling hydroxide and returning to starting material.'",
+ "recommended_outcome": "The mechanism section needs the expulsion heuristic stated with its scope — it decides between two chemically different groups, and it is superseded when the alternative simply regenerates the starting material or when an irreversible downstream proton transfer supplies the driving force. The saponification section should explicitly cross-reference that qualification.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "inst-005",
+ "location": {
+ "nugget_id": "nugget-reactivity-ladder",
+ "concept_slug": "relative-reactivity-of-acyl-derivatives",
+ "question_slug": "ch21-benzamide-synthesis-route",
+ "anchor_text": "Interconversions run down the reactivity ladder, never up"
+ },
+ "severity": "medium",
+ "category": "misconception",
+ "observation": "The ladder is built from four families only; the carboxylic acid is never placed on it, yet the chapter repeatedly speaks of 'hydrolysis back to the carboxylic acid' as the way to move 'up'. The rule is then stated without exception in ch21-benzamide-synthesis-route's feedback ('Interconversions run down the reactivity ladder, never up'), while that same question's reagent list offers 'CH₃OH, H₂SO₄ (cat.)' — Fischer esterification, which converts benzoic acid directly to methyl benzoate and which nugget-ester-hydrolysis explicitly teaches ('the reverse of this sequence is Fischer esterification'). Amide hydrolysis to the carboxylic acid is likewise not classifiable as up or down on a ladder that has no rung for the acid.",
+ "learner_impact": "A student who knows Fischer esterification sees the chapter's absolute rule falsified by a reagent printed in the same question, and a student who does not know it takes away a rule that will forbid a transformation they are expected to perform. Neither can locate the carboxylic acid when asked to plan a route, which is the actual skill the synthesis_route items test.",
+ "evidence": "nugget-reactivity-ladder text.expanded: 'Reactions proceed down the ladder ... Moving up the ladder requires hydrolysis back to the carboxylic acid followed by treatment with a reagent such as thionyl chloride.' ch21-benzamide-synthesis-route.feedback_bundle.generic_incorrect_explanation: 'Interconversions run down the reactivity ladder, never up...' with student_config.reagents including r_meoh 'CH₃OH, H₂SO₄ (cat.)'. nugget-ester-hydrolysis text.expanded: 'Since the reverse of this sequence is Fischer esterification, the position of the equilibrium is controlled by concentration...'.",
+ "recommended_outcome": "The reactivity section needs the carboxylic acid placed explicitly on the ladder and the directional rule qualified so that acid-catalysed, equilibrium-driven conversions (Fischer esterification, transesterification) are visibly compatible with it rather than apparent counterexamples.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "inst-006",
+ "location": {
+ "nugget_id": "nugget-addition-elimination",
+ "concept_slug": "nucleophilic-acyl-substitution-mechanism",
+ "anchor_text": "A backside displacement is geometrically impossible here"
+ },
+ "severity": "medium",
+ "category": "misconception",
+ "observation": "The chapter asserts that concerted backside displacement at an acyl carbon is 'geometrically impossible' and that every reaction in the chapter proceeds through a discrete tetrahedral intermediate. Both are stronger than the evidence supports: for the most reactive substrates (acyl halides with weakly basic nucleophiles) the tetrahedral species is often not a minimum on the potential-energy surface at all and the substitution is concerted, and in-plane concerted acyl substitution is a recognized mechanistic class. The correct teaching claim is energetic and structural — addition is accessible because the π* orbital offers a low-energy destination for the electron pair, so the addition–elimination path dominates — not that the alternative is geometrically forbidden.",
+ "learner_impact": "Students are given an absolute they will have to un-learn, and the useful reasoning (compare the energetic cost of the two pathways) is replaced by an assertion they cannot check. It also makes the chapter's own energy profile look decorative: if the alternative were geometrically impossible there would be nothing for the profile to argue about.",
+ "evidence": "nugget-addition-elimination text.standard: 'A backside displacement is geometrically impossible here: the carbonyl carbon is sp²-hybridized and planar, and the π system provides a low-energy destination for the electron pair, making addition the accessible pathway.' The learning_goal of rc-addition-elimination states the intended claim correctly: 'passes through a discrete tetrahedral intermediate sitting in a shallow well, rather than through a single concerted step.'",
+ "recommended_outcome": "The mechanism section needs 'geometrically impossible' replaced by an energetic comparison, with an acknowledgement that the tetrahedral species is a shallow minimum whose existence is substrate-dependent.",
+ "confidence": 0.7
+ },
+ {
+ "finding_id": "inst-007",
+ "location": {
+ "question_slug": "ch21-addition-elimination-arrow",
+ "concept_slug": "nucleophilic-acyl-substitution-mechanism",
+ "anchor_text": "Draw the single curved arrow for the first step of the mechanism."
+ },
+ "severity": "medium",
+ "category": "notation-consistency",
+ "observation": "Both curved_arrow items set max_arrows: 1 and ask for 'the single curved arrow for the first step', while the section they assess teaches that the addition step takes two arrows — 'Two curved arrows record this step: one runs from the lone pair of the nucleophile to the carbonyl carbon, and a second runs from the carbon–oxygen π bond to the oxygen.' The items' own level-3 hints restate the two-arrow picture ('The carbonyl carbon accepts the electron pair, and the π electrons move onto oxygen as it does'), so the question tells students the second arrow exists and then makes it impossible to draw. The expected arrow itself (lone pair on site 0 → atom site 3 / site 2) is correct, and I verified the site ids map exactly onto the RDKit atom order of both molecule_smiles strings.",
+ "learner_impact": "A student who has learned the chapter's arrow convention correctly cannot enter the step they were taught, and receives credit for a half-step. The habit of omitting the π-bond arrow is precisely the bookkeeping error that produces pentavalent carbons later in the mechanism.",
+ "evidence": "ch21-addition-elimination-arrow.student_config.max_arrows = 1 with expected_arrows of length 1; nugget-addition-elimination text.expanded: 'Two curved arrows record this step...'; the same question's hints[2]. Identical pattern in ch21-addition-elimination-arrow-v2.",
+ "recommended_outcome": "The mechanism items need to accept the full two-arrow addition step that the chapter teaches, or the prompt and hints need to state explicitly which one of the two arrows is being asked for and why the other is omitted.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "inst-008",
+ "location": {
+ "question_slug": "ch21-chloride-expulsion-ledger",
+ "concept_slug": "nucleophilic-acyl-substitution-mechanism",
+ "anchor_text": "Methyl carbon attached to the central carbon"
+ },
+ "severity": "medium",
+ "category": "assessment-readiness",
+ "observation": "The atom_labels use zero-based SMILES atom indices — labels 1, 2, 3 and 4 correctly name the central carbon, the O⁻, the leaving atom and the methoxy oxygen for CC([O-])(Cl)OC — but label id '5' is given as 'Methyl carbon attached to the central carbon'. Atom 5 is the methyl carbon of the methoxy group; the methyl attached to the central carbon is atom 0 and carries no label. Both ledger items have the identical mislabel (ch21-chloride-expulsion-ledger and -v2 on CC([O-])(N)OC). The expected_rows themselves are chemically correct and do not reference atom 5 or atom 0, so grading is unaffected.",
+ "learner_impact": "The molecule contains two methyl groups and the only labelled one is labelled as the other. A student working out which bond breaks must disambiguate the two oxygens and the two methyls from a label set that misdirects them, which turns a mechanism-bookkeeping item into a puzzle about the labelling scheme.",
+ "evidence": "RDKit atom order for CC([O-])(Cl)OC: 0 C (methyl on central C), 1 C (central), 2 O⁻, 3 Cl, 4 O (methoxy), 5 C (methyl on methoxy O). student_config.atom_labels = [{'1','Central tetrahedral carbon'},{'2','Negatively charged oxygen'},{'3','Chlorine'},{'4','Methoxy oxygen'},{'5','Methyl carbon attached to the central carbon'}]. Same in -v2 for CC([O-])(N)OC.",
+ "recommended_outcome": "The two ledger items need their fifth atom label corrected to name the atom it actually points at, and ideally both methyl carbons labelled so the two oxygens and two methyls are unambiguous.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "inst-009",
+ "location": {
+ "question_slug": "ch21-reactivity-rank-v2",
+ "concept_slug": "relative-reactivity-of-acyl-derivatives"
+ },
+ "severity": "medium",
+ "category": "sequencing",
+ "observation": "Three of the six questions tagged to concept 3 (relative-reactivity-of-acyl-derivatives, order 3) require content introduced much later in the chapter. ch21-reactivity-rank-v2 asks students to place S-methyl thiobenzoate in the ladder, an idea taught only in nugget-biological-acyl-transfer (concept order 8). ch21-why-amide-least-reactive offers, as one of three pieces of expected evidence, the amide-versus-acid-chloride carbonyl IR positions, taught only in nugget-spectroscopy-acyl-derivatives (concept order 10); nugget-reactivity-ladder itself never mentions an infrared frequency. ch21-ester-vs-amide-matrix-v2 has an 'two carbonyl absorptions' row from the same later section.",
+ "learner_impact": "A student practising section 3 as they read hits items that cannot be answered from anything they have read, which reads as a knowledge gap rather than a sequencing artefact. Instructors assigning the chapter section by section will get spurious failure rates on the reactivity concept.",
+ "evidence": "ch21-reactivity-rank-v2.concept_slug = 'relative-reactivity-of-acyl-derivatives' with card 'S-Methyl thiobenzoate, C₆H₅COSCH₃'; the thioester argument appears only in nugget-biological-acyl-transfer (order 9, concept order 8). ch21-why-amide-least-reactive.answer_key.fields.evidence.expected_option_ids includes 'ir' ('carbonyl stretching absorption of an amide lies near 1660 cm⁻¹ ... acid chloride near 1800 cm⁻¹'); nugget-reactivity-ladder contains no wavenumbers.",
+ "recommended_outcome": "Either these three items need to be re-tagged to the later concepts whose content they require, or the reactivity section needs a forward-looking sentence that supplies the thioester rung and the IR correlation at the point the ladder is introduced.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "inst-010",
+ "location": {
+ "question_slug": "ch21-amide-hydrolysis-conditions-v2",
+ "concept_slug": "reactions-of-amides"
+ },
+ "severity": "medium",
+ "category": "objective-alignment",
+ "observation": "Three variant pairs are labelled variant_of but assess materially different objectives, and the compiled bank surfaces 24 items with 24 staged variants — so a cohort served the variant is never assessed on the base item's objective. ch21-amide-hydrolysis-conditions (products and conditions of forcing amide hydrolysis) is paired with -v2 (why the DMF methyl signals coalesce on warming). ch21-ester-reduction-product (LiAlH4 reduction stopping point) is paired with -v2 (transesterification regiochemistry) — the slug still says 'reduction'. ch21-grignard-ester-error (double Grignard addition) is paired with -v2 (saponification stoichiometry). Contrast the well-formed pairs, e.g. ch21-recognize-lactone / -v2 (lactone then lactam) and ch21-tetrahedral-intermediate-draw / -v2, which swap the substrate and hold the objective fixed.",
+ "learner_impact": "Two students taking the same assignment are tested on different learning objectives, and the item bank's per-objective coverage claims are not reliable. Amide hydrolysis conditions and ester reduction — both core, both named in learning_objectives — can be missed entirely depending on which variant is served.",
+ "evidence": "ch21-amide-hydrolysis-conditions.prompt_text 'Benzamide is heated for several hours with concentrated aqueous sodium hydroxide...' vs ch21-amide-hydrolysis-conditions-v2.prompt_text 'The two methyl groups of N,N-dimethylformamide give two separate signals in its proton NMR spectrum...', variant_of: 'ch21-amide-hydrolysis-conditions'. compiled/question-set.json counts: {'surfaced': 24, 'staged_variants': 24}.",
+ "recommended_outcome": "Variant pairs need to hold the assessed objective constant; the three mismatched items should become standalone questions on their own objectives so that neither objective can be dropped by a variant swap.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "inst-011",
+ "location": {
+ "nugget_id": "nugget-acyl-derivative-naming",
+ "section_id": "acyl-derivative-structure-and-naming",
+ "anchor_text": "practice_check"
+ },
+ "severity": "medium",
+ "category": "retrieval-practice",
+ "observation": "All eleven nuggets carry a practice_check with a prompt and a model answer, and I verified all eleven answers are chemically correct (methyl propanoate; chloride expulsion; the two-effect amide argument; the 50% methylamine yield; ethyl acetate plus acetic acid; the stoichiometric hydroxide; 2-phenylpropan-2-ol; N,N-dimethylethylamine; the thioester orbital argument; the polyester/polyamide pairing; acetic anhydride from C4H6O3 with two bands). None of them reaches the reader: the compiled chapter contains only text, molecule, reaction_coordinate, image, video, mcmurry_link and external_link blocks.",
+ "learner_impact": "Eleven authored retrieval opportunities — one per section, sized for immediate self-check while reading — are written and then discarded, leaving the reader as continuous prose with no in-section checkpoint. The only practice a student can reach is the question bank, which is a separate surface.",
+ "evidence": "Block-type census of frontend/public/reader/topic-chapters/carboxylic-acid-derivatives.json: Counter({'molecule': 35, 'text': 11, 'external_link': 11, 'video': 3, 'mcmurry_link': 1, 'reaction_coordinate': 1, 'image': 1}) — no practice block type. Every nugget in topic.package.json has a populated practice_check.",
+ "recommended_outcome": "Each reader section needs its authored self-check delivered inline with a reveal-able answer; if the reader cannot render one today that is a platform gap to raise rather than content to drop.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "inst-012",
+ "location": {
+ "nugget_id": "nugget-acyl-derivative-naming",
+ "concept_slug": "acyl-derivative-structure-and-naming",
+ "anchor_text": "Name esters and amides by the IUPAC rules, including cyclic lactones and lactams."
+ },
+ "severity": "medium",
+ "category": "objective-alignment",
+ "observation": "The naming concept declares three objectives: name esters and amides including lactones and lactams; distinguish primary, secondary and tertiary amides by substitution at nitrogen; and recognize the five families. Only the third is directly assessed. Both short_answer items name esters (ethyl butanoate, isopropyl acetate) and nothing anywhere asks a student to name an amide, a lactone, a lactam, an acid chloride or an anhydride, or to classify an amide as primary/secondary/tertiary — the primary/tertiary distinction surfaces only implicitly, as an N-H band count in ch21-ir-identify-derivative-v2, which is tagged to the spectroscopy concept.",
+ "learner_impact": "Two of the section's three stated objectives carry no assessment, so a student can complete the chapter's naming practice without ever producing an amide or lactam name — despite the trouble_spots calling lactone/lactam recognition and the amide/amine confusion the section's main hazards.",
+ "evidence": "ch21-name-ester prompt 'Give the IUPAC name of CH₃CH₂CH₂CO₂CH₂CH₃' and ch21-name-ester-v2 prompt 'Give the IUPAC name of CH₃CO₂CH(CH₃)₂' are the only short_answer items in the bank; concept acyl-derivative-structure-and-naming has six questions, four of which are the two categorize pairs and the two recognition items.",
+ "recommended_outcome": "The naming concept needs at least one item that requires producing an amide or lactam name and one that requires classifying amide substitution at nitrogen, so that all three of its stated objectives are assessed.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "inst-013",
+ "location": {
+ "section_id": "nucleophilic-acyl-substitution-mechanism",
+ "concept_slug": "nucleophilic-acyl-substitution-mechanism",
+ "nugget_id": "nugget-addition-elimination"
+ },
+ "severity": "medium",
+ "category": "worked-example-gap",
+ "observation": "The chapter contains no worked example in the instructional sense — no problem stated, reasoned through step by step, and resolved. The eleven sections are expository prose with molecule figures; the closest thing is the acid-to-amide roadmap, which renders as an empty image (inst-002), and the practice_checks, which are not delivered (inst-011). Meanwhile the question bank asks students to do things that are never modelled: draw a tetrahedral intermediate with its formal charge, fill a bond-and-charge ledger for an elimination step, and assemble a two-step route.",
+ "learner_impact": "Students meet the graded tasks cold. The gap is widest for the two structure_scaffold items and the two bond_change_ledger items, where the chapter has described the reasoning in paragraphs but never shown it executed on a specific substrate.",
+ "evidence": "Reader block census shows 11 text blocks and 35 molecule blocks and no worked-example construct; ch21-tetrahedral-intermediate-draw (scaffold 'blank_canvas', answer CC([O-])(O)OC) and ch21-chloride-expulsion-ledger (four expected rows) have no modelled counterpart in any section.",
+ "recommended_outcome": "The mechanism section needs at least one fully worked substrate carried end to end — starting material, arrows, intermediate with charge, expulsion decision, product — so that the drawing and ledger tasks have a demonstrated procedure to imitate.",
+ "confidence": 0.7
+ },
+ {
+ "finding_id": "inst-015",
+ "location": {
+ "question_slug": "ch21-ester-vs-amide-matrix",
+ "concept_slug": "relative-reactivity-of-acyl-derivatives",
+ "anchor_text": "The attached heteroatom donates its lone pair strongly enough to give the bond substantial double-bond character"
+ },
+ "severity": "medium",
+ "category": "assessment-readiness",
+ "observation": "The matrix mixes absolute and comparative feature framings. The second row is explicitly comparative ('the weaker base of the two compared here') but the first is absolute, and its key marks methyl acetate 'Does not apply'. Esters do have appreciable π donation from the alkoxy oxygen — the C–O(R) bond is shortened, esters have a rotational barrier of roughly 10–14 kcal/mol, and the strong s-cis (Z) conformational preference of esters is the standard evidence for it. A student who knows that, and who reads the row as written, marks 'Applies' for the ester and is scored wrong.",
+ "learner_impact": "The better-prepared student is penalized for the more accurate answer, and the row teaches a false binary — that esters have no carbonyl–oxygen conjugation — that later chapters (ester enolate chemistry, conformational preferences) will have to reverse.",
+ "evidence": "ch21-ester-vs-amide-matrix.student_config.features[0].label (absolute) vs features[1].label ('the weaker base of the two compared here', comparative); answer_key [redacted].",
+ "recommended_outcome": "The donation row needs the same comparative framing as the leaving-group row, so the item asks which of the two compounds shows the effect more strongly rather than asserting that the ester does not show it.",
+ "confidence": 0.7
+ },
+ {
+ "finding_id": "inst-022",
+ "location": {
+ "section_id": "acyl-derivative-structure-and-naming",
+ "asset_id": "mcmurry_link",
+ "anchor_text": "https://openstax.org/books/organic-chemistry/pages/21-why-this-chapter"
+ },
+ "severity": "medium",
+ "category": "missing-example",
+ "observation": "The chapter's only assigned-reading link is a single generic pointer to the OpenStax chapter-opener page ('21-why-this-chapter'), attached to section 1, with the boilerplate description 'Assigned reading in the OpenStax edition.' The house standard for a completed chapter is a set of specific OpenStax section links with a context sentence explaining why each is worth reading, and the chapter-opener URL is precisely the pattern that standard rules out. Every one of the eleven sections otherwise gets only a Wikipedia link, several of which are generic (Leaving_group for the reactivity ladder, Infrared_spectroscopy for the derivative-specific IR section).",
+ "learner_impact": "A student directed to read alongside this chapter lands on a chapter-opener page and has to find the relevant sections themselves; an instructor cannot point at a specific external section for saponification, amide reduction, or the IR correlation.",
+ "evidence": "frontend/public/reader/topic-chapters/carboxylic-acid-derivatives.json, section nugget-acyl-derivative-naming, block_type 'mcmurry_link', content.url = 'https://openstax.org/books/organic-chemistry/pages/21-why-this-chapter'; it is the only mcmurry_link block in the file (11 external_link blocks are all Wikipedia).",
+ "recommended_outcome": "The chapter needs its per-section OpenStax deep links with the one-sentence context each, matching the standard applied to the earlier chapters, and the two generic Wikipedia targets replaced with topic-specific ones.",
+ "confidence": 0.7
+ },
+ {
+ "finding_id": "inst-016",
+ "location": {
+ "nugget_id": "nugget-acyl-derivative-naming",
+ "concept_slug": "acyl-derivative-structure-and-naming",
+ "anchor_text": "Recognize an acid halide, an acid anhydride, an ester, an amide, and a nitrile as substituted acyl compounds."
+ },
+ "severity": "low",
+ "category": "objective-alignment",
+ "observation": "The first learning objective names the nitrile as one of the families to be recognized, and the expanded text gives it a sentence. No asset, no figure, no question and no other section in the chapter involves a nitrile: none of the categorize items includes one, and nitrile hydrolysis, reduction and Grignard addition are absent. Nitriles are in fact developed fully in the preceding topic package (carboxylic-acids-and-nitriles, concepts nitrile-structure-naming-and-preparation and reactions-of-nitriles).",
+ "learner_impact": "A stated objective is never taught to a level that would let a student meet it and is never assessed, which inflates the chapter's apparent coverage and may lead an instructor to assume nitrile chemistry is assigned here.",
+ "evidence": "nugget-acyl-derivative-naming.learning_objectives[0]; the string 'nitrile' appears exactly once in the chapter body (text.expanded of nugget 1) and in no asset, question, or answer key; carboxylic-acids-and-nitriles/topic.package.json contains 258 occurrences and dedicated concepts.",
+ "recommended_outcome": "Either the objective's nitrile clause is removed and replaced by a pointer to the preceding chapter, or the recognition items include a nitrile so the objective is actually met.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "inst-018",
+ "location": {
+ "question_slug": "ch21-benzamide-synthesis-route",
+ "concept_slug": "reactions-of-acid-halides",
+ "anchor_text": "NaCl, H₂O"
+ },
+ "severity": "low",
+ "category": "chemical-accuracy",
+ "observation": "The route builder offers the reagent 'NaCl, H₂O' alongside the candidate intermediate 'sodium benzoate'. Sodium chloride does not deprotonate benzoic acid — chloride is the conjugate base of a strong acid and the proton transfer is uphill by about twelve pKa units — so no reagent in the list actually produces the sodium benzoate node. The pairing is presented without comment, and the feedback addresses only the ladder direction.",
+ "learner_impact": "A student who selects that reagent/product pair receives no correction of the underlying acid–base error and may leave believing that a neutral salt can convert a carboxylic acid to its carboxylate.",
+ "evidence": "ch21-benzamide-synthesis-route.student_config.reagents[3] = {'id': 'r_nacl', 'text': 'NaCl, H₂O'}; intermediates[3] = {'id': 'm_salt', 'text': 'sodium benzoate', 'structure_smiles': '[O-]C(=O)c1ccccc1'}; feedback_bundle addresses only ladder direction and base for HCl.",
+ "recommended_outcome": "Either the distractor reagent should be one that genuinely gives the sodium benzoate node (a hydroxide or bicarbonate), or the feedback needs to name why a chloride salt cannot deprotonate a carboxylic acid.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "inst-021",
+ "location": {
+ "question_slug": "ch21-ir-identify-derivative",
+ "concept_slug": "spectroscopy-of-acyl-derivatives",
+ "anchor_text": "A compound of formula C₄H₆O₃"
+ },
+ "severity": "low",
+ "category": "assessment-readiness",
+ "observation": "The stated molecular formula C₄H₆O₃ is satisfied by exactly one of the four options: RDKit gives C4H6O3 for acetic anhydride, C3H6O2 for methyl acetate, C2H5NO for acetamide and C2H3ClO for acetyl chloride. The item can therefore be answered from the formula alone, and the infrared evidence — the two-band anhydride signature the section exists to teach — is never needed. The variant ch21-ir-identify-derivative-v2 is designed correctly for contrast: propanamide and N,N-dimethylformamide are both C₃H₇NO, so the N–H band count does the discriminating work.",
+ "learner_impact": "The base item does not measure IR interpretation, so the concept's surfaced pair contains one genuine spectroscopy item rather than two.",
+ "evidence": "ch21-ir-identify-derivative.prompt_text specifies C₄H₆O₃; RDKit formulas of options a–d: C4H6O3, C3H6O2, C2H5NO, C2H3ClO. ch21-ir-identify-derivative-v2 options a and b are both C3H7NO.",
+ "recommended_outcome": "The base item needs option candidates that share the stated formula, so that the pair of carbonyl bands rather than atom counting selects the answer.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "inst-020",
+ "location": {
+ "nugget_id": "nugget-step-growth-polymers",
+ "concept_slug": "step-growth-polymers",
+ "anchor_text": "which is how nylon 6 is made from caprolactam"
+ },
+ "severity": "low",
+ "category": "misconception",
+ "observation": "Caprolactam is presented as an ordinary step-growth monomer 'carrying one of each functional group', within a section whose organizing contrast is step-growth versus chain-growth. Caprolactam carries no free amine and no free acid; it must first ring-open, and the industrial anionic route is a ring-opening chain-growth polymerization in which an activated chain end consumes monomer. Classifying it as step-growth is a simplification that sits directly next to the passage teaching students how to tell the two mechanisms apart.",
+ "learner_impact": "A student asked later to sort polymerizations by mechanism has been shown a chain-growth process filed under step-growth, in the very section that teaches the discrimination.",
+ "evidence": "nugget-step-growth-polymers text.standard: 'A single monomer that carries one of each functional group polymerizes equally well, which is how nylon 6 is made from caprolactam'; the same nugget contrasts step- and chain-growth in detail, and ch21-monomer-pairs-categorize asks students to apply that contrast.",
+ "recommended_outcome": "The polymer section needs caprolactam identified as a ring-opening case rather than folded into the step-growth definition, or an explicit note that the lactam must hydrolyse to the amino acid before the step-growth argument applies.",
+ "confidence": 0.7
+ },
+ {
+ "finding_id": "inst-023",
+ "location": {
+ "nugget_id": "nugget-amide-reactions",
+ "concept_slug": "reactions-of-amides",
+ "anchor_text": "so the resulting iminium ion is reduced by a second hydride to give an amine"
+ },
+ "severity": "low",
+ "category": "chemical-accuracy",
+ "observation": "The hydride reduction of amides is described generically as passing through an iminium ion. That is right for tertiary amides (the practice_check correctly uses N,N-dimethylacetamide), but for primary and secondary amides the species formed after loss of the oxygen is a neutral imine, not an iminium ion — and the chapter's own drawing question uses a secondary amide, N-methylbenzamide.",
+ "learner_impact": "A student asked to write the intermediate for the graded case (ch21-amide-reduction-draw, N-methylbenzamide) will produce a charged species that cannot be drawn with a neutral nitrogen, and the formal-charge bookkeeping the chapter otherwise enforces breaks down.",
+ "evidence": "nugget-amide-reactions text.expanded: 'the tetrahedral intermediate then expels the oxygen, not the nitrogen, so the resulting iminium ion is reduced by a second hydride to give an amine'; ch21-amide-reduction-draw prompt uses N-methylbenzamide (answer_key.smiles CNCc1ccccc1, verified correct).",
+ "recommended_outcome": "The amide-reduction passage needs the intermediate described in a way that covers primary and secondary amides (imine) as well as tertiary (iminium), matching the substrates actually used in the questions.",
+ "confidence": 0.7
+ },
+ {
+ "finding_id": "inst-017",
+ "location": {
+ "nugget_id": "nugget-ester-hydrolysis",
+ "concept_slug": "reactions-of-esters",
+ "anchor_text": "hydrolyse"
+ },
+ "severity": "low",
+ "category": "notation-consistency",
+ "observation": "This chapter is written in British orthography ('hydrolyse'/'hydrolysed' 8×, 'favourable' 2×, 'colour' 3×, 'aluminium' 21×) while mixing in American '-ize' forms ('delocalized', 'neutralize', 'polymerization') and 'sulfur'. The adjacent chapters use American forms: the preceding aldehydes-and-ketones package has 'hydrolyze' 10× and the following carbonyl-alpha-substitution package has 'hydrolyze' 16×; 'aluminum' is used in acids-bases-and-curved-arrows and electrophilic-aromatic-substitution.",
+ "learner_impact": "A student reading consecutive chapters sees the same operation spelled hydrolyzed, hydrolysed, then hydrolyzed again, and the same reagent as lithium aluminum hydride then lithium aluminium hydride. It is cosmetic per chapter but reads as inconsistent editing across a course.",
+ "evidence": "Corpus scan of content/organic/topic-packages/*/topic.package.json: carboxylic-acid-derivatives aluminium 21 / aluminum 0, hydrolyse 8 / hydrolyze 0, favourable 2 / favorable 0; aldehydes-and-ketones aluminium 2, hydrolyze 10, favorable 2; carbonyl-alpha-substitution hydrolyze 16, favorable 2.",
+ "recommended_outcome": "The chapter's orthography needs to be brought into line with the corpus convention used by its neighbours, and made internally consistent rather than mixing -yse with -ize.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "inst-024",
+ "location": {
+ "concept_slug": "reactions-of-acid-anhydrides",
+ "question_slug": "ch21-anhydride-acetylation"
+ },
+ "severity": "low",
+ "category": "assessment-readiness",
+ "observation": "Because the bank surfaces one of each variant pair, two concepts are assessed by a single item each: reactions-of-acid-anhydrides (ch21-anhydride-acetylation, aspirin) and biological-acyl-transfer (ch21-thioester-vs-ester). Both concepts declare three learning objectives. For anhydrides, the objective 'Justify the industrial preference for acetic anhydride over acetyl chloride' is reachable only through one row of a matrix item tagged to a different concept, and the cyclic-anhydride behaviour is assessed only if the student happens to be served the variant. By contrast the mechanism and ester concepts get four surfaced items each.",
+ "learner_impact": "Two of the chapter's ten concepts carry a single point of assessment evidence, so an instructor cannot tell from the bank whether a student understands anhydride atom economy or biological acyl activation.",
+ "evidence": "Per-concept question counts in topic.package.json: reactions-of-acid-anhydrides 2 and biological-acyl-transfer 2 (one base plus one variant each) versus nucleophilic-acyl-substitution-mechanism 8 and reactions-of-esters 8; compiled counts {'surfaced': 24, 'staged_variants': 24}.",
+ "recommended_outcome": "The anhydride and biological-acyl-transfer concepts each need at least one further surfaced item so their stated objectives are covered independently of which variant a student is served.",
+ "confidence": 0.7
+ },
+ {
+ "finding_id": "inst-019",
+ "location": {
+ "asset_id": "rc-addition-elimination",
+ "concept_slug": "nucleophilic-acyl-substitution-mechanism"
+ },
+ "severity": "low",
+ "category": "figure-accuracy",
+ "observation": "The energy profile's minima are labelled 'Acetyl chloride + methoxide', 'Tetrahedral intermediate' and 'Methyl acetate + chloride', but minima_molecules draws only one species at each terminus — CC(=O)Cl at minimum 0 and COC(C)=O at minimum 2 — so the methoxide that is about to attack and the chloride that has just left are named in the label but absent from the drawn structure. The intermediate itself is drawn correctly (CC([O-])(Cl)OC, verified C3H6ClO2⁻).",
+ "learner_impact": "The figure whose purpose is to show where the nucleophile goes and where the leaving group ends up never depicts either of them, which weakens the visual argument that the reactants and products are two-component systems and that the reaction is exergonic overall because chloride is stabilized.",
+ "evidence": "rc-addition-elimination.spec.minima_labels = ['Acetyl chloride + methoxide', 'Tetrahedral intermediate', 'Methyl acetate + chloride']; spec.minima_molecules = {'0': 'CC(=O)Cl', '1': 'CC([O-])(Cl)OC', '2': 'COC(C)=O'}.",
+ "recommended_outcome": "The terminal minima of the profile need to depict both components named in their labels, so the nucleophile's arrival and the leaving group's departure are visible on the diagram.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "inst-025",
+ "location": {
+ "asset_id": "mol-acetyl-chloride",
+ "section_id": "acyl-derivative-structure-and-naming"
+ },
+ "severity": "low",
+ "category": "media-equivalence",
+ "observation": "Every asset carries both an alt_text and a substantially richer long_description (for example the tetrahedral intermediate's long_description names all four substituents and identifies which two could be expelled — the whole point of the figure), but only alt_text survives compilation. The compiled molecule blocks contain name, smiles, alt_text and description (the learning_goal); there is no long_description field anywhere in the reader file.",
+ "learner_impact": "The chapter's most information-dense figure descriptions — which carry the teaching content for the tetrahedral intermediate, succinic anhydride's tethered leaving group, and the lactone ring-opening consequence — are authored and then discarded, so a student relying on the description gets a one-sentence shape summary instead of the reasoning.",
+ "evidence": "topic.package.json assets[*].accessibility.long_description populated for all 23 assets; compiled reader molecule blocks carry keys ['name','smiles','alt_text','description','generator_href'] with description == the asset's learning_goal, and the string 'long_description' does not occur in frontend/public/reader/topic-chapters/carboxylic-acid-derivatives.json.",
+ "recommended_outcome": "The reader needs the authored long descriptions delivered for figures whose teaching content lives there; if the block schema cannot carry them today that is a platform gap to raise rather than content to leave stranded.",
+ "confidence": 0.9
+ }
+ ],
+ "strengths": [
+ "Chemical accuracy of the assets and answer keys is high. I canonicalized all 21 asset SMILES, the 3 synthesis-roadmap nodes and the 3 reaction-coordinate minima with RDKit; all parse, and every molecular formula matches the compound's stated identity (acetic anhydride C4H6O3, succinic anhydride C4H4O3, caprolactam C6H11NO as a seven-membered ring, sodium stearate C18H35NaO2 matching the alt text's eighteen carbons, acetyl phosphate C2H5O5P).",
+ "All 24 surfaced answer keys are correct. The acid-chloride reagent matrix is textbook-clean and mass-balanced (LiAlH4 → ethanol, Me2CuLi → acetone, excess MeMgBr → tert-butanol, EtOH/pyridine → ethyl acetate), the mixed anhydride from sodium acetate and benzoyl chloride is drawn correctly, both hydride-reduction keys distinguish the ester (alcohol) from the amide (amine) cases, and the saponification stoichiometry items (1 equiv for a monoester, 3 for a triacylglycerol) are right for the right reason.",
+ "The two reaction_coordinate_reasoning items are internally consistent with their own control points: the first profile's highest transition state is ts_1 at 8.0 so the key correctly says step 1, and the variant's is ts_2 at 25.0 so the key correctly says step 2 — the deliberate non-first rate-determining step in the variant is good pedagogy against the common 'the first barrier is always rate-determining' error.",
+ "Curved-arrow site ids map exactly onto the RDKit atom ordering of the multi-fragment SMILES in both mechanism items (methoxide oxygen at index 0 attacking the acyl carbon at index 3; ammonia nitrogen at index 0 attacking the acyl carbon at index 2), so the arrows land where the labels say they do.",
+ "The IR section is accurate and unusually well built: the correlation of carbonyl frequency with π donation, the anhydride two-band signature, the ester C–O stretch at 1150–1250 cm⁻¹, the primary/secondary/tertiary N–H band count, and the correct note that esters absorb above ketones because inductive withdrawal outweighs π donation. The identification variant is designed so the formula cannot short-circuit the spectroscopy (propanamide and DMF are both C₃H₇NO).",
+ "The chapter is genuinely mechanism-first rather than a reaction list: one mechanism is established, the reactivity ladder is derived from two named effects rather than asserted, and the ladder is then used to explain synthesis direction, biological activation, and the IR ordering. The error_repair, structured_reasoning and comparison_matrix items all reward that causal reasoning rather than recall.",
+ "Fifteen question types across ten concepts with an even core/standard/advanced spread, every item carrying a three-level hint ladder and a substantive generic_incorrect_explanation, and per-option wrong-answer explanations on the single_select and multi_select items that name the specific misconception rather than restating the key.",
+ "All eleven authored practice_check model answers are chemically correct, including the harder ones (N,N-dimethylethylamine from LiAlH4 on N,N-dimethylacetamide; the 50%-yield methylamine stoichiometry argument; acetic anhydride identified from C₄H₆O₃ plus a band pair).",
+ "The compiled question-set is byte-identical to the package for prompt_text, student_config, answer_key, feedback_bundle and accessibility_bundle across all 48 items — no compile-time drift, and the numeric items use the {mode, amount} tolerance shape rather than a bare number."
+ ],
+ "open_questions": [
+ "I could not verify at the renderer level whether the curved_arrow workspace handles a multi-fragment molecule_smiles ('[O-]C.CC(=O)Cl' and 'N.ClC(=O)c1ccccc1'). The site ids are correct against RDKit atom order, but if the workspace lays out only the first fragment these two items become unanswerable. Worth a render check before seeding.",
+ "topic_tags and representation_tags are empty on all 48 compiled questions. This is corpus-wide rather than chapter-specific (only alkyl-halide-substitution-and-elimination, alkynes-organic-synthesis and organohalides have them populated), so I have not raised it as a finding, but it does mean this bank cannot be filtered by representation for assignment building.",
+ "ch21-chloride-expulsion-ledger-v2 uses CC([O-])(N)OC — an anionic tetrahedral intermediate bearing a neutral NH₂ — which is the adduct of amide anion with methyl acetate rather than of ammonia. The collapse to acetamide plus methoxide is correct and balanced, so I have not flagged it as an error, but an instructor may want it replaced by the neutral-amine pathway the chapter actually teaches.",
+ "The chapter never states where a carboxylic acid or a thioester sits on the reactivity ladder even though both are compared to it (inst-005, inst-009). If the intent is to keep the ladder to four rungs, the two comparison questions that reach outside it should say so explicitly.",
+ "Whether the empty roadmap image block (inst-002) and the dropped practice_check and long_description content (inst-011, inst-025) are chapter defects or known compiler/reader platform gaps affecting other chapters too — the fixes differ, and the orchestrator may already be tracking these as platform tickets.",
+ "Orchestrator normalization: this envelope returned overall_score 72 on a 0-10 scale; recorded as 7.2. Disclosed rather than silently corrected.",
+ "Orchestrator normalization: 25 findings returned a word-valued confidence (high/medium/low); mapped to 0.9/0.7/0.5 to satisfy the shared schema. Disclosed, not silently corrected."
+ ]
+ },
+ {
+ "persona": "Struggling Student",
+ "persona_version": "1.0.0",
+ "chapter_id": "carboxylic-acid-derivatives",
+ "chapter_version": "1",
+ "model": "claude-opus-5[1m]",
+ "summary": "The chapter is well organized around one mechanism and one reactivity ladder, and the question bank is genuinely broad (48 items, 15 types, every concept assessed), but for a student with weak prerequisites the reader itself gives almost nothing to hold on to. Eleven long prose sections arrive with no checkpoints, no worked examples, no summary and no ladder graphic; the eleven per-nugget practice checks that exist in the source package are never compiled into the reader, and the one synthesis roadmap compiles to an empty image block. Several places actively mislead me: the chapter states 'the weaker base is expelled' as the single principle governing every reaction, then has alkoxide (the stronger base) expelled in saponification with only a subordinate clause of justification; the IR section tells me frequency order equals reactivity order and then gives me an ester above a ketone; the acid-halide section says a ketone is 'more reactive' than the acid chloride it came from, one section after teaching me acid chlorides are the most reactive of all. The curved-arrow question lets me draw one arrow when the prose just told me the step takes two. Acid-catalysed substitution and amide-to-amine reduction are asserted in single sentences and then assessed by blank-canvas drawing questions. Nothing is strictly impossible to answer — the hint ladders are consistently three levels and usually rescue me — so I report no hard blocker, but I would stall, reread, and guess in at least six identifiable places.",
+ "overall_score": 5.6,
+ "publication_blockers": [],
+ "findings": [
+ {
+ "finding_id": "ss-001",
+ "location": {
+ "nugget_id": "nugget-acyl-derivative-naming",
+ "concept_slug": "acyl-derivative-structure-and-naming",
+ "section_id": "nugget-acyl-derivative-naming",
+ "anchor_text": "The acyl group and the five families of carboxylic acid derivatives"
+ },
+ "severity": "high",
+ "category": "objective-alignment",
+ "observation": "The first section is titled 'the five families', and its first learning objective says 'Recognize an acid halide, an acid anhydride, an ester, an amide, and a nitrile as substituted acyl compounds.' A nitrile then appears exactly once, in a subordinate clause, and never again: there is no nitrile structure among the 23 assets, no nitrile concept, no nitrile reaction, no nitrile IR band, and none of the 48 questions mentions one. Meanwhile the reactivity, matrix and IR questions all say 'the four principal derivative families' and the classify-derivatives questions offer four groups.",
+ "learner_impact": "I count four families in every figure, every ladder and every question, but the heading and the objective promise five. I assume I have missed a whole section, scroll back through the chapter looking for it, and end up unsure whether nitriles are examinable. If they are, I have nothing to study from: I have never been shown a C≡N drawn, or told how to name one.",
+ "evidence": "nugget-acyl-derivative-naming title and learning_objectives[0]; the only nitrile sentence is 'A nitrile is included with these families by convention because hydrolysis converts it to the same carboxylic acid, although its carbon is sp-hybridized rather than sp².' Compare ch21-carbonyl-ir-wavenumber prompt: 'the four principal derivative families'.",
+ "recommended_outcome": "The chapter needs to either teach and assess the nitrile family at the same minimum level as the other four (a structure I can see, a name I can form, and at least one question), or stop promising it in the title and the objective and count consistently as four throughout.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "ss-002",
+ "location": {
+ "nugget_id": "nugget-ester-hydrolysis",
+ "concept_slug": "reactions-of-esters",
+ "question_slug": "ch21-saponification-products",
+ "anchor_text": "which is the more basic of the two available leaving groups but is nevertheless lost"
+ },
+ "severity": "high",
+ "category": "misconception",
+ "observation": "Section 2 gives me one universal rule: 'When the tetrahedral intermediate carries two potential leaving groups, the weaker base is expelled. That single principle sets both the direction of every interconversion in this chapter and the reactivity order of the derivatives.' Section 6 then breaks that rule on the chapter's most important reaction and repairs it in half a sentence: alkoxide is expelled even though it 'is the more basic of the two available leaving groups', 'because the alternative is expelling hydroxide and returning to starting material.' The generalization a student actually needs — that when the two candidate groups are of comparable basicity the product-determining outcome is set by a downstream irreversible step, not by the elimination step alone — is never stated.",
+ "learner_impact": "I apply the rule I was told is universal, predict that hydroxide leaves again and nothing happens, and conclude either that esters do not saponify or that I have misunderstood basicity. Because the exception is buried mid-paragraph, I read it as a typo and keep the wrong rule. On ch21-saponification-products I then guess on option (d) about whether hydroxide is consumed.",
+ "evidence": "nugget-addition-elimination text.standard; nugget-ester-hydrolysis text.standard and text.expanded ('this last step is strongly exergonic and effectively irreversible'); ch21-saponification-products options a/c/d and ch21-grignard-ester-error-v2 both test the consumed-equivalent consequence.",
+ "recommended_outcome": "The chapter needs the leaving-group rule stated with its scope and its exception together at the point it is introduced, so a learner knows in advance that saponification is decided by the proton transfer that follows and not by comparing the two groups on the tetrahedral carbon.",
+ "confidence": 0.92
+ },
+ {
+ "finding_id": "ss-003",
+ "location": {
+ "nugget_id": "nugget-addition-elimination",
+ "concept_slug": "nucleophilic-acyl-substitution-mechanism",
+ "question_slug": "ch21-amide-reduction-draw-v2",
+ "anchor_text": "The steps are the same; only the charges differ."
+ },
+ "severity": "high",
+ "category": "worked-example-gap",
+ "observation": "The acid-catalysed pathway is disposed of in three sentences ('Protonation of the carbonyl oxygen raises the electrophilicity... The steps are the same; only the charges differ') and in one compressed chain in the ester nugget ('proton transfers within the tetrahedral intermediate convert the alkoxy group into an alcohol, which then departs as a neutral molecule'). No figure shows a protonated carbonyl, a neutral tetrahedral intermediate, or the internal proton transfer; the chapter's only mechanism figure and only energy profile are both for the anionic methoxide-plus-acetyl-chloride case.",
+ "learner_impact": "The step I always get stuck on is exactly the one that is skipped — which oxygen gets protonated, when, and how the alkoxy group turns into an alcohol. Three questions put me in acidic conditions (ch21-amide-reduction-draw-v2, ch21-ester-reduction-product-v2, and the acid-hydrolysis half of ch21-amide-hydrolysis-conditions) and I answer them by remembering product names rather than by tracing anything, which is exactly the habit that fails me on an exam.",
+ "evidence": "nugget-addition-elimination text.expanded final paragraph; nugget-ester-hydrolysis text.expanded paragraph 3; assets list contains no protonated species (mol-tetrahedral-intermediate is the anionic CC([O-])(Cl)OC only).",
+ "recommended_outcome": "The chapter needs one fully worked acid-catalysed substitution — every intermediate shown as a drawn species with its charges — because three questions require reasoning through charges the prose only asserts are 'the same'.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "ss-004",
+ "location": {
+ "question_slug": "ch21-addition-elimination-arrow",
+ "concept_slug": "nucleophilic-acyl-substitution-mechanism",
+ "anchor_text": "Draw the single curved arrow for the first step of the mechanism."
+ },
+ "severity": "high",
+ "category": "notation-consistency",
+ "observation": "The prose teaches that the addition step takes two curved arrows: 'Two curved arrows record this step: one runs from the lone pair of the nucleophile to the carbonyl carbon, and a second runs from the carbon–oxygen π bond to the oxygen.' The question asks for 'the single curved arrow for the first step' and sets max_arrows: 1, accepting only the nucleophile-to-carbon arrow. Its level-3 hint even describes the second arrow I am forbidden to draw: 'The carbonyl carbon accepts the electron pair, and the π electrons move onto oxygen as it does.' The same conflict is in ch21-addition-elimination-arrow-v2.",
+ "learner_impact": "I draw the arrow I was taught, try to add the second one, and the workspace refuses. I do not conclude the question is simplified — I conclude my two-arrow reading of the mechanism was wrong, delete my correct arrow, and start guessing. On any exam that asks for 'the mechanism', I now under-draw.",
+ "evidence": "nugget-addition-elimination text.expanded paragraph 1; ch21-addition-elimination-arrow student_config.max_arrows = 1, answer_key.expected_arrows has one entry; feedback_bundle.hints[2].",
+ "recommended_outcome": "The arrow question and the prose need to agree on how many arrows the addition step takes, or the prompt needs to say explicitly which of the two arrows it is asking for and that the other one is still part of the step.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "ss-005",
+ "location": {
+ "nugget_id": "nugget-acid-halide-reactions",
+ "concept_slug": "reactions-of-acid-halides",
+ "anchor_text": "a ketone is more electrophilic than the acid chloride's substitution product would suggest"
+ },
+ "severity": "high",
+ "category": "conceptual-support",
+ "observation": "The sentence explaining double Grignard addition is circular and contradicts the ladder taught one section earlier. The ketone IS the acid chloride's substitution product, so 'a ketone is more electrophilic than the acid chloride's substitution product would suggest' compares the species to itself; and the shorter version says the reagent adds 'to that more reactive ketone', which directly contradicts 'acid halide > anhydride > ester > amide' with the acid chloride at the top. The correct account — that a ketone is more electrophilic than an ester or amide because it has no donating heteroatom, and that the ladder covers only heteroatom-substituted acyl compounds — appears only in the ester section ('that new carbonyl compound is more electrophilic than the ester was, because it lacks the electron-donating alkoxy group') and is never connected back.",
+ "learner_impact": "I have just memorized that the acid chloride is the most reactive thing in the chapter, so 'the more reactive ketone' reads as a contradiction and I stop trusting the ladder. I cannot answer 'why does it not just stop?' for myself, so on ch21-acid-chloride-products-v2 I match reagents to products by counting carbons and hoping, and I have no rule for when a carbonyl compound gets attacked twice.",
+ "evidence": "nugget-acid-halide-reactions text.expanded paragraph 3 and text.standard; contrast nugget-reactivity-ladder text.standard ('acid halide > anhydride > ester > amide') and nugget-ester-other-reactions text.expanded paragraph 4; assessed by ch21-acid-chloride-products-v2 and ch21-grignard-equivalents.",
+ "recommended_outcome": "The chapter needs one clear statement of where ketones and aldehydes sit relative to the four derivative families, given once and used in both the acid-halide and ester sections, so 'it adds twice' has a reason a learner can reconstruct rather than a self-referential sentence.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "ss-006",
+ "location": {
+ "nugget_id": "nugget-acid-halide-reactions",
+ "section_id": "nugget-acid-halide-reactions",
+ "concept_slug": "reactions-of-acid-halides",
+ "anchor_text": "lithium tri-tert-butoxyaluminium hydride at −78 °C is attenuated enough to deliver the aldehyde"
+ },
+ "severity": "high",
+ "category": "cognitive-load",
+ "observation": "One 7-minute section introduces thionyl chloride plus its chlorosulfite intermediate, oxalyl chloride, four heteroatom nucleophiles with their four products, the base requirement and the ammonium-salt failure mode, Grignard double addition, lithium diorganocopper reagents and how they are prepared, lithium aluminium hydride, and lithium tri-tert-butoxyaluminium hydride at −78 °C — roughly ten reagents and eight products in three paragraphs. The reader delivers this with two molecule figures (benzoyl chloride, acetyl chloride), an empty image block, and no table, no product structures, and no checkpoint.",
+ "learner_impact": "This is where I stop reading and start highlighting. There is no product structure to anchor any of the eight transformations, so I try to memorize reagent-name-to-product-name pairs, mix up the two attenuated hydride reagents (which one goes with the acid chloride and which with the ester?), and go into ch21-acid-chloride-products-v2 — marked 'advanced' — with nothing but name recall.",
+ "evidence": "nugget-acid-halide-reactions text.expanded (three paragraphs, duration_minutes 7); reader section nugget-acid-halide-reactions contains blocks blk-z4s7hany, blk-p6ds8eti (two molecules), blk-w6qmft0f (empty image), blk-ozox8sn3 (Wikipedia link) and nothing else. The reader's default detail level is 'expanded', the densest of the three written versions.",
+ "recommended_outcome": "This section needs its reagent load either split or made scannable — a learner should be able to see each transformation's product, and to tell the two partial-reduction reagents apart, without holding ten reagent names in working memory at once.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "ss-007",
+ "location": {
+ "section_id": "nugget-acyl-derivative-naming",
+ "nugget_id": "nugget-acyl-derivative-naming",
+ "anchor_text": "Name CH₃CH₂CO₂CH₃ and state which fragment comes from the alcohol."
+ },
+ "severity": "high",
+ "category": "retrieval-practice",
+ "observation": "All eleven nuggets carry a practice_check with a prompt and a model answer, and none of them reaches the reader: a search of the compiled chapter for 'practice' and for any practice-check text returns zero hits, and the compiled block types are only text, molecule, reaction_coordinate, image, video, external_link and mcmurry_link. There is no callout, no summary, no self-check and no worked example anywhere in the 11-section chapter, and the only external reading pointer is a single chapter-level OpenStax link to '21-why-this-chapter'.",
+ "learner_impact": "I read eleven long expanded prose sections end to end with no place to stop and test whether any of it stuck, and no worked problem modelling how an answer is supposed to be written. I believe I understand it because I have read it, then discover in the question bank that I cannot do it. When I stall on saponification there is no targeted place to go — the one further-reading link is the chapter's opening page.",
+ "evidence": "topic.package.json nuggets[*].practice_check (11 present, e.g. nugget-acyl-derivative-naming, nugget-addition-elimination, nugget-ester-hydrolysis); grep of frontend/public/reader/topic-chapters/carboxylic-acid-derivatives.json for those prompts returns 0; block_type counts: 11 text, 35 molecule, 11 external_link, 1 mcmurry_link, 1 image, 3 video, 1 reaction_coordinate.",
+ "recommended_outcome": "The eleven checkpoints that were already authored need to reach the page a student reads, and at least the mechanism and stoichiometry sections need a worked answer a learner can imitate — reading-only delivery leaves a low-confidence student with no way to detect that they have not learned it.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "ss-008",
+ "location": {
+ "asset_id": "roadmap-acid-to-amide",
+ "section_id": "nugget-acid-halide-reactions",
+ "anchor_text": "Benzoic acid to N-methylbenzamide by way of the acid chloride"
+ },
+ "severity": "high",
+ "category": "media-equivalence",
+ "observation": "The synthesis roadmap compiles into reader block blk-w6qmft0f as an image with url: \"\" and is not hidden (unlike the three video blocks, which are is_hidden: true). The block still carries a caption and an alt text describing a three-structure, two-arrow scheme with reagents and a highlighted target that no student will ever see.",
+ "learner_impact": "I get a blank frame with a caption promising exactly the figure I need — the one picture in the chapter that shows the direction of travel up and back down the ladder. I assume it failed to load, reload the page, and eventually move on believing I have missed something. The reasoning it was meant to carry is then required by ch21-benzamide-synthesis-route and ch21-benzamide-synthesis-route-v2.",
+ "evidence": "frontend/public/reader/topic-chapters/carboxylic-acid-derivatives.json block blk-w6qmft0f: {block_type: 'image', content.url: '', alt_text: 'A two-step forward synthesis: benzoic acid is treated with thionyl chloride...'}; source asset roadmap-acid-to-amide has a full node/step spec.",
+ "recommended_outcome": "The activation-then-acylation sequence needs to actually reach the page in some visible form; a caption and alt text for a figure that renders empty is worse than no figure, because it tells the learner content exists that they cannot get to.",
+ "confidence": 0.93
+ },
+ {
+ "finding_id": "ss-009",
+ "location": {
+ "nugget_id": "nugget-reactivity-ladder",
+ "concept_slug": "relative-reactivity-of-acyl-derivatives",
+ "question_slug": "ch21-why-amide-least-reactive",
+ "anchor_text": "chloride, a carboxylate, an alkoxide, and an amide anion form a series of increasing basicity"
+ },
+ "severity": "high",
+ "category": "conceptual-support",
+ "observation": "The chapter's central argument rests on comparing leaving-group basicity, but it never gives me the numbers to compare with. Basicity is described only in words ('the conjugate base of a strong acid', 'a strong base', 'stronger still'), and the only pKa values in any nugget are 5 and 16 in the ester-hydrolysis section. The actual reference values appear once — inside a distractor-bearing option of ch21-why-amide-least-reactive ('pKa near −7... pKa near 38') — and questions and hints elsewhere ask me to compare a thiol with an alcohol (ch21-thioester-vs-ester hint 2) and a carboxylic acid with an alcohol (ch21-why-amide-least-reactive-v2) using values I was never given.",
+ "learner_impact": "Every ranking task reduces to recalling the sentence order in which the four families were listed, which is exactly the memorization the chapter's own trouble_spots warn against. When ch21-reactivity-rank-v2 inserts a thioester into the list, my memorized sentence has no slot for it and I guess. I cannot check my own ranking against anything.",
+ "evidence": "nugget-reactivity-ladder text.standard and text.expanded contain no pKa values; nugget-ester-hydrolysis is the only place pKa appears (5, 16, 'eleven pKa units'); ch21-why-amide-least-reactive evidence option 'pka'; ch21-thioester-vs-ester hints[1] 'Compare the pKa of a thiol with that of an alcohol.'",
+ "recommended_outcome": "The learner needs the leaving-group basicity comparison available as data in the reading — one place that pairs each departing group with its conjugate-acid pKa — because four question types ask them to reason from basicities the chapter only characterizes with adjectives.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "ss-010",
+ "location": {
+ "nugget_id": "nugget-spectroscopy-acyl-derivatives",
+ "concept_slug": "spectroscopy-of-acyl-derivatives",
+ "anchor_text": "The order of the frequencies is the same as the order of reactivity"
+ },
+ "severity": "high",
+ "category": "misconception",
+ "observation": "The spectroscopy section gives me a rule — 'The order of the frequencies is the same as the order of reactivity, which follows because both are governed by the same donation' — and, three sentences later, the data that breaks it: esters absorb 'near 1735 cm⁻¹ — slightly higher than the roughly 1715 cm⁻¹ of a ketone, since the inductive withdrawal by the ester oxygen outweighs its π donation.' Induction is introduced here and nowhere else; the reactivity section explains everything by π donation alone. The ketone value is then used as an anchor in the hints of both ch21-carbonyl-ir-wavenumber and its v2.",
+ "learner_impact": "I apply the rule I was just handed to the two numbers I was just handed and conclude that an ester is more reactive than a ketone — a wrong belief that survives into the aldehyde/ketone material and makes the 'the ketone is attacked immediately' claim in the ester section look impossible. Nothing in the chapter contradicts me, so I never find out.",
+ "evidence": "nugget-spectroscopy-acyl-derivatives text.standard ('The order of the frequencies is the same as the order of reactivity') and text.expanded (ester 1735 vs ketone 1715 with the inductive-withdrawal caveat); ch21-carbonyl-ir-wavenumber hints[0] 'Start from the ester value of about 1735 cm⁻¹'; ch21-carbonyl-ir-wavenumber-v2 hints[0] 'Start from the ketone value of about 1715 cm⁻¹'.",
+ "recommended_outcome": "The frequency-tracks-reactivity rule needs to be stated with the ketone counterexample attached, so the one pair of numbers the chapter hands the learner cannot be used to derive the opposite of what the chapter teaches.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "ss-011",
+ "location": {
+ "question_slug": "ch21-addition-elimination-profile-v2",
+ "concept_slug": "nucleophilic-acyl-substitution-mechanism",
+ "anchor_text": "rate_determining_step"
+ },
+ "severity": "high",
+ "category": "assessment-readiness",
+ "observation": "Both reaction-coordinate questions ask for step_count, rate_determining_step, overall and step_types, with expected answers 'endergonic'/'exergonic' and a rate-determining step that is step 1 in the parent and step 2 in the variant. The strings 'rate-determining' and 'endergonic' appear zero times across all thirty-three nugget texts; 'exergonic' appears once, in passing, about a proton transfer. The rc-addition-elimination figure in the reader is labelled only with minima names and never marks or names a transition state, and its accessible long description likewise never uses either term.",
+ "learner_impact": "I am asked to name the rate-determining step of a mechanism whose chapter never uses the phrase and never points at a transition state on the one profile I was shown. I fall back on 'the first step is always the slow one', which is right by luck in the parent question and wrong in the variant, so my score tells me nothing about what I actually misunderstand. The hints rescue the mechanics but only after I have already guessed.",
+ "evidence": "ch21-addition-elimination-profile and -v2 student_config.ask; answer_key.expected.step_types ['endergonic','exergonic'], rate_determining_step 1 vs 2; word counts over topic.package.json nuggets: 'rate-determining' 0, 'endergonic' 0, 'exergonic' 1; asset rc-addition-elimination accessibility.long_description names no transition state.",
+ "recommended_outcome": "Either the reading needs to name and locate a transition state and define rate-determining and endergonic where the profile is first shown, or these questions need to stop assuming vocabulary this chapter never uses.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "ss-012",
+ "location": {
+ "nugget_id": "nugget-amide-reactions",
+ "concept_slug": "reactions-of-amides",
+ "question_slug": "ch21-amide-reduction-draw",
+ "anchor_text": "so the resulting iminium ion is reduced by a second hydride to give an amine"
+ },
+ "severity": "medium",
+ "category": "worked-example-gap",
+ "observation": "Amide reduction is the one reaction in the chapter that breaks the pattern, and it is delivered in two asserted sentences. The shorter version gives no reason at all ('because the intermediate collapses by expelling oxygen rather than nitrogen'); the longer one introduces an iminium ion that is never defined, never drawn, and never mentioned again. No figure shows the intermediate, the iminium, or the second hydride delivery, and the chapter never reconciles 'the oxygen is expelled' with the leaving-group rule from section 2.",
+ "learner_impact": "I am then asked to draw the product on a blank canvas (ch21-amide-reduction-draw) with no picture of any step to imitate. I memorize 'amide gives amine' as an exception with no mechanism attached, which means I cannot handle it when the substrate is anything but the two I was shown, and 'iminium ion' becomes a word I skip over.",
+ "evidence": "nugget-amide-reactions text.standard and text.expanded paragraph 3; asset list for this nugget contains only mol-acetamide, mol-n-methylacetamide, mol-benzamide (no intermediate); ch21-amide-reduction-draw student_config.scaffold = 'blank_canvas' with only text hints.",
+ "recommended_outcome": "The amide-to-amine divergence needs a visible intermediate sequence and a stated reason for expelling oxygen rather than nitrogen, since it is assessed by a from-scratch drawing task and is the one place the chapter's general rule appears to be overridden.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "ss-013",
+ "location": {
+ "nugget_id": "nugget-reactivity-ladder",
+ "concept_slug": "relative-reactivity-of-acyl-derivatives",
+ "anchor_text": "the ladder can be used directly for synthesis planning"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The word 'ladder' carries the whole chapter — it appears eight times across the nuggets, in phrases like 'down the ladder', 'up the ladder', 'the top of the reactivity ladder' and 'sit just below acid halides on the reactivity ladder' — and it is never drawn. The reader represents it as four separate molecule cards stacked one after another (acetyl chloride, acetic anhydride, methyl acetate, acetamide) with no ordering, no arrow and no direction marker. The one asset that would have shown it, video-reactivity-ladder, compiles to a hidden block with an empty url.",
+ "learner_impact": "'Down the ladder' is a spatial instruction and I have no picture to move down. I have to re-derive which direction is which every time, and on ch21-benzamide-synthesis-route the whole task is choosing a direction. Four identical-looking molecule cards in a row do not tell me they are a sequence.",
+ "evidence": "nugget-reactivity-ladder text.expanded ('Reactions proceed down the ladder', 'Moving up the ladder requires hydrolysis back to the carboxylic acid'); reader blocks blk-rrajuygo, blk-l1b0vq29, blk-n80dn9nl, blk-vxjudis9 are four ungrouped molecule cards; blk-1ndwval0 is video with url '' and is_hidden true.",
+ "recommended_outcome": "The chapter's organizing metaphor needs to exist as something a learner can see ordered and directional, because prose alone cannot make 'down' mean anything and four ungrouped structure cards do not read as a ranking.",
+ "confidence": 0.87
+ },
+ {
+ "finding_id": "ss-014",
+ "location": {
+ "question_slug": "ch21-reactivity-rank",
+ "concept_slug": "relative-reactivity-of-acyl-derivatives",
+ "anchor_text": "Two effects decide the order and both point the same way."
+ },
+ "severity": "medium",
+ "category": "assessment-readiness",
+ "observation": "Only the twenty option-based questions (single_select and multi_select) carry per-answer explanations; the other twenty-eight — every ranking, matching, categorizing, matrix, ledger, drawing, numeric, short-answer, synthesis-route and error-repair item — have a single generic_incorrect_explanation that is identical no matter what the learner did. A student who swaps only ester and amide in ch21-reactivity-rank sees the same paragraph as a student who reverses the whole list; a student who misfiles only the anhydride in ch21-classify-derivatives is told to 'read each formula from the acyl carbon outward'.",
+ "learner_impact": "When I get one card out of four wrong, the feedback restates the method I already tried and never tells me which card was misplaced or why. I cannot tell a small slip from a broken concept, so I re-attempt by shuffling rather than by re-reasoning, and I learn nothing from being wrong.",
+ "evidence": "Compiled question-set: 28 of 48 questions have wrong_answer_explanations length 0 (e.g. ch21-reactivity-rank, ch21-classify-derivatives, ch21-acid-chloride-products, ch21-ester-vs-amide-matrix, ch21-chloride-expulsion-ledger, ch21-polyamide-monomers); the 20 option-based items have 2–3 each.",
+ "recommended_outcome": "The non-option question types need feedback that responds to the specific mistake — at minimum for the ranking and categorizing items, where the common error patterns are already named in the concepts' trouble_spots and could be addressed directly.",
+ "confidence": 0.8
+ },
+ {
+ "finding_id": "ss-015",
+ "location": {
+ "nugget_id": "nugget-step-growth-polymers",
+ "concept_slug": "step-growth-polymers",
+ "anchor_text": "Nothing new is required to explain polymer formation from the chemistry already developed in this chapter"
+ },
+ "severity": "medium",
+ "category": "cognitive-load",
+ "observation": "The polymer section opens by promising there is nothing new — 'the only change is that each monomer carries two reactive groups instead of one' — and then introduces a set of genuinely new ideas that are not acyl chemistry at all: the absence of an initiator, dimers combining with dimers, monomer disappearing early, high molecular weight arriving only at very high conversion, and a contrast with chain-growth polymerization including radical initiators. Four of the six items in ch21-monomer-pairs-categorize test exactly these new kinetics ideas.",
+ "learner_impact": "The opening tells me I can read this section quickly, so I do, and then a question asks me to sort 'High molecular weight is reached only at very high conversion' and 'Full-length chains coexist with unreacted monomer throughout' into two mechanisms I skimmed in one paragraph. False reassurance is worse than a warning: I do not go back, I guess.",
+ "evidence": "nugget-step-growth-polymers text.expanded paragraphs 1 and 3; ch21-monomer-pairs-categorize items i1–i4 and i6, all drawn from that single kinetics paragraph.",
+ "recommended_outcome": "The step-versus-chain-growth kinetics contrast needs to be flagged as new material and given the same weight in the reading as it has in the assessment, rather than being introduced under a reassurance that nothing new is coming.",
+ "confidence": 0.83
+ },
+ {
+ "finding_id": "ss-016",
+ "location": {
+ "nugget_id": "nugget-addition-elimination",
+ "question_slug": "ch21-addition-elimination-arrow",
+ "anchor_text": "A backside displacement is geometrically impossible here"
+ },
+ "severity": "medium",
+ "category": "conceptual-support",
+ "observation": "The reason acyl substitution is not an SN2 is asserted rather than shown: 'A backside displacement is geometrically impossible here: the carbonyl carbon is sp²-hybridized and planar.' Planarity alone does not obviously forbid attack opposite the leaving group, and no figure contrasts the two geometries. The curved-arrow question's generic feedback then repeats the same unexplained assertion back at me ('An arrow drawn to the chlorine or to a carbon–chlorine bond describes a one-step substitution, which cannot occur at a planar sp² carbon'). The neighbouring sentence 'no bond is ever broken and formed at the same time as it is in an SN2 reaction' is also ambiguous on a first read.",
+ "learner_impact": "This is the single question I would most want answered — why does the mechanism I spent a whole chapter learning not apply here? — and I get the same sentence twice, once in the reading and once as the explanation of why my answer was wrong. Feedback that restates the claim I did not understand does not help me; I accept it as a rule to memorize and stop asking.",
+ "evidence": "nugget-addition-elimination text.standard and text.expanded paragraph 1; ch21-addition-elimination-arrow feedback_bundle.generic_incorrect_explanation; no asset contrasts sp³ backside attack with acyl addition.",
+ "recommended_outcome": "The learner needs the SN2-versus-addition contrast made visible or argued rather than asserted, and the wrong-answer feedback needs to teach something the reading did not already say in the same words.",
+ "confidence": 0.8
+ },
+ {
+ "finding_id": "ss-017",
+ "location": {
+ "question_slug": "ch21-chloride-expulsion-ledger",
+ "concept_slug": "nucleophilic-acyl-substitution-mechanism",
+ "anchor_text": "Methyl carbon attached to the central carbon"
+ },
+ "severity": "medium",
+ "category": "figure-purpose",
+ "observation": "The ledger questions ask me to type bond entries like '1-3' against a numbered atom legend, but the reference structure rendered beside the legend is a plain RDKit drawing with no atom numbers on it (the renderer produces the SVG with no atomNote labels). The legend is also imprecise: the molecule CC([O-])(Cl)OC contains two methyl carbons, and label '5: Methyl carbon attached to the central carbon' names one of them while the other methyl — the one on the methoxy oxygen — is left unlabelled, even though a methoxy oxygen label ('4') is provided.",
+ "learner_impact": "I am asked to record changes by atom number while looking at a picture with no numbers on it, so I have to hold the five verbal descriptions in my head and hope I matched them to the right atoms. With two methyls in view and only one named, I second-guess whether '5' means the one I think it does, and on an 'advanced' question with a spurious-row penalty I add fewer rows than I should rather than risk being wrong.",
+ "evidence": "ch21-chloride-expulsion-ledger student_config.atom_labels and molecule_smiles 'CC([O-])(Cl)OC'; same pattern in -v2 with 'CC([O-])(N)OC'; [internal source reference — not in this repo] renders config.molecule.svgDataUri as a plain image plus a text legend, and molecule_visuals.render_molecule_visual draws the SVG without atom numbering.",
+ "recommended_outcome": "The ledger's numbered legend needs a structure a learner can actually map numbers onto, and every atom a learner might want to name should be named — otherwise the numbering is a memory task layered on top of the chemistry task.",
+ "confidence": 0.72
+ },
+ {
+ "finding_id": "ss-018",
+ "location": {
+ "nugget_id": "nugget-spectroscopy-acyl-derivatives",
+ "concept_slug": "spectroscopy-of-acyl-derivatives",
+ "question_slug": "ch21-amide-hydrolysis-conditions-v2",
+ "anchor_text": "coalesce only on warming"
+ },
+ "severity": "medium",
+ "category": "conceptual-support",
+ "observation": "The restricted-rotation evidence is delivered through an NMR observation whose vocabulary is never explained: DMF's two methyls 'give separate NMR signals at room temperature and coalesce only on warming'. 'Coalesce' is not defined, and the idea of an NMR timescale appears only inside a level-3 hint of the question that tests it ('coalescence occurs when that rate becomes fast on the NMR timescale'). The variant question is graded 'advanced' and is one of only four questions on the amide concept.",
+ "learner_impact": "I can see that something changes on warming but not why an NMR spectrum should care about a rotation rate, so I answer ch21-amide-hydrolysis-conditions-v2 by elimination on the other three options rather than by understanding, and the 20 kcal/mol barrier stays a number I have read rather than evidence I can use.",
+ "evidence": "nugget-amide-reactions text.expanded paragraph 1; nugget-spectroscopy-acyl-derivatives text.expanded; ch21-amide-hydrolysis-conditions-v2 option a and hints[2].",
+ "recommended_outcome": "If the chapter uses a spectroscopic observation as its evidence for restricted rotation, the learner needs a bridge for what coalescence means and why a spectrum reports on a rate, since that reasoning is what the advanced question grades.",
+ "confidence": 0.78
+ },
+ {
+ "finding_id": "ss-019",
+ "location": {
+ "nugget_id": "nugget-acyl-derivative-naming",
+ "asset_id": "mol-butyrolactone",
+ "anchor_text": "both are named with a Greek letter or a ring size that states how many atoms separate the carbonyl carbon from the heteroatom"
+ },
+ "severity": "low",
+ "category": "conceptual-support",
+ "observation": "Lactone and lactam naming is described only in that one clause, and the Greek-letter convention is never worked: γ-butyrolactone appears as a figure title with no statement of what γ counts from or to. Caprolactam and nylon 6 are likewise named without their numbering being explained.",
+ "learner_impact": "I can recognize the ring as an ester but I could not name one, and I cannot tell whether γ means the third carbon from the carbonyl or the fifth atom of the ring. Since both cyclic questions (ch21-recognize-lactone and its variant) ask me only to classify, I never find out that I cannot name them until an exam does.",
+ "evidence": "nugget-acyl-derivative-naming text.standard; asset mol-butyrolactone title 'γ-Butyrolactone, a cyclic ester' and its long_description, which explains the ring but not the letter; ch21-recognize-lactone tests classification only.",
+ "recommended_outcome": "Either the Greek-letter lactone convention needs one worked instance so a learner can apply it, or the naming objective should stop implying it is covered.",
+ "confidence": 0.75
+ }
+ ],
+ "strengths": [
+ "Every one of the ten concepts is assessed, with 24 surfaced questions plus 24 variants across 15 question types — no concept is left with only a drawing task or only a recall task.",
+ "The concepts' trouble_spots are real student errors, not generic warnings, and many of them are converted directly into distractors and wrong-answer explanations (the 'both acyl groups transfer' anhydride error, the 'two separate molecules' cyclic-anhydride error, the 'hydroxide is catalytic' saponification error).",
+ "The wrong-answer explanations on the twenty option-based questions are specific and diagnostic rather than scolding — ch21-ester-reduction-product option b names DIBAL-H at −78 °C as the fix, and ch21-amide-hydrolysis-conditions option d corrects 'inert' to 'slow' and points at proteases.",
+ "The paired energy-profile questions deliberately put the rate-determining step in step 1 in one and step 2 in the other, which is exactly the discrimination a memorizer would fail.",
+ "The tetrahedral-intermediate figure (mol-tetrahedral-intermediate) shows the charge explicitly and is the single most useful anchor in the chapter; the reader places it right beside the prose that needs it.",
+ "All 48 questions carry a three-level hint ladder that moves from a general orienting question to the specific fact, and level 1 hints reliably ask rather than tell — this is what keeps several under-explained sections answerable at all.",
+ "The pKa values a learner needs for the amide argument, though missing from the reading, are at least supplied inside ch21-why-amide-least-reactive's evidence options rather than assumed silently."
+ ],
+ "open_questions": [
+ "Are the eleven authored practice_check items intended to reach the reader at all, or is their absence a compiler-level gap that affects every topic package? If it is platform-wide, this chapter still needs interim checkpoints in its prose.",
+ "Is the empty image block for roadmap-acid-to-amide (blk-w6qmft0f, url: \"\") a compile defect, or is the synthesis_roadmap spec expected to render client-side from the block's spec the way reaction_coordinate does?",
+ "The reader's default detail level is 'expanded' (useReaderPersonalization prefs), so the densest of the three authored variants is what a struggling reader sees first, including jargon such as 'the carbonyl π* orbital' that appears in no other variant. Is 'expanded' the intended default for this audience?",
+ "The chapter's only further-reading pointer is the chapter-level OpenStax '21-why-this-chapter' link; deeper section links exist for other chapters. Is that intentional for this package?",
+ "I coined no new categories; ss-017 was filed under figure-purpose because the defect is that the reference figure cannot serve the numbering task it is paired with, not that it is drawn incorrectly."
+ ]
+ }
+ ],
+ "publication_readiness": "blocked",
+ "executive_summary": "Baseline verdict is blocked, driven by two chapter-local blockers and three platform access blockers. The instructor persona independently re-parsed all 21 asset SMILES and all 48 answer keys in RDKit and found the chemistry otherwise sound — every formula matches its stated identity, both energy-profile keys read correctly off their own control points, and the curved-arrow site indices map exactly onto the SMILES atom order. The two chapter-local blockers were a genuinely wrong causal claim (a Grignard adds twice because the ketone is 'more reactive' than the acid chloride, which inverts the chapter's own reactivity ladder and is additionally circular, since the ketone IS the acid chloride's substitution product) and two recognition items whose four options each drew a different compound, so the key was the only option whose picture matched the stem. Both are corrected. A third defect was reported independently by all four personas: the chapter's only multi-step figure, the acid-to-amide synthesis roadmap, compiled to a visible image block with an empty URL — a caption and alt text promising a figure that renders as nothing. It has been replaced with a three-species molecule sequence and its reagent rationale moved into prose. The remaining blockers are platform-wide and identical in every already-published chapter of this series.",
+ "consensus_strengths": [
+ "All 21 asset SMILES and all 48 answer keys verified correct in RDKit; every mass balance checked is exact.",
+ "No option set uses positional 'Structure A/B/C/D' labels, and every illustrated option set is uniformly illustrated — no lone-illustrated-option answer tell anywhere in the bank.",
+ "Every question type used is keyboard-complete through labelled Selects and IconButtons; no activity is drag-only, hover-only, or motion-dependent.",
+ "bond_change_ledger items are fully answerable without seeing the structure — atom_labels are self-describing text rendered as a list.",
+ "The paired energy-profile questions deliberately put the rate-determining step in step 1 in one and step 2 in the other, which a memoriser fails.",
+ "All 48 questions carry a three-level hint ladder whose level-1 hints ask rather than tell."
+ ],
+ "ranked_recommendations": [
+ {
+ "rec_id": "rec-001",
+ "title": "Correct the double-Grignard explanation",
+ "need": "The stated reason for the second addition inverts the chapter's own reactivity ladder and is circular.",
+ "chosen_intervention": "prose-edit",
+ "target_surface": "prose",
+ "severity": "blocker",
+ "source_findings": [
+ "inst-001",
+ "ss-005"
+ ],
+ "rationale": "The claim is factually wrong, not merely unclear; the least-complex fix is a prose correction in both the standard and expanded tiers that keeps the ladder intact and gives a real reason (a Grignard is nucleophilic enough to consume the ketone as fast as it forms, and ketones are not members of the heteroatom-substituted series the ladder ranks)."
+ },
+ {
+ "rec_id": "rec-002",
+ "title": "Fix the two cyclic-derivative recognition items",
+ "need": "Each option drew a different compound, so the key was selectable by matching the picture to the stem without evaluating any claim.",
+ "chosen_intervention": "prose-edit",
+ "target_surface": "assessment",
+ "severity": "blocker",
+ "source_findings": [
+ "inst-003",
+ "visual-015"
+ ],
+ "rationale": "Showing the same subject structure on every option removes the tell while preserving the item's intent; no new asset is needed."
+ },
+ {
+ "rec_id": "rec-003",
+ "title": "Deliver the acid-to-amide sequence as figures that render",
+ "need": "The chapter's only multi-step figure compiled to a visible empty-URL image block.",
+ "chosen_intervention": "new-figure",
+ "target_surface": "figure",
+ "severity": "high",
+ "source_findings": [
+ "inst-002",
+ "ss-008",
+ "access-005",
+ "visual-001"
+ ],
+ "rationale": "All four personas reported this independently. Rather than wait on the roadmap renderer, the three species are now molecule assets (which do render) and the roadmap's reagent rationale and caveats moved into the section prose — the same substitution ch23 used successfully."
+ },
+ {
+ "rec_id": "rec-004",
+ "title": "De-leak both energy-profile accessible descriptions",
+ "need": "Both opened with 'A two-maximum energy profile', handing over the step count the item asks for, while omitting the heights the other three asks need.",
+ "chosen_intervention": "longer-description",
+ "target_surface": "assessment",
+ "severity": "blocker",
+ "source_findings": [
+ "access-001",
+ "access-002"
+ ],
+ "rationale": "Replaced with the plotted heights at each stationary point and no comparison performed, so the non-visual and visual versions demand the same reasoning. This also supplies the geometry the previous text omitted."
+ },
+ {
+ "rec_id": "rec-005",
+ "title": "Platform: deliver accessible_description to the workspace",
+ "need": "Authored per-question non-visual descriptions reach no student-facing surface.",
+ "chosen_intervention": "text-equivalent",
+ "target_surface": "assessment",
+ "severity": "blocker",
+ "source_findings": [
+ "access-006",
+ "access-002"
+ ],
+ "rationale": "Not chapter-fixable. Routed as a platform ticket; identical in every published chapter."
+ },
+ {
+ "rec_id": "rec-006",
+ "title": "Platform: non-pointer path for blank-canvas drawing items",
+ "need": "Four structure_scaffold items have no keyboard or non-visual route to an answer.",
+ "chosen_intervention": "keyboard-alternative",
+ "target_surface": "assessment",
+ "severity": "blocker",
+ "source_findings": [
+ "access-003"
+ ],
+ "rationale": "Not chapter-fixable. Mitigation: both affected concepts are also assessed by accessible types, so no concept is assessed solely through the blocked modality."
+ },
+ {
+ "rec_id": "rec-007",
+ "title": "Reconcile the leaving-group rule with saponification",
+ "need": "The chapter states 'the weaker base is expelled' as universal, then breaks it on its most important reaction with a half-sentence.",
+ "chosen_intervention": "prose-edit",
+ "target_surface": "prose",
+ "severity": "high",
+ "source_findings": [
+ "ss-002"
+ ],
+ "rationale": "Recorded, not applied: this is a pedagogical restructuring rather than a factual error, and the chapter's statement is defensible as written. Scheduled rather than forced."
+ },
+ {
+ "rec_id": "rec-008",
+ "title": "Reconcile the IR frequency-tracks-reactivity rule with its own counterexample",
+ "need": "The section states the orders match, then gives an ester above a ketone three sentences later.",
+ "chosen_intervention": "prose-edit",
+ "target_surface": "prose",
+ "severity": "high",
+ "source_findings": [
+ "ss-010"
+ ],
+ "rationale": "Recorded, not applied: same class as rec-007. The numbers given are correct; what is missing is the caveat tying them together."
+ },
+ {
+ "rec_id": "rec-009",
+ "title": "Nitrile family promised but never taught or assessed",
+ "need": "Title and objective say five families; nitriles appear in one subordinate clause with no structure, no reaction and no question.",
+ "chosen_intervention": "prose-edit",
+ "target_surface": "prose",
+ "severity": "high",
+ "source_findings": [
+ "ss-001",
+ "visual-009"
+ ],
+ "rationale": "Recorded, not applied: resolving it means either adding a family's worth of content or renegotiating the chapter's scope, which is an authoring decision rather than an error correction."
+ }
+ ],
+ "accessibility_blockers": [
+ "access-001",
+ "access-002",
+ "access-003"
+ ],
+ "accessibility_blocker_notes": [
+ "access-001 (chapter-local, CORRECTED): both profile descriptions stated the step count.",
+ "access-002 (platform): reaction-coordinate renderer reads the wrong accessibility key, so the profile is announced only as 'Schematic reaction coordinate diagram'.",
+ "access-003 (platform): four blank-canvas drawing items have no non-pointer alternative."
+ ],
+ "visual_opportunities": [
+ "The reactivity ladder is the chapter's organising metaphor and is never drawn — four ungrouped structure cards do not read as a ranking (visual-004, ss-013).",
+ "No figure anywhere shows a curved arrow, although the chapter teaches one mechanism throughout and describes each arrow's origin and destination in prose (visual-003, inst-014).",
+ "The spectroscopy section carries five repeat structures and no spectral information; a wavenumber number line would replace its densest paragraph (visual-005, visual-006)."
+ ],
+ "sufficient_as_is": [
+ "Molecule alt texts state connectivity rather than naming the image and are usable readouts on their own — no rewrite needed.",
+ "Deferred videos compile hidden with empty URLs, so no dead controls are exposed; the deferral handling is correct as is.",
+ "The tetrahedral-intermediate figure is placed correctly beside the prose that needs it and needs no change."
+ ],
+ "disagreements": [
+ {
+ "topic": "Whether the empty-URL roadmap is a chapter defect or a platform gap",
+ "positions": {
+ "Organic Chemistry Instructor": "Chapter-visible defect: the deferred videos were compiled is_hidden while the roadmap was not, so students are shown a broken figure.",
+ "Learner with Visual Preference": "Platform gap: the reader builder emits synthesis_roadmap as an image with url:'' and drops the spec, so no authoring choice could have rendered it."
+ },
+ "resolution": "Both are right about different layers, and the chapter-local half is actionable now. Rather than wait on the renderer, the roadmap asset was removed and replaced with three molecule assets that do render, with its reagent rationale and caveats moved into prose. The platform behaviour is recorded for the renderer ticket."
+ }
+ ],
+ "regression": {
+ "resolved": [],
+ "unchanged": [],
+ "worsened": [],
+ "new": []
+ },
+ "corrections": {
+ "status": "applied-and-verified-without-second-persona-run",
+ "post_correction_readiness_estimate": "major revision",
+ "estimate_note": "Not a new persona verdict. Every chapter-local blocker is resolved and verified; the estimate is held at major revision solely because the three platform access blockers remain open. Those three are identical in every already-published chapter of this series, so on that axis this chapter is at parity with the live chapters. A new verdict requires a separate four-persona regression run.",
+ "applied": [
+ {
+ "change": "Rewrote the double-Grignard explanation in both the standard and expanded tiers: removed the claim that the ketone is more reactive than the acid chloride and the circular 'more electrophilic than the acid chloride's substitution product would suggest', and replaced them with the correct reason plus an explicit note that the ladder ranks only the heteroatom-substituted derivatives.",
+ "resolves": [
+ "inst-001"
+ ],
+ "partially_addresses": [
+ "ss-005"
+ ]
+ },
+ {
+ "change": "Set all four options in ch21-recognize-lactone and ch21-recognize-lactone-v2 to show the subject compound (γ-butyrolactone and caprolactam respectively), so the options differ only in their claims. Updated both accessible descriptions to state that the structure is the same throughout.",
+ "resolves": [
+ "inst-003"
+ ],
+ "partially_addresses": [
+ "visual-015"
+ ]
+ },
+ {
+ "change": "Replaced the empty-rendering roadmap-acid-to-amide asset with two new molecule assets (mol-benzoic-acid, mol-n-methylbenzamide) which, with the existing mol-benzoyl-chloride, present the sequence in order; moved the roadmap's reagent rationale (why SOCl2 drives to completion, why a second equivalent of amine is needed) and its caveats into the section's expanded prose.",
+ "resolves": [
+ "inst-002"
+ ],
+ "partially_addresses": [
+ "ss-008",
+ "access-005",
+ "visual-001"
+ ]
+ },
+ {
+ "change": "Rewrote both energy-profile accessible descriptions to give the plotted height of every stationary point without stating the step count, the rate-determining step, or any energetic classification.",
+ "resolves": [
+ "access-001"
+ ],
+ "partially_addresses": [
+ "access-002"
+ ]
+ }
+ ],
+ "remaining_high_priority": [
+ "access-002, access-003, access-006 — platform access blockers, identical in every published chapter of this series.",
+ "rec-007, rec-008, rec-009 — high-severity pedagogical gaps recorded but deliberately not auto-applied (scope, not error)."
+ ],
+ "verification": [
+ "compile_topic_package --write-runtime — clean, verification_required empty",
+ "tools/topic_packages/tests — 62 passed",
+ "backend question-pipeline suites (7 files) — 177 passed",
+ "RDKit re-parse of every asset SMILES and every option/answer-key SMILES — all valid",
+ "lone-illustrated-option guard across all questions — none",
+ "textbook-profiles clobber re-merged — 18 topics present"
+ ]
+ }
+}

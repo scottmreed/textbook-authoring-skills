@@ -1,0 +1,1071 @@
+# Chapter review — Alkynes: An Introduction to Organic Synthesis (`alkynes-organic-synthesis`)
+
+_Reviewed 2026-07-31 · chapter version 1 · personas: Instructor, Struggling Student, Accessibility, Visual Preference_
+
+**Publication readiness: blocked**
+
+The underlying chemistry of this chapter is unusually clean — every SMILES round-trips to the compound claimed, the pKa ladder is quantitatively coherent, both reaction-coordinate question profiles are self-consistent, the two rank_order items are NOT pre-solved, and the compiled question set is byte-identical to the package. What blocks it is everything between the authored package and the student. One outright chemistry error ships in prose and three questions: the anti-Markovnikov hydration route is written as unhindered BH3/THF, which adds twice across a terminal alkyne. Six question accessibility descriptions state their own answers, and removing the two hotspot leaks leaves that item unanswerable without vision because the atom buttons announce only 'C atom 1/2/3' — an unresolved required-access blocker, which forces `blocked` regardless of scores. Both of the chapter's only composed figures are broken at render: the energy diagram authors barrier sizes `high`/`low`, which are not in BARRIER_HEIGHTS and are silently coerced to `medium`, so it draws two equal barriers and a thermoneutral reaction — the precise opposite of the section's thesis and of its own alt text; and the synthesis roadmap authors `edges` where the renderer reads `steps`, so every arrow is unlabeled and the cis/trans fork flattens into a chain depicting cis-pent-2-ene converting to trans-pent-2-ene. Seven of seven concepts lack `wikipedia_title`, so the reader ships seven fabricated Wikipedia URLs, all HTTP-verified 404. Finally, all 7 practice checks and 14 trouble spots are stranded: the compiled artifact predates the callout emitter and contains zero callout blocks.
+
+### Top blockers
+
+- **[BLOCKER] Both structure_scaffold questions state their own answer in accessibility_bundle.** — `access-001` (Accessibility Persona; section_id=`nugget-alkyne-hydration`, concept_slug=`alkyne-hydration-tautomerization`, question_slug=`ch9-draw-hydration-ketone`)
+- **[BLOCKER] Both hotspot questions name the target atom in their accessible_description.** — `access-002` (Accessibility Persona; section_id=`nugget-terminal-acidity`, concept_slug=`terminal-alkyne-acidity`, question_slug=`ch9-acidic-proton-site`)
+- **[BLOCKER] Once the leaked description is removed, the hotspot pair becomes unanswerable without vision.** — `access-003` (Accessibility Persona; section_id=`nugget-terminal-acidity`, concept_slug=`terminal-alkyne-acidity`, question_slug=`ch9-acidic-proton-site`)
+- **[BLOCKER] The anti-Markovnikov hydration route is specified as unhindered borane.** — `instr-001` (Organic Chemistry Instructor; concept_slug=`alkyne-hydration-tautomerization`, nugget_id=`nugget-alkyne-hydration`, question_slug=`ch9-draw-hydration-ketone-v2`)
+- **[BLOCKER] The chapter's only energy diagram renders with two identical activation barriers and a product exactly level with the reactants, so it shows neither the rate-determining step nor an exergonic reaction.** — `visual-001` (Learner with Visual Preference; section_id=`nugget-alkyne-addition`, nugget_id=`nugget-alkyne-addition`, concept_slug=`alkyne-electrophilic-addition`, asset_id=`rc-hx-addition`)
+- **[BLOCKER] The capstone synthesis figure renders with every arrow blank and the route flattened.** — `visual-002` (Learner with Visual Preference; section_id=`nugget-acetylide-alkylation`, nugget_id=`nugget-acetylide-alkylation`, concept_slug=`acetylide-alkylation-synthesis`, asset_id=`roadmap-chain-extension`)
+
+### Top 5 recommended changes
+
+1. **Anti-Markovnikov hydration is specified with unhindered borane** — The reagent taught for anti-Markovnikov alkyne hydration must be one that actually stops after a single addition, and students must learn why an unhindered borane does not. → **prose-edit** (prose, blocker)
+2. **Hotspot items leak the answer, and are unanswerable without vision once the leak is removed** — A non-visual learner must be able to identify the acidic carbon by reasoning, which requires the structure's connectivity mapped onto the same atom numbering the buttons announce — without being told which atom is the answer. → **structured-chemical-description** (assessment, blocker)
+3. **Four more accessible_descriptions state the answer or the method** — The non-visual equivalent must convey only the stimulus and the task, so the two cohorts attempt the same question. → **text-equivalent** (assessment, blocker)
+4. **Energy diagram draws two equal barriers and a thermoneutral reaction** — The addition section's figure must show a visibly larger first barrier and a product below the reactants, agreeing with its own description and with the chapter's reaction_coordinate_reasoning question. → **new-figure** (figure, blocker)
+5. **Synthesis roadmap renders unlabeled arrows and a nonexistent cis-to-trans step** — The capstone route figure must label every arrow with its reagents and must not depict a transformation that does not exist. → **new-figure** (figure, blocker)
+
+### Persona status cards
+
+| Persona | Score | Blockers | Headline |
+|---|---|---|---|
+| Organic Chemistry Instructor | 6.5/10 | 2 | Chemistry is clean except the hydroboration reagent; seven dead links; no alkyne preparation section. |
+| Struggling Student | 5.4/10 | 0 | Every piece of authored in-reading scaffolding — 7 practice checks, 14 trouble spots — reaches no reader. |
+| Accessibility Persona | 5.4/10 | 3 | Six descriptions state their own answer; the hotspot pair is unanswerable without vision once they are removed. |
+| Learner with Visual Preference | 5.2/10 | 2 | Both composed figures render contradicting their own descriptions and the prose. |
+
+### Affected sections & assets
+
+`acetylide-alkylation-synthesis`, `alkyne-electrophilic-addition`, `alkyne-hydration-tautomerization`, `alkyne-reduction-stereochemistry`, `alkyne-structure-and-bonding`, `blk-jnb7ox9c`, `blk-rw2ry74r`, `ch9-acetylide-sn2-arrow`, `ch9-acidic-proton-site-v2`, `ch9-acidic-proton-site`, `ch9-acidity-rank-v2`, `ch9-acidity-rank`, `ch9-chain-extension-route`, `ch9-degrees-unsaturation-v2`, `ch9-degrees-unsaturation`, `ch9-dissolving-metal-error`, `ch9-draw-hydration-ketone-v2`, `ch9-draw-hydration-ketone`, `ch9-hbr-markovnikov`, `ch9-hydration-reagent-product`, `ch9-name-terminal-butyne`, `ch9-reduction-sort`, `ch9-sp-hybridized-carbons`, `ch9-vinyl-cation-profile-v2`, `ch9-vinyl-cation-profile`, `mol-prop-1-en-2-ol`, `mol-propane`, `mol-propyne`, `nugget-acetylide-alkylation`, `nugget-alkyne-addition`, `nugget-alkyne-hydration`, `nugget-alkyne-reduction`, `nugget-alkyne-structure`, `nugget-terminal-acidity`, `rc-hx-addition`, `roadmap-chain-extension`, `terminal-alkyne-acidity`, `video-alkyne-orbitals`, `video-three-reductions`
+
+---
+## Full evidence
+
+### Independent persona reports
+
+#### Organic Chemistry Instructor — 6.5/10
+
+Not a go for assignment yet. Core chemistry is unusually clean: every SMILES parses and is the compound claimed, the pKa ladder (25/44/60) is internally consistent, both reaction-coordinate question profiles are numerically self-consistent, and the compiled question set is byte-identical to the package. Two things block assignment: the hydroboration route is written as BH3/THF (unhindered borane adds twice to a terminal alkyne), and the compiled reader ships seven fabricated Wikipedia links. Beyond those: Lindlar is never named, there is no alkyne-preparation section, X2 addition gets one sentence and zero assessment, the vinyl cation is never drawn, and all 7 practice checks plus 14 trouble spots failed to compile into the reader.
+
+**Publication blockers:** `instr-001`, `instr-003`
+
+**Strengths**
+
+- Every SMILES in the package is chemically correct; all 31 distinct structures round-trip through RDKit with the intended formula, and all four cis/trans pairs carry the right stereo tags.
+- The acidity treatment is quantitatively coherent end to end: pKa 25/44/60 tied to 50/33/25 percent s character, acetylide explicitly not resonance stabilized, hydroxide ruled out by water pKa 16, amide justified by ammonia at 38.
+- Both reaction_coordinate_reasoning items are numerically self-consistent: barriers measured from the preceding minimum genuinely make step 1 rate determining.
+- The curved-arrow item is correctly specified at the site level: atom indices map exactly to labels, the key runs lone pair to electrophilic carbon, distractors capture the two real errors.
+- The reduction section is the best-taught idea in the chapter and is assessed four different ways without any leaking the others' answers.
+- The compiled question set is faithful to the package: 28/28 slugs present, every prompt_text and answer_key byte-identical.
+- Degree-of-unsaturation is handled correctly in prose and in both numeric items, with distractors targeting the two real arithmetic slips.
+
+**Findings**
+
+##### `instr-001` — BLOCKER · chemical-accuracy · confidence 0.93
+
+**Location:** concept_slug=`alkyne-hydration-tautomerization` · nugget_id=`nugget-alkyne-hydration` · question_slug=`ch9-draw-hydration-ketone-v2` · anchor="1. BH₃, THF 2. H₂O₂, NaOH"
+
+**Observation:** The anti-Markovnikov hydration route is specified as unhindered borane. Three questions write the reagent explicitly as BH3/THF. BH3 adds twice across a terminal alkyne, which is why the standard teaching reagent is a bulky borane (disiamylborane, dicyclohexylborane, catecholborane, 9-BBN). The words bulky, hindered borane, disiamyl, dicyclohexyl and 9-BBN appear zero times in the package.
+
+**Learner impact:** Students learn a reagent that will be marked wrong on any exam drawn from the mapped textbooks (McMurry/OpenStax 9.4, Klein, Wade, Smith all specify a bulky borane). It also strips out the one place where sterics on the reagent control an outcome.
+
+**Evidence:** nugget-alkyne-hydration expanded text; question_sets ch9-hydration-reagent-product l2, ch9-hydration-reagent-product-v2 l2, ch9-draw-hydration-ketone-v2 prompt_text; grep returns 0 hits for disiamyl/dicyclohexyl/9-BBN/bulky borane.
+
+**Recommended outcome (need):** The anti-Markovnikov hydration condition needs a reagent that actually stops after one addition, and the chapter needs to say why an unhindered borane does not, in the prose and in every question that names the reagent.
+
+##### `instr-003` — HIGH · conceptual-support · confidence 0.97
+
+**Location:** section_id=`nugget-alkyne-structure` · asset_id=`blk-rw2ry74r` · anchor="https://en.wikipedia.org/wiki/Three_reductions,_three_different_products"
+
+**Observation:** All seven sections carry an external_link block titled 'Wikipedia - <title>' whose URL is that title with spaces replaced by underscores. None are real Wikipedia articles. Each is presented as 'Background reading on <topic>. Opens on Wikipedia.' with a CC BY-SA attribution line.
+
+**Learner impact:** Every student who follows the chapter's only offered outside reading lands on a Wikipedia no-article page, seven times out of seven. It also puts a false CC BY-SA attribution on a nonexistent source.
+
+**Evidence:** frontend/public/reader/topic-chapters/alkynes-organic-synthesis.json: 7 external_link blocks, provenance.source_url equals content.url; URL is verbatim the nugget/concept title.
+
+**Recommended outcome (need):** Each section either needs an outside-reading target that actually resolves and is on-topic, or needs no outside-reading block at all.
+
+##### `instr-002` — HIGH · missing-example · confidence 0.9
+
+**Location:** concept_slug=`alkyne-reduction-stereochemistry` · nugget_id=`nugget-alkyne-reduction` · question_slug=`ch9-reduction-sort` · anchor="H₂, poisoned Pd catalyst"
+
+**Observation:** The partial-hydrogenation condition is never named. Prose says 'a lead-poisoned palladium catalyst'; six questions and the roadmap write 'H2, poisoned Pd catalyst'. 'Lindlar' and 'quinoline' appear zero times. The dissolving-metal partner by contrast is given concretely as 'Na, NH3 (liquid)'.
+
+**Learner impact:** Every mapped textbook and essentially every exam writes this as 'Lindlar catalyst' or 'H2, Pd/CaCO3, quinoline'. A student who has only seen 'poisoned Pd catalyst' will not recognize the reagent on a problem set.
+
+**Evidence:** nugget-alkyne-reduction standard/expanded text; roadmap-chain-extension edge reagent; 6 question_sets entries; grep 'Lindlar' returns 0.
+
+**Recommended outcome (need):** The partial-hydrogenation condition needs the name and composition students will meet elsewhere, stated once in prose and used consistently in reagent strings.
+
+##### `instr-004` — HIGH · retrieval-practice · confidence 0.95
+
+**Location:** section_id=`nugget-alkyne-structure` · anchor="How many sigma and how many pi bonds make up a carbon-carbon triple bond"
+
+**Observation:** The package authors a practice_check on all 7 nuggets and 2 trouble_spots on all 7 concepts. None reach the compiled reader. Block census: 22 molecule, 7 text, 7 external_link, 4 video (hidden), 1 mcmurry_link, 1 reaction_coordinate, 1 teaching_asset. Zero callout blocks.
+
+**Learner impact:** The student-facing chapter is seven blocks of prose and a gallery of structures with no in-text check, no watch-out cue, and no self-test between sections.
+
+**Evidence:** Compiled reader block_type Counter shows no callout; topic.package.json contains practice_check on all 7 nuggets and trouble_spots on all 7 concepts.
+
+**Recommended outcome (need):** The authored practice checks and trouble spots need to surface in the reader between sections.
+
+##### `instr-005` — HIGH · missing-example · confidence 0.86
+
+**Location:** concept_slug=`acetylide-alkylation-synthesis` · nugget_id=`nugget-acetylide-alkylation` · anchor="Alkynes: An Introduction to Organic Synthesis"
+
+**Observation:** The chapter has no alkyne-preparation content. No concept, nugget, asset or question covers double dehydrohalogenation of a vicinal or geminal dihalide with two equivalents of strong base. 'dehydrohalogenation' returns 0 hits.
+
+**Learner impact:** In a chapter subtitled 'An Introduction to Organic Synthesis', students can extend and reduce an alkyne but have no way to make one, so every synthesis problem must be handed a terminal alkyne.
+
+**Evidence:** concepts[] contains no preparation concept; nugget-alkyne-addition expanded final sentence; grep dehydrohalogenation returns 0.
+
+**Recommended outcome (need):** The chapter needs a route into the alkyne functional group so students can plan a synthesis whose starting material is not already an alkyne.
+
+##### `instr-006` — HIGH · objective-alignment · confidence 0.91
+
+**Location:** concept_slug=`alkyne-electrophilic-addition` · nugget_id=`nugget-alkyne-addition` · anchor="Addition of X2 follows the analogous course, giving first a trans-dihaloalkene and then a tetrahaloalkane."
+
+**Observation:** The concept is titled 'Electrophilic addition of HX and X2 to alkynes' but X2 addition is one asserted sentence at the end. Neither learning objective mentions X2; no asset shows a dihaloalkene or tetrahaloalkane; none of the 28 questions references Br2, Cl2, a vicinal dihalide, or a tetrahalide.
+
+**Learner impact:** Half of what the concept advertises is taught by assertion and never assessed.
+
+**Evidence:** concepts[2].title vs nugget-alkyne-addition learning_objectives (both HX-only); asset_ids for the nugget; zero questions mention X2.
+
+**Recommended outcome (need):** Either X2 addition needs the treatment the HX pathway gets, or the concept title and scope need to stop promising it.
+
+##### `instr-011` — HIGH · objective-alignment · confidence 0.9
+
+**Location:** concept_slug=`acetylide-alkylation-synthesis` · nugget_id=`nugget-acetylide-alkylation` · question_slug=`ch9-name-terminal-butyne` · anchor="Explain why secondary and tertiary halides fail in this reaction."
+
+**Observation:** Three stated objectives are never assessed: (a) why secondary/tertiary halides fail (all four relevant items use methyl/primary halides); (b) choosing a base strong enough to deprotonate a terminal alkyne (no question asks for a base); (c) distinguishing terminal from internal alkyne from a structure (both nomenclature questions describe the chain in words, representation_tags ['text'], never showing a structure).
+
+**Learner impact:** The three ideas most likely to appear on an exam are stated once in prose and never rehearsed.
+
+**Evidence:** nugget-acetylide-alkylation learning_objectives[2]; nugget-terminal-acidity learning_objectives[1] and concept trouble_spots[1]; ch9-name-terminal-butyne/-v2 student_config has no structure_smiles.
+
+**Recommended outcome (need):** Each of these three objectives needs at least one item that requires the decision it names.
+
+##### `instr-008` — MEDIUM · visual-opportunity · confidence 0.88
+
+**Location:** asset_id=`rc-hx-addition` · nugget_id=`nugget-alkyne-addition` · anchor="Protonating an alkyne produces a vinyl cation"
+
+**Observation:** The vinyl cation is the chapter's one genuinely new species and is never rendered. No asset; no question carries its structure; rc-hx-addition labels minimum 1 'Vinyl cation + bromide' but minima_molecules supplies SMILES only for keys 0 and 2.
+
+**Learner impact:** Students accept a rate-determining-step argument turning entirely on the geometry and orbital picture of a species they have never seen drawn.
+
+**Evidence:** assets[] has no vinyl-cation entry; rc-hx-addition.spec.minima_molecules = {'0','2'}; ch9-vinyl-cation-profile min_1 label with no structure.
+
+**Recommended outcome (need):** The vinyl cation needs to be visible at the point the argument depends on it, with hybridization and empty orbital made explicit.
+
+##### `instr-009` — MEDIUM · misconception · confidence 0.82
+
+**Location:** nugget_id=`nugget-alkyne-addition` · concept_slug=`alkyne-electrophilic-addition` · anchor="The empty orbital sits in an sp framework with high s character"
+
+**Observation:** The empty orbital of a vinyl cation is an unhybridized p orbital; it is the cationic carbon's framework that is sp. As written the sentence reads as 'the empty orbital has high s character', which is false, and the chapter never states what the empty orbital actually is.
+
+**Learner impact:** A student who believes the empty orbital is an sp hybrid cannot draw a vinyl cation or explain its linear geometry, and carries the error into carbocation stability arguments generally.
+
+**Evidence:** nugget-alkyne-addition expanded paragraph 2; 'p orbital' appears in the structure nugget but never in the addition nugget.
+
+**Recommended outcome (need):** The vinyl cation's orbital description needs to be unambiguous so the s-character argument attaches to the framework rather than the vacancy.
+
+##### `instr-007` — MEDIUM · conceptual-support · confidence 0.83
+
+**Location:** nugget_id=`nugget-alkyne-addition` · question_slug=`ch9-vinyl-cation-profile-v2` · anchor="giving first a trans-dihaloalkene"
+
+**Observation:** The section asserts anti stereochemistry for X2 addition while the only mechanistic model offered is an open vinyl cation, which cannot deliver stereospecificity; no bridged halonium intermediate is mentioned. Meanwhile HX addition to an internal alkyne drops geometry entirely (ch9-vinyl-cation-profile-v2 labels the product '2-Bromobut-2-ene' with no geometry).
+
+**Learner impact:** A student reasoning from the taught mechanism will predict a stereorandom mixture for X2 and be told they are wrong, with no way to see why.
+
+**Evidence:** nugget-alkyne-addition expanded final sentence vs paragraph 2; ch9-vinyl-cation-profile-v2 min_2 label.
+
+**Recommended outcome (need):** The stereochemical claims need a mechanism that supports them, or need scoping so students are not asked to accept an outcome their model contradicts.
+
+##### `instr-010` — MEDIUM · misconception · confidence 0.8
+
+**Location:** question_slug=`ch9-acidic-proton-site-v2` · nugget_id=`nugget-terminal-acidity` · anchor="Being next to a triple bond does not make a C-H acidic"
+
+**Observation:** Two statements overstate the case: 'an internal alkyne has ... no acidic C-H at all' and the distractor feedback 'Being next to a triple bond does not make a C-H acidic'. A propargylic C-H has a pKa around 35, twenty-five units below an ordinary sp3 C-H.
+
+**Learner impact:** The absolute phrasing teaches that proximity to a pi system never affects C-H acidity, contradicting allylic/propargylic and later alpha-carbonyl acidity.
+
+**Evidence:** nugget-terminal-acidity expanded final sentence; ch9-acidic-proton-site-v2 wrong_answer_explanations for region_ids ['atom_2'].
+
+**Recommended outcome (need):** The claim needs to be bounded to the bases and pKa range in play rather than stated as an absolute about adjacency.
+
+##### `instr-013` — MEDIUM · assessment-readiness · confidence 0.85
+
+**Location:** concept_slug=`alkyne-hydration-tautomerization` · question_slug=`ch9-acetylide-sn2-arrow` · anchor="a proton moves from oxygen to the adjacent carbon while the pi bond shifts"
+
+**Observation:** The chapter narrates four mechanisms but the only arrow-level assessment in all 28 questions is ch9-acetylide-sn2-arrow and its variant, both asking for a single bond-forming arrow in the SN2. Tautomerization is described in three places and never drawn or graded.
+
+**Learner impact:** Tautomerization is the step the chapter identifies as the most common student error, yet students are only asked for the final product, never the proton-and-pi-bond bookkeeping.
+
+**Evidence:** question_sets by_type: curved_arrow 2 (both acetylide SN2); nugget-alkyne-hydration expanded paragraph 3; hint ladders reference the step but never grade it.
+
+**Recommended outcome (need):** The tautomerization step needs an item that makes the student perform the proton shift and pi-bond relocation.
+
+##### `instr-012` — MEDIUM · sequencing · confidence 0.87
+
+**Location:** concept_slug=`alkyne-hydration-tautomerization` · anchor=""prerequisites": ["alkyne-electrophilic-addition"]"
+
+**Observation:** Two concepts declare prerequisites narrower than their prose assumes. alkyne-hydration-tautomerization lists only alkyne-electrophilic-addition but teaches hydroboration-oxidation; alkyne-reduction-stereochemistry lists only alkyne-structure-and-bonding but rests on catalytic hydrogenation being syn addition. By contrast acetylide-alkylation-synthesis correctly declares sn2-substitution.
+
+**Learner impact:** Concept maps and prerequisite gating let a student into the hydration and reduction sections without the alkene chemistry those sections silently depend on.
+
+**Evidence:** concepts[3].prerequisites and concepts[4].prerequisites vs their nugget expanded text; compare concepts[6].prerequisites.
+
+**Recommended outcome (need):** The declared prerequisites for hydration and reduction need to name the alkene reactions their explanations stand on.
+
+##### `instr-014` — MEDIUM · notation-consistency · confidence 0.86
+
+**Location:** question_slug=`ch9-reduction-sort` · nugget_id=`nugget-alkyne-nomenclature` · anchor="cis-2-Butene"
+
+**Observation:** Alkene and haloalkene names mix pre-1993 and current IUPAC locant placement, sometimes within one question family. Current: cis-pent-2-ene, 2-chlorobut-1-ene, but-1-yne. Legacy: cis-2-butene, 2-bromopropene. ch9-reduction-sort uses 'cis-2-Butene' while ch9-reduction-sort-v2 uses 'cis-Hex-3-ene'. Common names (isobutylene, tert-butyl bromide) appear once each.
+
+**Learner impact:** The nomenclature section teaches the modern rule and the chapter's own product names then break it repeatedly.
+
+**Evidence:** nugget-alkyne-nomenclature expanded; asset titles mol-cis-2-butene / mol-2-bromopropene; ch9-reduction-sort vs -v2.
+
+**Recommended outcome (need):** One naming convention needs to hold across prose, asset titles and question options, and it should be the one the nomenclature section teaches.
+
+##### `instr-015` — MEDIUM · conceptual-support · confidence 0.85
+
+**Location:** section_id=`nugget-alkyne-structure` · asset_id=`blk-jnb7ox9c` · anchor="https://openstax.org/books/organic-chemistry/pages/9-why-this-chapter"
+
+**Observation:** The compiled reader carries exactly one OpenStax link, in the first section, pointing at the chapter landing page. The other six sections have no textbook link, and no section-level OpenStax targets appear anywhere.
+
+**Learner impact:** An instructor cannot point students from a reader section to the matching textbook section.
+
+**Evidence:** Compiled reader mcmurry_link count 1; textbook_matching.overrides gives chapter number 9 only, with no section crosswalk.
+
+**Recommended outcome (need):** Each reader section needs a textbook target specific enough to assign.
+
+##### `instr-016` — MEDIUM · assessment-readiness · confidence 0.8
+
+**Location:** concept_slug=`acetylide-alkylation-synthesis` · question_slug=`ch9-draw-hydration-ketone` · anchor=""structure_scaffold": 2"
+
+**Observation:** The two structure-drawing items are both hydration products. Nothing asks a student to draw the acetylide alkylation product, the geminal dihalide, an acetylide anion, or either reduction alkene. The synthesis assessment is entirely selection-based.
+
+**Learner impact:** A student can complete every item without producing a structure for either half of the chapter's stated arc.
+
+**Evidence:** compiled counts.by_type structure_scaffold 2, both alkyne-hydration-tautomerization; ch9-chain-extension-route student_config reagents[]/intermediates[].
+
+**Recommended outcome (need):** The synthesis and reduction objectives need at least one item where the student produces the product structure rather than selecting it.
+
+##### `instr-017` — LOW · assessment-readiness · confidence 0.7
+
+**Location:** question_slug=`ch9-dissolving-metal-error` · anchor="Keep cis-2-butene and justify it by syn delivery from the metal surface"
+
+**Observation:** The three repair options are not equally plausible: fix_trans carries the full correct justification while the distractors carry a disowned phrase or a claim rulable out from the reagent alone. Same asymmetry in -v2.
+
+**Learner impact:** A student can select the right repair by picking the option with reasoning attached rather than by diagnosing the flaw.
+
+**Evidence:** ch9-dissolving-metal-error student_config.repair_options; -v2 fix_hexane vs fix_poison/fix_trans.
+
+**Recommended outcome (need):** The repair options need parallel construction so the correct one is identified by its chemistry.
+
+**Open questions**
+
+- instr-003 (fabricated Wikipedia URLs) has no good category id; filed under conceptual-support, which understates it. The schema may want a broken-reference or rights-attribution id since this failure mode recurs across chapters.
+- All 28 questions are demo_eligible: false. Is that intentional, or should some core items surface in the public sampler?
+- All four video_briefs compiled as video blocks with url "" and is_hidden true. Read as intentionally unproduced-and-suppressed.
+- Is 'poisoned Pd catalyst' a deliberate vendor-neutral house style across ChemIllusion chapters, or specific to this package?
+- science_review.status is not_reviewed and available is false, so this was reviewed as a pre-publication draft.
+
+#### Struggling Student — 5.4/10
+
+The prose is careful and the question bank is unusually well built for a shaky learner, but almost none of that support reaches the person reading the chapter. The compiled reader contains 36 blocks and not one is a callout: all 7 practice_checks and all 14 trouble_spots are stranded in the package. The sibling chapter alkenes-reactions-and-synthesis.json, compiled 15 hours later the same day, has 12 callouts, so this is a stale artifact. All four video briefs compiled to hidden blocks with empty urls, and no mechanism figure exists anywhere, leaving the vinyl cation and vinyl anion as words I am asked to picture but never shown. Where I would stall: section 1 (a cylinder of pi density I cannot see), section 4 (the anti-Markovnikov enol never drawn), section 5 (why the vinyl anion ends up trans), and section 7 (eight new ideas in one section).
+
+**Publication blockers:** _none_
+
+**Strengths**
+
+- Every one of the 28 question sets carries a three-level hint ladder that escalates properly from conceptual nudge to narrowing question to concrete worked step.
+- Wrong-answer explanations are specific rather than generic; ch9-degrees-unsaturation names the exact arithmetic slip.
+- The reader preserves all three depth levels per section, so a student drowning in the default text has a shorter version available.
+- The two error_repair items model the diagnostic habit a shaky student lacks by explicitly isolating the one wrong claim of three.
+- The reduction section's framing, one substrate three products selected entirely by conditions, gives a single organizing idea.
+- ch9-chain-extension-route hint level 1 teaches the transferable move (count carbons) rather than hinting at the answer.
+
+**Findings**
+
+##### `stud-001` — HIGH · retrieval-practice · confidence 0.97
+
+**Location:** section_id=`nugget-alkyne-hydration` · nugget_id=`nugget-alkyne-hydration` · concept_slug=`alkyne-hydration-tautomerization` · anchor="Reporting the enol as the isolated product instead of tautomerizing it to the carbonyl compound"
+
+**Observation:** Every authored piece of in-reading scaffolding is missing from the compiled reader. The package holds 7 practice_check blocks and 14 trouble_spots; the compiled chapter contains zero callout blocks. Census: molecule 22, text 7, external_link 7, video 4, mcmurry_link 1, reaction_coordinate 1, teaching_asset 1. The sibling chapter compiled the same day at 17:45 contains 12 callouts carrying exactly these two kinds of content; this chapter was compiled at 02:03.
+
+**Learner impact:** I read seven long sections with nowhere to stop and check whether anything stuck, and with no warning at any of the fourteen places the author already knows I will go wrong. The single highest-value line for me, the warning not to report the enol, reaches nobody.
+
+**Evidence:** topic.package.json nuggets[*].practice_check (7 present); concepts[*].trouble_spots (14 present). Compiled reader: 0 occurrences of 'practice', 'trouble', or 'callout'.
+
+**Recommended outcome (need):** The self-check questions and named-trap warnings that already exist in the package need to appear in the reading flow at the section they belong to.
+
+##### `stud-002` — HIGH · cognitive-load · confidence 0.94
+
+**Location:** section_id=`nugget-alkyne-addition` · asset_id=`rc-hx-addition` · nugget_id=`nugget-alkyne-addition` · anchor="a vinyl cation is considerably higher in energy than the sp2 carbocation"
+
+**Observation:** The vinyl cation and vinyl anion are the two intermediates the chapter's reasoning rests on and neither is ever drawn. 'Vinyl cation' appears 21 times and 'vinyl anion' 17 times; there is no charged-carbon SMILES anywhere. rc-hx-addition supplies minima_molecules only for keys 0 and 2, deliberately skipping index 1, the minimum labelled 'Vinyl cation + bromide'.
+
+**Learner impact:** I am asked to compare the stability of a thing I have never seen against another thing I have never seen, so I memorize 'first step is rate determining' instead of understanding it.
+
+**Evidence:** assets[] contains 16 molecule assets, none an ion other than mol-propynide; rc-hx-addition.spec.minima_molecules = {'0': 'C#CC', '2': 'CC(Br)=C'}.
+
+**Recommended outcome (need):** The two charged intermediates carrying the chapter's central arguments need to be visible where those arguments are made, including which carbon bears the charge and its geometry.
+
+##### `stud-003` — HIGH · worked-example-gap · confidence 0.93
+
+**Location:** section_id=`nugget-acetylide-alkylation` · nugget_id=`nugget-acetylide-alkylation` · question_slug=`ch9-acetylide-sn2-arrow` · anchor="In curved-arrow terms the step takes exactly two arrows"
+
+**Observation:** The chapter contains no mechanism figure of any kind. Three of seven nuggets are typed 'mechanism'; the only non-molecule assets are one reaction-coordinate diagram and one synthesis roadmap. The SN2 arrow placement is delivered as a 130-word paragraph of verbal instructions and then graded.
+
+**Learner impact:** Drawing arrows is a spatial skill and I am being taught it in sentences. This is where I would give up and copy an arrow pattern without understanding it.
+
+**Evidence:** assets[] types: 16 molecule, 1 reaction_coordinate, 1 synthesis_roadmap; no mechanism or curved-arrow asset.
+
+**Recommended outcome (need):** A student needs to see the acetylide SN2 electron flow, not only read it, before being graded on reproducing it.
+
+##### `stud-004` — HIGH · cognitive-load · confidence 0.95
+
+**Location:** section_id=`nugget-alkyne-structure` · asset_id=`video-alkyne-orbitals` · concept_slug=`alkyne-structure-and-bonding` · anchor="those two pi clouds form a cylinder of electron density around the sigma bond axis"
+
+**Observation:** All four video briefs compiled with empty url and is_hidden true, and [internal source reference — not in this repo] returns null for hidden blocks, so nothing renders. The four missing animations are precisely the load-reducing ones. Section 1 is left with two flat line structures which show nothing about orbitals, though the concept declares preferred_representations ['molecule','orbital_overlay'] and no orbital_overlay asset exists.
+
+**Learner impact:** I am told to visualize two perpendicular p-orbital pairs superimposing into a cylinder and then conclude there is no cis/trans isomerism. I cannot build that image from a flat line drawing, so I accept the cylinder claim and lose the intuition that would make the rest cohere.
+
+**Evidence:** Four video blocks with url "" and is_hidden true (blk-rqx41wqp, blk-728vdyws, blk-wwgj4r7a, blk-2k5bmqt5); all four video_briefs status needs_review.
+
+**Recommended outcome (need):** The three-dimensional claims in section 1 need some visual carrier a student can actually see.
+
+##### `stud-005` — HIGH · cognitive-load · confidence 0.86
+
+**Location:** section_id=`nugget-acetylide-alkylation` · nugget_id=`nugget-acetylide-alkylation` · anchor="Most reactions in an introductory course rearrange functional groups on a fixed skeleton."
+
+**Observation:** The final section is depth 'advanced', 8 minutes, and introduces roughly ten new ideas in four paragraphs: acetylide formation, SN2 mechanism, exact placement of two curved arrows, two arrow-direction errors, arrow points at carbon not halogen, chain-length arithmetic, double alkylation of acetylene, methyl/primary-only restriction, competing E2, and retrosynthetic disconnection.
+
+**Learner impact:** By the third paragraph I have lost the thread of the first. Each new idea arrives before the previous one has been practiced, with no checkpoint to consolidate.
+
+**Evidence:** nugget-acetylide-alkylation depth advanced, duration 8, three learning_objectives, four paragraphs; concept difficulty advanced.
+
+**Recommended outcome (need):** This section needs breaking into digestible stages with a chance to consolidate between them.
+
+##### `stud-006` — HIGH · cognitive-load · confidence 0.9
+
+**Location:** section_id=`nugget-alkyne-hydration` · nugget_id=`nugget-alkyne-hydration` · question_slug=`ch9-hbr-markovnikov` · anchor="hydroboration-oxidation adds it anti-Markovnikov to give an aldehyde"
+
+**Observation:** 'anti-Markovnikov' appears in exactly one place in the reading path: the terse variant of nugget-alkyne-hydration. It is absent from the standard and expanded text, which is what the reader renders by default. Yet the term is used as established vocabulary throughout the question bank feedback.
+
+**Learner impact:** I get a question wrong, open the explanation meant to rescue me, and it uses a word the chapter never taught me. The feedback becomes one more thing I do not understand.
+
+**Evidence:** Per-variant scan: 'anti-Markovnikov' present in nugget-alkyne-hydration.text.terse only; absent from .standard, .expanded, and the compiled reader. Present in feedback_bundle of ch9-hbr-markovnikov, -v2, ch9-draw-hydration-ketone, -v2.
+
+**Recommended outcome (need):** Vocabulary used in graded feedback has to be defined in the depth level a student actually reads.
+
+##### `stud-007` — MEDIUM · conceptual-support · confidence 0.88
+
+**Location:** question_slug=`ch9-vinyl-cation-profile` · section_id=`nugget-alkyne-addition` · anchor="Report the number of steps, the rate-determining step, the overall direction"
+
+**Observation:** ch9-vinyl-cation-profile requires step_types ['endergonic','exergonic']. 'endergonic' does not occur in any nugget text at any depth; 'exergonic' occurs exactly once, used but never defined.
+
+**Learner impact:** I can see step one goes up and step two comes down but cannot map that to vocabulary the chapter never gave me, so I guess or skip.
+
+**Evidence:** answer_key.expected.step_types; text scan across 7 nuggets x 3 depths: endergonic 0 hits, exergonic 1 hit.
+
+**Recommended outcome (need):** Either the endergonic/exergonic vocabulary needs stating where the energy profile is discussed, or the question needs to ask in the language the chapter uses.
+
+##### `stud-008` — MEDIUM · worked-example-gap · confidence 0.87
+
+**Location:** section_id=`nugget-alkyne-hydration` · asset_id=`mol-prop-1-en-2-ol` · question_slug=`ch9-draw-hydration-ketone-v2` · anchor="Boron, the electrophilic partner, adds to the less hindered terminal carbon"
+
+**Observation:** Only one of the two enols is drawn. mol-prop-1-en-2-ol is the Markovnikov enol; the anti-Markovnikov enol is never shown. In the reader the hydration section presents propyne, the Markovnikov enol, acetone, propanal, so the aldehyde appears immediately after an enol that does not lead to it. ch9-draw-hydration-ketone-v2 grades the hydroboration route and expects students to recognize 'CCCC=CO', an enol never shown.
+
+**Learner impact:** The natural inference is that the one enol tautomerizes to both carbonyl products, exactly backwards from the chapter's point.
+
+**Evidence:** assets[] contains mol-prop-1-en-2-ol (CC(O)=C) with no counterpart; reader block order blk-8qdp89fg, blk-5gd4d2eh, blk-qli0byrp, blk-3hfpqab7.
+
+**Recommended outcome (need):** Both hydration routes need their intermediate made visible so the two paths are visibly parallel.
+
+##### `stud-009` — MEDIUM · cognitive-load · confidence 0.82
+
+**Location:** section_id=`nugget-alkyne-structure` · nugget_id=`nugget-alkyne-structure` · question_slug=`ch9-degrees-unsaturation-v2` · anchor="The degree of unsaturation is (2C + 2 - H) / 2"
+
+**Observation:** Degrees of unsaturation is bolted onto the end of the sp-hybridization section as a fourth unrelated topic: formula, an 'equivalently' restatement of the same formula, a worked count, then the C7H10 ring inference in a single clause. Not listed as a prerequisite, no section of its own, graded by two numeric items.
+
+**Learner impact:** Two phrasings of one rule is harder for me, not easier. The ring inference gets one clause and is the whole point of a graded question.
+
+**Evidence:** nugget-alkyne-structure.text.expanded final paragraph; concept prerequisites contain no unsaturation entry; ch9-degrees-unsaturation and -v2.
+
+**Recommended outcome (need):** The unsaturation count needs its own space and a worked step, and the ring inference needs demonstrating rather than mentioning.
+
+##### `stud-010` — MEDIUM · conceptual-support · confidence 0.96
+
+**Location:** section_id=`nugget-terminal-acidity` · anchor="Wikipedia — Why a terminal alkyne C-H is acidic"
+
+**Observation:** All seven 'Background reading' links are auto-derived from nugget or concept titles and point at Wikipedia articles that do not exist. The peer chapter's package authors an explicit wikipedia_title on each concept; this package's concepts have no such field.
+
+**Learner impact:** The link labelled 'Background reading' is the one thing a struggling student clicks when a section did not land, and all seven are dead. Seven dead ends teaches me the chapter's help is not real.
+
+**Evidence:** Compiled reader external_link blocks blk-rw2ry74r, blk-fpz3t6ps, blk-0db16po8, blk-pabt67et, blk-3skaa4wp, blk-ttnfj3nw, blk-k1bqp7tz; concepts[] contain no wikipedia_title.
+
+**Recommended outcome (need):** The background-reading affordance needs to resolve to a real page for each section, or not be offered.
+
+##### `stud-011` — MEDIUM · conceptual-support · confidence 0.89
+
+**Location:** section_id=`nugget-alkyne-hydration` · question_slug=`ch9-hydration-reagent-product` · anchor="Hydroboration followed by oxidative workup adds it the other way"
+
+**Observation:** The reader never states the hydroboration reagents. 'BH3', 'BH₃' and 'H2O2' appear zero times in the compiled reader; the prose says only 'hydroboration-oxidation' and 'oxidative workup'. The question bank then presents those exact reagents as the thing to recognize.
+
+**Learner impact:** I recognize the words but not the reagent line in front of me, so I match by elimination instead of by chemistry.
+
+**Evidence:** Compiled reader text scan: BH3 0 hits, H2O2 0 hits. ch9-hydration-reagent-product left[1].text; ch9-draw-hydration-ketone-v2 prompt_text.
+
+**Recommended outcome (need):** The reagent notation students meet on an exam needs tying to the named transformation in the reading.
+
+##### `stud-012` — MEDIUM · conceptual-support · confidence 0.91
+
+**Location:** section_id=`nugget-alkyne-reduction` · concept_slug=`alkyne-reduction-stereochemistry` · anchor="a lead-poisoned palladium catalyst is reactive enough to reduce an alkyne"
+
+**Observation:** The standard name for the poisoned catalyst is never given. 'Lindlar' appears zero times in the package, the reader, and the question bank.
+
+**Learner impact:** The chapter is internally consistent, which is what makes this dangerous: when a homework question says 'H2, Lindlar' I do not recognize it as the reaction I just studied.
+
+**Evidence:** Case-insensitive search for 'Lindlar' returns 0 across all three files.
+
+**Recommended outcome (need):** The reduction section needs to connect its descriptive phrase to the name students will encounter elsewhere.
+
+##### `stud-013` — MEDIUM · conceptual-support · confidence 0.88
+
+**Location:** section_id=`nugget-alkyne-structure` · concept_slug=`alkyne-structure-and-bonding` · anchor="Each carbon of a carbon-carbon triple bond is sp hybridized."
+
+**Observation:** Nothing in the compiled reader signals what matters most or what a student needs before starting. 18 learning_objectives and all concept-level prerequisites are in the package and none reach the reader: no objectives block, no prerequisite block, no summary block.
+
+**Learner impact:** Everything reads as equally weighted. I never find out the chapter assumes Markovnikov addition and SN2 are solid, so I feel behind rather than going back to review.
+
+**Evidence:** Compiled reader has no objectives, prerequisite, or summary block; 'objective' returns 0 hits.
+
+**Recommended outcome (need):** A student needs to be told at the start of each section what they are expected to have and what they should be able to do at the end.
+
+##### `stud-014` — MEDIUM · worked-example-gap · confidence 0.84
+
+**Location:** section_id=`nugget-acetylide-alkylation` · question_slug=`ch9-chain-extension-route` · anchor="Working backwards from a target cis or trans alkene, disconnect it to the alkyne"
+
+**Observation:** Retrosynthesis is the skill the chapter title advertises and it is introduced in the final paragraph of the final section, in two sentences plus one fully-compressed example. No intermediate reasoning is shown. It is then graded by two advanced synthesis_route items.
+
+**Learner impact:** The example shows me the answer, not the process, so I cannot reproduce it on a target I have not seen; I start trying reagents at random.
+
+**Evidence:** nugget-acetylide-alkylation.text.expanded final paragraph; ch9-chain-extension-route and -v2 both difficulty advanced; the roadmap shows the forward sequence.
+
+**Recommended outcome (need):** The backwards-planning move needs demonstrating step by step at least once before students perform it under grading.
+
+##### `stud-015` — MEDIUM · cognitive-load · confidence 0.8
+
+**Location:** section_id=`nugget-terminal-acidity` · asset_id=`mol-propane` · anchor="a pKa of about 25, compared with roughly 44 for a vinylic C-H and roughly 60 for an alkane C-H"
+
+**Observation:** The acidity section is built entirely on a three-way comparison and the four figures in that section are plain line structures carrying none of those numbers or percentages. Their alt text likewise carries no pKa or s-character value.
+
+**Learner impact:** The pictures show three short hydrocarbons that look almost identical and tell me nothing about the property being compared, so the comparison stays as six numbers in a paragraph.
+
+**Evidence:** Reader section blocks blk-fmy06pun, blk-ghpl72qg, blk-xnmyje08, blk-z01erekt; asset alt_text contains no acidity data.
+
+**Recommended outcome (need):** The comparison this section exists to teach needs to be visible where the compared structures are shown.
+
+##### `stud-016` — LOW · misconception · confidence 0.76
+
+**Location:** question_slug=`ch9-acetylide-sn2-arrow` · section_id=`nugget-acetylide-alkylation` · anchor="Draw the single curved arrow that forms the new carbon-carbon bond."
+
+**Observation:** The reading says emphatically that this step needs two arrows and that both must be placed, then the graded item sets max_arrows 1 and asks for the single bond-forming arrow. The second arrow is offered as a labeled site but never expected.
+
+**Learner impact:** Having just been told twice that leaving out an arrow is the error to avoid, being asked for one arrow makes me think I misread the question.
+
+**Evidence:** nugget-acetylide-alkylation.text.expanded; ch9-acetylide-sn2-arrow student_config.max_arrows = 1; sites list includes bromine as site 4 with no expected arrow.
+
+**Recommended outcome (need):** The relationship between the two arrows the chapter teaches and the one arrow the item grades needs to be explicit.
+
+**Open questions**
+
+- The compiled reader was generated at 2026-07-31T02:03Z while alkenes-reactions-and-synthesis.json was generated at 17:45Z the same day and does contain callouts. Is stud-001 fixed simply by recompiling?
+- The reader renders the expanded text as the default, which for a low-confidence student is the longest and densest of the three variants. Not filed as a finding because it looks platform-wide.
+- None of the 28 questions is demo_eligible and the chapter is available false, so I could not tell whether the question bank is reachable from inside the reading flow.
+- No new category ids were coined.
+
+#### Accessibility Persona — 5.4/10
+
+The prose layer is genuinely accessible: every structural claim that matters is stated in words, all 18 figures carry non-empty alt text describing chemistry, every one of the 28 questions carries an accessible_description and a three-level hint ladder in which every hint has a text form, both structure-drawing questions set typed_structure_entry allowed, and the renderers for matching, categorize, comparison matrix, rank order, curved arrow, synthesis route and reaction-coordinate reasoning are all labeled select controls rather than drag targets. The failures concentrate in the question accessibility layer. Three authored accessible_descriptions hand a screen-reader user the solution outright, and the compile-time guard passes all of them. The hotspot pair is the one activity a non-visual learner cannot complete on the merits: atom targets are keyboard-reachable buttons labeled only 'C atom 1/2/3' with no connectivity. Underneath both sits a structural problem: accessible_description is read by only two renderers in the codebase, so for 26 of 28 questions the chapter's non-visual provision reaches no learner. Two lower-tier gaps: no asset carries a long_description, and all seven practice_check items are absent from the compiled reader.
+
+**Publication blockers:** `access-001`, `access-002`, `access-003`
+
+**Strengths**
+
+- Every reaction-outcome claim is carried by prose, not by a figure: the cis/trans distinction, the hydration fork, and the sp/sp2/sp3 acidity ordering are all stated in words.
+- All 18 figures have substantive alt text describing chemistry rather than naming the image; the stereochemically load-bearing pair states 'both methyl groups on the same side' versus 'opposite sides'.
+- Both structure_scaffold questions set typed_structure_entry allowed, which opens the TypedStructureRenderer keyboard path into an otherwise pointer-only Ketcher canvas. structure_scaffold fails closed by default, so this is an active authoring choice.
+- Every one of the 84 hints carries a text form, including the visual ones: structure_highlight hints ship text plus caption and region_focus hints state the reasoning rather than relying on the highlight.
+- The response workspaces are keyboard-complete without an accommodation path: matching and categorize are labeled selects, comparison_matrix is a semantic table of per-cell selects, curved_arrow and synthesis_route are selects over named sites. No drag-only interaction appears anywhere.
+- The curved_arrow pair is answerable purely from text: sites are authored with meaningful labels that appear verbatim in the select options.
+- The reaction_coordinate_reasoning pair is the model for the rest: the SVG is role img with the authored description as its label, giving the same control-point values a sighted student reads without stating step count, rate-determining step or direction.
+- The reader surfaces figure descriptions to everyone: cards print a visible 'Described as' line, and turning images off converts a figure into a callout carrying its description instead of dropping it.
+
+**Findings**
+
+##### `access-001` — BLOCKER · alt-text-quality · confidence 0.98
+
+**Location:** section_id=`nugget-alkyne-hydration` · concept_slug=`alkyne-hydration-tautomerization` · question_slug=`ch9-draw-hydration-ketone` · anchor="The expected answer is a four-carbon ketone with the carbonyl at position two."
+
+**Observation:** Both structure_scaffold questions state their own answer in accessibility_bundle.accessible_description. ch9-draw-hydration-ketone appends 'The expected answer is a four-carbon ketone with the carbonyl at position two.' which is butan-2-one, exactly answer_key.smiles CCC(C)=O. Its variant appends 'The expected answer is a five-carbon aldehyde.' The aldehyde-not-ketone discrimination is the entire point of the hydroboration route, and answer_key.smiles is CCCCC=O.
+
+**Learner impact:** A screen-reader user is told the answer before attempting the question, so the assessment measures nothing for them and their score is not comparable to a sighted peer's. It removes the one place these questions test the chapter's central hydration contrast.
+
+**Evidence:** topic.package.json and compiled/question-set.json both contain the leaked text. find_accessibility_leaks passes both: the answer key is a SMILES under key 'smiles', not an answer-marker key, and four/two/five are words, not the digits the numeric check scans for.
+
+**Recommended outcome (need):** Both descriptions must convey only the task and the stimulus a sighted student sees. The product class, carbon count and carbonyl position must not appear. This class of semantic leak is invisible to the compile-time guard.
+
+##### `access-002` — BLOCKER · alt-text-quality · confidence 0.97
+
+**Location:** section_id=`nugget-terminal-acidity` · concept_slug=`terminal-alkyne-acidity` · question_slug=`ch9-acidic-proton-site` · anchor="Select the terminal sp carbon, the one bonded to a single hydrogen at the end of the triple bond."
+
+**Observation:** Both hotspot questions name the target atom in their accessible_description. The prompt asks which carbon carries the acidic hydrogen and the description answers it. The v2 description does the same for pent-1-yne.
+
+**Learner impact:** The non-visual equivalent becomes an instruction sheet: the learner is told which atom to pick and never performs the hybridization reasoning the question exists to assess.
+
+**Evidence:** ch9-acidic-proton-site: molecule_smiles C#CC, answer_key correct_option_ids [redacted] which IS the terminal sp carbon the description names. -v2: molecule_smiles CCCC#C, answer_key atom_4. The guard passes because the literal id string does not appear.
+
+**Recommended outcome (need):** The hotspot descriptions must establish the stimulus without naming the answer atom. This fix is coupled to access-003: a neutral description is only usable if the learner can map it onto the selectable targets.
+
+##### `access-003` — BLOCKER · interactive-fallback · confidence 0.93
+
+**Location:** section_id=`nugget-terminal-acidity` · concept_slug=`terminal-alkyne-acidity` · question_slug=`ch9-acidic-proton-site` · anchor="Click the carbon of propyne that carries the acidic hydrogen."
+
+**Observation:** Once the leaked description is removed, the hotspot pair becomes unanswerable without vision. The renderer builds one button per atom over a structure image whose alt is the fixed string 'Structure for this question', and each button's accessible name is only symbol + 'atom' + index+1. Nothing states which numbered carbon is triply bonded or bears the hydrogen. Keyboard reachability is fine; the missing thing is the information needed to choose.
+
+**Learner impact:** A blind or low-vision learner is presented with three interchangeable buttons and must guess. keyboard_complete is True so nothing in the pipeline flags this; the barrier is informational, not motor.
+
+**Evidence:** [internal source reference — not in this repo] and :264-271; [internal source reference — not in this repo] enrich_student_config expands molecule_smiles into the payload triggering this branch; [internal source reference — not in this repo] declares nonvisual_response_mode named_region_list but these questions supply a molecule rather than named regions.
+
+**Recommended outcome (need):** A non-visual learner needs the connectivity of the displayed structure conveyed in a form that maps onto the selectable atom labels, supplied as stimulus not as answer. Alternatively the item needs an equivalent response path.
+
+##### `access-004` — HIGH · media-equivalence · confidence 0.9
+
+**Location:** section_id=`nugget-alkyne-structure` · question_slug=`ch9-sp-hybridized-carbons` · anchor="Four named compounds with structures: propyne, propene, but-2-yne, and propane."
+
+**Observation:** The chapter authors accessible_description on all 28 questions, but only two renderers read accessibilityBundle: ReactionCoordinateQuestionRenderer and MolecularGeometryRenderer. Every other type used here discards it, so 26 of 28 authored non-visual equivalents reach no learner.
+
+**Learner impact:** The chapter's accessibility provision is largely inert at delivery. Where the stimulus is a picture the learner falls back to generic alt. It also means an author fixing access-001 or -002 has no in-product way to confirm the corrected text is what a learner hears.
+
+**Evidence:** Repo-wide search for accessibilityBundle under frontend/src returns consumers only at [internal source reference — not in this repo] and [internal source reference — not in this repo] plus plumbing. Backend delivers it on every question.
+
+**Recommended outcome (need):** Every question carrying an authored non-visual equivalent needs it to reach the learner in the response surface it belongs to. This is platform wiring surfaced by this chapter, not a defect the package can fix alone.
+
+##### `access-005` — HIGH · alt-text-quality · confidence 0.88
+
+**Location:** section_id=`nugget-alkyne-structure` · concept_slug=`alkyne-structure-and-bonding` · question_slug=`ch9-degrees-unsaturation` · anchor="using the formula two C plus two minus H, all divided by two"
+
+**Observation:** Both numeric_with_units questions put the solution method in accessible_description. The prompt gives only the formula and the instruction to calculate; the relation appears nowhere in prompt_text or student_config and is otherwise held back until hint level 3. These questions have no visual stimulus, so the description substitutes for nothing.
+
+**Learner impact:** The learner receiving the description is handed the method for free while a sighted peer either recalls it or spends a hint, making results non-comparable.
+
+**Evidence:** ch9-degrees-unsaturation and -v2 accessible_description; hints level 3 are worked_step entries revealing the same reasoning; answer keys value 2.0 and 3.0 with the description spelling numbers as words so the guard cannot see it.
+
+**Recommended outcome (need):** For a question with no visual stimulus the description should add nothing beyond the task and response format; the relation belongs in the hint ladder where it already is.
+
+##### `access-006` — MEDIUM · media-equivalence · confidence 0.85
+
+**Location:** asset_id=`rc-hx-addition` · section_id=`nugget-alkyne-addition` · concept_slug=`alkyne-electrophilic-addition` · anchor="Two-step free-energy profile for HBr addition to propyne"
+
+**Observation:** None of the 18 assets carries accessibility.long_description. The reader treats long_description as the fuller equivalent in two places: TopicPackageChapterRenderer textEquivalentBlock falls back to alt_text when showImages is off, and TeachingAssetLiveRenderer renders it as a separate paragraph. With the field empty both paths collapse to one sentence. The two composite figures feel this most.
+
+**Learner impact:** A learner who turns images off receives one sentence per figure. For the energy profile the measure-each-barrier-from-the-preceding-minimum reasoning is not recoverable, and the absent schematic caveat risks treating the values as real energies.
+
+**Evidence:** All 18 assets have accessibility keys == ['alt_text'] exactly; [internal source reference — not in this repo]; [internal source reference — not in this repo].
+
+**Recommended outcome (need):** The two composite figures need a fuller structured equivalent than one sentence, including an explicit statement that the energy profile is schematic. The 16 single-molecule figures are adequately served by their existing alt text.
+
+##### `access-007` — MEDIUM · retrieval-practice · confidence 0.92
+
+**Location:** section_id=`nugget-alkyne-structure` · nugget_id=`nugget-alkyne-structure` · anchor="How many sigma and how many pi bonds make up a carbon-carbon triple bond"
+
+**Observation:** All seven nuggets author a practice_check and none appears in the compiled reader. The compiled file contains zero callout blocks and the reader components contain no practice_check consumer outside the unrelated TextbookOutputView.
+
+**Learner impact:** The chapter's only in-reader self-check is missing for every learner, disproportionately affecting learners who cannot skim and rely on explicit checkpoints to confirm comprehension.
+
+**Evidence:** All seven nuggets carry practice_check; grep for 'practice' and 'callout' in the compiled reader returns 0.
+
+**Recommended outcome (need):** The authored per-section retrieval checks need to reach the reader as content, encountered in reading order at the end of each section.
+
+##### `access-008` — MEDIUM · interactive-fallback · confidence 0.8
+
+**Location:** asset_id=`video-three-reductions` · section_id=`nugget-alkyne-reduction` · concept_slug=`alkyne-reduction-stereochemistry` · anchor="Place but-2-yne at the center with three arrows radiating out."
+
+**Observation:** Four video_briefs are authored with formats mp4/gif and status needs_review. None declares captions, a transcript, or an audio-description track, and none states the motion must be pausable or steppable. GIF delivery has no pause, replay or step control. The compiled blocks are hidden with empty urls so nothing is broken today; the gap is in what the briefs commit to producing.
+
+**Learner impact:** As specified these videos would ship without a caption or transcript deliverable. video-three-reductions attributes cis geometry to syn surface delivery and trans to the equilibrating vinyl anion, so a deaf learner would see three products with no access to the causal claim.
+
+**Evidence:** Four video_briefs each have storyboard plus narration_outline and no caption/transcript/audio-description field; compiled blocks all url "" and is_hidden true.
+
+**Recommended outcome (need):** Before production each needs a committed text equivalent for its audio and a delivery form that can be paused, replayed or stepped. Forward-looking: nothing is currently exposed to a learner.
+
+##### `access-009` — LOW · keyboard-operability · confidence 0.82
+
+**Location:** section_id=`nugget-alkyne-structure` · anchor="Propyne, a terminal alkyne"
+
+**Observation:** The compiled reader's heading levels skip a rank. Chapter title renders h1 and each section title h2, but every figure card inside a section renders its title as h4. No h3 exists anywhere, so the outline goes h1 to h2 to h4 in all seven sections.
+
+**Learner impact:** Screen-reader users navigate by heading level and rank. A missing rank makes figure headings read as nested one level deeper than they are.
+
+**Evidence:** [internal source reference — not in this repo], :202; [internal source reference — not in this repo], :303, :515, :542 and [internal source reference — not in this repo] all use h4. No h3 in the reader block path.
+
+**Recommended outcome (need):** Figure and card headings inside a section need to sit one rank below the section heading. This is a reader-component change, not a package change.
+
+**Open questions**
+
+- All the Wikipedia links in the compiled chapter point at URLs built from the section heading rather than a real article. Logged rather than filed because it is a content-sourcing defect other personas own; noting that dead links are disproportionately costly to screen-reader users who navigate by link list.
+- I could not determine whether the accessibility_bundle is consumed by any export surface outside the two frontend renderers. If it is, the leaks reach learners today; if not, they are latent until the wiring lands.
+- The hotspot atom buttons announce 1-based positions derived from input-SMILES order. Any atom-by-atom description must be authored against that same numbering; I did not verify the rendered depiction's atom order matches input-SMILES order for every molecule.
+- ch9-reduction-sort-v2 inverts its parent's direction while both share the phrasing 'Sort each'. I could not tell whether the per-item select label makes that inversion clear to a learner who cannot see the two columns.
+
+#### Learner with Visual Preference — 5.2/10
+
+The chapter is generously supplied with figures on paper: 18 assets, each with a purposeful learning_goal and alt text, and every one compiling into a reader block. But 16 of 18 are standalone line structures, and the only two composed figures are both broken at render time. The HBr reaction-coordinate diagram authors barrier sizes high/low that are not valid values, so both barriers silently collapse to medium and the profile draws two identical peaks with the product exactly level with the reactants, the opposite of what its own alt text and its paired question both say. The chain-extension roadmap authors its arrows as edges, but the renderer's contract is steps, so every arrow renders unlabeled and the branch flattens into a linear chain depicting cis-pent-2-ene converting into trans-pent-2-ene. Beyond those, the chapter's inherently spatial claims are carried by prose alone: the sp/two-perpendicular-pi/cylinder picture has no figure, no figure anywhere shows a reactant plus arrow plus product even though the reader supports a reaction block, and the cis-versus-trans discrimination is made on words alone. The figures that exist are readable: no asset authors rdkit_options, so nothing has oversized stereo glyphs on top of a structure.
+
+**Publication blockers:** `visual-001`, `visual-002`
+
+**Strengths**
+
+- Every one of the 18 authored assets compiles into a reader block; nothing is stranded in the package, and synthesis_roadmap and reaction_coordinate both have working reader render paths.
+- Every asset carries a specific learning_goal that compiles through to the on-page caption, so no figure is decorative or unexplained.
+- No asset authors rdkit_options anywhere, so there are no oversized R/S or E/Z annotation glyphs sitting on top of the structures.
+- The four unproduced videos are correctly compiled as is_hidden true rather than shipping empty players.
+- The two reaction_coordinate_reasoning questions author their profiles as explicit control points rather than qualitative descriptors, so those diagrams match the answer key, which is also what makes the reader figure's divergence detectable.
+- Structures authored on answer options do reach the student on select, multi-select, matching, hotspot, curved-arrow and error-repair questions via server-rendered SVG data URIs.
+- Alt text is present on all 18 assets and is specific about spatial arrangement, which is what makes the two broken figures' contradictions verifiable.
+
+**Findings**
+
+##### `visual-001` — BLOCKER · figure-accuracy · confidence 0.97
+
+**Location:** section_id=`nugget-alkyne-addition` · nugget_id=`nugget-alkyne-addition` · concept_slug=`alkyne-electrophilic-addition` · asset_id=`rc-hx-addition` · anchor="HBr addition to propyne: a shallow vinyl cation well"
+
+**Observation:** The chapter's only energy diagram renders with two identical activation barriers and a product exactly level with the reactants, so it shows neither the rate-determining step nor an exergonic reaction. The authored spec uses barrier values high and low, which are not valid: the renderer accepts only small/medium/large and silently substitutes medium for both.
+
+**Learner impact:** A learner who goes to the figure to see what the prose asserts sees the opposite. The section's point is that the first step is rate determining; the drawn profile has two equal peaks from which no rate-determining step can be read, and a flat overall energy change saying HBr addition is thermoneutral. The caption instructs the student to read something that is not there.
+
+**Evidence:** rc-hx-addition spec steps barrier 'high' and 'low'. [internal source reference — not in this repo] BARRIER_HEIGHTS small 0.6 medium 1.2 large 2.0, DEFAULT_BARRIER medium; lines 110-112 coerce unrecognized values. Running normalize_spec plus compute_profile yields minima 0.0/1.6/0.0 and peaks both 2.8. The alt_text says a tall first barrier and a product below the reactants. The paired question ch9-vinyl-cation-profile authors control points ts_1 3.2, min_1 2.2, ts_2 2.9, min_2 -1.4 and expects exergonic with rate_determining_step 1, so assessment and figure teach different physics.
+
+**Recommended outcome (need):** The addition section needs an energy figure whose drawn shape carries a visibly larger first barrier than second and a product well below the reactants, agreeing with its description and with the chapter's own reaction_coordinate_reasoning question.
+
+##### `visual-002` — BLOCKER · figure-accuracy · confidence 0.92
+
+**Location:** section_id=`nugget-acetylide-alkylation` · nugget_id=`nugget-acetylide-alkylation` · concept_slug=`acetylide-alkylation-synthesis` · asset_id=`roadmap-chain-extension` · anchor="Chain extension roadmap: propyne to a cis or trans pentene"
+
+**Observation:** The capstone synthesis figure renders with every arrow blank and the route flattened. The asset authors arrows as edges [{from,to,reagent}] but the renderer's contract is steps [{reagents,note}] indexed positionally against consecutive nodes. spec.steps is undefined, so no reagent text is drawn over any arrow, and because the renderer is strictly linear the branch is drawn as a chain in which cis-pent-2-ene converts to trans-pent-2-ene.
+
+**Learner impact:** A learner sees five boxes joined by four unlabeled arrows and a footer reading 'reagents shown over each arrow' when none are. Worse, the flattened chain teaches a transformation that does not exist. The one decision the figure exists to make visible, that the target's geometry selects which reduction you run, is exactly what the rendering destroys.
+
+**Evidence:** Authored edges list four reagents. [internal source reference — not in this repo] defines SynthesisRoadmapSpec as {nodes, steps} with no edges field. [internal source reference — not in this repo] steps = spec.steps || [], :146 steps[i] || {reagents:''}, :166 wraps empty string, :170 draws the arrow unconditionally. No node authors is_target so the target highlight never fires. [internal source reference — not in this repo] types spec as Dict[str,Any] so nothing validated the shape. The alt_text correctly says the route branches, which the picture contradicts.
+
+**Recommended outcome (need):** The alkylation section needs a route figure showing reagents on each arrow and representing the cis/trans fork as a fork rather than a sequence. If the roadmap surface is strictly linear, split the route into two linear roadmaps sharing the first two steps; the current asset must not ship rendering a nonexistent cis to trans step.
+
+##### `visual-003` — HIGH · visual-opportunity · confidence 0.9
+
+**Location:** section_id=`nugget-alkyne-structure` · nugget_id=`nugget-alkyne-structure` · concept_slug=`alkyne-structure-and-bonding` · anchor="those two pi clouds form a cylinder of electron density around the sigma bond axis"
+
+**Observation:** The foundational section spends two paragraphs on purely spatial relationships (two sp hybrids 180 degrees apart, two unhybridized p orbitals mutually perpendicular, two pi bonds in perpendicular planes, superimposing into a cylinder) and supplies no figure that can show any of it. Its only two assets are flat RDKit line drawings. The one planned visual, video-alkyne-orbitals, is an unproduced placeholder.
+
+**Learner impact:** Every downstream concept leans on this picture: linear geometry, the absence of cis/trans isomerism at a triple bond, and the s-character argument for terminal acidity. A line drawing of C#CC cannot show a p orbital, a plane, or a cylinder.
+
+**Evidence:** nugget-alkyne-structure asset_ids are two molecule assets. video-alkyne-orbitals storyboards exactly this but is status needs_review and compiles to a hidden block. orbital_overlay is in AssetPreview's INLINE_SVG_TYPES ([internal source reference — not in this repo]) and TeachingAssetLiveRenderer routes it through AssetPreview, so the platform already renders orbital figures inline.
+
+**Recommended outcome (need):** The bonding section needs the sigma/two-perpendicular-pi arrangement made visible, specifically the 180-degree sp axis, the two p-orbital pairs in perpendicular planes, and the contrast with the alkene's two lobes. A static labeled figure would carry it; this does not require producing the video.
+
+##### `visual-004` — HIGH · visual-opportunity · confidence 0.85
+
+**Location:** section_id=`nugget-alkyne-reduction` · nugget_id=`nugget-alkyne-reduction` · concept_slug=`alkyne-reduction-stereochemistry` · anchor="The reagent, not the substrate, sets the geometry"
+
+**Observation:** No figure anywhere shows a transformation: a starting material, an arrow bearing reagents, and a product in one image. Sixteen of eighteen assets are standalone molecules and the two composed figures are the two broken ones. In the reduction section the reader sees but-2-yne, cis-2-butene, trans-2-butene and butane as four independent stacked cards.
+
+**Learner impact:** The task the section sets is a mapping between two sets. A learner must reconstruct it by reading four separate captions when one figure with three labeled arrows would let it be read at a glance. The same gap applies to the addition and hydration sections.
+
+**Evidence:** 16 of 18 assets are type molecule; zero assets of type reaction although [internal source reference — not in this repo] has a working case 'reaction' rendering reactant/arrow/product. Reduction section blocks are four separate molecule blocks. The three video briefs that were to carry these mappings all compile to hidden blocks with empty urls.
+
+**Recommended outcome (need):** The three reaction sections each need the reagent-to-product relationship shown in a single visual field. The reduction section is highest value because it is a three-way branch. The video briefs should not be counted as coverage.
+
+##### `visual-005` — MEDIUM · figure-purpose · confidence 0.93
+
+**Location:** question_slug=`ch9-acidity-rank` · concept_slug=`terminal-alkyne-acidity` · anchor="Order these C-H bonds from least acidic to most acidic."
+
+**Observation:** Both rank_order questions author a structure on every card, the backend renders those into imageUrl data URIs at serve time, and the rank_order renderer discards them: it maps each card to {id, text} only and contains no image element.
+
+**Learner impact:** The ranking is done on the parenthetical hybridization labels already in the card text, turning a structural-reasoning task into a label-matching task.
+
+**Evidence:** ch9-acidity-rank cards carry structure_smiles CC=C, CCC, C#CC; [internal source reference — not in this repo] includes 'cards' so imageUrl is attached on every serving path; [internal source reference — not in this repo] readCards returns {id, text} and the file contains no Image or imageUrl reference.
+
+**Recommended outcome (need):** The acidity ranking needs the three C-H environments visible while being ordered. This is a display-layer gap, not an authoring one.
+
+##### `visual-006` — MEDIUM · figure-purpose · confidence 0.88
+
+**Location:** question_slug=`ch9-chain-extension-route` · concept_slug=`acetylide-alkylation-synthesis` · anchor="Convert propyne into cis-pent-2-ene in two steps."
+
+**Observation:** The start and target structures are drawn, but the intermediate choices, where the cis/trans decision is made, are a plain text dropdown. The author supplied structures for all four intermediates and the backend enriches them, but RouteBuilderRenderer renders intermediates only as option text.
+
+**Learner impact:** The question's whole discrimination is geometric, and the geometry is visible on one side of the comparison and absent on the other, pushing the student to match the word cis rather than compare two shapes.
+
+**Evidence:** ch9-chain-extension-route intermediates include C/C=C\CC and C/C=C/CC, all enriched by [internal source reference — not in this repo]; [internal source reference — not in this repo] renders StructureCard for start and target only; lines 100 and 110 render reagents and intermediates as option text.
+
+**Recommended outcome (need):** The route builder's intermediate choice needs the candidate structures visible at the point of choosing.
+
+##### `visual-007` — MEDIUM · visual-opportunity · confidence 0.86
+
+**Location:** question_slug=`ch9-reduction-sort` · section_id=`nugget-alkyne-reduction` · concept_slug=`alkyne-reduction-stereochemistry` · anchor="Sort each set by the product it gives."
+
+**Observation:** Both categorize_groups questions on alkyne reduction are entirely text. The products appear only as names; no item or group carries structure_smiles. In v1 the products sit in groups, which the backend's enrichment key list does not cover; in v2 they sit in items, which IS enrichable, and still none is authored.
+
+**Learner impact:** The stereochemical outcome is the most purely visual thing this chapter teaches, and the question assessing it can be answered by pairing the word poisoned with the word cis without ever forming a picture of what cis geometry is.
+
+**Evidence:** ch9-reduction-sort and -v2 student_config carry no structure_smiles anywhere. [internal source reference — not in this repo] enriches options/items/left/right/cards/reagents/intermediates/cases/candidates/evidence; 'groups' is absent although [internal source reference — not in this repo] would render a group imageUrl. The chapter already owns mol-cis-2-butene, mol-trans-2-butene, mol-butane.
+
+**Recommended outcome (need):** The reduction-sorting task needs the three products shown as structures so the sort is a judgement about geometry rather than vocabulary.
+
+##### `visual-008` — MEDIUM · visual-opportunity · confidence 0.82
+
+**Location:** section_id=`nugget-terminal-acidity` · nugget_id=`nugget-terminal-acidity` · concept_slug=`terminal-alkyne-acidity` · anchor="a terminal alkyne C-H has a pKa near 25, an alkene C-H near 44, and an alkane C-H near 60"
+
+**Observation:** The acidity section asserts an ordered quantified ladder and supplies four independent line drawings that show none of the ordering, none of the numbers, and no mark on the C-H in question. Nothing distinguishes which hydrogen is the acidic one.
+
+**Learner impact:** The learner must hold a five-value ordering in prose while the figures neither anchor it nor point at the bond being discussed. Two of the four cards carry no information extractable by looking.
+
+**Evidence:** nugget-terminal-acidity asset_ids are four molecule assets with no highlights and no rdkit_options. Captions assert a comparison but the structures render as separate stacked cards with nothing linking them. mol-propynide's alt text promises a lone pair but a plain RDKit depiction of CC#[C-] draws none.
+
+**Recommended outcome (need):** The acidity section needs the ordering made visible: the three C-H environments on a common scale with pKa and s-character attached, and the specific C-H marked on each structure.
+
+##### `visual-011` — MEDIUM · figure-purpose · confidence 0.72
+
+**Location:** section_id=`nugget-alkyne-addition` · asset_id=`rc-hx-addition` · anchor="Reaction-coordinate diagram — ChemIllusion"
+
+**Observation:** The reader renders the chapter's only energy diagram through a metered, tier-gated backend route rather than the ungated preview route the equivalent component elsewhere deliberately uses. When the call is refused the block degrades to a line of italic alt text.
+
+**Learner impact:** A learner on an anonymous or free account who has used their monthly preview allowance elsewhere finds the figure replaced by a sentence, in the one section where the diagram is supposed to carry the argument. The degradation is silent and depends on unrelated activity.
+
+**Evidence:** [internal source reference — not in this repo] calls renderReactionCoordinate which POSTs /graphs/reaction-coordinate; [internal source reference — not in this repo] guards it with require_reaction_coordinate_render; [internal source reference — not in this repo] sets [preview allowance limits — not in this repo], free 3, basic 3. On failure [internal source reference — not in this repo] renders alt_text in italics. [internal source reference — not in this repo] routes the same diagram kind through the ungated deck-creator preview.
+
+**Recommended outcome (need):** The reader's energy figure needs to reach every student independent of an unrelated per-account render quota. An ungated render path already exists and is used by the comparable component.
+
+##### `visual-009` — LOW · visual-redundancy · confidence 0.8
+
+**Location:** asset_id=`mol-propyne` · anchor="Identify the linear sp carbons and the terminal C-H of a terminal alkyne."
+
+**Observation:** The propyne card appears in four of the seven sections with an identical title and an identical caption written for the first of them.
+
+**Learner impact:** A figure that repeats unchanged reads as boilerplate. In the addition section the useful thing to notice is which carbon bears more hydrogens; in hydration, where the oxygen lands; in acidity, the terminal C-H. The caption says the same thing in all four places.
+
+**Evidence:** mol-propyne declares nugget_ids for four nuggets; reader blocks blk-n7jb5og8, blk-asan5mec, blk-8qdp89fg, blk-fmy06pun all carry the same name and description. Same pattern for mol-but-2-yne, mol-propynide, mol-pent-2-yne.
+
+**Recommended outcome (need):** A structure reused across sections needs its caption to name what that section wants the learner to notice, or the repeat should be dropped.
+
+##### `visual-010` — LOW · figure-purpose · confidence 0.75
+
+**Location:** question_slug=`ch9-acidity-rank-v2` · anchor="Order these four compounds from least acidic to most acidic."
+
+**Observation:** Three of the four cards authored a structure; the ammonia card did not. If the rank_order renderer is fixed to display structures, one card would render as bare text while three render as pictures.
+
+**Learner impact:** An option that looks different from its peers draws attention for reasons unrelated to the chemistry. Ammonia sits third in the correct order so the tell is weak, but the inconsistency is unnecessary.
+
+**Evidence:** ch9-acidity-rank-v2 c_nh3 has no structure_smiles; c_ethane CC, c_ethyne C#C, c_ethene C=C all carry one. Currently masked because MechanismCardSortRenderer discards all four images.
+
+**Recommended outcome (need):** Within one option set every option needs the same visual treatment so nothing is singled out by appearance.
+
+##### `visual-012` — LOW · notation-consistency · confidence 0.85
+
+**Location:** asset_id=`roadmap-chain-extension` · anchor="H₂, poisoned Pd catalyst"
+
+**Observation:** Within the roadmap's four reagent labels, formula notation is mixed: 'H₂, poisoned Pd catalyst' uses Unicode subscripts while NaNH2, CH3CH2Br (SN2) and Na, NH3(l) use plain digits, and SN2 is written without its subscript.
+
+**Learner impact:** Inconsistent subscripting inside one figure looks like an error and makes the labels harder to scan as a set.
+
+**Evidence:** roadmap-chain-extension spec.edges reagents. The question bank is internally consistent by contrast. Currently moot because none of these labels renders at all.
+
+**Recommended outcome (need):** The roadmap's reagent labels need one consistent formula notation across all arrows, fixed together with the arrow-label defect.
+
+**Open questions**
+
+- The compiled reader contains zero callout blocks so the seven practice_check items appear to reach no reader surface. Outside this persona's lens but flagged because it means section self-checks are not available alongside the figures.
+- Every nugget's text tiers are terse/standard/expanded and the reader defaults to expanded. Confirming that default matters for the figure findings because the orbital and cylinder prose lives only in the expanded tier.
+- Should groups be added to the backend's structure-enrichment key list? CategorizeRenderer already renders a group imageUrl if one arrives but the backend never attaches one.
+- Is the synthesis_roadmap surface intended to support branching routes at all? If not, visual-002 should be resolved by splitting the route rather than reshaping the spec.
+- No new category ids were coined.
+
+### Orchestrator decisions
+
+#### `rec-001` — Anti-Markovnikov hydration is specified with unhindered borane (blocker)
+
+- **Need:** The reagent taught for anti-Markovnikov alkyne hydration must be one that actually stops after a single addition, and students must learn why an unhindered borane does not.
+- **Chosen intervention:** `prose-edit` → target surface `prose`
+- **Why this is the least-complex option that fully addresses the need:** The chemistry is wrong, not merely underexplained, and the fix is bounded: name a bulky borane in the hydration nugget plus the three question strings that spell out the reagent. No new asset or question is required to make the chapter correct.
+- **Consolidates:** `instr-001`, `stud-011`
+
+#### `rec-002` — Hotspot items leak the answer, and are unanswerable without vision once the leak is removed (blocker)
+
+- **Need:** A non-visual learner must be able to identify the acidic carbon by reasoning, which requires the structure's connectivity mapped onto the same atom numbering the buttons announce — without being told which atom is the answer.
+- **Chosen intervention:** `structured-chemical-description` → target surface `assessment`
+- **Why this is the least-complex option that fully addresses the need:** Simply deleting the leaked sentence would convert an answer giveaway into an access blocker, because the atom buttons announce only 'C atom N'. A structured atom-by-atom description authored against input-SMILES order is the least-complex intervention that both closes the leak and restores independent access; it needs no renderer change and no alternate activity.
+- **Consolidates:** `access-002`, `access-003`
+
+#### `rec-003` — Four more accessible_descriptions state the answer or the method (blocker)
+
+- **Need:** The non-visual equivalent must convey only the stimulus and the task, so the two cohorts attempt the same question.
+- **Chosen intervention:** `text-equivalent` → target surface `assessment`
+- **Why this is the least-complex option that fully addresses the need:** These four items (two structure_scaffold, two numeric_with_units) have no spatial content to reconstruct — the numeric pair has no visual stimulus at all — so a plain corrected text equivalent fully addresses the need. The compile-time guard cannot detect these because the keys are `smiles`/`value` and the leaks spell numbers as words.
+- **Consolidates:** `access-001`, `access-005`
+
+#### `rec-004` — Energy diagram draws two equal barriers and a thermoneutral reaction (blocker)
+
+- **Need:** The addition section's figure must show a visibly larger first barrier and a product below the reactants, agreeing with its own description and with the chapter's reaction_coordinate_reasoning question.
+- **Chosen intervention:** `new-figure` → target surface `figure`
+- **Why this is the least-complex option that fully addresses the need:** Corrected in place — the authored barrier vocabulary is simply outside the accepted {small, medium, large} set and is silently coerced. Substituting valid values fixes the drawn geometry with no additional asset. This is the least-complex fix; nothing about the figure's design is wrong.
+- **Consolidates:** `visual-001`
+
+#### `rec-005` — Synthesis roadmap renders unlabeled arrows and a nonexistent cis-to-trans step (blocker)
+
+- **Need:** The capstone route figure must label every arrow with its reagents and must not depict a transformation that does not exist.
+- **Chosen intervention:** `new-figure` → target surface `figure`
+- **Why this is the least-complex option that fully addresses the need:** Corrected in place. The renderer contract is {nodes, steps} with steps[i] joining consecutive nodes and is strictly linear; the asset authored a branching `edges` list that the renderer never reads. Rewriting to a linear steps route and carrying the cis/trans fork as a scientific caveat removes the false step and restores the labels without adding a second figure. Rendering the fork as an actual fork remains a genuine enhancement and is listed under visual opportunities.
+- **Consolidates:** `visual-002`, `visual-012`
+
+#### `rec-006` — Seven fabricated Wikipedia links, all 404 (high)
+
+- **Need:** Every offered outside-reading target must resolve to a real, on-topic page, or not be offered at all.
+- **Chosen intervention:** `prose-edit` → target surface `prose`
+- **Why this is the least-complex option that fully addresses the need:** The URLs are minted by `_concept_wiki_title` falling back to the concept's prose title because no concept authors `wikipedia_title`. Authoring the field on all seven concepts and HTTP-verifying each is bounded and removes the false CC BY-SA attribution at the same time.
+- **Consolidates:** `instr-003`, `stud-010`
+
+#### `rec-007` — The Lindlar catalyst is never named (high)
+
+- **Need:** The partial-hydrogenation condition must be recognizable under the name students will meet in every mapped textbook and on every exam.
+- **Chosen intervention:** `prose-edit` → target surface `prose`
+- **Why this is the least-complex option that fully addresses the need:** Nothing in the chapter is false here — 'lead-poisoned palladium' is accurate — but a student who has only seen that phrase will not recognize 'H2, Lindlar'. Naming it once in prose and using the name consistently in reagent strings is bounded and requires no new content.
+- **Consolidates:** `instr-002`, `stud-012`
+
+#### `rec-008` — All 7 practice checks and 14 trouble spots reach no reader (high)
+
+- **Need:** The authored self-checks and named-trap warnings must appear in the reading flow at the section they belong to.
+- **Chosen intervention:** `added-practice` → target surface `practice`
+- **Why this is the least-complex option that fully addresses the need:** The content already exists and is correct; the compiled artifact simply predates the callout emitter (compiled 2026-07-31T02:03Z, zero callout blocks, while a sibling chapter compiled the same day at 17:45Z carries 12). A recompile surfaces all 21 items with no authoring work.
+- **Consolidates:** `instr-004`, `stud-001`, `access-007`
+
+#### `rec-009` — Vocabulary used in graded feedback is never defined in the text students read (high)
+
+- **Need:** Terms the assessment relies on — anti-Markovnikov, endergonic/exergonic, and the hydroboration reagents themselves — must be present in the depth tier the reader renders.
+- **Chosen intervention:** `prose-edit` → target surface `prose`
+- **Why this is the least-complex option that fully addresses the need:** Each term already appears somewhere (anti-Markovnikov only in the terse tier, exergonic once undefined, the reagents only in question strings). Surfacing them in the expanded tier is a few sentences and removes the failure mode where remedial feedback introduces new unknowns.
+- **Consolidates:** `stud-006`, `stud-007`, `stud-011`
+
+#### `rec-010` — Two statements will need un-teaching (medium)
+
+- **Need:** The vinyl cation's empty orbital must be identified as an unhybridized p orbital, and the claim that adjacency to a triple bond never confers acidity must be bounded to the bases in play.
+- **Chosen intervention:** `prose-edit` → target surface `prose`
+- **Why this is the least-complex option that fully addresses the need:** Both are misleading-as-written rather than wrong-in-substance, and both are single-sentence fixes. Left alone they seed errors that surface later in carbocation stability and alpha-carbonyl acidity.
+- **Consolidates:** `instr-009`, `instr-010`
+
+#### `rec-011` — Hydration and reduction concepts declare prerequisites narrower than their prose assumes (medium)
+
+- **Need:** Prerequisite declarations must name the alkene chemistry (hydroboration-oxidation, syn catalytic hydrogenation) the explanations actually stand on.
+- **Chosen intervention:** `instructor-note` → target surface `instructor-support`
+- **Why this is the least-complex option that fully addresses the need:** The consumer is concept-map sequencing and instructor planning, not the student-facing prose. Correcting the declared prerequisites is a two-line data fix that makes the gating honest; no prose change is needed.
+- **Consolidates:** `instr-012`
+
+#### `rec-012` — Neither composite figure has a long description (medium)
+
+- **Need:** The energy profile and the synthesis roadmap need a fuller equivalent than one sentence, including an explicit statement that the profile is schematic.
+- **Chosen intervention:** `longer-description` → target surface `figure`
+- **Why this is the least-complex option that fully addresses the need:** Both the images-off reader path and the visible 'Described as' line fall back to alt_text when long_description is absent, collapsing multi-part figures to a sentence. The 16 single-molecule figures are adequately served by their existing alt text and need nothing — only these two do.
+- **Consolidates:** `access-006`
+
+#### `rec-013` — The chapter has no route into the alkyne functional group (high)
+
+- **Need:** Students in a chapter subtitled 'An Introduction to Organic Synthesis' need a way to make an alkyne, not only to extend and reduce one.
+- **Chosen intervention:** `prose-edit` → target surface `prose`
+- **Why this is the least-complex option that fully addresses the need:** A preparation section (double dehydrohalogenation of a vicinal dihalide) is the smallest addition that closes the loop the chapter itself opens when it produces a tetrahaloalkane from X2 addition. Deferred rather than auto-applied: this is new instructional content, not a verified-error correction.
+- **Consolidates:** `instr-005`
+
+#### `rec-014` — X2 addition is promised by the concept title and taught in one sentence (high)
+
+- **Need:** Either X2 addition gets a product students can see and at least one item that assesses it, or the concept scope stops promising it.
+- **Chosen intervention:** `added-practice` → target surface `assessment`
+- **Why this is the least-complex option that fully addresses the need:** The cheaper of the two honest options is to narrow the concept title; the better one for the learner is one item plus one product structure. Deferred as authoring scope rather than auto-applied.
+- **Consolidates:** `instr-006`
+
+#### `rec-015` — Three stated objectives are never assessed (high)
+
+- **Need:** Why secondary/tertiary halides fail, which base makes an acetylide, and reading terminal-versus-internal off a drawn structure each need an item that requires that decision.
+- **Chosen intervention:** `added-practice` → target surface `assessment`
+- **Why this is the least-complex option that fully addresses the need:** These are the three ideas most likely to appear on an exam and each is currently stated once in prose and never rehearsed. Three items is the minimum that aligns assessment to the declared objectives. Deferred as authoring scope.
+- **Consolidates:** `instr-011`, `instr-013`, `instr-016`
+
+#### `rec-016` — The chapter's spatial claims are carried by prose alone (high)
+
+- **Need:** The sp axis with two perpendicular pi systems, the vinyl cation and vinyl anion, and the reagent-to-product mappings need to be visible where the arguments that depend on them are made.
+- **Chosen intervention:** `new-figure` → target surface `figure`
+- **Why this is the least-complex option that fully addresses the need:** A description cannot substitute here: these are relational and spatial claims, and the personas that most need them (Struggling Student, Visual Preference) both stall at exactly these points. Static labeled figures suffice — none of this requires producing the four planned videos. Deferred as authoring scope.
+- **Consolidates:** `visual-003`, `visual-004`, `instr-008`, `stud-002`, `stud-004`, `visual-008`
+
+#### `rec-017` — Platform display gaps surfaced by this chapter (high)
+
+- **Need:** Authored structures and authored non-visual equivalents must reach the learner in the surfaces that already carry them.
+- **Chosen intervention:** `instructor-note` → target surface `instructor-support`
+- **Why this is the least-complex option that fully addresses the need:** None of these is fixable in the topic package: rank_order and route-builder renderers discard server-rendered structures they are already served, `groups` is absent from the backend enrichment key list, accessibilityBundle is read by only 2 of the renderers this chapter uses, the reader's energy figure goes through a metered gated route, and figure headings skip from h2 to h4. Recorded for the platform backlog so the chapter is not held hostage to it.
+- **Consolidates:** `visual-005`, `visual-006`, `visual-007`, `visual-011`, `access-004`, `access-009`
+
+#### `rec-018` — Four video briefs commit to no caption or transcript deliverable (medium)
+
+- **Need:** Before production, each planned animation needs a committed text equivalent for its audio and a delivery form that can be paused, replayed or stepped.
+- **Chosen intervention:** `transcript` → target surface `figure`
+- **Why this is the least-complex option that fully addresses the need:** The narration outlines are already drafted and would serve as the transcript, so the commitment costs nothing now and prevents shipping GIFs with no pause control later. Nothing is currently exposed to a learner — all four compile hidden with empty urls — so this is forward-looking.
+- **Consolidates:** `access-008`
+
+#### `rec-019` — The advanced final section front-loads ten ideas with no consolidation (medium)
+
+- **Need:** Acetylide alkylation, the substrate restriction, and backwards planning need to be staged with a chance to consolidate, and the retrosynthetic move needs demonstrating step by step at least once.
+- **Chosen intervention:** `added-practice` → target surface `practice`
+- **Why this is the least-complex option that fully addresses the need:** The section already has the right content in the right order; what is missing is a break between stages and one worked backwards-planning example. The recompiled practice checks (rec-008) partly address this, which is why it ranks below them.
+- **Consolidates:** `stud-005`, `stud-014`, `stud-009`
+
+#### `rec-020` — Polish: repeated captions, an unillustrated option, mixed locant conventions (low)
+
+- **Need:** A structure reused across four sections should say what each section wants noticed; options within one set should look alike; and one IUPAC locant convention should hold across prose, asset titles and question text.
+- **Chosen intervention:** `prose-edit` → target surface `figure`
+- **Why this is the least-complex option that fully addresses the need:** Low severity and partly a matter of house style — cis-2-butene is legacy, not wrong — so the naming sweep is left as a recommendation rather than applied, since rewriting option text risks disturbing answer matching for no chemical gain.
+- **Consolidates:** `visual-009`, `visual-010`, `instr-014`, `instr-017`, `stud-016`
+
+### Merged duplicates
+
+- **Anti-Markovnikov hydration is specified with unhindered borane** (`rec-001`) — raised independently by 2 personas: Organic Chemistry Instructor `instr-001`; Struggling Student `stud-011`. Kept at the strongest severity (`blocker`); every persona's learner impact is preserved verbatim in the persona reports above.
+- **Seven fabricated Wikipedia links, all 404** (`rec-006`) — raised independently by 2 personas: Organic Chemistry Instructor `instr-003`; Struggling Student `stud-010`. Kept at the strongest severity (`high`); every persona's learner impact is preserved verbatim in the persona reports above.
+- **The Lindlar catalyst is never named** (`rec-007`) — raised independently by 2 personas: Organic Chemistry Instructor `instr-002`; Struggling Student `stud-012`. Kept at the strongest severity (`high`); every persona's learner impact is preserved verbatim in the persona reports above.
+- **All 7 practice checks and 14 trouble spots reach no reader** (`rec-008`) — raised independently by 3 personas: Organic Chemistry Instructor `instr-004`; Struggling Student `stud-001`; Accessibility Persona `access-007`. Kept at the strongest severity (`high`); every persona's learner impact is preserved verbatim in the persona reports above.
+- **The chapter's spatial claims are carried by prose alone** (`rec-016`) — raised independently by 3 personas: Learner with Visual Preference `visual-003`, `visual-004`, `visual-008`; Organic Chemistry Instructor `instr-008`; Struggling Student `stud-002`, `stud-004`. Kept at the strongest severity (`high`); every persona's learner impact is preserved verbatim in the persona reports above.
+- **Platform display gaps surfaced by this chapter** (`rec-017`) — raised independently by 2 personas: Learner with Visual Preference `visual-005`, `visual-006`, `visual-007`, `visual-011`; Accessibility Persona `access-004`, `access-009`. Kept at the strongest severity (`high`); every persona's learner impact is preserved verbatim in the persona reports above.
+- **Polish: repeated captions, an unillustrated option, mixed locant conventions** (`rec-020`) — raised independently by 3 personas: Learner with Visual Preference `visual-009`, `visual-010`; Organic Chemistry Instructor `instr-014`, `instr-017`; Struggling Student `stud-016`. Kept at the strongest severity (`low`); every persona's learner impact is preserved verbatim in the persona reports above.
+
+### Retained disagreements
+
+#### Whether prose-only delivery of the chapter's spatial claims is a strength or a defect
+
+- **Accessibility Persona:** "Every reaction-outcome claim in the chapter is carried by prose, not by a figure. The cis/trans distinction, the Markovnikov/anti-Markovnikov hydration fork, and the sp/sp2/sp3 acidity ordering are all stated in words — nothing depends on comparing two pictures." Filed as a top strength.
+- **Learner with Visual Preference:** "The chapter's inherently spatial claims are carried by prose alone: the sp/two-perpendicular-pi/cylindrical-pi-cloud picture that the whole chapter rests on has no figure." Filed as visual-003, severity high.
+- **Struggling Student:** Sides with Visual Preference: "I am told to visualize two perpendicular p-orbital pairs superimposing into a cylinder... I cannot build that image from a flat line drawing" (stud-004, high).
+
+**Orchestrator resolution:** Both are correct about different properties and neither cancels the other. Accessibility is measuring redundancy — no information exists ONLY in a figure, which is a genuine and unusual strength and is retained as such. Visual Preference and Struggling Student are measuring sufficiency — prose is a poor carrier for relational spatial claims even when it is complete. The orchestrator keeps the strength as recorded AND rec-016 as high severity: adding the figures does not weaken the prose redundancy, so there is no trade-off to adjudicate. The one place this would become a real conflict is if a figure were allowed to become the sole carrier of a claim; rec-016 is therefore scoped to figures that duplicate, never replace, the prose.
+
+#### Whether the four line drawings in the acidity section are adequately described
+
+- **Accessibility Persona:** The 16 single-molecule figures — which include all four acidity structures — "are adequately served by their existing alt text and need nothing added" (access-006 explicitly exempts them).
+- **Learner with Visual Preference:** "Two of the four cards — propane and propene rendered alone — carry no information a learner can extract by looking; everything they contribute is in their captions... mol-propynide's alt text promises a lone pair but a plain RDKit depiction of CC#[C-] draws none" (visual-008, medium).
+
+**Orchestrator resolution:** Resolved in favour of Visual Preference on the substance, Accessibility on the remedy. The figures are indeed low-information — but the fix Visual Preference asks for (pKa and s-character on a common scale, the C-H marked) is a new figure, not a better description, so access-006's judgement that these alt texts need no expansion still stands. Both are recorded: alt text is left unchanged, and the ladder figure is listed under visual opportunities at medium priority. Separately, mol-propynide's alt text promising a lone pair the renderer does not draw is a real description/figure mismatch and is carried into rec-020 rather than dismissed.
+
+#### Whether the chapter has any hard publication blocker
+
+- **Struggling Student:** publication_blockers: [] — "Nothing here is impossible to follow if I am patient and already fairly steady, so I am recording no hard publication blocker."
+- **Organic Chemistry Instructor:** publication_blockers: [instr-001, instr-003] — wrong hydroboration reagent and seven dead links.
+- **Accessibility Persona:** publication_blockers: [access-001, access-002, access-003] — three answer leaks plus an unanswerable-without-vision item.
+- **Learner with Visual Preference:** publication_blockers: [visual-001, visual-002] — both composed figures render contradicting their own descriptions.
+
+**Orchestrator resolution:** The Struggling Student's nil return is retained verbatim and is not treated as a dissent from the verdict: that persona's lens is comprehensibility, and it is consistent to find a chapter followable-but-unsupported. Readiness is computed, not averaged or voted — seven blocker-severity findings across three personas force at least `major revision`, and access-003 (a required activity that no non-visual learner can complete on the merits once the leak is closed) forces `blocked`. The Struggling Student's 5.4 score and empty blocker list cannot raise it, and its highest-value finding (stud-001, the stranded practice checks) is in fact the cheapest fix in the whole report.
+
+### Places where a description is sufficient (no new asset)
+
+- The 16 single-molecule figures: their existing alt_text describes chemistry rather than naming the image and is specific about spatial arrangement (notably the cis/trans pair, which states 'same side' versus 'opposite sides'). No long description and no additional figure is needed for these.
+- The curved_arrow pair: authored site labels are meaningful and appear verbatim in the select options, so the item is answerable purely from text. No alternate activity needed.
+- The reaction_coordinate_reasoning pair: the SVG is role=img with the authored description as its label, giving the same control-point values a sighted student reads without stating step count, rate-determining step or direction. This is the model the other question types should follow.
+- The 84 hints: every one has a text form, including the structure_highlight and region_focus kinds. No transcript or text alternative needs adding.
+- The four unproduced videos as currently compiled: hidden with empty urls is correct behaviour and needs no fallback content today.
+- Both rank_order items: independently checked against the MechanismCardSortRenderer pre-solve trap — authored card order differs from correct_order in both, so neither ships pre-solved.
+
+### Accessibility blockers
+
+- **`access-002+access-003`** — Both hotspot items name the answer atom in their accessible_description; removing that sentence leaves the item unanswerable without vision because the atom buttons announce only 'C atom N' with no connectivity. This unresolved required-access blocker is why the computed readiness is `blocked` rather than `major revision`.
+- **`access-001`** — Both structure_scaffold items state the product class, carbon count and carbonyl position - exactly the discrimination they assess.
+- **`access-005`** — Both numeric_with_units items supply the degree-of-unsaturation relation otherwise withheld until hint level 3, to a cohort whose questions have no visual stimulus at all.
+- **`access-004`** — accessibilityBundle is consumed by only 2 of the renderers this chapter uses, so 26 of 28 authored non-visual equivalents reach no learner. Platform wiring, not a package defect.
+
+### Visual opportunities
+
+- Render the cis/trans fork in the chain-extension roadmap as an actual branch rather than carrying it as a caveat, if the roadmap surface gains branching support.
+- A static labeled orbital figure for section 1: the 180-degree sp axis, the two p-orbital pairs in perpendicular planes, and the cylindrical pi density contrasted with an alkene's two lobes. orbital_overlay already renders inline in the reader.
+- The vinyl cation drawn at the point the rate-determining-step argument depends on it, with sp carbon and empty unhybridized p orbital marked.
+- One transformation figure per reaction section — substrate, labeled arrows, products in a single visual field. The reader already has a working `reaction` block type and the chapter authors zero assets of that type.
+- The acidity ladder placed on a common scale with pKa and s-character attached, and the specific C-H marked on each of the four structures.
+
+### Regression targets for next run
+
+Recheck these stable `finding_id`s after revision:
+
+- `access-001` (blocker, Accessibility Persona) — Both descriptions must convey only the task and the stimulus a sighted student sees. The product class, carbon…
+- `access-002` (blocker, Accessibility Persona) — The hotspot descriptions must establish the stimulus without naming the answer atom. This fix is coupled to ac…
+- `access-003` (blocker, Accessibility Persona) — A non-visual learner needs the connectivity of the displayed structure conveyed in a form that maps onto the s…
+- `instr-001` (blocker, Organic Chemistry Instructor) — The anti-Markovnikov hydration condition needs a reagent that actually stops after one addition, and the chapt…
+- `visual-001` (blocker, Learner with Visual Preference) — The addition section needs an energy figure whose drawn shape carries a visibly larger first barrier than seco…
+- `visual-002` (blocker, Learner with Visual Preference) — The alkylation section needs a route figure showing reagents on each arrow and representing the cis/trans fork…
+- `access-004` (high, Accessibility Persona) — Every question carrying an authored non-visual equivalent needs it to reach the learner in the response surfac…
+- `access-005` (high, Accessibility Persona) — For a question with no visual stimulus the description should add nothing beyond the task and response format;…
+- `instr-002` (high, Organic Chemistry Instructor) — The partial-hydrogenation condition needs the name and composition students will meet elsewhere, stated once i…
+- `instr-003` (high, Organic Chemistry Instructor) — Each section either needs an outside-reading target that actually resolves and is on-topic, or needs no outsid…
+- `instr-004` (high, Organic Chemistry Instructor) — The authored practice checks and trouble spots need to surface in the reader between sections.…
+- `instr-005` (high, Organic Chemistry Instructor) — The chapter needs a route into the alkyne functional group so students can plan a synthesis whose starting mat…
+- `instr-006` (high, Organic Chemistry Instructor) — Either X2 addition needs the treatment the HX pathway gets, or the concept title and scope need to stop promis…
+- `instr-011` (high, Organic Chemistry Instructor) — Each of these three objectives needs at least one item that requires the decision it names.…
+- `stud-001` (high, Struggling Student) — The self-check questions and named-trap warnings that already exist in the package need to appear in the readi…
+- `stud-002` (high, Struggling Student) — The two charged intermediates carrying the chapter's central arguments need to be visible where those argument…
+- `stud-003` (high, Struggling Student) — A student needs to see the acetylide SN2 electron flow, not only read it, before being graded on reproducing i…
+- `stud-004` (high, Struggling Student) — The three-dimensional claims in section 1 need some visual carrier a student can actually see.…
+- `stud-005` (high, Struggling Student) — This section needs breaking into digestible stages with a chance to consolidate between them.…
+- `stud-006` (high, Struggling Student) — Vocabulary used in graded feedback has to be defined in the depth level a student actually reads.…
+- `visual-003` (high, Learner with Visual Preference) — The bonding section needs the sigma/two-perpendicular-pi arrangement made visible, specifically the 180-degree…
+- `visual-004` (high, Learner with Visual Preference) — The three reaction sections each need the reagent-to-product relationship shown in a single visual field. The …
+
+---
+## Post-correction record
+
+**Estimated state: major revision (not a second persona verdict).**
+
+Not a new persona verdict. All seven blocker-severity findings are resolved and the required-access blocker is addressed, which clears `blocked`. Several high-severity findings remain open by design (they are new instructional content or platform work, not verified-error corrections), so the estimate does not reach `ready with minor revisions`.
+
+### Artifact-drift check (step 6a, before any compile)
+
+- **Performed:** before any compile, per step 6a
+- **Result:** CRITICAL — ch9 had flip-flopped three times. Commit [commit ref — not in this repo] fixed the 7 Wikipedia links and the invalid barrier vocabulary in the ARTIFACT ONLY; [commit ref — not in this repo] reverted them; merge [commit ref — not in this repo] restored them; and recompile [commit ref — not in this repo] (compiled_at 2026-07-31T02:03:37Z) wiped them again. The chapter was live with 7/7 fabricated 404 links and a flat energy diagram. Every curated artifact-only value was classified and BACK-PORTED to topic.package.json before compiling, so this recompile preserves rather than destroys them.
+- **Back-ported to the package before compiling:**
+ - 7 verified Wikipedia link targets, now authored as concepts[].wikipedia_title
+ - reaction_coordinate barrier vocabulary large/small
+
+### Changes applied
+
+- Authored `wikipedia_title` on all 7 concepts (Orbital hybridisation, Alkyne, Electrophilic addition, Keto–enol tautomerism, Lindlar catalyst, Acetylide x2). All 7 emitted URLs HTTP-verified 200, replacing 7 fabricated titles that were HTTP-verified 404. — resolves `instr-003`, `stud-010`
+- Rewrote the anti-Markovnikov hydration route to require a bulky borane (disiamylborane / dicyclohexylborane / 9-BBN) and to explain why unhindered BH3 adds twice across a terminal alkyne; named H2O2/NaOH as the oxidative workup. Applied to the terse, standard and expanded tiers plus the 3 question strings that spelled out BH3. — resolves `instr-001` · partially addresses `stud-011`
+- reaction_coordinate rc-hx-addition: barrier `high`/`low` (silently coerced to `medium`, drawing two equal peaks) changed to `large`/`small`, and step 2 magnitude set to 1.9. Recomputed profile: activations 3.6 vs 0.6 (step 1 rate-determining), product at -1.44 (exergonic overall) — now matches its own alt text, the prose, and the paired question's authored control points (-1.4). — resolves `visual-001`
+- synthesis_roadmap roadmap-chain-extension: rewrote the unread `edges` list as the renderer's `steps` contract, so all arrows now carry reagents. Removed the false cis-pent-2-ene -> trans-pent-2-ene step that the strictly linear renderer was drawing, marked cis-pent-2-ene as is_target, and carried the trans branch as a scientific_caveat. Notation normalised to Unicode subscripts throughout. — resolves `visual-002`, `visual-012`
+- Rewrote 6 leaked accessible_descriptions: both structure_scaffold items no longer state the product class/carbon count/carbonyl position; both numeric items no longer supply the degree-of-unsaturation relation; both hotspot items no longer name the answer atom. — resolves `access-001`, `access-005` · partially addresses `access-002`
+- Replaced the two hotspot descriptions with structured chemical descriptions giving per-atom connectivity and hydrogen counts, authored against the 1-based input-SMILES numbering the atom buttons announce ('C atom N'), so a non-visual learner can locate the acidic carbon by reasoning rather than being told it. — resolves `access-002`, `access-003`
+- Named the Lindlar catalyst in the reduction nugget (all three tiers) with its composition (Pd on CaCO3, lead acetate, quinoline) and the exam notations students will meet; relabelled 6 question/asset reagent strings from 'H2, poisoned Pd catalyst' to 'H2, Lindlar catalyst (poisoned Pd)'. Answer keys are id-based, so no key changed. — resolves `instr-002`, `stud-012`
+- Corrected the vinyl-cation orbital description: the empty orbital is now identified as an unhybridized p orbital, with the high s character attributed to the sp framework rather than to the vacancy. — resolves `instr-009`
+- Bounded the propargylic-acidity claim in prose and in the ch9-acidic-proton-site-v2 distractor feedback: a C-H next to a triple bond has pKa about 35 and is simply out of reach of every base in this chapter, rather than 'not acidic'. — resolves `instr-010`
+- Defined the vocabulary the assessment relies on inside the tier the reader renders: 'anti-Markovnikov' now appears in the standard and expanded hydration text (previously terse-only), and endergonic/exergonic are defined where the energy profile is discussed (previously 'exergonic' appeared once, undefined; 'endergonic' never). — resolves `stud-006`, `stud-007`
+- Declared the prerequisites the prose actually assumes: hydroboration-oxidation on alkyne-hydration-tautomerization and catalytic-hydrogenation on alkyne-reduction-stereochemistry. — resolves `instr-012`
+- Added long_description to both composite figures — the energy profile (explicitly stating it is schematic and not to quantitative scale, and giving the measure-from-the-preceding-minimum reasoning) and the synthesis roadmap (node-by-node with the reagent on each arrow). The 16 single-molecule figures were deliberately left unchanged; their alt text is sufficient. — resolves `access-006`
+- Recompiled the chapter, which surfaced all 7 practice checks and 14 trouble spots as 14 callout blocks. The pre-correction artifact contained ZERO callout blocks because it predated the callout emitter. — resolves `instr-004`, `stud-001`, `access-007`
+
+### Verification
+
+- curl -s -o /dev/null -w '%{http_code}' on all 7 emitted Wikipedia URLs plus the OpenStax link — 8/8 returned 200 (pre-correction: 7/8 returned 404)
+- Topic-package compiler (proprietary toolchain, not in this repo) — clean
+- Automated test suite — 173 passed
+- reaction_coordinate_service.compute_profile on the corrected spec — minima [0.0, 1.6, -1.44], activations [3.6, 0.6], rate-determining step 1, exergonic overall (pre-correction: minima [0.0, 1.6, 0.0], activations [2.8, 2.8], no readable RDS, thermoneutral)
+- accessibility_guard.find_accessibility_leaks over all 28 questions — 0 flagged (note: the guard also returned 0 BEFORE correction; the 6 leaks were semantic and invisible to it, so this is a regression check, not the evidence they are fixed)
+- Compiled reader block census — callout blocks 0 -> 14; all 7 practice checks and 14 trouble spots now reach the student
+- git diff review — all 11 changed files are chapter-derived; no unrelated aggregate churn, no reviewed asset type/status or curated spec replaced by generic package output
+
+### Still recommended
+
+- instr-005 — no alkyne-preparation section (double dehydrohalogenation). New instructional content; deferred as scope.
+- instr-006 — X2 addition is promised by the concept title, taught in one sentence, and assessed by zero of 28 questions.
+- instr-011 / instr-013 / instr-016 — why secondary and tertiary halides fail, choosing a base, and terminal-vs-internal from a drawn structure are stated objectives with no item that requires the decision; tautomerization is never graded at arrow level.
+- rec-016 — the chapter's spatial claims still have no figure: the sp axis with two perpendicular pi systems, the vinyl cation and vinyl anion, and one transformation figure per reaction section (the reader already supports a `reaction` block and the chapter authors zero).
+- rec-017 — platform work not fixable in the package: rank_order and route-builder renderers discard structures they are already served; `groups` is missing from the backend enrichment key list; accessibilityBundle is read by only 2 of the renderers this chapter uses (so 26 of 28 corrected descriptions still reach no learner); the reader's energy figure goes through a metered gated route; figure headings skip h2 to h4.
+- access-004 — remains open and is the reason the six corrected descriptions above cannot be verified in-product.

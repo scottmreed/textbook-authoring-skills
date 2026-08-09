@@ -1,0 +1,284 @@
+{
+ "persona": "Learner with Visual Preference",
+ "persona_version": "1.0.0",
+ "chapter_id": "benzene-and-aromaticity",
+ "chapter_version": "1",
+ "model": "claude-opus-5",
+ "summary": "This chapter is visually monotonous by construction: all 21 assets are 2D molecule depictions, the single video brief is deferred and compiles to a hidden block with an empty URL, and the reader lays every section out identically — one unbroken 340-490 word paragraph block followed by all of that section's structures appended at the end, with no in-text reference tying a sentence to a figure. Where the chapter's teaching point is a structure, the figure set works well and is thoughtfully assembled into comparison groups. But the chapter's hardest ideas are not structural — they are energetic, orbital-spatial, geometric, and field-geometric — and every one of those is carried entirely by prose while the accompanying figure is a flat skeletal ring that cannot show it. In two places the figure actively works against the text. The one finding I consider a hard block is not a missing visual but a misused one: in ten statement-choice items exactly one answer option carries a decorative structure_smiles, and in nine of the ten that illustrated option is the correct answer.",
+ "overall_score": 5.7,
+ "publication_blockers": ["vis-001"],
+ "findings": [
+ {
+ "finding_id": "vis-001",
+ "location": {
+ "question_slug": "ch15-pyridine-lone-pair",
+ "concept_slug": "aromatic-heterocycles",
+ "anchor_text": "In an sp2 orbital lying in the ring plane, outside the"
+ },
+ "severity": "blocker",
+ "category": "figure-purpose",
+ "observation": "In ten items whose options are prose statements, exactly one option carries a decorative structure_smiles while the other options carry none. In nine of the ten, the lone illustrated option is the keyed correct answer: ch15-benzene-bond-lengths, ch15-benzene-mo-ladder-v2, ch15-pyridine-lone-pair, ch15-pyridine-lone-pair-v2, ch15-fused-ring-stabilization, ch15-fused-ring-stabilization-v2, ch15-ring-current-shift, ch15-ring-current-shift-v2, and ch15-cyclopentadiene-acidity-reasoning-v2. The tenth, ch15-benzene-bond-lengths-v2, puts the lone structure on option a while the correct answer is b. None of these structures carries information the option text lacks.",
+ "learner_impact": "A learner who orients to figures first gets a reliable free answer on nine items across four of the eight concepts. Those items then measure nothing and any mastery gating built on them is invalid. On ch15-benzene-bond-lengths-v2 the same learned cue actively steers toward a distractor, so the one item that breaks the pattern punishes the habit the other nine trained.",
+ "evidence": "topic.package.json question_sets and compiled/question-set.json: options with structure_smiles versus answer_key.correct_option_ids. Contrast ch15-identify-meta-isomer and ch15-identify-aromatic-ring, where all four options carry structures and the cue does not exist.",
+ "recommended_outcome": "Visual treatment must be uniform across the options of a statement-choice item, so that whether an option is illustrated conveys nothing about whether it is correct. Where a structure genuinely helps the reasoning it belongs with the stem, not with one option.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "vis-002",
+ "location": {
+ "nugget_id": "nugget-benzene-mos",
+ "concept_slug": "molecular-orbitals-of-benzene",
+ "asset_id": "mol-benzene",
+ "anchor_text": "The vertex must sit at the bottom of the circle rather than an edge"
+ },
+ "severity": "high",
+ "category": "visual-opportunity",
+ "observation": "The section's three stated objectives are all constructive-spatial, yet the section's only rendered figure is mol-benzene, a flat Kekule hexagon that shows no orbitals, no nodes, no energy axis, and no polygon. The one asset that would carry it has production_status 'deferred' and compiles into the reader with url '' and is_hidden true. So a learner sees a hexagon and 389 words asking them to picture a circle, a point-down hexagon, six horizontal levels, node counts, and an electron-filling sequence entirely in their head.",
+ "learner_impact": "The inscribed-polygon construction is a drawing procedure; asked to reproduce it from prose alone, a learner has no model of what a correct construction looks like and no way to check their own. The chapter itself names placing the polygon on an edge as a trouble spot and warns against it in words — a warning about a geometric error the learner cannot see.",
+ "evidence": "nugget-benzene-mos asset_ids ['mol-benzene']; learning_objectives include the inscribed-polygon construction; reader video block with url '' and is_hidden true; coherence-pass.md records the gap as deferred because orbital_overlay compiles to an empty image URL.",
+ "recommended_outcome": "The orbital energy ladder and the inscribed-polygon construction need a form a learner can look at while reading — the level heights, the two degenerate pairs, the nonbonding line, and the electron count must be visible somewhere other than the reader's imagination.",
+ "confidence": 0.93
+ },
+ {
+ "finding_id": "vis-003",
+ "location": {
+ "asset_id": "mol-cyclooctatetraene",
+ "nugget_id": "nugget-huckel-rule",
+ "anchor_text": "drawn flat although the molecule itself is tub-shaped"
+ },
+ "severity": "high",
+ "category": "figure-accuracy",
+ "observation": "The entire teaching point of cyclooctatetraene in this chapter is that it is not planar. The figure supplied is a flat 2D depiction of a planar eight-membered ring with four alternating double bonds. The alt text explicitly acknowledges the contradiction rather than resolving it. The figure sits directly beside mol-cyclobutadiene, whose flat depiction is faithful, so the two are visually indistinguishable in the one respect that separates their classification.",
+ "learner_impact": "The section's central discrimination — antiaromatic versus nonaromatic — is asked for by name in the practice check and by three questions, one of whose flawed work is precisely 'the unstated assumption that the ring is planar'. A learner comparing the two figures sees two flat rings and receives visual confirmation of exactly the misconception the error-repair item exists to correct.",
+ "evidence": "Asset mol-cyclooctatetraene alt_text and learning_goal; ch15-cyclooctatetraene-error-repair target t_planarity.",
+ "recommended_outcome": "The non-planarity of cyclooctatetraene needs to be visible rather than only asserted and then contradicted by the picture, or the flat depiction must be explicitly and visibly marked as a connectivity diagram that does not represent the molecule's shape.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "vis-004",
+ "location": {
+ "nugget_id": "nugget-aromatic-heterocycles",
+ "concept_slug": "aromatic-heterocycles",
+ "asset_id": "mol-pyridine",
+ "anchor_text": "at right angles to the"
+ },
+ "severity": "high",
+ "category": "visual-opportunity",
+ "observation": "This section turns entirely on a three-dimensional distinction. The three figures are plain 2D skeletal rings. None of them draws a lone pair at all, in either orientation; their alt texts describe only ring size and nitrogen placement. Imidazole is introduced specifically because it contains both kinds of nitrogen in one molecule, and its figure gives a viewer no way to tell the two nitrogens apart beyond one bearing an H.",
+ "learner_impact": "Two of the section's three objectives are geometry questions answered with no geometry on the page. The basicity difference, the practice check, ch15-pyridine-lone-pair, and every row of ch15-pyridine-pyrrole-matrix all reduce to 'where does that pair point' — and 'perpendicular', 'in the ring plane', and 'at right angles' are spatial words a flat hexagon cannot disambiguate.",
+ "evidence": "nugget-aromatic-heterocycles asset_ids ['mol-pyridine','mol-pyrrole','mol-imidazole']; alt texts mention no lone pair; ch15-pyridine-pyrrole-matrix features lone_pair_in_plane and lone_pair_in_pi.",
+ "recommended_outcome": "The orientation of each nitrogen lone pair relative to the ring plane and to the pi system needs to be visible on or alongside the pyridine/pyrrole/imidazole figures.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "vis-005",
+ "location": {
+ "nugget_id": "nugget-benzene-structure",
+ "concept_slug": "benzene-structure-and-stability",
+ "anchor_text": "benzene releases only 206 kJ/mol"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The aromatic stabilization argument is a four-way energy comparison delivered as running prose. The section's three assets are structure drawings that identify the three species but show nothing about the relative energies, the common product, or the gap that is the whole point. The gap is not a number stated in any source; it is the difference between a measured and an extrapolated value, which is a distance on an axis.",
+ "learner_impact": "Learners must hold four numbers, one of them hypothetical, and perform the comparison mentally while also tracking that the comparison is only legitimate because all three end at cyclohexane — which the chapter itself lists as a trouble spot.",
+ "evidence": "nugget-benzene-structure expanded text and asset_ids; concept trouble_spot on holding the product constant.",
+ "recommended_outcome": "The energetic relationship among the three real compounds, the hypothetical cyclohexatriene, and their shared product needs a form in which the ~150 kJ/mol gap is something a learner can see as a distance rather than compute from four numbers in a paragraph.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "vis-006",
+ "location": {
+ "nugget_id": "nugget-aromatic-spectroscopy",
+ "concept_slug": "spectroscopy-of-aromatic-compounds",
+ "asset_id": "mol-toluene",
+ "anchor_text": "the induced field lines curve back and reinforce it"
+ },
+ "severity": "medium",
+ "category": "figure-purpose",
+ "observation": "The spectroscopy section teaches shifts, the ring-current mechanism, IR band positions, out-of-plane bending patterns, UV maxima, and the m/z 91 fragment — none of which is a structural fact. Its three figures are verbatim reuses of figures already shown in earlier sections. No figure in this section shows a spectrum, a shift scale, a field geometry, or a band position. Meanwhile the assessment surface for the same concept does render a real IR spectrum with five selectable peaks.",
+ "learner_impact": "A learner scanning this section for visual anchors finds three molecules they have already seen and nothing that depicts the actual subject. The learner then meets a spectrum for the first time inside a graded item.",
+ "evidence": "nugget-aromatic-spectroscopy asset_ids are all previously used; ch15-aromatic-ir-band student_config.spectrum with five peaks.",
+ "recommended_outcome": "This section's figures need to match what it teaches: either the spectral evidence becomes visible before it is assessed, or the repeated structures must earn their place by being annotated with the section's specific claims.",
+ "confidence": 0.87
+ },
+ {
+ "finding_id": "vis-007",
+ "location": {
+ "asset_id": "mol-benzene",
+ "anchor_text": "Benzene, the parent aromatic ring"
+ },
+ "severity": "medium",
+ "category": "visual-redundancy",
+ "observation": "mol-benzene is emitted into four of the eight reader sections with byte-identical title, alt text, and description each time; mol-toluene and mol-4-bromotoluene each appear twice the same way. Nothing in the repeated block is localised to the section it appears in.",
+ "learner_impact": "Repeats without differentiation train a learner to stop looking at the figure strip, which is costly in a chapter where the figure strip is the only non-prose channel; the useful figures in a section get skipped along with the redundant one.",
+ "evidence": "Four reader blocks render smiles c1ccccc1 with the same description; asset mol-benzene.concept_slugs lists four concepts.",
+ "recommended_outcome": "A structure re-shown in a later section needs to say something new in that section or not be re-shown.",
+ "confidence": 0.83
+ },
+ {
+ "finding_id": "vis-008",
+ "location": {
+ "section_id": "nugget-huckel-rule",
+ "anchor_text": "four requirements that must be checked in order"
+ },
+ "severity": "medium",
+ "category": "figure-purpose",
+ "observation": "Every compiled reader section has exactly the same shape: one text block carrying the full expanded variant (343-487 words, no subheadings), then all of that section's molecule blocks appended after it, then the link blocks. No figure is placed at the sentence that discusses it, no sentence names a figure, and there are no captions tying a structure to the argument step it belongs to.",
+ "learner_impact": "The learner must read a long unbroken passage, then scroll to an undifferentiated strip of structures and reverse-engineer which paragraph each one belonged to. The heaviest sections are exactly the ones where this costs most.",
+ "evidence": "frontend/public/reader/topic-chapters/benzene-and-aromaticity.json — every section: one text block matching nuggets[].text.expanded verbatim, followed by 3-5 molecule blocks.",
+ "recommended_outcome": "Figures need to be resolvable to the point they illustrate — the need is for the prose and the structures to be interleaved or cross-referenced.",
+ "confidence": 0.86
+ },
+ {
+ "finding_id": "vis-009",
+ "location": {
+ "nugget_id": "nugget-naming-benzenes",
+ "concept_slug": "naming-substituted-benzenes",
+ "anchor_text": "attached through an additional sp"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The naming section supplies four figures: toluene, phenol, aniline, and one para-disubstituted ring. There is no ortho figure and no meta figure, so the ortho/meta/para relationship is shown only for one of its three cases. There is also no figure of a phenyl group beside a benzyl group, although interchanging them is a named trouble spot and is directly tested. Of the seven retained names the prose says are worth learning as a set, only three are drawn.",
+ "learner_impact": "ortho/meta/para is precisely the kind of relationship a side-by-side view settles instantly; a learner who saw only the para case has to construct the other two mentally, then apply them in two questions. The phenyl/benzyl confusion is a distractor in one item and the whole subject of another, yet the one-carbon difference is never depicted.",
+ "evidence": "nugget-naming-benzenes asset_ids; concept trouble_spot on phenyl versus benzyl; ch15-identify-meta-isomer option d BrCc1ccccc1.",
+ "recommended_outcome": "The three positional relationships need to be visible together rather than one-of-three, and the phenyl-versus-benzyl distinction needs a visible one-carbon contrast.",
+ "confidence": 0.84
+ },
+ {
+ "finding_id": "vis-010",
+ "location": {
+ "nugget_id": "nugget-aromatic-spectroscopy",
+ "anchor_text": "a monosubstituted ring shows two bands"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The section's third objective is delivered as a three-clause sentence listing mono, ortho, and para band ranges. The neighbouring 13C symmetry rule is delivered the same way. Both are small lookup relationships between a substitution pattern and a numeric range, presented as running prose with no tabulated or positional rendering anywhere in the chapter.",
+ "learner_impact": "Ranges embedded in a sentence are hard to compare (735-770 versus 730-770 differ by 5 cm-1 and are five words apart in the same clause) and hard to retrieve later. Two questions depend on this list.",
+ "evidence": "nugget-aromatic-spectroscopy expanded text; ch15-aromatic-ir-band peak at 728 cm-1 with feedback turning on the 690-900 region.",
+ "recommended_outcome": "The pattern-to-band-range correspondence and the pattern-to-signal-count correspondence need a form that supports comparison at a glance rather than sequential reading.",
+ "confidence": 0.8
+ },
+ {
+ "finding_id": "vis-011",
+ "location": {
+ "asset_id": "mol-naphthalene",
+ "nugget_id": "nugget-polycyclic-aromatics",
+ "anchor_text": "Counting p orbitals rather than rings gives ten"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The section's stated skill is counting pi electrons of a fused system without double-counting fusion carbons, and its named trouble spot is exactly that double-count. The naphthalene figure is an unannotated skeletal drawing in which the two shared carbons are not distinguished from the eight others; nothing marks the periphery. The same applies to anthracene and phenanthrene, where the central ring of anthracene is singled out as the reactive one with no marking on the figure.",
+ "learner_impact": "The practice check, two numeric items, a matching item whose hint says 'count the carbons at the ring junction once, not twice', and the anthracene variant all depend on locating specific atoms or a specific ring in a fused framework. A learner is asked to point at something in a picture that does not point at it.",
+ "evidence": "Asset mol-naphthalene alt_text; concept trouble_spot on counting shared ring-fusion carbons twice; asset mol-anthracene learning_goal cites central-ring reactivity with no annotation.",
+ "recommended_outcome": "The fusion carbons and the peripheral pi circuit in naphthalene, and the central ring in anthracene, need to be identifiable on the figure.",
+ "confidence": 0.82
+ },
+ {
+ "finding_id": "vis-012",
+ "location": {
+ "question_slug": "ch15-select-sp3-carbon",
+ "concept_slug": "aromatic-ions",
+ "anchor_text": "select the carbon that must lose a proton before the ring can become aromatic"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "All 138 hints across all 46 questions are kind 'text'. That includes items whose task surface is explicitly visual: the two hotspot items, the two spectrum_peaks items, the four structure_scaffold items, and the two error_repair items. A learner stuck on ch15-select-sp3-carbon is told in words 'The remaining carbon is sp3-hybridized and carries two hydrogens' while looking at a structure on which nothing can be indicated.",
+ "learner_impact": "On a click-the-atom or click-the-peak task, a text hint asks the learner to re-do the same visual search that already failed, in a different modality. The hint ladder never reduces the visual search space.",
+ "evidence": "compiled/question-set.json hint kinds across all questions: {'text': 138}; ch15-select-sp3-carbon and ch15-draw-para-bromotoluene student_config.",
+ "recommended_outcome": "Hints for items whose answer is a location on a rendered object need to be able to narrow that location, so the hint ladder reduces the search rather than restating it.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "vis-013",
+ "location": {
+ "asset_id": "mol-benzene",
+ "nugget_id": "nugget-benzene-structure",
+ "anchor_text": "drawn as a regular hexagon with alternating double and single bonds"
+ },
+ "severity": "medium",
+ "category": "alt-text-quality",
+ "observation": "mol-benzene's single alt text is reused verbatim in all four sections that show it. In nugget-benzene-structure it directly contradicts the section's thesis. In nugget-benzene-mos it says nothing about p orbitals; in nugget-huckel-rule nothing about the six pi electrons; in nugget-aromatic-spectroscopy nothing about the equivalent hydrogens. Several other alt texts are similarly generic where the teaching point is specific.",
+ "learner_impact": "A learner who relies on the figure caption to tell them what to look at is told, in the section arguing against localised bonds, to see localised bonds — reinforcing the exact misconception the concept lists first. Elsewhere the alt line simply restates the ring size and omits the feature the figure was chosen for.",
+ "evidence": "Asset mol-benzene accessibility.alt_text reused across four reader blocks; concept benzene-structure-and-stability trouble_spot on Kekule structures as equilibrium; alt texts of mol-pyridine, mol-pyrrole, mol-imidazole, mol-naphthalene.",
+ "recommended_outcome": "A figure's description needs to carry the point it is being used to make in the section where it appears, including a note that a Kekule drawing is a convention rather than a claim about alternating bond lengths.",
+ "confidence": 0.84
+ },
+ {
+ "finding_id": "vis-014",
+ "location": {
+ "asset_id": "mol-cyclooctatetraene",
+ "nugget_id": "nugget-huckel-rule",
+ "anchor_text": "Cyclobutadiene, an antiaromatic ring"
+ },
+ "severity": "low",
+ "category": "notation-consistency",
+ "observation": "Explicit-hydrogen rendering is applied inconsistently: 14 assets set rdkit_options.show_hydrogens true and 7 do not, and the inconsistency falls inside direct comparison groups. In nugget-huckel-rule, mol-benzene and mol-cyclobutadiene render explicit hydrogens while mol-cyclooctatetraene, the third member of the same three-way comparison, does not. In nugget-aromatic-heterocycles, mol-pyrrole and mol-imidazole show hydrogens while mol-pyridine does not, even though the presence or absence of the N-H is the visual cue the section asks learners to read.",
+ "learner_impact": "When figures in a comparison set are drawn to different conventions, apparent differences between them are ambiguous — a learner cannot tell whether a missing H means 'no hydrogen there' or 'hydrogens not drawn in this one'.",
+ "evidence": "Assets with show_hydrogens true include mol-benzene, mol-cyclobutadiene, mol-pyrrole, mol-imidazole; without: mol-cyclooctatetraene, mol-pyridine, mol-naphthalene, mol-anthracene, mol-phenanthrene, mol-adenine, mol-toluene, mol-phenol, mol-aniline, mol-4-bromotoluene.",
+ "recommended_outcome": "Figures a learner is asked to compare side by side need to share a drawing convention, so that a visible difference between them is a chemical difference.",
+ "confidence": 0.78
+ },
+ {
+ "finding_id": "vis-015",
+ "location": {
+ "asset_id": "mol-cyclopentadienyl-anion",
+ "nugget_id": "nugget-aromatic-ions",
+ "anchor_text": "leaves an empty p orbital"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "This section is built on two parallel transformations in which the chemically decisive change is an orbital change. The figure set correctly pairs before and after in both cases, but the depictions differ only in ring bonding and a charge symbol. Neither the filled p orbital nor the empty one is shown, and the alt texts say only 'carrying a negative charge' / 'carrying a positive charge' without locating the charge or the orbital.",
+ "learner_impact": "The chapter's own trouble spot is 'Adding electrons for a cation or removing them for an anion' — counterintuitive precisely because a positive charge feels like it should subtract. The practice check asks why deprotonating cycloheptatriene would not give an aromatic ion. That distinction is entirely about whether the new p orbital is occupied or empty, and the figures show a plus sign versus a minus sign, which if anything suggests the opposite.",
+ "evidence": "nugget-aromatic-ions asset_ids pairing precursor with ion; alt texts of mol-cyclopentadienyl-anion and mol-tropylium-cation; concept trouble_spot.",
+ "recommended_outcome": "The occupied-versus-empty p orbital at the former sp3 position needs to be distinguishable between the anion and the cation case, since that occupancy — not the sign of the charge — is what makes both ions reach six pi electrons.",
+ "confidence": 0.82
+ },
+ {
+ "finding_id": "vis-016",
+ "location": {
+ "section_id": "nugget-benzene-mos",
+ "asset_id": "video-benzene-mo-filling",
+ "anchor_text": "one closed shell: filling benzene"
+ },
+ "severity": "low",
+ "category": "interactive-fallback",
+ "observation": "The compiled reader chapter ships a video block whose content.url is the empty string. It is currently suppressed by is_hidden true, so no learner sees it today, but the placeholder is in the published artifact with a title and a description that is just the first storyboard line, and provenance marked chemillusion_generated. If is_hidden is ever cleared — or if a consumer of this JSON does not honour it — the section renders a titled media element with nothing behind it.",
+ "learner_impact": "No impact while hidden. If surfaced, a learner in the chapter's most under-supported section is shown a promise of exactly the animation they need, and gets an empty player.",
+ "evidence": "frontend/public/reader/topic-chapters/benzene-and-aromaticity.json video block with url '' and is_hidden true; topic package video_briefs[0].production_status 'deferred'.",
+ "recommended_outcome": "A deferred media item should not compile into the published reader as a zero-URL block that depends on a single boolean to stay invisible.",
+ "confidence": 0.8
+ },
+ {
+ "finding_id": "vis-017",
+ "location": {
+ "question_slug": "ch15-acidity-ranking",
+ "concept_slug": "aromatic-ions",
+ "anchor_text": "Rank these hydrocarbons from MOST acidic"
+ },
+ "severity": "low",
+ "category": "visual-opportunity",
+ "observation": "Both rank_order items and both categorize_groups items present their cards purely as names. Other item types in the same chapter do attach structure_smiles to their cards, so the omission is inconsistent rather than deliberate policy.",
+ "learner_impact": "Sorting six species by aromatic class requires locating the sp3 carbon in two of them and judging planarity in a third — decisions the chapter itself makes by looking at structures. Forcing name-to-structure recall first adds a retrieval step that is not what the item is measuring.",
+ "evidence": "ch15-classify-rings student_config.items are text-only; ch15-acidity-ranking cards are text-only; compare ch15-pi-electron-matching left entries.",
+ "recommended_outcome": "Items that ask a learner to classify or order species by a structural property need the structures available, consistently with the other item types in this chapter.",
+ "confidence": 0.75
+ }
+ ],
+ "strengths": [
+ "Every asset carries a learning_goal that compiles into the reader as a per-figure description, so each structure states what it is there to teach rather than sitting unlabelled.",
+ "Figures are deliberately grouped into comparison sets rather than scattered: the hydrogenation trio, the lone-pair trio, the fusion-geometry trio, and the neutral-precursor to aromatic-ion pairs.",
+ "The aromatic-ions section sequences its figures as genuine before/after pairs placed adjacently, which makes the transformation legible even though the orbital change itself is not drawn.",
+ "Every asset is editable and every compiled molecule block carries a generator_href, so a learner can open any structure and manipulate it rather than only look at it.",
+ "The spectrum_peaks items render a real IR spectrum with five positioned, selectable peaks and per-peak wrong-answer feedback keyed to the region selected.",
+ "Every asset has non-empty alt_text and every question has an accessible_description that describes the stimulus rather than naming it.",
+ "The unproduced MO animation was deferred with a written reason and hidden rather than shipped as a broken player, and the coherence pass records the orbital-diagram gap explicitly instead of quietly leaving it."
+ ],
+ "open_questions": [
+ "vis-001 is the only finding raised to blocker from this persona. The schema lists 'an answer is leaked' as blocker-grade; here the leak is a visual regularity rather than leaked answer text. If the orchestrator judges a statistical cue below the blocker bar, high is defensible — but ch15-benzene-bond-lengths-v2, where the cue points at a distractor, is a defect on its own terms either way.",
+ "I used notation-consistency and interactive-fallback — both are on the schema's list but neither is named in my persona rubric's category set. No categories were coined.",
+ "Is orbital_overlay expected to become renderable, or is the reader permanently limited to molecule assets? The answer determines whether vis-002 and vis-004 are content gaps or platform gaps.",
+ "Does the reader honour is_hidden on video blocks in every consuming surface (PWA, LMS export, PDF), or only in the web reader?",
+ "I could not execute RDKit locally to confirm that the charged aromatic SMILES render as intended.",
+ "Do structure_smiles values attached to single_select options render as images in the student UI, or only as data?"
+ ]
+}

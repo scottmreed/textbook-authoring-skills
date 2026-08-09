@@ -1,0 +1,553 @@
+{
+ "chapter_id": "alkanes-and-stereochemistry",
+ "chapter_version": "1",
+ "run_at": "2026-07-31T05:00:00Z",
+ "personas": [
+ {
+ "persona": "Organic Chemistry Instructor",
+ "persona_version": "1.0.0",
+ "chapter_id": "alkanes-and-stereochemistry",
+ "chapter_version": "1",
+ "model": "gpt-5.6-sol",
+ "summary": "Not ready for instructor use. The chapter has a coherent sequence, correct molecular structures, and varied assessments, but it conflates intermolecular forces with chemical inertness, misstates the thermal significance of ethane's torsional barrier, and accepts an incomplete IUPAC name. The authored ethane torsion scan also supplies an invalid atom tuple, the ethane objective has no compiled assessment, ester is assessed before it is taught, and functional-group behavior is overstated.",
+ "overall_score": 5.2,
+ "publication_blockers": ["instructor-001", "instructor-002", "instructor-003"],
+ "findings": [
+ {
+ "finding_id": "instructor-001",
+ "location": {"section_id": "alkane-properties", "concept_slug": "alkane-properties", "nugget_id": "nugget-properties", "anchor_text": "The same weak intermolecular forces account for the low water solubility of alkanes and for their chemical inertness"},
+ "severity": "blocker",
+ "category": "chemical-accuracy",
+ "observation": "The expanded prose says weak intermolecular forces cause both low water solubility and chemical inertness. Dispersion forces explain physical-property trends; alkane reactivity instead depends on strong nonpolar covalent bonds and unfavorable reaction pathways.",
+ "learner_impact": "Students may predict chemical reactivity from boiling point or intermolecular-force strength.",
+ "evidence": "The causal claim appears in the final paragraph of nugget-properties immediately after the boiling-point explanation.",
+ "recommended_outcome": "Separate the physical-property explanation from the bond-energy and reaction-pathway explanation for low reactivity.",
+ "confidence": 0.99
+ },
+ {
+ "finding_id": "instructor-002",
+ "location": {"section_id": "ethane-conformations", "concept_slug": "ethane-conformations", "nugget_id": "nugget-ethane-conformations", "anchor_text": "far below what thermal motion supplies at room temperature"},
+ "severity": "blocker",
+ "category": "chemical-accuracy",
+ "observation": "The practice answer says a 12 kJ/mol torsional barrier is far below the thermal energy supplied at room temperature. RT is about 2.5 kJ/mol; rapid interconversion is explained by a thermally accessible rate distribution, not by 12 kJ/mol being below RT.",
+ "learner_impact": "Students receive a quantitatively false mental model of thermal activation.",
+ "evidence": "The source practice_check answer compares the 12 kJ/mol barrier directly with room-temperature thermal motion.",
+ "recommended_outcome": "Explain that a significant fraction of molecules can cross this modest barrier, so interconversion is rapid at room temperature.",
+ "confidence": 0.99
+ },
+ {
+ "finding_id": "instructor-003",
+ "location": {"concept_slug": "alkane-nomenclature", "question_slug": "ch3-iupac-name-v2", "anchor_text": "dimethylpropane"},
+ "severity": "blocker",
+ "category": "assessment-readiness",
+ "observation": "The IUPAC naming item accepts dimethylpropane without the required 2,2-locants; it also accepts neopentane although the prompt specifically requests an IUPAC name.",
+ "learner_impact": "An incomplete or common name earns credit and teaches that required locants are optional.",
+ "evidence": "answer_key.answer_text contains 2,2-dimethylpropane, 2,2 dimethylpropane, dimethylpropane, and neopentane.",
+ "recommended_outcome": "Accept only systematic forms that include both locants for this prompt.",
+ "confidence": 0.99
+ },
+ {
+ "finding_id": "instructor-004",
+ "location": {"section_id": "ethane-conformations", "asset_id": "cep-ethane-rotation", "anchor_text": "scan_dihedral"},
+ "severity": "high",
+ "category": "figure-accuracy",
+ "observation": "The ethane profile declares scan_dihedral [0,1,2,3] for SMILES CC. After hydrogens are added, atoms 0 and 1 are the two carbons, so the tuple does not describe an H-C-C-H torsion and the real scan fails or falls back silently.",
+ "learner_impact": "The displayed profile may not be the authored quantitative torsion scan.",
+ "evidence": "The source asset contains scan_smiles CC and scan_dihedral [0,1,2,3]; the torsion API supports automatic valid-dihedral selection when the field is omitted.",
+ "recommended_outcome": "Remove the invalid tuple and use the validated automatic torsion selection.",
+ "confidence": 0.99
+ },
+ {
+ "finding_id": "instructor-005",
+ "location": {"section_id": "ethane-conformations", "concept_slug": "ethane-conformations", "anchor_text": "Describe the staggered and eclipsed conformations of ethane"},
+ "severity": "high",
+ "category": "objective-alignment",
+ "observation": "No compiled question is tagged to ethane-conformations, so the stated ethane objective is not measured before the chapter advances to butane.",
+ "learner_impact": "A student can complete the bank without demonstrating the foundational conformation objective.",
+ "evidence": "The compiled 20-question set contains no item with concept_slug ethane-conformations.",
+ "recommended_outcome": "Add a focused ethane retrieval or interpretation item.",
+ "confidence": 0.99
+ },
+ {
+ "finding_id": "instructor-006",
+ "location": {"section_id": "functional-groups-overview", "question_slug": "ch3-functional-group-sort-v2", "anchor_text": "ester"},
+ "severity": "high",
+ "category": "sequencing",
+ "observation": "The sorting assessment requires recognition of an ester, but the instructional prose lists and defines alcohols, carbonyls, carboxylic acids, amines, ethers, and halides without introducing the ester pattern.",
+ "learner_impact": "Students are graded on a functional group not yet taught.",
+ "evidence": "The item includes a C(=O)O-C ester card and feedback, while nugget-functional-groups never names ester.",
+ "recommended_outcome": "Teach the ester connectivity before it appears in the bank or replace the premature item.",
+ "confidence": 0.98
+ },
+ {
+ "finding_id": "instructor-007",
+ "location": {"section_id": "functional-groups-overview", "nugget_id": "nugget-functional-groups", "anchor_text": "behaves the same way in every molecule"},
+ "severity": "high",
+ "category": "misconception",
+ "observation": "The chapter says a functional group behaves the same way in every molecule regardless of the surrounding structure. Functional groups confer characteristic patterns, but substitution, conjugation, sterics, and neighboring groups modify reactivity.",
+ "learner_impact": "Students may treat functional-group recognition as a context-free reaction guarantee.",
+ "evidence": "All three detail tiers use absolute or near-absolute language, including regardless of the rest of the structure and behaves the same way in every molecule.",
+ "recommended_outcome": "Describe characteristic behavior while explicitly preserving structural context.",
+ "confidence": 0.97
+ }
+ ],
+ "strengths": [
+ "The six concepts follow a coherent sequence from connectivity through nomenclature, properties, and conformations.",
+ "All inspected source and question SMILES parse and represent the named molecules.",
+ "Most numerical values and answer keys are chemically sound.",
+ "The bank uses varied formats and generally explanatory feedback."
+ ],
+ "open_questions": ["Is the ethane torsion profile intended to use the API's automatic H-C-C-H selection?"]
+ },
+ {
+ "persona": "Struggling Student",
+ "persona_version": "1.0.0",
+ "chapter_id": "alkanes-and-stereochemistry",
+ "chapter_version": "1",
+ "model": "gpt-5.6-sol",
+ "summary": "The chapter is concise and approachable early on, but condensed-formula nomenclature and the transition from line structures to Newman projections and energy curves omit the intermediate decoding work a low-confidence learner needs. The intermolecular-force/reactivity statement also creates a durable misconception.",
+ "overall_score": 5.4,
+ "publication_blockers": [],
+ "findings": [
+ {
+ "finding_id": "struggle-001",
+ "location": {"section_id": "functional-groups-overview", "question_slug": "ch3-functional-group-sort", "anchor_text": "amines (C-N)"},
+ "severity": "medium",
+ "category": "cognitive-load",
+ "observation": "Six group families arrive in one sentence, only three get molecule examples, and the first sorter expects methylamine recognition from a condensed formula.",
+ "learner_impact": "A shaky learner pattern-matches letters rather than reading connectivity.",
+ "evidence": "The section shows acetone, ethanol, and acetic acid, while the question asks learners to classify CH3NH2.",
+ "recommended_outcome": "Bridge symbolic group patterns to condensed formulas before mixing them.",
+ "confidence": 0.94
+ },
+ {
+ "finding_id": "struggle-002",
+ "location": {"section_id": "alkanes-and-isomers", "nugget_id": "nugget-alkanes-isomers", "anchor_text": "connectivity, not appearance on the page"},
+ "severity": "medium",
+ "category": "misconception",
+ "observation": "The prose warns that rotated or reversed drawings can be identical but never walks through such a pair atom by atom.",
+ "learner_impact": "The learner has no repeatable method for rejecting duplicate drawings.",
+ "evidence": "The two visible examples are genuinely different connectivities, not different-looking drawings of one connectivity.",
+ "recommended_outcome": "Resolve one deceptive duplicate pair explicitly.",
+ "confidence": 0.91
+ },
+ {
+ "finding_id": "struggle-003",
+ "location": {"section_id": "alkane-nomenclature", "question_slug": "ch3-iupac-name", "anchor_text": "Applied to (CH3)2CHCH2CH3"},
+ "severity": "high",
+ "category": "worked-example-gap",
+ "observation": "The only naming example compresses decoding parentheses, tracing chains, choosing a numbering direction, assigning the locant, and assembling the name into one sentence.",
+ "learner_impact": "A learner copies 2-methylbutane without learning how to derive it.",
+ "evidence": "The associated molecule card is already titled 2-Methylbutane and carries no parent-chain or carbon-number annotations.",
+ "recommended_outcome": "Make each naming decision individually checkable before the short-answer item.",
+ "confidence": 0.97
+ },
+ {
+ "finding_id": "struggle-004",
+ "location": {"section_id": "alkane-properties", "nugget_id": "nugget-properties", "anchor_text": "same weak intermolecular forces"},
+ "severity": "high",
+ "category": "misconception",
+ "observation": "The prose attributes chemical inertness to weak intermolecular forces.",
+ "learner_impact": "The learner may predict reactions from boiling point or polarity.",
+ "evidence": "The causal claim directly follows the dispersion-force boiling-point explanation.",
+ "recommended_outcome": "Keep physical-property and covalent-reactivity explanations distinct.",
+ "confidence": 0.98
+ },
+ {
+ "finding_id": "struggle-005",
+ "location": {"section_id": "ethane-conformations", "asset_id": "cep-ethane-rotation", "anchor_text": "A Newman projection represents"},
+ "severity": "high",
+ "category": "worked-example-gap",
+ "observation": "The reader defines Newman projections but supplies only an ethane line structure followed by an energy profile; it never shows the front/back-carbon transformation or 0-degree to 60-degree rotation.",
+ "learner_impact": "The learner memorizes staggered low and eclipsed high without reasoning from geometry.",
+ "evidence": "The intended connecting video is hidden with an empty URL and no ethane Newman asset exists.",
+ "recommended_outcome": "Connect viewing direction, rotation, dihedral angle, and curve position in an observable sequence.",
+ "confidence": 0.99
+ },
+ {
+ "finding_id": "struggle-006",
+ "location": {"concept_slug": "ethane-conformations", "anchor_text": "minima at every staggered geometry"},
+ "severity": "medium",
+ "category": "retrieval-practice",
+ "observation": "Ethane conformations is the only chapter concept with no compiled question.",
+ "learner_impact": "A comprehension gap first surfaces only after butane adds more complexity.",
+ "evidence": "The source practice_check is absent from the reader and no bank item carries this concept slug.",
+ "recommended_outcome": "Expose a low-stakes ethane check before butane.",
+ "confidence": 0.99
+ },
+ {
+ "finding_id": "struggle-007",
+ "location": {"section_id": "butane-conformations", "question_slug": "ch3-newman-anti-v2", "anchor_text": "At 60 degrees the methyls are adjacent"},
+ "severity": "high",
+ "category": "cognitive-load",
+ "observation": "The section coordinates line structure, Newman geometry, angle, torsional strain, steric strain, and an energy curve while showing only anti before asking learners to build gauche.",
+ "learner_impact": "The learner may equate gauche with eclipsed or rotate the wrong bonds.",
+ "evidence": "No gauche or eclipsed Newman teaching figure accompanies the assessed distinctions.",
+ "recommended_outcome": "Introduce the named conformers in smaller aligned steps.",
+ "confidence": 0.96
+ },
+ {
+ "finding_id": "struggle-008",
+ "location": {"concept_slug": "alkane-nomenclature", "question_slug": "ch3-iupac-name-v2", "anchor_text": "Give the IUPAC name of C(CH3)4"},
+ "severity": "high",
+ "category": "misconception",
+ "observation": "The key accepts dimethylpropane without locants and the common name neopentane for an IUPAC prompt.",
+ "learner_impact": "The learner concludes locants are optional.",
+ "evidence": "Both strings appear in answer_key.answer_text.",
+ "recommended_outcome": "Grade the requested systematic name consistently.",
+ "confidence": 0.99
+ },
+ {
+ "finding_id": "struggle-009",
+ "location": {"concept_slug": "butane-conformations", "question_slug": "ch3-conformer-matrix", "anchor_text": "Present / higher"},
+ "severity": "medium",
+ "category": "cognitive-load",
+ "observation": "One pair of slash labels expresses both presence/absence and relative magnitude across unlike matrix rows.",
+ "learner_impact": "The learner must decode the control wording instead of only comparing conformers.",
+ "evidence": "The same yes/no values grade an angle-present row and a strain-higher row.",
+ "recommended_outcome": "Use row-appropriate, single-relation labels.",
+ "confidence": 0.95
+ }
+ ],
+ "strengths": [
+ "Early examples use small familiar molecules.",
+ "Question feedback often names the likely wrong move.",
+ "Concrete boiling points support the branching trend.",
+ "The anti Newman description clearly identifies the viewing bond."
+ ],
+ "open_questions": ["Are variant questions served to learners, and is another surface expected to render source practice checks?"]
+ },
+ {
+ "persona": "Accessibility Persona",
+ "persona_version": "1.0.0",
+ "chapter_id": "alkanes-and-stereochemistry",
+ "chapter_version": "1",
+ "model": "gpt-5.6-sol",
+ "summary": "Two required assessments block publication: structure-backed functional-group choices lack equivalent structural descriptions, and one nomenclature description supplies the answer-producing parent, substituent, and locant. Other reviewed interaction paths are comparatively strong.",
+ "overall_score": 7.0,
+ "publication_blockers": ["access-001", "access-002"],
+ "findings": [
+ {
+ "finding_id": "access-001",
+ "location": {"concept_slug": "functional-groups-overview", "question_slug": "ch3-functional-group-identify", "anchor_text": "Choose the compound containing a ketone"},
+ "severity": "blocker",
+ "category": "media-equivalence",
+ "observation": "Both identification items attach structures to options, but accessible descriptions and labels supply only compound names rather than the visible connectivity.",
+ "learner_impact": "A nonvisual learner must answer from memorized names instead of identifying the functional group from structure.",
+ "evidence": "The v1 options render acetone, ethanol, and acetic acid structures; v2 renders acetaldehyde, acetone, and diethyl ether, while their descriptions only name the compounds.",
+ "recommended_outcome": "Provide neutral speech-friendly connectivity for every structure-backed option.",
+ "confidence": 0.98
+ },
+ {
+ "finding_id": "access-002",
+ "location": {"concept_slug": "alkane-nomenclature", "question_slug": "ch3-iupac-name", "anchor_text": "a methyl group on the second carbon of a butane chain"},
+ "severity": "blocker",
+ "category": "alt-text-quality",
+ "observation": "The accessible description explicitly identifies the butane parent, methyl substituent, and locant 2, which directly assembles into the keyed answer.",
+ "learner_impact": "A screen-reader learner is handed the reasoning the assessment is meant to measure.",
+ "evidence": "The visible stimulus is (CH3)2CHCH2CH3; the description calls it a methyl group on carbon 2 of a butane chain.",
+ "recommended_outcome": "Use a speech-friendly equivalent of the condensed formula without performing chain selection or numbering.",
+ "confidence": 0.99
+ },
+ {
+ "finding_id": "access-003",
+ "location": {"concept_slug": "butane-conformations", "question_slug": "ch3-newman-anti", "anchor_text": "arrange the two methyl groups and four hydrogens"},
+ "severity": "medium",
+ "category": "interactive-fallback",
+ "observation": "The description promises six placement controls, but the activity starts from a preset and exposes rotation controls with a live state readout.",
+ "learner_impact": "Screen-reader or voice-control users may search for controls that do not exist.",
+ "evidence": "student_config contains only a butane preset and staggered geometry; the workspace uses 60-degree rotation controls.",
+ "recommended_outcome": "Describe the actual preset, adjustable face, rotation increment, and state announcement.",
+ "confidence": 0.94
+ }
+ ],
+ "strengths": [
+ "All twelve teaching assets have chemically specific alt text.",
+ "Most activity descriptions remain task-neutral.",
+ "Structure-scaffold items allow typed entry.",
+ "Reviewed categorization, matching, matrix, ranking, and Newman controls are keyboard operable."
+ ],
+ "open_questions": ["Before the video is surfaced, will it have equivalent narration and playback controls?", "Has typed structure entry been tested end-to-end with screen readers?"]
+ },
+ {
+ "persona": "Learner with Visual Preference",
+ "persona_version": "1.0.0",
+ "chapter_id": "alkanes-and-stereochemistry",
+ "chapter_version": "1",
+ "model": "gpt-5.6-sol",
+ "summary": "Ordinary molecule depictions are appropriate, but compiled reader data does not preserve renderable specs for the two torsional profiles, and the butane Newman asset does not match the live renderer's object contract. The chapter therefore loses its most important stereochemical visuals.",
+ "overall_score": 4.2,
+ "publication_blockers": ["visual-001", "visual-002"],
+ "findings": [
+ {
+ "finding_id": "visual-001",
+ "location": {"section_id": "ethane-conformations", "asset_id": "cep-ethane-rotation", "anchor_text": "Ethane torsional energy profile"},
+ "severity": "high",
+ "category": "figure-accuracy",
+ "observation": "Both authored conformational profiles compile as reaction_coordinate blocks without content.spec, and the reader card fails when the spec is absent.",
+ "learner_impact": "The dihedral-angle-to-energy relationship is unavailable in both conformation sections.",
+ "evidence": "Compiled blocks blk-v5qe4swh and blk-s4rjhppb omit spec; source assets carry detailed conformer specs.",
+ "recommended_outcome": "Preserve and route the profile specs through a compatible renderer with a usable static fallback.",
+ "confidence": 0.99
+ },
+ {
+ "finding_id": "visual-002",
+ "location": {"section_id": "butane-conformations", "asset_id": "newman-butane-anti-pkg", "question_slug": "ch3-newman-anti", "anchor_text": "Butane, anti conformation"},
+ "severity": "high",
+ "category": "figure-accuracy",
+ "observation": "The compiled Newman asset contains a simple spec but no object, while the live rendering path calls newmanSceneDataUrl(asset.object).",
+ "learner_impact": "The only authored Newman projection can reach a render-error state before Newman-building activities.",
+ "evidence": "Compiled block blk-elunk41q embeds spec.front_substituents/back_substituents/dihedral_deg and no object.",
+ "recommended_outcome": "Convert the authoring spec to the validated Newman object consumed by the renderer.",
+ "confidence": 0.98
+ },
+ {
+ "finding_id": "visual-003",
+ "location": {"section_id": "ethane-conformations", "asset_id": "mol-ethane-conf", "anchor_text": "A Newman projection represents"},
+ "severity": "high",
+ "category": "visual-opportunity",
+ "observation": "The first Newman lesson has only an ethane line structure; it shows neither viewing direction nor staggered/eclipsed projections.",
+ "learner_impact": "Learners must mentally invent the line-to-Newman transformation.",
+ "evidence": "The nugget lists mol-ethane-conf and cep-ethane-rotation, but no ethane Newman asset.",
+ "recommended_outcome": "Align viewing direction, 0-degree/60-degree Newman views, and curve positions in a compact static sequence.",
+ "confidence": 0.99
+ },
+ {
+ "finding_id": "visual-004",
+ "location": {"section_id": "butane-conformations", "question_slug": "ch3-newman-anti-v2", "anchor_text": "Build a gauche conformer"},
+ "severity": "high",
+ "category": "visual-opportunity",
+ "observation": "The chapter contains no gauche or eclipsed Newman projection even though it assesses all of these conformer relationships.",
+ "learner_impact": "Methyl separations of 180, 60, and 0 degrees cannot be compared visually before construction.",
+ "evidence": "newman-butane-anti-pkg is the only authored Newman asset.",
+ "recommended_outcome": "Align assessed conformers by angle, staggering/eclipsing, and relative energy.",
+ "confidence": 0.98
+ },
+ {
+ "finding_id": "visual-005",
+ "location": {"section_id": "alkane-nomenclature", "asset_id": "mol-2-methylbutane", "anchor_text": "Practice locating the longest chain and lowest locant"},
+ "severity": "medium",
+ "category": "figure-purpose",
+ "observation": "Accurate structures are unannotated, so the parent-chain choice, numbering direction, and branch locant are not visually traceable.",
+ "learner_impact": "The figures display answers without displaying the naming procedure.",
+ "evidence": "The molecule cards carry correct SMILES but no numbering or parent-chain annotations.",
+ "recommended_outcome": "Reuse the structures in an annotated worked naming example.",
+ "confidence": 0.96
+ },
+ {
+ "finding_id": "visual-006",
+ "location": {"section_id": "alkane-properties", "asset_id": "mol-neopentane", "question_slug": "ch3-boiling-point-rank-v2", "anchor_text": "more nearly spherical"},
+ "severity": "medium",
+ "category": "figure-purpose",
+ "observation": "Two-dimensional line structures do not establish the claimed three-dimensional compactness/contact-area explanation, and the intermediate C5 isomer is absent.",
+ "learner_impact": "Learners may memorize the trend without seeing its physical basis.",
+ "evidence": "The prose and question compare three isomers, but only pentane and neopentane are shown.",
+ "recommended_outcome": "Provide a concise three-isomer structure/contact/boiling-point comparison.",
+ "confidence": 0.94
+ }
+ ],
+ "strengths": [
+ "Ordinary molecule assets use appropriate SMILES.",
+ "Butane and isobutane are co-located for connectivity comparison.",
+ "The source selects Newman projections and energy profiles as the right representations.",
+ "The unfinished video is correctly hidden."
+ ],
+ "open_questions": ["Is there an undocumented runtime spec-to-object Newman normalization?", "Should conformational profiles remain their own reader asset type?"]
+ }
+ ],
+ "orchestrator_findings": [
+ {
+ "finding_id": "orchestrator-001",
+ "location": {"section_id": "alkanes-and-isomers", "anchor_text": "Wikipedia"},
+ "severity": "high",
+ "category": "conceptual-support",
+ "observation": "Five of the chapter's six Wikipedia background links return HTTP 404: constitutional isomers, naming alkanes, alkane properties, ethane conformations, and butane conformations.",
+ "learner_impact": "Most section-level background-reading paths fail.",
+ "evidence": "Direct HTTP checks returned 404 for the five generated URLs; Functional_groups and the OpenStax chapter link resolve.",
+ "recommended_outcome": "Map each section to a verified live article title before recompiling.",
+ "confidence": 1.0
+ }
+ ],
+ "publication_readiness": "blocked",
+ "executive_summary": "The baseline is blocked by two required-assessment accessibility defects. It also needs major chemistry/key corrections and repair of the compiled stereochemical visual pipeline. The source sequence and ordinary molecular structures are strong, but learners cannot rely on the current naming accessibility description, functional-group option equivalence, torsional-profile blocks, or Newman teaching asset.",
+ "consensus_strengths": [
+ "The concept sequence is coherent.",
+ "Ordinary molecule structures are accurate and well chosen.",
+ "The bank is varied and usually provides explanatory feedback.",
+ "The source correctly identifies Newman projections and energy profiles as essential representations."
+ ],
+ "ranked_recommendations": [
+ {
+ "rec_id": "rec-001",
+ "title": "Restore equivalent functional-group option descriptions",
+ "need": "Nonvisual learners need the same connectivity evidence as learners viewing structure renders.",
+ "chosen_intervention": "structured-chemical-description",
+ "rationale": "Neutral connectivity descriptions preserve the tested classification decision.",
+ "target_surface": "assessment",
+ "severity": "blocker",
+ "source_findings": ["access-001"]
+ },
+ {
+ "rec_id": "rec-002",
+ "title": "Remove the nomenclature answer leak",
+ "need": "The accessible stimulus must not preselect the parent, substituent, and locant.",
+ "chosen_intervention": "text-equivalent",
+ "rationale": "The condensed formula can be spoken directly without solving it.",
+ "target_surface": "assessment",
+ "severity": "blocker",
+ "source_findings": ["access-002"]
+ },
+ {
+ "rec_id": "rec-003",
+ "title": "Correct chemistry and IUPAC grading",
+ "need": "Physical forces/reactivity, thermal activation, and required locants must be accurate.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "These are bounded source corrections.",
+ "target_surface": "prose",
+ "severity": "blocker",
+ "source_findings": ["instructor-001", "instructor-002", "instructor-003", "struggle-004", "struggle-008"]
+ },
+ {
+ "rec_id": "rec-004",
+ "title": "Repair conformational visual delivery",
+ "need": "Energy profiles and the anti Newman projection need renderable reader data.",
+ "chosen_intervention": "new-figure",
+ "rationale": "The authored scientific content exists; the reader contracts must preserve it and provide a stable fallback.",
+ "target_surface": "figure",
+ "severity": "high",
+ "source_findings": ["visual-001", "visual-002", "instructor-004"]
+ },
+ {
+ "rec_id": "rec-005",
+ "title": "Add worked Newman and naming bridges",
+ "need": "Learners need to observe line-to-Newman transformation and the individual naming decisions.",
+ "chosen_intervention": "static-image-sequence",
+ "rationale": "A compact aligned sequence is sufficient; animation is optional.",
+ "target_surface": "figure",
+ "severity": "high",
+ "source_findings": ["struggle-003", "struggle-005", "struggle-007", "visual-003", "visual-004", "visual-005"]
+ },
+ {
+ "rec_id": "rec-006",
+ "title": "Align instruction and assessment",
+ "need": "Ester needs instruction, ethane needs retrieval practice, and matrix labels need one meaning each.",
+ "chosen_intervention": "added-practice",
+ "rationale": "A small content bridge and one focused item close the main alignment gaps.",
+ "target_surface": "practice",
+ "severity": "high",
+ "source_findings": ["instructor-005", "instructor-006", "struggle-006", "struggle-009"]
+ },
+ {
+ "rec_id": "rec-007",
+ "title": "Repair dead background links",
+ "need": "Five section links need verified live destinations.",
+ "chosen_intervention": "instructor-note",
+ "rationale": "This is a source-profile integrity correction.",
+ "target_surface": "instructor-support",
+ "severity": "high",
+ "source_findings": ["orchestrator-001"]
+ }
+ ],
+ "accessibility_blockers": ["access-001", "access-002"],
+ "visual_opportunities": ["visual-003", "visual-004", "visual-005", "visual-006"],
+ "sufficient_as_is": [
+ "All twelve teaching assets have nonempty, chemically meaningful alt text.",
+ "Both structure-scaffold items offer typed entry.",
+ "The unfinished conformation video is hidden while its URL is empty.",
+ "The ordinary molecule cards accurately represent their named compounds."
+ ],
+ "disagreements": [
+ {
+ "topic": "Severity of missing conformation visuals",
+ "positions": {
+ "Learner with Visual Preference": "The broken existing profile and Newman render paths are publication blockers.",
+ "Struggling Student": "The absent worked representation is high severity because it drives guessing and memorization.",
+ "Accessibility Persona": "The prose and descriptions preserve content access, so these are not required-access blockers."
+ },
+ "resolution": "Retain the visual persona's blocker labels and the accessibility persona's distinction: the baseline is blocked by access-001/access-002, while the visual defects independently require major revision."
+ }
+ ],
+ "regression": {
+ "resolved": [],
+ "unchanged": [],
+ "worsened": [],
+ "new": [
+ "instructor-001", "instructor-002", "instructor-003", "instructor-004", "instructor-005", "instructor-006", "instructor-007",
+ "struggle-001", "struggle-002", "struggle-003", "struggle-004", "struggle-005", "struggle-006", "struggle-007", "struggle-008", "struggle-009",
+ "access-001", "access-002", "access-003",
+ "visual-001", "visual-002", "visual-003", "visual-004", "visual-005", "visual-006",
+ "orchestrator-001"
+ ]
+ },
+ "corrections": {
+ "status": "applied-and-verified-without-second-persona-run",
+ "post_correction_readiness_estimate": "major revision",
+ "estimate_note": "Not a new persona verdict. Both required-access blockers and all three instructor chemistry/key blockers were corrected, but the conformation visual-rendering and worked-example cluster remains.",
+ "applied": [
+ {
+ "change": "Separated alkane physical-property explanations from chemical reactivity: dispersion forces account for boiling-point trends, while strong nonpolar covalent bonds and unfavorable pathways account for low reactivity.",
+ "resolves": ["instructor-001", "struggle-004"],
+ "partially_addresses": []
+ },
+ {
+ "change": "Replaced the false comparison of the 12 kJ/mol ethane barrier with room-temperature thermal energy by a rate-distribution explanation: enough molecules cross the modest barrier for rapid interconversion.",
+ "resolves": ["instructor-002"],
+ "partially_addresses": []
+ },
+ {
+ "change": "Restricted the C(CH3)4 IUPAC key to forms containing the required 2,2 locants and removed the common-name answer.",
+ "resolves": ["instructor-003", "struggle-008"],
+ "partially_addresses": []
+ },
+ {
+ "change": "Removed the invalid ethane scan_dihedral tuple so the torsion service can choose a valid H-C-C-H dihedral automatically.",
+ "resolves": ["instructor-004"],
+ "partially_addresses": ["visual-001"]
+ },
+ {
+ "change": "Qualified functional-group behavior as characteristic rather than invariant and introduced the ester C(=O)-O-C pattern before it is assessed.",
+ "resolves": ["instructor-006", "instructor-007"],
+ "partially_addresses": ["struggle-001"]
+ },
+ {
+ "change": "Added condensed connectivity directly to every option in both structure-backed functional-group identification items and supplied neutral speech-friendly descriptions.",
+ "resolves": ["access-001"],
+ "partially_addresses": []
+ },
+ {
+ "change": "Replaced the IUPAC accessible-description answer leak with a spoken equivalent of the original condensed formula.",
+ "resolves": ["access-002"],
+ "partially_addresses": []
+ },
+ {
+ "change": "Aligned the Newman activity descriptions with the actual preset, 60-degree rotation controls, and announced dihedral state.",
+ "resolves": ["access-003"],
+ "partially_addresses": []
+ },
+ {
+ "change": "Reworded both conformer matrices so Present/Absent has one meaning and the magnitude comparison is stated in the feature label.",
+ "resolves": ["struggle-009"],
+ "partially_addresses": []
+ },
+ {
+ "change": "Mapped all six concept links to verified live Wikipedia article titles: Functional group, Structural isomer, IUPAC nomenclature of organic chemistry, Alkane, Ethane, and Rotamer.",
+ "resolves": ["orchestrator-001"],
+ "partially_addresses": []
+ }
+ ],
+ "remaining_high_priority": [
+ "The reader still compiles conformational_energy_profile assets as reaction-coordinate blocks without their authored specs; visual-001 remains open.",
+ "The anti-butane Newman teaching asset still needs a verified spec-to-object renderer normalization; visual-002 remains open.",
+ "Ethane has no worked Newman sequence and no compiled retrieval item; instructor-005, struggle-005/006, and visual-003 remain open.",
+ "The nomenclature section still lacks an annotated, stepwise parent-chain and numbering example.",
+ "Gauche and eclipsed butane projections are not shown before comparison and construction activities."
+ ],
+ "verification": [
+ "jq empty content/organic/topic-packages/alkanes-and-stereochemistry/topic.package.json — valid JSON",
+ "Topic-package compiler (proprietary toolchain, not in this repo) — clean
+ "Automated test suite — 144 passed
+ "python .[internal source reference — not in this repo] --synthesized reports/topic-packages/alkanes-and-stereochemistry/chapter-review.json — valid",
+ "Generated diff inspected; chapter-derived outputs retained and aggregate manifest/catalog churn restored."
+ ]
+ }
+}

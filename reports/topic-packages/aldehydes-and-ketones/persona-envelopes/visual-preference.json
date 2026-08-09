@@ -1,0 +1,268 @@
+{
+ "persona": "Learner with Visual Preference",
+ "persona_version": "1.0.0",
+ "chapter_id": "aldehydes-and-ketones",
+ "chapter_version": "1",
+ "model": "claude-opus-5[1m]",
+ "summary": "The chapter is prose-rich and visually thin in a specific, correctable way: all 13 assets are static single-molecule structures (SMILES + alt text), and every one of them shows a *substance*, never a *change*. The chapter's own authoring recognized this — three mechanism video briefs were written for nucleophilic addition, acetal protection, and the Wittig — but all three are marked production_status 'deferred' and their compiled reader blocks carry url:\"\" with is_hidden:true, so they render as nothing. No static sequence was substituted. The result is that the chapter's central teaching claims — the two-step addition mechanism and 105° trajectory, sp2→sp3 rehybridization, the aldehyde-vs-ketone electrophilicity argument, the 1,2-vs-1,4 branch point, the protect/react/deprotect strategy, the pH 4.5 rate optimum, the hydration equilibrium spread, and every IR/NMR number — are carried entirely by paragraphs, while the figures show endpoints that a reader must already understand the mechanism to connect. Several existing molecules are also reused verbatim across sections with identical alt text and no re-annotation, so on second appearance they teach nothing new. The structures themselves are chemically sound and their alt text is unusually good; the gap is relational and diagrammatic, not accuracy.",
+ "overall_score": 5.6,
+ "publication_blockers": [],
+ "findings": [
+ {
+ "finding_id": "visual-001",
+ "location": {
+ "section_id": "nugget-nucleophilic-addition",
+ "concept_slug": "nucleophilic-addition-mechanism",
+ "nugget_id": "nugget-nucleophilic-addition",
+ "asset_id": "video-nucleophilic-addition",
+ "anchor_text": "attacks that carbon along a trajectory roughly 105° to the C=O axis"
+ },
+ "severity": "high",
+ "category": "visual-opportunity",
+ "observation": "The chapter's declared master mechanism has no visual of the mechanism. The only figures in the section are flat static structures of acetone and benzaldehyde. The intended support, video_brief 'video-nucleophilic-addition', is production_status 'deferred'; its compiled reader block (blk-r8gcfq5b) has url:\"\" and is_hidden:true, so the reader shows nothing at all — no animation and no static substitute.",
+ "learner_impact": "A learner who reasons from diagrams has to hold four simultaneous changes in working memory from prose alone — nucleophile approach geometry, sigma bond forming, pi electrons relocating to oxygen, and carbon rehybridizing from trigonal planar to tetrahedral — and then reapply that unseen template to seven downstream reactions. The 105° trajectory and the planar-to-tetrahedral change are inherently spatial claims that text cannot make visible.",
+ "evidence": "topic.package.json video_briefs[0].production_status = 'deferred'; production_note: 'the molecule-video-creator chalk pipeline cannot produce it ... The reader carries the same content in the linked nugget prose and molecule figures.' Compiled reader block blk-r8gcfq5b: {\"url\": \"\", \"is_hidden\": true}. Section assets: mol-acetone, mol-benzaldehyde only.",
+ "recommended_outcome": "The section needs the addition step itself made visible — the electron reorganization and the geometry change at the carbonyl carbon — in a form that survives the video deferral. The deferral note asserts the prose and molecule figures already carry this content; they do not, because no figure in the section depicts a transformation.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "visual-002",
+ "location": {
+ "section_id": "nugget-conjugate-addition",
+ "concept_slug": "conjugate-addition",
+ "nugget_id": "nugget-conjugate-addition",
+ "asset_id": "mol-methyl-vinyl-ketone",
+ "anchor_text": "methylmagnesium bromide converts 2-cyclohexenone mainly to 1-methyl-2-cyclohexen-1-ol (1,2), while lithium dimethylcuprate converts it to 3-methylcyclohexanone (1,4)"
+ },
+ "severity": "high",
+ "category": "visual-opportunity",
+ "observation": "The whole section is a two-branch comparison — same substrate, two nucleophile classes, two different products at two different carbons — and no branch is shown. The single figure is methyl vinyl ketone, which is not the compound the section's worked contrast uses (2-cyclohexenone), and neither of the two named products has a figure. The beta carbon, the site the entire section turns on, is never marked on any structure.",
+ "learner_impact": "Deciding 1,2 versus 1,4 requires seeing which carbon is 'beta' and where the nucleophile lands. A learner must build the enone, count to the beta carbon, and construct both product skeletons mentally before the comparison can even be evaluated — exactly the load a side-by-side comparison removes. The mismatch between the figured compound and the discussed compound adds a second mapping step.",
+ "evidence": "Section nugget-conjugate-addition blocks: one text block plus blk-kwl9f6tl (mol-methyl-vinyl-ketone). Prose names 2-cyclohexenone, 1-methyl-2-cyclohexen-1-ol, and 3-methylcyclohexanone; none appears in assets[].",
+ "recommended_outcome": "The 1,2-versus-1,4 fork needs to be visible on one substrate with both electrophilic sites identified and both products shown side by side; and the section's figure should depict the compound the section actually argues about.",
+ "confidence": 0.93
+ },
+ {
+ "finding_id": "visual-003",
+ "location": {
+ "section_id": "nugget-carbonyl-spectroscopy",
+ "concept_slug": "spectroscopy-of-aldehydes-and-ketones",
+ "nugget_id": "nugget-carbonyl-spectroscopy",
+ "question_slug": "ch19-aldehyde-nmr-shift",
+ "anchor_text": "a characteristic pair of weak stretches near 2720 and 2820 cm⁻¹, the lower of which sits in an otherwise empty region"
+ },
+ "severity": "high",
+ "category": "visual-opportunity",
+ "observation": "The spectroscopy section asserts roughly a dozen positional facts (C=O near 1730 vs 1715 cm⁻¹, ~30 cm⁻¹ conjugation shift to ~1690, aldehyde C–H pair at 2720/2820 cm⁻¹, aldehyde proton 9–10 ppm, alpha protons 2.0–2.6 ppm, 13C 190–205 vs 200–215 ppm) with no spectrum, axis, or annotated band anywhere in the chapter. The prose itself uses positional language — 'a narrow window', 'sits in an otherwise empty region', 'the most downfield signal' — that presupposes a picture the reader never gets.",
+ "learner_impact": "Spectral interpretation is a pattern-matching skill performed on a trace. Presented as a list of numbers, the learner memorizes values but never sees that 1730 and 1715 are indistinguishable in practice while 1690 is visibly shifted, or why the 2720 band is diagnostic precisely because its neighborhood is empty. The chapter also assesses this numerically (ch19-aldehyde-nmr-shift asks for the CHO shift in ppm with no spectrum), so recall is tested where reading was taught.",
+ "evidence": "Section nugget-carbonyl-spectroscopy contains one text block plus blk-vmo02wqe (mol-acetaldehyde, reused from section 1) and a Wikipedia link. assets[] contains no spectrum or vibration asset of any kind.",
+ "recommended_outcome": "The chapter needs the diagnostic regions shown on an axis at least once — where the carbonyl band sits, how far conjugation moves it, and where the aldehyde C–H and CHO proton signals fall relative to everything else — so the numbers become positions rather than a list.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "visual-004",
+ "location": {
+ "section_id": "nugget-preparation",
+ "concept_slug": "preparation-of-aldehydes-and-ketones",
+ "nugget_id": "nugget-preparation",
+ "asset_id": "mol-cyclohexanone",
+ "anchor_text": "Mercury(II)-catalyzed hydration in aqueous sulfuric acid places the hydroxyl on the internal carbon (Markovnikov)"
+ },
+ "severity": "high",
+ "category": "visual-opportunity",
+ "observation": "This is the chapter's densest paragraph — five distinct routes, three of which are reagent-controlled forks (PCC/Dess–Martin vs aqueous Cr(VI); Markovnikov vs anti-Markovnikov alkyne hydration; primary vs secondary alcohol) — supported by exactly one figure, cyclohexanone, which illustrates none of the forks.",
+ "learner_impact": "Branching decision content read as continuous prose forces the learner to reconstruct the tree themselves and, in practice, to memorize reagent-product pairs without the organizing structure. The two alkyne-hydration routes in particular differ only in which carbon gets the oxygen — a positional distinction that prose states and a picture would show.",
+ "evidence": "Section nugget-preparation blocks: one text block, blk-6tawtaho (mol-cyclohexanone), one Wikipedia link. Expanded text covers PCC/DMP, aqueous Cr(VI), ozonolysis, Hg(II) hydration, hydroboration–oxidation, and Friedel–Crafts acylation.",
+ "recommended_outcome": "The starting-material-to-carbonyl routes need to be seeable as a branching map with the reagent that selects each branch on the branch, rather than recovered from a paragraph.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "visual-005",
+ "location": {
+ "section_id": "nugget-acetals",
+ "concept_slug": "acetals-and-protecting-groups",
+ "nugget_id": "nugget-acetals",
+ "asset_id": "video-acetal-formation",
+ "anchor_text": "convert the ketone to its cyclic acetal with ethylene glycol and an acid catalyst, run the Grignard addition on the ester, and then hydrolyze the acetal"
+ },
+ "severity": "high",
+ "category": "visual-opportunity",
+ "observation": "The section's payoff is a three-stage synthetic strategy (protect, react elsewhere, deprotect) plus a four-intermediate mechanism (hemiacetal, protonation, oxocarbenium ion, ring closure). The only figure is the finished cyclic acetal — the middle state of the strategy, shown without either the ketone it came from or the ketone it returns to. The intended animation (video-acetal-formation) is deferred and its reader block is hidden.",
+ "learner_impact": "Protecting-group logic is about a molecule changing and changing back while a different site reacts. Given only the protected endpoint, a learner cannot see what was hidden, what reacted, or what was recovered, and the reversibility that makes the whole strategy work is invisible. This is also the section's practice_check task, so the learner is asked to reproduce a sequence never shown.",
+ "evidence": "assets: mol-cyclohexanone-ethylene-acetal only. video_briefs[1].production_status = 'deferred'; compiled block blk-ijjski5m {\"url\": \"\", \"is_hidden\": true}. practice_check asks how the ketone is protected and recovered.",
+ "recommended_outcome": "The protect/react/deprotect cycle needs to be visible as a sequence with the same molecule in all three states, and the reversibility of the equilibrium needs to be shown rather than asserted.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "visual-006",
+ "location": {
+ "section_id": "nugget-aldehyde-oxidation",
+ "concept_slug": "oxidation-of-aldehydes",
+ "asset_id": "mol-benzoic-acid",
+ "anchor_text": "old samples of benzaldehyde are contaminated with benzoic acid"
+ },
+ "severity": "medium",
+ "category": "figure-purpose",
+ "observation": "Throughout the chapter, transformations are represented as two independent static molecule cards with nothing between them: benzaldehyde and benzoic acid (section 3), cyclohexanone-imine and cyclohexanone-enamine (section 7), chloral hydrate and acetone cyanohydrin (section 5). No reaction block, arrow, reagent label, or before/after pairing exists anywhere in the compiled chapter — the reader has only block_type 'molecule'.",
+ "learner_impact": "Adjacency is not causation. A learner scanning the page sees a gallery of unrelated compounds and must read the paragraph to learn that card two is card one after a reagent. The relationship — which is the actual content — is the one thing not depicted, and the reused benzaldehyde card in section 3 is visually identical to its section 1 appearance where it meant something different.",
+ "evidence": "Compiled chapter contains 15 molecule blocks and zero reaction/reaction_coordinate blocks, although the reader's block vocabulary includes 'reaction' and 'reaction_coordinate' ([internal source reference — not in this repo] IMAGE_TYPES).",
+ "recommended_outcome": "Where two figures are a substrate and its product, the transformation and its reagent need to be part of the figure rather than left to the surrounding paragraph.",
+ "confidence": 0.87
+ },
+ {
+ "finding_id": "visual-007",
+ "location": {
+ "section_id": "nugget-nucleophilic-addition",
+ "concept_slug": "nucleophilic-addition-mechanism",
+ "asset_id": "mol-acetone",
+ "anchor_text": "the two donors of a ketone reduce the partial positive charge — and with it the electrophilicity — more than the single donor of an aldehyde"
+ },
+ "severity": "medium",
+ "category": "figure-purpose",
+ "observation": "Acetone and benzaldehyde appear in the nucleophilic-addition section specifically to support the relative-reactivity argument, but they are rendered as plain unannotated structures identical to their section-1 appearances (same SMILES, same alt text, same rdkit options). Nothing on either figure shows partial charges, the crowding difference, or the conjugation that the argument depends on. Formaldehyde — the named extreme of the series in this nugget, in the practice_check, and in question ch19-reactivity-ranking — has no asset in the chapter at all.",
+ "learner_impact": "The figures are present but inert: they identify the compounds without carrying the comparison, so the reactivity ordering remains a verbal claim. A learner cannot see why acetone is less electrophilic than acetaldehyde, and the most reactive member of the series is the one they never see drawn.",
+ "evidence": "assets mol-acetone and mol-benzaldehyde carry no charge/steric annotation; alt_text is identical between blk-xdhc47d4 (section 1) and blk-ohx2ueq0 (section 4). No formaldehyde asset in assets[] despite 'formaldehyde, with two hydrogens, is the most reactive simple carbonyl compound'.",
+ "recommended_outcome": "The reactivity series needs a figure whose annotations do the comparing — showing the charge and crowding trend across formaldehyde, an aldehyde, and a ketone — instead of two unmarked structures that only name compounds.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "visual-008",
+ "location": {
+ "section_id": "nugget-hydride-grignard",
+ "concept_slug": "hydride-and-grignard-addition",
+ "nugget_id": "nugget-hydride-grignard",
+ "anchor_text": "Formaldehyde, with two hydrogens on the carbonyl carbon, gives a primary alcohol extended by one R group; any other aldehyde gives a secondary alcohol; a ketone gives a tertiary alcohol"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The section states two independent mapping rules — substrate class to alcohol class (three cases for Grignard, two for hydride) and NaBH4 versus LiAlH4 scope — and shows one product structure, 1-phenylethanol, which instantiates a single cell of that map.",
+ "learner_impact": "This is the chapter's most mechanical predict-the-product content, and mappings of this shape are what a comparison panel exists for. Read as prose, the learner memorizes three sentences and reconstructs the map under exam pressure; the reagent-choice rule (mild/selective vs strong/reduces esters and acids) is likewise carried by two adjacent clauses that invite conflation.",
+ "evidence": "Section nugget-hydride-grignard: one text block, blk-0vrzhlp1 (mol-1-phenylethanol), one Wikipedia link. Prose enumerates formaldehyde→primary, other aldehyde→secondary, ketone→tertiary, and NaBH4 vs LiAlH4 scope.",
+ "recommended_outcome": "The substrate-class-to-product-class mapping and the reduction-reagent scope distinction each need to be inspectable as a laid-out comparison rather than reassembled from sentences.",
+ "confidence": 0.84
+ },
+ {
+ "finding_id": "visual-009",
+ "location": {
+ "section_id": "nugget-hydration-cyanohydrin",
+ "concept_slug": "hydration-and-cyanohydrins",
+ "nugget_id": "nugget-hydration-cyanohydrin",
+ "anchor_text": "more than 99% hydrate in aqueous solution; acetaldehyde is roughly half hydrated; acetone remains almost entirely in the carbonyl form"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "A quantitative three-point comparison of equilibrium position (>99%, ~50%, ~0%) plus the chloral outlier is stated numerically and supported by one figure, chloral hydrate, which shows a structure but not an equilibrium. Nothing depicts the carbonyl/hydrate balance or how substituents shift it.",
+ "learner_impact": "Equilibrium extent is a proportional quantity, and proportions are what visuals convey most cheaply. Presented as three numbers in a sentence, the trend is easy to read past and hard to retain; the learner also cannot see that the same steric/electronic axis governing reactivity governs this equilibrium, which is the paragraph's actual point.",
+ "evidence": "Section nugget-hydration-cyanohydrin assets: mol-chloral-hydrate, mol-acetone-cyanohydrin. Question ch19-hydration-extent tests the same comparison with no figure.",
+ "recommended_outcome": "The position of the hydration equilibrium across formaldehyde, an ordinary aldehyde, a ketone, and chloral needs to be visible as a comparison of extents, not four numbers in running text.",
+ "confidence": 0.82
+ },
+ {
+ "finding_id": "visual-010",
+ "location": {
+ "section_id": "nugget-imines-enamines",
+ "concept_slug": "imines-and-enamines",
+ "nugget_id": "nugget-imines-enamines",
+ "question_slug": "ch19-imine-ph-optimum",
+ "anchor_text": "Both condensations are acid-catalyzed with a sharply defined optimum near pH 4.5"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The pH 4.5 optimum is presented as a two-opposing-effects trade-off ('Too little acid stalls the dehydration; too much removes the nucleophile') producing a maximum — a shape — but is given only in words and one number. It is then assessed numerically (ch19-imine-ph-optimum) with no figure.",
+ "learner_impact": "The learner is asked to remember 4.5 without ever seeing the curve whose peak explains it, which converts a reasoned optimum into an arbitrary fact. The word 'sharply' describes a graph feature the reader cannot inspect.",
+ "evidence": "Section nugget-imines-enamines figures: mol-cyclohexanone-methylimine, mol-cyclohexanone-pyrrolidine-enamine (both products only, no mechanism or rate content). Question ch19-imine-ph-optimum is numeric_with_units with student_config containing no stimulus.",
+ "recommended_outcome": "The competing-effects rate maximum needs to be shown as a shape with the two failure modes labeled on either side, so the optimum is derived rather than memorized.",
+ "confidence": 0.8
+ },
+ {
+ "finding_id": "visual-011",
+ "location": {
+ "question_slug": "ch19-conjugate-addition-select",
+ "concept_slug": "conjugate-addition",
+ "anchor_text": "Which reagent delivers its methyl group to the beta carbon (conjugate, 1,4 addition) of 2-cyclohexenone"
+ },
+ "severity": "medium",
+ "category": "figure-purpose",
+ "observation": "Several questions turn on structural positions but present no structure. ch19-conjugate-addition-select names 2-cyclohexenone and 'the beta carbon' with a text-only stem and text-only options. ch19-draw-cyanohydrin and ch19-draw-wittig-product give student_config [redacted] with the substrate named only in words. ch19-aldehyde-nmr-shift asks for a chemical shift with no spectrum.",
+ "learner_impact": "A learner who works from structures must first draw the stimulus from its name before starting the actual task, which taxes recall of nomenclature rather than the concept under test and disadvantages exactly the reasoning style the drawing questions otherwise reward.",
+ "evidence": "compiled/question-set.json: ch19-conjugate-addition-select student_config.options carry text only (no structure_smiles), unlike ch19-reactivity-ranking whose cards do carry structure_smiles; ch19-draw-cyanohydrin and ch19-draw-wittig-product student_config [redacted].",
+ "recommended_outcome": "Questions whose task is locating a site or transforming a skeleton need the substrate present as a structure in the stem, so the assessed step is the chemistry and not the name-to-structure translation.",
+ "confidence": 0.86
+ },
+ {
+ "finding_id": "visual-012",
+ "location": {
+ "question_slug": "ch19-iupac-name",
+ "concept_slug": "carbonyl-structure-and-naming",
+ "anchor_text": "Select the correct IUPAC name for the compound shown: CH₃COCH₂CH(CH₃)CH₃."
+ },
+ "severity": "medium",
+ "category": "figure-accuracy",
+ "observation": "The stem says 'the compound shown' but shows only a condensed formula, no structure. Meanwhile options a ('4-Methyl-2-pentanone', correct) and b ('2-Methyl-4-pentanone', distractor) carry the identical structure_smiles 'CC(=O)CC(C)C', so the two options render as visually indistinguishable structures.",
+ "learner_impact": "A learner comparing the rendered option structures gets no discriminating signal between the correct answer and its nearest distractor, and may reasonably conclude the item is broken or that two options are equally right. The 'compound shown' phrasing sets an expectation of a depicted structure that the item does not meet.",
+ "evidence": "compiled/question-set.json ch19-iupac-name: options[0].structure_smiles == options[1].structure_smiles == 'CC(=O)CC(C)C'; student_config contains no stimulus structure.",
+ "recommended_outcome": "The stem needs the structure it claims to show, and the distractor must not be rendered as a structure identical to the key — the numbering error being tested is a naming error, not a structural one, and should be surfaced without duplicating the key's picture.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "visual-013",
+ "location": {
+ "section_id": "nugget-wittig",
+ "concept_slug": "wittig-reaction",
+ "asset_id": "mol-methylenecyclohexane",
+ "anchor_text": "whereas dehydration of 1-methylcyclohexanol would give mostly the more substituted internal alkene"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The Wittig section's central selling point is a contrast — exocyclic alkene from the Wittig versus endocyclic alkene from dehydration — and only one side of the contrast is figured. 1-Methylcyclohexene, the compound the argument is against, has no asset, and neither does the ylide or the oxaphosphetane intermediate the prose describes in detail. The intended animation is deferred and hidden.",
+ "learner_impact": "'The alkene appears at exactly one position' is a claim about where a bond sits, and the difference between an exocyclic CH2 and an endocyclic C=C is immediately obvious when both are drawn and effortful to picture when only one is. The oxaphosphetane, a transient four-membered ring, is the hardest object in the section to visualize from words.",
+ "evidence": "Section nugget-wittig assets: mol-methylenecyclohexane only. video_briefs[2].production_status = 'deferred'; compiled block blk-pmnwmeje {\"url\": \"\", \"is_hidden\": true}. Prose and practice_check both use the methylenecyclohexane vs 1-methylcyclohexene contrast.",
+ "recommended_outcome": "The positional-certainty argument needs both possible alkenes visible together, and the oxaphosphetane stage needs some depiction if the mechanism is to be taught at the level the prose describes.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "visual-014",
+ "location": {
+ "section_id": "nugget-carbonyl-spectroscopy",
+ "asset_id": "mol-acetaldehyde",
+ "anchor_text": "Acetaldehyde: a two-carbon molecule whose terminal carbon forms a double bond to oxygen"
+ },
+ "severity": "low",
+ "category": "visual-redundancy",
+ "observation": "Four of the fifteen molecule blocks are verbatim repeats of an earlier block with the same SMILES, title, alt text and description: acetaldehyde in sections 1 and 12, acetone in sections 1 and 4, benzaldehyde in sections 1, 3 and 4. In each repeat the figure was placed to support a new point (oxidation susceptibility, electrophilicity, diagnostic CHO signals) but is not re-annotated for it.",
+ "learner_impact": "A figure that looks exactly like one seen three sections earlier reads as filler and trains the learner to skip figures. Page space and attention are spent without adding information, which is a real cost given how many of the chapter's arguments have no figure at all.",
+ "evidence": "blk-tw0tuzoc vs blk-vmo02wqe (identical acetaldehyde payload); blk-xdhc47d4 vs blk-ohx2ueq0 (acetone); blk-lk6f5rih, blk-bwlfln81, blk-b555fr7z (benzaldehyde x3), all with identical alt_text.",
+ "recommended_outcome": "Repeat appearances of a structure should either earn their place by carrying the new section's annotation or be dropped in favor of the section's un-figured content; identical re-renders should not consume figure slots.",
+ "confidence": 0.83
+ },
+ {
+ "finding_id": "visual-015",
+ "location": {
+ "asset_id": "video-nucleophilic-addition",
+ "section_id": "nugget-nucleophilic-addition",
+ "anchor_text": "Open on a ketone with the C=O polarization marked: partial positive on carbon, partial negative on oxygen."
+ },
+ "severity": "low",
+ "category": "alt-text-quality",
+ "observation": "The three deferred video blocks carry, as their 'description', a single verbatim line from the storyboard — a production stage direction, not a description of content. The blocks are currently hidden (is_hidden:true, and ReaderBlockRenderer returns null), so no learner sees this today, but the description is what would be exposed if the blocks are ever unhidden or if the video ships without a written equivalent.",
+ "learner_impact": "If surfaced as-is, a learner would read the opening shot instruction as though it summarized the whole mechanism, receiving roughly one fifth of the intended content phrased as camera direction. The briefs' own production_notes require a transcript that names every electron-flow and bond change; no such text exists in the package yet.",
+ "evidence": "Compiled blocks blk-r8gcfq5b / blk-ijjski5m / blk-pmnwmeje descriptions each equal storyboard[0] of the corresponding video_brief; video_briefs[*].production_note records the transcript requirement as pending.",
+ "recommended_outcome": "Any video block that reaches the reader needs a description that conveys the full sequence of chemical changes, not the first storyboard beat; and the recorded transcript requirement should be satisfied before these blocks are unhidden.",
+ "confidence": 0.8
+ }
+ ],
+ "strengths": [
+ "Every molecule asset carries connectivity-level alt_text that names what is bonded to what (e.g. mol-cyclohexanone-ethylene-acetal describes the spiro relationship and explicitly notes the absence of a hydroxyl or carbonyl) — well above typical 'structure of X' placeholder alt text.",
+ "All 13 SMILES are chemically correct and match their titles, including the trickier cases: the pyrrolidine enamine (C1CCN(C1)C1=CCCCC1), the spiro dioxolane acetal (C1CCC2(CC1)OCCO2), and the exocyclic methylenecyclohexane (C=C1CCCCC1).",
+ "Every asset carries a learning_goal plus concept_slugs and nugget_ids, so each figure has a stated instructional purpose and a resolvable home in the chapter — the sequencing of figures to sections is clean.",
+ "rdkit_options.show_hydrogens is set precisely where the hydrogen is the teaching point (acetaldehyde, acetone, methyl vinyl ketone), which makes the aldehyde-vs-ketone distinction visible in exactly the figures that argue it.",
+ "Some question types already ship structures with their options — ch19-reactivity-ranking cards and ch19-grignard-product options carry structure_smiles — showing the pattern exists in the pipeline and only needs extending to the items that lack it.",
+ "The deferred video briefs are honestly labeled with the reason, the deferral class, and a recorded caption/transcript requirement rather than silently dropped."
+ ],
+ "open_questions": [
+ "Confirmed that the three empty-url video blocks are suppressed at render (is_hidden:true; [internal source reference — not in this repo] returns null), so no dead 'Watch →' link reaches a student today — is the intent to unhide them once produced, or should the deferral instead trigger a static replacement at compile time?",
+ "The chapter uses only block_type 'molecule', while the renderer's IMAGE_TYPES also accepts 'reaction' and 'reaction_coordinate'. Was reaction-block authoring unavailable for this chapter, or simply not exercised? Several findings above assume reaction blocks are a live option.",
+ "The repo contains nmr-spectrum-figure-authoring and ir-vibration-asset-authoring skills; is the spectroscopy section's lack of any spectrum figure a deliberate scope decision for chapter 19, or an omission?",
+ "Does the reader personalization 'showImages' preference ever leave a section with zero visual support, and is that acceptable for sections whose only non-text block is a molecule?"
+ ]
+}

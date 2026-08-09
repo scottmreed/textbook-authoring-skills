@@ -1,0 +1,1494 @@
+{
+ "chapter_id": "carbonyl-condensation",
+ "chapter_version": "1",
+ "run_at": "2026-07-30T06:40:00+00:00",
+ "personas": [
+ {
+ "persona": "Accessibility Persona",
+ "persona_version": "1.0.0",
+ "chapter_id": "carbonyl-condensation",
+ "chapter_version": "1",
+ "model": "claude-opus-5[1m]",
+ "summary": "The authoring in this package is among the strongest accessibility work I have reviewed on this platform: every one of the 26 figures carries a chemistry-bearing alt text plus a genuinely structural long description, all 156 hints are text, every selectable option carries a compound name alongside its structure, the prose teaches by atom-numbering rather than by pointing at pictures, and — critically — both reaction_coordinate_reasoning items describe their profiles purely geometrically (relative heights, climb measured from the preceding valley) without ever stating step count, rate-determining step, overall classification or per-step classification. I verified the arithmetic behind both descriptions and they are correct and leak-free; the ch22 leak class has been cleanly avoided. The problem is delivery, not authoring. Three hard barriers stand between this package and a non-visual learner: (1) the authored `accessible_description` on all 52 questions is compiled and resolved into the activity envelope but no student-facing surface ever reads it; (2) the one renderer that tries — the reaction-coordinate renderer — reads the wrong key (`description` instead of `accessible_description`) and falls back to the aria-label \"Schematic reaction coordinate diagram\", leaving a blind student asked for four readings of a diagram they cannot perceive at all; (3) the four blank-canvas drawing items are delivered as an embedded Ketcher iframe whose own type manifest declares `keyboard_complete=False`, with the promised `structured_molecule_entry` fallback unimplemented. Separately, the reader compiler silently drops all 26 asset `long_description`s and all 10 nugget `practice_check` blocks, so the richest non-visual content in the package never reaches a reader at all. These are platform gaps, not authoring failures, but they are load-bearing here and the chapter should not publish over them.",
+ "overall_score": 5.2,
+ "publication_blockers": [
+ "access-001",
+ "access-002",
+ "access-003"
+ ],
+ "findings": [
+ {
+ "finding_id": "access-001",
+ "location": {
+ "question_slug": "ch23-acceptor-only-partner",
+ "concept_slug": "carbonyl-condensation-pattern",
+ "anchor_text": "Four carbonyl compounds are shown as structures: benzaldehyde, propanal, cyclohexanone, and ethyl acetate."
+ },
+ "severity": "blocker",
+ "category": "media-equivalence",
+ "observation": "Every one of the 52 questions carries an authored `accessibility_bundle.accessible_description`, and it survives compilation into `compiled/question-set.json` and is resolved into the activity envelope as `accessibilityBundle` ([internal source reference — not in this repo], [internal source reference — not in this repo]). No student-facing surface reads it. A repo-wide search for `accessibilityBundle` in frontend/src returns only the type declaration, a demo-envelope stub that hardcodes `null`, a public-demos API type, and ReactionCoordinateQuestionRenderer (which reads the wrong key — see access-002). Neither LmsWorkspacePanel, PublicQuestionSetPanel, ActivityWorkspaceRenderer, nor any of the fifteen per-type renderers this chapter uses reference it. The only page that renders an accessible description is the question-type demo gallery ([internal source reference — not in this repo]), which serves platform demo fixtures, not this bank. The reader-side static preview, frontend/public/reader/topic-chapters/carbonyl-condensation.questions.json, strips `student_config`, `feedback_bundle` and `accessibility_bundle` entirely, keeping only `prompt_text`.",
+ "learner_impact": "A learner using a screen reader receives the prompt and whatever the individual renderer happens to expose, and nothing else. For most items in this chapter that is survivable because every option carries a text name — but it is survivable by accident, not by design. The author's deliberate stimulus descriptions ('Two acetaldehyde molecules are shown side by side, with five labelled atoms…', 'Five selectable sites are offered — the carbanion carbon, the enolate oxygen…') are written to be the non-visual equivalent and are simply discarded. For the two reaction-coordinate items the loss is total (access-002).",
+ "evidence": "Authored: `accessibility_bundle.accessible_description` on all 52 entries in topic.package.json `question_sets[]`. Compiled: present on all 52 entries in compiled/question-set.json. Resolved: `accessibility_bundle=question.accessibility_bundle or None` ([internal source reference — not in this repo]). Consumed: `grep -rn accessibilityBundle frontend/src` → [internal source reference — not in this repo], [internal source reference — not in this repo] (`null`), [internal source reference — not in this repo], [internal source reference — not in this repo] only.",
+ "recommended_outcome": "Every question a student can be assigned needs its authored accessible description to actually reach the student — as programmatically-associated text on the workspace, not only as an aria-label on one figure. Until the delivery path exists, this chapter's non-visual equivalence is asserted rather than provided.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "access-002",
+ "location": {
+ "question_slug": "ch23-aldol-dehydration-profile",
+ "concept_slug": "aldol-condensation-dehydration",
+ "anchor_text": "The profile below describes acetone being converted to a conjugated enone on warming with base. Answer the questions about the profile."
+ },
+ "severity": "blocker",
+ "category": "media-equivalence",
+ "observation": "The reaction-coordinate renderer draws the profile as an inline `<svg role=\"img\">` whose aria-label is `envelope.question.accessibilityBundle?.description` with the fallback string \"Schematic reaction coordinate diagram\" ([internal source reference — not in this repo]). The authored key is `accessible_description`, not `description`, so the lookup always misses and the fallback always wins. Because `role=\"img\"` removes the SVG's children from the accessibility tree, the in-diagram `<text>` labels ('Acetone (2 equivalents)', '‡', 'Aldol addition product', 'Conjugated enone + H₂O') and every y-coordinate are also unreachable. The prompt adds no geometry. Both `ch23-aldol-dehydration-profile` and `ch23-aldol-dehydration-profile-v2` then require four readings: step count, rate-determining step, overall classification, and a classification per step.",
+ "learner_impact": "A blind or low-vision student is asked to report which climb is larger and whether each step is uphill or downhill from a graphic announced to them only as 'Schematic reaction coordinate diagram'. The task is not merely harder — it is unanswerable except by guessing. Both advanced items on the aldol-condensation-dehydration concept are affected, and this is the only place in the chapter where the required information exists exclusively in a picture. The irony is that the author wrote exactly the description that would fix it (the 'climb measured from the valley immediately before it' phrasing is precisely right); it is discarded by a key mismatch.",
+ "evidence": "Compiled question `accessibility_bundle` = `{\"accessible_description\": \"A free-energy profile is presented… whose climb measured from the valley immediately before it is smaller than the first climb measured from the start…\"}`. Renderer: `aria-label={(envelope.question.accessibilityBundle?.description as string | undefined) ?? \"Schematic reaction coordinate diagram\"}` (line 148). Profile control points carry the only quantitative information: ts_1 y=18, min_1 y=4, ts_2 y=20 (v1); ts_1 y=15, min_1 y=-6, ts_2 y=12 (v2).",
+ "recommended_outcome": "The two energy-profile items need their stationary points, relative heights and per-step climbs available as text to a non-visual learner at the moment of answering; the diagram cannot remain the sole carrier. A key-name mismatch between authoring and rendering must not be able to silently void an authored equivalent.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "access-003",
+ "location": {
+ "question_slug": "ch23-draw-aldol-product",
+ "concept_slug": "aldol-reaction",
+ "anchor_text": "Draw the aldol addition product formed when acetaldehyde is treated with dilute sodium hydroxide."
+ },
+ "severity": "blocker",
+ "category": "interactive-fallback",
+ "observation": "Four required items — ch23-draw-aldol-product, ch23-draw-aldol-product-v2, ch23-draw-dieckmann-product, ch23-draw-dieckmann-product-v2 — use `structure_scaffold` with `student_config.scaffold = \"blank_canvas\"`. The platform's own type manifest is explicit that this is not keyboard-reachable: `AccessibilityBlock(keyboard_complete=False, # honest: Ketcher canvas is not yet ([internal PRD reference — not in this repo]), nonvisual_response_mode=\"structured_molecule_entry\", requires_molecule_description=True)` ([internal source reference — not in this repo]). [internal source reference — not in this repo] and a link to open the same surface full-screen; it implements no text/SMILES entry, and the declared `structured_molecule_entry` mode appears nowhere in the renderer. The answer is captured solely from `postMessage` events emitted by canvas manipulation.",
+ "learner_impact": "A student who cannot use a pointing device, or who cannot see the canvas, cannot submit an answer to these four items at all — not a degraded answer, no answer. Both mitigating factors are real but partial: neither affected concept is assessed only by drawing (aldol-reaction also has single_select, bond_change_ledger and curved_arrow items; dieckmann-cyclization also has two numeric_with_units items), and the answer keys are plain SMILES that a text field could accept. That makes this a delivery gap rather than a design gap — but as shipped it is a required activity some learners cannot complete.",
+ "evidence": "`{\"scaffold\":\"blank_canvas\"}` on all four items; answer keys `CC(O)CC=O`, `CC(=O)CC(C)(C)O`, `CCOC(=O)C1CCCC1=O`, `CCOC(=O)C1CCCCC1=O`. [internal source reference — not in this repo]. [internal source reference — not in this repo] has no input element of any kind.",
+ "recommended_outcome": "Every drawing item in this chapter needs a non-pointer, non-visual way to submit the same structure — the type manifest already names the need (`structured_molecule_entry`) and the graders already accept SMILES, so the equivalent path is missing rather than impossible. Until it exists, these four items should not be assignable as required work.",
+ "confidence": 0.92
+ },
+ {
+ "finding_id": "access-004",
+ "location": {
+ "asset_id": "mol-acetaldehyde",
+ "section_id": "carbonyl-condensation-pattern",
+ "anchor_text": "Two carbons. The right-hand carbon is double-bonded to an oxygen and carries a single hydrogen; that is the carbonyl carbon, the electrophilic site."
+ },
+ "severity": "high",
+ "category": "media-equivalence",
+ "observation": "All 26 assets carry an `accessibility.long_description` averaging ~380 characters of genuine atom-by-atom readout. None of them reaches the reader. `[internal source reference — not in this repo]accessibility.alt_text` and then sets the card's visible `description` to the asset's `learning_goal`. `grep -c long_description frontend/public/reader/topic-chapters/carbonyl-condensation.json` returns 0, and `grep -rn long_description tools/` shows the topic-package pipeline never reads the field at all — it is authored into a dead end.",
+ "learner_impact": "Non-visual learners get the alt text, which in this chapter is unusually good, but lose the layer that actually teaches: which carbon is alpha and why, which bond is the new one, how the product maps back onto the two starting molecules. The loss is worst on the structurally complex figures — mol-wieland-miescher-ketone's long description explains which shared carbon is quaternary and which carbonyl was consumed by the closure, information the 172-character alt text cannot carry. Sighted learners lose it too, since the reader card renders alt text visibly as 'Described as: …'.",
+ "evidence": "26/26 assets have non-empty `accessibility.long_description` in topic.package.json. [internal source reference — not in this repo]; :84 `\"description\": asset.get(\"learning_goal\", \"\")`. Zero occurrences of `long_description` or of the string 'Two carbons. The right-hand carbon' in the compiled reader chapter.",
+ "recommended_outcome": "The chapter needs the authored structural readouts to be deliverable to readers who need more than a one-sentence alt text; content written specifically as the non-visual equivalent must not be discarded at compile time.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "access-005",
+ "location": {
+ "nugget_id": "nugget-aldol-reaction",
+ "section_id": "aldol-reaction",
+ "anchor_text": "Which bond breaks in the retro-aldol direction, and what single compound results?"
+ },
+ "severity": "high",
+ "category": "retrieval-practice",
+ "observation": "All 10 nuggets carry a `practice_check` with a prompt and a full worked answer. The deck-creator compilation emits them as 'Check your understanding' slides (10 occurrences in frontend/public/deck-creator/carbonyl-condensation.json), but the reader compilation drops them entirely: `grep -c practice_check frontend/public/reader/topic-chapters/carbonyl-condensation.json` returns 0, and the reader's block-type inventory is only external_link (10), mcmurry_link (1), molecule (36), text (10), video (5).",
+ "learner_impact": "The practice checks are the chapter's only fully text-native, self-scoring retrieval opportunity — no canvas, no drag, no diagram, every one answerable and checkable by reading. They are exactly the surface a learner using assistive technology can use independently, and they are exactly what the reader omits. A reader-only student (the common case, since the question bank sits behind teacher preview) gets ten sections of prose and 36 figures with no checkpoint at all.",
+ "evidence": "10/10 nuggets have `practice_check.prompt` + `.answer` in topic.package.json; e.g. nugget-robinson-annulation: 'why can the intramolecular aldol condensation not simply be run first…'. [internal source reference — not in this repo] emits them for the deck; [internal source reference — not in this repo].",
+ "recommended_outcome": "The reader needs the authored practice checks to reach the student; a text-only self-check is the least-mediated form of practice this chapter offers and it currently exists only on a surface students do not see.",
+ "confidence": 0.93
+ },
+ {
+ "finding_id": "access-006",
+ "location": {
+ "question_slug": "ch23-aldol-dehydration-profile-v2",
+ "concept_slug": "aldol-condensation-dehydration",
+ "anchor_text": "The task is to report how many steps the profile shows, identify which step controls the rate, and classify each step and the overall reaction from these features."
+ },
+ "severity": "high",
+ "category": "assessment-readiness",
+ "observation": "Both reaction-coordinate items ask for `step_count` *and* `rate_determining_step` *and* `step_types`. The renderer builds the rate-determining-step dropdown from `Array.from({length: stepCount})` ([internal source reference — not in this repo], 230) and renders one 'Step n' row per step for `step_types` (line 262). With `profile.step_count = 2`, the student sees exactly two RDS options and exactly two step-type rows before answering anything — so the UI discloses the answer to the step-count question it is simultaneously asking.",
+ "learner_impact": "Affects every learner equally, so it is not an access inequity, but it voids one of the four readings each item claims to assess and it does so invisibly to the author (the compile-time leak guard inspects text, not renderer geometry — I ran `find_accessibility_leaks` over all 52 compiled questions and it returns zero flags). It also means the accessible-description work that so carefully avoids stating the step count is protecting an answer the interface gives away.",
+ "evidence": "`\"ask\":[\"step_count\",\"rate_determining_step\",\"overall\",\"step_types\"]` and `\"profile\":{...,\"step_count\":2,...}` on both items. Renderer: `const steps = Array.from({length: stepCount}, (_, i) => i + 1);` then `{steps.map((n) => <option …>Step {n}</option>)}` for RDS and `{steps.map((n) => …)}` for the step-type rows.",
+ "recommended_outcome": "An item that asks a student to count the steps needs an interface that does not pre-count them; either the count must not be asked alongside the per-step readings, or the per-step controls must not be sized from the answer.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "access-007",
+ "location": {
+ "question_slug": "ch23-acceptor-only-partner",
+ "concept_slug": "carbonyl-condensation-pattern",
+ "anchor_text": "The task is to decide which one lacks any hydrogen on a carbon adjacent to its carbonyl group and is therefore confined to the acceptor role in a condensation."
+ },
+ "severity": "medium",
+ "category": "alt-text-quality",
+ "observation": "Several accessible descriptions restate the task using the very criterion the item is testing, rather than describing the stimulus and the ask. ch23-acceptor-only-partner's prompt asks only 'which can serve only as the acceptor, never as the donor'; the description supplies the operational rule ('lacks any hydrogen on a carbon adjacent to its carbonyl group'). ch23-donor-or-acceptor-only does the same ('classify each compound by whether a base can remove a proton from a carbon adjacent to its carbonyl group'), as does ch23-rank-michael-donors ('reasoning from the number and type of neighbouring carbonyl groups'). Contrast ch23-clean-mixed-aldol-partners, where the same phrasing is a fair gloss of the prompt's own word 'non-enolizable'.",
+ "learner_impact": "This is the inverse of the usual leak: it does not name the answer, but it converts a two-step inference ('acceptor-only ⇒ no enolate ⇒ no alpha H') into a one-step lookup, and it does so only for the learner reading the accessible description. That learner is assessed on a materially easier item than the sighted learner beside them. Because these are the chapter's core-difficulty items on its foundational concept, the mis-measurement lands where it matters most.",
+ "evidence": "ch23-acceptor-only-partner prompt vs description as quoted; ch23-donor-or-acceptor-only description 'classify each compound by whether a base can remove a proton from a carbon adjacent to its carbonyl group'; ch23-rank-michael-donors description '…reasoning from the number and type of neighbouring carbonyl groups.'",
+ "recommended_outcome": "Accessible descriptions across these items need to convey what is shown and what is asked without also supplying the discriminating rule, so that the non-visual and visual versions of an item are the same item.",
+ "confidence": 0.72
+ },
+ {
+ "finding_id": "access-008",
+ "location": {
+ "question_slug": "ch23-robinson-route",
+ "concept_slug": "robinson-annulation",
+ "anchor_text": "Assemble the two-stage Robinson annulation that converts 2-methylcyclohexane-1,3-dione into the fused bicyclic enone shown as the target."
+ },
+ "severity": "medium",
+ "category": "media-equivalence",
+ "observation": "In both Robinson route items the target and two of the four intermediates are labelled only by non-specific descriptors: 'the fused bicyclic enone', 'the bicyclic ketol, before loss of water', 'the saturated bicyclic diketone', 'the bicyclic diol from exhaustive reduction'. RouteBuilderRenderer renders each structure with `alt={entry.text}` (StructureCard, line 53), so those strings are the whole non-visual representation. The accessible description adds nothing beyond 'a fused bicyclic enone is the target'. Every other item in the chapter names its structures in IUPAC — including the sibling Stork route items, whose intermediates are '1-(cyclohex-1-en-1-yl)pyrrolidine' and '2-(3-oxobutyl)cyclohexan-1-one'.",
+ "learner_impact": "A non-visual learner cannot tell which bicyclic enone is the target — ring sizes, the position of the enone, the quaternary methyl are all unstated. The task remains completable, because the route is fully determined by the reagent sequence, but the student is reasoning from reagents alone while a sighted student reasons from the target structure. On the chapter's capstone concept that is a meaningful difference in what is being assessed.",
+ "evidence": "`target_structure: {\"text\":\"the fused bicyclic enone\", \"structure_smiles\":\"CC12CCC(=O)C=C1CCCC2=O\"}`; intermediates `m_ketol` text 'the bicyclic ketol, before loss of water', `m_saturated` text 'the saturated bicyclic diketone'. StructureCard: `<Box as=\"img\" src={imageUrl} alt={String(entry.text ?? caption)} …>`. The package already holds a full description of this exact structure in asset mol-wieland-miescher-ketone.",
+ "recommended_outcome": "The Robinson route items need their target and intermediates identified specifically enough that a learner who cannot see the drawings knows which compounds they are choosing among.",
+ "confidence": 0.8
+ },
+ {
+ "finding_id": "access-009",
+ "location": {
+ "question_slug": "ch23-robinson-retrosynthesis-v2",
+ "concept_slug": "robinson-annulation",
+ "anchor_text": "Complete the reasoning: how many atoms are in the ring formed by the closing stage? Give a digit or a word."
+ },
+ "severity": "medium",
+ "category": "assessment-readiness",
+ "observation": "Both robinson structured_reasoning items place the answer to their free-text sub-question inside one of their own evidence options. In -v2 the `reasoning` field asks for the ring size (accepted answers '6', 'six', 'six-membered') while evidence option `e_six` reads 'A six-membered ring closure requires exactly that five-atom spacing' — and `e_six` is itself a required correct selection. In v1 the `reasoning` field asks for the class of compound revealed (accepted answers '1,5-diketone', '1,5-dicarbonyl') while required evidence option `e_15` reads 'A conjugate addition always leaves the two carbonyl groups in a 1,5-relationship'.",
+ "learner_impact": "Affects all learners equally rather than being an access barrier, so I flag it as adjacent to my remit rather than central to it. The effect is that the third field of each item measures reading rather than reasoning, which matters because these are the two advanced items carrying the chapter's synthesis-level objective. I note it here because the compile-time leak guard cannot see it (it compares the accessible description against the answer key, not the answer key against the student config) and it is the same failure mode as an accessible-description leak, one field over.",
+ "evidence": "ch23-robinson-retrosynthesis-v2: `reasoning.answer_text` includes '6','six','six-membered'; `evidence` option e_six text 'A six-membered ring closure requires exactly that five-atom spacing'; `expected_option_ids` includes 'e_six'. ch23-robinson-retrosynthesis: `reasoning.answer_text` includes '1,5-diketone'; e_15 text 'A conjugate addition always leaves the two carbonyl groups in a 1,5-relationship'; e_15 is expected.",
+ "recommended_outcome": "The free-text rung of these two items needs to require something the student must supply, not something already printed among the options they are asked to tick.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "access-010",
+ "location": {
+ "asset_id": "video-aldol-mechanism",
+ "section_id": "aldol-reaction",
+ "anchor_text": "Open on two acetaldehyde molecules, colour-coded: the left one tinted as the future donor, the right one as the future acceptor"
+ },
+ "severity": "medium",
+ "category": "color-motion-only",
+ "observation": "Four of the five video briefs make colour the sole carrier of a chemical distinction in their storyboards: donor vs acceptor by tint (video-aldol-mechanism), the conjugated pi system by shading (video-e1cb-dehydration), the leaving group by tint (video-claisen-mechanism), and the two fused rings plus the shared edge by differential tint (video-robinson-two-stages). Each brief's `production_note` records a requirement for closed captions, narration naming every visual change, and a transcript — but no requirement that a colour distinction be redundantly encoded. The briefs are `production_status: \"deferred\"` and the compiled reader marks all five video blocks `is_hidden: true` ([internal source reference — not in this repo]), so nothing is shipped broken today.",
+ "learner_impact": "Prospective rather than current. If these are produced against the storyboards as written, a colour-blind learner loses the donor/acceptor assignment in the aldol video and the ring-fusion reading in the Robinson video — the two single most important pieces of information in each. The alt-text and prose work elsewhere in this chapter is careful about this; the briefs are the one place it lapses.",
+ "evidence": "Storyboard lines quoted above from video_briefs[0].storyboard[0], [1].storyboard[4], [2].storyboard[2], [4].storyboard[5]. `production_note` text: 'closed captions plus narration naming every visual change … and a text transcript' — no colour-redundancy clause. Compiled reader video blocks carry `\"url\": \"\"` and `\"is_hidden\": true`; [internal source reference — not in this repo] returns null for hidden blocks, so no dead 'Watch' control is exposed.",
+ "recommended_outcome": "The production requirements recorded on these briefs need to include a non-colour encoding for every distinction the storyboard currently makes by tint, so the requirement is captured before the videos are made rather than found afterwards.",
+ "confidence": 0.83
+ },
+ {
+ "finding_id": "access-011",
+ "location": {
+ "section_id": "carbonyl-condensation-pattern",
+ "anchor_text": "Acetaldehyde: a partner that can play both roles"
+ },
+ "severity": "low",
+ "category": "keyboard-operability",
+ "observation": "The reader's heading hierarchy skips a level throughout. TopicPackageChapterRenderer emits the chapter title as `h1` and each section title as `h2`; every block card in ReaderBlockRenderer is then an `h4` (lines 179, 290, 368, 390, 498, 525, 567). No `h3` is produced anywhere, and the section prose contains no markdown headings of its own.",
+ "learner_impact": "Screen-reader users navigating by heading level get an h2→h4 jump at every one of the 36 figure cards in this chapter, which reads as a missing level of structure and makes 'jump to next sibling section' behave unpredictably. Minor, and platform-wide rather than specific to this chapter, but it is 36 instances here.",
+ "evidence": "[internal source reference — not in this repo] (`as=\"h1\"`), :140 (`as=\"h2\"`); [internal source reference — not in this repo] returns only h4. Compiled chapter has 10 sections and 62 blocks, 36 of them molecule cards.",
+ "recommended_outcome": "Reader figure and link cards need to sit one level below their section rather than two, so heading navigation reflects the actual document structure.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "access-012",
+ "location": {
+ "question_slug": "ch23-michael-arrow",
+ "concept_slug": "michael-reaction",
+ "anchor_text": "The diethyl malonate anion is shown beside but-3-en-2-one."
+ },
+ "severity": "low",
+ "category": "alt-text-quality",
+ "observation": "The reference structures embedded in three interactive question types carry generic alt text supplied by the renderer rather than by the item: CurvedArrowRenderer uses `alt=\"Reaction system for this arrow question\"` (line 246) and ErrorRepairRenderer uses `alt=\"Structure for the flawed step\"` (line 116). BondChangeLedgerRenderer is the exception and does better, falling back to the item's own `reaction_display` string.",
+ "learner_impact": "Low, because in every affected item this chapter supplies the chemistry through labelled controls instead — the curved-arrow items enumerate sites as 'Ring alkene carbon farther from the carbonyl group (beta carbon)', and both error_repair items put the full plan in `flawed_work` text including the condensed formula. So the tasks stay completable. What is lost is the ability to inspect the drawn structure itself, which a sighted student can do freely.",
+ "evidence": "[internal source reference — not in this repo]; [internal source reference — not in this repo]; [internal source reference — not in this repo]. Affected items: ch23-aldol-attack-arrow(+v2), ch23-michael-arrow(+v2), ch23-flawed-claisen(+v2).",
+ "recommended_outcome": "The reference figure inside an interactive item needs a description of that specific structure, not a description of the question type — the ledger renderer already shows the pattern.",
+ "confidence": 0.75
+ }
+ ],
+ "strengths": [
+ "Both reaction_coordinate_reasoning items describe their profiles in purely geometric terms and state none of the four things they ask for. I checked the arithmetic: v1 (ts_1 18 from 0, ts_2 20 from a valley at 4) gives climbs of 18 and 16, and the description says the second maximum 'stands slightly higher above the starting level than the first' but its 'climb measured from the valley immediately before it is smaller' — correct, and it yields RDS=1 by derivation rather than by disclosure; v2 (climbs 15 and 18) is described just as accurately in the opposite direction. Step count, rate-determining step, overall classification and per-step classification are all derivable and none is stated. This is the ch22 leak class cleanly avoided.",
+ "All 26 asset alt texts convey actual chemistry rather than naming the image — 'Ethyl acetoacetate: an ester and a ketone separated by a single CH2 group', 'A fused bicyclic diketone: two six-membered rings sharing an edge, one carrying a conjugated enone and the other a saturated ketone, with a methyl group at the ring fusion'. The reader also renders alt text visibly as 'Described as: …', so it benefits everyone.",
+ "Nine of the fifteen question types this chapter uses are keyboard-complete in code, which I verified renderer by renderer: rank_order (per-card up/down IconButtons with aria-live position readout), matching_pairs and categorize_groups (one labelled Select per item), comparison_matrix (Selects in a table with scope=\"col\"/\"row\"), synthesis_route (Selects per step), bond_change_ledger (Selects plus a text field, with `<Th scope>` headers), curved_arrow (source/target Selects — the registry's 'electron_action_list' mode actually implemented), error_repair (RadioGroup + Selects), structured_reasoning (CheckboxGroup + Selects + text).",
+ "Every selectable option in the chapter carries a `text` name alongside its `structure_smiles`, and SelectedResponseRenderer sets the option image's alt to that name — so all 12 single_select, 4 multi_select and 2 matching_pairs items are answerable from names without seeing a structure. This is consistent across all 52 items with no exceptions.",
+ "The curved_arrow site labels and the bond_change_ledger atom labels are semantic, not positional: 'Carbanion alpha carbon of the malonate anion (lone pair)', 'The proton that water delivers to the acceptor's oxygen'. A learner who cannot see the drawing can still reason about which site is which.",
+ "All 156 hints across the bank are `kind: \"text\"` — no hint depends on a highlight, an animation, or a region focus.",
+ "The prose teaches by explicit atom numbering rather than by pointing at figures ('Number the six carbons, so the ketones are at carbons two and five… Count the atoms enclosed by the new bond: carbons one, two, three, four, and five'). I searched the ten reader text blocks for colour words, 'shown above/below', and figure references and found none — the chapter's chemistry is genuinely carried by text.",
+ "No concept is assessed only by an inaccessible type. dieckmann-cyclization, the concept most at risk, pairs its two drawing items with two numeric_with_units items; aldol-reaction pairs its drawing items with single_select, bond_change_ledger and curved_arrow.",
+ "Unproduced video blocks are compiled with `is_hidden: true` and suppressed by the renderer, so the chapter exposes no dead 'Watch' links or empty media placeholders — the failure mode I expected to find given the empty `url` fields."
+ ],
+ "open_questions": [
+ "The Ketcher embed is loaded as `/generator?embed=1&toolbarProfile=lti_drawing`. I could not determine from StructureWorkspaceRenderer alone whether that toolbar profile exposes a SMILES/text paste field inside the iframe. If it does, access-003 softens from 'impossible' to 'undiscoverable'; if it does not, the finding stands as written. This should be checked against the running embed rather than the source.",
+ "I inspected the LMS activity shell, the public question-set panel and the fifteen per-type renderers for a surface that consumes `accessible_description` and found none. I did not exhaustively audit the live-questions/exit-ticket path or any LTI-only view, so there is a small chance a delivery surface exists that I missed — that would downgrade access-001 but not access-002.",
+ "Several accessible descriptions say options are 'shown as structures'. Server-side visual enrichment does attach an `imageUrl` for each `structure_smiles`, so this is accurate in the activity shell — but the reader-side static preview file strips `student_config` entirely, so on that surface the phrase would describe something the student never receives. Worth confirming which surface students actually meet this bank on.",
+ "ch23-flawed-claisen's correct repair option `fix_two_h` runs about three times the length of either distractor. I judged this an item-writing tell rather than an access barrier and did not file it, but it is the kind of thing another persona may want to weigh."
+ ]
+ },
+ {
+ "persona": "Learner with Visual Preference",
+ "persona_version": "1.0.0",
+ "chapter_id": "carbonyl-condensation",
+ "chapter_version": "1",
+ "model": "claude-opus-5[1m]",
+ "summary": "Every figure in this chapter is chemically correct, legibly drawn, and actually reaches the compiled reader — I verified all 26 assets render cleanly with RDKit at reader-scale sizes, found no annotation_font_scale defect, no crowded or label-on-structure figure, and a 100% nugget-asset delivery rate. The problem is not figure quality but figure *kind*. All 36 molecule blocks are isolated single-species skeletal structures and there is not one relational figure in the chapter: no energy profile, no labelled atom, no numbered chain, no side-by-side comparison, no marked bond. This is the only chapter of the twenty-four in the reader with zero non-molecule figure blocks, and it has the highest molecule count of any of them — nine sibling chapters carry native `reaction_coordinate` blocks. Meanwhile the prose does an unusual amount of explicitly spatial work: it numbers carbons one through six across four sections, tells the student to count ring atoms as a bond forms, instructs them to draw resonance forms, instructs them to set an enol beside an enamine, and builds its entire thermodynamic argument on a coupled-equilibrium picture (unfavourable aldol pulled by irreversible dehydration) that is stated three times and drawn zero times. The substitution of per-species molecule figures for a `synthesis_roadmap` works for the Robinson annulation and the intramolecular aldol, where the species chain is complete and the reader can follow reactant to product; it fails for the Claisen (two figures for a section whose whole point is what happens at a tetrahedral intermediate that is never drawn), the Stork (the iminium the section warns you not to forget is never shown, though a question offers it as an option), and the Dieckmann (the six-membered case is argued in prose and asked about in a question but never drawn, while the structurally identical intramolecular-aldol section draws both ring sizes). No lone illustrated option acts as an answer tell anywhere in the 52-item bank — option sets are uniformly illustrated or uniformly textual, which is a genuine strength.",
+ "overall_score": 6.2,
+ "publication_blockers": [],
+ "findings": [
+ {
+ "finding_id": "visual-001",
+ "location": {
+ "concept_slug": "aldol-condensation-dehydration",
+ "nugget_id": "nugget-aldol-condensation-dehydration",
+ "anchor_text": "Dehydration is, for planning purposes, a one-way door."
+ },
+ "severity": "high",
+ "category": "visual-opportunity",
+ "observation": "The chapter's central thermodynamic argument — an unfavourable, reversible aldol addition coupled to an irreversible dehydration that drains the equilibrium forward — is carried entirely in prose and asserted in three separate sections (aldol reaction, dehydration, intramolecular aldol) without a single energy or equilibrium figure. The compiled reader contains 36 `molecule` blocks and zero `reaction_coordinate` blocks.",
+ "learner_impact": "A student is asked to hold two coupled equilibria, their relative depths, and the barrier that separates them in working memory purely from sentences. The claim that acetone gives 'only a few percent' at equilibrium yet 'good yield' of enone on heating reads as a contradiction until the two-well picture is constructed mentally; a student who cannot construct it takes the outcome on faith and cannot transfer the reasoning to the intramolecular-aldol ring-size argument, which reuses the identical logic.",
+ "evidence": "Reader prose: 'as long as some aldol product exists at equilibrium, and as long as it is consumed faster than it reverts, the addition equilibrium is continuously refilled and the whole system drains into the enone'; also 'Because dehydration is irreversible, the first product to reach that stage is the product you isolate' (nugget-intramolecular-aldol). Block census across frontend/public/reader/topic-chapters/: carbonyl-condensation.json = {molecule: 36, reaction_coordinate: 0}; nine other chapters carry reaction_coordinate blocks (alkenes-structure-and-reactivity 4, overview-of-organic-reactions 3, alkanes-and-stereochemistry 2, cycloalkanes 2, and five with 1). `reaction_coordinate` is an allowed topic-package asset type ([internal source reference — not in this repo] ALLOWED_ASSET_TYPES) that maps to a native reader block ([internal source reference — not in this repo]), not to the known-empty `image` path that `synthesis_roadmap` takes. The question set already ships exactly this profile: ch23-aldol-dehydration-profile encodes min 0.0 / TS 18.0 / min 4.0 / TS 20.0 / min -12.0 for the same acetone-to-enone sequence.",
+ "recommended_outcome": "The reader needs the coupled-equilibrium relationship — shallow reversible first well, deep irreversible second well — made visible at the point the argument is made, rather than existing only inside a graded question the student meets afterward. The renderer for this already works in this chapter's own question bank.",
+ "confidence": 0.93
+ },
+ {
+ "finding_id": "visual-002",
+ "location": {
+ "concept_slug": "carbonyl-condensation-pattern",
+ "nugget_id": "nugget-carbonyl-condensation-pattern",
+ "anchor_text": "The bond formed is always donor alpha carbon to acceptor carbonyl carbon"
+ },
+ "severity": "high",
+ "category": "visual-opportunity",
+ "observation": "The opening section establishes the one rule the whole chapter depends on — a bond forms between the donor's alpha carbon and the acceptor's carbonyl carbon, never between two alpha carbons or two carbonyl carbons — and illustrates it with four unrelated, isolated molecule cards (acetaldehyde, its enolate, benzaldehyde, but-3-en-2-one). No figure shows two partners together, shows which atom in each plays which role, or shows a bond between them.",
+ "learner_impact": "The section's single governing relationship is precisely the kind that a picture carries in one glance and prose carries in a paragraph. A student who reads 'finding those two atoms and drawing a line between them gets you most of the way there' is being told to do something visual and is given four structures with no indication of which atom on which molecule is meant. The four negative cases the prose rules out ('there is no version of this chemistry in which two alpha carbons bond to each other') are invisible.",
+ "evidence": "nugget-carbonyl-condensation-pattern asset_ids = [mol-acetaldehyde, mol-acetaldehyde-enolate, mol-benzaldehyde, mol-mvk]; all four compile to standalone `molecule` blocks (blk-v8n71yob, blk-4i1bteqz, blk-5v16arac, blk-g7rdpd6m) whose descriptions each characterise one molecule in isolation. Prose: 'When you are asked to predict a condensation product, finding those two atoms and drawing a line between them gets you most of the way there.'",
+ "recommended_outcome": "The donor-alpha-to-acceptor-carbonyl bond is the chapter's organising rule and needs to be visible as a relationship between two partners, not inferable from four separate structures. The overview section is where a student decides whether the chapter has one idea or seven.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "visual-003",
+ "location": {
+ "concept_slug": "intramolecular-aldol",
+ "nugget_id": "nugget-intramolecular-aldol",
+ "asset_id": "mol-3-methylcyclopent-2-enone",
+ "anchor_text": "Count the atoms enclosed by the new bond: carbons one, two, three, four, and five"
+ },
+ "severity": "high",
+ "category": "figure-purpose",
+ "observation": "Not one of the 26 figures in this chapter carries a label, a number, a highlight, or any annotation — every asset is a bare skeletal structure with rdkit_options limited to `show_hydrogens`. Yet the prose performs explicit atom-by-atom numbering in at least five sections (aldol product carbons 1-4, hexane-2,5-dione carbons 1-6, heptane-2,6-dione, diethyl hexanedioate carbons 1-6, the Robinson six-atom ring count, the Michael 1,5-relationship). The numbering scheme the prose relies on exists nowhere on the figures it refers to.",
+ "learner_impact": "The student must construct a numbered mental overlay on an unnumbered picture and keep it aligned across several paragraphs. Reading 'carbon five now bears an alkoxide, and it still carries its methyl group, carbon six, which hangs outside the ring' against an unannotated cyclopentenone requires re-deriving the numbering from scratch each time, and any misalignment silently corrupts everything downstream. This affects exactly the ring-counting skill that four questions assess (ch23-dieckmann-ring-size, ch23-mixed-aldol-product-count, ch23-match-diketone-to-ring, ch23-intramolecular-ring-product).",
+ "evidence": "All 26 assets in topic.package.json have rdkit_options of `null` or `{\"show_hydrogens\": true}` — no annotation, no highlight, no atom-note field is populated on any asset. Prose from nugget-dieckmann-cyclization: 'The new ring is bounded by the bond just made, and it encloses carbons two, three, four, five, and six: five atoms. Carbon one, the other ester carbonyl carbon, sits outside the ring.' The corresponding figures mol-diethyl-adipate and mol-ethyl-2-oxocyclopentanecarboxylate carry no numbering at all.",
+ "recommended_outcome": "Where the prose counts atoms, the figure the count refers to needs to carry that count, or the student needs some other way to see which atom the sentence means. This is the highest-leverage single change in the chapter because the same numbering discipline recurs in five sections and four questions.",
+ "confidence": 0.92
+ },
+ {
+ "finding_id": "visual-004",
+ "location": {
+ "concept_slug": "claisen-condensation",
+ "nugget_id": "nugget-claisen-condensation",
+ "anchor_text": "The two reactions diverge at the tetrahedral intermediate."
+ },
+ "severity": "high",
+ "category": "visual-opportunity",
+ "observation": "The Claisen section carries only two figures — ethyl acetate and ethyl acetoacetate — the fewest of any section in the chapter, and they are the reactant and the product. The species the entire section is about, the tetrahedral intermediate and the difference between the aldol version (nothing to expel) and the Claisen version (an ethoxy leaving group), is never drawn. The one-versus-two-alpha-hydrogen requirement and the transesterification hazard, both given full paragraphs, are also unillustrated.",
+ "learner_impact": "The section explicitly frames itself as a comparison at a single branch point, and the branch point is invisible. A student must imagine two tetrahedral carbons side by side, differing in one substituent, from a sentence. The error_repair question then tests exactly this on ethyl 2-methylpropanoate — a structure that appears nowhere in the reader — so a student who did not build the mental picture has nothing to fall back on.",
+ "evidence": "nugget-claisen-condensation asset_ids = [mol-ethyl-acetate, mol-ethyl-acetoacetate] (2 assets; every other section has 3-5). The deferred video-claisen-mechanism storyboard requests exactly the missing picture: 'Zoom on the two intermediates: the left one carries only carbon and hydrogen, the right one carries an ethoxy group tinted as a leaving group.' Question ch23-flawed-claisen uses molecule_smiles `CCOC(=O)C(C)C` (ethyl 2-methylpropanoate), which has no counterpart figure in the reader.",
+ "recommended_outcome": "The addition-versus-substitution divergence is a two-structure comparison and needs to be visible as one; the section currently shows only the endpoints of a journey whose midpoint is the lesson.",
+ "confidence": 0.89
+ },
+ {
+ "finding_id": "visual-005",
+ "location": {
+ "concept_slug": "stork-enamine-reaction",
+ "nugget_id": "nugget-stork-enamine-reaction",
+ "question_slug": "ch23-stork-route",
+ "anchor_text": "Forgetting this final step is the single most common error on Stork problems"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "Two reaction intermediates are shown to students in the question bank but never in the reader: the Stork iminium salt (`CC(=O)CCC1CCCCC1=[N+]1CCCC1`, offered as intermediate m_iminium in ch23-stork-route) and the Robinson bicyclic ketol (`CC12CCC(=O)CC1(O)CCCC2=O`, offered as m_ketol in ch23-robinson-route). The Stork section explicitly warns that forgetting to hydrolyse the iminium is the commonest error, then never draws the iminium the student is supposed to remember to destroy.",
+ "learner_impact": "A student meets these structures for the first time in a graded synthesis-route item, where one is the correct intermediate and the other a distractor, without ever having seen either in the teaching text. The three-stage Stork sequence is the chapter's longest and the only multi-stage reaction with no video brief at all; its species chain in the reader runs cyclohexanone → enamine → (gap) → product, so the stage the warning is about is the one stage with no picture.",
+ "evidence": "nugget-stork-enamine-reaction asset_ids = [mol-cyclohexanone, mol-cyclohexenyl-pyrrolidine, mol-mvk, mol-2-3-oxobutyl-cyclohexanone] — no iminium. ch23-stork-route student_config intermediates include m_iminium with the iminium SMILES. nugget-robinson-annulation asset_ids = [mol-2-methylcyclohexane-13-dione, mol-mvk, mol-robinson-michael-adduct, mol-wieland-miescher-ketone] — no ketol. ch23-robinson-route intermediates include m_ketol. The five video_briefs cover aldol, E1cb, Claisen, conjugate addition and Robinson; none covers Stork.",
+ "recommended_outcome": "Where a section names a species as the thing students get wrong, and the assessment then shows that species as an option, the reader needs to have shown it first. The per-species-figure substitution for a roadmap works only when the species chain has no gaps in it.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "visual-006",
+ "location": {
+ "concept_slug": "dieckmann-cyclization",
+ "nugget_id": "nugget-dieckmann-cyclization",
+ "question_slug": "ch23-dieckmann-ring-size",
+ "anchor_text": "Diethyl heptanedioate closes to the six-membered ethyl 2-oxocyclohexane-1-carboxylate."
+ },
+ "severity": "medium",
+ "category": "sequencing",
+ "observation": "The intramolecular-aldol section draws all four structures of its 'add one carbon, grow the ring by one' contrast (hexane-2,5-dione, the cyclopentenone, heptane-2,6-dione, the cyclohexenone). The Dieckmann section makes the structurally identical argument and draws only the five-membered pair; diethyl heptanedioate and ethyl 2-oxocyclohexane-1-carboxylate exist in prose only. The question ch23-dieckmann-ring-size then asks students for the ring size of the diethyl heptanedioate product.",
+ "learner_impact": "Two adjacent sections teach the same prediction rule with unequal support, so the harder of the two (Dieckmann, where the ring comes out one atom smaller than the carbon count suggests — a point the prose flags as 'one detail trips people up') gets the thinner visual treatment. A student is asked in assessment about a substrate-product pair they were never shown, in the exact case the chapter says is most error-prone.",
+ "evidence": "nugget-intramolecular-aldol asset_ids has 4 entries covering both ring sizes; nugget-dieckmann-cyclization asset_ids = [mol-diethyl-adipate, mol-ethyl-2-oxocyclopentanecarboxylate] only. Reader prose in the Dieckmann section: 'A 1,6-diester — six carbons counting both ester carbonyl carbons — gives a five-membered ring, and a 1,7-diester gives a six-membered ring. The ring always comes out one atom smaller than the carbon count suggests.' ch23-dieckmann-ring-size prompt: 'Diethyl heptanedioate is treated with sodium ethoxide in ethanol. How many atoms are in the ring of the cyclic product?' with student_config `{\"placeholder\": \"number of ring atoms\"}` — no structure shown.",
+ "recommended_outcome": "The two parallel ring-size arguments need parallel visual support, and the case the assessment tests needs to be one the student has seen. The gap is an asymmetry between two sections, not an absolute shortage.",
+ "confidence": 0.91
+ },
+ {
+ "finding_id": "visual-007",
+ "location": {
+ "concept_slug": "michael-reaction",
+ "nugget_id": "nugget-michael-reaction",
+ "asset_id": "mol-ethyl-acetoacetate"
+ },
+ "severity": "medium",
+ "category": "figure-purpose",
+ "observation": "Six assets are reused across sections, and each carries a single global `learning_goal` written for the section it first appeared in. In the reusing section the caption then describes something the section is not about. Ethyl acetoacetate appears in the Michael section captioned with the Claisen driving force ('the full equivalent of base deprotonates the product and drives the equilibrium forward') rather than with why pKa 11 makes it a Michael donor. Acetone appears in the mixed-aldol section captioned 'Ketone aldol additions are unfavorable at equilibrium; acetone at equilibrium is only a few percent converted' — irrelevant to that section, whose point is that acetone is the only enolizable partner present. 4-Hydroxy-4-methylpentan-2-one appears in the dehydration section captioned about how little of it forms, not about which H and which OH are lost.",
+ "learner_impact": "A student reading a figure caption that argues a different section's point either follows the caption away from the current argument or learns to stop reading captions. The mixed-aldol case is the most costly: the reader is being told to notice that acetone's equilibrium is bad at exactly the moment the section wants them to notice that acetone is the donor.",
+ "evidence": "mol-ethyl-acetoacetate learning_goal is Claisen-framed and is emitted verbatim as the description of blk-3jjyd5he inside the Michael section. mol-acetone learning_goal emitted verbatim as blk-kttdzh6y inside nugget-mixed-aldol-selectivity. mol-diacetone-alcohol learning_goal emitted verbatim as blk-o6td2g4a inside nugget-aldol-condensation-dehydration. mol-mvk carries one identical description across four sections (blk-g7rdpd6m, blk-3ibi68hy, blk-oa5q7r0v, blk-2rzp06bm).",
+ "recommended_outcome": "A figure reused in a second section needs its caption to say what it is doing *there*; a single global learning_goal per asset cannot serve two different arguments, and the compiler currently gives it no way to.",
+ "confidence": 0.87
+ },
+ {
+ "finding_id": "visual-008",
+ "location": {
+ "concept_slug": "michael-reaction",
+ "nugget_id": "nugget-michael-reaction",
+ "anchor_text": "Set the whole set against ethanol at pKa 16 and the practical dividing line appears"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The chapter builds a six-value acidity ladder (2,4-pentanedione 9, ethyl acetoacetate 11, diethyl malonate 13, ethanol 16, ketone 19, ester 25) with an explicit dividing line at ethanol, and uses it three times — to explain the Claisen driving force, to explain Michael donor selection, and to explain why the Stork route exists at all. It is never shown as a scale. `acid_base_energy_diagram` is an allowed asset type that compiles to the same native reader block as `reaction_coordinate`.",
+ "learner_impact": "'Above or below ethanol' is a one-dimensional spatial relationship being carried by six numbers scattered across three sections. A student who cannot hold the ladder cannot see why the same dividing line explains a full equivalent of base in one section, monopoly of the donor role in another, and the whole purpose of an enamine in a third. The rank_order question ch23-rank-michael-donors asks the student to reproduce the ladder they were never shown.",
+ "evidence": "Reader prose (nugget-michael-reaction): 'Michael donors are the compounds already familiar as unusually acidic: diethyl malonate at pKa 13, ethyl acetoacetate at 11, 2,4-pentanedione at 9 … the same ordering holds for singly activated positions, where a ketone sits near 19 and an ester near 25. Set the whole set against ethanol at pKa 16 and the practical dividing line appears.' Also nugget-claisen-condensation ('pKa near 11 … five units below ethanol's 16') and nugget-stork-enamine-reaction ('A simple ketone at pKa 19 is not deprotonated to any useful extent'). [internal source reference — not in this repo]; [internal source reference — not in this repo] block.",
+ "recommended_outcome": "A one-dimensional ordering used as a decision rule in three separate sections needs to exist as an ordering the student can see once and refer back to, rather than as six numbers recited in prose.",
+ "confidence": 0.86
+ },
+ {
+ "finding_id": "visual-009",
+ "location": {
+ "concept_slug": "mixed-aldol-selectivity",
+ "nugget_id": "nugget-mixed-aldol-selectivity",
+ "question_slug": "ch23-mixed-aldol-product-count",
+ "anchor_text": "That is two donors times two acceptors: four aldol products."
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The mixed-aldol section is built on a problem-then-solution structure, and only the solution is illustrated. The four-product combinatorial mixture — two donors times two acceptors, two self-condensations and two crossed — is a 2x2 grid described entirely in words, while the three figures in the section (benzaldehyde, acetone, the clean Claisen-Schmidt product) all illustrate the case where the problem has already been solved.",
+ "learner_impact": "The student never sees the failure the whole section exists to prevent, so the payoff of the no-alpha-hydrogen strategy lands as an assertion rather than a relief. ch23-mixed-aldol-product-count then asks the student to enumerate that grid for propanal and butanal as a bare number with no scaffold, which is the one place where a picture of the grid would have done all the work.",
+ "evidence": "nugget-mixed-aldol-selectivity asset_ids = [mol-benzaldehyde, mol-acetone, mol-benzalacetone]. Prose: 'Call them A and B: you get A attacking A, B attacking B, A attacking B, and B attacking A. Four aldol products.' ch23-mixed-aldol-product-count student_config = `{\"placeholder\": \"number of products\"}`.",
+ "recommended_outcome": "The section needs the four-way mixture to be visible as a mixture, since the entire selectivity argument is about collapsing a grid from four cells to one and a grid is what the student is being asked to picture.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "visual-010",
+ "location": {
+ "asset_id": "mol-acetaldehyde-enolate",
+ "concept_slug": "michael-reaction",
+ "anchor_text": "Drawing the resonance forms makes the consequence explicit"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "Resonance delocalisation is invoked as an explanation four times and drawn zero times. The enolate is shown only in its carbanion form (`[CH2-]C=O`), even though the chapter's opening sentence says the nucleophile's 'reactivity lives on carbon even though most of its charge lives on oxygen' — the oxygen-anion form is never drawn. The Michael section says in so many words that 'Drawing the resonance forms makes the consequence explicit' for but-3-en-2-one, and then shows but-3-en-2-one in one form with no second form and no partial-charge marking on the beta carbon.",
+ "learner_impact": "The reader is instructed to perform a drawing and given none, and the two-electrophilic-site claim that the whole Michael section rests on has to be taken on trust. A student who cannot generate the second resonance form has no way to see why the beta carbon is electrophilic, which is precisely the point ch23-michael-attack-site and ch23-michael-arrow assess.",
+ "evidence": "mol-acetaldehyde-enolate smiles `[CH2-]C=O`; its own alt_text concedes the limitation — 'drawn in its carbanion resonance form'. mol-mvk smiles `CC(=O)C=C` with rdkit_options `{\"show_hydrogens\": true}` and no charge markers. Reader prose (nugget-michael-reaction): 'Drawing the resonance forms makes the consequence explicit: alongside the usual form with positive character on the carbonyl carbon, there is a form with the negative charge on oxygen and the positive charge on the beta carbon.' The deferred video-conjugate-vs-direct-addition storyboard asks for exactly this: 'cycle its resonance forms, leaving partial-positive markers on both the carbonyl carbon and the beta carbon.'",
+ "recommended_outcome": "Where the prose tells the student that drawing a second form makes something explicit, the second form needs to exist somewhere the student can look at it; a single-form figure plus an instruction to imagine the other is the current state.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "visual-011",
+ "location": {
+ "concept_slug": "stork-enamine-reaction",
+ "nugget_id": "nugget-stork-enamine-reaction",
+ "asset_id": "mol-cyclohexenyl-pyrrolidine",
+ "anchor_text": "Compare it with an enol drawn beside it"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The Stork section directs the reader to a side-by-side comparison that the reader does not contain: 'Compare it with an enol drawn beside it: the two differ only in whether the heteroatom is oxygen bearing a hydrogen or nitrogen bearing two alkyl groups.' No enol is drawn anywhere in the chapter, beside the enamine or otherwise.",
+ "learner_impact": "This is a literal instruction to look at something that is not on the page. The enol-enamine analogy is the section's whole conceptual bridge — it is how a student accepts that a neutral molecule can do an anion's job — and it is a one-atom structural difference, which is the single clearest case in the chapter where two adjacent pictures replace a paragraph.",
+ "evidence": "Reader prose, nugget-stork-enamine-reaction expanded text: 'Compare it with an enol drawn beside it: the two differ only in whether the heteroatom is oxygen bearing a hydrogen or nitrogen bearing two alkyl groups. Nitrogen is the better electron donor, which makes the enamine a distinctly better nucleophile than the corresponding enol.' Section asset_ids = [mol-cyclohexanone, mol-cyclohexenyl-pyrrolidine, mol-mvk, mol-2-3-oxobutyl-cyclohexanone]; the cyclohexanone enol (`OC1=CCCCC1`) is absent from all 26 chapter assets.",
+ "recommended_outcome": "The comparison the prose asks the student to make needs to be makeable; either the enol has to be visible next to the enamine or the sentence should stop instructing a comparison the page cannot support.",
+ "confidence": 0.94
+ },
+ {
+ "finding_id": "visual-012",
+ "location": {
+ "question_slug": "ch23-donor-or-acceptor-only",
+ "concept_slug": "carbonyl-condensation-pattern"
+ },
+ "severity": "medium",
+ "category": "assessment-readiness",
+ "observation": "Three questions assess an explicitly structural skill using text-only compound names or condensed formulas, while their own twins in the same bank show structures. ch23-donor-or-acceptor-only asks students to sort six compounds by donor/acceptor role from names alone (including 'Diethyl carbonate', which appears in no chapter figure), whereas ch23-acceptor-only-partner asks the identical skill with all four options drawn. ch23-rank-michael-donors uses condensed text formulas (CH3COCH2COCH3). ch23-match-diketone-to-ring draws the four product rings but leaves the four diketones as names.",
+ "learner_impact": "The skill being tested is stated in the bank's own hints as a looking task — 'Find the carbonyl carbon first, then look only at the carbons bonded directly to it' — so removing the structure changes what is being measured from role-recognition to name-to-structure recall. A student who can do the chemistry but cannot draw diethyl carbonate from its name fails an item about condensation roles.",
+ "evidence": "ch23-donor-or-acceptor-only student_config items are `[{\"id\":\"i1\",\"text\":\"Acetone\"}, … {\"id\":\"i5\",\"text\":\"Diethyl carbonate\"}, {\"id\":\"i6\",\"text\":\"Cyclopentanone\"}]` with no structure_smiles; ch23-acceptor-only-partner options all carry structure_smiles. ch23-rank-michael-donors cards are text-only condensed formulas. ch23-match-diketone-to-ring left column is text-only, right column carries structure_smiles on all four. Hint level 1 of ch23-acceptor-only-partner: 'Find the carbonyl carbon first, then look only at the carbons bonded directly to it.'",
+ "recommended_outcome": "Items that assess 'look at the structure and find the alpha carbon' need the structure present; the bank is internally inconsistent about this within a single concept.",
+ "confidence": 0.89
+ },
+ {
+ "finding_id": "visual-013",
+ "location": {
+ "question_slug": "ch23-robinson-retrosynthesis",
+ "concept_slug": "robinson-annulation"
+ },
+ "severity": "medium",
+ "category": "assessment-readiness",
+ "observation": "ch23-robinson-retrosynthesis opens 'A target cyclohexenone is to be traced back to the two compounds that would build it by a Robinson annulation' and shows no target. The student_config is three text fields with no structure of any kind, and the accessible_description does not supply one either. ch23-robinson-statements-v2 similarly names cyclohex-2-enone as the acceptor without drawing it while drawing all five candidate donors.",
+ "learner_impact": "Retrosynthesis is a bond-breaking task performed on a picture. Asking a student to sequence three disconnections — undo the dehydration, undo the ring-closing addition, undo the conjugate addition — against a target that is only referred to means the reasoning is exercised abstractly and cannot be checked against anything. The answer options happen to be answerable from general knowledge, which makes the item easier than the skill it names.",
+ "evidence": "ch23-robinson-retrosynthesis student_config contains only `fields` (claim single_select, evidence multi_select, reasoning short_text); no start_structure, target_structure, or molecule_smiles. Contrast ch23-robinson-route, which does supply both start_structure (`CC1C(=O)CCCC1=O`) and target_structure (`CC12CCC(=O)C=C1CCCC2=O`).",
+ "recommended_outcome": "A retrosynthesis item that says 'a target' needs a target the student can look at and cut, or the stem should stop implying a specific structure is under analysis.",
+ "confidence": 0.87
+ },
+ {
+ "finding_id": "visual-014",
+ "location": {
+ "concept_slug": "aldol-reaction",
+ "nugget_id": "nugget-aldol-reaction",
+ "anchor_text": "the enzyme aldolase performs precisely this cleavage on fructose 1,6-bisphosphate"
+ },
+ "severity": "low",
+ "category": "visual-opportunity",
+ "observation": "The retro-aldol biology — aldolase splitting fructose 1,6-bisphosphate into two three-carbon fragments in glycolysis — is the chapter's one connection to a pathway a student may already know, and it is prose-only. Neither the sugar nor the cleavage site is shown.",
+ "learner_impact": "A one-sentence claim about a six-carbon sugar splitting at a specific bond has to be visualised from a name. The section's own transferable point — 'Recognizing the beta-hydroxy carbonyl pattern in a biological molecule is often the fastest way to see which bond a pathway is about to make or break' — is a pattern-recognition skill, and the example given is the one instance in the chapter where the pattern is not visible.",
+ "evidence": "nugget-aldol-reaction expanded text: 'In glycolysis, the enzyme aldolase performs precisely this cleavage on fructose 1,6-bisphosphate, splitting one six-carbon sugar into two three-carbon fragments.' Section asset_ids contain no sugar.",
+ "recommended_outcome": "The biological payoff rests on seeing a familiar pattern inside an unfamiliar molecule; either the molecule needs to be visible or the sentence should not promise a recognition the page cannot deliver.",
+ "confidence": 0.79
+ },
+ {
+ "finding_id": "visual-015",
+ "location": {
+ "nugget_id": "nugget-carbonyl-condensation-pattern",
+ "asset_id": "mol-mvk",
+ "concept_slug": "carbonyl-condensation-pattern"
+ },
+ "severity": "low",
+ "category": "visual-redundancy",
+ "observation": "The overview section's four figures are byte-identical reproductions of cards that appear again in the sections that own them (acetaldehyde and its enolate in the aldol section, benzaldehyde in mixed aldols, but-3-en-2-one in the Michael section). But-3-en-2-one is rendered four separate times with the same name, description and alt text. Across the chapter, 36 molecule blocks are generated from 26 distinct assets.",
+ "learner_impact": "Modest. Re-showing a structure where it is needed saves scrolling and is defensible. The cost is that the overview section spends all four of its figure slots on previews that carry no information the later sections do not repeat, at exactly the point identified in visual-002 where the section's own governing relationship goes unillustrated.",
+ "evidence": "blk-g7rdpd6m, blk-3ibi68hy, blk-oa5q7r0v and blk-2rzp06bm are four instances of mol-mvk with identical content. blk-v8n71yob / blk-1hjxj8yb (acetaldehyde) and blk-4i1bteqz / blk-uumiirt0 (enolate) are pairwise identical. Chapter totals: 36 molecule blocks from 26 assets, the highest molecule-block count of the 24 compiled reader chapters.",
+ "recommended_outcome": "The overview's figure budget should carry the overview's idea rather than preview four structures the chapter shows again anyway; this is a case for changing what a figure does, not for adding figures.",
+ "confidence": 0.81
+ },
+ {
+ "finding_id": "visual-016",
+ "location": {
+ "nugget_id": "nugget-aldol-reaction",
+ "concept_slug": "aldol-reaction",
+ "anchor_text": "Two aldehydes, one new bond: the aldol reaction step by step"
+ },
+ "severity": "medium",
+ "category": "media-equivalence",
+ "observation": "All five mechanism animations compile into the reader as `video` blocks with an empty `url` and `is_hidden: true`, so a student sees nothing. The production notes assert the substitution is covered — 'The reader carries the same content in nugget-X together with the figures' — but for three of the five that claim does not hold, because the figures show only reactants and products and the briefs are about intermediates and electron flow. This is a platform-wide state (no chapter in the reader has a produced video), but this chapter defers more of them than any other and its briefs specifically request the annotations findings visual-003 and visual-010 identify as missing.",
+ "learner_impact": "The multi-step sequences that motivated the briefs are left to prose plus endpoint structures. A student following the Claisen brief's promised comparison, or the Michael brief's promised resonance cycling, gets neither the animation nor a static equivalent of what it would have shown.",
+ "evidence": "All five video blocks in carbonyl-condensation.json (blk-d5tojv1k, blk-anvkzdmx, blk-9d675oza, blk-awacta2q, blk-2cwyvg99) have `\"url\": \"\"` and `\"is_hidden\": true`; all five briefs carry `production_status: deferred`. Census across all 24 chapters: 0 videos with a url. video-claisen-mechanism storyboard step 3 and video-conjugate-vs-direct-addition storyboard step 1 describe exactly the two missing static comparisons flagged in visual-004 and visual-010.",
+ "recommended_outcome": "Where an animation is deferred, the reader needs a static equivalent of the specific thing the animation was going to show — the intermediate, the resonance form, the labelled atom — rather than a claim that reactant and product figures already cover it.",
+ "confidence": 0.9
+ }
+ ],
+ "strengths": [
+ "Every one of the 26 assets renders correctly and legibly. I re-rendered all of them with RDKit at 300x220 and the six busiest at 420x330: no overlapping labels, no glyph sitting on a bond, no structure too small or too crowded to parse. The fused bicyclic Robinson product, the Michael adduct with two esters and a ketone, and the enamine all read cleanly at thumbnail scale.",
+ "No `annotation_font_scale` defect anywhere: all 26 assets carry either `null` or `{\"show_hydrogens\": true}` as rdkit_options, so the oversized-stereo-glyph failure mode does not occur in this chapter.",
+ "`show_hydrogens` is applied with judgement rather than by default — it is set on exactly the five small molecules where a student needs to count alpha hydrogens or see the carbanion (acetaldehyde, its enolate, acetone, but-3-en-2-one, (E)-but-2-enal) and omitted on everything larger, which keeps the bigger skeletons uncluttered.",
+ "Figure delivery is complete: all 26 nugget-referenced assets reach the compiled reader, with every nugget's asset_ids matching the reader section's molecule blocks one-for-one. Nothing is authored and then lost in compilation.",
+ "No lone-illustrated-option answer tell exists anywhere in the 52-item bank. Every multiple-choice and multi-select option set is either uniformly illustrated (4/4 or 5/5 with structure_smiles) or uniformly textual — the failure mode that made a single drawn option the giveaway in earlier chapters does not recur here.",
+ "The intramolecular-aldol and Robinson sections are the two places where the per-species-figure substitution for a roadmap genuinely works: both show an unbroken species chain (both diketones and both ring products; donor, acceptor, Michael adduct and final bicyclic enone), so a student can follow the transformation from the figures alone.",
+ "ch23-aldol-dehydration-profile ships a real, well-specified energy profile with labelled minima and transition states — proof that the platform renders this content properly and that the reader's total absence of energy figures is a choice rather than a capability limit.",
+ "The synthesis_route items (ch23-stork-route, ch23-robinson-route) carry both start and target structures plus structure-bearing intermediate options, so the two most sequence-heavy tasks in the bank are the two best-illustrated."
+ ],
+ "open_questions": [
+ "The public reader preview file frontend/public/reader/topic-chapters/carbonyl-condensation.questions.json strips `student_config` from all 26 surfaced questions, so a stem like ch23-aldol-product-propanal ('Which structure is the aldol addition product?') reaches the preview panel with no structures at all. I verified this is identical across every chapter's .questions.json, so I have treated it as a platform gap rather than a chapter finding — but it means the chapter's best-illustrated items are unillustrated on the surface most students see first.",
+ "`reaction` is a supported reader block type with a `reaction_smiles` field ([internal source reference — not in this repo]) and the reader chapter builder maps it, but it is absent from ALLOWED_ASSET_TYPES in [internal source reference — not in this repo] — so a topic package currently cannot emit a reaction scheme even though the reader can render one, and no compiled chapter contains a single `reaction` block. If that is an oversight rather than a deliberate restriction, it is the cheapest available fix for visual-002 and visual-004.",
+ "Is `synthesis_roadmap` still known-broken? It compiles to an `image` block, which is the empty-render path the authors avoided, but `reaction_coordinate` and `acid_base_energy_diagram` compile to a native block and are demonstrably fine. My findings assume the second pair is usable and the first is not; if the roadmap renderer has since been fixed, several findings collapse into one roadmap-per-multi-step-reaction recommendation.",
+ "In ch23-match-diketone-to-ring, octane-3,6-dione is paired with 3-ethyl-2-methylcyclopent-2-enone. I did not verify that mapping — it is a chemistry question outside this persona's scope — but flagging it for the Instructor reviewer since it is the one item where I could not confirm the drawn product from the named substrate at a glance."
+ ]
+ },
+ {
+ "persona": "Organic Chemistry Instructor",
+ "persona_version": "1.0.0",
+ "chapter_id": "carbonyl-condensation",
+ "chapter_version": "1",
+ "model": "claude-opus-5[1m]",
+ "summary": "NOT-GO as it stands, but the gap to publishable is narrow. This is the strongest-written condensation chapter I have reviewed here: the donor/acceptor framing is genuinely explanatory rather than list-based, every one of the 26 molecule assets parses in RDKit, and every mass balance I checked is exact — aldol additions conserve formula (2 x C2H4O = C4H8O2; 2 x C3H6O = C6H12O2), condensations lose exactly H2O (C4H8O2 -> C4H6O; C6H12O2 -> C6H10O; C11H16O3 -> C11H14O2), the Claisen loses exactly EtOH (2 x C4H8O2 - C2H6O = C6H10O3; C10H18O4 - C2H6O = C8H12O3), and the Robinson product SMILES is a correctly connected Wieland-Miescher skeleton with two fused six-membered rings, the alkene at the ring fusion and the enone conjugation in the right place. Ring sizes are correct everywhere I counted them except in one place, and that place blocks publication: the chapter twice claims that octane-2,7-dione closes to a seven-membered ring (3-methylcyclohept-2-enone) when the C3 enolate can reach C7 to give an essentially strain-free five-membered ring, delivering 1-acetyl-2-methylcyclopent-1-ene. That is not a debatable call — it contradicts the chapter's own stated principle that reversible steps funnel everything into the strain-free five- or six-membered closure, and the correct product is not even among the matching options, so the item has no defensible correct answer. Beyond that, one worked count in the Robinson section enumerates five ring atoms and calls them six, the acid-catalyzed dehydration is taught and assessed as a free beta-carbocation E1 rather than the enol route the mapped McMurry chapter gives, one distractor is labelled with a name no molecule can have, and the Robinson retrosynthesis item promises a target structure it never shows. Assessment breadth is excellent (52 items, 15 types, every concept covered by at least two types), but three learning objectives are never assessed and the entire mechanistic story is text-only because all five mechanism videos are deferred and hidden. Fix the octane-2,7-dione items and I would assign this chapter.",
+ "overall_score": 6.8,
+ "publication_blockers": [
+ "inst-001",
+ "inst-002"
+ ],
+ "findings": [
+ {
+ "finding_id": "inst-001",
+ "location": {
+ "question_slug": "ch23-match-diketone-to-ring",
+ "concept_slug": "intramolecular-aldol",
+ "anchor_text": "Octane-2,7-dione"
+ },
+ "severity": "blocker",
+ "category": "chemical-accuracy",
+ "observation": "The matching item keys octane-2,7-dione (l3) to 3-methylcyclohept-2-enone (r3). Octane-2,7-dione is CH3-C2(=O)-C3H2-C4H2-C5H2-C6H2-C7(=O)-CH3. Its alpha carbons are C1, C3, C6 and C8. The keyed pathway uses the C1 enolate attacking C7, which encloses seven atoms; but the C3 enolate attacking C7 encloses only five (C3-C4-C5-C6-C7), and by symmetry so does C6 attacking C2. The five-membered closure is enormously faster and is not reverted, because the resulting ketol still dehydrates: the OH sits on C7 and C3 is alpha to the surviving exocyclic acetyl group, so E1cb gives the C3=C7 alkene conjugated with that acetyl. The observed product is 1-acetyl-2-methylcyclopent-1-ene (SMILES CC(=O)C1=C(C)CCC1, C8H12O), not the keyed seven-membered enone (C8H12O). Both are C8H12O, so the item's own level-3 hint about counting ring members cannot rescue it. The correct product is not among the four options, so l3 has no defensible answer; a student who reasons correctly is forced into the wrong pairing by elimination and learns a false rule.",
+ "learner_impact": "Every student who works this item is taught, and graded as correct for believing, that a 1,6-diketone prefers a seven-membered aldol closure. That directly overwrites the chapter's own (correct) ring-size heuristic and will produce wrong answers on any exam question involving 2,7-diketones or 1,6-dicarbonyl retrosynthesis. Strong students who get the right chemistry will be marked wrong or will be forced by the matching constraint into an answer they know is false, which corrodes trust in the item bank.",
+ "evidence": "student_config.left l3 = 'Octane-2,7-dione'; student_config.right r3 = '3-Methylcyclohept-2-enone', structure_smiles 'CC1=CC(=O)CCCC1' (RDKit: C8H12O, ring sizes [7]); answer_key.correct_pairs l3 -> r3. Contrast the chapter's own rule in nugget-intramolecular-aldol: 'Any closure that would give a three- or four-membered ring is strained and simply comes back apart faster than it goes on. Only the closure to an unstrained five- or six-membered ring survives long enough to dehydrate.'",
+ "recommended_outcome": "The chapter needs this item to test only substrates whose favoured closure is unambiguous, and it needs the 1,6-diketone case either removed or re-keyed to the five-membered outcome with the correct product structure present as an option. If the authors want to keep a 1,6-diketone, the chapter also needs an explicit statement of what happens when both a five-ring and a larger ring are geometrically reachable, since that is exactly the discrimination the item is currently mis-teaching.",
+ "confidence": 0.96
+ },
+ {
+ "finding_id": "inst-002",
+ "location": {
+ "nugget_id": "nugget-intramolecular-aldol",
+ "section_id": "intramolecular-aldol",
+ "concept_slug": "intramolecular-aldol",
+ "anchor_text": "The isolated product is the cyclic conjugated enone after dehydration, 3-methylcyclohept-2-enone"
+ },
+ "severity": "blocker",
+ "category": "chemical-accuracy",
+ "observation": "The section's practice_check asks what octane-2,7-dione gives with NaOH and answers that the C1 enolate attacks C7 to enclose a seven-membered ring, giving 3-methylcyclohept-2-enone, hedged only with 'seven-membered rings close far less readily than five- and six-membered ones, so yields are correspondingly lower'. This is the same error as inst-001 and is worse here because it is presented as the section's own worked reasoning. The hedge is precisely backwards: the reason seven-membered closure is slow is exactly why the competing five-membered closure (C3 enolate onto C7) takes over completely. The answer also mis-labels the substrate: it calls carbonyls at C2 and C7 'a 1,6-diketone relationship' while the chapter's own convention elsewhere counts positions (hexane-2,5-dione is called a 1,4-diketone), so the labelling is internally consistent but the conclusion drawn from it is not.",
+ "learner_impact": "This is the retrieval item a student uses to self-check immediately after reading the ring-size rule. It teaches an incorrect product and, more damagingly, teaches a wrong method: extrapolate the chain-length rule linearly instead of asking which reachable closure is strain-free. Students will carry this into Robinson retrosynthesis, where recognising the five-ring alternative matters.",
+ "evidence": "nuggets[4].practice_check.answer: 'The enolate at carbon one attacks the carbonyl at carbon seven, enclosing carbons one through seven: a seven-membered ring. The isolated product is the cyclic conjugated enone after dehydration, 3-methylcyclohept-2-enone.' RDKit confirms both candidate products are C8H12O; the five-membered candidate CC(=O)C1=C(C)CCC1 has ring sizes [5].",
+ "recommended_outcome": "The section needs a practice item whose substrate has an unambiguous favoured closure, and the chapter needs the missing generalisation — that when two ring sizes are reachable the five- or six-membered one wins regardless of which enolate is drawn first — stated explicitly rather than left to be inferred from the 1,4/1,5 pair.",
+ "confidence": 0.96
+ },
+ {
+ "finding_id": "inst-003",
+ "location": {
+ "nugget_id": "nugget-robinson-annulation",
+ "section_id": "robinson-annulation",
+ "concept_slug": "robinson-annulation",
+ "anchor_text": "the attacking carbon, the two CH₂ groups, the quaternary carbon, and the carbonyl carbon under attack — six, so a six-membered ring"
+ },
+ "severity": "high",
+ "category": "worked-example-gap",
+ "observation": "The expanded text's atom-by-atom count of the new Robinson ring enumerates five atoms and then asserts six. The side chain installed by the Michael stage is -CH2-CH2-C(=O)-CH3; the ring formed when the terminal methyl attacks a ring carbonyl is [attacking CH2] + [side-chain ketone carbon] + [two CH2 groups] + [quaternary carbon] + [attacked carbonyl carbon] = six. The list omits the side-chain ketone carbon, which is precisely the carbon that becomes the enone carbonyl of the new ring. The product SMILES CC12CCC(=O)C=C1CCCC2=O is correct and does place that carbonyl inside the new six-membered ring, so the structure and the conclusion are right and only the enumeration is wrong — but this is the chapter's single most important worked count.",
+ "learner_impact": "A student following along literally counts five and concludes either that they have mis-drawn the intermediate or that the ring is five-membered. Worse, the omitted atom is the one whose fate they most need to track: a student who leaves the side-chain ketone carbon outside the ring will place the surviving carbonyl on the wrong side and draw a bicyclic diketone with the enone in the old ring rather than the new one.",
+ "evidence": "nuggets[9].text.expanded: 'In the aldol stage the terminal methyl of that chain is deprotonated and attacks one of the two ring carbonyls. Count the atoms enclosed: the attacking carbon, the two CH₂ groups, the quaternary carbon, and the carbonyl carbon under attack — six, so a six-membered ring.' Compare mol-wieland-miescher-ketone SMILES CC12CCC(=O)C=C1CCCC2=O, RDKit ring sizes [6, 6], with the conjugated ketone inside the newly formed ring.",
+ "recommended_outcome": "The Robinson worked example needs its ring-atom enumeration to name all six atoms in order, and needs the side-chain carbonyl carbon explicitly identified as the carbon that becomes the new ring's ketone, since that identification is what makes the subsequent dehydration and the retrosynthetic disconnection legible.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "inst-004",
+ "location": {
+ "nugget_id": "nugget-aldol-condensation-dehydration",
+ "section_id": "aldol-condensation-dehydration",
+ "question_slug": "ch23-addition-vs-dehydration-v2",
+ "anchor_text": "a proton goes onto the hydroxyl oxygen, water departs to leave a carbocation at the beta carbon, and an alpha proton is then lost to give the alkene"
+ },
+ "severity": "high",
+ "category": "chemical-accuracy",
+ "observation": "The chapter presents acid-catalyzed dehydration of an aldol as a clean E1 through a discrete carbocation at the beta carbon, and then assesses that model as categorically true in an advanced comparison matrix (feature f_cation, 'Passes through a carbocation at the beta carbon', keyed 'Applies' for the acid case). The mapped textbook (OpenStax/McMurry ch. 23) routes acid-catalyzed dehydration through the enol: the carbonyl is protonated, the enol forms, the hydroxyl is then protonated and water leaves with the enol pi bond assisting. The chapter's running dehydration example is 3-hydroxybutanal, whose beta carbon is secondary; a free secondary carbocation is not a defensible intermediate here. The E1 picture is only reasonable for the tertiary case (4-hydroxy-4-methylpentan-2-one), which the chapter never distinguishes.",
+ "learner_impact": "Students are given a mechanism they will be told is wrong in the next course, and are graded on it as an either/or matrix cell with no room to answer correctly. It also teaches a false symmetry ('the mirror-image route') that hides the real point: both catalysts work by first generating a nucleophilic carbon (enolate or enol) adjacent to the leaving group, which is why beta-hydroxy carbonyls dehydrate when ordinary alcohols do not.",
+ "evidence": "nuggets[2].text.expanded: 'Acid catalysis reaches the same product by the mirror-image route: a proton goes onto the hydroxyl oxygen, water departs to leave a carbocation at the beta carbon, and an alpha proton is then lost to give the alkene.' ch23-addition-vs-dehydration-v2 answer_key [redacted] and f_carbanion = {case_base: 'yes', case_acid: 'no'}; the chapter's dehydration examples are 3-hydroxybutanal (secondary beta carbon) and 4-hydroxy-4-methylpentan-2-one (tertiary).",
+ "recommended_outcome": "The acid-catalyzed route needs to be described as the mapped textbook describes it — enolization first, then loss of protonated water assisted by the enol — or, if a simplified E1 is retained deliberately, it needs to be scoped to substrates with a tertiary beta carbon and the assessment item needs to stop asserting a free beta carbocation as a general truth.",
+ "confidence": 0.72
+ },
+ {
+ "finding_id": "inst-005",
+ "location": {
+ "question_slug": "ch23-dehydration-product-v2",
+ "concept_slug": "aldol-condensation-dehydration",
+ "anchor_text": "4-Methylpentane-2,4-dione"
+ },
+ "severity": "high",
+ "category": "chemical-accuracy",
+ "observation": "Distractor option d is labelled '4-Methylpentane-2,4-dione' but carries structure_smiles CC(=O)CC(C)=O, which RDKit resolves to C5H8O2 — pentane-2,4-dione (acetylacetone). The displayed name is not merely a mismatch; it names a molecule that cannot exist, since C4 would need a ketone oxygen, a methyl, C3 and C5 (five bonds). The paired wrong-answer explanation compounds the problem: it says the compound 'has lost two hydrogens rather than a molecule of water', but relative to the C6H12O2 starting material this structure has lost CH4, not H2. The explanation's second clause ('one carbon fewer') is correct and contradicts its own first clause.",
+ "learner_impact": "Students see a rendered structure captioned with an impossible IUPAC name and an explanation whose stated bookkeeping does not match either the name or the structure. Students who are learning to use formula bookkeeping as their check — which this very question's level-1 hint tells them to do — get a worked comparison that fails their own check, and some will conclude their formula arithmetic is unreliable.",
+ "evidence": "ch23-dehydration-product-v2 student_config.options[3] = {text: '4-Methylpentane-2,4-dione', structure_smiles: 'CC(=O)CC(C)=O'}; RDKit formula C5H8O2, canonical CC(=O)CC(C)=O = pentane-2,4-dione. Starting material CC(=O)CC(C)(C)O = C6H12O2. feedback_bundle wrong_answer_explanations option_id d: 'This compound has lost two hydrogens rather than a molecule of water, and it has one carbon fewer than the starting material.'",
+ "recommended_outcome": "This distractor needs a name that matches the structure it renders and an explanation whose atom bookkeeping is arithmetically true. More usefully, the distractor set needs a fourth option that is a genuine isomer of the substrate or of the correct product, so the formula check the hints teach actually discriminates.",
+ "confidence": 0.94
+ },
+ {
+ "finding_id": "inst-006",
+ "location": {
+ "question_slug": "ch23-robinson-retrosynthesis",
+ "concept_slug": "robinson-annulation",
+ "anchor_text": "A target cyclohexenone is to be traced back to the two compounds that would build it"
+ },
+ "severity": "high",
+ "category": "assessment-readiness",
+ "observation": "This advanced structured_reasoning item opens by referring to 'a target cyclohexenone' and asks the student to trace it back to its Michael donor and acceptor, but student_config contains only a fields array — no start_structure, no target_structure, no structure_smiles anywhere in the item. There is no target to analyse. The accessibility_bundle repeats the promise ('A target cyclohexenone is to be analysed retrosynthetically') without supplying one. The three fields happen to be answerable generically, which is precisely the problem: the item is billed as a retrosynthesis of a specific compound and is in fact a definitional recall item.",
+ "learner_impact": "Students hunt for a structure that is not there and either report the question as broken or, more often, guess. The item also fails to assess the objective it is the only candidate for — 'Work backward from a cyclohexenone product to the donor and acceptor that would build it' — because no product is ever presented. Nothing in the chapter's 52 items requires a student to actually perform a Robinson disconnection on a structure.",
+ "evidence": "ch23-robinson-retrosynthesis student_config keys = ['fields'] only; no structure_smiles appears anywhere in the item (verified by exhaustive walk over the question for smiles/structure_smiles/molecule_smiles keys). Compare ch23-robinson-route, which does supply start_structure and target_structure with SMILES. nuggets[9].learning_objectives[2] = 'Work backward from a cyclohexenone product to the donor and acceptor that would build it.'",
+ "recommended_outcome": "The item needs the target compound it references to be present and inspectable, and the chapter needs at least one item in which a student performs the three disconnections on an actual structure rather than only naming their order.",
+ "confidence": 0.93
+ },
+ {
+ "finding_id": "inst-007",
+ "location": {
+ "question_slug": "ch23-aldol-dehydration-profile",
+ "concept_slug": "aldol-condensation-dehydration",
+ "anchor_text": "but whose climb measured from the valley immediately before it is smaller than the first climb measured from the start"
+ },
+ "severity": "high",
+ "category": "assessment-readiness",
+ "observation": "Both reaction_coordinate_reasoning items ask for rate_determining_step, and both accessible_descriptions state the barrier comparison outright rather than describing the curve's geometry. In the first item the description says the second maximum's 'climb measured from the valley immediately before it is smaller than the first climb measured from the start'; in the variant it says the second climb 'is larger than the first climb measured from the start'. A sighted student must derive that comparison from the plotted heights; a screen-reader student is handed it. This is the same leak class the previous chapter's review identified: the accessible description may give relative heights but must not state the derived quantity that the ask is asking for.",
+ "learner_impact": "The item stops assessing the skill it exists to assess for exactly the learners who most need it assessed. It also creates a differential grading advantage and, in the other direction, denies those learners the practice of measuring a barrier from its own preceding valley — which is the misconception the generic_incorrect_explanation says the item is designed to correct.",
+ "evidence": "ch23-aldol-dehydration-profile accessibility_bundle.accessible_description and ch23-aldol-dehydration-profile-v2 accessible_description, both compared against student_config.ask = ['step_count','rate_determining_step','overall','step_types']. The underlying keys are chemically correct (v1: barriers 18 vs 16, RDS = step 1; v2: barriers 15 vs 18, RDS = step 2).",
+ "recommended_outcome": "These two descriptions need to convey only what the plot shows — the numeric or clearly relative height of each minimum and maximum — and leave the barrier comparison for the student to perform, so the non-visual and visual versions of the task demand the same reasoning.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "inst-008",
+ "location": {
+ "nugget_id": "nugget-carbonyl-condensation-pattern",
+ "section_id": "carbonyl-condensation-pattern",
+ "concept_slug": "carbonyl-condensation-pattern",
+ "anchor_text": "The bond formed is always donor alpha carbon to acceptor carbonyl carbon"
+ },
+ "severity": "medium",
+ "category": "misconception",
+ "observation": "The chapter's organising rule is stated as exceptionless in all three depths ('the new bond is always the same one', 'The bond formed is always donor alpha carbon to acceptor carbonyl carbon; there is no version of this chemistry in which two alpha carbons bond to each other, or two carbonyl carbons do'). Two paragraphs later the same nugget introduces the Michael reaction, in which the enolate bonds to the acceptor's beta carbon and not to its carbonyl carbon. The 'always' is therefore falsified by one of the four named reactions the same nugget is previewing, and nothing signals the exception at the point the rule is asserted.",
+ "learner_impact": "The rule is stated in the most memorable place in the chapter and repeated three times, so it is what students will encode. They will then reach ch23-michael-attack-site and ch23-michael-arrow with a rule that predicts option c (attack at the alpha carbon adjacent to the carbonyl) or attack at the carbonyl carbon, and be told they are wrong by a chapter that told them the rule admits no exceptions. The Michael section's own trouble_spot anticipates exactly this error but the intro nugget causes it.",
+ "evidence": "nuggets[0].text.standard: 'the new bond is always the same one: donor alpha carbon to acceptor carbonyl carbon'; nuggets[0].text.expanded: 'there is no version of this chemistry in which two alpha carbons bond to each other, or two carbonyl carbons do'; the same expanded text then states 'the enolate can attack the far end of that alkene instead of the carbonyl carbon — that is the Michael reaction.' concepts[7].trouble_spots[0]: 'Sending the nucleophile to the carbonyl carbon: a stabilized, reversible nucleophile ends up on the beta carbon.'",
+ "recommended_outcome": "The organising rule needs to be scoped where it is first asserted — the donor always supplies its alpha carbon, but the acceptor supplies either its carbonyl carbon or, when conjugated, its beta carbon — so that the Michael reaction reads as a case of the pattern rather than a contradiction of it.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "inst-009",
+ "location": {
+ "nugget_id": "nugget-michael-reaction",
+ "section_id": "michael-reaction",
+ "concept_slug": "michael-reaction",
+ "anchor_text": "Highly reactive, non-stabilized nucleophiles such as Grignard reagents and hydride donors attack the carbonyl carbon directly, giving 1,2-addition"
+ },
+ "severity": "medium",
+ "category": "misconception",
+ "observation": "The 1,2- versus 1,4- decision is presented as fully determined by nucleophile reactivity, with organometallics and hydrides assigned unconditionally to 1,2-addition. The chapter never mentions organocuprates, which are organometallic and give clean 1,4-addition, nor that NaBH4 on an enone gives substantial conjugate reduction (the reason Luche conditions exist). The words 'cuprate' and 'Gilman' do not appear anywhere in the package. The reversibility argument the chapter gives is sound as far as it goes but is presented as the whole story.",
+ "learner_impact": "Students form a hard rule — organometallic means 1,2 — that has to be un-taught the moment cuprates appear, and they lose the more durable idea that hard/soft character and reversibility, not simply 'reactive versus stabilized', decide the site. A student asked on a later exam to add a methyl group to the beta carbon of an enone will reach for a Grignard.",
+ "evidence": "nuggets[7].text.standard: 'Highly reactive, non-stabilized nucleophiles such as Grignard reagents and hydride donors attack the carbonyl carbon directly, giving 1,2-addition.' nuggets[7].text.expanded: 'A Grignard reagent or a hydride donor is highly reactive and its addition to a carbonyl is effectively irreversible; it attacks the nearest and most electrophilic site, the carbonyl carbon, and stays there.' grep for 'cuprate' and 'Gilman' in the package returns 0 hits.",
+ "recommended_outcome": "The section needs at least a one-sentence acknowledgement that some organometallics (notably diorganocuprates) deliver carbon to the beta carbon, so that the rule is framed as a strong tendency with a named counterexample rather than as a law; without it the chapter builds a misconception it will have to spend later chapters removing.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "inst-010",
+ "location": {
+ "concept_slug": "mixed-aldol-selectivity",
+ "nugget_id": "nugget-mixed-aldol-selectivity",
+ "section_id": "mixed-aldol-selectivity",
+ "question_slug": "ch23-clean-mixed-aldol-partners"
+ },
+ "severity": "medium",
+ "category": "objective-alignment",
+ "observation": "Two of the three learning objectives for this concept are never assessed. LO2 asks students to 'Predict a single product when one partner cannot enolize, and identify which partner supplies the alpha carbon', and LO3 asks them to 'Recognize the second selectivity strategy, in which a much more acidic donor monopolizes the donor role'. The concept's four items are two numeric product counts and two multi-selects that only classify compounds as enolizable or not. No item in the entire chapter asks a student to produce or select a crossed aldol product — not even benzaldehyde plus acetone, for which an asset (mol-benzalacetone) already exists — and no item on this concept touches the acidity strategy. The mixed Claisen partners the prose introduces (ethyl formate, ethyl benzoate, diethyl carbonate, diethyl oxalate) are likewise never assessed as acceptors.",
+ "learner_impact": "Students can pass every item on the most synthetically important selectivity section by doing structure triage alone, without ever drawing a crossed product or reasoning about which of two partners donates. The section's central practical skill — predict the one product a well-designed mixed condensation gives — is taught and then never practised, so an instructor assigning this bank cannot tell whether it has landed.",
+ "evidence": "nuggets[3].learning_objectives vs the four items keyed to concept_slug 'mixed-aldol-selectivity': ch23-mixed-aldol-product-count (answer 4), ch23-mixed-aldol-product-count-v2 (answer 2), ch23-clean-mixed-aldol-partners (a,b,e), ch23-clean-mixed-aldol-partners-v2 (a,c,e). Asset mol-benzalacetone exists with the Claisen-Schmidt product and is used by no question.",
+ "recommended_outcome": "This concept needs practice that requires producing a crossed-aldol product structure and naming which partner supplied the alpha carbon, and it needs at least one item exercising the acidity-based selectivity strategy so both taught routes to a clean mixed condensation are assessed.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "inst-011",
+ "location": {
+ "concept_slug": "aldol-reaction",
+ "nugget_id": "nugget-aldol-reaction",
+ "section_id": "aldol-reaction",
+ "anchor_text": "Use the reversibility of the reaction to predict the fragments of a retro-aldol cleavage."
+ },
+ "severity": "medium",
+ "category": "objective-alignment",
+ "observation": "The retro-aldol is developed at length — it is a stated learning objective, a concept trouble_spot, the subject of the section's practice_check, and the biological hook (aldolase cleaving fructose 1,6-bisphosphate) — but none of the eight items keyed to aldol-reaction assess it. All eight run the reaction forward: two product single-selects, two forward drawings, two forward bond ledgers, two forward attack arrows. The same gap exists for dieckmann-cyclization LO3 ('Connect the cyclic product to the alkylation and decarboxylation chemistry of beta-keto esters'), which no item touches.",
+ "learner_impact": "Retro-aldol disconnection is the highest-transfer skill in the section — it is the retrosynthetic move the chapter itself calls 'one of the most reliable retrosynthetic disconnections in the course' and the one that carries into biochemistry — and a student can complete every graded item without ever running a step backward. Instructors assigning this bank get no signal on whether students can reverse the reaction.",
+ "evidence": "nuggets[1].learning_objectives[2]; nuggets[1].text.expanded: 'this is one of the most reliable retrosynthetic disconnections in the course'; the eight aldol-reaction items are ch23-aldol-product-propanal(+v2), ch23-draw-aldol-product(+v2), ch23-aldol-bond-ledger(+v2), ch23-aldol-attack-arrow(+v2), all forward-direction. nuggets[6].learning_objectives[2] with dieckmann items ch23-dieckmann-ring-size(+v2), ch23-draw-dieckmann-product(+v2).",
+ "recommended_outcome": "The aldol section needs practice that runs the equilibrium backward — given a beta-hydroxy carbonyl compound, identify the bond that cleaves and the two fragments — and the Dieckmann section needs an item connecting its cyclic beta-keto ester to the alkylation/decarboxylation sequence its objective promises.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "inst-012",
+ "location": {
+ "concept_slug": "aldol-reaction",
+ "asset_id": "mol-acetaldehyde-enolate",
+ "anchor_text": "video-aldol-mechanism"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "All 26 assets in this chapter are static single molecules, and all five video_briefs are production_status 'deferred'; in the compiled reader every video block carries is_hidden true and url ''. The result is that no figure anywhere in the chapter shows a bond forming, an arrow, a tetrahedral intermediate, or an energy comparison. The chapter's four hardest ideas are all comparative or dynamic — enolate attack at the carbonyl carbon versus the beta carbon, the aldol tetrahedral intermediate protonating versus the Claisen one collapsing, the coupled unfavourable-addition/irreversible-dehydration equilibrium, and the two-stage Robinson ring build — and each is carried entirely by prose. There is a reaction_coordinate_reasoning question type in use, yet no reaction-coordinate figure asset exists in the chapter at all.",
+ "learner_impact": "Students must hold a multi-step electron-flow story in working memory from text alone at the exact points where the chapter's own trouble_spots say they fail. The Michael regiochemistry in particular is a spatial claim ('two carbons away from the oxygen') delivered without a single picture distinguishing the two electrophilic sites, and the aldol-versus-Claisen divergence is a side-by-side comparison with no side-by-side figure.",
+ "evidence": "assets[] contains 26 entries, all type 'molecule'; video_briefs[0..4] all have production_status 'deferred'; compiled reader frontend/public/reader/topic-chapters/carbonyl-condensation.json block_type counts = {molecule: 36, text: 10, external_link: 10, video: 5, mcmurry_link: 1}, with all five video blocks is_hidden true and content.url ''. Question ch23-aldol-dehydration-profile uses a profile that exists only inside the question, not as a chapter asset.",
+ "recommended_outcome": "The chapter needs a non-video visual equivalent for at least the two electrophilic sites of an enone and for the aldol/Claisen tetrahedral-intermediate divergence, since those are the two claims students are graded on most and currently have no figure support of any kind; it also needs the coupled-equilibrium energy story available as a figure rather than only inside one assessment item.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "inst-013",
+ "location": {
+ "nugget_id": "nugget-claisen-condensation",
+ "section_id": "claisen-condensation",
+ "anchor_text": "practice_check"
+ },
+ "severity": "medium",
+ "category": "retrieval-practice",
+ "observation": "All ten nuggets carry a practice_check with a prompt and a worked answer, and none of them reaches the compiled reader. The compiled chapter contains only molecule, text, external_link, video and mcmurry_link blocks — there is no practice_check block type at all. The same is true of the assets' long_description fields: the reader's molecule blocks carry only alt_text and the learning_goal as 'description', so the atom-by-atom walkthroughs written for each figure (which is where the alpha/beta carbon identifications actually live) are not delivered either.",
+ "learner_impact": "A reader student gets ten sections of continuous exposition with zero interleaved retrieval, and must go to the separate question bank to test anything. The long_descriptions are where the chapter does its most careful atom labelling — for example mol-3-hydroxybutanal's 'The bond between carbons two and three is the new carbon-carbon bond made in the reaction' — and losing them removes the bridge between the prose and the picture at exactly the moments the prose says to trace atoms.",
+ "evidence": "Compiled reader block_type census shows no practice_check block; nuggets[0..9] each define practice_check.prompt and .answer. Reader molecule block content keys are ['name','smiles','alt_text','description','generator_href'(,'rdkit_options')] with description == the asset's learning_goal; assets[].accessibility.long_description appears nowhere in the compiled reader.",
+ "recommended_outcome": "The chapter needs its ten authored retrieval prompts and its per-figure atom walkthroughs to actually reach the reading surface; as compiled, a substantial fraction of the authored teaching content is written but undeliverable, which an instructor assigning the reader has no way to detect.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "inst-014",
+ "location": {
+ "concept_slug": "michael-reaction",
+ "anchor_text": "\"prerequisites\": [\n \"carbonyl-condensation-pattern\"\n ]"
+ },
+ "severity": "low",
+ "category": "sequencing",
+ "observation": "The michael-reaction concept declares only carbonyl-condensation-pattern as a prerequisite, but its nugget depends on two later concepts. It requires alpha,beta-unsaturated carbonyl compounds, which the chapter creates in aldol-condensation-dehydration (order 3), and it leans on the pKa-versus-ethanol selectivity argument built in mixed-aldol-selectivity (order 4), which explicitly forward-references it: 'The same logic will explain the Michael reaction later in the chapter.' Robinson annulation similarly omits aldol-condensation-dehydration, though it inherits it transitively through intramolecular-aldol.",
+ "learner_impact": "Any surface that sequences by declared prerequisites — a concept map, an adaptive path, an instructor building a partial assignment — could place the Michael reaction before enones have been introduced, leaving the acceptor unexplained. The reading order is correct; only the machine-readable dependency graph is wrong.",
+ "evidence": "concepts[7].prerequisites = ['carbonyl-condensation-pattern']; nuggets[7].text.standard opens 'An alpha,beta-unsaturated carbonyl compound has two electrophilic sites'; nuggets[3].text.expanded closes 'The same logic will explain the Michael reaction later in the chapter, where stabilized donors are chosen for exactly this reason.'",
+ "recommended_outcome": "The prerequisite graph needs to reflect the dependencies the prose actually assumes, so that any surface reordering these concepts cannot present the Michael reaction before its acceptor class and its acidity argument exist.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "inst-015",
+ "location": {
+ "nugget_id": "nugget-aldol-reaction",
+ "section_id": "aldol-reaction",
+ "anchor_text": "acetaldehyde is converted largely to its aldol"
+ },
+ "severity": "low",
+ "category": "chemical-accuracy",
+ "observation": "The chapter states that 'Aldehydes generally give good conversion; acetaldehyde is converted largely to its aldol.' The standard figure for acetaldehyde's aldol equilibrium is roughly 50 percent conversion, which supports 'favours product' but not 'largely'. The contrast the section is drawing — aldehydes favour product, ketones do not — is correct and well made; only the quantitative colouring overstates.",
+ "learner_impact": "Minor, but it slightly undercuts the section's own best point. The reason the aldol equilibrium matters is that it sits near the middle for aldehydes and far to the left for ketones, which is what makes the coupled irreversible dehydration such a general trick. Overstating the aldehyde case makes the ketone case look like a special deficiency rather than the same equilibrium shifted.",
+ "evidence": "nuggets[1].text.standard: 'Aldehydes generally give good conversion; acetaldehyde is converted largely to its aldol. Ketones do not. Acetone under the same conditions reaches equilibrium at only a few percent product'. The acetone figure (a few percent) matches the standard value; the acetaldehyde characterisation does not.",
+ "recommended_outcome": "The aldehyde equilibrium needs a figure or a hedge consistent with the roughly even conversion normally quoted, so that the aldehyde/ketone contrast is a matter of degree on one scale rather than an apparent success/failure dichotomy.",
+ "confidence": 0.65
+ },
+ {
+ "finding_id": "inst-016",
+ "location": {
+ "nugget_id": "nugget-claisen-condensation",
+ "section_id": "claisen-condensation",
+ "question_slug": "ch23-flawed-claisen",
+ "anchor_text": "A successful Claisen needs at least two alpha hydrogens on the donor."
+ },
+ "severity": "low",
+ "category": "misconception",
+ "observation": "The two-alpha-hydrogen requirement is stated without qualification in the nugget, in the section's practice_check answer, and in the keyed repair option of ch23-flawed-claisen. The rule is exactly right for the alkoxide-mediated Claisen the chapter teaches, because the driving force is the final deprotonation. It is not a structural impossibility: with a full equivalent of a strong, non-nucleophilic base that is not regenerated as an alcohol, esters bearing a single alpha hydrogen can be condensed. The chapter's own framing already supplies the correct reasoning ('the driving step is unavailable'), so the exception is one clause away.",
+ "learner_impact": "Low. Students carry a rule that is operationally correct for every problem in this course but is stated as a structural law rather than a thermodynamic consequence, so a later encounter with a forced Claisen reads as a contradiction rather than as the same argument with a different base.",
+ "evidence": "nuggets[5].text.expanded: 'An ester with a single alpha hydrogen gives a product with none, the driving step is unavailable, and the condensation fails.' nuggets[5].practice_check.answer: 'A successful Claisen needs at least two alpha hydrogens on the donor.' ch23-flawed-claisen repair_options fix_two_h, keyed correct.",
+ "recommended_outcome": "The requirement needs to be attributed to the driving deprotonation rather than presented as an absolute structural bar, so that students learn a transferable thermodynamic argument rather than a rule with an unexplained exception waiting for them.",
+ "confidence": 0.7
+ },
+ {
+ "finding_id": "inst-017",
+ "location": {
+ "question_slug": "ch23-dehydration-product-v2",
+ "nugget_id": "nugget-mixed-aldol-selectivity",
+ "anchor_text": "the double bond is exocyclic to the chain at carbons four and five"
+ },
+ "severity": "low",
+ "category": "notation-consistency",
+ "observation": "Two terminology slips. First, a wrong-answer explanation for an acyclic substrate describes its alkene as 'exocyclic to the chain' — there is no ring anywhere in 4-methylpent-4-en-2-one, and every other use of 'exocyclic' in the package (seven of eight) correctly refers to the Dieckmann product's ester group hanging off a ring. Second, the Claisen-Schmidt condensation is scoped two different ways: the standard-depth text defines it as 'an aromatic aldehyde with an enolizable ketone', while the expanded text narrows it to 'When the enolizable partner is a methyl ketone'.",
+ "learner_impact": "Small but real. 'Exocyclic' is a term students are actively learning to use precisely, and seeing it applied to an open chain in a graded explanation undermines that. The Claisen-Schmidt scoping difference means a student reading at two depths gets two different definitions of the same named reaction and may wrongly conclude that a non-methyl ketone does not qualify.",
+ "evidence": "ch23-dehydration-product-v2 feedback_bundle.wrong_answer_explanations option_id b: 'Water has been lost, but the double bond is exocyclic to the chain at carbons four and five'. nuggets[3].text.standard: 'This particular combination, an aromatic aldehyde with an enolizable ketone, is named the Claisen-Schmidt condensation'; nuggets[3].text.expanded: 'When the enolizable partner is a methyl ketone and the acceptor is an aromatic aldehyde, the reaction is called the Claisen-Schmidt condensation'.",
+ "recommended_outcome": "The chapter needs consistent terminology for ring-attached versus chain positions, and one scope for the Claisen-Schmidt name across all three depths, so that terms the chapter is teaching students to use precisely are used precisely in the chapter's own explanations.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "inst-018",
+ "location": {
+ "section_id": "carbonyl-condensation-pattern",
+ "anchor_text": "https://openstax.org/books/organic-chemistry/pages/23-why-this-chapter"
+ },
+ "severity": "low",
+ "category": "missing-example",
+ "observation": "The compiled reader contains exactly one OpenStax link for the whole chapter, and it points at the chapter's 'why this chapter' landing page rather than at any specific section. The ten Wikipedia links are per-concept and well chosen, but the assigned-textbook link gives a student who wants to read further on, say, the Dieckmann cyclization or conjugate addition nothing more targeted than the chapter opener.",
+ "learner_impact": "A student who wants the textbook's treatment of one specific reaction has to navigate the chapter themselves, and an instructor cannot point at a section-level correspondence when building an assignment. The per-concept mapping the chapter has already done internally is not exposed to the reader.",
+ "evidence": "Compiled reader block_type census: mcmurry_link count = 1, in section nugget-carbonyl-condensation-pattern only, url 'https://openstax.org/books/organic-chemistry/pages/23-why-this-chapter'; external_link count = 10, all Wikipedia.",
+ "recommended_outcome": "The chapter needs section-level assigned-reading correspondence surfaced to the student, matching the granularity of the concept breakdown it already has, rather than a single chapter-opener link standing in for ten distinct topics.",
+ "confidence": 0.8
+ },
+ {
+ "finding_id": "inst-019",
+ "location": {
+ "question_slug": "ch23-aldol-dehydration-profile",
+ "anchor_text": "\"y_axis_label\": \"Free energy, G\""
+ },
+ "severity": "low",
+ "category": "figure-purpose",
+ "observation": "Both reaction-coordinate profiles plot numeric free energies (0, 18, 4, 20, -12 and 0, 15, -6, 12, -20) against an axis labelled only 'Free energy, G' with no units. Beyond the notation issue, the acetone profile places the aldol addition product 4 units above starting material; if those units are kcal/mol that corresponds to roughly 0.1 percent product at equilibrium, whereas the chapter's prose says acetone reaches 'only a few percent' (about 1.8 kcal/mol). The relative comparisons the item actually grades are unaffected.",
+ "learner_impact": "Minor. Students in an advanced item are shown quantitative energies they cannot interpret, and the one number that could be checked against the chapter's own prose does not match it. A student who tries to connect the diagram to the 'few percent' figure from the aldol section will not be able to.",
+ "evidence": "ch23-aldol-dehydration-profile student_config.profile.control y values [0.0, 18.0, 4.0, 20.0, -12.0] with y_axis_label 'Free energy, G'; nuggets[1].text.standard: 'Acetone under the same conditions reaches equilibrium at only a few percent product'.",
+ "recommended_outcome": "The profiles need an explicit energy unit on the axis, and the addition-product minimum needs to be consistent with the equilibrium position the chapter states in prose, so the diagram and the text describe the same system.",
+ "confidence": 0.75
+ }
+ ],
+ "strengths": [
+ "Every SMILES in the package parses, and every mass balance I checked is exact: aldol additions conserve formula (2 x C2H4O = C4H8O2 for 3-hydroxybutanal; 2 x C3H6O = C6H12O2 for diacetone alcohol), condensations lose exactly one water (C4H8O2 -> C4H6O; C6H12O2 -> C6H10O; C7H12O2 -> C7H10O; C11H16O3 -> C11H14O2), the Claisen and Dieckmann lose exactly EtOH (2 x C4H8O2 - C2H6O = C6H10O3; C10H18O4 - C2H6O = C8H12O3), enamine formation loses exactly water (C6H10O + C4H9N - H2O = C10H17N), and both Michael adducts are exact sums of their partners.",
+ "The Robinson annulation product is structurally correct in a way that is easy to get wrong: CC12CCC(=O)C=C1CCCC2=O gives two fused six-membered rings sharing an edge, the quaternary methyl-bearing carbon at one fusion, the alkene at the other fusion conjugated to the newly formed ring's ketone, and the original ring's ketone adjacent to the quaternary carbon. The cyclopentane variant (Hajos-Parrish skeleton, rings [5,6]) is equally correct, as are both ketol intermediates.",
+ "The aldol/Claisen divergence is taught as one mechanism with one branch point — whether the acceptor's tetrahedral intermediate has a leaving group — rather than as two reactions to memorise. This is the single most useful reorganisation in the chapter and it is sustained across prose, the comparison_matrix item, and the video brief.",
+ "The pKa scale is used quantitatively and consistently everywhere it appears (2,4-pentanedione 9, beta-keto ester 11, malonate 13, ethanol 16, ketone 19, ester 25), and the chapter draws the right structural conclusion from it — that ethanol at 16 is the dividing line that determines which partner monopolises the donor role. The rank_order item, the Claisen driving-force item, and the Robinson donor-selection item all key against the same scale.",
+ "Assessment breadth is genuinely strong: 52 items across 15 types with 26 surfaced plus 26 variants, every concept covered by at least two different types, and no concept assessed only by a drawing task. Distractors are mostly principled — the alpha-attack isomer, the 1,2-addition alcohol, the condensation product where addition was asked — and RDKit confirms the key distractors in the aldol and Michael items are true isomers of the correct answer, so formula-counting alone cannot solve them.",
+ "The intramolecular aldol and Dieckmann worked examples both number the chain explicitly and count ring atoms correctly, and the Dieckmann section pre-empts the standard off-by-one error by naming exactly which carbon ends up exocyclic."
+ ],
+ "open_questions": [
+ "inst-004 (acid-catalyzed dehydration via a beta carbocation) is the one finding where I could see an instructor disagreeing about severity. The E1 picture is defensible for the chapter's tertiary example (4-hydroxy-4-methylpentan-2-one) but not for its primary example (3-hydroxybutanal, secondary beta carbon), and it contradicts the enol route given by the mapped OpenStax/McMurry chapter 23. I scored it high rather than blocker; if the project's standard is strict alignment with the mapped text, it should be promoted to a publication blocker.",
+ "inst-007 (the reaction-coordinate accessible_description stating the barrier comparison) meets the letter of the 'leaked answer' blocker definition for screen-reader users specifically. I scored it high rather than blocker because the leak is one sub-answer of four and because any faithful description must convey relative heights. The accessibility persona may reasonably escalate it; I would defer to that call.",
+ "Is the missing practice_check and long_description delivery in the compiled reader (inst-013) a chapter-authoring defect or the known platform gap carried over from the two preceding chapters? If platform, the finding should be routed to the pipeline rather than to a content revision, but the chapter still ships with a large fraction of its authored teaching text undeliverable and an instructor should be told that before assigning the reader.",
+ "The Wieland-Miescher ketone is never named in prose (asset id mol-wieland-miescher-ketone, title 'The bicyclic enone from the Robinson annulation') and is drawn without stereochemistry. Racemic is correct for the base-mediated reaction taught here, so I did not raise a finding, but if a later chapter covers proline-catalysed asymmetric annulation the authors may want the name introduced here as a hook.",
+ "I did not find a second-defensible-answer problem anywhere except the octane-2,7-dione case: all four diketones in each matching item are symmetric, and I verified by enumerating every alpha-carbon-to-carbonyl closure for each substrate that only the octane-2,7-dione entry admits a competing favoured ring size."
+ ]
+ },
+ {
+ "persona": "Struggling Student",
+ "persona_version": "1.0.0",
+ "chapter_id": "carbonyl-condensation",
+ "chapter_version": "1",
+ "model": "claude-opus-5[1m]",
+ "summary": "The chemistry here is careful and the wrong-answer explanations are among the best I have read in this course — most distractors are diagnosed by name, and three of the four ring-counting worked examples walk atom by atom. But the chapter is delivered as ten walls of prose with every structure parked after the text, zero mechanism figures, zero delivered practice checks, and five mechanism animations that ship with empty URLs and is_hidden set. Every intermediate the chapter's central argument turns on — the tetrahedral intermediate, the alkoxide, the carbinolamine, the iminium — is described in words and never drawn. Worse, the reader defaults to the 'expanded' detail level, and several definitions I actually need (what 'condensation' means, what 'aldol' means, the addition-versus-condensation naming rule that four graded questions hinge on, what 'annulation' means, and the Dieckmann off-by-one warning) exist only in the 'standard' variant, which I would have to guess to go looking for. The capstone Robinson worked example lists five atoms and calls the count six. Two advanced free-energy-profile questions assume a skill the chapter never touches — the prose contains no energy diagram and never uses the words transition state, barrier, or rate-determining step — and one of them reports two steps for a reaction the prose says has three. As a shaky student I could follow individual sentences all day and still stall at exactly the places I would be graded.",
+ "overall_score": 5.2,
+ "publication_blockers": [
+ "ss-001",
+ "ss-003"
+ ],
+ "findings": [
+ {
+ "finding_id": "ss-001",
+ "location": {
+ "section_id": "nugget-aldol-condensation-dehydration",
+ "nugget_id": "nugget-aldol-condensation-dehydration",
+ "anchor_text": "When a sequence includes this dehydration it is called an aldol condensation, reserving aldol reaction or aldol addition for the case that stops at the alcohol."
+ },
+ "severity": "blocker",
+ "category": "conceptual-support",
+ "observation": "The reader renders one detail level at a time and defaults to 'expanded' ([internal source reference — not in this repo] sets detailLevel: \"expanded\"; TopicPackageChapterRenderer swaps content.markdown for _detail_texts[prefs.detailLevel]). The levels are alternatives, not cumulative, and several load-bearing definitions exist ONLY in the 'standard' variant and appear nowhere in the 'expanded' text that is actually shown by default: why the reaction is called a condensation, where the word 'aldol' comes from, the rule that 'aldol condensation' means the sequence including dehydration while 'aldol reaction'/'aldol addition' means stopping at the alcohol, and that 'annulation means ring building'.",
+ "learner_impact": "I open the chapter, get the densest of the three texts by default, and never learn what the chapter's four central words mean. Then I hit ch23-draw-aldol-product ('Draw the aldol addition product'), ch23-aldol-product-propanal ('Which structure is the aldol addition product?') and ch23-dehydration-product ('Which structure is the condensation product?') and I have no basis at all for telling addition from condensation. I guess, get it wrong, read a feedback line that says 'The question asks for the addition product' as if I should have known, and conclude I am not smart enough for this chapter.",
+ "evidence": "_detail_texts.standard of nugget-aldol-condensation-dehydration contains the addition-vs-condensation naming rule; the rendered blk-59t2y57n markdown (= _detail_texts.expanded) never uses the phrase 'aldol condensation' at all. _detail_texts.standard of nugget-carbonyl-condensation-pattern contains 'Because two carbonyl-containing molecules are joined, the reaction is called a condensation'; expanded does not. _detail_texts.standard of nugget-aldol-reaction contains 'which is where the name aldol comes from'; expanded does not. _detail_texts.standard of nugget-robinson-annulation opens 'Annulation means ring building'; expanded does not. Affected surfaced questions: ch23-draw-aldol-product, ch23-aldol-product-propanal, ch23-dehydration-product, ch23-intramolecular-ring-product.",
+ "recommended_outcome": "Every term the chapter grades on must be defined at whatever detail level the student is reading, including the default one; the terminology that separates 'addition' from 'condensation' cannot live in a variant a struggling reader has no reason to switch to.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "ss-003",
+ "location": {
+ "section_id": "nugget-robinson-annulation",
+ "nugget_id": "nugget-robinson-annulation",
+ "anchor_text": "Count the atoms enclosed: the attacking carbon, the two CH₂ groups, the quaternary carbon, and the carbonyl carbon under attack — six, so a six-membered ring."
+ },
+ "severity": "blocker",
+ "category": "worked-example-gap",
+ "observation": "In the chapter's single atom-by-atom walkthrough of the capstone reaction, the enumerated list contains five atoms (attacking carbon + two CH₂ + quaternary carbon + attacked carbonyl carbon) but is asserted to be six. The side-chain ketone carbon, which sits between the attacking methyl and the CH₂CH₂ linker and IS a member of the new ring, is omitted from the list. The stated conclusion (six-membered) is correct; the count-along is not.",
+ "learner_impact": "The chapter has just spent three earlier sections training me to count ring atoms by listing them (and the intramolecular-aldol and Dieckmann sections do it correctly). So I count along, get five, and conclude either that the ring is five-membered or — far more likely for me — that I have misunderstood something fundamental about which atoms are in a ring. I stop and reread the paragraph three times, then give up on the Robinson section entirely, which is also the section the two synthesis_route questions and both structured_reasoning questions are built on.",
+ "evidence": "blk-venwqh8r markdown, paragraph 4. The correct ring for 2-methyl-2-(3-oxobutyl)cyclohexane-1,3-dione closing to CC12CCC(=O)C=C1CCCC2=O is: attacking CH₂, side-chain ketone carbon, CH₂, CH₂, quaternary carbon, attacked ring carbonyl carbon = six. Compare the correct enumerations in nugget-intramolecular-aldol ('carbons one, two, three, four, and five — a five-membered ring') and nugget-dieckmann-cyclization ('encloses carbons two, three, four, five, and six: five atoms').",
+ "recommended_outcome": "The capstone worked example needs an atom enumeration a student can count along with and reach the stated number; the side-chain carbonyl carbon must be named as a ring member.",
+ "confidence": 0.93
+ },
+ {
+ "finding_id": "ss-004",
+ "location": {
+ "section_id": "nugget-aldol-condensation-dehydration",
+ "nugget_id": "nugget-aldol-condensation-dehydration",
+ "anchor_text": "Alcohols are not normally eliminated by base: hydroxide is a poor leaving group"
+ },
+ "severity": "high",
+ "category": "conceptual-support",
+ "observation": "Within a single paragraph the chapter states that hydroxide is a poor leaving group and then, three sentences later, has the enolate 'eject hydroxide from the beta carbon'. Two sections later the Claisen text calls alkoxide 'a serviceable leaving group' with no explanation of why alkoxide is serviceable when hydroxide was poor — and no reminder of what a tetrahedral intermediate is or why collapsing it is favourable.",
+ "learner_impact": "Leaving-group ability is exactly the topic I am shakiest on. Being told a group is bad and then watching it leave, twice, in two different sections, with the word 'serviceable' doing all the explanatory work, is the point where I stop trying to reason and start memorising outcomes. From then on I answer every question in this chapter by pattern-matching, which is why I get ch23-claisen-product right and ch23-flawed-claisen wrong.",
+ "evidence": "blk-59t2y57n: 'hydroxide is a poor leaving group and there is no acidic proton to start from' followed by 'the enolate then pushes its electrons into the alpha-beta bond and ejects hydroxide from the beta carbon'. blk-6h9ci3tr: 'Alkoxide is a serviceable leaving group, the carbonyl reforms by expelling it'. Questions that depend on this: ch23-claisen-product (distractor b), ch23-flawed-claisen, ch23-addition-vs-dehydration-v2.",
+ "recommended_outcome": "The chapter needs to reconcile its own two statements about hydroxide/alkoxide leaving ability — a student must be able to see what makes expulsion possible in an E1cb and in a tetrahedral collapse when it is not possible in a plain alcohol.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "ss-005",
+ "location": {
+ "section_id": "nugget-claisen-condensation",
+ "nugget_id": "nugget-claisen-condensation",
+ "anchor_text": "The two reactions diverge at the tetrahedral intermediate."
+ },
+ "severity": "high",
+ "category": "worked-example-gap",
+ "observation": "All 26 assets in this chapter are static single-molecule renders of starting materials and isolated products. Not one intermediate is drawn anywhere: no tetrahedral intermediate, no alkoxide, no carbinolamine, no iminium ion, no enolate of the acceptor fragment, no curved arrow. The chapter's organising claim — that the aldol and the Claisen are the same reaction until the tetrahedral intermediate, at which point one is protonated and the other collapses — rests entirely on a species the student never sees.",
+ "learner_impact": "I cannot hold a four-species mechanism in words. When the chapter says 'the same intermediate carries an alkoxy group on the former carbonyl carbon', I have to build that structure in my head from a sentence while also tracking which molecule was donor and which was acceptor. I do not manage it. I then meet ch23-aldol-attack-arrow and ch23-michael-arrow, which ask me to place a curved arrow, and the chapter has never shown me a single curved arrow anywhere.",
+ "evidence": "topic.package.json assets[] — all 26 are plain molecule renders (mol-acetaldehyde through mol-wieland-miescher-ketone); the compiled reader contains 36 molecule blocks, 10 text blocks, 5 hidden video blocks and no reaction, reaction_coordinate, or mechanism block of any kind. Questions requiring the undrawn species: ch23-aldol-attack-arrow(+v2), ch23-michael-arrow(+v2), ch23-stork-route(+v2, intermediate m_iminium), ch23-claisen-product (distractor b reasoning), ch23-robinson-route (intermediate m_ketol).",
+ "recommended_outcome": "Students need to see the intermediates the chapter's central comparison turns on — at minimum the aldol alkoxide beside the Claisen tetrahedral intermediate, and the iminium the Stork sequence hydrolyses.",
+ "confidence": 0.92
+ },
+ {
+ "finding_id": "ss-006",
+ "location": {
+ "section_id": "nugget-aldol-reaction",
+ "asset_id": "video-aldol-mechanism",
+ "anchor_text": "Two aldehydes, one new bond: the aldol reaction step by step"
+ },
+ "severity": "high",
+ "category": "visual-opportunity",
+ "observation": "The package declares five step-by-step mechanism videos — video-aldol-mechanism, video-e1cb-dehydration, video-claisen-mechanism, video-conjugate-vs-direct-addition, video-robinson-two-stages — each with a written storyboard and learning goal. All five compile into the reader as video blocks with \"url\": \"\" and \"is_hidden\": true. The only media in the chapter designed to show motion through a mechanism is not delivered.",
+ "learner_impact": "These five are precisely the five things I would have watched instead of rereading: the aldol step sequence, why an alcohol eliminates in base, addition versus substitution at the tetrahedral intermediate, 1,2 versus 1,4 addition, and the two Robinson stages. Without them my only route into every mechanism is dense prose, which is the modality I am worst at. I reread the Michael section four times and still cannot say why a Grignard goes one place and a malonate anion another.",
+ "evidence": "Reader blocks blk-d5tojv1k, blk-anvkzdmx, blk-9d675oza, blk-awacta2q, blk-2cwyvg99 all carry \"url\": \"\" and \"is_hidden\": true. Their briefs in topic.package.json video_briefs[] are fully written (e.g. video-conjugate-vs-direct-addition: 'See the resonance forms that make an enone's beta carbon electrophilic, then watch a reactive nucleophile commit at the carbonyl carbon while a stabilized enolate reverses out').",
+ "recommended_outcome": "Either the promised step-through media must actually reach the reader, or each of those five mechanisms needs a delivered visual equivalent — the prose alone is not carrying them.",
+ "confidence": 0.94
+ },
+ {
+ "finding_id": "ss-007",
+ "location": {
+ "question_slug": "ch23-aldol-dehydration-profile",
+ "section_id": "nugget-aldol-condensation-dehydration",
+ "anchor_text": "The profile below describes acetone being converted to a conjugated enone on warming with base."
+ },
+ "severity": "high",
+ "category": "conceptual-support",
+ "observation": "Two advanced reaction_coordinate_reasoning questions ask for step count, rate-determining step, overall thermodynamics and per-step thermodynamics from a free-energy profile. The chapter contains no energy diagram of any kind and never uses the words transition state, activation barrier, rate-determining, exergonic, or endergonic in any of its ten sections at any detail level. The prose discusses equilibrium position and irreversibility in purely verbal terms ('sits far on the side of starting material', 'a one-way door').",
+ "learner_impact": "Reading a free-energy profile is a prior-chapter skill I never mastered, and this chapter builds no bridge to it — it does not even signal that I will need it. I meet a diagram cold, cannot remember whether the rate-determining step is the highest peak or the biggest climb, and guess. The hint ladder is good ('measure each climb from the valley immediately preceding it') but hints arrive after I have already decided I do not belong in this question.",
+ "evidence": "ch23-aldol-dehydration-profile and ch23-aldol-dehydration-profile-v2 ask ['step_count','rate_determining_step','overall','step_types']. Grepping the compiled reader for 'transition state', 'rate-determining', 'exergonic', 'endergonic', 'activation' returns nothing; the closest prose is 'Coupling an unfavorable equilibrium to a favorable irreversible step' in blk-59t2y57n.",
+ "recommended_outcome": "Before students are graded on a free-energy profile of these reactions, the chapter needs to connect its verbal equilibrium argument to a picture of the same argument — the coupled aldol/dehydration energetics are the natural place.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "ss-008",
+ "location": {
+ "question_slug": "ch23-aldol-dehydration-profile",
+ "section_id": "nugget-aldol-reaction",
+ "anchor_text": "The mechanism has three steps and no surprises."
+ },
+ "severity": "high",
+ "category": "misconception",
+ "observation": "The aldol section states the mechanism has three steps (deprotonation, attack, protonation) and the dehydration section describes E1cb as two steps (deprotonation, expulsion). The reaction_coordinate_reasoning profile for the same overall transformation has step_count 2, with minima labelled 'Acetone (2 equivalents)', 'Aldol addition product', 'Conjugated enone + H₂O'. Nothing tells the student the profile is coarse-grained at the level of overall stages rather than elementary steps.",
+ "learner_impact": "I did the work. I memorised that the aldol has three steps. I look at a diagram of the aldol plus dehydration and the graded answer is two. Either my mechanism count was wrong or my diagram reading is wrong and I cannot tell which, so I lose confidence in the one fact I had actually learned. On the exam I now second-guess the three-step mechanism as well.",
+ "evidence": "blk-10nbxf9y: 'The mechanism has three steps and no surprises.' blk-59t2y57n describes E1cb as deprotonation then loss of leaving group. ch23-aldol-dehydration-profile answer_key [redacted], with intermediate minimum labelled only 'Aldol addition product'.",
+ "recommended_outcome": "The relationship between the mechanism's elementary steps and the stages a profile shows must be stated somewhere the student meets before being graded on it; a profile that lumps three steps into one hill needs to say so.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "ss-009",
+ "location": {
+ "section_id": "nugget-carbonyl-condensation-pattern",
+ "nugget_id": "nugget-carbonyl-condensation-pattern",
+ "anchor_text": "In a mixture of 2,2-dimethylpropanal, (CH₃)₃CCHO, and propanal, CH₃CH₂CHO, which compound must serve as the donor, and why?"
+ },
+ "severity": "high",
+ "category": "retrieval-practice",
+ "observation": "All ten nuggets carry a well-written practice_check with a prompt and a full worked answer. Zero of them reach the compiled reader — the reader JSON contains no practice_check field and no block of any checkpoint type. The chapter as delivered is ten consecutive prose sections with no place to stop and test myself, no summary, and nothing between reading and a 26-question graded bank.",
+ "learner_impact": "I read 700 words, feel like I followed it, move on, and discover four sections later that I never actually internalised the donor/acceptor rule. The practice checks are exactly calibrated to catch that (the section-1 check on 2,2-dimethylpropanal is the single best diagnostic in the package) and I never see one. My first feedback on whether I understood anything arrives in a graded assessment, which is the worst possible place for a student with my confidence.",
+ "evidence": "grep 'practice_check' returns 10 hits in topic.package.json and 0 in frontend/public/reader/topic-chapters/carbonyl-condensation.json. Reader block_type census: 10 text, 36 molecule, 5 video (all hidden), 10 external_link, 1 mcmurry_link — no callout, summary, or practice block.",
+ "recommended_outcome": "The ten authored checkpoints need to reach the student inside the reading flow; a chapter of this density cannot go from prose straight to graded assessment with no self-check.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "ss-010",
+ "location": {
+ "question_slug": "ch23-donor-or-acceptor-only",
+ "anchor_text": "Diethyl carbonate"
+ },
+ "severity": "high",
+ "category": "missing-example",
+ "observation": "Both categorize_groups items present their compounds as bare names with no structure_smiles, unlike every sibling single_select and multi_select item in the same bank, which show structures. The names include diethyl carbonate, ethyl formate, ethyl benzoate and ethyl propanoate — none of which is drawn anywhere in the chapter, in any figure, at any point. Diethyl carbonate and ethyl formate get one clause each in prose ('Ethyl formate and diethyl carbonate qualify for the same reason') and are never shown.",
+ "learner_impact": "I cannot classify a compound whose structure I cannot picture. I know acetone and cyclopentanone by sight; 'diethyl carbonate' is a word to me. The task is 'find the carbonyl carbon and look at its neighbours' and I cannot start, because I do not know what is attached to that carbon. I guess on three of six items, and the item gives me no per-item feedback telling me which ones I got wrong.",
+ "evidence": "ch23-donor-or-acceptor-only student_config.items are {id, text} only — i1 Acetone, i2 Benzaldehyde, i3 Ethyl acetate, i4 Formaldehyde, i5 Diethyl carbonate, i6 Cyclopentanone. ch23-donor-or-acceptor-only-v2 likewise (ethyl formate, ethyl benzoate, ethyl propanoate). Compare ch23-acceptor-only-partner, whose options all carry structure_smiles. Chapter assets contain no carbonate or formate ester.",
+ "recommended_outcome": "A sorting task about where the alpha hydrogens are needs the structures visible, and the chapter needs to show diethyl carbonate and ethyl formate at least once before grading students on them.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "ss-011",
+ "location": {
+ "question_slug": "ch23-rank-michael-donors-v2",
+ "anchor_text": "Diisopropylamine, [(CH₃)₂CH]₂NH (the N-H)"
+ },
+ "severity": "high",
+ "category": "assessment-readiness",
+ "observation": "This advanced rank_order item asks students to place malononitrile and diisopropylamine on an acidity scale with ethanol, cyclohexanone and ethyl acetate. The chapter supplies pKa values for diethyl malonate (13), ethyl acetoacetate (11), 2,4-pentanedione (9), a ketone (19), an ester (25) and ethanol (16). It never gives a value for malononitrile — nitriles are mentioned once, in the clause 'their relatives with nitrile or nitro activating groups' — and diisopropylamine, LDA, and amine N-H acidity are not mentioned anywhere in the chapter at all.",
+ "learner_impact": "Three of the five cards I can place from the chapter. Two I cannot place from anything the chapter ever said. I know 'a strong, hindered base at low temperature' from the Stork section but the chapter never names it, so I have no way to connect that phrase to diisopropylamine. I put diisopropylamine somewhere in the middle, get the whole ranking marked wrong, and receive one generic paragraph that does not tell me which card I misplaced.",
+ "evidence": "ch23-rank-michael-donors-v2 cards: malononitrile, ethanol, cyclohexanone, ethylacetate, dipa; correct_order puts malononitrile first and dipa last. blk-xkig4ddq lists only the six pKa values above; 'diisopropylamine', 'LDA' and 'amide base' appear nowhere in the compiled reader (hint level 3 alludes to 'a much stronger amide base' but the term is never introduced).",
+ "recommended_outcome": "An acidity ranking must be answerable from values the chapter actually supplies, or the chapter must supply the two values it currently omits before grading on them.",
+ "confidence": 0.92
+ },
+ {
+ "finding_id": "ss-012",
+ "location": {
+ "question_slug": "ch23-match-diketone-to-ring",
+ "section_id": "nugget-intramolecular-aldol",
+ "anchor_text": "a 1,4-diketone gives a cyclopentenone and a 1,5-diketone gives a cyclohexenone"
+ },
+ "severity": "medium",
+ "category": "worked-example-gap",
+ "observation": "This advanced matching item requires two moves the chapter never demonstrates. First, octane-2,7-dione must be mapped to a seven-membered ring, while the prose's stated rule covers only 1,4→cyclopentenone and 1,5→cyclohexenone and frames five- and six-membered rings as 'where this chemistry works'. Second, octane-3,6-dione requires choosing the terminal-side enolate over the internal ones to reach 3-ethyl-2-methylcyclopent-2-enone — but every worked example in the chapter deprotonates the terminal methyl of a methyl ketone, so the internal-versus-terminal decision is never modelled.",
+ "learner_impact": "I have been told twice that only strain-free five- and six-membered rings survive. Presented with octane-2,7-dione I either answer that no reaction occurs or force it into the six-ring answer, because the chapter gave me no seven-ring case. On octane-3,6-dione I pick an internal enolate, get a three-membered ring, decide I have made an error, and abandon the item.",
+ "evidence": "ch23-match-diketone-to-ring left items l3 'Octane-2,7-dione' → r3 3-methylcyclohept-2-enone and l4 'Octane-3,6-dione' → r4 3-ethyl-2-methylcyclopent-2-enone. blk-h8y0anu7 only works hexane-2,5-dione and heptane-2,6-dione and states 'five- and six-membered rings are where this chemistry works'. The seven-ring case is treated only in the undelivered practice_check of nugget-intramolecular-aldol.",
+ "recommended_outcome": "Ring cases and enolate choices that appear in assessment need to have been modelled at least once in the reading, including a ring size outside the five/six pair and an unsymmetrically substituted diketone.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "ss-013",
+ "location": {
+ "section_id": "nugget-michael-reaction",
+ "nugget_id": "nugget-michael-reaction",
+ "anchor_text": "Michael donors are the compounds already familiar as unusually acidic: diethyl malonate at pKa 13, ethyl acetoacetate at 11, 2,4-pentanedione at 9"
+ },
+ "severity": "high",
+ "category": "cognitive-load",
+ "observation": "One paragraph of the Michael section introduces, in sequence: three donor pKa values, nitrile and nitro activating groups, an ordering rule for doubly activated positions, an electronic explanation of why an ester is the weaker activator (the second oxygen's lone-pair donation), two more pKa values for singly activated positions, ethanol at 16 as the dividing line, a two-part consequence of that line, and then a five-member list of acceptor classes. That is roughly nine new ideas and six numbers in a single unbroken paragraph, with no table, no figure and no numeric line to look at.",
+ "learner_impact": "By the fourth pKa I have lost which number belongs to which compound. I skip the paragraph, which means I skip the one idea that makes the Michael reaction predictable, and I then cannot do ch23-rank-michael-donors or ch23-robinson-statements-v2, both of which are pure applications of it. This is the paragraph where I stop reading and start scrolling.",
+ "evidence": "blk-xkig4ddq, paragraph 3 (identical in _detail_texts.expanded). Downstream items depending on it: ch23-rank-michael-donors, ch23-rank-michael-donors-v2, ch23-robinson-statements-v2 (distractor d explanation cites pKa 25 versus ethanol 16), ch23-michael-attack-site.",
+ "recommended_outcome": "The pKa comparison that governs donor selection needs a form a student can hold at a glance rather than a run of numbers inside continuous prose.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "ss-014",
+ "location": {
+ "section_id": "nugget-aldol-condensation-dehydration",
+ "nugget_id": "nugget-aldol-condensation-dehydration",
+ "anchor_text": "the label for this is E1cb, elimination unimolecular conjugate base"
+ },
+ "severity": "medium",
+ "category": "cognitive-load",
+ "observation": "E1cb is introduced, expanded and named in a single sentence, with no figure, no comparison to the E1 and E2 mechanisms the student already half-knows, and no drawing of the carbanion intermediate. The very next sentences then introduce the acid-catalysed E1 route with a carbocation at the beta carbon. Two elimination mechanisms with oppositely charged intermediates arrive in one paragraph and are immediately assessed at 'advanced' difficulty in a five-feature by two-case comparison matrix.",
+ "learner_impact": "E1 versus E2 was already the topic I did worst on. A third label, defined by an expansion of its acronym rather than by a picture, does not stick. When ch23-addition-vs-dehydration-v2 asks me to fill ten cells about which route passes through a carbanion and which through a carbocation, I flip a mental coin on each row rather than reasoning, and a wrong matrix gives me one generic paragraph with no indication of which cells failed.",
+ "evidence": "blk-59t2y57n paragraph 2 introduces E1cb and the acid-catalysed E1 route in consecutive sentences with no figure. ch23-addition-vs-dehydration-v2 is difficulty 'advanced' with 5 features × 2 cases and feedback_bundle carrying only generic_incorrect_explanation.",
+ "recommended_outcome": "A newly named mechanism needs to be shown, not only named and expanded, and ideally set beside the eliminations the student already has — especially before it is graded in a ten-cell matrix.",
+ "confidence": 0.82
+ },
+ {
+ "finding_id": "ss-015",
+ "location": {
+ "section_id": "nugget-stork-enamine-reaction",
+ "nugget_id": "nugget-stork-enamine-reaction",
+ "anchor_text": "the resulting carbinolamine loses water under acid catalysis to give an iminium ion"
+ },
+ "severity": "high",
+ "category": "conceptual-support",
+ "observation": "The Stork section explicitly hands its first stage back to a prior chapter — 'Stage one is enamine formation, which is carbonyl chemistry from the aldehydes and ketones chapter' — and then uses 'carbinolamine' and 'iminium ion' as known vocabulary. Neither term is defined, and neither species is drawn anywhere in the chapter. The section's four figures are cyclohexanone, the finished enamine, MVK and the final product; every intermediate on the way in and on the way out is invisible.",
+ "learner_impact": "If enamine/imine formation is one of the things I did not master last chapter, this section is closed to me from its second paragraph. The chapter tells me the prerequisite exists but builds no bridge to it. When ch23-stork-route then asks me to choose 'the iminium salt from conjugate addition' as the middle intermediate, I am picking a structure whose class I have never seen drawn, and when ch23-stork-final-step-v2 asks which class of amine is required, I have no picture of what would go wrong with a primary amine.",
+ "evidence": "blk-mvfihhb7 paragraphs 2 and 4. Section assets: mol-cyclohexanone, mol-cyclohexenyl-pyrrolidine, mol-mvk, mol-2-3-oxobutyl-cyclohexanone. ch23-stork-route intermediate m_iminium (CC(=O)CCC1CCCCC1=[N+]1CCCC1) is the first iminium structure a student would ever encounter in this chapter — inside a graded item.",
+ "recommended_outcome": "The prior-chapter enamine/imine dependency needs an actual refresher with the carbinolamine and iminium shown, not a pointer to another chapter followed by undefined vocabulary.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "ss-002",
+ "location": {
+ "section_id": "nugget-carbonyl-condensation-pattern",
+ "question_slug": "ch23-mixed-aldol-product-count-v2",
+ "anchor_text": "the number of possible products collapses from four to one"
+ },
+ "severity": "high",
+ "category": "misconception",
+ "observation": "Section 1 tells the student that with one non-enolizable partner the possible-product count 'collapses from four to one'. Section 4's expanded text corrects this to 'the product count drops from four to two — the crossed product and the self-condensation of the enolizable partner'. Section 4's standard text goes back to 'the product is a single conjugated enone'. The graded answer to ch23-mixed-aldol-product-count-v2 (acetaldehyde + benzaldehyde) is 2.",
+ "learner_impact": "I take my summary from the first section, because that is where the chapter told me the idea 'will come back in every section of this chapter'. Three sections later the number quietly changes and I do not notice, because the change is buried mid-paragraph. On the graded item I confidently type 1 and am marked wrong for a claim the chapter made to me first and most emphatically.",
+ "evidence": "blk-2y7y70ai final paragraph: 'the number of possible products collapses from four to one'. blk-h8wawbw9 paragraph 2: 'the product count drops from four to two'. _detail_texts.standard of nugget-mixed-aldol-selectivity: 'the product is a single conjugated enone'. ch23-mixed-aldol-product-count-v2 answer_key [redacted], tolerance 0.",
+ "recommended_outcome": "The chapter needs one consistent account of how many aldol products a non-enolizable partner actually leaves possible, distinguished clearly from how many are synthetically isolated — the graded item turns on that distinction.",
+ "confidence": 0.87
+ },
+ {
+ "finding_id": "ss-016",
+ "location": {
+ "section_id": "nugget-aldol-reaction",
+ "concept_slug": "aldol-reaction",
+ "anchor_text": "In glycolysis, the enzyme aldolase performs precisely this cleavage on fructose 1,6-bisphosphate"
+ },
+ "severity": "medium",
+ "category": "objective-alignment",
+ "observation": "The aldol section's third stated learning objective is 'Use the reversibility of the reaction to predict the fragments of a retro-aldol cleavage', and the section closes with a paragraph asserting that 'Reversibility is not a nuisance to be engineered around; it is the point in biology', introducing glycolysis, aldolase and fructose 1,6-bisphosphate. No structure accompanies any of it, and no question in the 52-item bank assesses retro-aldol at all. The only retro-aldol practice is in the undelivered practice_check. The same pattern hits the Dieckmann section, whose third objective ('Connect the cyclic product to the alkylation and decarboxylation chemistry of beta-keto esters') is likewise unassessed while the prose invokes a 'six-membered cyclic transition state' and the acetoacetic ester synthesis in one sentence.",
+ "learner_impact": "I have no way to tell what matters. The glycolysis paragraph is written with the same weight as the mechanism, mentions three biochemistry terms and a sugar I cannot draw, and is followed by nothing that tests it — so I either burn study time memorising it or (more likely) skip it and then panic when an exam mentions retro-aldol. The chapter gives me no signal of importance anywhere: there are no objectives shown, no summary, and no emphasis markers.",
+ "evidence": "nugget-aldol-reaction.learning_objectives[2] and blk-10nbxf9y paragraph 4; no question_set has concept_slug aldol-reaction addressing the reverse direction (the eight aldol items are product prediction ×2, structure draw ×2, bond ledger ×2, curved arrow ×2). nugget-dieckmann-cyclization.learning_objectives[2] versus its four items (ring size ×2, draw product ×2). No learning_objectives reach the compiled reader (grep returns 0).",
+ "recommended_outcome": "Objectives the chapter states need either practice that matches them or a clear signal that they are background; and a struggling reader needs some visible statement of what the section is for.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "ss-017",
+ "location": {
+ "section_id": "nugget-aldol-reaction",
+ "anchor_text": "The mechanism has three steps and no surprises."
+ },
+ "severity": "medium",
+ "category": "conceptual-support",
+ "observation": "The chapter repeatedly asserts that its content is easy or already known, in exactly the places where a weak student stalls: 'The mechanism has three steps and no surprises'; 'Nothing mechanistic is new here'; 'Counting the ring is a mechanical exercise'; 'Sorting the two roles is the whole skill'; 'Begin by seeing clearly why the naive mixed aldol fails'; 'it requires nothing new'; 'the alkoxide formed simply expels it again'; 'this chapter introduces no new mechanism'.",
+ "learner_impact": "Every one of those sentences is placed at a point where I am actually stuck. Being told that a three-step mechanism holds no surprises, immediately before I fail to reproduce it, tells me the problem is me and not the explanation. This is the tone that makes me stop asking questions in class, and it appears at least eight times across ten sections.",
+ "evidence": "blk-10nbxf9y ('three steps and no surprises'), blk-a9kb7040 ('Nothing mechanistic is new here'), _detail_texts.standard of nugget-intramolecular-aldol ('Counting the ring is a mechanical exercise'), blk-2y7y70ai ('introduces no new mechanism', 'Sorting the two roles is the whole skill' in the standard variant), blk-h8wawbw9 ('seeing clearly'), blk-venwqh8r ('it requires nothing new'), blk-xkig4ddq ('simply expels it again').",
+ "recommended_outcome": "Difficulty claims should be removed or inverted where the chapter is asserting ease about the exact step students most often fail; naming the step as hard and then supporting it does more for a low-confidence reader than declaring it easy.",
+ "confidence": 0.8
+ },
+ {
+ "finding_id": "ss-018",
+ "location": {
+ "section_id": "nugget-dieckmann-cyclization",
+ "anchor_text": "a 1,6-diester closes a five-membered ring and a 1,7-diester a six-membered ring"
+ },
+ "severity": "medium",
+ "category": "notation-consistency",
+ "observation": "The chapter uses at least four different counting conventions without ever tabulating them: 1,4-/1,5-diketone (carbonyl-to-carbonyl, inclusive); IUPAC locants (hexane-2,5-dione); 1,6-/1,7-diester (also carbonyl-to-carbonyl, but now the chain termini); and 1,2- versus 1,4-addition (counting from the oxygen). The result is that hexane-2,5-dione is a '1,4-diketone' giving a five-ring, while diethyl hexanedioate — the same six-carbon backbone — is a '1,6-diester' also giving a five-ring. The one sentence that explicitly warns about this trap exists only in the standard detail level and is absent from the default expanded text.",
+ "learner_impact": "Counting is the single operation this chapter asks me to do over and over, and the labels shift under me between sections. I try to build one rule ('subtract one from the number in the name') and it works for the Dieckmann and fails for the diketones. Because the warning sentence is not in the text I am shown, I never learn that there is a trap; I just keep getting ring sizes wrong on ch23-dieckmann-ring-size and ch23-intramolecular-ring-product and cannot see the pattern in my errors.",
+ "evidence": "_detail_texts.standard of nugget-dieckmann-cyclization: 'Ring size is the thing to be able to predict, and one detail trips people up... The ring always comes out one atom smaller than the carbon count suggests'. The rendered blk-a9kb7040 (expanded) omits this sentence entirely. Compare blk-h8y0anu7 ('a 1,4-diketone gives a cyclopentenone') with blk-a9kb7040 ('A 1,6-diester... gives a five-membered ring') and blk-xkig4ddq ('1,4-addition, counting from the oxygen').",
+ "recommended_outcome": "The chapter's counting conventions need to be stated together once, and the explicit off-by-one warning must appear at the detail level students actually read.",
+ "confidence": 0.83
+ },
+ {
+ "finding_id": "ss-019",
+ "location": {
+ "section_id": "nugget-claisen-condensation",
+ "asset_id": "mol-ethyl-acetoacetate",
+ "anchor_text": "Run the ethyl acetate case in full."
+ },
+ "severity": "medium",
+ "category": "cognitive-load",
+ "observation": "In every one of the ten sections the compiled block order is: one large text block containing all four paragraphs, then all the molecule figures, then the links. Nothing is interleaved. The Claisen section's text block runs roughly 700 words before the first structure appears, and the structures that appear (ethyl acetate, ethyl acetoacetate) are the two compounds named earliest in the prose.",
+ "learner_impact": "When the prose says 'the tetrahedral alkoxide intermediate collapses, expelling ethoxide, to give ethyl 3-oxobutanoate — ethyl acetoacetate', I need to see ethyl acetoacetate at that moment. Instead I have to hold the name in working memory, keep reading two more paragraphs about pKa and stoichiometry, then scroll down and try to reconnect the picture to a sentence I have already lost. Integrating prose with structures is the thing I am worst at, and this layout maximises the distance between them.",
+ "evidence": "Reader section nugget-claisen-condensation: blocks are blk-6h9ci3tr (text, ~700 words), then blk-ao192sfe (ethyl acetate), blk-xb5nt87f (ethyl acetoacetate), then a hidden video and a link. The same all-text-then-all-figures pattern holds for all ten sections.",
+ "recommended_outcome": "Structures need to sit next to the sentence that names them; a 700-word block with the relevant picture four screens away is not usable by a reader who cannot hold structures in memory.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "ss-020",
+ "location": {
+ "question_slug": "ch23-match-diketone-to-ring",
+ "anchor_text": "Match each symmetrical diketone with the cyclic enone it gives on treatment with base."
+ },
+ "severity": "medium",
+ "category": "assessment-readiness",
+ "observation": "Only the option-based question types (single_select, multi_select) carry per-response wrong_answer_explanations. The nine other types in this bank — matching_pairs, rank_order, comparison_matrix, bond_change_ledger, categorize_groups, curved_arrow, structure_scaffold, structured_reasoning, synthesis_route, error_repair — supply a single generic_incorrect_explanation and nothing response-specific. On a four-pair matching item or a five-card ranking, a student who gets one element wrong receives the same paragraph as a student who got everything wrong.",
+ "learner_impact": "I answer a four-pair match, get told 'incorrect', and read a general paragraph about counting ring atoms. I have no idea whether I missed one pair or all four, or which. So I cannot repair anything — I just try again with a different guess. This is where I stop learning from the assessment and start gaming it.",
+ "evidence": "ch23-match-diketone-to-ring, ch23-rank-michael-donors, ch23-addition-vs-dehydration, ch23-aldol-bond-ledger, ch23-donor-or-acceptor-only all have feedback_bundle with generic_incorrect_explanation + hints and no wrong_answer_explanations array. The generic text is well written but is written for the whole item, not for a response.",
+ "recommended_outcome": "Multi-element items need feedback that identifies which element was wrong; a single item-level paragraph cannot diagnose a four-pair match or a five-card ranking.",
+ "confidence": 0.8
+ },
+ {
+ "finding_id": "ss-021",
+ "location": {
+ "question_slug": "ch23-aldol-dehydration-profile-v2",
+ "anchor_text": "whose climb measured from the valley immediately before it is larger than the first climb measured from the start"
+ },
+ "severity": "medium",
+ "category": "assessment-readiness",
+ "observation": "Both reaction_coordinate_reasoning items state the comparison that determines the rate-determining step inside their accessible_description, rather than describing the geometry and leaving the comparison to the student. v1: 'whose climb measured from the valley immediately before it is smaller than the first climb measured from the start'. v2: 'whose climb ... is larger than the first climb'. One of the four asked sub-answers (rate_determining_step) is therefore given away to anyone reading that description.",
+ "learner_impact": "As a struggling student I often rely on the text description rather than the picture, because the picture is the part I misread. Here the description hands me one of the four answers, which means I never practise the skill the item exists to build — and on an exam, where no description accompanies the diagram, I have not learned to measure a barrier from its own valley.",
+ "evidence": "ch23-aldol-dehydration-profile.accessibility_bundle.accessible_description and ch23-aldol-dehydration-profile-v2.accessibility_bundle.accessible_description, both compared against answer_key.expected.rate_determining_step (1 and 2 respectively).",
+ "recommended_outcome": "The description should convey the curve's shape and relative heights without performing the comparison the question asks for.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "ss-022",
+ "location": {
+ "question_slug": "ch23-aldol-attack-arrow",
+ "anchor_text": "In this resonance form, which atom carries the negative charge? That is where the arrow begins."
+ },
+ "severity": "low",
+ "category": "conceptual-support",
+ "observation": "Every hint in all 52 questions is kind 'text'. There is not one structure, highlight, or region-focus hint in the bank, including on the four curved_arrow items, the four structure_scaffold items, and the two matching_pairs items, where the difficulty is inherently about locating an atom on a picture.",
+ "learner_impact": "On ch23-aldol-attack-arrow my problem is not vocabulary — it is that I cannot find the alpha carbon on the drawn structure. A hint that says 'which atom carries the negative charge' restates the same words I already failed to map onto the picture. A hint that highlighted the atom would have unstuck me; three more sentences do not.",
+ "evidence": "All hints across topic.package.json question_sets have \"kind\": \"text\" (no structure/highlight/region kinds present anywhere). Affected: ch23-aldol-attack-arrow(+v2), ch23-michael-arrow(+v2), ch23-draw-aldol-product(+v2), ch23-draw-dieckmann-product(+v2).",
+ "recommended_outcome": "Items whose difficulty is locating an atom on a structure need at least one hint that operates on the structure rather than restating the prose.",
+ "confidence": 0.78
+ },
+ {
+ "finding_id": "ss-023",
+ "location": {
+ "concept_slug": "aldol-reaction",
+ "section_id": "nugget-aldol-reaction",
+ "anchor_text": "Joining the wrong carbons: the new bond connects the alpha carbon of the donor to the carbonyl carbon of the acceptor"
+ },
+ "severity": "medium",
+ "category": "misconception",
+ "observation": "The package carries 30 authored trouble_spots (three per concept), naming precisely the wrong moves students make — joining alpha to alpha, using catalytic base for a Claisen, drawing the non-conjugated alkene, stopping at the iminium, running the Robinson stages in the wrong order. None of them reaches the reader as a labelled warning. Where the prose covers the same ground it does so as positive assertion embedded mid-paragraph, never flagged as 'this is the mistake'.",
+ "learner_impact": "I cannot distinguish a sentence that is telling me the rule from a sentence that is telling me the trap. 'there is no version of this chemistry in which two alpha carbons bond to each other' reads to me as one more fact among fifty, not as a warning about the error I am about to make. A named, visually distinct 'common mistake' is the thing I would actually copy into my notes, and there are none in this chapter.",
+ "evidence": "topic.package.json concepts[].trouble_spots — 30 entries; the compiled reader has no callout block type and no occurrence of the trouble_spot text. Reader block census contains only text, molecule, video, external_link, mcmurry_link.",
+ "recommended_outcome": "The authored common-mistake list needs to reach the student as something visibly distinct from the explanatory prose, at the point in the section where the mistake is made.",
+ "confidence": 0.82
+ }
+ ],
+ "strengths": [
+ "The wrong-answer explanations on the option-based items are the best scaffolding in the package: nearly every distractor is named for what it actually is ('This is the condensation product, formed after the aldol has lost water', 'This 1,3-dicarbonyl compound is the sort of product a Claisen condensation delivers'), so a wrong answer teaches rather than just marks.",
+ "Three of the four ring-counting walkthroughs (hexane-2,5-dione, heptane-2,6-dione, diethyl hexanedioate) number the chain explicitly and enumerate the enclosed atoms, which is exactly the level of step-by-step I need and rarely get.",
+ "Hint ladders genuinely scaffold rather than reveal: level 1 is almost always a procedural first move ('Find the carbonyl carbon first, then look only at the carbons bonded directly to it') and only level 3 approaches the answer.",
+ "The donor/acceptor framing in section 1 is a strong single organising idea, and the chapter really does return to it in every section, which makes the material feel like one thing instead of seven named reactions.",
+ "The distractor design is diagnostic rather than random — the aldol items consistently offer the condensation product, the wrong-connectivity isomer, and the Claisen-type product, so my particular error is identifiable.",
+ "The comparison_matrix and error_repair items ask me to reason about a plan rather than recall a fact, and their generic explanations model the reasoning well ('a step can only pull an equilibrium forward if its own reverse is negligible')."
+ ],
+ "open_questions": [
+ "The reader's detail-level slider defaults to 'expanded' and the three levels are mutually exclusive rather than cumulative. Is that intended? My blocker finding ss-001 assumes a student stays on the default; if the intended default is 'standard', the severity of ss-001 drops but the missing definitions still need to exist at every level.",
+ "The five video blocks compile with empty url and is_hidden true. I could not determine whether the reader suppresses them silently or renders an empty player — if the latter, that is an additional confusion point I have not scored.",
+ "The chapter and its question set both carry available: false, and counts.surfaced is 26 of 52 (variants staged). I reviewed all 52; if only the 26 non-variant items ship, ss-011 (ch23-rank-michael-donors-v2) and ss-012 (ch23-match-diketone-to-ring, which is a v1) may differ in reach.",
+ "I did not coin any new category ids; all findings use ids from the supplied list."
+ ]
+ }
+ ],
+ "publication_readiness": "blocked",
+ "executive_summary": "Baseline verdict is blocked, driven by two chapter-local chemistry blockers, two chapter-local delivery blockers, and the same three platform access blockers ch21 carries. The instructor persona verified every one of the 26 asset SMILES, every mass balance (aldol additions conserve formula, condensations lose exactly H2O, the Claisen loses exactly EtOH) and the Wieland-Miescher connectivity, and found the chapter's writing the strongest of the condensation series — but caught one error that formula checking structurally cannot catch: the chapter twice claimed octane-2,7-dione closes to a seven-membered ring, when the C3 enolate reaches C7 across only five atoms and the five-membered closure wins. Both candidate products are C8H12O isomers, so every automated check in the production pipeline passed. That claim also contradicted the chapter's own stated principle that reversible steps funnel into the strain-free closure, and the correct product was not among the matching options, so that item had no defensible answer. Separately the capstone Robinson worked example enumerated five ring atoms and called them six, and the acid-catalyzed dehydration had been written as a free secondary carbocation E1 — an error introduced during production's own coherence pass while fixing a different gap. All are corrected, along with a distractor bearing an impossible name and four definitions that existed only in a detail tier the reader does not show by default. Notably, the accessibility persona confirmed the ch22 answer-leak class was cleanly avoided: both profile descriptions were leak-free at baseline.",
+ "consensus_strengths": [
+ "All 26 asset SMILES valid and every mass balance exact; the Wieland-Miescher product is correctly connected with the alkene at the ring fusion and the enone conjugation in the right place.",
+ "Both reaction_coordinate_reasoning descriptions were leak-free at baseline — the ch22 leak class was cleanly avoided.",
+ "No lone-illustrated-option answer tell anywhere in the 52-item bank; every option set is uniformly illustrated or uniformly textual.",
+ "Figure delivery is complete: all 26 nugget-referenced assets reach the compiled reader, one for one.",
+ "show_hydrogens is applied with judgement — set on exactly the five small molecules where a student must count alpha hydrogens, omitted on larger skeletons.",
+ "Nine of the fifteen question types are keyboard-complete in code; all 156 hints are text; every option carries a compound name alongside its structure.",
+ "No annotation_font_scale defect anywhere — the ch14/ch18 oversized-stereo-glyph failure mode does not occur."
+ ],
+ "ranked_recommendations": [
+ {
+ "rec_id": "rec-001",
+ "title": "Correct the octane-2,7-dione ring-size claim",
+ "need": "The chapter twice keyed a 1,6-diketone to a seven-membered ring when a five-membered closure is available and wins.",
+ "chosen_intervention": "prose-edit",
+ "target_surface": "assessment",
+ "severity": "blocker",
+ "source_findings": [
+ "inst-001",
+ "inst-002"
+ ],
+ "rationale": "This is wrong chemistry with no defensible alternative reading, and it appeared both as a graded matching pair and as the section's own worked practice answer. The matching item is re-based on four substrates whose favoured closure is unambiguous; the practice check is re-based on nonane-3,7-dione; and the missing generalisation — count from every alpha carbon and take the smallest unstrained ring, not from the chain ends — is now stated explicitly, using octane-2,7-dione itself as the worked illustration."
+ },
+ {
+ "rec_id": "rec-002",
+ "title": "Correct the Robinson ring-atom enumeration",
+ "need": "The capstone worked example lists five atoms and asserts six, omitting the side-chain ketone carbon.",
+ "chosen_intervention": "prose-edit",
+ "target_surface": "prose",
+ "severity": "blocker",
+ "source_findings": [
+ "inst-003",
+ "ss-003"
+ ],
+ "rationale": "The conclusion and the product SMILES are both correct; only the count-along is wrong, and it omits precisely the carbon that becomes the new ring's enone carbonyl. Naming all six in order is the minimal fix."
+ },
+ {
+ "rec_id": "rec-003",
+ "title": "Replace the free-carbocation account of acid-catalyzed dehydration",
+ "need": "The chapter taught, and an advanced matrix item graded, a discrete beta carbocation; the beta carbon is secondary and the mapped textbook routes through the enol.",
+ "chosen_intervention": "prose-edit",
+ "target_surface": "prose",
+ "severity": "high",
+ "source_findings": [
+ "inst-004"
+ ],
+ "rationale": "Corrected to the enol route in prose, and the matrix item's carbocation row replaced with an enolization row plus a corrected key, so the assessment no longer asserts a non-defensible intermediate. This error was introduced by production's own coherence pass — recorded so the pass's own additions get verified next time."
+ },
+ {
+ "rec_id": "rec-004",
+ "title": "Restore the definitions missing from the default detail tier",
+ "need": "The reader defaults to 'expanded'; the definitions of condensation, aldol, the addition-versus-condensation naming rule, and annulation existed only in 'standard'.",
+ "chosen_intervention": "prose-edit",
+ "target_surface": "prose",
+ "severity": "blocker",
+ "source_findings": [
+ "ss-001"
+ ],
+ "rationale": "The tiers are alternatives, not cumulative, so four graded terms were undefined for a default reader. Each definition is now present in the expanded tier too."
+ },
+ {
+ "rec_id": "rec-005",
+ "title": "Fix the impossible distractor name and its explanation",
+ "need": "Option d was labelled 4-methylpentane-2,4-dione, a molecule that cannot exist, over a structure that is pentane-2,4-dione, and its explanation's atom bookkeeping was wrong.",
+ "chosen_intervention": "prose-edit",
+ "target_surface": "assessment",
+ "severity": "high",
+ "source_findings": [
+ "inst-005"
+ ],
+ "rationale": "Replaced with a true isomer of the starting material (4-hydroxy-4-methylpent-1-en-3-one) so the formula check the hints teach actually discriminates, with a corrected explanation."
+ },
+ {
+ "rec_id": "rec-006",
+ "title": "Give the retrosynthesis item the target it references",
+ "need": "The item says 'a target cyclohexenone' and supplies no structure of any kind.",
+ "chosen_intervention": "new-figure",
+ "target_surface": "assessment",
+ "severity": "high",
+ "source_findings": [
+ "inst-006",
+ "visual-013"
+ ],
+ "rationale": "Adding the bicyclic enone as the item's molecule_smiles makes the billed task performable; the item was otherwise a definitional recall item wearing a retrosynthesis label."
+ },
+ {
+ "rec_id": "rec-007",
+ "title": "Re-base the acidity ranking variant on values the chapter supplies",
+ "need": "The variant graded malononitrile and diisopropylamine, neither of which the chapter gives a value for.",
+ "chosen_intervention": "prose-edit",
+ "target_surface": "assessment",
+ "severity": "high",
+ "source_findings": [
+ "ss-011"
+ ],
+ "rationale": "Re-based on the five values the chapter does supply, which also makes the item reinforce the ethanol dividing line the chapter uses three times."
+ },
+ {
+ "rec_id": "rec-008",
+ "title": "Show the structures in the donor/acceptor sorting items",
+ "need": "Both categorize items sorted compounds by where their alpha hydrogens are, using names only, including compounds never drawn anywhere in the chapter.",
+ "chosen_intervention": "new-figure",
+ "target_surface": "assessment",
+ "severity": "high",
+ "source_findings": [
+ "ss-010",
+ "visual-012"
+ ],
+ "rationale": "The task is explicitly a looking task in the bank's own hints; supplying structure_smiles on every item restores what is being measured."
+ },
+ {
+ "rec_id": "rec-009",
+ "title": "Reconcile the mixed-aldol product count",
+ "need": "Section 1 said the count collapses from four to one; section 4 said four to two; the graded answer is two.",
+ "chosen_intervention": "prose-edit",
+ "target_surface": "prose",
+ "severity": "high",
+ "source_findings": [
+ "ss-002"
+ ],
+ "rationale": "Both sections now state four-to-two and distinguish it from how many products are actually isolated, which is the distinction the graded item turns on."
+ },
+ {
+ "rec_id": "rec-010",
+ "title": "Tighten the profile descriptions further",
+ "need": "Baseline descriptions were leak-free but performed the barrier comparison for the reader.",
+ "chosen_intervention": "longer-description",
+ "target_surface": "assessment",
+ "severity": "high",
+ "source_findings": [
+ "inst-007"
+ ],
+ "rationale": "The instructor and accessibility personas disagreed here (see disagreements). Resolved in the direction that satisfies both: the descriptions now give the plotted height of every stationary point and leave every comparison to the student."
+ },
+ {
+ "rec_id": "rec-011",
+ "title": "Platform: deliver accessible_description; fix the renderer key; give drawing items a non-pointer path",
+ "need": "Three platform access blockers.",
+ "chosen_intervention": "text-equivalent",
+ "target_surface": "assessment",
+ "severity": "blocker",
+ "source_findings": [
+ "access-001",
+ "access-002",
+ "access-003"
+ ],
+ "rationale": "Not chapter-fixable; identical in every published chapter. The renderer key mismatch in particular is a one-line platform fix that would restore this chapter's already-correct profile descriptions."
+ },
+ {
+ "rec_id": "rec-012",
+ "title": "Draw the intermediates the chapter's comparisons turn on",
+ "need": "No tetrahedral intermediate, alkoxide, carbinolamine or iminium is drawn anywhere.",
+ "chosen_intervention": "new-figure",
+ "target_surface": "figure",
+ "severity": "high",
+ "source_findings": [
+ "ss-005",
+ "visual-004",
+ "visual-005"
+ ],
+ "rationale": "Recorded, not applied: this is a figure-authoring expansion rather than an error correction, and the affected reasoning is carried by prose today. Highest-value deferred item."
+ }
+ ],
+ "accessibility_blockers": [
+ "access-001",
+ "access-002",
+ "access-003"
+ ],
+ "accessibility_blocker_notes": [
+ "access-001 (platform): authored accessible_description reaches no student-facing renderer.",
+ "access-002 (platform): reaction-coordinate renderer reads accessibilityBundle?.description, not accessible_description.",
+ "access-003 (platform): four blank-canvas drawing items have no non-pointer alternative; the type manifest itself declares keyboard_complete=False."
+ ],
+ "visual_opportunities": [
+ "The coupled-equilibrium argument (shallow reversible well, deep irreversible well) is stated three times and drawn zero times, although the chapter's own question bank ships exactly that profile (visual-001).",
+ "The prose numbers atoms in five sections and no figure carries a single number, label or highlight (visual-003).",
+ "The pKa ladder is used as a decision rule in three sections and never shown as a scale (visual-008, ss-013).",
+ "The Stork section instructs the reader to compare the enamine with 'an enol drawn beside it'; no enol is drawn anywhere in the chapter (visual-011)."
+ ],
+ "sufficient_as_is": [
+ "All 26 alt texts convey chemistry rather than naming the image — no rewrite needed.",
+ "curved_arrow site labels and bond_change_ledger atom labels are semantic rather than positional and are sufficient as non-visual equivalents.",
+ "The per-species molecule substitution for a synthesis roadmap works as delivered for the intramolecular-aldol and Robinson sections, where the species chain is complete.",
+ "Deferred videos compile hidden, exposing no dead controls."
+ ],
+ "disagreements": [
+ {
+ "topic": "Whether the reaction-coordinate accessible descriptions leaked",
+ "positions": {
+ "Accessibility Persona": "Leak-free and correct. The arithmetic was verified in both directions and none of the four asked-for answers is stated; this is the ch22 leak class cleanly avoided.",
+ "Organic Chemistry Instructor": "Still a leak: stating which climb is larger hands over the rate-determining step, which a sighted student must derive from the plotted heights."
+ },
+ "resolution": "The accessibility persona is right that no answer was stated and right that the ch22 correction pattern was followed; the instructor is right that performing the comparison is a step the sighted student performs themselves. Resolved in the direction that satisfies both rather than adjudicating between them: the descriptions now report the plotted height of every stationary point and perform no comparison at all, which is strictly more faithful to what the figure shows."
+ },
+ {
+ "topic": "Whether the per-species figure substitution for synthesis roadmaps succeeds",
+ "positions": {
+ "Learner with Visual Preference": "Works for the intramolecular aldol and Robinson, where the species chain is complete; fails for the Claisen, Stork and Dieckmann, where the intermediate or the second ring size is never drawn.",
+ "Struggling Student": "Fails generally — no intermediate is drawn anywhere in the chapter."
+ },
+ "resolution": "The visual persona's split verdict is the more precise one and is adopted. The substitution is retained (roadmaps still render as empty images platform-wide), and the specific gaps it leaves are recorded as rec-012 rather than treated as a reason to reinstate a figure type that does not render."
+ }
+ ],
+ "regression": {
+ "resolved": [],
+ "unchanged": [],
+ "worsened": [],
+ "new": []
+ },
+ "corrections": {
+ "status": "applied-and-verified-without-second-persona-run",
+ "post_correction_readiness_estimate": "major revision",
+ "estimate_note": "Not a new persona verdict. Every chapter-local blocker is resolved and verified; the estimate is held at major revision solely because the three platform access blockers remain open. Those three are identical in every already-published chapter of this series, so on that axis this chapter is at parity with the live chapters. A new verdict requires a separate four-persona regression run.",
+ "applied": [
+ {
+ "change": "Re-based ch23-match-diketone-to-ring on four substrates with unambiguous favoured closures (hexane-2,5-dione, heptane-2,6-dione, octane-3,6-dione, nonane-3,7-dione) forming a clean ring-size x substituent grid; removed octane-2,7-dione and the seven-membered product entirely.",
+ "resolves": [
+ "inst-001"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Re-based the intramolecular-aldol practice_check on nonane-3,7-dione and added the missing generalisation to the expanded prose: when more than one closure is reachable the five- or six-membered ring wins regardless of which enolate is drawn first, worked through octane-2,7-dione itself as the illustration.",
+ "resolves": [
+ "inst-002"
+ ],
+ "partially_addresses": [
+ "inst-001"
+ ]
+ },
+ {
+ "change": "Corrected the Robinson ring enumeration to name all six atoms in order and identified the side-chain ketone carbon as the one that becomes the new ring's carbonyl.",
+ "resolves": [
+ "inst-003",
+ "ss-003"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Replaced the free-beta-carbocation account of acid-catalyzed dehydration with the enol route, and rewrote ch23-addition-vs-dehydration-v2 accordingly: the carbocation feature is now an enolization feature with a corrected key, the redundant protonation row removed, and feedback and hints rewritten.",
+ "resolves": [
+ "inst-004"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Replaced the impossible '4-Methylpentane-2,4-dione' distractor with 4-hydroxy-4-methylpent-1-en-3-one, a true isomer of the starting material, and corrected its wrong-answer explanation's atom bookkeeping.",
+ "resolves": [
+ "inst-005"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Rewrote both profile accessible descriptions to report the plotted height of every stationary point and perform no comparison.",
+ "resolves": [
+ "inst-007"
+ ],
+ "partially_addresses": [
+ "access-002"
+ ]
+ },
+ {
+ "change": "Added the definitions of condensation, aldol, the aldol-addition versus aldol-condensation naming rule, and annulation to the expanded detail tier, which is the tier the reader shows by default.",
+ "resolves": [
+ "ss-001"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Reconciled the mixed-aldol product count at four-to-two across the overview and mixed-aldol sections, distinguishing possible products from isolated product.",
+ "resolves": [
+ "ss-002"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Re-based ch23-rank-michael-donors-v2 on the five acidity values the chapter actually supplies, removing malononitrile and diisopropylamine.",
+ "resolves": [
+ "ss-011"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Added structure_smiles to every item in both donor/acceptor categorize items and updated their accessible descriptions.",
+ "resolves": [
+ "ss-010"
+ ],
+ "partially_addresses": [
+ "visual-012"
+ ]
+ },
+ {
+ "change": "Added the bicyclic enone as molecule_smiles on ch23-robinson-retrosynthesis and rewrote its prompt and accessible description so the target it analyses is present.",
+ "resolves": [
+ "inst-006"
+ ],
+ "partially_addresses": [
+ "visual-013"
+ ]
+ }
+ ],
+ "remaining_high_priority": [
+ "access-001, access-002, access-003 — platform access blockers, identical in every published chapter of this series.",
+ "rec-012 — no reaction intermediates are drawn anywhere; recorded as the highest-value deferred figure work.",
+ "visual-001/003/008/011 — energy profile, atom numbering, pKa scale, and the enol-beside-enamine comparison the prose instructs but the page cannot support."
+ ],
+ "verification": [
+ "compile_topic_package --write-runtime — clean, verification_required empty",
+ "tools/topic_packages/tests — 62 passed",
+ "backend question-pipeline suites (7 files) — 177 passed",
+ "RDKit re-parse of every asset SMILES and every option/answer-key SMILES — all valid",
+ "lone-illustrated-option guard across all questions — none",
+ "textbook-profiles clobber re-merged — 18 topics present"
+ ]
+ }
+}

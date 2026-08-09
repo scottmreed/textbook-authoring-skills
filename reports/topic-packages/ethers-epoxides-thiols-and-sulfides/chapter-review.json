@@ -1,0 +1,1052 @@
+{
+ "chapter_id": "ethers-epoxides-thiols-and-sulfides",
+ "chapter_version": "1",
+ "run_at": "2026-07-28T22:05:00Z",
+ "personas": [
+ {
+ "persona": "Organic Chemistry Instructor",
+ "persona_version": "1.0.0",
+ "chapter_id": "ethers-epoxides-thiols-and-sulfides",
+ "chapter_version": "1",
+ "model": "claude-fable-5",
+ "summary": "A well-sequenced, mechanistically honest chapter whose prose I would assign with confidence: the acid vs base epoxide regiochemistry contrast is the best I have seen at this level, physical data (bp 35 vs 118 C, pKa 10.6 vs 16, ~105 kJ/mol strain, C-O-C 112 deg) are accurate, and all 38 compiled answer keys check out chemically, including curved-arrow and hotspot atom indices which I verified against RDKit atom numbering. However, it is NOT ready to publish as-is: the asset titled cis-2,3-dimethyloxirane encodes the (2R,3R)-trans epoxide (verified by RDKit CIP assignment; the SMILES is chiral, while the cis isomer is meso), and this asset is the designated 'stereochemical fingerprint' of syn epoxidation in both the package and the compiled reader. Fix that one structure and correct a wrong IUPAC name in a synthesis-route distractor label, and this is a go.",
+ "overall_score": 7.9,
+ "publication_blockers": [
+ "instr-001"
+ ],
+ "findings": [
+ {
+ "finding_id": "instr-001",
+ "location": {
+ "asset_id": "mol-cis-23-dimethyloxirane",
+ "nugget_id": "nugget-epoxide-preparation",
+ "section_id": "epoxide-preparation-and-ring-strain",
+ "anchor_text": "cis-2-butene gives exclusively cis-2,3-dimethyloxirane"
+ },
+ "severity": "blocker",
+ "category": "chemical-accuracy",
+ "observation": "The SMILES for the asset titled 'cis-2,3-Dimethyloxirane' is C[C@H]1O[C@@H]1C, which RDKit assigns as (2R,3R) — the chiral TRANS diastereomer. The true cis isomer is the meso (2R,3S) compound (e.g. C[C@H]1O[C@H]1C). A mirror-image comparison confirms the encoded structure is not meso. The same SMILES is baked into the compiled reader chapter.",
+ "learner_impact": "This asset exists solely to teach that peroxyacid epoxidation is stereospecific and syn — the nugget text says cis-2-butene gives ONLY the cis epoxide, and then the rendered figure shows the trans epoxide. Any student who reads the wedge/dash rendering carefully learns the opposite of the intended lesson; the practice_check on trans-2-butene compounds the confusion.",
+ "evidence": "asset mol-cis-23-dimethyloxirane smiles C[C@H]1O[C@@H]1C; RDKit CIP: both stereocenters R; meso test false. Alt text explicitly claims 'both methyl groups on the same face of the ring', contradicting the structure.",
+ "recommended_outcome": "The rendered structure must actually be the meso cis diastereomer so the figure, title, alt text, and the syn-addition teaching point agree.",
+ "confidence": 0.98
+ },
+ {
+ "finding_id": "instr-002",
+ "location": {
+ "question_slug": "ch18-trans-diol-synthesis-route-v2",
+ "anchor_text": "2-methoxy-3-methyl-2-butanol (OCH₃ on the CH(CH₃) carbon)"
+ },
+ "severity": "medium",
+ "category": "notation-consistency",
+ "observation": "The wrong-regiochemistry distractor intermediate m_wrong_regio (SMILES COC(C)C(C)(C)O) is labeled '2-methoxy-3-methyl-2-butanol'. Correct IUPAC numbering (OH gets the low locant) makes it 3-methoxy-2-methyl-2-butanol; the name as printed places both the methoxy and the hydroxyl on C2, which describes no valid structure. The target's name, 3-methoxy-3-methyl-2-butanol, is correct.",
+ "learner_impact": "Students cross-checking the name against the parenthetical structure hint or the SMILES rendering get contradictory locants; strong nomenclature students will conclude the option is broken rather than merely wrong-regiochemistry.",
+ "evidence": "student_config.intermediates[m_wrong_regio] text vs structure_smiles COC(C)C(C)(C)O.",
+ "recommended_outcome": "The distractor's name needs to match its structure under IUPAC numbering rules.",
+ "confidence": 0.93
+ },
+ {
+ "finding_id": "instr-003",
+ "location": {
+ "concept_slug": "crown-ethers-and-cation-binding",
+ "question_slug": "ch18-crown-oxygen-count"
+ },
+ "severity": "medium",
+ "category": "objective-alignment",
+ "observation": "The crown-ether nugget states three learning objectives (decode the name; explain cation solvation and naked-anion activation; match crowns to cations), but the only two assessments for this concept test just the name-decoding objective, and only its arithmetic surface.",
+ "learner_impact": "The chemically interesting objectives — size-selective K+/Na+/Li+ matching and why the naked anion becomes hyper-reactive — are taught but never assessed, so instructors get no signal on whether students grasped the host-guest concept.",
+ "evidence": "learning_objectives of nugget-crown-ethers vs the two numeric_with_units questions, the only ones with concept_slug crown-ethers-and-cation-binding.",
+ "recommended_outcome": "The concept needs at least one assessment item targeting cation-size matching or naked-anion reactivity, not only name parsing.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "instr-004",
+ "location": {
+ "question_slug": "ch18-boiling-point-ranking",
+ "anchor_text": "diethyl ether boils at 35 °C, within a degree of pentane's 36 °C"
+ },
+ "severity": "low",
+ "category": "assessment-readiness",
+ "observation": "The answer key requires ranking diethyl ether (bp 35 C) strictly above pentane (bp 36 C), yet the chapter's own feedback text concedes the two are within one degree — and by the literature values pentane actually boils slightly HIGHER than diethyl ether. The graded discriminator (C-O dipole edge for the ether) contradicts the cited data.",
+ "learner_impact": "A student who internalized the chapter's correct message — ether and alkane are essentially tied — can reasonably place pentane second and be marked wrong on a distinction the chapter itself calls a one-degree tie in the wrong direction.",
+ "evidence": "answer_key.correct_order ['butanol','ether','pentane'] with partial_credit; feedback quotes 35 vs 36 C. The v2 variant (1-pentanol / ethyl propyl ether / hexane) has the same issue in milder form (ethyl propyl ether ~64 C vs hexane ~69 C, where hexane is again higher).",
+ "recommended_outcome": "The ranking items need compound triples where the ether-vs-alkane order is unambiguous, or grading that accepts either order of the bottom pair.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "instr-005",
+ "location": {
+ "question_slug": "ch18-basic-opening-profile",
+ "anchor_text": "ts_character"
+ },
+ "severity": "low",
+ "category": "conceptual-support",
+ "observation": "Both reaction_coordinate_reasoning items key ts_character as 'early' purely from 'strongly exergonic implies early TS' (Hammond). That is consistent with the plotted curves and the taught rule, but the absolutized inference risks students applying Hammond as exergonic-always-means-early.",
+ "learner_impact": "Minor risk of over-generalization; graded answer is defensible from the figure as drawn.",
+ "evidence": "answer_key.expected.ts_character ['early'] in ch18-basic-opening-profile and -v2; generic_incorrect_explanation invokes the Hammond postulate.",
+ "recommended_outcome": "The feedback would benefit from a boundary note that Hammond compares a TS to the closer-in-energy species and is a tendency, not a switch.",
+ "confidence": 0.6
+ },
+ {
+ "finding_id": "instr-006",
+ "location": {
+ "nugget_id": "nugget-epoxide-preparation",
+ "anchor_text": "closing the ring with anti geometry between the departing halide and the attacking oxygen"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The halohydrin-to-epoxide closure is described as an intramolecular Williamson whose SN2 character 'imposes the same anti requirement', but the only supporting asset is a flat skeletal 1-bromo-2-propanol with no stereochemical rendering, and the sole chapter video brief is production-deferred.",
+ "learner_impact": "Students must hold two consecutive anti relationships in their heads with no wedge/dash or animated support; this is a classic exam failure point (drawing the epoxide closing syn).",
+ "evidence": "mol-bromohydrin smiles CC(O)CBr (achiral, no stereo); video brief production_status 'deferred'.",
+ "recommended_outcome": "The anti-periplanar alignment of the alkoxide and C-Br bond during ring closure needs a stereochemically explicit visual treatment of some kind.",
+ "confidence": 0.8
+ },
+ {
+ "finding_id": "instr-007",
+ "location": {
+ "concept_slug": "thiols-and-disulfides",
+ "nugget_id": "nugget-thiols-disulfides"
+ },
+ "severity": "low",
+ "category": "assessment-readiness",
+ "observation": "The chapter has no structure-drawing or mechanism-level question anywhere in the sulfur half (concepts 8-9). All six sulfur assessments are select/match/reason formats; the SN2 alkylation of a thiolate and the SAM methyl transfer would both support a curved_arrow or structure_scaffold item.",
+ "learner_impact": "Instructors get no evidence that students can draw sulfur chemistry, only that they can classify it; the SAM biological hook (a stated learning objective) is assessed nowhere.",
+ "evidence": "by_type counts in compiled/question-set.json: both curved_arrow, both bond_change_ledger, both structure_scaffold items target epoxide/oxygen concepts.",
+ "recommended_outcome": "The sulfur concepts need at least one drawing- or mechanism-level assessment.",
+ "confidence": 0.82
+ },
+ {
+ "finding_id": "instr-008",
+ "location": {
+ "nugget_id": "nugget-williamson-synthesis",
+ "anchor_text": "alkoxymercuration of an alkene followed by reduction"
+ },
+ "severity": "low",
+ "category": "missing-example",
+ "observation": "Alkoxymercuration is introduced in one sentence of the expanded Williamson nugget (and appears in textbook_matching terms) as the complement for hindered ethers, but no example, structure, or assessment ever uses it. Similarly the Claisen rearrangement gets a sentence with no figure of the [3,3] transition state.",
+ "learner_impact": "Students following McMurry ch18 (the declared one-to-one mapping) will meet exam questions on both topics; the chapter names them without giving a single worked instance.",
+ "evidence": "textbook_matching.terms includes 'alkoxymercuration' and 'Claisen rearrangement'; no asset or question references either.",
+ "recommended_outcome": "Either a worked example each for alkoxymercuration and the Claisen rearrangement, or an explicit scope note that they are mentioned for orientation only.",
+ "confidence": 0.75
+ }
+ ],
+ "strengths": [
+ "The acid-vs-base epoxide regiochemistry thread is exemplary: the same substrate is carried through nuggets, product assets, comparison matrix, curved arrows, ledgers, error-repair, hotspot, and synthesis-route items with consistent, correct chemistry.",
+ "All 38 answer keys are chemically correct, including atom-index-level keys verified against RDKit atom numbering.",
+ "Wrong-answer explanations teach rather than scold, mechanistically argued.",
+ "Physical data are accurate and consistently reused, and prerequisites correctly point back to the SN1/SN2 chapter concepts.",
+ "The error_repair pair is unusually good conceptual assessment: both items force students to reject the 'free planar carbocation' model using observed trans-diol stereochemistry."
+ ],
+ "open_questions": [
+ "Do hotspot correct_option_ids [redacted] map to RDKit/SMILES atom indices in the runtime renderer? If the renderer reindexes, both hotspot keys need re-checking.",
+ "The only video brief for the chapter's flagged trouble spot is production-deferred; is a static two-panel substitute planned for launch?",
+ "The reader compiled sections carry only the 'expanded' text tier — is the terse/standard tier selection handled elsewhere?"
+ ]
+ },
+ {
+ "persona": "Struggling Student",
+ "persona_version": "1.0.0",
+ "chapter_id": "ethers-epoxides-thiols-and-sulfides",
+ "chapter_version": "1",
+ "model": "claude-fable-5",
+ "summary": "This chapter is unusually kind to a shaky student in its explanations — it says out loud why things happen, names the classic wrong moves, and the question set has real hint ladders and specific wrong-answer feedback. But it is almost entirely prose about reactions with no reaction drawn anywhere: every mechanism exists only as paragraphs plus isolated single-molecule pictures. The one asset built to rescue the chapter's central contrast — the acid-vs-base opening of 2,2-dimethyloxirane — is a video block that is hidden with an empty URL in all three places it appears. Several advanced terms (disconnection, alkoxymercuration/Markovnikov, [3,3]-sigmatropic, Hammond postulate in a question) arrive with no setup. I would pass the core questions but stall repeatedly while reading, and I would guess on the transition-state-character part of the profile question.",
+ "overall_score": 6.8,
+ "publication_blockers": [],
+ "findings": [
+ {
+ "finding_id": "stud-001",
+ "location": {
+ "section_id": "nugget-base-epoxide-opening",
+ "asset_id": "blk-wpp99l4j",
+ "anchor_text": "One epoxide, two products: how conditions choose the carbon"
+ },
+ "severity": "high",
+ "category": "cognitive-load",
+ "observation": "The video that would let me SEE the chapter's central acid-vs-base regiochemistry contrast has an empty url and is_hidden: true in all three sections where it is placed. The contrast is instead carried by prose split across two sections plus four separate static molecule cards.",
+ "learner_impact": "I have to hold 2,2-dimethyloxirane, two conditions, two attack sites, and two products in working memory across two sections; on the comparison-matrix question I'd be answering from memorized labels, not a picture.",
+ "evidence": "blk-973n6vip, blk-lssdd8sd, blk-wpp99l4j all have url \"\" and is_hidden true.",
+ "recommended_outcome": "The acid-vs-base opening of the same unsymmetrical epoxide needs one visible, side-by-side visual treatment so the regiochemical contrast can be perceived rather than reconstructed from two sections of prose.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "stud-002",
+ "location": {
+ "section_id": "nugget-williamson-synthesis",
+ "anchor_text": "RO⁻ + R′–X → R–O–R′ + X⁻"
+ },
+ "severity": "high",
+ "category": "worked-example-gap",
+ "observation": "The Williamson section — and the whole chapter — contains no drawn reaction scheme or curved-arrow figure. The only equation is an inline text string; the tert-butyl methyl ether disconnection decision is worked entirely in prose, with a single static product molecule as the only figure.",
+ "learner_impact": "I cannot check my mental picture of which bond forms and which partner attacks; I'd guess on any disconnection I haven't seen verbatim.",
+ "evidence": "Section nugget-williamson-synthesis has one text block, one molecule card (the product only), and a Wikipedia link.",
+ "recommended_outcome": "The Williamson disconnection decision needs at least one worked visual example showing both partners of the correct pairing (and ideally the failed pairing's E2 outcome) as structures.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "stud-003",
+ "location": {
+ "section_id": "nugget-epoxide-preparation",
+ "anchor_text": "placing Br and OH anti to each other"
+ },
+ "severity": "high",
+ "category": "worked-example-gap",
+ "observation": "The halohydrin route is described in prose with three stereochemical claims stacked in one paragraph, but the only supporting figure is a flat skeletal 1-bromo-2-propanol with no stereochemistry and no depiction of any step.",
+ "learner_impact": "This is the exact spot I give up: two consecutive 3D events I have never seen drawn; I skim past it and form the wrong model (or none).",
+ "evidence": "blk-nh2ujir2 paragraph 3; blk-a7myipe3 shows CC(O)CBr with no wedges.",
+ "recommended_outcome": "The halohydrin-to-epoxide closure needs a stepwise visual or equivalently explicit stereochemical depiction showing the anti Br/OH relationship and the backside displacement.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "stud-004",
+ "location": {
+ "question_slug": "ch18-basic-opening-profile",
+ "anchor_text": "Hammond postulate: the transition state of a strongly downhill step resembles the side it is closer to in energy."
+ },
+ "severity": "high",
+ "category": "conceptual-support",
+ "observation": "The question grades ts_character 'early', but neither the chapter prose nor the reaction-coordinate figure ever introduces the Hammond postulate or the terms early/late transition state. The concept appears for the first time inside the level-3 hint and the post-answer explanation.",
+ "learner_impact": "On the transition-state part I have nothing from the chapter to reason with; it feels like being tested on a section I was never given.",
+ "evidence": "answer_key expects ts_character ['early']; grep of the reader chapter shows no occurrence of 'Hammond', 'early', or 'late transition state' in any text block.",
+ "recommended_outcome": "The chapter needs to teach (or the question needs to stop assuming) the early/late transition-state idea before a graded item depends on it; a one-paragraph anchor tied to the existing energy-profile figure would suffice.",
+ "confidence": 0.92
+ },
+ {
+ "finding_id": "stud-005",
+ "location": {
+ "section_id": "nugget-acidic-ether-cleavage",
+ "anchor_text": "a concerted, pericyclic [3,3]-sigmatropic shift through a cyclic six-membered transition state"
+ },
+ "severity": "medium",
+ "category": "cognitive-load",
+ "observation": "The Claisen rearrangement is appended as one sentence using three unexplained terms at once, with no figure and no question revisiting it.",
+ "learner_impact": "I hit a wall of vocabulary with no payoff; I can't tell if this matters, so I either waste time decoding 'sigmatropic' or skip it and worry it will be on the exam.",
+ "evidence": "Final sentence of blk-2z3ttm4v; no figure for any Claisen species; no question targets it.",
+ "recommended_outcome": "The Claisen mention needs either enough scaffolding to be learnable or an explicit low-stakes framing so a student knows it is enrichment, not a required mechanism.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "stud-006",
+ "location": {
+ "section_id": "nugget-williamson-synthesis",
+ "anchor_text": "the target must be disconnected so that the less hindered group arrives as the halide"
+ },
+ "severity": "medium",
+ "category": "cognitive-load",
+ "observation": "Two pieces of unintroduced vocabulary land in this section: the retrosynthetic term 'disconnected/disconnection' is used as if already known, and the closing sentence drops alkoxymercuration with Markovnikov orientation as a one-sentence alternative route with no reagents, example, or figure.",
+ "learner_impact": "'Disconnected' reads as a weird word choice rather than a named skill; the alkoxymercuration sentence makes me wonder whether I was supposed to already know a reaction I've never seen.",
+ "evidence": "blk-kn0pbb6p, paragraph 3.",
+ "recommended_outcome": "The disconnection idea needs one sentence of definition, and the alkoxymercuration aside needs either a minimal concrete example or explicit flagging as a forward-reference.",
+ "confidence": 0.82
+ },
+ {
+ "finding_id": "stud-007",
+ "location": {
+ "section_id": "nugget-acid-epoxide-opening",
+ "concept_slug": "acid-catalyzed-epoxide-opening",
+ "anchor_text": "it is SN1-like"
+ },
+ "severity": "medium",
+ "category": "conceptual-support",
+ "observation": "The acid-opening section asks the reader to hold a hybrid concept — SN1-like but not SN1 — entirely in prose. No figure depicts the partially opened ring with partial charges; the trans-diol product card shows only the final molecule.",
+ "learner_impact": "Without a picture of the loose transition state I default to one of the two pure models; the error-repair question later confirms this is exactly the expected wrong model.",
+ "evidence": "blk-0seeisbf: 'The SN1 character is only partial...'; the section's molecule blocks are all discrete stable species.",
+ "recommended_outcome": "The 'SN1-like transition state' needs a visual or structured representation showing the elongated C–O bond and partial positive charge, so the hybrid model is available as an image rather than only as a qualifying sentence.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "stud-008",
+ "location": {
+ "section_id": "nugget-thiols-disulfides",
+ "anchor_text": "add the suffix -thiol to the parent alkane name with no elision"
+ },
+ "severity": "low",
+ "category": "cognitive-load",
+ "observation": "The thiol section opens with the linguistics term 'elision' unexplained, and later uses 'the smaller, harder alkoxide is muffled' — HSAB vocabulary the chapter never introduces.",
+ "learner_impact": "Minor stumbles: 'harder' makes me think of physical hardness and I lose the thread of the nucleophilicity argument for a moment.",
+ "evidence": "blk-7fwu21lc, paragraphs 1 and 3.",
+ "recommended_outcome": "The nomenclature point needs plain wording, and the hard/soft vocabulary needs either a gloss or replacement with the size/polarizability language the section already established.",
+ "confidence": 0.7
+ },
+ {
+ "finding_id": "stud-009",
+ "location": {
+ "section_id": "nugget-ether-structure-naming",
+ "anchor_text": "An ether contains an oxygen atom bonded to two carbon groups"
+ },
+ "severity": "medium",
+ "category": "retrieval-practice",
+ "observation": "No reader section contains a checkpoint, self-test, or end-of-section summary; every section is a long prose block plus molecule cards plus an external link. All retrieval practice lives in the separate question bank.",
+ "learner_impact": "I read four dense paragraphs and have no immediate way to check whether anything stuck before moving on; I'd re-read whole sections instead of practicing.",
+ "evidence": "All eight sections follow the same block pattern (text → molecules → link); no block_type is a checkpoint, summary, or inline question.",
+ "recommended_outcome": "Each section needs a lightweight self-check or takeaway summary at its end so a low-confidence reader can verify understanding before the next section builds on it.",
+ "confidence": 0.8
+ }
+ ],
+ "strengths": [
+ "The prose consistently explains WHY, not just what — memorable causal framing a struggling student can hang on to.",
+ "Common wrong moves are explicitly named and corrected in the text itself.",
+ "Every question ships a three-level hint ladder plus specific per-wrong-answer explanations — excellent recovery support after a wrong guess.",
+ "The error-repair question directly targets the chapter's central misconception and its distractor repairs match the wrong models a student actually builds.",
+ "Concrete numbers anchor abstract claims throughout — the exact facts the ranking and reasoning questions then reuse."
+ ],
+ "open_questions": [
+ "Are the three hidden 'One epoxide, two products' video blocks planned assets awaiting production, or abandoned? stud-001 severity assumes they will not appear at publish time.",
+ "Does the reader render the terse level as a student-accessible summary mode? If so, part of stud-009 is mitigated.",
+ "For ch18-acid-attack-hotspot the key is 'atom_1' — worth an instructor/platform check that renderer atom indexing maps it to the C(CH₃)₂ ring carbon."
+ ]
+ },
+ {
+ "persona": "Accessibility Persona",
+ "persona_version": "1.0.0",
+ "chapter_id": "ethers-epoxides-thiols-and-sulfides",
+ "chapter_version": "1",
+ "model": "claude-fable-5",
+ "summary": "At the content layer this chapter is among the strongest reviewed: every asset carries chemically substantive alt text (including verbal statements of the wedge-and-dash stereochemistry), all questions ship an accessible_description written as task-not-answer, hotspot keys are single-atom, and every structure-bearing option also carries a chemical name in text. The gaps are at the interaction layer: the two reaction_coordinate_reasoning questions require reading relative energy levels off a plotted curve whose accessible_description omits that data, so a non-visual learner cannot answer the 'overall' and 'ts_character' asks; and the two structure_scaffold questions are blank-canvas freehand drawing with no declared non-visual or non-pointer alternative. Curved-arrow and hotspot items have good verbal scaffolding but their pointer interactions have no verified keyboard path. The deferred mechanism video is cleanly hidden and its narration outline explicitly voices the visual changes, so no silent-animation debt ships in v1.",
+ "overall_score": 6.8,
+ "publication_blockers": [
+ "access-001",
+ "access-002"
+ ],
+ "findings": [
+ {
+ "finding_id": "access-001",
+ "location": {
+ "question_slug": "ch18-basic-opening-profile",
+ "concept_slug": "base-promoted-epoxide-opening",
+ "anchor_text": "From the plotted curve, determine the number of steps"
+ },
+ "severity": "blocker",
+ "category": "media-equivalence",
+ "observation": "Both reaction_coordinate_reasoning questions ask for overall thermodynamic outcome, step types, and transition-state character 'from the plotted curve', but the accessible_description names only the three labeled points and never states their relative energies. The load-bearing data exists only in the rendered curve geometry.",
+ "learner_impact": "A learner using a screen reader receives the task but not the data: 'exergonic vs endergonic' and 'early vs late TS' are literally unanswerable without the relative heights, so both required questions are impossible without vision.",
+ "evidence": "student_config.profile.control y-values (0.0, 2.0, -2.6) vs accessibility_bundle.accessible_description, which contains no energy-relationship information.",
+ "recommended_outcome": "A non-visual learner needs the same neutral curve data a sighted learner reads: a structured readout of the labeled points and their relative energy ordering and magnitudes, stated as data, not as the graded conclusions.",
+ "confidence": 0.93
+ },
+ {
+ "finding_id": "access-002",
+ "location": {
+ "question_slug": "ch18-draw-trisubstituted-epoxide",
+ "concept_slug": "epoxide-preparation-and-ring-strain",
+ "anchor_text": "Using the structure editor, draw the epoxide produced when 2-methyl-2-butene reacts with the peroxyacid mCPBA."
+ },
+ "severity": "blocker",
+ "category": "interactive-fallback",
+ "observation": "Both structure_scaffold questions are blank-canvas freehand drawing tasks in the structure editor, with no declared text-entry (name/SMILES), scaffold-completion, or alternate-activity path in the package.",
+ "learner_impact": "Learners who cannot use vision or fine-pointer input cannot complete a freehand Ketcher drawing from a blank canvas; if the set is assigned as required homework these two items are not completable at all for those learners.",
+ "evidence": "student_config [redacted] on both items. Mitigation exists at the concept level: epoxide-preparation-and-ring-strain is also assessed by fully text-based items, so no concept is drawing-only.",
+ "recommended_outcome": "Every drawing-graded item needs a vision- and pointer-independent way to submit the same chemistry — e.g., an accepted typed name/SMILES answer path or an equivalent alternate activity — or an explicit platform-level accommodation policy attached to structure_scaffold items.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "access-003",
+ "location": {
+ "question_slug": "ch18-methoxide-attack-arrow",
+ "concept_slug": "base-promoted-epoxide-opening",
+ "anchor_text": "Draw one curved arrow representing the nucleophile's lone pair attacking a ring carbon."
+ },
+ "severity": "high",
+ "category": "interactive-fallback",
+ "observation": "The two curved_arrow items provide excellent verbal affordances — named sites with chemical labels and max_arrows:1 — but nothing evidences a keyboard/AT path for specifying an arrow from a source site to a target site without pointer dragging on the canvas.",
+ "learner_impact": "Keyboard-only and low-vision learners can understand exactly what is asked yet may be unable to physically enter the arrow, degrading a conceptually accessible item into an input-blocked one.",
+ "evidence": "student_config.sites with labeled ids; no keyboard-alternative or structured-input declaration anywhere.",
+ "recommended_outcome": "The labeled-site model already contains everything needed for a non-pointer interaction; the need is a verified keyboard/AT-operable way to pick a source site and target site, or an equivalent selection-based fallback for arrow entry.",
+ "confidence": 0.72
+ },
+ {
+ "finding_id": "access-004",
+ "location": {
+ "question_slug": "ch18-acid-attack-hotspot",
+ "concept_slug": "acid-catalyzed-epoxide-opening",
+ "anchor_text": "Select the single ring carbon that methanol attacks under acid catalysis."
+ },
+ "severity": "high",
+ "category": "interactive-fallback",
+ "observation": "Both hotspot items key a single atom and their accessible_descriptions fully characterize the two candidate carbons in words, but atom selection on a rendered structure is a pointer-target interaction with no evidenced keyboard or list-based selection alternative.",
+ "learner_impact": "A learner who knows the answer may have no operable way to indicate it; small atom hit-targets also penalize learners with motor impairments.",
+ "evidence": "student_config: molecule_smiles [redacted], select_count 'one', answer_key [redacted]; no non-pointer input path declared.",
+ "recommended_outcome": "Atom-selection questions need a focusable, enumerable alternative so the selection can be made without a pointer.",
+ "confidence": 0.7
+ },
+ {
+ "finding_id": "access-005",
+ "location": {
+ "section_id": "nugget-base-epoxide-opening",
+ "asset_id": "rc-epoxide-basic-opening-profile",
+ "anchor_text": "strongly exergonic single-step reaction"
+ },
+ "severity": "low",
+ "category": "alt-text-quality",
+ "observation": "The reader's reaction-coordinate figure alt text states the pedagogical conclusions. This is exemplary for the chapter figure itself, but it verbalizes the exact graded answers of ch18-basic-opening-profile; if the same asset alt text were ever reused as the question figure's description it would hand over the key.",
+ "learner_impact": "No current harm — the question defines its own profile in student_config — but a compile-path change that reuses asset accessibility bundles for question figures would create an answer leak for this pair.",
+ "evidence": "Reader block blk-mubaexjn alt_text vs question ch18-basic-opening-profile answer_key.",
+ "recommended_outcome": "The question-side description must remain a neutral data readout, independent of the teaching figure's conclusion-stating alt text; keep the two bundles decoupled in the compiler.",
+ "confidence": 0.75
+ },
+ {
+ "finding_id": "access-006",
+ "location": {
+ "asset_id": "video-epoxide-opening-regiochemistry",
+ "anchor_text": "highlighted in contrasting colors"
+ },
+ "severity": "low",
+ "category": "color-motion-only",
+ "observation": "The deferred video's storyboard opens by distinguishing the two ring carbons 'in contrasting colors' and later shades 'a growing partial positive charge'. The closing frame does add text labels and the narration outline voices every visual change, but the mid-video carbon identity and charge growth are specified as color/shading-only.",
+ "learner_impact": "When produced, color-blind and non-visual learners would lose the carbon-identity distinction during the mechanism frames unless labels or narration carry it throughout.",
+ "evidence": "video_briefs[0].storyboard steps 1 and 3 vs step 5; production_status 'deferred'.",
+ "recommended_outcome": "At production time, the carbon identities and the developing charge need a non-color carrier (persistent text labels and explicit narration) in every frame where they are load-bearing.",
+ "confidence": 0.8
+ }
+ ],
+ "strengths": [
+ "All questions carry an accessible_description framed as the task, not the answer.",
+ "Every asset's alt text communicates the chemistry, not just the image name; stereochemistry is stated in words.",
+ "Options in structure-bearing questions always pair structure_smiles with a real chemical name in text — no bare 'Structure A/B/C/D' labels anywhere.",
+ "Hotspot answer keys are single-atom, respecting the proven enterability constraint.",
+ "Most concepts have vision-independent assessment coverage; the crown-ether items are entirely name-decoding and fully accessible.",
+ "The deferred mechanism video is hidden cleanly and its narration outline explicitly narrates each visual change.",
+ "Three text depth levels are compiled into every section, supporting learners who need reduced reading load."
+ ],
+ "open_questions": [
+ "Is the accessibility_bundle.accessible_description actually delivered to assistive technology at runtime? The ch16 EAS review found it was authored but never delivered; if still true platform-wide, this chapter inherits a platform-level blocker.",
+ "Do the hotspot, curved_arrow, matching_pairs, categorize_groups, and rank_order widgets have keyboard-operable interaction paths? Nothing in the content files can confirm or deny this.",
+ "Does the structure editor accept typed SMILES/name input as an alternative to freehand drawing? If yes, access-002 downgrades from blocker to high.",
+ "Nugget practice_check prompt/answer pairs do not appear as blocks in the compiled reader chapter — is that an intentional compile decision?"
+ ]
+ },
+ {
+ "persona": "Learner with Visual Preference",
+ "persona_version": "1.0.0",
+ "chapter_id": "ethers-epoxides-thiols-and-sulfides",
+ "chapter_version": "1",
+ "model": "claude-fable-5",
+ "summary": "The chapter's molecule blocks are well chosen, chemically correct, and carry genuinely instructional captions — the stereochemistry pair uses wedge/dash rendering exactly where it matters, and the single reaction-coordinate figure earns its place. But the chapter's visual load-bearing wall is missing: its self-declared 'cleanest regiochemical contrast' (acid vs base opening of 2,2-dimethyloxirane) is never shown as one visible comparison — the planned video exists only as three identical hidden blocks with empty URLs, and the two product molecules sit in different sections. Several relationship-heavy passages are asserted in dense prose with no visual that makes the relationship inspectable. Questions render structures where needed and the profile question plots a real curve, so the assessment layer is visually adequate.",
+ "overall_score": 6.4,
+ "publication_blockers": [],
+ "findings": [
+ {
+ "finding_id": "visual-001",
+ "location": {
+ "section_id": "nugget-base-epoxide-opening",
+ "concept_slug": "base-promoted-epoxide-opening",
+ "asset_id": "blk-wpp99l4j",
+ "anchor_text": "the pair makes the cleanest regiochemical contrast in this chapter: same epoxide, same net elements added, opposite connectivity, chosen by conditions"
+ },
+ "severity": "high",
+ "category": "visual-opportunity",
+ "observation": "The chapter's central teaching contrast is never presented as a single visible comparison. The intended carrier appears three times but every instance has url \"\" and is_hidden true, so no student ever sees it. The two product molecules live in separate sections.",
+ "learner_impact": "A learner who benefits from side-by-side comparison must reconstruct the contrast mentally across two sections of prose; the regiochemical divergence currently has zero delivered visual.",
+ "evidence": "Three hidden video blocks with empty url; product molecules blk-kbfvuz7d and blk-svp7s7n5 in different sections.",
+ "recommended_outcome": "The acid vs base opening of the same epoxide needs one co-located, directly comparable visual presentation of both outcomes, whether or not the planned video ships.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "visual-002",
+ "location": {
+ "section_id": "nugget-williamson-synthesis",
+ "concept_slug": "williamson-ether-synthesis",
+ "anchor_text": "the target must be disconnected so that the less hindered group arrives as the halide"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The Williamson section carries three dense paragraphs of decision logic supported by exactly one figure — the static TBME product molecule. Neither the SN2 bond-forming event nor the good-vs-bad disconnection is shown.",
+ "learner_impact": "The disconnection decision is a two-branch comparison; conveyed only in prose, the learner cannot see why one pairing succeeds and the mirror pairing diverts to elimination.",
+ "evidence": "Section contains one text block, one molecule block (TBME), one external link.",
+ "recommended_outcome": "The successful and failing disconnections of tert-butyl methyl ether need to be visible as a contrast, not only narrated.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "visual-003",
+ "location": {
+ "section_id": "nugget-crown-ethers",
+ "concept_slug": "crown-ethers-and-cation-binding",
+ "asset_id": "blk-c10ga3wd",
+ "anchor_text": "K⁺ sits best in 18-crown-6, Na⁺ in 15-crown-5, and Li⁺ in 12-crown-4"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "Cation binding is an inherently spatial claim but the only visual is a flat 2D skeletal macrocycle of 18-crown-6 with no cation. The size-selectivity series and the crown–K⁺ complex are asserted in prose and never shown.",
+ "learner_impact": "The 2D macrocycle reads as an oval of atoms; the entire mechanism of salt solubilization stays abstract.",
+ "evidence": "blk-c10ga3wd is the section's sole figure, no bound cation; 15-crown-5 and 12-crown-4 appear only in text.",
+ "recommended_outcome": "The host–guest fit needs a spatial representation the flat ring drawing cannot provide.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "visual-004",
+ "location": {
+ "section_id": "nugget-epoxide-preparation",
+ "concept_slug": "epoxide-preparation-and-ring-strain",
+ "asset_id": "blk-8na4ieyn",
+ "anchor_text": "cis-2-butene gives exclusively cis-2,3-dimethyloxirane"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The stereospecificity claim is a before/after correspondence, but only the 'after' is shown: the epoxide appears with wedge/dash bonds while cis-2-butene (and the trans pair entirely) is never drawn.",
+ "learner_impact": "Without the starting alkene beside the product, the learner cannot visually verify 'geometry preserved'; the trans case has no visual at all.",
+ "evidence": "Section figures are ethylene oxide, mCPBA, cis-2,3-dimethyloxirane, and the bromohydrin — no butene isomer appears anywhere in the chapter.",
+ "recommended_outcome": "The alkene-geometry-to-epoxide-geometry correspondence needs both ends of at least one pairing visible together.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "visual-005",
+ "location": {
+ "section_id": "nugget-epoxide-preparation",
+ "asset_id": "blk-a7myipe3",
+ "anchor_text": "aqueous Br₂ places Br and OH anti across the former alkene"
+ },
+ "severity": "medium",
+ "category": "figure-purpose",
+ "observation": "The bromohydrin figure chosen to illustrate the anti relationship is 1-bromo-2-propanol — an acyclic, freely rotating molecule drawn with no stereochemical information, derived from propene where the anti relationship has no observable consequence. Its caption asserts 'places Br and OH anti,' but nothing in the drawn structure can show anti.",
+ "learner_impact": "The figure claims to teach the section's stereochemical point but structurally cannot; a learner may conclude 'anti' is invisible bookkeeping rather than a geometric requirement.",
+ "evidence": "blk-a7myipe3 SMILES CC(O)CBr with no stereocenters rendered.",
+ "recommended_outcome": "The anti Br/OH relationship and the backside ring closure need a substrate whose geometry can actually display them (e.g., a stereodefined or cyclic halohydrin), or the figure's caption should stop claiming a relationship the drawing cannot show.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "visual-006",
+ "location": {
+ "section_id": "nugget-acidic-ether-cleavage",
+ "concept_slug": "acidic-ether-cleavage",
+ "anchor_text": "a concerted, pericyclic [3,3]-sigmatropic shift through a cyclic six-membered transition state"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The Claisen rearrangement is described entirely in prose with no figure of the allyl aryl ether, the transition-state geometry, or the o-allylphenol product. This is among the most geometry-dependent transformations in the chapter.",
+ "learner_impact": "A [3,3] shift is nearly impossible to reconstruct from words alone; learners will memorize the outcome without seeing how the six-membered loop dictates ortho delivery.",
+ "evidence": "Section figures are anisole and butyl methyl ether only.",
+ "recommended_outcome": "The atom connectivity change of the Claisen rearrangement and its cyclic transition state need to be visible, or the paragraph should be trimmed to a forward pointer.",
+ "confidence": 0.87
+ },
+ {
+ "finding_id": "visual-007",
+ "location": {
+ "section_id": "nugget-acid-epoxide-opening",
+ "concept_slug": "acid-catalyzed-epoxide-opening",
+ "anchor_text": "the transition state acquires substantial carbocation character at that position — it is SN1-like"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The 'SN1-like transition state' argument is the chapter's subtlest idea and is carried by prose alone. The section's molecule blocks show only stable start/end species; the base-promoted section got a reaction-coordinate figure while the acid pathway got none.",
+ "learner_impact": "Learners must juggle four simultaneous prose claims; the 'partial SN1' nuance is precisely where misconceptions take root.",
+ "evidence": "nugget-acid-epoxide-opening contains five molecule blocks and no reaction_coordinate or annotated-mechanism block.",
+ "recommended_outcome": "The unsymmetric bond-breaking / charge-buildup character of the acid-catalyzed transition state needs some visible representation so the acid and base pathways can be compared on equal visual footing.",
+ "confidence": 0.82
+ },
+ {
+ "finding_id": "visual-008",
+ "location": {
+ "section_id": "nugget-thiols-disulfides",
+ "concept_slug": "thiols-and-disulfides",
+ "anchor_text": "thiols have pKa values near 10 — a million times more acidic than alcohols near 16"
+ },
+ "severity": "low",
+ "category": "visual-opportunity",
+ "observation": "The thiol-vs-alcohol comparison is a naturally tabular/paired relationship distributed across two paragraphs of prose; no side-by-side comparison exists.",
+ "learner_impact": "Minor: the facts are all present, but a learner must self-assemble the O-vs-S comparison that organizes the whole section.",
+ "evidence": "Text block blk-7fwu21lc paragraphs 3–4.",
+ "recommended_outcome": "The systematic O-vs-S property contrast would benefit from being visible at a glance rather than reconstructed from prose.",
+ "confidence": 0.7
+ },
+ {
+ "finding_id": "visual-009",
+ "location": {
+ "section_id": "nugget-ether-structure-naming",
+ "asset_id": "blk-pdiudidq",
+ "anchor_text": "in acidic cleavage only the methyl–oxygen bond can break, since the sp² aryl carbon admits no substitution pathway"
+ },
+ "severity": "low",
+ "category": "figure-purpose",
+ "observation": "The anisole molecule block is reused verbatim in sections 1 and 3 with an identical caption. In section 1 the caption is about acidic cleavage — content the reader has not met yet.",
+ "learner_impact": "Mild confusion/forward-reference in section 1, and mild redundancy on second encounter.",
+ "evidence": "Identical description string in blk-pdiudidq and blk-xdlbakgb.",
+ "recommended_outcome": "Each placement of the anisole figure needs a caption matched to that section's teaching point.",
+ "confidence": 0.92
+ },
+ {
+ "finding_id": "visual-010",
+ "location": {
+ "section_id": "nugget-sulfides-oxidation",
+ "anchor_text": "norepinephrine is methylated to adrenaline this way"
+ },
+ "severity": "low",
+ "category": "visual-opportunity",
+ "observation": "The SAM methyl-transfer story — the chapter's marquee biological application — has no visual: neither SAM's sulfonium core, nor the SN2 arrow, nor the norepinephrine-to-adrenaline change is shown.",
+ "learner_impact": "Minor: the structural principle is covered by the sulfonium figure, but the payoff application stays abstract.",
+ "evidence": "Section figures: dimethyl sulfide, DMSO, dimethyl sulfone, trimethylsulfonium ion; no SAM-related block.",
+ "recommended_outcome": "The SAM methyl-transfer event would land better with the attacking nucleophile, the transferred methyl, and the departing sulfide made visible, even in simplified form.",
+ "confidence": 0.7
+ }
+ ],
+ "strengths": [
+ "Stereochemistry figures are rendered where stereochemistry is the point, with explicit wedge/dash SMILES and enlarged annotation fonts.",
+ "The single reaction-coordinate figure has a clear instructional purpose and its alt text describes the curve's shape, not just its topic.",
+ "Molecule captions consistently teach rather than decorate.",
+ "Sensible renderer choices: explicit hydrogens where H placement is pedagogically relevant; the sulfur oxidation ladder is an actual three-figure sequence.",
+ "Question set uses structures where they matter, and the profile question plots a real labeled energy curve for reasoning."
+ ],
+ "open_questions": [
+ "Is video-epoxide-opening-regiochemistry expected to be produced before publication, or should the acid/base comparison be planned as a static asset?",
+ "Why is the same hidden video block inserted in three different sections? Its placement in the preparation section looks like an insertion error even once the video exists.",
+ "blk-8na4ieyn sets rdkit_options.annotation_font_scale 1.8 but no annotations are specified — is an atom-annotation layer intended and missing from the compile?"
+ ]
+ }
+ ],
+ "publication_readiness": "blocked",
+ "executive_summary": "Strong prose and a chemically sound question set (all 38 answer keys verified, including atom-index-level keys) undermined by one verified chemistry blocker — the asset titled cis-2,3-dimethyloxirane encodes the (2R,3R)-trans epoxide, teaching the opposite of the syn-epoxidation lesson it exists to carry — plus two accessibility blockers: the reaction-coordinate questions withhold the curve data a non-visual learner needs, and the two blank-canvas drawing items have no pointer/vision-independent input path (platform-level). Three personas independently converged on the same content-shape gap: the chapter's self-declared central contrast (acid vs base opening of the same epoxide) has no delivered visual because its video is deferred and its two product figures sit in different sections. Chemistry blocker and the data-readout blocker are bounded content fixes; the drawing-input blocker is a standing platform ticket mitigated by the concept never being assessed drawing-only.",
+ "consensus_strengths": [
+ "All 38 answer keys chemically correct; curved-arrow site maps and hotspot atom indices verified against RDKit numbering (Instructor).",
+ "Hint ladders and per-wrong-answer explanations are specific and teach the discriminating criterion (Student, Instructor).",
+ "No 'Structure A/B/C/D' labels anywhere; every structural option pairs SMILES with a real chemical name (Accessibility).",
+ "Hotspot keys are single-atom, respecting the proven enterability constraint (Accessibility).",
+ "Figure captions teach rather than decorate; stereochemistry rendered exactly where it is the point (Visual).",
+ "The acid-vs-base regiochemistry thread is assessed from six directions with consistent chemistry (Instructor)."
+ ],
+ "ranked_recommendations": [
+ {
+ "rec_id": "rec-001",
+ "title": "cis-2,3-Dimethyloxirane asset encodes the trans epoxide",
+ "need": "The figure, title, alt text, and syn-addition teaching point must agree: the rendered structure must be the meso cis diastereomer.",
+ "chosen_intervention": "new-figure",
+ "rationale": "One-line SMILES correction (C[C@H]1O[C@H]1C, RDKit-verified meso) fully resolves it; nothing else changes.",
+ "target_surface": "figure",
+ "severity": "blocker",
+ "source_findings": [
+ "instr-001"
+ ]
+ },
+ {
+ "rec_id": "rec-002",
+ "title": "Reaction-coordinate questions withhold curve data from non-visual learners",
+ "need": "A screen-reader user needs the plotted relative energies as neutral data to answer 'overall' and 'ts_character'.",
+ "chosen_intervention": "structured-chemical-description",
+ "rationale": "Adding a neutral readout of point ordering/relative heights to the accessible_description gives data without leaking graded verdicts; no new asset needed.",
+ "target_surface": "assessment",
+ "severity": "blocker",
+ "source_findings": [
+ "access-001"
+ ]
+ },
+ {
+ "rec_id": "rec-003",
+ "title": "Blank-canvas drawing items have no vision/pointer-independent input path",
+ "need": "structure_scaffold items need a typed name/SMILES path, scaffold completion, or accommodation policy.",
+ "chosen_intervention": "keyboard-alternative",
+ "rationale": "Platform-level (Ketcher keyboard_complete=False is a standing ticket); content-side mitigation already in place — no concept is assessed drawing-only. Remains open; recorded as accessibility blocker.",
+ "target_surface": "interactive",
+ "severity": "blocker",
+ "source_findings": [
+ "access-002"
+ ]
+ },
+ {
+ "rec_id": "rec-004",
+ "title": "Curved-arrow and hotspot interactions lack verified keyboard paths",
+ "need": "Site/atom selection must be operable without pointer dragging; the labeled-site model already supports enumeration.",
+ "chosen_intervention": "keyboard-alternative",
+ "rationale": "Platform ticket (shared with ch16 findings); content already carries strong verbal scaffolding.",
+ "target_surface": "interactive",
+ "severity": "high",
+ "source_findings": [
+ "access-003",
+ "access-004"
+ ]
+ },
+ {
+ "rec_id": "rec-005",
+ "title": "Central acid-vs-base contrast has no delivered visual",
+ "need": "The two openings of the same epoxide must be perceivable as one comparison, not reconstructed across two sections.",
+ "chosen_intervention": "static-image-sequence",
+ "rationale": "Least-complex partial fix now: co-locate both product figures in both opening sections; the deferred video remains the full treatment. Three personas converged here.",
+ "target_surface": "figure",
+ "severity": "high",
+ "source_findings": [
+ "stud-001",
+ "visual-001"
+ ]
+ },
+ {
+ "rec_id": "rec-006",
+ "title": "Hammond postulate graded but never taught in-chapter",
+ "need": "The early/late transition-state idea must be available before a graded item depends on it.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "One anchoring passage in the base-opening nugget, tied to the existing energy-profile figure, suffices; also bounds the rule per instr-005.",
+ "target_surface": "prose",
+ "severity": "high",
+ "source_findings": [
+ "stud-004",
+ "instr-005"
+ ]
+ },
+ {
+ "rec_id": "rec-007",
+ "title": "Bromohydrin figure structurally cannot show the anti relationship it claims",
+ "need": "The anti Br/OH arrangement and backside closure need a substrate whose geometry can display them.",
+ "chosen_intervention": "new-figure",
+ "rationale": "Swapping the achiral 1-bromo-2-propanol for stereodefined trans-2-bromocyclohexanol makes the claimed relationship visible with wedge/dash; a full step sequence remains a future enhancement.",
+ "target_surface": "figure",
+ "severity": "high",
+ "source_findings": [
+ "stud-003",
+ "instr-006",
+ "visual-005"
+ ]
+ },
+ {
+ "rec_id": "rec-008",
+ "title": "Boiling-point rankings grade a distinction the data contradict",
+ "need": "Ranking triples must have unambiguous ether-vs-alkane order (literature: pentane 36 °C boils above diethyl ether 34.6 °C).",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Replace the alkane cards (butane in the parent, pentane in v2) so every adjacent pair is separated by >30 °C; update feedback to drop the wrong-direction tiebreaker.",
+ "target_surface": "assessment",
+ "severity": "medium",
+ "source_findings": [
+ "instr-004"
+ ]
+ },
+ {
+ "rec_id": "rec-009",
+ "title": "Synthesis-route distractor name has impossible locants",
+ "need": "The wrong-regio intermediate's name must match its structure (3-methoxy-2-methyl-2-butanol).",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Label-only fix.",
+ "target_surface": "assessment",
+ "severity": "medium",
+ "source_findings": [
+ "instr-002"
+ ]
+ },
+ {
+ "rec_id": "rec-010",
+ "title": "Williamson disconnection worked only in prose",
+ "need": "The good-vs-bad pairing decision needs a visible contrast; the term 'disconnection' needs definition.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Apply the bounded prose gloss now (define disconnection, flag alkoxymercuration as orientation-only); the two-branch visual is recorded for the figure backlog rather than built ad hoc.",
+ "target_surface": "prose",
+ "severity": "medium",
+ "source_findings": [
+ "stud-002",
+ "stud-006",
+ "visual-002",
+ "instr-008"
+ ]
+ },
+ {
+ "rec_id": "rec-011",
+ "title": "Claisen rearrangement arrives as unglossed jargon with no figure",
+ "need": "Either scaffold it (plain-language + structure) or frame it explicitly as enrichment.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Enrichment framing plus a plain-language clause is the least-complex full fix at this chapter's depth; a TS figure would be scope expansion.",
+ "target_surface": "prose",
+ "severity": "medium",
+ "source_findings": [
+ "stud-005",
+ "visual-006"
+ ]
+ },
+ {
+ "rec_id": "rec-012",
+ "title": "Crown-ether host-guest claims never assessed or shown spatially",
+ "need": "Size-selective binding needs a spatial representation and at least one non-arithmetic assessment item.",
+ "chosen_intervention": "added-practice",
+ "rationale": "Recommendation only — new assets/questions are scope expansion; the concept is enrichment-band.",
+ "target_surface": "practice",
+ "severity": "medium",
+ "source_findings": [
+ "visual-003",
+ "instr-003"
+ ]
+ },
+ {
+ "rec_id": "rec-013",
+ "title": "SN1-like transition state carried by prose alone",
+ "need": "The elongated C–O bond / partial charge hybrid model needs a visible representation comparable to the base pathway's profile.",
+ "chosen_intervention": "new-figure",
+ "rationale": "Recommendation for the figure backlog; the error-repair items currently carry the misconception check.",
+ "target_surface": "figure",
+ "severity": "medium",
+ "source_findings": [
+ "stud-007",
+ "visual-007"
+ ]
+ },
+ {
+ "rec_id": "rec-014",
+ "title": "No in-reader checkpoints; practice_checks not compiled into reader",
+ "need": "Each section needs a lightweight self-check surface.",
+ "chosen_intervention": "instructor-note",
+ "rationale": "Known platform/compiler gap (practice_checks authored but not emitted as reader blocks — standing ticket from ch16); not a content edit.",
+ "target_surface": "instructor-support",
+ "severity": "medium",
+ "source_findings": [
+ "stud-009"
+ ]
+ },
+ {
+ "rec_id": "rec-015",
+ "title": "cis-Alkene → cis-epoxide correspondence shows only the product",
+ "need": "Both ends of one stereo pairing should be visible together.",
+ "chosen_intervention": "new-figure",
+ "rationale": "Adding a cis-2-butene molecule card beside the epoxide is a one-asset bounded fix.",
+ "target_surface": "figure",
+ "severity": "medium",
+ "source_findings": [
+ "visual-004"
+ ]
+ },
+ {
+ "rec_id": "rec-016",
+ "title": "Minor wording stumbles (elision, HSAB 'harder')",
+ "need": "Plain wording for the -thiol suffix rule; polarizability language instead of unintroduced hard/soft terms.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Two-clause edit.",
+ "target_surface": "prose",
+ "severity": "low",
+ "source_findings": [
+ "stud-008"
+ ]
+ },
+ {
+ "rec_id": "rec-017",
+ "title": "Video storyboard relies on color-only carriers mid-video",
+ "need": "Carbon identity and charge growth need non-color carriers in every load-bearing frame at production time.",
+ "chosen_intervention": "instructor-note",
+ "rationale": "Append requirement to the deferred brief's production_note so it binds the future production run.",
+ "target_surface": "instructor-support",
+ "severity": "low",
+ "source_findings": [
+ "access-006"
+ ]
+ },
+ {
+ "rec_id": "rec-018",
+ "title": "Sulfur half has no drawing/mechanism-level assessment; SAM unassessed and unvisualized",
+ "need": "At least one mechanism-level sulfur item and a SAM visual would close the loop on stated objectives.",
+ "chosen_intervention": "added-practice",
+ "rationale": "Recommendation — scope expansion.",
+ "target_surface": "practice",
+ "severity": "low",
+ "source_findings": [
+ "instr-007",
+ "visual-010"
+ ]
+ },
+ {
+ "rec_id": "rec-019",
+ "title": "Shared anisole figure carries a section-3 caption in section 1",
+ "need": "Per-placement captions.",
+ "chosen_intervention": "instructor-note",
+ "rationale": "The compiler reuses one learning_goal per asset across placements; per-section captions are a compiler feature, not a content edit. Current caption covers both uses.",
+ "target_surface": "figure",
+ "severity": "low",
+ "source_findings": [
+ "visual-009"
+ ]
+ },
+ {
+ "rec_id": "rec-020",
+ "title": "Thiol-vs-alcohol contrast is naturally tabular",
+ "need": "The O-vs-S property pairs would benefit from at-a-glance presentation.",
+ "chosen_intervention": "sufficient-alt-text",
+ "rationale": "Facts are all present in prose and captions; declining a new table asset — sufficient as is.",
+ "target_surface": "prose",
+ "severity": "low",
+ "source_findings": [
+ "visual-008"
+ ]
+ }
+ ],
+ "accessibility_blockers": [
+ "access-001",
+ "access-002"
+ ],
+ "visual_opportunities": [
+ "Side-by-side acid/base opening comparison (partially addressed by co-locating product figures; full treatment is the deferred video).",
+ "Williamson good-vs-bad disconnection contrast.",
+ "Crown-ether cation-in-cavity spatial figure.",
+ "SN1-like transition-state depiction for the acid pathway.",
+ "Claisen rearrangement connectivity/TS figure (only if scope grows).",
+ "SAM methyl-transfer visual."
+ ],
+ "sufficient_as_is": [
+ "All molecule alt texts (chemistry-bearing, stereo stated in words).",
+ "All question accessible_descriptions except the two RCR items (fixed).",
+ "Sulfur oxidation ladder as a three-figure sequence.",
+ "Crown-ether numeric items (fully accessible as-is).",
+ "Thiol-vs-alcohol comparison in prose (rec-020)."
+ ],
+ "disagreements": [
+ {
+ "topic": "Text depth tiers",
+ "positions": {
+ "Accessibility Persona": "Three text depth levels are compiled into every section (listed as a strength)",
+ "Organic Chemistry Instructor": "The reader compiled sections appear to carry only the expanded tier (open question)"
+ },
+ "resolution": "Both are looking at real structure: terse/standard are embedded as _detail_texts and rendered by the reader's personalization slider; the expanded tier is the default body. No finding; documented so future reviewers stop re-litigating it."
+ },
+ {
+ "topic": "Hidden video blocks",
+ "positions": {
+ "Struggling Student": "Treats the hidden empty-url blocks as the central missing support (high severity)",
+ "Accessibility Persona": "Notes the same blocks are cleanly hidden, so no broken/silent media ships (strength)"
+ },
+ "resolution": "Both true: nothing broken ships, and the pedagogical gap is real. Handled as rec-005 (co-locate product figures now; video remains deferred). The triple placement of the block (including the preparation section) flagged by the Visual persona is compiler default placement per linked nugget, not an authoring error, but the preparation-section placement will disappear only if the brief's nugget_ids are narrowed at production time."
+ }
+ ],
+ "regression": {
+ "resolved": [],
+ "unchanged": [],
+ "worsened": [],
+ "new": [
+ "instr-001",
+ "instr-002",
+ "instr-003",
+ "instr-004",
+ "instr-005",
+ "instr-006",
+ "instr-007",
+ "instr-008",
+ "stud-001",
+ "stud-002",
+ "stud-003",
+ "stud-004",
+ "stud-005",
+ "stud-006",
+ "stud-007",
+ "stud-008",
+ "stud-009",
+ "access-001",
+ "access-002",
+ "access-003",
+ "access-004",
+ "access-005",
+ "access-006",
+ "visual-001",
+ "visual-002",
+ "visual-003",
+ "visual-004",
+ "visual-005",
+ "visual-006",
+ "visual-007",
+ "visual-008",
+ "visual-009",
+ "visual-010"
+ ]
+ },
+ "corrections": {
+ "status": "applied-and-verified-without-second-persona-run",
+ "post_correction_readiness_estimate": "ready with minor revisions",
+ "estimate_note": "Not a new persona verdict. Estimate assumes the standing platform-level structure_scaffold input-path ticket (access-002) is tracked platform-side, as in prior chapters; content-side blockers instr-001 and access-001 are resolved.",
+ "applied": [
+ {
+ "change": "mol-cis-23-dimethyloxirane SMILES corrected from C[C@H]1O[C@@H]1C (trans, R,R) to C[C@H]1O[C@H]1C (meso cis); RDKit-verified meso.",
+ "resolves": [
+ "instr-001"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Both reaction_coordinate_reasoning accessible_descriptions now include a neutral plotted-data readout (point ordering and relative heights in energy units) without verdict words; also pushed directly to the two seeded bank rows because the seeder's content hash ignores bundle-only changes.",
+ "resolves": [
+ "access-001"
+ ],
+ "partially_addresses": [
+ "access-005"
+ ]
+ },
+ {
+ "change": "Boiling-point ranking triples replaced with unambiguous ones (1-butanol/diethyl ether/butane; 1-pentanol/ethyl propyl ether/pentane); feedback and hints rewritten to drop the wrong-direction one-degree tiebreaker.",
+ "resolves": [
+ "instr-004"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Synthesis-route v2 distractor renamed to 3-methoxy-2-methyl-2-butanol to match its structure.",
+ "resolves": [
+ "instr-002"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Hammond postulate (early/late TS) now taught in nugget-base-epoxide-opening standard and expanded tiers, anchored to the energy-profile figure.",
+ "resolves": [
+ "stud-004"
+ ],
+ "partially_addresses": [
+ "instr-005"
+ ]
+ },
+ {
+ "change": "mol-bromohydrin replaced by stereodefined trans-2-bromocyclohexan-1-ol (O[C@H]1CCCC[C@@H]1Br, RDKit CIP S,S = trans) with wedge/dash alt text and a caption that claims only what the drawing shows.",
+ "resolves": [
+ "visual-005"
+ ],
+ "partially_addresses": [
+ "stud-003",
+ "instr-006"
+ ]
+ },
+ {
+ "change": "Acid and base opening product figures co-located: each opening nugget now shows both regiochemical products side by side.",
+ "resolves": [],
+ "partially_addresses": [
+ "stud-001",
+ "visual-001"
+ ]
+ },
+ {
+ "change": "New asset mol-cis-2-butene added beside the cis-epoxide so the stereospecificity before/after pairing is visible.",
+ "resolves": [
+ "visual-004"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Williamson prose: 'disconnected' defined inline; alkoxymercuration flagged as orientation-only.",
+ "resolves": [
+ "stud-006"
+ ],
+ "partially_addresses": [
+ "stud-002",
+ "instr-008"
+ ]
+ },
+ {
+ "change": "Claisen sentences reframed as enrichment with plain-language gloss of concerted/[3,3]-sigmatropic in both tiers.",
+ "resolves": [
+ "stud-005"
+ ],
+ "partially_addresses": [
+ "visual-006",
+ "instr-008"
+ ]
+ },
+ {
+ "change": "Thiol nugget wording: 'no elision' replaced with keep-the-final-e phrasing; HSAB 'harder' replaced with concentrated-charge/solvation language.",
+ "resolves": [
+ "stud-008"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Video brief production_note now requires non-color carriers (persistent labels + narration) for carbon identity and charge in every load-bearing frame.",
+ "resolves": [
+ "access-006"
+ ],
+ "partially_addresses": []
+ }
+ ],
+ "remaining_high_priority": [
+ "access-002 structure_scaffold non-pointer input path (platform ticket; mitigated: no concept assessed drawing-only)",
+ "access-003/access-004 keyboard paths for curved_arrow and hotspot (platform ticket)",
+ "rec-005 full treatment: the deferred two-branch regiochemistry video",
+ "rec-012/rec-018 assessment gaps (crown host-guest; sulfur mechanism-level item) — scope decisions for the maintainer"
+ ],
+ "verification": [
+ "PYTHONPATH=. python3 [internal source reference — not in this repo] ... --write-runtime — compiled clean incl. accessibility leak guard; profiles snapshot deep-merge repair verified additive (1937 leaf keys)",
+ "Automated test suite — 54 passed
+ "RDKit CIP checks: corrected epoxide is meso (R,S); bromohydrin (S,S) trans matching the verified trans-diol pattern",
+ "question-bank seeder (proprietary toolchain, not in this repo)
+ ]
+ }
+}

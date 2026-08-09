@@ -1,0 +1,326 @@
+{
+ "persona": "Struggling Student",
+ "persona_version": "1.0.0",
+ "chapter_id": "biomolecules-lipids",
+ "chapter_version": "1",
+ "summary": "The prose is unusually good at naming its own traps - the elaidic acid control experiment, the alpha/beta vs axial/equatorial split, and the partial-vs-complete hydrogenation point are all set up as explicit corrections rather than left as traps - and the single_select and multi_select feedback is genuinely discriminating. What defeats a low-confidence student is everything around that prose. The chapter is text-and-molecule only: all 36 assets are flat molecule renderings, the four authored videos are all production_status 'deferred' with an empty url, and they sit on exactly the four arguments that are spatial and cannot be carried by sentences (cis-kink packing, the saponification tetrahedral intermediate, micelle-vs-bilayer geometry, and the trans-decalin ring lock). The per-nugget practice_check is authored for all ten nuggets and never compiles into the reader, so there is no checkpoint anywhere between a 1121-word section and a question bank that is still available:false. One question pair is hard-broken: the Newman conformation question can never be graded correct because its declared principal_labels do not exist in the workspace the student is given, and its v2 asks for an expected_class the grader cannot emit. Reading load is the other systemic problem - the steroid and eicosanoid nuggets run at 140+ words per declared minute with 48 and 26 bolded spans respectively, which removes any signal of what matters most.",
+ "overall_score": 6,
+ "publication_blockers": [
+ "stud-001"
+ ],
+ "findings": [
+ {
+ "finding_id": "stud-001",
+ "location": {
+ "question_slug": "ch27-saturated-chain-conformation",
+ "concept_slug": "chain-packing-and-melting-points",
+ "nugget_id": "nugget-chain-packing-and-melting-points",
+ "anchor_text": ""expected_class": "[redacted]", \"principal_labels\": [\"CH₂R\", \"CH₂R\"]"
+ },
+ "severity": "blocker",
+ "category": "assessment-readiness",
+ "observation": "Neither the Newman question nor its variant can ever be graded correct. student_config sets preset_hint: \"butane\", and [internal source reference — not in this repo] line 50 maps that to the butane_gauche preset, whose anchors carry the substituent labels \"CH3\" ([internal source reference — not in this repo]). The answer key declares principal_labels [\"CH₂R\", \"CH₂R\"]. The only control the renderer gives the student is a pair of \"Rotate front ±60°\" buttons - there is no substituent relabelling UI - so no submittable state can ever contain a \"CH₂R\" label. In [internal source reference — not in this repo], _principal() returns the _AMBIGUOUS sentinel when the declared label is absent, classify_newman() then returns None, and [internal source reference — not in this repo] returns status=\"manual_review\" with feedback_text \"Submitted for teacher review.\" On top of that, ch27-saturated-chain-conformation-v2 declares expected_class \"syn\", which classify_newman never emits - its only return values are anti, gauche, eclipsed and staggered.",
+ "learner_impact": "A student who reasons the anti conformation out correctly - which is the whole point of the exercise, and which the prose sets up well - rotates to 180°, submits, and is told only \"Submitted for teacher review.\" In self-study reader mode no teacher ever arrives. The one place in the chapter where a shaky student can check that they actually understood the packing argument returns nothing, and the v2 variant is worse: a student who correctly builds the syn-eclipsed maximum is marked incorrect. After two of these a low-confidence student concludes the tool is broken and stops attempting the interactive items in the chapter.",
+ "evidence": "topic.package.json question_sets: ch27-saturated-chain-conformation student_config [redacted], answer_key [redacted]; ch27-saturated-chain-conformation-v2 answer_key [redacted]. Contrast [internal source reference — not in this repo] line 189, which uses principal_labels [\"CH3\", \"CH3\"] for a butane preset. Secondary confusion in the same item: prompt_text says \"with the two chain-continuation groups as the principal substituents\" and accessible_description says \"The front and back carbons each carry one chain-continuation group and two hydrogens\", but the workspace visibly shows CH3.",
+ "recommended_outcome": "This question pair needs an answer key whose declared principal substituent labels actually exist in the workspace state the student can produce, and an expected_class the grader is capable of returning, so that a correct conformation is confirmed as correct without a human in the loop. The prompt's description of the substituents must match what the tool displays.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "stud-002",
+ "location": {
+ "question_slug": "ch27-saponification-first-arrow-v2",
+ "concept_slug": "saponification-and-soap-action",
+ "anchor_text": "The tetrahedral intermediate from hydroxide addition to the central ester of tributyrin has formed."
+ },
+ "severity": "high",
+ "category": "figure-accuracy",
+ "observation": "The prompt asks the student to draw the collapse arrow starting from the tetrahedral intermediate, but molecule_smiles is still \"CCCC(=O)OCC(OC(=O)CCC)COC(=O)CCC.[OH-]\" - unreacted tributyrin plus a separate free hydroxide. Site 10 is labelled \"The oxygen that became negatively charged on addition (former carbonyl oxygen)\" while it is drawn as a neutral C=O, and site 9 is labelled \"The former carbonyl carbon, now tetrahedral\" while it is drawn sp2. The expected arrow, lone_pair(10) to atom(9), performed on the structure actually displayed would give a carbon with five bonds.",
+ "learner_impact": "A student who is being careful - which is exactly the student this question is for - reads the labels, looks at the picture, sees a normal ester with a detached hydroxide floating beside it, and concludes they have misunderstood the question. The honest reading of the drawing is that the previous step has not happened yet, so they either redraw the addition arrow (wrong) or guess an arrow that makes no sense to them just to move on. Either way they finish the two-step mechanism without ever having seen the tetrahedral intermediate they are supposedly working from.",
+ "evidence": "student_config.molecule_smiles is byte-identical to that of the parent question ch27-saponification-first-arrow, which correctly depicts the pre-addition state; only the site labels changed. answer_key expected_arrows [redacted] lone_pair site 10, target atom site 9.",
+ "recommended_outcome": "The follow-on mechanism step needs the species named in its prompt to be the species on screen - the anionic tetrahedral intermediate, with the sp3 carbon and the negatively charged oxygen actually drawn - so the arrow the student draws is chemically legible on the structure in front of them.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "stud-003",
+ "location": {
+ "question_slug": "ch27-cholesterol-a-ring-chair",
+ "concept_slug": "steroids-structure-and-conformation",
+ "anchor_text": "Think about which orientation avoids 1,3-diaxial interactions with the other substituents on the ring. That is the one cholesterol's C3 hydroxyl occupies."
+ },
+ "severity": "high",
+ "category": "misconception",
+ "observation": "The chair question's level-3 hint, and the closing sentence of its generic_incorrect_explanation, both tell the student to pick equatorial because it avoids 1,3-diaxial crowding. The nugget this question assesses says the opposite in as many words: \"It is not equatorial by preference over an axial alternative; there is no alternative.\" The whole point of the section is that trans fusion removes the conformational choice, so the equatorial position is a fact about the single available chair, not the outcome of an energy comparison. The hint hands the student the right answer via reasoning the chapter has just spent a paragraph disqualifying.",
+ "learner_impact": "A student who takes hints (the struggling student always does) walks away with the tidy, transferable, wrong rule 'steroid hydroxyls sit equatorial because axial is crowded'. That rule survives into the error_repair question two items later, where fix_faster and the flawed claim both depend on believing ring A has conformational freedom - and the student now half-believes it does, because the hint just used a preference argument. This is the single most likely place in the chapter to leave a wrong mental model behind while scoring the point.",
+ "evidence": "ch27-cholesterol-a-ring-chair feedback_bundle.hints[2] and the tail of generic_incorrect_explanation (\"...one orientation points outward along the ring's equator and suffers no 1,3-diaxial crowding while the other points straight along the ring axis and does\"). Compare nugget-steroids-structure-and-conformation expanded text: \"because trans fusion prevents ring A from flipping, equatorial is the *only* orientation it can have.\" Note hints[1] already states this correctly - \"you are not choosing the more stable of two conformers\" - and hint 3 then contradicts hint 2.",
+ "recommended_outcome": "The final hint on the locked-ring chair item needs to close the loop with the chapter's own argument - read the orientation off the one available chair - rather than importing the monocyclic stability comparison the nugget has explicitly ruled out.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "stud-004",
+ "location": {
+ "section_id": "nugget-chain-packing-and-melting-points",
+ "asset_id": "video-cis-kink-packing",
+ "anchor_text": "\"block_type\": \"video\", \"content\": {\"title\": \"Why a cis kink melts a fat\", \"url\": \"\""
+ },
+ "severity": "high",
+ "category": "media-equivalence",
+ "observation": "All four video blocks in the compiled reader carry url: \"\" - the briefs are production_status \"deferred\", status \"needs_review\". They are video-cis-kink-packing, video-saponification-mechanism, video-bilayer-assembly and video-steroid-rigidity. Those are precisely the chapter's four spatial arguments. Everything else in the reader is a flat 2D molecule: all 36 assets are type \"molecule\", and the compiled block census is 10 text, 59 molecule, 4 empty video, 10 external_link, 1 mcmurry_link. There is no mechanism figure, no reaction coordinate, no chair or conformer figure, no bilayer or micelle schematic anywhere in the chapter.",
+ "learner_impact": "The student sees a card promising 'Why a cis kink melts a fat' with a storyboard-style description and nothing that plays. For someone who already struggles to integrate prose with 3D structure, that is worse than no card: it advertises the exact help they need and withholds it. In practice they re-read the paragraph two or three times, fail to build the picture, and fall back on memorising the melting-point table - which is the failure mode the nugget itself calls out (\"the difference between understanding this section and memorising a table\").",
+ "evidence": "frontend/public/reader/topic-chapters/biomolecules-lipids.json - all four video blocks have empty url; topic.package.json video_briefs all show production_status \"deferred\", formats [mp4, gif], visual_asset_ids pointing only at existing 2D molecule assets. Sibling chapters carry non-molecule blocks (reaction_coordinate, image); this chapter carries none.",
+ "recommended_outcome": "The four concepts these deferred videos cover need some visual equivalent available at publication - the chapter currently has no non-molecule figure of any kind, so a student has no rendered support for packing, mechanism, aggregate geometry, or ring locking.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "stud-005",
+ "location": {
+ "section_id": "nugget-saponification-and-soap-action",
+ "concept_slug": "saponification-and-soap-action",
+ "anchor_text": "The product is a negatively charged **tetrahedral intermediate**, an alkoxide with the former carbonyl carbon now sp3-hybridised and bearing four single bonds."
+ },
+ "severity": "high",
+ "category": "worked-example-gap",
+ "observation": "The tetrahedral intermediate is described in words and is never drawn anywhere - not in the six molecule assets attached to this nugget (tributyrin, glycerol, stearate anion, stearic acid, calcium stearate, LAS detergent), not in any reader block, and not in the question figures. Yet three questions require the student to operate on it: ch27-saponification-first-arrow (produce it), ch27-saponification-first-arrow-v2 (collapse it), and ch27-saponification-bond-ledger (account for its bonds and charges row by row). The nugget calls step 3 \"the single most examinable point in the section\", so this is not a peripheral species.",
+ "learner_impact": "The student is asked to record four ledger rows about a structure they have never seen. They can follow the sentence 'hydroxide attacks the carbonyl carbon' but cannot check their own drawing against anything, so they cannot tell whether they built the intermediate right before they start reasoning from it. The ledger question then punishes an error made two steps earlier without ever surfacing it. Most will attempt the core numeric question, skip the three mechanism items, and leave the mechanism unlearned.",
+ "evidence": "nugget-saponification-and-soap-action asset_ids: [mol-tributyrin, mol-glycerol, mol-stearate-anion, mol-stearic-acid, mol-calcium-stearate, mol-las-detergent] - none is an intermediate or a mechanism. ch27-saponification-bond-ledger expected_rows requires bond_formed 1-2, order_changed 2-3 double to single, charge_changed 3 from 0 to -1, charge_changed 1 from -1 to 0.",
+ "recommended_outcome": "Before the mechanism questions, the student needs to see the anionic tetrahedral intermediate depicted - with the sp3 carbon and the charge shown - so their mental structure can be checked against something rather than assembled blind from prose.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "stud-006",
+ "location": {
+ "section_id": "nugget-steroids-structure-and-conformation",
+ "asset_id": "mol-trans-decalin",
+ "anchor_text": "the two carbon-carbon bonds that join the rings are **equatorial** with respect to both chairs"
+ },
+ "severity": "high",
+ "category": "figure-purpose",
+ "observation": "The rigidity argument depends entirely on seeing two fused chairs and reading off whether each junction bond is axial or equatorial. The figures supplied are flat 2D depictions from SMILES: mol-trans-decalin \"[H][C@]12CCCC[C@]1([H])CCCC2\" and mol-cis-decalin \"[H][C@]12CCCC[C@@]1([H])CCCC2\". A 2D depiction cannot show axial versus equatorial at all. The asset long_description asserts the chair facts in prose (\"the two bonds joining the rings are both equatorial with respect to each chair\") - which is a description of a picture the student is not being shown.",
+ "learner_impact": "The student looks at two drawings that appear essentially identical apart from two hydrogen wedges, is told one flips and one cannot, and has no way to verify or even visualise the claim. This is the point at which a shaky student stops trying to understand and starts memorising 'trans = locked'. That memorised rule is then insufficient for ch27-steroid-rigidity-error-repair, whose correct repair (fix_locked) is a two-clause geometric argument the student must recognise as correct rather than merely recall.",
+ "evidence": "topic.package.json assets mol-trans-decalin and mol-cis-decalin, both type \"molecule\", both plain SMILES with no conformer or chair rendering; the deferred video-steroid-rigidity brief is the only artefact that would have shown the chairs, and its reader block has url: \"\". All 36 assets in the package are type \"molecule\".",
+ "recommended_outcome": "The cis/trans decalin comparison needs a representation in which junction-bond orientation is actually visible, because the argument the chapter builds on it is not readable from a flat structure.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "stud-007",
+ "location": {
+ "section_id": "nugget-terpenoids-and-the-isoprene-rule",
+ "concept_slug": "terpenoids-and-the-isoprene-rule",
+ "anchor_text": "In a cyclic terpenoid such as limonene or alpha-pinene the same dissection works, but the cut lines run through the ring and take more care to find."
+ },
+ "severity": "high",
+ "category": "worked-example-gap",
+ "observation": "The first stated learning objective for this concept is \"Apply the isoprene rule by dissecting a terpenoid skeleton into five-carbon units joined head to tail.\" No dissection is ever shown. Myrcene is called \"the cleanest illustration\" and the reader block for it is an unannotated 2D structure with no cut lines or highlighted units. The cyclic case is explicitly flagged as harder and then dropped. Neither of the concept's two questions requires a dissection: ch27-classify-squalene and ch27-terpene-class-carbon-counts are both carbon-count-to-class-name arithmetic, and objective 3 (IPP/DMAPP and the tail-to-tail bond) is unassessed as well.",
+ "learner_impact": "The student is told twice that there is a skill here ('spotting that regular spacing is the practical test') and is never shown it performed once. Handed limonene in an exam they will count carbons, divide by five, and guess at the connection pattern - which is precisely the trouble spot the concept lists (\"Counting total carbons and dividing by five without checking the connection pattern\"). Because the questions only ever ask for the arithmetic, nothing tells the student they are missing the skill until it is too late.",
+ "evidence": "concepts[].slug terpenoids-and-the-isoprene-rule learning_objectives[0]; nugget asset_ids [mol-isoprene, mol-myrcene, mol-limonene, mol-alpha-pinene, mol-farnesol, mol-squalene, mol-beta-carotene], all plain type \"molecule\"; question_sets for this concept: ch27-classify-squalene (single_select on class name and unit count) and ch27-terpene-class-carbon-counts (matching_pairs on class name to carbon count).",
+ "recommended_outcome": "The isoprene dissection needs to be demonstrated on at least one acyclic and one cyclic example with the cuts made visible, and practised in at least one question, or the stated objective should be withdrawn so students are not told to learn a skill the chapter never teaches or tests.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "stud-008",
+ "location": {
+ "question_slug": "ch27-saponification-first-arrow",
+ "concept_slug": "saponification-and-soap-action"
+ },
+ "severity": "high",
+ "category": "misconception",
+ "observation": "The curved-arrow question offers five labelled sites - hydroxide oxygen, the carbonyl carbon, the carbonyl oxygen, the ester oxygen, and glycerol C2 - and has zero wrong_answer_explanations. The concept's own trouble_spots name the wrong move ahead of time: \"Writing hydroxide as a base that removes a proton here, when in this step it is a nucleophile adding to the carbonyl carbon.\" That misconception is addressed only in a generic paragraph that every wrong arrow receives identically. This is systemic in the chapter: 11 of 26 base questions carry no wrong-answer explanations at all, including every saponification question except ch27-hard-water-scum, both hotspot questions, both numeric questions, and the chair question. Sibling packages do supply endpoint-matched feedback for the same types - ch11-sn2-arrow, ch9-acetylide-sn2-arrow, ch25-ring-closure-arrow and alk-hbr-capture-arrow all match on specific source/target pairs, and 14 of 24 hotspot questions across the corpus carry wrong-answer explanations.",
+ "learner_impact": "A student who draws the arrow from the carbonyl oxygen (the classic 'oxygen has lone pairs so it must be the nucleophile' error) or from the ester oxygen gets the same paragraph as a student who reversed the arrow entirely. They cannot tell which of their several possible misconceptions fired. With one shared explanation covering up to twenty distinct wrong arrows, the student's only strategy is to try endpoints until the tool accepts one, which teaches the answer without touching the reasoning.",
+ "evidence": "ch27-saponification-first-arrow feedback_bundle has hints (3) and generic_incorrect_explanation but no wrong_answer_explanations key; same for ch27-saponification-first-arrow-v2, ch27-saponification-bond-ledger, ch27-naoh-per-triacylglycerol, ch27-draw-saponification-alcohol, ch27-prostaglandin-ring-ketone, ch27-hydrogen-equivalents-arachidonic, ch27-rank-unsaturation-melting-points, ch27-eicosanoid-precursor, ch27-cholesterol-a-ring-chair and both Newman items. Compare content/organic/topic-packages/alkyl-halide-substitution-and-elimination ch11-sn2-arrow, whose match key is a full {source, target, electrons} arrow spec.",
+ "recommended_outcome": "The mechanism questions in the saponification concept need wrong-answer feedback tied to the specific wrong endpoints - particularly the nucleophile-versus-base confusion the concept itself names - so that a wrong arrow tells the student which idea failed.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "stud-009",
+ "location": {
+ "section_id": "nugget-steroids-structure-and-conformation",
+ "nugget_id": "nugget-steroids-structure-and-conformation",
+ "anchor_text": "That a single folding of one acyclic chain builds four rings with correct stereochemistry at seven centres is among the most impressive transformations in biology"
+ },
+ "severity": "high",
+ "category": "cognitive-load",
+ "observation": "The steroids nugget is 1121 words with duration_minutes 8 - about 140 words per minute of dense structural organic chemistry, with no allowance for re-reading. In that span it introduces the A-D ring lettering, the perhydrocyclopentanophenanthrene name, cholesterol's full carbon accounting (17 + 2 + 8), the squalene to squalene-epoxide to lanosterol to cholesterol cascade including hydride and methyl shifts and oxidative demethylation, the trans/cis-decalin conformational argument, the alpha/beta versus axial/equatorial distinction, and then four steroid families with associated pharmacology (bile acid emulsification, testosterone/estradiol aromatisation, aldosterone, cortisol and phospholipase A2). The eicosanoid nugget has the same profile: 854 words at 142 wpm covering roughly fourteen distinct named facts, with only two questions attached.",
+ "learner_impact": "Reading in one pass at the declared pace is not possible for this reader, so the student either abandons the section part-way (the biosynthesis cascade is the natural drop-off point, since nothing before or after depends on remembering hydride shifts) or skims to the end and retains the last thing read - the family list - rather than the rigidity argument, which is the section's actual load-bearing idea and the only one the questions test. There is no checkpoint anywhere inside the 1121 words at which they could discover this.",
+ "evidence": "topic.package.json nuggets: steroids expanded 1121 words / duration_minutes 8; eicosanoids 854 / 6; phospholipids 883 / 8; saponification 876 / 8; terpenoids 779 / 6. Total expanded prose 7641 words against 68 declared minutes.",
+ "recommended_outcome": "The advanced steroid and eicosanoid sections need to be broken into smaller units with a checkpoint between them, or their declared time budget reconciled with their actual length, so a student can tell where one idea ends and the next begins.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "stud-010",
+ "location": {
+ "section_id": "nugget-steroids-structure-and-conformation",
+ "nugget_id": "nugget-steroids-structure-and-conformation",
+ "anchor_text": "**Alpha / beta** is a **configurational** label."
+ },
+ "severity": "medium",
+ "category": "conceptual-support",
+ "observation": "Emphasis is used so heavily that it stops carrying information. The steroids nugget contains 48 bolded spans in 1121 words; eicosanoids, phospholipids and terpenoids contain 26, 26 and 24 respectively. Genuinely load-bearing statements ('keeping them apart is the single most valuable clarification in this section') are bolded at the same weight as ordinary vocabulary first-mentions ('**Sterols**', '**bile acids**', '**testosterone**'). The chapter also has no summary, no key-takeaway list, and no section-closing block of any kind - each reader section ends with a run of molecule figures and a Wikipedia link.",
+ "learner_impact": "The student's usual triage strategy - highlight what the author emphasised - returns nearly the whole section, so they cannot prioritise revision and default to trying to memorise everything. Given that only three of these ideas are actually assessed (rigidity, alpha/beta versus axial/equatorial, and the estradiol aromatisation consequences), they spend their limited effort in the wrong places and arrive at the questions under-prepared on the parts that matter.",
+ "evidence": "Bold-span counts computed from nuggets[].text.expanded: steroids 48, eicosanoids 26, phospholipids 26, terpenoids 24, saponification 16. Compiled reader block census for biomolecules-lipids.json: 10 text, 59 molecule, 4 video, 10 external_link, 1 mcmurry_link - no summary or checkpoint block type present.",
+ "recommended_outcome": "Each section needs an explicit signal of what a student is expected to walk away able to do, distinct from ordinary term emphasis, so that revision effort can be targeted.",
+ "confidence": 0.7
+ },
+ {
+ "finding_id": "stud-011",
+ "location": {
+ "section_id": "nugget-lipid-classification-and-solubility",
+ "nugget_id": "nugget-lipid-classification-and-solubility",
+ "anchor_text": "practice_check"
+ },
+ "severity": "high",
+ "category": "retrieval-practice",
+ "observation": "Every one of the ten nuggets carries a well-written practice_check with a prompt and a full worked answer, and not one of them reaches the reader. The compiled chapter contains only text, molecule, video, external_link and mcmurry_link blocks; searching the compiled JSON for 'practice' returns only incidental prose occurrences ('in industrial practice', 'in practice the terms are used interchangeably'). The separate question bank is the only retrieval surface and it is marked available: false, as is publishing.available for the chapter.",
+ "learner_impact": "The student reads 585 to 1121 words per section with no point at which they are asked to produce anything, so the illusion of fluency goes unchallenged until they reach a question bank that is not yet switched on. These particular practice_checks are exactly what this reader needs - the saponification one asks for both the stoichiometry and the irreversibility in a single prompt and models the full answer - and they are the highest-value scaffolding in the package that no student can currently reach.",
+ "evidence": "topic.package.json nuggets[].practice_check present for all ten nuggets; frontend/public/reader/topic-chapters/biomolecules-lipids.json contains no corresponding block. The same absence holds across all compiled topic chapters, so this is a pipeline gap rather than an authoring omission - but its cost is concentrated here, where sections are long and the question bank is off.",
+ "recommended_outcome": "The authored per-nugget self-checks need to be reachable by a student reading the chapter, so that retrieval happens inside the reading rather than only in a bank that may be unavailable.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "stud-012",
+ "location": {
+ "section_id": "nugget-phospholipids-and-membranes",
+ "nugget_id": "nugget-phospholipids-and-membranes"
+ },
+ "severity": "medium",
+ "category": "cognitive-load",
+ "observation": "Each nugget carries three text tiers - terse, standard and expanded - and the reader compiles the expanded tier verbatim and only the expanded tier, with no switcher. The wordiness control exists only in Deck Creator ([internal source reference — not in this repo]); nothing under the reader path reads the terse or standard field. For this chapter the difference is large: the phospholipid nugget is 144 words terse, 479 standard, 883 expanded, and the steroids nugget is 138 / 513 / 1121.",
+ "learner_impact": "A student who is losing the thread in the middle of an 883-word section has no shorter path through the same argument. The 479-word standard version of the phospholipid section carries the diester, the zwitterion and the wedge-versus-cylinder argument without the phosphatidylserine asymmetry, cholesterol fluidity modulation, or the sphingomyelin case - which is exactly the reduced load they need for a first pass. Instead they either re-read the long version repeatedly or skip the section.",
+ "evidence": "All ten reader text blocks in biomolecules-lipids.json match nuggets[].text.expanded exactly (verified by string comparison against all three tiers). grep for 'terse' across frontend/src returns hits only in deckCreator, promptedDecks and type declarations - none in the reader path.",
+ "recommended_outcome": "Reader students need access to the shorter authored tiers, at least for the four longest sections, so that a first pass at reduced load is possible before committing to the full text.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "stud-013",
+ "location": {
+ "section_id": "nugget-phospholipids-and-membranes",
+ "nugget_id": "nugget-phospholipids-and-membranes",
+ "anchor_text": "Soaps and phospholipids are both amphipathic and both aggregate in water to bury their hydrocarbon from it."
+ },
+ "severity": "medium",
+ "category": "conceptual-support",
+ "observation": "'Amphipathic' is used here as though already known and is never defined anywhere in the chapter's prose. The saponification section describes soap's two halves at length ('an ionic carboxylate head... and a seventeen-carbon hydrocarbon tail') without ever naming the property, so this is the term's first appearance. The only definition in the package sits inside a question, as the feature label of ch27-lipid-architecture-matrix: 'Amphipathic: has both a strongly polar region and nonpolar tails'. Two more terms are dropped in the same way: 'prochiral' and the sn-1/sn-2/sn-3 numbering appear once each, in consecutive sentences of the triacylglycerol nugget, both unexplained.",
+ "learner_impact": "The sentence that opens the bilayer argument is the one where the student is most invested in following, and it opens with an unglossed adjective. They stall on the word, lose the clause it governs ('so the driving force is the same in both cases'), and therefore miss the setup for the wedge-versus-cylinder contrast that follows - which is the reasoning ch27-bilayer-versus-micelle tests. The sn- sentence has the same effect in miniature: it arrives immediately after the stereocenter argument, which is the one part of that section a student needs to hold onto.",
+ "evidence": "Occurrence scan across all thirty text tiers: 'amphipath' appears twice, both in nugget-phospholipids-and-membranes (standard and expanded), never with a definition; 'prochiral' once, in nugget-triacylglycerols-and-waxes expanded (\"an enzyme active site can tell the two ends of a prochiral glycerol apart\"); 'sn-1' once, in the following sentence (\"Biochemistry labels the positions sn-1, sn-2, and sn-3\").",
+ "recommended_outcome": "Terms the chapter relies on to carry an argument need to be defined at the point the argument uses them - amphipathic belongs in the soap section where the structure is first described, and the prochiral/sn- aside needs either an explanation or removal.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "stud-014",
+ "location": {
+ "section_id": "nugget-fatty-acid-structure-and-shorthand",
+ "nugget_id": "nugget-fatty-acid-structure-and-shorthand",
+ "anchor_text": "A second numbering system, the **omega** system, counts from the far end of the chain instead - the methyl end."
+ },
+ "severity": "medium",
+ "category": "cognitive-load",
+ "observation": "A second, oppositely directed numbering system is introduced one paragraph after delta locants, with a four-sentence worked derivation (alpha-linolenic delta-15 in C18 counted back from the methyl end to give omega-3, then linoleic as omega-6). It appears only in the expanded tier - the terse and standard versions omit it entirely - and it appears in neither the concept's three learning objectives nor its three trouble_spots, and no question in the bank touches it.",
+ "learner_impact": "The student has just accepted, with effort, that numbering runs from the carboxyl carbon as C1. The next paragraph reverses the direction and asks them to do the arithmetic both ways on the same molecule. Because nothing marks it as optional, a struggling student treats it as examinable and spends disproportionate effort on it - and because it collides directly with the rule they only just internalised, the common outcome is that both systems become unreliable. That damage shows up immediately in ch27-read-fatty-acid-shorthand, where correct delta-locant counting is the whole task.",
+ "evidence": "The omega paragraph is present only in nuggets[] entry nugget-fatty-acid-structure-and-shorthand text.expanded; concepts[] fatty-acid-structure-and-shorthand learning_objectives contain no omega reference; no question_sets prompt_text, option, or answer key in the package mentions omega.",
+ "recommended_outcome": "The omega system needs either an explicit signal that it is context, not an assessed skill, or enough separation from the delta-locant rule that the two do not interfere while the first is still fragile.",
+ "confidence": 0.7
+ },
+ {
+ "finding_id": "stud-015",
+ "location": {
+ "question_slug": "ch27-lipid-class-defining-feature",
+ "concept_slug": "triacylglycerols-and-waxes",
+ "anchor_text": "A fatty acid joined by an amide bond to a sphingosine backbone, with a phosphocholine head"
+ },
+ "severity": "medium",
+ "category": "sequencing",
+ "observation": "This matching question sits at display_order 16 on the triacylglycerols-and-waxes concept, but two of its four pairs require material taught three sections later: phosphatidylcholine's phosphate diester and sphingomyelin's amide-to-sphingosine linkage are both introduced in nugget-phospholipids-and-membranes, whose questions begin at display_order 34. Sphingosine is not mentioned anywhere before that section.",
+ "learner_impact": "A student working the bank in order - which is what the display_order implies and what a struggling student does - meets two structures they have never seen, in a question nominally about fats and waxes. Even though the right-hand descriptions are self-describing enough to be matched by elimination, the experience reads as 'I have forgotten something', which for this reader is indistinguishable from 'I am behind'. The likely response is to go back and re-read the triacylglycerol section looking for sphingomyelin, find nothing, and lose confidence in their own reading.",
+ "evidence": "compiled/question-set.json: ch27-lipid-class-defining-feature display_order 16, concept_slug triacylglycerols-and-waxes; ch27-lipid-architecture-matrix and ch27-bilayer-versus-micelle at display_order 34 and 36 on phospholipids-and-membranes. concepts[] phospholipids-and-membranes is order 7; triacylglycerols-and-waxes is order 4.",
+ "recommended_outcome": "This question needs to sit after the phospholipid section, or be restricted to the classes the student has actually met by that point, so that working in order never requires unmet material.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "stud-016",
+ "location": {
+ "concept_slug": "phospholipids-and-membranes",
+ "nugget_id": "nugget-phospholipids-and-membranes",
+ "anchor_text": "Determine the net charge of phosphatidylcholine at physiological pH and explain why it is zwitterionic rather than anionic."
+ },
+ "severity": "medium",
+ "category": "objective-alignment",
+ "observation": "Several stated objectives on the standard-difficulty concepts are never assessed. The phospholipid net-charge objective is also one of the concept's three trouble_spots and is the entire subject of the nugget's practice_check, yet neither phospholipid question tests it: ch27-lipid-architecture-matrix rows are backbone, phosphate, amide and amphipathic, and ch27-bilayer-versus-micelle mentions charge only inside distractor b, whose feedback then explains that charge is not the deciding factor. The eicosanoid concept has the same shape: objective 2 (cyclooxygenase makes a ring, lipoxygenase does not) and objective 3 (aspirin covalent versus ibuprofen competitive) go untested by the parent questions, which are a one-word recall of arachidonic acid and a hotspot click on the ring ketone.",
+ "learner_impact": "The student who studies to the objectives, works every question, and gets them all right, has still never once been asked to work out that phosphatidylcholine is net neutral - the single fact that section spends most words on. Their self-assessment says 'phospholipids: done'. Because the practice_check that would have caught this does not compile into the reader either (stud-011), there is no surface anywhere in the chapter where the gap becomes visible before an exam.",
+ "evidence": "concepts[] phospholipids-and-membranes learning_objectives[1]; question_sets for that concept are only ch27-lipid-architecture-matrix (features: backbone, phosphate, amide, amphipathic) and ch27-bilayer-versus-micelle. concepts[] eicosanoids-and-prostaglandins learning_objectives[1] and [2] against ch27-eicosanoid-precursor and ch27-prostaglandin-ring-ketone.",
+ "recommended_outcome": "Each concept's stated objectives need at least one assessment surface a student will actually encounter, particularly where the objective coincides with a declared trouble spot - net charge on phosphatidylcholine and the COX/LOX ring distinction are currently taught, flagged as traps, and never checked.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "stud-017",
+ "location": {
+ "question_slug": "ch27-cis-trans-packing-reasoning",
+ "concept_slug": "chain-packing-and-melting-points",
+ "anchor_text": "Name the intermolecular consequence that links shape to melting point"
+ },
+ "severity": "medium",
+ "category": "assessment-readiness",
+ "observation": "The third field of this structured_reasoning question is a required short_text whose answer key lists expected_text ['packing', 'van der waals', 'dispersion'] plus synonyms. [internal source reference — not in this repo] states in its own header comment that 'select fields grade deterministically server-side, open text may route to teacher review', and the renderer emits the field as a plain Textarea with no client-side checking. In a self-study reader there is no teacher, so the expected_text list is inert.",
+ "learner_impact": "The claim and evidence fields are the easy parts - a student can get both right by pattern-matching the wording of the prompt. The reasoning field is the only place they have to produce the causal link themselves, and it is the only field that returns nothing. A student who writes 'because the double bond makes it less stable' - the exact misconception this question was built to catch, and the one the nugget calls out by name - submits it, sees the claim and evidence marked correct, and concludes they understand the argument.",
+ "evidence": "ch27-cis-trans-packing-reasoning answer_key.fields.reasoning.expected_text and .synonyms; [internal source reference — not in this repo] lines 5-6 and 132-142.",
+ "recommended_outcome": "Where a reasoning field carries the discriminating idea, the student needs some feedback on it in self-study - otherwise the question's headline skill is the one part of it that goes unchecked.",
+ "confidence": 0.7
+ },
+ {
+ "finding_id": "stud-018",
+ "location": {
+ "concept_slug": "saponification-and-soap-action",
+ "section_id": "nugget-saponification-and-soap-action",
+ "anchor_text": "nucleophilic acyl substitution, in the addition-elimination pattern that governs every carboxylic acid derivative"
+ },
+ "severity": "medium",
+ "category": "conceptual-support",
+ "observation": "The chapter leans on prior-chapter machinery - addition-elimination and the tetrahedral intermediate, pKa comparison, the all-anti extended conformation and butane torsional analysis, axial/equatorial and 1,3-diaxial interactions, resonance-stabilised allylic cations, aromatisation, and NMR signal counting - and provides no route back to any of it. Every concept's prerequisites array lists only other lipid concepts (saponification-and-soap-action: ['triacylglycerols-and-waxes']; steroids: ['terpenoids-and-the-isoprene-rule', 'lipid-classification-and-solubility']). The reader's only textbook link is a single generic mcmurry_link to openstax.org/books/organic-chemistry/pages/27-why-this-chapter, in section 1; the remaining ten external links are one Wikipedia article per section.",
+ "learner_impact": "The phrase 'the addition-elimination pattern that governs every carboxylic acid derivative' is reassuring to a student who has it and a wall to a student who does not. Having no signposted way back, they carry the gap forward into three mechanism questions and a bond ledger. The same happens at 'the extended all-anti zigzag first met in conformational analysis' and at the 1,3-diaxial reference in the steroid section. A single chapter-intro link is not a recovery path for any of these.",
+ "evidence": "concepts[].prerequisites for all ten concepts contain only intra-chapter slugs; frontend/public/reader/topic-chapters/biomolecules-lipids.json contains exactly one mcmurry_link block (chapter_number 27, url .../27-why-this-chapter) and ten external_link blocks, all Wikipedia.",
+ "recommended_outcome": "Students need explicit, targeted pointers back to the prior-chapter skills this chapter reuses - nucleophilic acyl substitution above all - rather than a single link to the chapter's own opening page.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "stud-019",
+ "location": {
+ "question_slug": "ch27-cholesterol-a-ring-chair-v2",
+ "concept_slug": "steroids-structure-and-conformation",
+ "anchor_text": "Consider methylcyclohexane — an ordinary, freely flipping cyclohexane with a single methyl substituent, and NOT part of any fused ring system."
+ },
+ "severity": "medium",
+ "category": "assessment-readiness",
+ "observation": "Two variant pairs assess different things from their parents rather than the same thing differently. ch27-cholesterol-a-ring-chair-v2 abandons the steroid entirely and asks about methylcyclohexane, so a student served the variant never practises the locked-ring case at all - and its hint ladder ends on 'Name the steric interaction that penalises the axial position', the reasoning the parent concept exists to disqualify. ch27-eicosanoid-precursor (core, name the twenty-carbon precursor) and ch27-eicosanoid-precursor-v2 (standard, name the residue aspirin acetylates) are different objectives at different declared difficulties.",
+ "learner_impact": "Which chapter content a student practises becomes a matter of which variant they draw. A student served the methylcyclohexane variant does the freely-flipping analysis, gets it right, and reasonably infers that the same analysis applies to cholesterol - the precise inference the parent nugget spends a paragraph forbidding. A student served the aspirin variant never rehearses arachidonic acid, which every other eicosanoid fact hangs off.",
+ "evidence": "ch27-cholesterol-a-ring-chair student_config [redacted] with prompt about ring A of cholesterol, versus -v2 {ring: cyclohexane, substituent: CH3} with prompt about isolated methylcyclohexane and hints[2] 'Name the steric interaction that penalises the axial position'. ch27-eicosanoid-precursor difficulty 'core' versus -v2 difficulty 'standard' with an unrelated answer key ['serine', 'ser'].",
+ "recommended_outcome": "Variants need to assess the same objective as their parent at comparable difficulty, so that a student's coverage does not depend on which version they are served - the methylcyclohexane item is valuable but belongs as a lead-in, not as a substitute for the locked-ring case.",
+ "confidence": 0.7
+ },
+ {
+ "finding_id": "stud-020",
+ "location": {
+ "question_slug": "ch27-identify-steroid-from-evidence",
+ "concept_slug": "steroids-structure-and-conformation",
+ "anchor_text": "statuses: Supports / Contradicts / Neutral"
+ },
+ "severity": "low",
+ "category": "assessment-readiness",
+ "observation": "The evidence board offers three statuses but the answer key uses only two: all six cells are either 'support' for estradiol or 'contradict' for testosterone. 'Neutral' is never correct anywhere in the grid. The three evidence items are also not independent - base solubility, molecular formula and the single angular methyl singlet are three consequences of the one structural difference, which the generic_incorrect_explanation itself states ('All three observations point the same way').",
+ "learner_impact": "A low-confidence student reads the presence of an unused third option as a signal that they have got something wrong, goes back over cells they marked correctly, and changes one to 'Neutral' to make the grid look more like the discriminating exercise it appears to be. The question also does not exercise the skill the format implies - weighing evidence that cuts different ways - so a student who does well on it has not actually practised elimination.",
+ "evidence": "ch27-identify-steroid-from-evidence student_config.statuses includes {id: 'neutral'}; answer_key.expected_marks assigns only 'support' and 'contradict' across all six cells.",
+ "recommended_outcome": "An evidence-weighing question needs at least one piece of evidence that does not discriminate, or the unused status removed, so the format's affordances match what the answer key rewards.",
+ "confidence": 0.7
+ }
+ ],
+ "strengths": [
+ "The elaidic acid comparison in nugget-chain-packing-and-melting-points is the best piece of teaching in the chapter. It is explicitly framed as a control experiment ('Same molecular formula, same number of double bonds, same bond energies, same everything except the geometry at C9'), it names the wrong explanation before refuting it, and it is carried straight through into ch27-cis-trans-packing-reasoning, whose distractor feedback repeats the same falsification. A struggling student is given a reason to believe the correct explanation rather than being asked to accept it.",
+ "The single_select and multi_select wrong-answer explanations teach discriminating criteria rather than just marking the answer wrong. ch27-bilayer-versus-micelle option b concedes that the charge statement is true and then refutes its relevance with phosphatidylserine; ch27-hard-water-scum option d distinguishes a solubility effect from a precipitate by what would be observed; ch27-classify-squalene option c isolates exactly which of the two counts the student got wrong. This is the right shape of feedback and 213 of 215 single_selects across the corpus carry it.",
+ "Hint ladders on the select-type questions escalate properly instead of restating the prompt: level 1 orients ('Two of these three compounds are isomers of each other'), level 2 narrows the mechanism of thought, level 3 hands over the last step without the answer. ch27-naoh-per-triacylglycerol and ch27-partial-hydrogenation-facts are both clean examples.",
+ "ch27-steroid-rigidity-error-repair is well built for a low-confidence student: two of the three candidate flaws are deliberately TRUE claims, and their wrong-answer explanations say so explicitly and explain why, which turns a wrong selection into a confirmation rather than a further loss of footing.",
+ "Every concept carries an explicit trouble_spots list written as the student's likely wrong move rather than as a topic label, and the prose consistently states the misconception before correcting it - 'Students routinely explain the melting-point drop by saying that a double bond weakens the molecule', 'Phosphatidylcholine is routinely miscalled an anionic lipid', 'Students who reason wedge, therefore axial are importing an intuition from monocyclic cyclohexanes'. Naming the mistake out loud is exactly what this reader needs."
+ ],
+ "open_questions": [
+ "publishing.available is false and the compiled question bank reports available: false with demo_eligible 0, so no part of this chapter is currently reachable by a student. Several findings (stud-001, stud-002, stud-011) describe behaviour that will only be observable once it is switched on; they were established by reading the graders and renderers rather than by running the reader.",
+ "stud-001 rests on a code reading of [internal source reference — not in this repo], [internal source reference — not in this repo], [internal source reference — not in this repo] and [internal source reference — not in this repo] rather than on an executed submission. A single end-to-end submission of the anti conformation would confirm or refute the manual_review outcome definitively, and is worth doing before scheduling the fix.",
+ "stud-011 (practice_check never compiling) is true of every compiled topic chapter, not just this one, so it is a pipeline-level gap. I have reported it here because its cost is unusually high in this chapter - long sections, no summary blocks, and a question bank that is off - but the fix presumably does not belong to this chapter's authoring.",
+ "I did not evaluate whether the SMILES, stereodescriptors, or quoted melting points are chemically correct; that is another reviewer's remit. My findings assume the chemistry as written is right and ask only whether a shaky student could follow it.",
+ "The four video briefs are marked production_status 'deferred', which reads as a deliberate decision rather than an oversight. stud-004 is framed as 'these four concepts have no visual support of any kind', not as 'the videos are missing' - if a static figure is planned in their place, that finding is already being addressed."
+ ]
+}

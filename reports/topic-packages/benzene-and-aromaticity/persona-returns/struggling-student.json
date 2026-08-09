@@ -1,0 +1,291 @@
+{
+ "persona": "Struggling Student",
+ "persona_version": "1.0.0",
+ "chapter_id": "benzene-and-aromaticity",
+ "chapter_version": "1",
+ "model": "claude-opus-5",
+ "summary": "The prose is calm, well-sequenced, and unusually good at naming the classic wrong moves (non-integer n, Kekule structures as an equilibrium, cyclooctatetraene called antiaromatic), and every question ships a three-level hint ladder plus wrong-answer explanations that diagnose the specific error rather than just saying 'no'. But this is a chapter about orbitals, energy ladders, planarity, and magnetic field lines in which all 21 figures are flat 2D molecule drawings: there is no pi MO ladder, no inscribed-polygon construction, no ring-current picture, no hydrogenation-energy comparison, and the one video that would have carried the MO section is deferred, empty-URL, and hidden from the reader. The chapter's central procedure exists only as running prose inside a 431-word unbroken block, and the compiled reader carries no learning objectives, no prerequisites, no summary, and not one practice item. Working the questions as a student, most are answerable from the text, but ch15-acidity-ranking cannot be: the ranking it wants is the opposite of what the aromatic-ions section teaches about the cycloheptatrienyl anion, and no hint bridges the gap.",
+ "overall_score": 6.0,
+ "publication_blockers": ["ss-001"],
+ "findings": [
+ {
+ "finding_id": "ss-001",
+ "location": {
+ "question_slug": "ch15-acidity-ranking",
+ "nugget_id": "nugget-aromatic-ions",
+ "concept_slug": "aromatic-ions",
+ "anchor_text": "which is antiaromatic and is not formed under comparable conditions"
+ },
+ "severity": "blocker",
+ "category": "worked-example-gap",
+ "observation": "ch15-acidity-ranking requires the order cyclopentadiene > cycloheptatriene > propene > ethane, but the chapter gives no basis for placing cycloheptatriene above propene and in fact teaches the opposite. The aromatic-ions section says deprotonating cycloheptatriene gives an eight-electron anion 'which is antiaromatic and is not formed under comparable conditions', while it gives propene an explicit pKa near 43 and a delocalized allylic anion. No pKa is given for cycloheptatriene anywhere in the package, and the hint ladder does not resolve the pair. rank_order also has no wrong_answer_explanations, so an incorrect submission returns only the generic text, which never mentions cycloheptatriene.",
+ "learner_impact": "A low-confidence student reasons carefully from the chapter, produces the ordering the chapter implies, is marked wrong, reads a generic explanation that does not mention the pair they got wrong, and concludes their whole antiaromaticity model is broken. This is the point where I stop trusting the text and start guessing on every later ranking item.",
+ "evidence": "topic.package.json question_sets ch15-acidity-ranking answer_key [redacted]. nugget-aromatic-ions expanded: 'Deprotonating cycloheptatriene instead would give an eight-electron anion with a 4n count, which is antiaromatic and is not formed under comparable conditions.'",
+ "recommended_outcome": "The chapter needs to make the cycloheptatriene-versus-propene comparison learnable before the question asks for it, or the ranking item needs to be restricted to species whose relative acidity the text actually establishes; either way the feedback for this item needs to address the specific pair a student will invert.",
+ "confidence": 0.86
+ },
+ {
+ "finding_id": "ss-002",
+ "location": {
+ "nugget_id": "nugget-benzene-mos",
+ "concept_slug": "molecular-orbitals-of-benzene",
+ "asset_id": "video-benzene-mo-filling",
+ "section_id": "nugget-benzene-mos",
+ "anchor_text": "The vertex must sit at the bottom of the circle rather than an edge"
+ },
+ "severity": "high",
+ "category": "worked-example-gap",
+ "observation": "The entire pi molecular orbital section is verbal. Its stated objective is 'Use the inscribed-polygon construction to predict the orbital pattern of any monocyclic conjugated ring', and the prose describes a geometric construction plus a six-level ladder with node counts and degenerate pairs, with zero supporting graphics. The only asset attached is mol-benzene, a flat 2D hexagon that shows none of this, and the video brief authored precisely for it compiles into the reader with url '' and is_hidden true. The chapter then warns about a drawing error for a drawing the student has never been shown, and a level-3 hint instructs 'Inscribe a hexagon point-down in a circle'.",
+ "learner_impact": "A student who cannot already picture an MO energy diagram rereads the paragraph two or three times, gives up on constructing anything, and falls back to memorising 'three bonding and three antibonding'. The objective about applying the construction to a new ring is simply not attempted, and the level-3 hint asks for a drawing they have never seen.",
+ "evidence": "topic.package.json nugget-benzene-mos asset_ids = ['mol-benzene'], video_brief_ids = ['video-benzene-mo-filling'] (production_status 'deferred'); reader chapter video block {url: '', is_hidden: true}; all 21 assets are type 'molecule'.",
+ "recommended_outcome": "The inscribed-polygon construction and the six-level filled ladder need to be shown, not only described, and the warning about vertex-down orientation needs something to attach to.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "ss-003",
+ "location": {
+ "nugget_id": "nugget-huckel-rule",
+ "concept_slug": "huckel-rule-and-antiaromaticity",
+ "section_id": "nugget-huckel-rule",
+ "anchor_text": "Aromaticity is defined by four requirements that must be checked in order"
+ },
+ "severity": "high",
+ "category": "cognitive-load",
+ "observation": "The chapter's most reusable procedure is delivered as running sentences inside a 431-word block with no numbered list, no heading, no checklist, and no worked pass through an example. Four separate questions all require executing that ordered procedure, and three of the four hint ladders are simply the procedure restated one step per level. The compiled reader has no headings or lists anywhere: all eight sections are single unbroken text blocks of 343-487 words.",
+ "learner_impact": "Under time pressure a shaky student jumps straight to counting pi electrons because the count is the only concrete-looking step, which is exactly the error the error-repair question punishes. With nothing scannable to return to, they re-read the whole paragraph each time instead of running a checklist.",
+ "evidence": "nugget-huckel-rule expanded, 431 words, 3 paragraphs, no list markup; reader chapter section contains one text block plus three molecule blocks and one link.",
+ "recommended_outcome": "The four-requirement test needs to exist in the reader as a scannable, reusable artefact the student can hold beside a structure while working, plus at least one fully stepped-through pass on a species that fails an early requirement.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "ss-004",
+ "location": {
+ "section_id": "nugget-naming-benzenes",
+ "nugget_id": "nugget-naming-benzenes",
+ "concept_slug": "naming-substituted-benzenes",
+ "question_slug": "ch15-identify-meta-isomer",
+ "anchor_text": "ortho for the 1,2 arrangement, meta for 1,3, and para for 1,4"
+ },
+ "severity": "high",
+ "category": "missing-example",
+ "observation": "Ortho, meta, and para are introduced only as a verbal mapping to locants, and the only disubstituted ring drawn in the whole section is mol-4-bromotoluene, the para case. No ortho ring and no meta ring is ever drawn anywhere in the chapter. The first question in the set then asks the student to pick the meta isomer out of four rendered structures, and its distractors are exactly the ortho and para arrangements the student has never seen side by side.",
+ "learner_impact": "A student who cannot yet translate '1,3' into a ring picture counts positions on the rendered options by eye, miscounts the direction of numbering, and picks ortho or para. Because this is question one, the wrong answer sets the tone for the whole set.",
+ "evidence": "nugget-naming-benzenes asset_ids = ['mol-toluene', 'mol-phenol', 'mol-aniline', 'mol-4-bromotoluene']; ch15-identify-meta-isomer options Cc1ccccc1Br (ortho), Cc1cccc(Br)c1 (meta, correct), Cc1ccc(Br)cc1 (para), BrCc1ccccc1 (benzyl bromide).",
+ "recommended_outcome": "The student needs to see the three disubstitution relationships contrasted on rings before being asked to identify one, so that the o/m/p vocabulary is anchored to a picture rather than to a locant pair held in memory.",
+ "confidence": 0.92
+ },
+ {
+ "finding_id": "ss-005",
+ "location": {
+ "section_id": "nugget-benzene-structure",
+ "nugget_id": "nugget-benzene-structure",
+ "anchor_text": "Read in McMurry (OpenStax)"
+ },
+ "severity": "high",
+ "category": "retrieval-practice",
+ "observation": "The compiled reader chapter contains no practice of any kind: 8 text blocks, 26 molecule blocks, 9 link blocks, 1 hidden video, and zero question or check-your-understanding blocks. Every nugget carries an authored practice_check with a prompt and an answer, but the string 'practice' does not appear in the compiled reader at all. The 46-item question bank is a separate compiled artefact with no entry point from the chapter.",
+ "learner_impact": "A struggling student reads 3,381 words of continuous exposition with no point at which they find out whether any of it stuck. Fluent-reading illusion sets in. There is also no low-stakes place to fail, which is the single thing a low-confidence learner needs most.",
+ "evidence": "reader chapter block_type counts {text: 8, molecule: 26, mcmurry_link: 1, external_link: 8, video: 1}; grep for 'practice' in the compiled reader returns 0 hits; topic.package.json has a practice_check on all 8 nuggets.",
+ "recommended_outcome": "The student needs retrieval opportunities inside the reading flow at each section boundary — the authored practice_checks and the existing question bank already contain the material, but nothing currently puts a checkpoint in front of the reader.",
+ "confidence": 0.93
+ },
+ {
+ "finding_id": "ss-006",
+ "location": {
+ "section_id": "nugget-polycyclic-aromatics",
+ "concept_slug": "polycyclic-aromatic-compounds",
+ "anchor_text": "Larger members of the family, such as benzo"
+ },
+ "severity": "high",
+ "category": "conceptual-support",
+ "observation": "Nothing in the reader signals importance. The compiled chapter carries no learning objectives, no prerequisites, no difficulty or depth metadata, no summary and no key-term emphasis, even though the package holds three objectives per nugget, two to three prerequisites per concept, and three to four named trouble spots per concept. Inside the prose, examinable machinery and cultural context are set in the same flat voice.",
+ "learner_impact": "A student with limited study time distributes it evenly, memorises serotonin and benzo[a]pyrene, and under-rehearses pi-electron counting. They never learn what they were supposed to be able to do at the end of a section, so self-assessment is impossible and they default to re-reading.",
+ "evidence": "reader chapter JSON contains no 'learning_objectives', 'prerequisites', 'trouble_spots', 'difficulty' or 'depth' keys; topic.package.json concepts carry all of these.",
+ "recommended_outcome": "The reader needs visible signals of what each section is for, what it assumes the student already knows, and which items are core versus enrichment — the authoring already contains all three, but the student currently sees none of it.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "ss-007",
+ "location": {
+ "nugget_id": "nugget-benzene-mos",
+ "concept_slug": "molecular-orbitals-of-benzene",
+ "anchor_text": "each carry one node and are degenerate"
+ },
+ "severity": "medium",
+ "category": "cognitive-load",
+ "observation": "The MO section defines 'degenerate' carefully but never defines 'node', which is the load-bearing term: the whole ladder is ordered by node count, and the two degenerate orbitals are distinguished only by where their nodes fall. The psi subscript/asterisk notation is also introduced without a key. Elsewhere the same pattern recurs: 'four degrees of unsaturation' opens the benzene-structure section without restatement, and 'following Hund's rule' is invoked once in the Huckel section.",
+ "learner_impact": "A student with weak prerequisites reads a sentence whose only distinguishing content is a word they cannot picture, cannot tell whether the star is decorative, and quietly downgrades the whole paragraph to 'stuff I will memorise later'.",
+ "evidence": "nugget-benzene-mos expanded; nugget-benzene-structure expanded opening; nugget-huckel-rule expanded reference to Hund's rule.",
+ "recommended_outcome": "The terms the reasoning actually turns on — node, the psi/asterisk convention, degrees of unsaturation, Hund's rule — need to be recoverable at the point of use rather than assumed.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "ss-008",
+ "location": {
+ "nugget_id": "nugget-aromatic-spectroscopy",
+ "concept_slug": "spectroscopy-of-aromatic-compounds",
+ "question_slug": "ch15-ring-current-shift",
+ "anchor_text": "the induced field lines curve back and reinforce it"
+ },
+ "severity": "medium",
+ "category": "conceptual-support",
+ "observation": "The ring-current explanation is entirely spatial and is delivered in one sentence of prose with no diagram; the section's three assets are flat structures of benzene, toluene and 4-bromotoluene. The chapter then leans on the same picture twice more, and the level-3 hint just restates the spatial claim.",
+ "learner_impact": "A student who cannot visualise field lines matches the correct option by keyword rather than by understanding, then cannot handle the variant question about interior hydrogens resonating upfield. The hint ladder offers no new representation at level 3, so a stuck student stays stuck.",
+ "evidence": "nugget-aromatic-spectroscopy asset_ids = ['mol-benzene', 'mol-toluene', 'mol-4-bromotoluene']; ch15-ring-current-shift hints are all kind 'text'.",
+ "recommended_outcome": "The inside-versus-outside geometry of the induced field needs a representation a student can inspect rather than imagine, since three separate items depend on getting that geometry right.",
+ "confidence": 0.87
+ },
+ {
+ "finding_id": "ss-009",
+ "location": {
+ "asset_id": "mol-cyclooctatetraene",
+ "nugget_id": "nugget-huckel-rule",
+ "section_id": "nugget-huckel-rule",
+ "anchor_text": "drawn flat although the molecule itself is tub-shaped"
+ },
+ "severity": "medium",
+ "category": "misconception",
+ "observation": "Two figures in the Huckel section show the student exactly the structure the prose is arguing against. mol-cyclooctatetraene is a flat octagon — its own alt text concedes this — while the text's whole point is that the molecule escapes antiaromaticity by puckering. mol-cyclobutadiene is drawn as a symmetric square, while the text says its structure is a rectangle with alternating short and long bonds.",
+ "learner_impact": "Visual memory wins over prose memory for a struggling student. They will recall the flat octagon, answer the error-repair question with 'antiaromatic', and be unable to justify why cyclooctatetraene is classified nonaromatic.",
+ "evidence": "reader block alt_text for cyclooctatetraene and cyclobutadiene; nugget-huckel-rule expanded: 'the molecule adopts a tub-shaped, nonplanar conformation'.",
+ "recommended_outcome": "Where the chapter's argument is that the real geometry differs from the flat drawing, the student needs the real geometry represented — a flat drawing with a disclaimer in its caption teaches the opposite of the section's thesis.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "ss-010",
+ "location": {
+ "nugget_id": "nugget-aromatic-ions",
+ "concept_slug": "aromatic-ions",
+ "anchor_text": "close to that of water"
+ },
+ "severity": "medium",
+ "category": "misconception",
+ "observation": "The chapter carries three separate arguments on pKa values and never once restates that a lower pKa means a stronger acid, or that for the nitrogen bases the pKa quoted is that of the conjugate acid. The concept lists 'pka-and-acid-strength' as a prerequisite, but the reader shows no prerequisites and offers no refresher. The direction of the scale is the entire content of ch15-acidity-ranking and of the staged basicity variant.",
+ "learner_impact": "Inverting the pKa scale is the single most common wrong move a shaky student makes here, and it flips both ranking questions and the pyridine/pyrrole comparison at once. Because nothing in the text restates the direction, the student has no way to self-check.",
+ "evidence": "nugget-aromatic-ions standard and expanded; nugget-aromatic-heterocycles standard; concept aromatic-ions prerequisites = ['huckel-rule-and-antiaromaticity', 'pka-and-acid-strength'].",
+ "recommended_outcome": "The chapter needs the pKa convention re-anchored at first use — including the fact that the basicity comparisons quote conjugate-acid pKa values — so a student with a weak acid-base chapter behind them cannot silently read every comparison backwards.",
+ "confidence": 0.84
+ },
+ {
+ "finding_id": "ss-011",
+ "location": {
+ "nugget_id": "nugget-aromatic-spectroscopy",
+ "concept_slug": "spectroscopy-of-aromatic-compounds",
+ "anchor_text": "Aromatic rings announce themselves through hydrogens"
+ },
+ "severity": "medium",
+ "category": "cognitive-load",
+ "observation": "The reader's detail control defaults to the expanded tier, so an overwhelmed student meets the densest version first and can only step down. But stepping down removes exactly the causal machinery the questions test: the terse spectroscopy tier is a bare list of numbers with no mention of the ring current though a core item asks for the cause; the terse naming tier drops phenyl and benzyl entirely though a core item asks for benzyl; the terse MO tier drops the inscribed-polygon construction that a hint later instructs the student to use.",
+ "learner_impact": "The student most likely to lower the detail level is the one struggling, and lowering it hands them a memorisation list while the questions still ask 'why'. They then answer core questions from a tier that never taught the answer.",
+ "evidence": "[internal source reference — not in this repo] defaults detailLevel: 'expanded'; terse tiers of nugget-aromatic-spectroscopy, nugget-naming-benzenes, nugget-benzene-mos.",
+ "recommended_outcome": "The shorter tiers need to keep the causal claim the assessments depend on and shed detail elsewhere, so that reducing detail reduces load without removing the explanation a student is accountable for.",
+ "confidence": 0.82
+ },
+ {
+ "finding_id": "ss-012",
+ "location": {
+ "nugget_id": "nugget-aromatic-spectroscopy",
+ "concept_slug": "spectroscopy-of-aromatic-compounds",
+ "anchor_text": "can distinguish monosubstituted from ortho-, meta-, and para-disubstituted rings"
+ },
+ "severity": "medium",
+ "category": "conceptual-support",
+ "observation": "The standard tier promises that out-of-plane C-H bending bands can distinguish four substitution patterns, and the concept objective repeats it. The expanded tier then supplies values for monosubstituted, ortho and para — and never gives the meta values at all. The two ranges given for mono and ortho overlap almost completely, so the only usable discriminator is band count, which is stated but not emphasised.",
+ "learner_impact": "A student trying to meet the stated objective looks for the meta case, cannot find it, assumes they missed it, and re-reads. Seeing 730-770 for mono and 735-770 for ortho they conclude the method does not work and abandon it.",
+ "evidence": "nugget-aromatic-spectroscopy expanded lists mono (690-710 and 730-770), ortho (735-770) and para (810-840). No meta value appears anywhere in the package.",
+ "recommended_outcome": "The substitution-pattern inference needs a complete and comparable set of cases, presented so the student can see at a glance which feature does the discriminating.",
+ "confidence": 0.86
+ },
+ {
+ "finding_id": "ss-013",
+ "location": {
+ "question_slug": "ch15-classify-rings",
+ "concept_slug": "huckel-rule-and-antiaromaticity",
+ "anchor_text": "Sort each species into the class that describes its"
+ },
+ "severity": "medium",
+ "category": "cognitive-load",
+ "observation": "ch15-classify-rings presents its six species as bare names with no structure_smiles on any item, and ch15-acidity-ranking does the same with four hydrocarbon names. Other items in the same set do attach structures. The item's own accessible_description describes the species structurally, which is more structural information than the working student is given.",
+ "learner_impact": "The task the chapter taught is 'apply the four requirements to a structure', but the task as posed is 'recall six structures from their names, then apply the four requirements'. Cyclopenta-1,3-diene is the trap: without its picture the sp3 CH2 that decides its class is invisible.",
+ "evidence": "ch15-classify-rings student_config.items carry only 'text'; ch15-acidity-ranking student_config.cards carry only 'text'; compare ch15-pi-electron-matching left items, each with structure_smiles.",
+ "recommended_outcome": "Items that assess the aromaticity decision procedure need the structures visible so that recall of nomenclature is not silently bundled into the graded skill.",
+ "confidence": 0.83
+ },
+ {
+ "finding_id": "ss-014",
+ "location": {
+ "nugget_id": "nugget-naming-benzenes",
+ "concept_slug": "naming-substituted-benzenes",
+ "anchor_text": "the numbering is chosen to give the lowest possible set of locants"
+ },
+ "severity": "medium",
+ "category": "worked-example-gap",
+ "observation": "The section's second objective covers switching to locants for three or more substituents, but that case gets one sentence of rule statement, no worked example, no trisubstituted structure anywhere in the chapter, and no question in the 46-item bank. Similarly, seven retained parent names are given as a list the student is told is worth learning as a set, but only toluene, phenol and aniline are drawn.",
+ "learner_impact": "A rule stated once and never demonstrated is a rule a struggling student cannot execute. On an exam they will attempt a trisubstituted name having never seen one numbered, and they will not recognise anisole or styrene as structures at all.",
+ "evidence": "nugget-naming-benzenes expanded lists seven retained names; assets for the section are mol-toluene, mol-phenol, mol-aniline, mol-4-bromotoluene; no question involves three substituents.",
+ "recommended_outcome": "The numbering rule for three or more substituents needs to be demonstrated on a concrete ring and then practised, and the retained names need to be presented as name-plus-structure pairs.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "ss-015",
+ "location": {
+ "question_slug": "ch15-acidity-ranking-v2",
+ "concept_slug": "aromatic-heterocycles",
+ "anchor_text": "Imidazole is therefore aromatic and also a moderate base"
+ },
+ "severity": "medium",
+ "category": "worked-example-gap",
+ "observation": "The staged variant requires the basicity order piperidine > imidazole > pyridine > pyrrole. The chapter never mentions piperidine, gives no pKa for imidazole beyond the phrase 'a moderate base', and gives pyridinium 5.25 against an alkylamine 'near 10'. So the piperidine and pyrrole ends are derivable but the middle pair is not. The hint ladder distinguishes sp3 from sp2 lone pairs and flags the aromatic-sextet cost, neither of which separates imidazole from pyridine.",
+ "learner_impact": "Same failure shape as the surfaced ranking item: careful reasoning gets the ends right and the middle wrong, partial credit lands, and the feedback never names the pair the student inverted.",
+ "evidence": "ch15-acidity-ranking-v2 correct_order [piperidine, imidazole, pyridine, pyrrole]; nugget-aromatic-heterocycles expanded gives no value for imidazole.",
+ "recommended_outcome": "Before this variant is surfaced, the chapter needs to make the imidazole-versus-pyridine comparison decidable from the text, or the item needs to be restricted to species whose relative basicity the chapter establishes.",
+ "confidence": 0.8
+ },
+ {
+ "finding_id": "ss-016",
+ "location": {
+ "nugget_id": "nugget-benzene-structure",
+ "concept_slug": "benzene-structure-and-stability",
+ "question_slug": "ch15-aromatic-stabilization-energy",
+ "anchor_text": "Cyclohexene releases 118 kJ/mol on hydrogenation"
+ },
+ "severity": "medium",
+ "category": "cognitive-load",
+ "observation": "The aromatic stabilization argument asks the student to hold four energies plus a hypothetical molecule that does not exist plus the fact that all three real compounds converge on cyclohexane, and to compare where each starts rather than where it ends — all in continuous prose with no energy-level comparison to look at. The three attached figures show the reactants but carry none of the energy relationship.",
+ "learner_impact": "A student who cannot picture the energy axis subtracts the two numbers they can see (206 - 118 = 88) or adds them, which is exactly the anticipated error. They arrive at a number without a mental model.",
+ "evidence": "nugget-benzene-structure asset_ids are all flat structures; ch15-aromatic-stabilization-energy wrong_answer_explanations for 88 and 324.",
+ "recommended_outcome": "The relative starting energies of cyclohexene, the hypothetical cyclohexatriene and benzene against their shared product need a representation the student can read the 150 kJ/mol gap off, rather than four numbers to align mentally inside a paragraph.",
+ "confidence": 0.84
+ },
+ {
+ "finding_id": "ss-017",
+ "location": {
+ "nugget_id": "nugget-benzene-mos",
+ "concept_slug": "molecular-orbitals-of-benzene",
+ "anchor_text": "can be obtained without calculation by an inscribed-polygon construction"
+ },
+ "severity": "low",
+ "category": "conceptual-support",
+ "observation": "The construction is called only 'the inscribed-polygon construction' in every tier of the prose and in the question feedback, while the concept's own trouble_spots call it the 'Frost circle' — the name a student will hear in lecture and will type into a search box. The two names are never connected anywhere the student can see.",
+ "learner_impact": "A student who cannot follow the verbal description tries to find outside help and does not know what to search for, or hears 'Frost circle' in class and does not realise it is the thing the chapter already covered.",
+ "evidence": "concept molecular-orbitals-of-benzene trouble_spots mentions the Frost circle; the string 'Frost' appears zero times in the compiled reader prose.",
+ "recommended_outcome": "The student needs the common alternative name attached to the construction at first use so that lecture vocabulary, search results and the chapter all resolve to the same object.",
+ "confidence": 0.9
+ }
+ ],
+ "strengths": [
+ "Misconceptions are named and corrected inside the prose rather than left as traps: the Kekule structures are explicitly called contributing structures and not an equilibrium, non-integer n is flagged as the most common error, and cyclooctatetraene is explicitly classified nonaromatic rather than antiaromatic.",
+ "Every question carries a three-level hint ladder that escalates from orientation to procedure without leaking the answer.",
+ "Wrong-answer explanations diagnose the specific reasoning error rather than restating the correct answer.",
+ "Quantitative questions hand the student the data they need in the prompt, so the item tests reasoning rather than recall of numbers.",
+ "ch15-cyclopentadiene-acidity-reasoning is genuinely well scaffolded: it separates claim, evidence and the single missing word, and its generic feedback anticipates the partly-correct answer.",
+ "The pyridine/pyrrole treatment gives one decision rule and then reuses it consistently across pyridine, pyrrole, imidazole and the comparison-matrix question."
+ ],
+ "open_questions": [
+ "Is the 46-item question bank surfaced to the student from inside the reader chapter, or only through the LMS/deck exports?",
+ "Are nugget practice_checks intended to reach the reader at all?",
+ "Is the deferred video-benzene-mo-filling scheduled for production before publication, and if not, is a static substitute planned?",
+ "Should the reader default detail level be 'expanded' for a first read?",
+ "No coined categories were needed; all findings use ids from the schema list."
+ ]
+}

@@ -1,0 +1,891 @@
+{
+ "chapter_id": "conjugated-compounds-and-ultraviolet-spectroscopy",
+ "chapter_version": "1",
+ "run_at": "2026-07-27T13:12:35Z",
+ "personas": [
+ {
+ "persona": "Organic Chemistry Instructor",
+ "persona_version": "1.0.0",
+ "chapter_id": "conjugated-compounds-and-ultraviolet-spectroscopy",
+ "chapter_version": "1",
+ "model": "claude-opus-4-8[1m]",
+ "summary": "Go, with minor revisions. As an instructor I would assign this chapter. The chemistry is accurate and well-sequenced across all seven concepts: diene classification, butadiene π MOs, allylic-cation 1,2-/1,4-addition, kinetic vs thermodynamic control, the Diels–Alder reaction, diene/dienophile requirements, and UV–vis. Every SMILES I checked is correct, the quantitative anchors match the standard McMurry data set (16 kJ/mol conjugation stabilization, 147 vs 153 pm central bond, 71:29 at −80 °C / 15:85 at 40 °C, λmax 171/217/258/455 nm, 551 kJ/mol gap from E = 1.196×10⁵/λ), curved arrows flow source→sink, and the concerted stereospecificity of Diels–Alder is stated correctly. Assessment readiness is a genuine strength: 38 questions across 13 types, all seven concepts assessed, with teaching-quality wrong-answer explanations and three-level hint ladders. There are no chemical-accuracy blockers. My concerns are (1) that the two most orbital-dependent concepts — the four butadiene π MOs and the allylic-cation resonance/mechanism — are conveyed in the reader by prose plus static product molecules only, with no orbital or curved-arrow visualization, and the Diels–Alder mechanism video is deferred/hidden; and (2) two small naming slips and one 'why is the 1,2 barrier lower' gap.",
+ "overall_score": 8.1,
+ "publication_blockers": [],
+ "findings": [
+ {
+ "finding_id": "instr-001",
+ "location": {
+ "concept_slug": "molecular-orbitals-of-butadiene",
+ "nugget_id": "nugget-butadiene-mos",
+ "section_id": "nugget-butadiene-mos"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The entire MO nugget is about the shapes, node counts, and relative energies of ψ₁–ψ₄ and the identity of the HOMO (ψ₂) and LUMO (ψ₃*), yet the reader section carries only two static structural molecules (buta-1,3-diene and hexatriene). The orbitals the prose spends three paragraphs describing are never shown.",
+ "learner_impact": "Students build the frontier-orbital picture that later governs both the Diels–Alder (HOMO/LUMO overlap) and UV (HOMO→LUMO excitation) sections. Reading 'ψ₂ has one node between C2 and C3' without seeing the phase pattern and energy ladder leaves the concept abstract and memorization-prone, and weakens the payoff two sections later.",
+ "evidence": "nugget-butadiene-mos text describes 'four π molecular orbitals... differ in the number of nodes,' 'ψ₂ is the HOMO and ψ₃* is the LUMO'; reader blocks blk-74406y1b and blk-j2oh6x6x are plain molecule renders with show_hydrogens, no orbital depiction.",
+ "recommended_outcome": "The node structure, phase pattern, and HOMO–LUMO energy ordering of the four butadiene π MOs are currently text-only; learners need a visual equivalent that shows the orbital lobes/nodes and the filled-vs-empty energy ladder so the frontier-orbital concept is seen, not just asserted.",
+ "confidence": 0.83
+ },
+ {
+ "finding_id": "instr-002",
+ "location": {
+ "concept_slug": "allylic-cations-and-14-addition",
+ "nugget_id": "nugget-allylic-cation-addition",
+ "section_id": "nugget-allylic-cation-addition"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The allylic-cation section describes protonation, the delocalized cation, its two resonance forms, and bromide capture at C2 vs C4 entirely in prose; the reader shows only the two final products (3-bromobut-1-ene and 1-bromobut-2-ene). The intermediate and the electron-flow that define the whole concept are never drawn.",
+ "learner_impact": "The chapter explicitly warns (concept trouble_spots) that students treat the two resonance forms as interconverting isomers. A text-only treatment of a single delocalized cation with shared charge is exactly the presentation that reinforces that misconception; a curved-arrow / resonance visualization would directly counter it.",
+ "evidence": "nugget-allylic-cation-addition: 'Two resonance forms describe this single delocalized intermediate... the positive charge is genuinely shared between the two termini'; reader section blocks are only blk-70hjca8m and blk-kmm1ik5q (product molecules). A curved_arrow question (ch14-allyl-capture-arrow) exists in the bank but is not in the reader narrative.",
+ "recommended_outcome": "The delocalized allylic cation, its two resonance contributors, and the bromide-capture electron flow are conveyed only in prose in the reader; learners need a curved-arrow/resonance visual so the shared-charge single-species idea is shown against the resonance-as-isomers misconception the concept itself flags.",
+ "confidence": 0.8
+ },
+ {
+ "finding_id": "instr-003",
+ "location": {
+ "concept_slug": "diels-alder-cycloaddition",
+ "asset_id": "video-diels-alder-cycloaddition",
+ "nugget_id": "nugget-diels-alder"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The one dynamic asset that would show the defining feature of the Diels–Alder reaction — the concerted, parallel-plane approach with both σ bonds forming simultaneously — is deferred at authoring and appears in the reader as a hidden video block with an empty URL. The mechanism is carried by prose plus static product/dienophile structures.",
+ "learner_impact": "The concept's central 'why' is that the reaction is concerted (no intermediate), which is what makes it stereospecific. Static structures can show the product but not the simultaneity of bond formation, which is precisely the point students must internalize to answer stereospecificity questions with understanding rather than a memorized rule.",
+ "evidence": "video_briefs[0] production_status: 'deferred', production_note states the concerted TS morph 'is not producible by the molecule-video-creator chalk pipeline'; reader block blk-yrw8woqa has url '' and is_hidden: true.",
+ "recommended_outcome": "The concerted, synchronous two-bond formation of the Diels–Alder reaction has no moving or interactive representation in the reader; learners need a dynamic or stepwise-interactive equivalent (or an explicit instructor note that the prose + static figures are the intended substitute) so the concerted mechanism is demonstrable, not only described.",
+ "confidence": 0.75
+ },
+ {
+ "finding_id": "instr-004",
+ "location": {
+ "concept_slug": "uv-spectroscopy-and-conjugation",
+ "nugget_id": "nugget-uv-spectroscopy",
+ "anchor_text": "Each additional conjugated double bond raises the HOMO and lowers the LUMO, compressing the gap"
+ },
+ "severity": "low",
+ "category": "visual-opportunity",
+ "observation": "The UV section teaches that extending conjugation narrows the HOMO–LUMO gap and lengthens λmax, and gives the ethylene→butadiene→triene→β-carotene series, but the reader shows only two structural molecules. There is no absorption-spectrum trace or HOMO/LUMO energy-ladder diagram connecting narrowing gap to lengthening λmax.",
+ "learner_impact": "The section's flagged trouble spot is that students read longer λmax as a larger gap (wavelength and energy run opposite ways). A simple energy-gap-vs-λmax visual would make the inverse relation concrete; without it, students rely on remembering the direction rather than seeing it.",
+ "evidence": "nugget-uv-spectroscopy trouble_spot 'Reading a longer λmax as a larger energy gap'; reader section blocks blk-b8andabb and blk-d6nnlbfv are structural molecules only; the λmax values live in prose and in question ch14-lambda-max-matching.",
+ "recommended_outcome": "The inverse gap↔λmax relationship and the conjugation-length trend are text/number-only in the reader; learners would benefit from a visual that ties a shrinking HOMO–LUMO gap to a lengthening λmax across the ethylene→β-carotene series.",
+ "confidence": 0.6
+ },
+ {
+ "finding_id": "instr-005",
+ "location": {
+ "question_slug": "ch14-allyl-capture-arrow",
+ "concept_slug": "allylic-cations-and-14-addition",
+ "anchor_text": "shown as its 1-methylallyl resonance form, with the positive charge on the terminal CH₂ carbon"
+ },
+ "severity": "low",
+ "category": "notation-consistency",
+ "observation": "The curved-arrow question (and its accessible_description) labels the resonance form drawn with the positive charge on the terminal CH₂ carbon as the '1-methylallyl resonance form.' The 1-methylallyl cation form is the one with the charge on the internal methyl-bearing carbon (the secondary center); the form actually shown, CC=C[CH2+], is the primary crotyl / but-2-en-1-yl contributor.",
+ "learner_impact": "A student learning to name allylic resonance contributors is given a self-contradictory label ('1-methylallyl' but 'charge on the terminal CH₂'). This can muddle the mapping between resonance-form drawings and their names in exactly the concept where that mapping matters.",
+ "evidence": "ch14-allyl-capture-arrow prompt_text and accessibility_bundle both say '1-methylallyl resonance form, with the positive charge on the terminal CH₂ carbon'; molecule_smiles 'CC=C[CH2+].[Br-]' places the charge on the primary terminal carbon.",
+ "recommended_outcome": "The resonance-form label in this question is internally inconsistent with the structure shown; the prose need is to name the depicted contributor correctly (the primary/crotyl form) or relocate the '1-methylallyl' descriptor to the form that carries the charge on the internal carbon.",
+ "confidence": 0.72
+ },
+ {
+ "finding_id": "instr-006",
+ "location": {
+ "question_slug": "ch14-diene-stability-ranking",
+ "concept_slug": "diene-classes-and-stability",
+ "anchor_text": "(1E)-Hexa-1,3-diene (conjugated, one terminal double bond)"
+ },
+ "severity": "low",
+ "category": "notation-consistency",
+ "observation": "The stability-ranking card names a compound '(1E)-Hexa-1,3-diene.' Hexa-1,3-diene's C1=C2 bond is terminal (=CH2) and cannot carry an E/Z descriptor; the stereogenic double bond is C3=C4, so the correct descriptor locant is 3, i.e. (3E)-hexa-1,3-diene (the package correctly uses '(3E)' for hexa-1,3,5-triene elsewhere).",
+ "learner_impact": "Minor, but in a chapter that carefully drills E/Z and locant discipline, an impossible stereodescriptor locant models incorrect nomenclature for students.",
+ "evidence": "ch14-diene-stability-ranking card id 'conj-terminal': '(1E)-Hexa-1,3-diene'; compare asset mol-hexa-135-triene titled '(3E)-Hexa-1,3,5-triene' where the descriptor is placed on the internal bond.",
+ "recommended_outcome": "The stereodescriptor locant on this card is placed on a non-stereogenic terminal double bond; the naming needs correction to (3E)-hexa-1,3-diene (or removal of the descriptor).",
+ "confidence": 0.78
+ },
+ {
+ "finding_id": "instr-007",
+ "location": {
+ "concept_slug": "kinetic-vs-thermodynamic-control",
+ "nugget_id": "nugget-kinetic-thermodynamic",
+ "anchor_text": "The barrier to 1,2-addition is lower, the 1,2-adduct forms faster"
+ },
+ "severity": "low",
+ "category": "conceptual-support",
+ "observation": "The kinetic/thermodynamic nugget asserts that the 1,2-addition transition state is lower in energy but never says why. Students are told to accept that the 1,2 barrier is lower as a given, which is the memorization posture the rubric flags.",
+ "learner_impact": "Without the standard mechanistic rationale (the allylic cation carries more positive charge on the secondary C2 terminus and/or the ion-pair bromide is delivered closer to C2), students memorize 'kinetic = 1,2' rather than reasoning to it, and cannot transfer the idea to other unsymmetrical allylic cations.",
+ "evidence": "nugget-kinetic-thermodynamic expanded text: 'their ratio mirrors the relative heights of the two transition states. The barrier to 1,2-addition is lower, the 1,2-adduct forms faster' — no cause is given for the lower barrier, though the allylic nugget does note 'the greater share on the secondary carbon.'",
+ "recommended_outcome": "The claim that the 1,2 pathway has the lower barrier is stated without a mechanistic 'why'; the prose needs a one-clause rationale (greater positive charge / closer bromide delivery at the secondary terminus) so kinetic control is reasoned rather than memorized.",
+ "confidence": 0.6
+ },
+ {
+ "finding_id": "instr-008",
+ "location": {
+ "concept_slug": "dienes-and-dienophiles",
+ "nugget_id": "nugget-diene-dienophile-requirements",
+ "anchor_text": "Diels–Alder reactions preferentially form the endo product"
+ },
+ "severity": "low",
+ "category": "objective-alignment",
+ "observation": "The endo/exo selectivity rule and secondary orbital interactions are presented only in the expanded depth of one nugget and are not reflected in that nugget's learning_objectives nor tested by any question in the 38-item bank.",
+ "learner_impact": "Low. Endo selectivity is an advanced flourish here, but presenting it as chapter content while leaving it unstated in objectives and unassessed creates a small mismatch between what the expanded prose teaches and what the chapter claims to and checks.",
+ "evidence": "nugget-diene-dienophile-requirements expanded: 'Diels–Alder reactions preferentially form the endo product... stabilized by secondary orbital interactions'; learning_objectives for that nugget list only dienophile identification, s-cis requirement, and reactivity ranking; no question_set targets endo/exo.",
+ "recommended_outcome": "The endo rule is taught in expanded prose but is neither an objective nor assessed; either add it to the objectives with a light retrieval check, or mark it explicitly as enrichment so scope, objectives, and assessment agree.",
+ "confidence": 0.55
+ }
+ ],
+ "strengths": [
+ "Chemistry is accurate and quantitatively grounded: conjugation stabilization (16 kJ/mol from 252−236), central C2–C3 bond 147 vs 153 pm, 71:29 (−80 °C) and 15:85 (40 °C) product ratios, λmax 171/217/258/455 nm, and the 551 kJ/mol gap from E = 1.196×10⁵/λ all match the standard data set, and every SMILES checked (products, dienophiles, β-carotene, the 2,3-di-tert-butyl 'unreactive' diene) is correct.",
+ "Assessment coverage is thorough and well-aligned: all seven concepts are assessed, 38 questions span 13 types including curved_arrow, structure_scaffold product drawing, reaction_coordinate_reasoning, and a genuine stereochemistry item (ch14-da-stereospecificity on dimethyl maleate), satisfying the 'at least one structure/mechanism question where the chemistry supports it' criterion.",
+ "Feedback teaches rather than just scores: nearly every question carries targeted wrong-answer explanations tied to specific distractors plus a three-level hint ladder that scaffolds from principle to answer.",
+ "Concept prerequisites and ordering are correct and pedagogically sound — MOs (order 2) precede their payoff in Diels–Alder (order 5) and UV (order 7), and the allylic-cation/kinetic-thermodynamic pair is sequenced so the shared intermediate is established before control is discussed.",
+ "The nuggets explicitly anticipate the classic misconceptions (resonance forms as interconverting isomers, longer λmax read as a larger gap, conjugation as merely 'two double bonds anywhere') in their trouble_spots and address them in prose."
+ ],
+ "open_questions": [
+ "Is the deferred Diels–Alder mechanism video (video-diels-alder-cycloaddition, hidden in the reader with an empty URL) intended to be produced before publication, or are the prose and static cyclohexene/maleic-anhydride figures the accepted permanent substitute?",
+ "Does the reader surface support an orbital/MO energy-ladder visualization at all? If not, findings instr-001 and instr-004 may be better resolved by an instructor-support note than by a new interactive."
+ ]
+ },
+ {
+ "persona": "Struggling Student",
+ "persona_version": "1.0.0",
+ "chapter_id": "conjugated-compounds-and-ultraviolet-spectroscopy",
+ "chapter_version": "1",
+ "model": "claude-opus-4-8[1m]",
+ "summary": "The prose is careful, complete, and unusually well written, and the question bank has excellent 3-level hint ladders and specific wrong-answer feedback — so a confident student would do well. But for a shaky student the reader leans almost entirely on dense words: the three ideas that most need a picture — the four π molecular orbitals with their nodes, the energy profile behind kinetic vs. thermodynamic control, and the delocalized allylic cation / concerted Diels–Alder motion — are all delivered as prose-only, with the section figures showing finished structures rather than the concept being explained. The reader also renders the longest ('expanded') version of every nugget with no summary, no signal of what matters most, and no embedded checkpoints, so a low-confidence reader has no place to stop, self-test, or recover. Nothing is chemically un-followable, so there is no hard blocker, but several high-severity scaffolding gaps would make a struggling student reread, guess, or quit.",
+ "overall_score": 6.0,
+ "publication_blockers": [],
+ "findings": [
+ {
+ "finding_id": "struggle-001",
+ "location": {
+ "section_id": "nugget-butadiene-mos",
+ "concept_slug": "molecular-orbitals-of-butadiene",
+ "nugget_id": "nugget-butadiene-mos",
+ "anchor_text": "The lowest-energy orbital, ψ₁, has zero nodes"
+ },
+ "severity": "high",
+ "category": "conceptual-support",
+ "observation": "The entire molecular-orbital section is prose-only. It asks the reader to hold four orbitals (ψ₁, ψ₂, ψ₃*, ψ₄*), their node counts (0, 1, 2, 3), 'planes where the wavefunction changes sign,' bonding vs. antibonding, and HOMO/LUMO in their head — but the only figures in the section are the flat structures of buta-1,3-diene and hexa-1,3,5-triene. There is no orbital/energy-level diagram anywhere in the reader.",
+ "learner_impact": "A student with weak prerequisites cannot picture what 'one node between C2 and C3' looks like or why ψ₂ is still bonding. With nothing to look at, they reread the paragraph, fail to build a mental image, and fall back to memorizing 'HOMO = ψ₂' as a fact without understanding — which then breaks down when the Diels–Alder and UV sections both depend on the same orbital picture.",
+ "evidence": "Section nugget-butadiene-mos text: 'combine into four π molecular orbitals... The combinations differ in the number of nodes'; asset_ids are only mol-buta-13-diene and mol-hexa-135-triene (plain molecules).",
+ "recommended_outcome": "This section needs a visual representation of the four π MOs (relative energies and node pattern) so a student can see the ψ₁–ψ₄* ordering and the HOMO/LUMO gap rather than reconstruct it from prose.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "struggle-002",
+ "location": {
+ "section_id": "nugget-diene-classes",
+ "concept_slug": "diene-classes-and-stability",
+ "nugget_id": "nugget-diene-classes",
+ "anchor_text": "In the s-trans conformation the double bonds point to opposite sides of the single bond; in the s-cis conformation they point to the same side."
+ },
+ "severity": "high",
+ "category": "conceptual-support",
+ "observation": "The s-cis vs. s-trans distinction is introduced in words only, with no figure of the two conformations, even though the chapter states 'The distinction matters later in the chapter: only the s-cis conformation can enter the Diels–Alder reaction' and returns to it as the key reactivity requirement in nugget-diene-dienophile-requirements.",
+ "learner_impact": "'Same side' vs. 'opposite sides' of a rotating single bond is genuinely hard to visualize without a picture. A struggling student forms a fuzzy or wrong mental model here, then cannot follow later why cyclopentadiene (locked s-cis) is reactive and 2,3-di-tert-butylbutadiene is not — they guess on the s-cis question rather than reason it out.",
+ "evidence": "nugget-diene-classes prose describes s-cis/s-trans; nugget-diene-dienophile-requirements: 'only the s-cis conformation points those termini toward the same side'; no conformation figure exists in either section's blocks.",
+ "recommended_outcome": "The reader needs a side-by-side visual of the s-cis and s-trans conformations of buta-1,3-diene tied to the Diels–Alder geometry requirement, so the later reactivity argument has something concrete to point back to.",
+ "confidence": 0.87
+ },
+ {
+ "finding_id": "struggle-003",
+ "location": {
+ "section_id": "nugget-allylic-cation-addition",
+ "concept_slug": "allylic-cations-and-14-addition",
+ "nugget_id": "nugget-allylic-cation-addition",
+ "anchor_text": "In one drawing the positive charge sits on C2, a secondary carbon, with the double bond intact between C3 and C4; in the other the charge sits on the terminal carbon C4"
+ },
+ "severity": "high",
+ "category": "conceptual-support",
+ "observation": "The whole 1,2- vs. 1,4-addition story hinges on the delocalized allylic cation and its two resonance forms, but neither the cation nor its resonance structures are shown. The only figures in the section are the two final products (3-bromobut-1-ene and 1-bromobut-2-ene).",
+ "learner_impact": "The rubric misconception 'treating the two resonance forms as interconverting isomers' is exactly what a student will fall into when the shared cation is described in prose but never drawn. Without seeing the delocalized intermediate and the two termini bromide can attack, a low-confidence student cannot see where two products come from and will memorize the outcome instead of understanding it.",
+ "evidence": "Section asset_ids are mol-3-bromobut-1-ene and mol-1-bromobut-2-ene only; the resonance-delocalized cation described in the text has no figure.",
+ "recommended_outcome": "This section needs a visual of the single delocalized allylic cation (its two resonance contributors and the shared C2/C4 positive character) so the origin of both addition products is seen, not just asserted.",
+ "confidence": 0.86
+ },
+ {
+ "finding_id": "struggle-004",
+ "location": {
+ "section_id": "nugget-kinetic-thermodynamic",
+ "concept_slug": "kinetic-vs-thermodynamic-control",
+ "nugget_id": "nugget-kinetic-thermodynamic",
+ "anchor_text": "the transition state leading to it lies lower in energy"
+ },
+ "severity": "high",
+ "category": "conceptual-support",
+ "observation": "The kinetic-vs-thermodynamic argument is entirely about comparing two transition-state heights and two product energies, yet the reader section contains no energy/reaction-coordinate diagram — only the two product molecules. The concept even lists 'reaction_coordinate' as a preferred representation, and a reaction-coordinate profile exists in the question bank (ch14-addition-profile-reasoning), but not in the teaching section itself.",
+ "learner_impact": "A struggling student is asked to reason about 'lower barrier' vs. 'more stable product' — two different vertical distances on a graph — with no graph in front of them. This is the classic point where students conflate 'faster' with 'more stable.' Without the picture they cannot separate the two axes and will guess on the comparison-matrix and why-kinetic questions.",
+ "evidence": "nugget-kinetic-thermodynamic text contrasts 'relative heights of the two transition states' with 'relative free energies'; section blocks contain only text plus mol-3-bromobut-1-ene and mol-1-bromobut-2-ene; no profile.",
+ "recommended_outcome": "The teaching section needs a reaction-coordinate diagram showing the shared cation, the two competing transition states (1,2 lower barrier), and the two product wells (1,4 lower energy), so the student can see why temperature selects a different winner.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "struggle-005",
+ "location": {
+ "section_id": "nugget-diels-alder",
+ "concept_slug": "diels-alder-cycloaddition",
+ "nugget_id": "nugget-diels-alder",
+ "anchor_text": "six π electrons shift in concert"
+ },
+ "severity": "high",
+ "category": "conceptual-support",
+ "observation": "The Diels–Alder section teaches a concerted, three-arrow, six-electron, parallel-plane process, but the planned animation is deferred (video_brief production_status 'deferred') and the reader's video block is empty and hidden (is_hidden: true, url ''). The visible figures are the finished cyclohexene and maleic anhydride structures, so the reader never shows the diene+dienophile approach, the cyclic transition state, or the electron flow. The endo/exo preference in nugget-diene-dienophile-requirements is likewise prose-only.",
+ "learner_impact": "The rubric misconception 'looking for a carbocation or radical intermediate' persists precisely because the student never sees the one-step, simultaneous bond formation. Given a static product and a paragraph, a struggling student cannot visualize 'both σ bonds form at once on the same face' and defaults to guessing on the cis/trans stereospecificity question.",
+ "evidence": "video_brief video-diels-alder-cycloaddition: production_status 'deferred'; reader block blk-yrw8woqa is_hidden true with url ''; section figures are cyclohexene and maleic anhydride only.",
+ "recommended_outcome": "The reader needs a still or stepwise visual equivalent of the concerted [4+2] mechanism (parallel-plane approach, cyclic transition state with the three curved arrows, two new σ bonds) so a non-animated student has a concrete picture of 'concerted,' not just the word.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "struggle-006",
+ "location": {
+ "section_id": "nugget-diene-classes",
+ "concept_slug": "diene-classes-and-stability",
+ "anchor_text": "The distinction matters later in the chapter"
+ },
+ "severity": "medium",
+ "category": "retrieval-practice",
+ "observation": "Each nugget in the source package carries a 'practice_check' (a prompt + answer), but these do not appear in the compiled reader — the reader's blocks are only text, molecule, link, and (hidden) video. There are no embedded checkpoints, self-test prompts, or end-of-section summaries anywhere in the reading. All practice lives in a separate question set that a student may never open while reading.",
+ "learner_impact": "A shaky student reads seven dense sections in a row with no place to stop and confirm they understood before the next idea builds on it. They reach the kinetic/thermodynamic and Diels–Alder sections already lost, with no earlier moment that would have flagged the gap. Low-confidence readers who get no feedback tend to disengage.",
+ "evidence": "topic.package nuggets each contain practice_check (e.g., nugget-diene-classes practice_check about penta-1,4-diene); the reader JSON sections contain no practice/checkpoint block type.",
+ "recommended_outcome": "The reading itself needs light retrieval checkpoints between sections (the authored practice_checks would serve), so a struggling student can verify understanding before the next concept stacks on top of it.",
+ "confidence": 0.8
+ },
+ {
+ "finding_id": "struggle-007",
+ "location": {
+ "section_id": "nugget-diene-classes",
+ "nugget_id": "nugget-diene-classes",
+ "anchor_text": "A diene contains two carbon–carbon double bonds, and the relationship between them determines the chemistry of the molecule."
+ },
+ "severity": "medium",
+ "category": "cognitive-load",
+ "observation": "The reader renders the longest 'expanded' variant of every nugget as the body text (the markdown equals the expanded _detail_text), with no bolding, no key-term callouts, and no summary. Every sentence reads with equal weight, and core facts sit beside enrichment asides (isoprene/rubber, retinal and vision, tetracyanoethylene) in the same undifferentiated paragraphs.",
+ "learner_impact": "A struggling student cannot tell what they must master (conjugation → stability; s-cis for Diels–Alder; longer conjugation → longer λmax) from what is background color. Facing a wall of equally-weighted prose, they either try to memorize everything and overload, or skim and miss the load-bearing point.",
+ "evidence": "Reader block markdown for each section matches the 'expanded' _detail_texts verbatim; no summary/callout blocks exist; e.g., nugget-uv-spectroscopy mixes the λmax rule with the 11-cis-retinal vision aside in one flow.",
+ "recommended_outcome": "Struggling readers need a signal of importance in each section — a short takeaway or highlighted key relationship — and/or a shorter default detail level, so essential ideas are visually distinguished from enrichment.",
+ "confidence": 0.75
+ },
+ {
+ "finding_id": "struggle-008",
+ "location": {
+ "section_id": "nugget-butadiene-mos",
+ "nugget_id": "nugget-butadiene-mos",
+ "anchor_text": "ψ₃* has two nodes and is net antibonding"
+ },
+ "severity": "medium",
+ "category": "cognitive-load",
+ "observation": "The ψ (psi) symbol and the asterisk-for-antibonding convention (ψ₃*, ψ₄*, and later π → π*) are used throughout without ever stating that ψ denotes a molecular-orbital wavefunction or that the star marks an antibonding orbital. 'Wavefunction' appears once, in passing, inside the node definition.",
+ "learner_impact": "A student who has not firmly met this notation reads 'ψ₃*' as an opaque label and cannot connect the star in ψ₃* to the star in the π → π* transition three sections later. They lose the thread that the UV excitation is HOMO→LUMO = ψ₂→ψ₃*, which the chapter intends as its payoff.",
+ "evidence": "nugget-butadiene-mos introduces ψ₁–ψ₄* with node counts; nugget-uv-spectroscopy reuses 'π → π* transition' and 'ψ₂ to ψ₃*' without ever defining the * = antibonding convention.",
+ "recommended_outcome": "The MO section needs a one-line gloss of the notation (ψ = a π molecular orbital; the * marks an antibonding orbital) so the symbols are decodable when they reappear in the UV section.",
+ "confidence": 0.72
+ },
+ {
+ "finding_id": "struggle-009",
+ "location": {
+ "section_id": "nugget-uv-spectroscopy",
+ "concept_slug": "uv-spectroscopy-and-conjugation",
+ "nugget_id": "nugget-uv-spectroscopy",
+ "anchor_text": "the transmitted light appears orange, the color of carrots"
+ },
+ "severity": "medium",
+ "category": "conceptual-support",
+ "observation": "Two things arrive in the UV section without setup: the conversion constant 'E = 1.196 × 10⁵ kJ·nm·mol⁻¹ / λ' is dropped in with no explanation of where it comes from or how the odd units work, and the color logic ('absorbs at 455 nm in the blue; the transmitted light appears orange') assumes the student already knows about complementary colors.",
+ "learner_impact": "A struggling student sees an intimidating constant and either plugs numbers mechanically (as the numeric question expects) without understanding, or freezes. The blue-absorbed-looks-orange step reads as a non-sequitur — they cannot see why absorbing one color yields the appearance of another — so the memorable β-carotene payoff lands as something to accept on faith.",
+ "evidence": "nugget-uv-spectroscopy: 'E = 1.196 × 10⁵ kJ·nm·mol⁻¹ / λ, so the butadiene gap is roughly 551 kJ/mol'; 'absorbs at 455 nm in the blue; the transmitted light appears orange' with no complementary-color explanation.",
+ "recommended_outcome": "This section needs a brief plain-language bridge for the energy–wavelength constant (what it represents) and for why absorbing blue light makes a compound look orange (complementary color), so the quantitative and color claims are followable rather than accepted blindly.",
+ "confidence": 0.73
+ },
+ {
+ "finding_id": "struggle-010",
+ "location": {
+ "section_id": "nugget-allylic-cation-addition",
+ "concept_slug": "allylic-cations-and-14-addition",
+ "nugget_id": "nugget-allylic-cation-addition",
+ "anchor_text": "protonation at a terminal carbon (C1) produces a carbocation at C2"
+ },
+ "severity": "medium",
+ "category": "misconception",
+ "observation": "The section reasons about the diene using positional labels (protonate C1 → cation at C2, charge shared to C4) while the products are named by fresh IUPAC numbering (3-bromobut-1-ene, 1-bromobut-2-ene), and the associated curved-arrow question relabels the same cation yet again as a '1-methylallyl' form with the SMILES CC=C[CH2+] and a 'C4' terminal carbon. The carbon that is 'C1' of the diene, 'C1' of a product name, and the methyl of the cation SMILES are not the same atom.",
+ "learner_impact": "A struggling student trying to track which carbon is which across the prose, the product names, and the mechanism question loses the mapping and cannot tell whether bromide 'at C2' and '3-bromobut-1-ene' describe the same event. They either give up reconciling the numbers or answer the curved-arrow/error-repair questions by pattern rather than by following the atoms.",
+ "evidence": "nugget-allylic-cation-addition uses C1/C2/C4 diene numbering; products are 3-bromobut-1-ene / 1-bromobut-2-ene; question ch14-allyl-capture-arrow uses SMILES 'CC=C[CH2+]' with site labels 'Methyl carbon (C1)' and 'Terminal CH₂ carbon... (C4)'.",
+ "recommended_outcome": "The addition section needs a consistent, visually anchored carbon-numbering (a labeled figure of the diene carried through to the cation and products) so the student can see that the mechanism numbering and the product names refer to the same atoms.",
+ "confidence": 0.68
+ }
+ ],
+ "strengths": [
+ "The question bank is genuinely supportive for a shaky student: every item has a 3-level hint ladder that escalates from concept to concrete answer, plus specific per-wrong-answer explanations that name the exact misconception (e.g., ch14-why-kinetic-product distinguishes 'faster' from 'more stable').",
+ "The concepts encode the common wrong moves explicitly in 'trouble_spots' (conjugation ≠ any two double bonds; smaller heat of hydrogenation = more stable; resonance forms are not interconverting isomers), which is exactly the kind of misconception-naming a struggling student benefits from.",
+ "The prose is accurate, plainly worded, and consistently forward-references how each idea will be used (MOs → Diels–Alder + UV), giving a motivated reader a sense of where the chapter is heading.",
+ "Molecule figures carry clear, specific alt text and 'learning_goal' descriptions, so each structure is captioned with what it is meant to teach rather than left unexplained."
+ ],
+ "open_questions": [
+ "Does the reader UI let a student switch to the shorter 'terse'/'standard' detail levels, or expose the authored per-nugget practice_checks? Both exist in the source package but neither is visible in the compiled reader JSON I reviewed; if the UI surfaces them, findings struggle-006 and struggle-007 soften considerably.",
+ "Is the deferred Diels–Alder animation (video-diels-alder-cycloaddition) expected to ship in version 1, or is the hidden empty video block the intended final state for launch? This affects whether struggle-005 is a gap or a known deferral."
+ ]
+ },
+ {
+ "persona": "Accessibility Persona",
+ "persona_version": "1.0.0",
+ "chapter_id": "conjugated-compounds-and-ultraviolet-spectroscopy",
+ "chapter_version": "1",
+ "model": "claude-opus-4-8[1m]",
+ "summary": "This chapter is unusually strong for non-visual access at the prose layer: every piece of load-bearing chemistry — diene classification, heats of hydrogenation, the four butadiene π MOs with their node counts and HOMO/LUMO assignments, the allylic-cation resonance argument, kinetic/thermodynamic ratios, the Diels–Alder electron count and stereochemistry, and the λmax series with the E = 1.196×10⁵/λ relation — is carried in text, not locked inside a figure. There is no MO energy-level diagram, no UV spectrum trace, and no orbital-phase artwork, so no visual-only carrier of meaning and no color/motion/hover-only distinction exists to fail. Molecule figures carry substantive, chemically specific alt text plus a visible learning-goal caption, and every one of the 38 questions ships an accessible_description that conveys the task without leaking the answer. The residual risk is not description quality but interaction: several required question types are draw-on-canvas or drag-based (structure_scaffold, curved_arrow, categorize_groups, rank_order, matching_pairs, comparison_matrix, reaction_coordinate_reasoning), and the content provides no confirmed non-pointer path to complete them. One reaction-coordinate item also has an accessible_description that omits the quantitative fact its answer depends on. These interaction gaps, not the prose, are what stand between this chapter and confident accessibility.",
+ "overall_score": 7.5,
+ "publication_blockers": [],
+ "findings": [
+ {
+ "finding_id": "access-001",
+ "location": {
+ "question_slug": "ch14-draw-da-cyclohexene",
+ "concept_slug": "diels-alder-cycloaddition"
+ },
+ "severity": "high",
+ "category": "interactive-fallback",
+ "observation": "Four required questions are structure_scaffold items with student_config.scaffold = 'blank_canvas' and an rdkit-graded SMILES answer key (ch14-draw-14-adduct, ch14-draw-14-adduct-v2, ch14-draw-da-cyclohexene, ch14-draw-da-cyclohexene-v2). The task is to draw a structure in the editor. The content specifies no alternative input path (e.g., typing a SMILES/IUPAC name) for a learner who cannot use fine-pointer input or who is drawing non-visually.",
+ "learner_impact": "A student who relies on keyboard-only navigation, a screen reader, or who cannot perform fine-pointer drawing may be unable to complete a graded 'draw the product' task, even though they can state the product in words (the hints literally name it, e.g. '1-bromobut-2-ene', 'cyclohex-3-ene-1-carbonitrile'). The activity becomes non-completable for those learners.",
+ "evidence": "ch14-draw-da-cyclohexene: student_config [redacted], answer_key [redacted], grading_rules {\"structure_engine\": \"rdkit\"}; same shape in ch14-draw-14-adduct, ch14-draw-14-adduct-v2, ch14-draw-da-cyclohexene-v2.",
+ "recommended_outcome": "Each draw-the-structure task needs a verified non-pointer, non-visual way to submit the same answer, so a learner who cannot draw on the canvas can still complete the required activity and be graded equivalently.",
+ "confidence": 0.7
+ },
+ {
+ "finding_id": "access-002",
+ "location": {
+ "question_slug": "ch14-allyl-capture-arrow",
+ "concept_slug": "allylic-cations-and-14-addition"
+ },
+ "severity": "high",
+ "category": "keyboard-operability",
+ "observation": "The two curved_arrow items (ch14-allyl-capture-arrow, ch14-allyl-capture-arrow-v2) require the student to draw a curved arrow from a source site to a target site on a molecule. The config does provide well-labeled discrete sites (e.g. 'Bromide ion (lone pairs)', 'Terminal CH₂ carbon bearing the positive charge (C4)'), which is the right foundation for a pick-source/pick-target selection model, but the content does not establish that the arrow can be constructed by keyboard/screen-reader selection rather than pointer drawing.",
+ "learner_impact": "If arrow entry is pointer-drag only, a keyboard-only or screen-reader user cannot express the answer despite fully understanding the mechanism (lone pair to cationic carbon). The two error_repair variants (ch14-arrow-error-repair) escape this because they are pick-target/pick-category/pick-repair selections, which highlights that the curved_arrow variant is the one at risk.",
+ "evidence": "ch14-allyl-capture-arrow student_config.sites list with labeled ids and kinds; answer_key.expected_arrows [{source: lone_pair site 4, target: atom site 3}]; max_arrows 1.",
+ "recommended_outcome": "The curved-arrow task needs a confirmed keyboard/screen-reader-operable way to choose the electron source and sink (the labeled sites already exist to support this), so a non-pointer user can submit the arrow.",
+ "confidence": 0.6
+ },
+ {
+ "finding_id": "access-003",
+ "location": {
+ "question_slug": "ch14-addition-profile-reasoning",
+ "concept_slug": "kinetic-vs-thermodynamic-control"
+ },
+ "severity": "medium",
+ "category": "media-equivalence",
+ "observation": "The reaction_coordinate_reasoning items ask for 'overall' energy change (answer key: exergonic), which depends on the product minimum lying BELOW the reactant starting level (product y = -0.8 vs reactant y = 0.0). The accessible_description says the profile rises to a carbocation intermediate and then goes 'over a second, lower transition state down to the product' but never states that the final product sits below the initial reactants. A sighted student reads this from the y-axis; a non-visual student is not given it.",
+ "learner_impact": "A non-visual student can answer step_count, rate-determining step, and per-step directions from the description, but cannot reliably determine that the overall reaction is exergonic, because 'down to the product' describes descent from the intermediate, not the product's position relative to the reactants. This item's equivalence is therefore incomplete. Same gap in ch14-addition-profile-reasoning-v2 (product y = -0.6).",
+ "evidence": "ch14-addition-profile-reasoning profile.control min_2 y = -0.8 vs min_0 y = 0.0; ask includes 'overall'; answer_key [redacted]; accessible_description omits any statement that the product lies below the reactants.",
+ "recommended_outcome": "The energy-profile description needs to convey the same quantitative relations the graph shows a sighted reader — in particular the product's energy relative to the starting reactants — so the 'overall energy change' sub-question is answerable non-visually.",
+ "confidence": 0.72
+ },
+ {
+ "finding_id": "access-004",
+ "location": {
+ "question_slug": "ch14-diene-class-categorize",
+ "concept_slug": "diene-classes-and-stability"
+ },
+ "severity": "medium",
+ "category": "interactive-fallback",
+ "observation": "A large share of the required items use inherently spatial/drag interaction models — categorize_groups (sort items into bins), rank_order (order cards), matching_pairs (pair left to right), and comparison_matrix (fill a yes/no grid). Their accessible_descriptions correctly convey the stimulus and task, but the content does not establish that the sorting/ordering/matching can be performed without drag-and-drop pointer input.",
+ "learner_impact": "If these interactions are drag-only, keyboard-only and screen-reader users may be unable to place items even though they know the answers. This spans many items (ch14-diene-class-categorize, ch14-diene-stability-ranking, ch14-lambda-max-matching, ch14-kinetic-thermo-matrix and their v2 variants), so an unverified drag dependency would broadly reduce completability.",
+ "evidence": "ch14-diene-class-categorize student_config with items i1–i6 and groups g-conj/g-isol/g-cumu; ch14-diene-stability-ranking cards ordered in answer_key.correct_order; ch14-lambda-max-matching left/right with correct_pairs.",
+ "recommended_outcome": "These sort/rank/match/grid activities need a confirmed keyboard- and screen-reader-operable input method (e.g., assign-via-listbox) so the required tasks are completable without a pointer.",
+ "confidence": 0.55
+ }
+ ],
+ "strengths": [
+ "All conceptually load-bearing chemistry is delivered as text, not trapped in a figure: the four butadiene π MOs are described with explicit node counts, bonding/antibonding status, and HOMO=ψ₂ / LUMO=ψ₃* assignments in prose (nugget-butadiene-mos), so the absence of an MO diagram creates no non-visual access gap.",
+ "Molecule alt text is chemically specific rather than a bare name — it states double-bond positions, the intervening sp³/sp carbon, substituent placement, and E/Z geometry (e.g. mol-1-bromobut-2-ene, mol-penta-14-diene) — and each reader molecule block additionally exposes the learning goal as visible caption text.",
+ "Every one of the 38 questions carries an accessible_description that conveys the task and stimulus without handing over the answer; option-level text labels (compound names, node counts, verbal gap descriptions) mean selection questions are answerable by name rather than by reading a rendered structure.",
+ "No distinction anywhere depends solely on color, motion, spatial position, or hover — the β-carotene 'orange' point is fully explained in prose (absorbs blue at 455 nm, transmits the complement), and the deferred Diels–Alder animation is is_hidden with its content preserved in nugget-diels-alder prose."
+ ],
+ "open_questions": [
+ "Does the structure editor used for structure_scaffold questions (blank_canvas, rdkit-graded) offer a keyboard-operable and/or SMILES/name text-entry path? This determines whether access-001 is a high-severity gap or a hard publication blocker.",
+ "Are curved_arrow answers (access-002) constructible by keyboard/screen-reader selection of the already-labeled source and target sites, or only by pointer drag?",
+ "Are the drag-style interactions in categorize_groups, rank_order, matching_pairs, and comparison_matrix (access-004) backed by an accessible non-pointer control, or is drag-and-drop the only input?"
+ ]
+ },
+ {
+ "persona": "Learner with Visual Preference",
+ "persona_version": "1.0.0",
+ "chapter_id": "conjugated-compounds-and-ultraviolet-spectroscopy",
+ "chapter_version": "1",
+ "model": "claude-opus-4-8[1m]",
+ "summary": "The chapter is prose-rich and every existing figure is chemically correct, clearly labeled, and carries a specific learning goal (strong alt text and per-figure descriptions throughout). The weakness, seen through a visual-preference lens, is that the reader's only figure type is a flat 2D molecule render, so several concepts that are inherently spatial or graphical are asserted in dense prose and never shown. The π molecular-orbital section describes four orbitals, their node counts, energy ordering, filling, and the HOMO-LUMO gap with no energy-level/orbital diagram; the kinetic-vs-thermodynamic section describes competing transition-state barriers and product energies with no reaction-energy profile (even though the concept lists reaction_coordinate as a preferred representation); the Diels-Alder transformation and the allylic-cation branching (one intermediate to two products) are described but the transformation itself, its electron flow, and the s-cis/s-trans distinction are never depicted; and the UV section lists a λmax trend (171 to 455 nm) and complementary-color argument without a spectrum, trend plot, or gap-vs-conjugation visual. The deferred Diels-Alder video is hidden in the reader, so no moving or static depiction of that transformation reaches the student. None of this is a chemistry error, so there are no blockers; the needs are additive visualizations that would materially reduce explanation burden.",
+ "overall_score": 6.0,
+ "publication_blockers": [],
+ "findings": [
+ {
+ "finding_id": "visual-001",
+ "location": {
+ "section_id": "nugget-butadiene-mos",
+ "nugget_id": "nugget-butadiene-mos",
+ "concept_slug": "molecular-orbitals-of-butadiene",
+ "anchor_text": "The lowest-energy orbital, ψ₁, has zero nodes"
+ },
+ "severity": "high",
+ "category": "visual-opportunity",
+ "observation": "The molecular-orbital section describes four π molecular orbitals (ψ₁-ψ₄*), their node counts and phase relationships, their energy ordering, the filling of the four π electrons, and the resulting HOMO (ψ₂) / LUMO (ψ₃*) gap entirely in prose. The only figures in the section are two flat 2D molecule structures (buta-1,3-diene and hexa-1,3,5-triene), which show connectivity but nothing about orbitals, nodes, phase, occupancy, or the energy gap.",
+ "learner_impact": "A learner who benefits from spatial organization must hold four abstract orbitals, their nodal planes, relative energies, and electron occupancy in working memory purely from text. An energy-level diagram is the standard, near-canonical way this topic is taught, and its absence forces the reader to reconstruct a picture the prose is really describing.",
+ "evidence": "nugget-butadiene-mos text: 'ψ₂ has one node, located between C2 and C3 ... ψ₃* has two nodes and is net antibonding, and ψ₄*, with a node between every pair of carbons'; assets are only mol-buta-13-diene and mol-hexa-135-triene (plain molecule renders).",
+ "recommended_outcome": "The reader needs a way to see the four butadiene π molecular orbitals arranged by energy with their nodes, phases, electron occupancy, and the HOMO-LUMO gap made visible, rather than reconstructing that ordering from prose.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "visual-002",
+ "location": {
+ "section_id": "nugget-kinetic-thermodynamic",
+ "nugget_id": "nugget-kinetic-thermodynamic",
+ "concept_slug": "kinetic-vs-thermodynamic-control",
+ "anchor_text": "the transition state leading to it lies lower in energy"
+ },
+ "severity": "high",
+ "category": "visual-opportunity",
+ "observation": "The kinetic-versus-thermodynamic section is built on an energy comparison — the 1,2 pathway has the lower transition-state barrier while the 1,4 product sits at lower energy — but the reader shows no reaction-energy profile. The two figures in the section are the same two static product molecules (3-bromobut-1-ene and 1-bromobut-2-ene) already shown in the previous section. The concept itself lists 'reaction_coordinate' among its preferred_representations, yet no such diagram is rendered in the teaching prose (only a separate question later contains a profile).",
+ "learner_impact": "The whole point — that 'faster to form' and 'more stable' are different axes — is a two-curve energy picture. Without it, a learner who reasons spatially cannot see the lower barrier versus lower well relationship and must infer a graph the text is narrating, exactly where a diagram would replace a dense paragraph.",
+ "evidence": "Concept 'kinetic-vs-thermodynamic-control' preferred_representations includes 'reaction_coordinate'; reader section nugget-kinetic-thermodynamic blocks contain only text plus repeated molecule blocks blk-elplwpxw and blk-zbgeqo9m; prose: 'The barrier to 1,2-addition is lower ... the 1,4-adduct is the more stable compound'.",
+ "recommended_outcome": "The section needs the competing kinetic (lower barrier) and thermodynamic (lower-energy product) pathways shown on a shared energy-versus-progress axis so the two-criterion distinction is visible rather than asserted.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "visual-003",
+ "location": {
+ "section_id": "nugget-allylic-cation-addition",
+ "nugget_id": "nugget-allylic-cation-addition",
+ "concept_slug": "allylic-cations-and-14-addition",
+ "anchor_text": "The allylic carbocation is one species described by two resonance forms"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The section teaches that one delocalized allylic cation, described by two resonance forms with charge shared over C2 and C4, gives two products depending on where bromide attacks. The reader shows only the two final product molecules; the diene starting material, the shared allylic cation, its two resonance drawings, and the branching of a single intermediate into two products are not depicted. The branching relationship and the electron flow are exactly the kind of transformation a visual makes clear.",
+ "learner_impact": "A learner who benefits from seeing relationships must build the branching mechanism (one cation, two capture sites, two products, with a migrating double bond) from text alone; the two isolated product structures do not convey that they descend from a common intermediate.",
+ "evidence": "Prose describes 'one species described by two resonance forms ... the positive charge is genuinely shared between the two termini'; assets are only mol-3-bromobut-1-ene and mol-1-bromobut-2-ene (products), with no figure of the diene or the allylic cation resonance pair or the branching pathway.",
+ "recommended_outcome": "The section needs the one-intermediate-to-two-products relationship — the allylic cation, its shared charge/resonance, and the two capture routes — made visible, rather than shown only as two disconnected product structures.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "visual-004",
+ "location": {
+ "section_id": "nugget-diels-alder",
+ "nugget_id": "nugget-diels-alder",
+ "asset_id": "video-diels-alder-cycloaddition",
+ "concept_slug": "diels-alder-cycloaddition",
+ "anchor_text": "both new carbon–carbon σ bonds form simultaneously"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The Diels-Alder transformation — s-cis diene plus dienophile approaching in parallel planes, six electrons circulating, two new σ bonds forming, one π bond surviving in the ring — is described only in prose. The planned animation is deferred and its reader block is hidden (is_hidden: true, empty url), so the student sees no depiction of the transformation. The section's remaining figures are the isolated cyclohexene product and maleic anhydride; the reaction (diene plus dienophile giving the ring, with the bond reorganization) is never shown, even as a static labeled scheme.",
+ "learner_impact": "The [4+2] cycloaddition is arguably the most transformation-centric concept in the chapter, and a learner who benefits from seeing change over a sequence gets only the endpoint molecule. The relationship between where each product carbon came from and where the surviving double bond sits must be reconstructed from text.",
+ "evidence": "video_brief video-diels-alder-cycloaddition production_status 'deferred'; reader block blk-yrw8woqa has 'url': '' and 'is_hidden': true; section figures are mol-cyclohexene-adduct and mol-maleic-anhydride only; prose: 'both new σ bonds form on the same face ... six π electrons shift in concert'.",
+ "recommended_outcome": "The section needs the Diels-Alder transformation itself — reactants, electron reorganization/new bonds, and product with carbon mapping — conveyed visually (a static labeled sequence would suffice), since the deferred animation currently leaves the reader with no depiction of the reaction.",
+ "confidence": 0.82
+ },
+ {
+ "finding_id": "visual-005",
+ "location": {
+ "section_id": "nugget-diene-classes",
+ "nugget_id": "nugget-diene-classes",
+ "concept_slug": "diene-classes-and-stability",
+ "anchor_text": "In the s-trans conformation the double bonds point to opposite sides of the single bond; in the s-cis conformation they point to the same side"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The s-cis versus s-trans conformational distinction is introduced in the diene-classes section and is the geometric key to the later Diels-Alder requirement, but it is described only in words ('opposite sides' versus 'same side'). No figure shows the two conformers side by side; the buta-1,3-diene asset is a single flat depiction that does not distinguish the two rotamers. The same distinction is again asserted verbally in the dienes-and-dienophiles section without a comparison figure.",
+ "learner_impact": "A same-side/opposite-side geometric contrast is precisely what a paired diagram communicates instantly and prose communicates slowly. Learners who reason spatially cannot see why only s-cis reaches the transition state, which weakens the payoff in the later Diels-Alder section that depends on this picture.",
+ "evidence": "nugget-diene-classes prose defines s-trans/s-cis; nugget-diene-dienophile-requirements prose: 'only the s-cis conformation points those termini toward the same side'; the only related asset is mol-buta-13-diene, a single static structure.",
+ "recommended_outcome": "The chapter needs the s-cis and s-trans conformations shown as a visible side-by-side comparison so the same-side versus opposite-side geometry — and its consequence for the Diels-Alder reaction — is seen rather than described twice in prose.",
+ "confidence": 0.83
+ },
+ {
+ "finding_id": "visual-006",
+ "location": {
+ "section_id": "nugget-uv-spectroscopy",
+ "nugget_id": "nugget-uv-spectroscopy",
+ "concept_slug": "uv-spectroscopy-and-conjugation",
+ "anchor_text": "ethylene absorbs at 171 nm, buta-1,3-diene at 217 nm, and hexa-1,3,5-triene at 258 nm"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The UV section conveys a quantitative trend (λmax lengthening 171 to 217 to 258 to 455 nm as conjugation extends, tied to a narrowing HOMO-LUMO gap) and a color argument (β-carotene absorbs blue at 455 nm, so it looks orange). Both the trend and the absorbed-versus-transmitted-color relationship are graphical by nature, but the reader shows only two flat molecule structures (hexatriene and β-carotene). There is no UV absorption spectrum, no plot of λmax versus number of conjugated double bonds, no gap-narrowing ladder, and no visual of the complementary-color relationship.",
+ "learner_impact": "A learner who benefits from visible comparison gets a list of numbers where a trend line, a shrinking-gap ladder, or a sample spectrum would make the monotonic relationship and the crossing into the visible region immediately apparent, and where a color visual would make the complementary-color reasoning concrete.",
+ "evidence": "nugget-uv-spectroscopy prose lists the λmax series and 'β-Carotene ... absorbs at 455 nm in the blue; the transmitted light appears orange'; assets are only mol-hexa-135-triene and mol-beta-carotene.",
+ "recommended_outcome": "The section needs the λmax-versus-conjugation trend (and ideally the shrinking HOMO-LUMO gap and the absorbed/transmitted-color relationship) shown graphically, so the quantitative pattern is seen rather than parsed from a numeric list.",
+ "confidence": 0.8
+ },
+ {
+ "finding_id": "visual-007",
+ "location": {
+ "section_id": "nugget-kinetic-thermodynamic",
+ "nugget_id": "nugget-kinetic-thermodynamic",
+ "asset_id": "mol-3-bromobut-1-ene",
+ "anchor_text": "3-Bromobut-1-ene, the 1,2-addition product"
+ },
+ "severity": "low",
+ "category": "visual-redundancy",
+ "observation": "The two product molecule figures in the kinetic-vs-thermodynamic section (3-bromobut-1-ene and 1-bromobut-2-ene) are identical to the two figures already presented in the immediately preceding allylic-cation section. In the kinetic/thermodynamic context they add little new visual information, while the concept the section actually needs to show (the competing energy pathways) is not depicted.",
+ "learner_impact": "Re-showing the same two static structures in consecutive sections spends the visual channel on repetition instead of on the energy-profile relationship the section is about, mildly diluting attention from the objective.",
+ "evidence": "Reader blocks blk-70hjca8m/blk-kmm1ik5q (allylic section) and blk-elplwpxw/blk-zbgeqo9m (kinetic section) render the same mol-3-bromobut-1-ene and mol-1-bromobut-2-ene assets.",
+ "recommended_outcome": "The kinetic/thermodynamic section's visual budget would be better spent on the energy-pathway comparison (see visual-002) than on repeating the two product structures already shown one section earlier.",
+ "confidence": 0.6
+ }
+ ],
+ "strengths": [
+ "Every molecule figure in the reader is chemically correct (SMILES verified for butadiene, penta-1,4-diene, allene, isoprene, both bromobutene products, cyclopentadiene, maleic anhydride, propenal, cyclohexene, hexatriene, and β-carotene) — no figure-accuracy issues.",
+ "Each figure carries a specific instructional purpose via its per-figure 'description'/learning_goal (for example, penta-1,4-diene's sp³ CH₂ interrupting overlap, maleic anhydride's twin carbonyls lowering the LUMO), so figures teach a point rather than decorate.",
+ "Alt text on figures is consistently descriptive and structure-specific, including geometry cues such as the E label on 1-bromobut-2-ene and the perpendicular π planes noted for allene in prose.",
+ "The deferred Diels-Alder animation was handled responsibly: its reader block is hidden rather than left as a broken empty player, and the production note points to the prose and static figures that carry the same content."
+ ],
+ "open_questions": [
+ "Is the reader's molecule block intended to render only as a static 2D structure, or can it expose an interactive/3D view? Several needs above (allene's orthogonal π planes, s-cis/s-trans, MO nodes) would be partly met by an interactive render if that capability exists in the reader.",
+ "The reaction-coordinate reasoning question (ch14-addition-profile-reasoning) already defines a usable energy profile; could that same profile data double as the teaching visual the kinetic/thermodynamic section lacks, or are question and reader assets kept separate by design?"
+ ]
+ }
+ ],
+ "publication_readiness": "ready with minor revisions",
+ "executive_summary": "All four personas cleared the chapter of chemistry errors and answer leaks: quantitative anchors, SMILES, curved-arrow direction, and Diels–Alder stereochemistry are correct, question feedback and hint ladders are consistently praised, and no persona declared a publication blocker. The dominant theme — raised independently by the instructor, struggling-student, and visual-preference reviewers — is that the chapter's only figure type is the static 2D molecule, so the four inherently visual ideas (butadiene π MO ladder, kinetic-vs-thermodynamic energy branching, allylic-cation resonance/branching, and the concerted Diels–Alder step) are carried by prose alone; the accessibility reviewer independently confirmed the prose fully carries the chemistry, so this is an enhancement cluster, not an access failure. Verified defects — two nomenclature slips in questions, an incomplete energy-profile accessible description, a missing notation gloss, an unexplained constant, a missing mechanistic rationale, and a numbering-mapping ambiguity — were corrected in this run. Remaining work is the visual-scaffolding cluster (needs the maintainer's figure-policy decisions, given the 2026-07-23 reaction-coordinate review constraints) and platform-level verification of non-pointer input for draw/drag question types, which spans all chapters, not just this one.",
+ "consensus_strengths": [
+ "Chemistry is accurate and quantitatively grounded throughout (16 kJ/mol conjugation stabilization, 71:29/15:85 temperature ratios, λmax 171/217/258/455 nm, E = 1.196×10⁵/λ) — verified independently by the instructor persona with no chemical-accuracy findings from any reviewer.",
+ "Question bank is strong for learning: 38 items across 13 types, all seven concepts covered, three-level hint ladders and distractor-specific wrong-answer explanations praised by instructor, struggling-student, and accessibility personas alike.",
+ "Molecule figure alt text is chemically specific (double-bond positions, interrupting sp³/sp carbons, E/Z geometry) and every question ships an answer-neutral accessible description.",
+ "The deferred Diels–Alder video is handled honestly: hidden block, no broken player, content preserved in prose, deferral recorded.",
+ "Concept sequencing is correct and misconceptions are anticipated explicitly in trouble_spots and addressed in prose."
+ ],
+ "ranked_recommendations": [
+ {
+ "rec_id": "rec-001",
+ "title": "Butadiene π MO ladder has no visual",
+ "need": "The four π MOs' node patterns, energy ordering, occupancy, and the HOMO–LUMO gap are described in three paragraphs of prose with no orbital or energy-level visual; three personas independently flagged this as the chapter's largest scaffolding gap.",
+ "chosen_intervention": "new-figure",
+ "rationale": "Prose already provides the accessible text equivalent (accessibility persona confirms), so the least-complex full fix is a single static MO energy-ladder figure; check the orbital_overlay preset registry before authoring new art. An instructor-note cannot substitute — the gap is for students, not instructors.",
+ "target_surface": "figure",
+ "severity": "high",
+ "source_findings": [
+ "visual-001",
+ "struggle-001",
+ "instr-001"
+ ]
+ },
+ {
+ "rec_id": "rec-002",
+ "title": "Kinetic vs thermodynamic control lacks its energy diagram",
+ "need": "The section's entire argument compares two barrier heights and two product depths, yet no energy profile appears in the teaching prose (one exists only inside a later question); the concept itself lists reaction_coordinate as a preferred representation.",
+ "chosen_intervention": "new-figure",
+ "rationale": "A single two-branch profile from the shared allylic cation is the canonical 'shape is the lesson' diagram and the least-complex fix; flagged for maintainer sign-off because the 2026-07-23 science review rejected reaction-coordinate diagrams for multistep ionic additions — this branch diagram is pedagogically distinct, but the call is the reviewer's, not the orchestrator's.",
+ "target_surface": "figure",
+ "severity": "high",
+ "source_findings": [
+ "visual-002",
+ "struggle-004",
+ "visual-007"
+ ]
+ },
+ {
+ "rec_id": "rec-003",
+ "title": "Allylic cation and its branching are never shown",
+ "need": "The delocalized allylic cation, its two resonance contributors, and the one-intermediate-to-two-products branching exist only in prose; the concept's own trouble_spot (resonance forms read as interconverting isomers) is reinforced by a text-only treatment.",
+ "chosen_intervention": "static-image-sequence",
+ "rationale": "A static labeled sequence (diene → protonation → two resonance drawings → two capture routes) fully addresses the need without animation; the carbon-numbering prose fix applied this run partially addresses the tracking problem.",
+ "target_surface": "figure",
+ "severity": "high",
+ "source_findings": [
+ "visual-003",
+ "struggle-003",
+ "instr-002",
+ "struggle-010"
+ ]
+ },
+ {
+ "rec_id": "rec-004",
+ "title": "Concerted Diels–Alder step has no depiction",
+ "need": "With the video deferred and hidden, the reader never shows the s-cis approach, cyclic transition state, three-arrow electron flow, or simultaneous bond formation — the exact content that counters the 'find the intermediate' misconception.",
+ "chosen_intervention": "static-image-sequence",
+ "rationale": "A static three-panel scheme (approach / cyclic TS with arrows / product with carbon mapping) is far cheaper than the deferred bespoke animation and covers the teaching need; the animation remains a future upgrade, not the requirement.",
+ "target_surface": "figure",
+ "severity": "high",
+ "source_findings": [
+ "visual-004",
+ "struggle-005",
+ "instr-003"
+ ]
+ },
+ {
+ "rec_id": "rec-005",
+ "title": "Non-pointer input for draw/drag question types unverified",
+ "need": "structure_scaffold (draw on canvas), curved_arrow (drag an arrow), and the sort/rank/match/grid types have no confirmed keyboard/screen-reader path; if drag-only, required activities become non-completable for some learners.",
+ "chosen_intervention": "keyboard-alternative",
+ "rationale": "This is a platform property of the shared question-type runtime, not chapter content — it spans every chapter using these types (ch13 shipped the same ones). Needs a one-time platform verification/remediation; no chapter-level edit can address it. The labeled sites in curved_arrow configs already support a pick-source/pick-target model.",
+ "target_surface": "interactive",
+ "severity": "high",
+ "source_findings": [
+ "access-001",
+ "access-002",
+ "access-004"
+ ]
+ },
+ {
+ "rec_id": "rec-006",
+ "title": "s-cis / s-trans conformations described but never shown",
+ "need": "The same-side vs opposite-side geometry — the key to Diels–Alder reactivity — is described twice in words with no side-by-side conformer visual; plain SMILES cannot encode the rotamer difference.",
+ "chosen_intervention": "new-figure",
+ "rationale": "A paired conformer depiction (or the conformational energy profile already deferred in the coherence pass) is the least-complex full fix; deferred to maintainer review because it introduces a new asset kind for this chapter against the all-molecule precedent.",
+ "target_surface": "figure",
+ "severity": "medium",
+ "source_findings": [
+ "visual-005",
+ "struggle-002"
+ ]
+ },
+ {
+ "rec_id": "rec-007",
+ "title": "Energy-profile accessible descriptions omitted the reactant-vs-product level",
+ "need": "The 'overall energy change' sub-question depends on the product minimum lying below the reactants, which the accessible description did not state — a sighted student reads it off the y-axis; a non-visual student was not given it.",
+ "chosen_intervention": "text-equivalent",
+ "rationale": "One-sentence extension of both profiles' accessible descriptions restores equivalence; describing the stimulus faithfully is not an answer leak because the graph shows the same fact to sighted students.",
+ "target_surface": "assessment",
+ "severity": "medium",
+ "source_findings": [
+ "access-003"
+ ]
+ },
+ {
+ "rec_id": "rec-008",
+ "title": "λmax/conjugation trend is numbers-only",
+ "need": "The 171→455 nm series and the shrinking-gap logic are conveyed as a numeric list; a trend visual would make the inverse energy–wavelength relation and the crossing into the visible range immediately apparent.",
+ "chosen_intervention": "new-figure",
+ "rationale": "Lower priority than rec-001..004: the matching question already forces engagement with the series, and the prose states the inverse relation explicitly; schedule with the visual cluster.",
+ "target_surface": "figure",
+ "severity": "medium",
+ "source_findings": [
+ "visual-006",
+ "instr-004"
+ ]
+ },
+ {
+ "rec_id": "rec-009",
+ "title": "Reader shows no retrieval checkpoints",
+ "need": "Authored per-nugget practice_checks flow to the LMS module (practice_prompt/practice_answer) but not into the reader page, so a reader-only student gets seven dense sections with no self-test moment.",
+ "chosen_intervention": "instructor-note",
+ "rationale": "Surfacing practice_checks in the reader is a systemic reader-builder feature (recorded as systemic in the ch12 review), not a chapter edit; meanwhile the LMS surface carries all seven prompts and the reader's tier slider (terse/standard/expanded all compiled) reduces the load concern.",
+ "target_surface": "instructor-support",
+ "severity": "medium",
+ "source_findings": [
+ "struggle-006",
+ "struggle-007"
+ ]
+ },
+ {
+ "rec_id": "rec-010",
+ "title": "ψ and asterisk notation never glossed",
+ "need": "ψₙ and the * = antibonding convention are used across two sections without definition, breaking the ψ₂→ψ₃* = π→π* payoff for students who have not met the notation.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "A one-line parenthetical gloss at first use fully addresses the need.",
+ "target_surface": "prose",
+ "severity": "medium",
+ "source_findings": [
+ "struggle-008"
+ ]
+ },
+ {
+ "rec_id": "rec-011",
+ "title": "Conversion constant dropped in without meaning",
+ "need": "E = 1.196×10⁵ kJ·nm·mol⁻¹/λ appears with no statement of what the constant is, inviting mechanical plug-in; the complementary-color logic was present but terse.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "A parenthetical identifying the constant as hc·Nₐ in convenient units, plus a clause tying 'complement' to 'white minus absorbed blue leaves orange', fully addresses the need.",
+ "target_surface": "prose",
+ "severity": "medium",
+ "source_findings": [
+ "struggle-009"
+ ]
+ },
+ {
+ "rec_id": "rec-012",
+ "title": "Diene vs product carbon numbering never reconciled",
+ "need": "Prose reasons in diene numbering (C1–C4) while product names renumber the chain, and the mechanism question relabels the cation again; students tracking atoms across the three surfaces lose the mapping.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "A parenthetical at the first product naming stating the renumbering (diene C2 = product C3) is the least-complex fix; the full labeled-figure need folds into rec-003.",
+ "target_surface": "prose",
+ "severity": "medium",
+ "source_findings": [
+ "struggle-010"
+ ]
+ },
+ {
+ "rec_id": "rec-013",
+ "title": "Curved-arrow question mislabels its resonance form",
+ "need": "ch14-allyl-capture-arrow called the depicted contributor (charge on the terminal CH₂, CC=C[CH2+]) the '1-methylallyl resonance form', which names the other contributor — an internally contradictory label in the exact concept where form↔name mapping matters.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Rename the depicted form correctly (the primary but-2-en-1-yl/crotyl contributor) in prompt and accessible description; no structural change needed.",
+ "target_surface": "assessment",
+ "severity": "low",
+ "source_findings": [
+ "instr-005",
+ "struggle-010"
+ ]
+ },
+ {
+ "rec_id": "rec-014",
+ "title": "Impossible stereodescriptor locant on ranking card",
+ "need": "'(1E)-Hexa-1,3-diene' places an E descriptor on the terminal, non-stereogenic C1=C2 bond; the stereogenic bond is C3=C4.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Rename the card (3E)-hexa-1,3-diene, matching the package's own correct (3E)-hexatriene usage.",
+ "target_surface": "assessment",
+ "severity": "low",
+ "source_findings": [
+ "instr-006"
+ ]
+ },
+ {
+ "rec_id": "rec-015",
+ "title": "Lower 1,2 barrier asserted without a why",
+ "need": "The kinetic-control claim gives no mechanistic rationale, encouraging memorization of 'kinetic = 1,2' instead of transferable reasoning.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "One clause tying the lower barrier to the greater positive-charge share on the secondary terminus (already established in the allylic nugget) fully addresses the need.",
+ "target_surface": "prose",
+ "severity": "low",
+ "source_findings": [
+ "instr-007"
+ ]
+ },
+ {
+ "rec_id": "rec-016",
+ "title": "Endo rule taught but not scoped",
+ "need": "Endo selectivity appears in expanded prose but is absent from objectives and assessment, leaving scope, objectives, and testing misaligned.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Explicitly framing the endo paragraph as enrichment is least-complex; adding an objective plus a question would expand assessment scope without need (no released type renders endo/exo cleanly — recorded in the coherence pass).",
+ "target_surface": "prose",
+ "severity": "low",
+ "source_findings": [
+ "instr-008"
+ ]
+ }
+ ],
+ "accessibility_blockers": [],
+ "visual_opportunities": [
+ "MO energy ladder for butadiene (rec-001)",
+ "Two-branch kinetic/thermodynamic energy profile (rec-002, needs maintainer RC-diagram policy call)",
+ "Allylic cation resonance/branching static sequence (rec-003)",
+ "Diels–Alder concerted-step static sequence (rec-004)",
+ "s-cis/s-trans conformer pair (rec-006)",
+ "λmax vs conjugation trend graphic (rec-008)"
+ ],
+ "sufficient_as_is": [
+ "All 12 molecule figure alt texts — praised by every persona; no rewriting needed.",
+ "36 of 38 question accessible descriptions (the two energy-profile items were extended this run).",
+ "The complementary-color explanation in the UV nugget — already present ('displaying the complement of the light it absorbs'); only lightly reinforced.",
+ "Repeating the two bromobutene product figures in the kinetic/thermodynamic section — intentional continuity with the preceding section (the products are the subject of both); no removal needed (visual-007).",
+ "Reader text density — the compiled chapter carries terse/standard/expanded tiers for the client-side personalization slider, so the expanded default flagged by the struggling-student persona is user-adjustable (struggle-007 softened)."
+ ],
+ "disagreements": [
+ {
+ "topic": "Is the absence of an MO/orbital diagram an access gap?",
+ "positions": {
+ "Accessibility Persona": "A strength: all load-bearing MO content is carried in prose, so no visual-only carrier of meaning exists to fail non-visual readers.",
+ "Learner with Visual Preference": "A high-severity gap: the orbital ladder is the canonical way this is taught and its absence forces prose-only reconstruction.",
+ "Struggling Student": "High-severity conceptual-support gap.",
+ "Organic Chemistry Instructor": "Medium visual-opportunity."
+ },
+ "resolution": "Both are correct on their own axes: text equivalence is satisfied (no accessibility defect), while sighted learners lack scaffolding. Orchestrator treats it as an enhancement (rec-001, new-figure), not an access blocker, and the prose remains the canonical accessible carrier."
+ },
+ {
+ "topic": "Do the missing reader practice checkpoints and expanded-tier default materially harm struggling readers?",
+ "positions": {
+ "Struggling Student": "Medium findings: no checkpoint or importance signal in the reading flow.",
+ "Orchestrator integrity check": "The compiled reader embeds terse/standard/expanded tiers for the personalization slider, and all seven practice_checks flow to the LMS module items."
+ },
+ "resolution": "Partially sufficient as-is: tier switching exists in the shipped artifact, so density is user-adjustable; surfacing practice_checks in the reader remains a systemic reader-builder feature request (rec-009), consistent with the ch12 review's systemic finding, not a chapter defect."
+ },
+ {
+ "topic": "Should the kinetic/thermodynamic section get a reaction-coordinate figure despite the 2026-07-23 review rejections?",
+ "positions": {
+ "Struggling Student": "The teaching section needs the two-branch profile.",
+ "Learner with Visual Preference": "Same, high severity.",
+ "Repo science-review precedent": "the 2026-07-23 pass rejected RC diagrams authored for multistep ionic additions (HBr addition among them)."
+ },
+ "resolution": "The prior rejections targeted profiles of the addition mechanism itself; the branch diagram from the shared cation is the canonical shape-is-the-lesson case the same review explicitly allowed for SN1. Because the boundary is the reviewer's to draw, rec-002 is recommended but not auto-applied."
+ }
+ ],
+ "regression": {
+ "resolved": [],
+ "unchanged": [],
+ "worsened": [],
+ "new": []
+ },
+ "corrections": {
+ "status": "applied-and-verified-without-second-persona-run",
+ "post_correction_readiness_estimate": "ready with minor revisions",
+ "estimate_note": "Not a new persona verdict. The baseline verdict above is preserved; this estimate reflects that all verified errors were fixed while the visual-scaffolding and platform-interaction recommendations remain open.",
+ "applied": [
+ {
+ "change": "ch14-allyl-capture-arrow prompt_text and accessible_description: replaced the incorrect '1-methylallyl resonance form' label with 'but-2-en-1-yl (crotyl) resonance form' to match the depicted structure CC=C[CH2+].",
+ "resolves": [
+ "instr-005"
+ ],
+ "partially_addresses": [
+ "struggle-010"
+ ]
+ },
+ {
+ "change": "ch14-diene-stability-ranking card renamed '(1E)-Hexa-1,3-diene' to '(3E)-Hexa-1,3-diene', placing the stereodescriptor on the stereogenic C3=C4 bond.",
+ "resolves": [
+ "instr-006"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Both reaction_coordinate_reasoning accessible_descriptions (ch14-addition-profile-reasoning, -v2) now state that the intermediate lies above and the product valley below the starting reactants' level, restoring media equivalence for the 'overall energy change' sub-question.",
+ "resolves": [
+ "access-003"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "nugget-butadiene-mos standard and expanded tiers now gloss the notation: ψ is the conventional molecular-orbital symbol and the asterisk marks an antibonding orbital.",
+ "resolves": [
+ "struggle-008"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "nugget-uv-spectroscopy standard and expanded tiers identify the conversion constant as hc·Nₐ in convenient units, and the β-carotene sentence now spells out 'removing blue from white light leaves the transmitted light orange — the complementary color'.",
+ "resolves": [
+ "struggle-009"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "nugget-kinetic-thermodynamic standard and expanded tiers add the mechanistic rationale for the lower 1,2 barrier (capture at the secondary terminus bearing the greater share of the delocalized positive charge).",
+ "resolves": [
+ "instr-007"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "nugget-diene-dienophile-requirements expanded tier explicitly frames the endo rule as enrichment beyond the chapter's core objectives.",
+ "resolves": [
+ "instr-008"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "nugget-allylic-cation-addition expanded tier reconciles the numbering systems: the product name renumbers the chain, so diene C2 = C3 of 3-bromobut-1-ene.",
+ "resolves": [],
+ "partially_addresses": [
+ "struggle-010"
+ ]
+ }
+ ],
+ "remaining_high_priority": [
+ "rec-001 MO energy-ladder figure (visual-001/struggle-001/instr-001)",
+ "rec-002 kinetic/thermodynamic branch profile figure — needs maintainer RC-diagram policy call (visual-002/struggle-004)",
+ "rec-003 allylic-cation resonance/branching static sequence (visual-003/struggle-003/instr-002)",
+ "rec-004 Diels–Alder concerted-step static sequence (visual-004/struggle-005/instr-003)",
+ "rec-005 platform verification of keyboard/non-pointer input for structure_scaffold, curved_arrow, and drag-based types (access-001/002/004) — spans all chapters"
+ ],
+ "verification": [
+ "Topic-package compiler (proprietary toolchain, not in this repo)
+ "Automated test suite — 54 passed
+ "backend pytest [internal source reference — not in this repo] [internal source reference — not in this repo] [internal source reference — not in this repo] -q — 142 passed",
+ "grep checks on compiled question-set.json and reader chapter — all 8 corrections present, old labels absent",
+ "topic-package-textbook-profiles.json re-merged after the known compiler clobber — 13 profiles × 5 chapters restored (additive diff only)"
+ ]
+ }
+}

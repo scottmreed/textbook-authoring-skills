@@ -1,0 +1,4 @@
+interface:
+ display_name: "Ingest Deck JSON to Nuggets"
+ short_description: "Extract source evidence for canonical nuggets"
+ default_prompt: "Use $ingest-deck-json-to-nuggets to compare a deck.json corpus as private evidence and propose neutral concepts and teaching nuggets without publishing source content."

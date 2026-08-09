@@ -1,0 +1,939 @@
+# Chapter review — Synthetic Polymers (`synthetic-polymers`)
+
+_Reviewed 2026-07-31 · chapter version 1 · personas: Instructor, Struggling Student, Accessibility, Visual Preference_
+
+**Publication readiness: blocked**
+
+Four independent personas reviewed chapter 31 the day it was produced, compiled and seeded. The chemistry is the strongest part: the instructor persona independently re-validated all 43 assets and every question structure through RDKit and found correct formulas, correct Z/E for cis- and trans-1,4-polyisoprene, correct (S,S) L-lactide and all-(S) PLLA, balanced reaction SMILES, and correct arithmetic in every numeric key and on all five figures. Two chemical errors survived and are blockers: the polyoctenamer repeat unit is stated with seven saturated carbons where ring-opening cyclooctene gives six, and the polynorbornene asset both depicts one ring where its title claims two and misassigns which of norbornene's rings becomes the backbone. Both were independently confirmed by the orchestrator with RDKit. The other two blockers are about delivery rather than content. The reader defaults to the 'expanded' text tier and replaces rather than appends, but every expanded tier here is authored as a supplement — so at the default depth the chapter never defines isotactic, never names the four copolymer architectures, and never states the Carothers relationship, all of which exist in the standard tier. And one matching item labels its four stimuli 'Model A' to 'Model D', with the chemistry living in structure_smiles that no renderer reads and in an accessible_description that no student surface delivers, leaving nothing to reason about. That last one is a required-access blocker, which is what forces the overall verdict to blocked rather than major revision. Beneath the blockers the picture is good: strong diagnostic wrong-answer feedback, an unusually complete accessibility layer with no answer leaks in 26 questions, correct typed_structure_entry on both drawing items, and a tacticity figure that solves a depiction problem RDKit gets backwards.
+
+### Top blockers
+
+- **[BLOCKER] instr-001** — The model answer to the metathesis practice_check states polyoctenamer has runs of SEVEN saturated carbons between double bonds. (Organic Chemistry Instructor, `nugget-olefin-metathesis-polymerization`)
+- **[BLOCKER] instr-003** — The long description misassigns the fate of norbornene's atoms in ROMP. (Organic Chemistry Instructor, `mol-polynorbornene-segment`)
+- **[BLOCKER] ss-001** — The reader's default detail level is 'expanded' (useReaderPersonalization. (Struggling Student, `nugget-ziegler-natta-and-tacticity`)
+- **[BLOCKER] access-001** — The four stimuli are labelled only 'Model A' through 'Model D'. (Accessibility Persona, `ch31-match-linkage-to-polymer`)
+
+### Top recommended changes
+
+1. **Polyoctenamer repeat unit stated with the wrong carbon count** — The model answer says seven saturated carbons between double bonds; ring-opening cyclooctene (C8H14) gives -CH=CH-(CH2)6-, which is six. → **prose-edit** (prose, blocker) · instr-001
+2. **Polynorbornene: the depicted structure and the account of ROMP are both wrong** — The asset is titled and described as a two-unit segment with rings joined through double bonds but contains one ring, and its long description says the six-membered ring becomes the backbone and a new five-membered ring closes — the opposite of what happens. → **new-figure** (figure, blocker) · instr-002, instr-003, visual-003
+3. **Matching item labels its four stimuli 'Model A' to 'Model D'** — The chemistry lives in structure_smiles, which no renderer reads, and in accessible_description, which no student surface delivers, so the item carries no information for any learner. → **text-equivalent** (assessment, blocker) · access-001, access-006
+4. **At the reader's default depth the chapter never states its own definitions** — The reader defaults to 'expanded' and replaces rather than appends, but every expanded tier is authored as a supplement, so isotactic/syndiotactic/atactic, the four copolymer architectures, initiation/propagation/termination, and the Carothers relationship are all absent from what a student sees. → **prose-edit** (prose, blocker) · ss-001, instr-004
+5. **Figure text equivalents omit the numbers baked into the SVGs** — Four figures carry quantitative content as on-canvas text invisible to assistive technology, and the molecular-weight description explicitly points at values it does not supply. → **longer-description** (figure, high) · access-002, access-003, access-004, access-007
+6. **The metallacyclobutane, the chapter's least familiar step, has no depiction** — The section states the four-membered ring can break along either of two pairs of bonds and warns that arrow-pushing does not transfer, then supplies no picture at all; the only planned treatment is a deferred video. → **new-figure** (figure, high) · visual-001, ss-003, instr-011
+7. **The bracket-and-subscript-n notation is never shown** — The section's first objective is to draw a repeat unit and its named trouble spot is drawing the monomer inside the brackets, yet no asset anywhere shows brackets, open valences, or a subscript n. → **new-figure** (figure, high) · ss-002
+8. **Neither the practice checks nor the question accessibility descriptions reach any student surface** — Ten authored practice_checks appear nowhere in the reader, and accessible_description is consumed by only two renderers, neither used by this chapter's eleven types. → **instructor-note** (instructor-support, high) · instr-005, ss-004, access-006
+
+### Persona status cards
+
+| Persona | Score | Blockers | Headline |
+|---|---|---|---|
+| Organic Chemistry Instructor | 7.2/10 | 2 | Chemistry re-verified with RDKit and sound; two chemical statements wrong in the metathesis section. |
+| Struggling Student | 5.2/10 | 1 | Every definition exists but the default reading depth never shows them, and no practice reaches the page. |
+| Accessibility Persona | 7.2/10 | 1 | Unusually complete authored layer; the numbers inside the SVGs and one item's whole stimulus never reach the text. |
+| Learner with Visual Preference | 6.4/10 | 0 | Five strong figures, but three sections carry no diagram and one asset contradicts its caption. |
+
+### Affected sections & assets
+
+`cationic-and-anionic-chain-growth`, `ch31-classify-growth-mechanism-v2`, `ch31-copolymer-architecture`, `ch31-match-linkage-to-polymer-v2`, `ch31-match-linkage-to-polymer`, `ch31-polypropylene-head-to-tail`, `ch31-propagation-bond-ledger`, `ch31-rubber-elasticity-reasoning`, `ch31-tacticity-comparison`, `ch31-weight-average-molar-mass`, `chain-growth-radical-polymerization`, `copolymers`, `fig-chain-vs-step-growth`, `fig-copolymer-architectures`, `fig-ldpe-vs-hdpe`, `fig-molecular-weight-distribution`, `fig-polymer-tacticity`, `mol-bisphenol-a`, `mol-natural-rubber-segment`, `mol-polyethylene-segment`, `mol-polynorbornene-segment`, `mol-tert-butyl-cation`, `molecular-weight-and-dispersity`, `nugget-cationic-and-anionic-chain-growth`, `nugget-chain-growth-radical-polymerization`, `nugget-chain-growth-versus-step-growth`, `nugget-copolymers`, `nugget-molecular-weight-and-dispersity`, `nugget-olefin-metathesis-polymerization`, `nugget-polymer-basics-and-repeat-units`, `nugget-polymer-properties-and-degradation`, `nugget-step-growth-polymerization`, `nugget-ziegler-natta-and-tacticity`, `olefin-metathesis-polymerization`, `polymer-basics-and-repeat-units`, `polymer-properties-and-degradation`, `rxn-cross-metathesis`, `step-growth-polymerization`, `video-metathesis-partner-swap`, `ziegler-natta-and-tacticity`
+
+---
+## Full evidence
+
+### Independent persona reports
+
+#### Organic Chemistry Instructor — 7.2/10
+
+The strongest chapter prose in this series, and the chemistry holds up under independent verification: all 43 assets and every question option, hint and answer-key SMILES parsed through RDKit with no invalid structures, correct formulas, correct (Z)/(E) for cis- and trans-1,4-polyisoprene, correct (S,S) L-lactide and all-(S) PLLA, correct cis-1,3-disubstitution in the polynorbornene ring, balanced reaction SMILES, and correct arithmetic in every numeric answer key and on all five SVGs. Two chemical errors survive: the polyoctenamer repeat unit is stated as runs of seven saturated carbons when ring-opening cyclooctene gives -CH=CH-(CH2)6- with six, and the polynorbornene long description misassigns which of norbornene's rings becomes the backbone. Beyond that the concerns are about what a student receives: the reader compiles only the expanded tier, which is authored as a supplement and therefore never defines monomer versus repeat unit, initiation/propagation/termination, isotactic/syndiotactic/atactic, the four copolymer architectures, or the Carothers relationship; none of the ten practice_checks reach the reader; and the degradation/recycling/Tg-versus-Tm payoff of the last section is unassessed.
+
+**Strengths**
+
+- Chemical accuracy across the asset library is unusually high: all 43 assets validated with RDKit — every SMILES parseable, every formula as claimed, correct Z for cis-1,4-polyisoprene and E for trans-1,4, correct (S,S) L-lactide and all-(S) PLLA, correct cis-1,3-disubstituted cyclopentane in the polynorbornene ring, correct atom balance in every non-radical reaction SMILES.
+- Every number checks out: Carothers at 99.0% (100) and 98.0% (50), both Mw problems (35,000 and 50,000 g/mol) with v2 correctly the narrower sample, the Mn/Mw/D practice check (30,000 / 43,333 / 1.44), the Carothers-with-r caps for 2% and 5% diamine excess (101 and 41), and on the figures the 98.9% crossing, the 25,976 g/mol gap with D = 1.58, the copolymer run statistics and the 4% density rise.
+- The tacticity figure solves the hardest drawing problem in the topic honestly: all five substituted carbons sit on equivalent upper vertices (SVG x = 466, 606, 746, 886, 1026), so wedge-versus-hash is genuinely the only variable, and the dyad annotations are correct for the patterns actually drawn.
+- The wrong-answer feedback is the best seen in this pipeline: it diagnoses the specific misconception rather than restating the answer, and is chemically careful even in throwaway lines (the ROMP rebuttal that ring size alone does not decide it, 'cyclopentene has five and polymerises perfectly well').
+- The chapter separates claims that are habitually conflated: step growth versus condensation (polyurethane as the standing counterexample), dispersity as constitution rather than experimental error, 'compostable' as a claim about a facility rather than the environment, and head-to-tail as a prediction from radical stability rather than a rule.
+
+**Findings**
+
+##### `instr-001` — blocker · chemical-accuracy
+*Location:* nugget_id=`nugget-olefin-metathesis-polymerization`, concept_slug=`olefin-metathesis-polymerization`
+*Anchor:* “polyoctenamer: a chain in which runs of seven saturated carbons alternate with a carbon-carbon double bond”
+*Observation:* The model answer to the metathesis practice_check states polyoctenamer has runs of SEVEN saturated carbons between double bonds. Cyclooctene is C8H14 and ring-opening metathesis relocates rather than consumes the alkene, so the repeat unit is -CH=CH-(CH2)6-: two sp2 carbons and SIX saturated carbons. Seven would require a nine-membered monomer.
+*Learner impact:* A student who follows the instruction the chapter gives everywhere else — build the repeat unit from the monomer rather than recall it — will get six, check the model answer, and conclude they were wrong. It breaks the chapter's own atom-bookkeeping discipline in the section where the mechanism is least familiar, and undercuts the immediately following claim that hydrogenated polyoctenamer is indistinguishable from polyethylene.
+*Evidence:* nuggets[].practice_check.answer for nugget-olefin-metathesis-polymerization. RDKit: cyclooctene = C8H14, one 8-membered ring.
+*Recommended outcome (need):* The stated repeat-unit composition for polyoctenamer must match what ring-opening an eight-membered cyclic alkene actually produces, and the count should be derivable on the page from the monomer's ring size rather than asserted.
+*Confidence:* 0.97
+
+##### `instr-003` — blocker · chemical-accuracy
+*Location:* asset_id=`mol-polynorbornene-segment`, concept_slug=`olefin-metathesis-polymerization`
+*Anchor:* “the six-membered ring has become the chain backbone and the one-carbon bridge has closed the remaining carbons into an unstrained five-membered ring”
+*Observation:* The long description misassigns the fate of norbornene's atoms in ROMP. In bicyclo[2.2.1]hept-2-ene the cyclopentane ring already exists and survives intact; metathesis cleaves only the C2=C3 bond, which becomes the -CH=CH- link. The six-membered ring is destroyed, not converted into the backbone — two of its carbons stay inside the five-membered ring — and nothing 'closes' into a new five-membered ring, since that ring was never opened.
+*Learner impact:* This is the wrong mental model at the one point where the mechanism is genuinely unfamiliar. A student who believes a ring closes during ROMP will predict the wrong product for any other strained cyclic alkene, and will miss the chapter's real point, that metathesis cuts one bond and relocates one double bond.
+*Evidence:* assets[] mol-polynorbornene-segment accessibility.long_description as quoted. Contrast the correct standard-tier prose in the same section: 'the same process opens the ring and strings the pieces into a chain.'
+*Recommended outcome (need):* The account of which norbornene atoms end up in the backbone and which stay in the pendant ring must be correct and traceable atom by atom.
+*Confidence:* 0.9
+
+##### `instr-002` — high · figure-accuracy
+*Location:* asset_id=`mol-polynorbornene-segment`, concept_slug=`olefin-metathesis-polymerization`
+*Anchor:* “A two-unit segment of polynorbornene”
+*Observation:* The asset title claims a two-unit segment and both accessibility texts describe plural rings joined to each other. The SMILES depicts exactly ONE cyclopentane ring carrying two methyl-capped vinylene stubs: C/C=C\[C@H]1C[C@@H](/C=C\C)CC1, which RDKit gives as C11H18 with a single five-membered ring.
+*Learner impact:* The whole point of this asset is that a ring and a double bond alternate along the chain. A learner told to look for rings joined to one another, seeing one ring with two short tails, cannot confirm the alternation the text asserts.
+*Evidence:* assets[] mol-polynorbornene-segment smiles/title/alt_text as quoted. RDKit ring count = 1. The stereochemistry itself is correct: cis-1,3-disubstituted cyclopentane, as ROMP of norbornene requires.
+*Recommended outcome (need):* The depicted structure and the words describing it must agree on how many repeat units are shown, and the depiction needs enough of the chain for the ring/double-bond alternation to be visible rather than asserted.
+*Confidence:* 0.94
+
+##### `instr-004` — high · sequencing
+*Location:* section_id=`nugget-copolymers`, concept_slug=`copolymers`
+*Anchor:* “Three copolymers repay a closer look, because each shows a different reason for using two monomers.”
+*Observation:* The compiled reader renders only the expanded tier by default ([internal source reference — not in this repo] sets detailLevel 'expanded'; TopicPackageChapterRenderer REPLACES content.markdown with _detail_texts[detailLevel]). But every expanded block is authored as a continuation of the standard block. Read alone, the chapter never defines monomer versus repeat unit, never gives initiation/propagation/termination, never defines isotactic/syndiotactic/atactic, never names the four copolymer architectures, and never states the Carothers relationship.
+*Learner impact:* A student opening at the default depth begins each of the ten sections mid-argument, with pronouns whose antecedents are in text they were never shown, then meets a question bank requiring exactly the vocabulary and formula the standard tier carries.
+*Evidence:* Every section of the compiled reader has one text block whose content.markdown equals _detail_texts.expanded. A previous chapter's review records the identical defect, so it is a known recurring behaviour.
+*Recommended outcome (need):* The definitional layer of each section must reach a student at whatever depth they open the chapter on; an expanded view needs to add to the standard argument rather than replace it.
+*Confidence:* 0.92
+
+##### `instr-005` — high · retrieval-practice
+*Location:* section_id=`nugget-step-growth-polymerization`, nugget_id=`nugget-step-growth-polymerization`
+*Anchor:* “A chemist heats terephthalic acid with ethylene glycol and obtains only a low-melting waxy solid.”
+*Observation:* All ten nuggets carry a substantial authored practice_check with a full model answer, and none appears in the compiled reader. The compiled block inventory is 10 text, 33 molecule, 11 reaction, 7 image, 6 hidden video and 11 link blocks, containing no practice or question block of any kind. The bank is separately compiled with available:false and demo_eligible 0.
+*Learner impact:* A student reads a 1,000–1,300 word section with no checkpoint and no way to find out whether they can do anything with it. The practice_checks are the chapter's best worked examples and are the only place Mn is ever computed.
+*Evidence:* nuggets[].practice_check present for all ten; compiled reader contains none of the prompt strings; compiled/question-set.json available:false, demo_eligible 0.
+*Recommended outcome (need):* Each section needs a retrieval checkpoint at the point of reading, and the authored practice_checks need a route to the student surface rather than living only in the source package.
+*Confidence:* 0.93
+
+##### `instr-006` — medium · objective-alignment
+*Location:* concept_slug=`polymer-properties-and-degradation`, section_id=`nugget-polymer-properties-and-degradation`
+*Anchor:* “Explain what makes a polymer degradable, and why a degradable polymer may still persist in the environment.”
+*Observation:* Seven of the thirty declared nugget learning objectives have no corresponding question, clustered in the last three sections: using dispersity to infer mechanism; computing Mn (both molecular-weight questions ask only for Mw); why Mw >= Mn; distinguishing Tg from melting; what makes a polymer degradable and why it may still persist; why exact stoichiometry is required; why a metathesis polymer retains a double bond.
+*Learner impact:* Dispersity-as-fingerprint is developed in four nuggets and is the most distinctive idea in the chapter, yet is never asked. Tg versus Tm is a classic exam item and is never checked. The degradation and recycling material — the chapter's stated payoff — carries zero assessment.
+*Evidence:* nuggets[].learning_objectives compared against the 26 question_sets[]; 'dispersity' appears 12 times in nuggets and zero times in any prompt_text or answer_key.
+*Recommended outcome (need):* The chapter needs assessment reaching its concluding third — the dispersity-to-mechanism inference, the Tg/Tm distinction, and the degradability-versus-persistence qualification — and at least one item requiring Mn.
+*Confidence:* 0.9
+
+##### `instr-007` — medium · objective-alignment
+*Location:* question_slug=`ch31-classify-growth-mechanism-v2`, concept_slug=`step-growth-polymerization`
+*Anchor:* “Bisphenol A with phosgene, giving a polycarbonate”
+*Observation:* Item j6 asks whether the bisphenol A / phosgene polycarbonate synthesis expels a small molecule (keyed correctly — it expels HCl). But phosgene appears nowhere in the chapter except in this question and its own feedback: the step-growth nugget says only 'A diol plus a carbonate source gives a polycarbonate'. The carbonate source is never named, the reaction never written, and HCl never identified as the leaving molecule.
+*Learner impact:* Every other item in this question can be settled from the chapter; this one cannot. The wrong-answer feedback is the first place the chapter tells them what phosgene is. That teaches that careful reading is not sufficient, which is corrosive on a question set otherwise built to reward exactly that.
+*Evidence:* grep for 'phosgene' returns hits only inside ch31-classify-growth-mechanism-v2 student_config, accessibility_bundle and feedback_bundle.
+*Recommended outcome (need):* Either the polycarbonate-forming reaction and its by-product need to be taught before this item can test them, or the item needs restricting to reactions the chapter actually writes out.
+*Confidence:* 0.9
+
+##### `instr-008` — medium · missing-example
+*Location:* concept_slug=`step-growth-polymerization`, asset_id=`mol-bisphenol-a`
+*Observation:* The concept is titled 'polyesters, polyamides, polycarbonates, polyurethanes' and three of the four classes get a worked reaction asset. Polycarbonate gets none. mol-bisphenol-a is the only monomer asset in the section with no partner and no linkage-forming reaction, even though the carbonate linkage is assessed twice.
+*Learner impact:* A student can build a polyester, polyamide and polyurethane junction atom by atom from the assets, but for the polycarbonate can only memorise a name. The chapter's repeated instruction — 'build the answer rather than recognising it' — is unavailable for one of its four headline classes.
+*Evidence:* assets[] contains rxn-nylon-66-amidation, rxn-pet-esterification, rxn-urethane-formation and mol-bisphenol-a, but no reaction producing a carbonate linkage.
+*Recommended outcome (need):* The polycarbonate junction needs the same build-it-yourself treatment the other three step-growth classes receive.
+*Confidence:* 0.88
+
+##### `instr-009` — medium · chemical-accuracy
+*Location:* question_slug=`ch31-match-linkage-to-polymer-v2`
+*Anchor:* “A six-carbon chain with CO₂H at each end”
+*Observation:* Left item l2 and its accessible_description describe adipic acid as 'a six-carbon chain with a carboxylic acid at each end'. Read literally that is octanedioic acid: adipic acid is a four-carbon chain with a CO2H at each end, or a six-carbon diacid counting the carboxyl carbons. In the same question, l3 describes hexamethylene diisocyanate as 'a six-carbon chain with an N=C=O group at each end', where the six correctly EXCLUDES the isocyanate carbons. Two conventions in one question whose answer is 'Nylon 6,6', a carbon count.
+*Learner impact:* The one thing this item asks is to count carbons to justify the name. A student who counts as instructed reads eight carbons in the diacid and cannot reconcile that with the answer.
+*Evidence:* ch31-match-linkage-to-polymer-v2 student_config.left l2/l3 text. The package gets this right elsewhere: mol-nylon-66-segment says adipic acid 'supplies six carbons in total counting its two carbonyl carbons'.
+*Recommended outcome (need):* Monomer descriptions in this item need one consistent carbon-counting convention, stated explicitly, since the answer depends on the count.
+*Confidence:* 0.86
+
+##### `instr-010` — medium · misconception
+*Location:* concept_slug=`ziegler-natta-and-tacticity`
+*Anchor:* “because the stereocentres are so nearly identical to one another in their surroundings that their individual rotations cancel”
+*Observation:* The expanded text explains the absence of optical activity in isotactic polypropylene by near-cancellation of individual rotations plus negligible end groups. That is not the operative reason. An isotactic vinyl chain drawn as an extended planar zig-zag maps onto its own mirror image, so it is achiral by symmetry, not merely undetectably rotating. Relatedly, the standard text's claim that the methyl-bearing carbon has 'four different groups' is a shorthand: along the chain the two backbone branches are constitutionally equivalent.
+*Learner impact:* The reason given implies a small residual rotation that is merely swamped. A student who accepts it will predict that a shorter isotactic oligomer should be measurably optically active, and will carry a wrong model of what makes a centre stereogenic into later stereochemistry work.
+*Evidence:* nugget-ziegler-natta-and-tacticity expanded and standard tiers as quoted.
+*Recommended outcome (need):* The chapter needs the correct reason isotactic chains are not optically active — the symmetry of the chain itself — and an acknowledgement that the backbone branches are equivalent, so 'stereocentre' is a working shorthand.
+*Confidence:* 0.78
+
+##### `instr-011` — medium · visual-opportunity
+*Location:* concept_slug=`olefin-metathesis-polymerization`, asset_id=`rxn-cross-metathesis`
+*Anchor:* “The carbene and an alkene combine to form a four-membered ring containing the metal, a metallacyclobutane.”
+*Observation:* The chapter contains no mechanism figure of any kind — no curved arrows, no intermediates, no electron bookkeeping. The eleven reaction assets are all bare reactant>>product SMILES. The metallacyclobutane, which the prose itself flags as unlike anything else in the course, has no static depiction at all; the only asset that would show it is a deferred video brief.
+*Learner impact:* The section asks a student to accept that the same four-membered ring can break two different ways and gives them nothing to look at. Every other section's key idea has a figure; this one's does not, and it is the one a student is least able to reconstruct from prior knowledge.
+*Evidence:* assets[] contains 11 reaction entries, all plain SMILES transforms; no asset depicts a metal carbene, a metallacyclobutane or any curved arrow.
+*Recommended outcome (need):* The metallacyclobutane step needs a static, non-video representation showing the two ways the ring can break.
+*Confidence:* 0.88
+
+##### `instr-012` — medium · visual-opportunity
+*Location:* concept_slug=`copolymers`, asset_id=`fig-copolymer-architectures`, question_slug=`ch31-copolymer-architecture`
+*Anchor:* “the polystyrene end blocks from many different chains cluster together into small hard domains”
+*Observation:* The two-phase morphology of an SBS triblock is the chapter's marquee structure-to-property argument, developed in two nuggets, basis of two practice_checks, and what ch31-copolymer-architecture assesses. No asset shows it. fig-copolymer-architectures shows sequences along single chains only and stops before the many-chain picture in which end blocks from different chains aggregate into hard domains anchoring rubbery bridges.
+*Learner impact:* The MCQ asks a student to choose 'block' because that architecture alone gives soft segments anchored at both ends into hard domains. Nothing lets them see one chain's blocks meeting another chain's blocks, so the anchoring argument — a many-chain phenomenon — has to be taken on faith.
+*Evidence:* fig-copolymer-architectures long_description describes four single-chain bead rows; the domain morphology appears only in prose and in feedback text.
+*Recommended outcome (need):* The many-chain domain picture needs a representation of its own, distinct from the single-chain sequence diagram.
+*Confidence:* 0.85
+
+##### `instr-013` — medium · sequencing
+*Location:* concept_slug=`copolymers`
+*Anchor:* “block copolymers are made by living polymerisation”
+*Observation:* The declared prerequisite graph understates what the prose assumes. 'copolymers' lists only chain-growth-radical-polymerization, yet its text asserts blocks 'require a living polymerisation' and its practice_check turns on SBS — taught in cationic-and-anionic-chain-growth. 'polymer-properties-and-degradation' lists only ziegler-natta and copolymers, yet rests on ester hydrolysis of PLA and PET and the thermoplastic/thermoset distinction — all step-growth material. Conversely, olefin-metathesis-polymerization declares chain-growth-versus-step-growth and never uses it.
+*Learner impact:* Any surface building a study path from concepts[].prerequisites will let a student into copolymers without living polymerisation and into properties without step growth, and will send a student to the conversion contrast before metathesis for no reason. In linear reading the sections happen to fall in a workable order, so the defect is invisible until the graph is actually used — which is what it exists for.
+*Evidence:* concepts[] prerequisites as quoted, compared against nuggets[] text.
+*Recommended outcome (need):* The prerequisite graph must state the dependencies the prose actually relies on, and drop the one it does not.
+*Confidence:* 0.87
+
+##### `instr-014` — medium · assessment-readiness
+*Location:* question_slug=`ch31-rubber-elasticity-reasoning`
+*Anchor:* “The amorphous cis material has a glass transition well below room temperature, so its chains stay mobile”
+*Observation:* The evidence field's label is 'Which observations support that claim?', where the claim just established is about which chain can pack into crystalline regions. The answer key requires selecting cis_tg_low alongside cis_kinks and no_rotation. Glass transition is about segmental mobility in the already-amorphous phase; it is a consequence of the packing failure, not evidence for it.
+*Learner impact:* A student who reasons precisely — selecting only the two observations bearing on chain shape and packing — is marked wrong for the very discrimination the question is training. This is a structured_reasoning item, whose purpose is to make claim-evidence links explicit, so a loose evidence key teaches the opposite habit.
+*Evidence:* ch31-rubber-elasticity-reasoning student_config.fields labels and answer_key.fields.evidence.expected_option_ids.
+*Recommended outcome (need):* Either the evidence field must be scoped to the packing claim it names, or the claim field widened to the full elasticity argument, so the correct evidence follows from the label the student reads.
+*Confidence:* 0.79
+
+##### `instr-016` — medium · assessment-readiness
+*Location:* concept_slug=`molecular-weight-and-dispersity`, question_slug=`ch31-weight-average-molar-mass`
+*Anchor:* “chapter-synthetic-polymers-core”
+*Observation:* Thirteen questions are surfaced covering ten concepts and thirty objectives — roughly 1.3 items per concept. Eleven types are represented and the mix is good, but there is no item on degradation/recycling, none on Tg versus Tm, none on dispersity, none on stoichiometric imbalance, and none requiring Mn. The whole bank is compiled available:false with all 26 demo_eligible:false.
+*Learner impact:* An instructor cannot build a representative quiz: the last three sections, carrying roughly a third of the reading, contribute four surfaced items between them. With one surfaced item per concept there is also no re-attempt path for a student who misses it.
+*Evidence:* compiled/question-set.json counts {questions 26, surfaced 13, staged_variants 13, types 11, demo_eligible 0}.
+*Recommended outcome (need):* The surfaced bank needs enough breadth that every concept and the concluding third are represented, and enough depth for a second non-identical attempt.
+*Confidence:* 0.85
+
+##### `instr-015` — low · figure-accuracy
+*Location:* asset_id=`mol-natural-rubber-segment`, concept_slug=`polymer-properties-and-degradation`
+*Anchor:* “At every double bond the two continuing chain segments lie on the same side”
+*Observation:* The cis and trans polyisoprene segments each contain three C=C, but only two carry defined geometry. RDKit reports exactly two stereo bonds in each (both Z, both E respectively). The third is a terminal isopropylidene bearing two methyls and only one continuing chain segment, so it has no geometry to define — and it is drawn identically in both segments.
+*Learner impact:* The asset's stated purpose is that 'nothing differs except the geometry at each double bond.' A student comparing the two sees one double bond that looks the same in both, while the alt text says 'every carbon-carbon double bond'. The controlled-variable framing is weaker than advertised.
+*Evidence:* mol-natural-rubber-segment and mol-gutta-percha-segment SMILES; RDKit: 3 C=C, 2 with defined geometry in each.
+*Recommended outcome (need):* Every double bond in the compared segments should either carry the geometry the description claims, or the description should say which unit is a chain terminus and why it has none.
+*Confidence:* 0.82
+
+**Open questions**
+
+- concepts[].learning_objectives and concepts[].misconceptions are null for all ten concepts; objectives live on nuggets[] and misconceptions in concepts[].trouble_spots. Is any downstream surface reading the concept-level fields?
+- All 26 questions are demo_eligible:false and both artifacts compile available:false. Intended pre-publication state, or has a demo item simply not been chosen?
+- rxn-lactide-ring-opening models PLA formation as two lactides plus water; industrially it is metal-alkoxide-initiated ROP and water is an impurity. Deliberate simplification?
+- rxn-urethane-formation uses monofunctional ethanol plus ethyl isocyanate while the nylon and PET assets use the real difunctional monomers. Intentional?
+- The chapter is written in British spelling while all slugs use American. Intentional and stable across the reader sequence?
+
+#### Struggling Student — 5.2/10
+
+The prose is some of the clearest I have read — it names my mistakes before I make them and the wrong-answer explanations are genuinely diagnostic. But almost none of that reaches me as compiled. The reader defaults to 'expanded', and every expanded passage is written as a supplement to the standard text, not a replacement, so at the default setting the tacticity section never defines isotactic, the copolymer section never names the four architectures, and the ionic section never says which substituents suit which mechanism. Every one of those definitions exists; the reader just does not show them. On top of that no practice reaches me at all: the ten practice checks are in the package but not in the reader, and the 26-question bank is compiled available:false. Two of the hardest ideas — what the bracket-and-subscript-n notation looks like, and how the metallacyclobutane breaks 'the other way' — have no figure. Where figures exist they are excellent, but two carry unexplained notation and one invites a numerical comparison it should not.
+
+**Strengths**
+
+- The wrong-answer explanations are the best part of this chapter: they name the specific wrong move, explain the reasoning that produced it, and often redirect it to where it IS correct — the anionic-monomer feedback tells me isobutylene's methyls destabilise a carbanion and then adds that those same methyls make it the standard cationic monomer. None of the 40+ I read was a bare restatement.
+- The prose pre-empts my mistakes by name and explains why they are tempting: 'the single most common error is drawing the monomer inside the brackets', 'Reading 95% conversion as nearly finished', 'Dispersity is not an experimental uncertainty'.
+- The tacticity figure does what the prose promises — it flattens the backbone so all five substituted carbons sit at equivalent upper vertices. I verified the SVG geometry: every substituted carbon really is at y=502.
+- The chapter gives causal chains rather than lists — regularity causes packing causes crystallinity causes melting point — and the comparison-matrix hint teaches that dependency structure instead of the answers.
+- The step-growth section handles polyurethane as a deliberate counterexample with its own reaction figure, stating plainly that step growth and condensation are different claims.
+- The Carothers derivation ('not an empirical fit; it is bookkeeping') turns a formula I would otherwise memorise into something I could reconstruct.
+
+**Findings**
+
+##### `ss-001` — blocker · conceptual-support
+*Location:* section_id=`nugget-ziegler-natta-and-tacticity`, concept_slug=`ziegler-natta-and-tacticity`
+*Anchor:* “The discovery that made this possible is worth recounting, because it is a good illustration”
+*Observation:* The reader's default detail level is 'expanded' ([internal source reference — not in this repo]) and TopicPackageChapterRenderer.applyPrefs REPLACES the block markdown with _detail_texts[prefs.detailLevel]. But every expanded passage is written as an additive supplement assuming the standard passage was just read. At the default setting the core definitions are simply absent. The tacticity section opens 'The discovery that made this possible is worth recounting' — 'this' has no antecedent, and isotactic, syndiotactic and atactic are never defined in the text I am shown. The copolymer section opens 'Three copolymers repay a closer look' and never names the four architectures. The ionic section never states which substituents suit which mechanism. The radical section opens 'Three points deserve more than the outline gives them' — an explicit reference to an outline the reader is not displaying.
+*Learner impact:* I read four paragraphs about Ziegler and Natta and the Nobel Prize and reach the end without being told what isotactic means. I do not know a 'standard' setting exists, so I assume the definitions were in a previous chapter and I have forgotten them. I reread twice, feel stupid, and go to Wikipedia — which is the link the page offers me.
+*Evidence:* [internal source reference — not in this repo] lines 47-63; [internal source reference — not in this repo] line 27; [internal source reference — not in this repo] _text_block sets content.markdown = text['expanded']. Compare nuggets[3].text.standard ('There are three cases. In an isotactic chain every stereocentre has the same configuration...') with nuggets[3].text.expanded, which contains no such definition.
+*Recommended outcome (need):* At whatever detail level the reader opens on, a student must be able to reach the section's defining statements. The deepest setting currently substitutes elaboration for foundation; the need is for the foundation to be present at every depth.
+*Confidence:* 0.95
+
+##### `ss-002` — high · worked-example-gap
+*Location:* section_id=`nugget-polymer-basics-and-repeat-units`, asset_id=`mol-polyethylene-segment`
+*Anchor:* “A polymer is written as the repeat unit in brackets with a subscript n”
+*Observation:* The section's first learning objective is 'Draw the repeat unit of an addition polymer from its monomer' and its named trouble spot is 'Drawing the monomer inside the brackets is the single most common error'. Yet nothing in the chapter ever SHOWS a repeat unit in brackets with a subscript n, and nothing shows an open valence. mol-polyethylene-segment is SMILES CCCCCCCCCCCC, which renders as plain dodecane with ordinary CH3 ends and no indication the chain continues. 'Bracket' and 'subscript n' appear only in prose. The one planned visual is deferred.
+*Learner impact:* I am told the single most common error is drawing the wrong thing inside the brackets, and I have never seen the brackets. When the practice check asks me to draw the repeat unit of poly(vinyl acetate) I do not know what the answer should look like, so I copy the twelve-carbon zig-zag and convince myself polyethylene is a C12 alkane.
+*Evidence:* concepts[0].trouble_spots[0]; nuggets[0].learning_objectives[0]; assets mol-polyethylene-segment smiles CCCCCCCCCCCC; video_briefs[0] deferred, reader block is_hidden true.
+*Recommended outcome (need):* The chapter's headline skill — turning a monomer into a bracketed repeat unit with open valences and a subscript n — is asserted in prose and never modelled. A student needs to see the notation itself before being asked to produce it.
+*Confidence:* 0.93
+
+##### `ss-003` — high · conceptual-support
+*Location:* section_id=`nugget-olefin-metathesis-polymerization`, concept_slug=`olefin-metathesis-polymerization`, asset_id=`video-metathesis-partner-swap`
+*Anchor:* “That ring can then break apart along either of two pairs of bonds”
+*Observation:* The chapter flags this as the hardest thing in it — 'arrow-pushing habits from the rest of the course do not transfer here' — and then delivers it entirely in words. There is no figure showing the metal carbene, the metallacyclobutane, or the two ways the ring can break. The only planned visual is a deferred, hidden video brief whose own learning_goal says it would 'Show the one step that makes metathesis intelligible'.
+*Learner impact:* 'That ring can then break apart along either of two pairs of bonds' is a sentence I cannot turn into a picture. I do not know which two bonds, or which carbons end up attached to which. I stop trying to understand and switch to memorising 'double bonds get swapped', which is exactly the surface reading that makes the ROMP and RCM questions unanswerable when the substrate changes.
+*Evidence:* nuggets[8].text.standard; video_briefs[4].learning_goal; reader block blk-87cu7040 video with url '' and is_hidden true; no diagram asset attached to this concept.
+*Recommended outcome (need):* A student needs a persistent, non-video representation of the carbene + alkene to metallacyclobutane to new carbene cycle that makes visible which bonds form and which of the two ways the ring opens.
+*Confidence:* 0.9
+
+##### `ss-004` — high · retrieval-practice
+*Location:* section_id=`nugget-polymer-basics-and-repeat-units`, question_slug=`ch31-polypropylene-head-to-tail`, concept_slug=`polymer-basics-and-repeat-units`
+*Observation:* As compiled, the chapter contains no practice a student can do. All ten practice_checks are in the package but none appears in the reader (verified by string search of every prompt). The block inventory contains no question, callout or practice block type. The 26-item bank compiles available:false with demo_eligible 0. Reading this chapter is 78 minutes of continuous exposition with no point at which I check whether I have understood anything.
+*Learner impact:* I read ten dense sections and finish with a strong feeling of having understood, which for me is almost always wrong. Nothing asks me to produce anything, so I never discover I cannot draw a repeat unit or compute a DPn until an exam does it for me.
+*Evidence:* nuggets[*].practice_check (10 present); compiled reader contains none of the 10 prompt strings; question-set.json available:false, demo_eligible 0, surfaced 13.
+*Recommended outcome (need):* A low-confidence reader needs a place to stop and test recall inside the reading flow, not only in a separate bank that is currently unpublished.
+*Confidence:* 0.94
+
+##### `ss-005` — high · cognitive-load
+*Location:* section_id=`nugget-step-growth-polymerization`, concept_slug=`step-growth-polymerization`
+*Anchor:* “The same logic covers most of the polymers in everyday use, with only the functional groups changing.”
+*Observation:* This is the longest passage (417 words standard, 523 expanded) and the heaviest reader section (13 blocks, 11 chemical assets). One four-sentence paragraph introduces polyester/PET, polycarbonate/bisphenol A, and caprolactam/nylon 6 — three polymer families, three new monomers, and the 'nothing expelled' exception — immediately after nylon 6,6 and immediately before polyurethanes, then closes with two more requirements. Six polymer classes, eight named monomers and two process constraints in one section with no checkpoint and no visual grouping.
+*Learner impact:* By the polyurethane paragraph I have lost track of which small molecule leaves in which case, which is the exact discrimination the section is building. I scroll back, lose my place among eleven structures that all look like variations on the same thing, and memorise names without the logic.
+*Evidence:* nuggets[5].text.standard paragraph 3; nuggets[5].asset_ids (11 assets); reader section has 13 blocks, the most in the chapter.
+*Recommended outcome (need):* A student needs the material broken into digestible units with a visible organising structure (which linkage, which monomers, what leaves) and a checkpoint before the stoichiometry/conversion requirements are added.
+*Confidence:* 0.85
+
+##### `ss-006` — medium · missing-example
+*Location:* section_id=`nugget-step-growth-polymerization`, question_slug=`ch31-match-linkage-to-polymer`
+*Anchor:* “A diol plus a carbonate source gives a polycarbonate”
+*Observation:* Polycarbonate is the only one of the four step-growth families taught by name alone. The 'carbonate source' is never named, the carbonate linkage is never drawn, and there is no reaction asset for it, while ester, amide and urethane each get an explicit reaction figure. Question ch31-match-linkage-to-polymer then asks me to identify CCOC(=O)OCC as the polycarbonate model.
+*Learner impact:* Three of the four models map onto a reaction figure I was shown; the fourth maps onto a word. I match the three I recognise and assign the leftover to polycarbonate by elimination rather than by seeing the two oxygens — so I get the mark without learning the linkage.
+*Evidence:* nuggets[5].text.standard; assets contain no carbonate reaction; ch31-match-linkage-to-polymer left l3 = CCOC(=O)OCC.
+*Recommended outcome (need):* A student needs the carbonate linkage shown with the same concreteness as the other three before being asked to recognise it.
+*Confidence:* 0.86
+
+##### `ss-007` — medium · cognitive-load
+*Location:* section_id=`nugget-ziegler-natta-and-tacticity`, asset_id=`fig-polymer-tacticity`
+*Anchor:* “dyads m m m m - 100% meso”
+*Observation:* Each of the figure's three panels carries a second, bolded label in a nomenclature the chapter never uses: 'dyads m m m m - 100% meso', 'dyads r r r r - 0% meso', 'dyads m r r m - 50% meso'. The strings 'dyad', 'meso' and 'racemo' appear zero times in the entire topic package — not in any nugget at any depth, not in any concept, not in any question, not in the figure's own alt_text or long_description.
+*Learner impact:* The bolded blue line under each heading looks like the important one, so I try to decode it first. 'm' and 'r' and '% meso' are not defined anywhere I can find, and 'meso' collides with the meso-compound meaning I half-remember, where it meant an achiral compound. I spend attention on the label instead of the methyl groups — the failure mode the figure was built to prevent.
+*Evidence:* polymer-tacticity.svg panel sublabels; grep of topic.package.json: 'dyad' 0 occurrences, 'meso' 0 occurrences.
+*Recommended outcome (need):* Either the dyad/meso notation needs introducing where a student meets it, or the label needs to carry information the chapter has actually taught.
+*Confidence:* 0.92
+
+##### `ss-008` — medium · misconception
+*Location:* section_id=`nugget-chain-growth-versus-step-growth`, asset_id=`fig-chain-vs-step-growth`
+*Anchor:* “the curves meet only at p = 98.9%”
+*Observation:* The figure draws the chain-growth line flat at DPn ~90 — an arbitrary illustrative value, since chain-growth DPn is set by the propagation/termination ratio and not by conversion at all — then annotates the crossing point 'the curves meet only at p = 98.9%'. That invites reading the intersection as a meaningful quantitative fact when it is entirely an artefact of choosing 90. The chain-growth curve is also drawn rising steeply from DPn = 0 at p = 0 to 90 by about p = 2%, which visually contradicts the caption's own claim that chain growth 'makes full-length chains from the start'.
+*Learner impact:* I write '98.9%' in my notes as a number to remember, alongside 99%, and confuse the two. Worse, I take away that chain growth gives DPn 90 and step growth gives DPn 100 — that they are roughly comparable — which is the opposite of the point, and makes me answer the classify-mechanism question by comparing numbers instead of counting reactive groups.
+*Evidence:* chain-vs-step-growth.svg annotations; legend 'chain growth (radical, ionic)' drawn as a constant line at ~90; caption 'an individual chain reaches roughly 90 units in seconds'.
+*Recommended outcome (need):* A student needs the chain-growth trace to read unambiguously as 'independent of conversion' and needs no invitation to compare the two DPn values numerically.
+*Confidence:* 0.82
+
+##### `ss-009` — medium · cognitive-load
+*Location:* section_id=`nugget-chain-growth-radical-polymerization`
+*Anchor:* “A radical polymerisation runs in three stages”
+*Observation:* Every one of the ten terse texts is a single sentence of 50-59 words carrying the section's full technical vocabulary, joined by dashes and semicolons. The radical one packs initiation, propagation, self-regeneration, termination and the regiochemistry rule into one sentence; the metathesis one packs bond cleavage, metal carbene, metallacyclobutane, the absence of ionic/radical intermediates, and double-bond retention into one sentence. Terse is a compression of the content, not a simplification.
+*Learner impact:* Terse is the setting I reach for when overwhelmed, expecting shorter sentences and simpler words. What I get is the same jargon with the connective explanation removed, which is strictly harder to parse. I read it three times, take nothing, and conclude the material is beyond me rather than that I picked the wrong setting.
+*Evidence:* nuggets[*].text.terse — all ten single sentences, 50-59 words.
+*Recommended outcome (need):* A struggling reader who selects the shortest option needs prose that is genuinely easier — shorter sentences and fewer simultaneous ideas — not the same ideas with the scaffolding removed.
+*Confidence:* 0.88
+
+##### `ss-010` — medium · conceptual-support
+*Location:* section_id=`nugget-molecular-weight-and-dispersity`, concept_slug=`molecular-weight-and-dispersity`
+*Observation:* Nothing in the compiled reader tells me what matters most or how hard a section is. The package carries learning_objectives on all ten nuggets, trouble_spots on all ten concepts, and a difficulty field; none of the three is compiled into the reader. Reader sections carry only id, title and blocks, and the block inventory has no callout, summary or objectives type. The 'advanced' dispersity section and the 'core' basics section present identically.
+*Learner impact:* Every paragraph looks equally important, so I highlight everything, which is the same as highlighting nothing. I spend as long on the Nobel Prize anecdote as on the definition of dispersity, and when I revise I have no way to tell which sections to go back to first.
+*Evidence:* concepts[*].trouble_spots (30 authored warnings), nuggets[*].learning_objectives (30); compiled sections have keys [id,title,blocks] only and contain none of those strings.
+*Recommended outcome (need):* Thirty objectives and thirty named misconceptions were authored and none reaches the student. A low-confidence reader needs visible signals of what a section is for, what the common wrong move is, and which sections are hard.
+*Confidence:* 0.9
+
+##### `ss-011` — medium · sequencing
+*Location:* question_slug=`ch31-polypropylene-head-to-tail`, concept_slug=`polymer-basics-and-repeat-units`, section_id=`nugget-polymer-basics-and-repeat-units`
+*Observation:* This question is tagged concept_slug polymer-basics-and-repeat-units (order 1, difficulty core) but answering it requires head-to-tail regiochemistry, taught in chain-growth-radical-polymerization (order 2). The section-1 text at every depth contains no occurrence of 'head-to-tail' and never says substituents end up on alternating backbone carbons. The distractor explanation for option (b) argues from radical stability. The same mismatch applies to the v2 variant.
+*Learner impact:* If I attempt this after section 1, as its tag implies, I have no basis to reject the 2,3,6 structure — both it and 2,4,6 have one methyl per two backbone carbons. I guess, get it wrong, then read feedback about radical stabilisation referring to chemistry I have not met, which makes me feel further behind rather than corrected.
+*Evidence:* question_sets[0].concept_slug; nuggets[0].text at all three depths contains no 'head-to-tail' and no 'alternat'; nuggets[1].text.standard 'That is called head-to-tail'.
+*Recommended outcome (need):* A student needs either the regiochemistry basis available where the question is placed, or the question associated with the concept that supplies it.
+*Confidence:* 0.87
+
+##### `ss-012` — medium · conceptual-support
+*Location:* section_id=`nugget-polymer-properties-and-degradation`, concept_slug=`polymer-properties-and-degradation`
+*Anchor:* “Heating it with sulfur forms covalent bridges between chains at the leftover double bonds”
+*Observation:* The section's second axis (thermoplastic / thermoset / elastomer, distinguished by cross-linking) has no visual support at all. Its eight assets are isoprene, butadiene, cis/trans polyisoprene, lactide, PLLA, the ROP reaction, and a third reuse of fig-ldpe-vs-hdpe. Nothing shows a cross-link, a network, or the difference between chains uncoiling and chains sliding. The only planned visual was a deferred, hidden video brief.
+*Learner impact:* 'Lightly cross-linked' and 'a single network molecule' are phrases I cannot picture, so thermoset and elastomer collapse into one category. When the structured-reasoning question asks me to build the rubber argument I can do the cis/trans part but cannot explain why vulcanisation matters, so I write something vague and lose the reasoning field.
+*Evidence:* nuggets[9].asset_ids; nuggets[9].text.standard paragraphs 4-5; video_briefs[5].learning_goal; reader block blk-sd8vk6aq is_hidden true.
+*Recommended outcome (need):* A student needs a way to see what a cross-link does to chain motion; the cross-linking axis is carried entirely by prose while its partner axis has three supporting figures.
+*Confidence:* 0.84
+
+##### `ss-013` — medium · worked-example-gap
+*Location:* question_slug=`ch31-propagation-bond-ledger`, concept_slug=`chain-growth-radical-polymerization`
+*Observation:* Every one of the 26 questions has exactly two hints regardless of type or difficulty, and the ladder does not scale with how unfamiliar the format is. ch31-propagation-bond-ledger is 'advanced' and uses a bond_change_ledger format with four kinds, six value options and max_rows 6 against a four-row key — but no worked ledger appears anywhere in the chapter and neither hint addresses the format. ch31-draw-pet-ester uses scaffold 'blank_canvas', the least scaffolded option in a type named 'scaffold'.
+*Learner impact:* On the ledger question I understand the chemistry after hint 2 but still do not know whether the two radical relocations are one row or two, so I enter three rows and get it marked wrong for a reason unrelated to what I understood. That teaches me I do not understand propagation, which is false.
+*Evidence:* question_sets[*].feedback_bundle.hints — all 26 have exactly 2; ch31-propagation-bond-ledger max_rows 6 vs 4 expected_rows.
+*Recommended outcome (need):* A student needs format-level support — a worked example of a completed ledger, and a partial starting structure on the drawing task — separate from the chemistry hints.
+*Confidence:* 0.83
+
+##### `ss-014` — low · assessment-readiness
+*Location:* question_slug=`ch31-rubber-elasticity-reasoning`
+*Anchor:* “At a cis double bond, do the two chain segments continue in roughly the same direction or double back?”
+*Observation:* Most hints are genuinely procedural, but three are not. On ch31-rubber-elasticity-reasoning, hint 1 asks the exact discriminating question whose answer supplies both the required claim and one of the three required evidence selections. On ch31-copolymer-architecture, hint 2 states that 'each component needs an uninterrupted run long enough to find others of its own kind' — the definition of the block architecture that is the answer. On ch31-romp-driving-force, hint 2 paraphrases 'ring strain'.
+*Learner impact:* When stuck I open hints, and on these three the hint ends my thinking rather than restarting it. I get the mark, record the question as understood, and skip it in revision — so I never find out I could not have produced the argument myself.
+*Evidence:* feedback_bundle.hints for the three named questions compared against their answer_keys.
+*Recommended outcome (need):* A student who opens a hint needs a next step to take, not the conclusion, and the final hint should leave at least one inferential step.
+*Confidence:* 0.78
+
+##### `ss-015` — low · cognitive-load
+*Location:* section_id=`nugget-molecular-weight-and-dispersity`
+*Anchor:* “Size exclusion chromatography separates chains by their hydrodynamic volume as they pass through a porous packing”
+*Observation:* The expanded text of the chapter's only 'advanced' concept introduces, without setup, size exclusion chromatography, hydrodynamic volume, porous packing, elution time, melt viscosity, melt elasticity and unintended plasticisers — none of which appears elsewhere in the package. This arrives in the same passage as the formal summation definitions, themselves the first summation notation in the chapter.
+*Learner impact:* I am still holding the difference between the two summation formulas when a chromatography technique I have never met is used to justify why dispersity is quoted routinely. I skim the rest, which means I also skim the closing paragraph — the one correcting the misconception that dispersity is an error bar, which is exactly the misconception I have.
+*Evidence:* nuggets[7].text.expanded paragraphs 1 and 3; 'size exclusion' appears 0 times elsewhere.
+*Recommended outcome (need):* A student needs the two averages secure before measurement technique is layered on, and any new apparatus vocabulary either supported or set aside.
+*Confidence:* 0.75
+
+##### `ss-016` — low · figure-accuracy
+*Location:* asset_id=`fig-copolymer-architectures`, section_id=`nugget-copolymers`
+*Anchor:* “All four can be drawn with the same overall A:B ratio and still behave nothing alike.”
+*Observation:* The closing caption asserts all four panels share the same overall A:B ratio, but the printed statistics contradict it: Random 'A 45%', Alternating 'A 50%', Block 'A 50%', Graft 'B 43%' (A 57%). The per-panel statistics also mix two meanings without saying so — '8 runs' counts runs of both monomers while 'mean A run 2.2' counts only A runs — and the Graft panel switches from an A-percentage to a B-percentage. The drawn bead sequences themselves are correct.
+*Learner impact:* I read the caption, check it against the numbers because I have been told composition is held constant, and they do not agree. I cannot tell whether I misunderstood 'overall ratio' or the figure is wrong, so I stop trusting the panel labels and just look at the bead patterns.
+*Evidence:* copolymer-architectures.svg panel stat lines and footer caption as quoted.
+*Recommended outcome (need):* A student needs the held-constant variable to be actually constant across the four panels, or the caption to say what is really being compared.
+*Confidence:* 0.8
+
+##### `ss-017` — low · visual-redundancy
+*Location:* asset_id=`fig-ldpe-vs-hdpe`, section_id=`nugget-ziegler-natta-and-tacticity`
+*Anchor:* “18 branches drawn. Branched, poorly packed, low crystallinity (45-55%)”
+*Observation:* fig-ldpe-vs-hdpe is placed three times with byte-identical alt text and no per-placement framing explaining why it has returned. Its per-panel captions are written in authoring voice rather than to the reader: '18 branches drawn' and '0 branches drawn' describe the drawing process, not the chemistry.
+*Learner impact:* The third time it appears I assume I have scrolled back and lost my place. When I realise it is deliberate I do not know what new thing I am supposed to see, so I skip it — including in the properties section, where it is the only figure carrying the packing argument the section rests on.
+*Evidence:* reader blocks blk-8ee5vsau, blk-tlguh0wz, blk-gz8d2ky9 — same url and identical alt_text; SVG panel captions as quoted.
+*Recommended outcome (need):* A student needs each placement to say what to look for there, and captions that describe what the figure shows rather than how it was drawn.
+*Confidence:* 0.72
+
+**Open questions**
+
+- Is 'expanded' genuinely intended as the default detail level, or is that a bug? If expanded is meant to APPEND to standard, the fix is in the renderer rather than the prose.
+- The chapter and bank are both available:false. I reviewed as if a student would open it today; if not yet student-facing, several delivery findings may be pending pipeline work.
+- All six video briefs are needs_review and their reader blocks are correctly is_hidden:true, so nothing is broken on screen. My question is whether the six are expected to render before publication.
+- 13 of 26 questions are v2 variants. If they are independently assignable they should get the same answerability review, since ch31-polypropylene-head-to-tail-v2 inherits the concept-tag mismatch in ss-011.
+
+#### Accessibility Persona — 7.2/10
+
+This chapter carries an unusually strong authored accessibility layer: all 43 assets have both alt_text and a substantive long_description (shortest 543 characters), the reader renders both as visible text next to every figure, all 26 questions carry an accessible_description, the mechanical answer-leak guard flags none, and a semantic read found no leaks. Every question type maps to a keyboard-complete renderer, both structure_scaffold items correctly set typed_structure_entry to 'allowed' with an explanatory note, and no concept is assessable only by pointer-driven drawing. The bond_change_ledger items label atoms with self-describing text plus a reaction_display sentence, so that task is genuinely performable without seeing the structure. The real barriers are of two kinds. First, the five hand-built SVGs carry substantial quantitative content as on-canvas text invisible to assistive technology (loaded through img, so only alt is exposed), and several of those numbers never reach the long_description or the prose — most starkly the molecular-weight figure, whose description says the averages are 'each labelled with its computed value' while supplying neither. Second, the non-visual layer for questions is authored but not delivered: no student-facing surface renders accessible_description, and one item identifies its entire stimulus as 'Model A' through 'Model D', so with the bundle undelivered there is nothing left to reason about. The six video briefs are deferred and their blocks are is_hidden, so no learner depends on them today.
+
+**Strengths**
+
+- All 43 assets carry both alt_text and a long_description with no placeholders — shortest 543 characters, median 761 — and the descriptions are chemically substantive rather than naming the image.
+- The reader renders both alt_text and long_description as visible on-page text for every molecule, reaction and image block, so figure equivalents are available to sighted learners who find the drawing hard to parse as well as to screen-reader users.
+- Both structure_scaffold items set typed_structure_entry to 'allowed' with a note explaining why, and that is the correct value for both. No concept in this chapter is assessable only by pointer-driven drawing.
+- The bond_change_ledger items make the labelled-index task genuinely performable without seeing a structure: atom_labels are self-describing, reaction_display states the connectivity change, and the renderer exposes labels as a role=list above a real table with per-control aria-labels.
+- No question depends on a value appearing only inside a figure — every numeric item restates its own data and formula in the prompt, so the figure-only-numbers problem does not propagate into assessment.
+- Answer-leak neutrality holds: find_accessibility_leaks flags 0 of 26, and on a semantic read the descriptions state the task and withhold the verdict.
+- Four of the five figures encode their distinctions redundantly rather than by colour, and the copolymer long_description says so explicitly.
+- All ten practice_check items are pure prose prompt-and-answer pairs with no visual dependency.
+- Every question type maps to a keyboard-complete renderer with labelled controls — matching and categorisation are one labelled Select per item rather than drag-and-drop, and card ordering has Move up / Move down with position announced.
+
+**Findings**
+
+##### `access-001` — blocker · interactive-fallback
+*Location:* question_slug=`ch31-match-linkage-to-polymer`, concept_slug=`step-growth-polymerization`
+*Anchor:* “Each structure below is a small model of the linkage found in the backbone of one class of step-growth polymer.”
+*Observation:* The four stimuli are labelled only 'Model A' through 'Model D'. The chemistry the task turns on lives in each left item's structure_smiles and in accessibility_bundle.accessible_description. MatchingRenderer reads only text and imageUrl from each left entry, never structure_smiles, and no student-facing question surface renders accessible_description. A learner using a screen reader hears four content-free labels and a list of four polymer classes, with no information on which to base a pairing.
+*Learner impact:* Screen-reader users and anyone relying on the text layer cannot attempt a required core-set item; they can only guess among 4! permutations. The same gap affects sighted users when no image renders, so there is no path by which the intended discrimination can be exercised non-visually.
+*Evidence:* student_config.left = [{id l1, text 'Model A', structure_smiles 'CC(=O)OCC'}, ...]. The sibling ch31-match-linkage-to-polymer-v2 shows the fix pattern in the same package: its left labels are self-describing.
+*Recommended outcome (need):* Each stimulus needs an identification that survives in the item's own delivered text, independent of whether a picture renders and independent of whether a surface exposes the accessibility bundle; 'Model A' cannot be the only label a non-visual learner receives.
+*Confidence:* 0.82
+
+##### `access-002` — high · media-equivalence
+*Location:* asset_id=`fig-molecular-weight-distribution`, section_id=`nugget-molecular-weight-and-dispersity`
+*Anchor:* “The ratio of the two is the dispersity, printed on the figure.”
+*Observation:* The SVG carries a fully worked numeric instance as on-canvas text: Mn = 44,553 g/mol, Mw = 70,530 g/mol, the gap +25,976 g/mol described as 58% of Mn, dispersity 1.58 called typical of a radical polymerisation, and the statement that the distribution peaks at 19,031 g/mol so the most common chain is neither average. None of these appear in alt_text, long_description, or the section prose. The long_description instead points at values it does not supply.
+*Learner impact:* A non-visual learner gets the qualitative shape argument but not the worked example, not a calibration for what dispersity counts as normal, and not the mode-versus-average point — the figure's most distinctive teaching move. They are also told twice that numbers exist which they are then not given, which is worse than silence.
+*Evidence:* SVG text nodes as quoted. The figure is delivered through img src=...svg, so embedded SVG text is not exposed to assistive technology.
+*Recommended outcome (need):* The quantitative instance the figure teaches with — both averages, their gap, the dispersity value and its interpretation, and the mode — must reach a learner who cannot read text baked into the image.
+*Confidence:* 0.95
+
+##### `access-006` — high · media-equivalence
+*Location:* question_slug=`ch31-propagation-bond-ledger`, section_id=`nugget-chain-growth-radical-polymerization`
+*Anchor:* “accessible_description”
+*Observation:* All 26 questions carry a well-written accessible_description which survives into the compiled question set, but no student-facing surface renders it. accessible_description is consumed only by ReactionCoordinateQuestionRenderer, MolecularGeometryRenderer — neither among this chapter's eleven types — and QuestionTypeDemoPage, gated on demo_eligible (which is 0). The three student surfaces mounting ActivityWorkspaceRenderer contain no reference to the bundle.
+*Learner impact:* The chapter's entire non-visual equivalence layer for assessment is authored but undelivered. For most items the option text happens to be self-sufficient, so the loss is degradation rather than exclusion — but for the matching item in access-001 the loss is total.
+*Evidence:* grep over frontend/src: accessible_description appears in three files only; compiled counts.demo_eligible = 0.
+*Recommended outcome (need):* Every item's authored non-visual description needs a delivery path on the surfaces where students actually answer; authoring it into the package must not be the end of the chain.
+*Confidence:* 0.8
+
+##### `access-003` — medium · media-equivalence
+*Location:* asset_id=`fig-copolymer-architectures`, section_id=`nugget-copolymers`, concept_slug=`copolymers`
+*Observation:* The figure prints the literal monomer sequences and run statistics for each architecture as on-canvas text. The long_description conveys the architectures only qualitatively and drops the sequences and every run statistic.
+*Learner impact:* The sequence strings are the most screen-reader-friendly content in the chapter and are exactly what makes 'sequence, not composition' concrete; a non-visual learner receives a paraphrase where a sighted learner receives four literal sequences plus quantitative run-length evidence.
+*Evidence:* SVG text nodes 'AAABABBAAABBBBBAABBB', 'ABABABABABABABABABAB', 'AAAAAAAAAABBBBBBBBBB', 'backbone 20 A - 5 side chains of 3 B - B 43%'; long_description contains no A/B string and no percentage or run count.
+*Recommended outcome (need):* The literal A/B sequences and the run statistics need to exist in text a screen reader can reach, not only as glyphs inside the SVG.
+*Confidence:* 0.92
+
+##### `access-004` — medium · media-equivalence
+*Location:* asset_id=`fig-ldpe-vs-hdpe`, section_id=`nugget-chain-growth-radical-polymerization`, concept_slug=`polymer-properties-and-degradation`
+*Observation:* The figure states crystallinity ranges (45-55% LDPE, 70-80% HDPE), synthesis conditions (radical 1500 atm 200 C versus Ziegler-Natta 1 atm), branch counts drawn, and the quantified comparison (2.3 times further apart, 25 percentage points, 4% density). The long_description carries only the two densities and qualitative words.
+*Learner impact:* A non-visual learner gets the causal chain but not the magnitudes that make it persuasive — in particular that a 4% density change corresponds to a 25-point crystallinity change — and does not receive the reaction conditions distinguishing the two industrial processes.
+*Evidence:* SVG text as quoted. This figure is reused in three sections with the same description, so the gap repeats.
+*Recommended outcome (need):* The quantified contrast the figure makes needs a text equivalent that reaches a learner who cannot read the labels inside the image.
+*Confidence:* 0.93
+
+##### `access-005` — medium · alt-text-quality
+*Location:* asset_id=`fig-polymer-tacticity`, section_id=`nugget-ziegler-natta-and-tacticity`, concept_slug=`ziegler-natta-and-tacticity`
+*Observation:* The figure introduces dyad notation as chemistry vocabulary and states the drawing convention explicitly ('bold wedge, CH3 drawn above = toward you'). The long_description describes side-of-backbone patterns and property consequences well, but never mentions m/r dyads, percent meso, or the wedge/hash convention that the figure's own footnote calls 'the stereochemistry, and nothing else'.
+*Learner impact:* A non-visual learner leaves this figure without the standard vocabulary a textbook and instructor will use for tacticity, and without the explicit statement of how tacticity is encoded in a drawing — precisely the representational knowledge they most need substituted.
+*Evidence:* SVG text nodes 'dyads m m m m - 100% meso' etc.; long_description contains neither 'dyad' nor 'meso'. Grep over the compiled reader finds zero occurrences of either in any prose block or detail variant.
+*Recommended outcome (need):* The dyad/meso vocabulary and the wedge-hash encoding rule need to be available in the text layer, so a non-visual learner acquires the same nomenclature and the same account of how the representation works.
+*Confidence:* 0.9
+
+##### `access-009` — medium · media-equivalence
+*Location:* nugget_id=`nugget-chain-growth-radical-polymerization`, concept_slug=`chain-growth-radical-polymerization`
+*Anchor:* “Deferred at authoring (2026-07-30).”
+*Observation:* All six video briefs specify a storyboard and narration_outline but no caption track, transcript, or audio-description plan, and the brief schema has no field for one. Several storyboards describe meaning that lives in motion and colour and is not obviously narrated. Because all six are deferred and their blocks are is_hidden with an empty url, nothing is broken for learners today; the ideas the briefs carry are all present in prose.
+*Learner impact:* No differential barrier exists now — the videos are absent for everyone. The risk is forward-looking: as written, the handoff would produce six pieces of media whose visual distinctions have no specified equivalent, and no captions for learners who are deaf or hard of hearing.
+*Evidence:* video_briefs[*].production_status deferred; reader blocks all is_hidden true with url ''; brief key set contains no caption/transcript field.
+*Recommended outcome (need):* Before any brief is rendered, each needs a specified text equivalent for its dialogue and an account of the visual changes that carry meaning.
+*Confidence:* 0.85
+
+##### `access-007` — low · media-equivalence
+*Location:* asset_id=`fig-chain-vs-step-growth`, section_id=`nugget-chain-growth-versus-step-growth`
+*Observation:* The long_description is the best of the five and reproduces most of the computed table, but omits the p = 80% row, the 98.9% crossing annotation, and the caption's statement that a chain-growth chain reaches roughly 90 units in seconds — the only place the chain-growth curve is given a numeric height.
+*Learner impact:* A non-visual learner can state the step-growth argument quantitatively but cannot say what value the flat chain-growth curve sits at, so the comparison remains one-sided in a figure whose entire purpose is the comparison.
+*Evidence:* SVG text 'p = 80% DPn = 5.0', 'the curves meet only at p = 98.9%', 'reaches roughly 90 units in seconds'; none present in long_description.
+*Recommended outcome (need):* The chain-growth curve needs a numeric anchor in the text equivalent, alongside the step-growth values already narrated.
+*Confidence:* 0.85
+
+##### `access-008` — low · color-motion-only
+*Location:* asset_id=`fig-chain-vs-step-growth`
+*Anchor:* “chain growth (radical, ionic)”
+*Observation:* The association between each legend entry and its curve is carried by colour alone: an orange rule for chain growth and a blue rule for step growth, with neither curve directly labelled or dash-patterned. The other four figures are redundantly encoded, so this is the single instance in the chapter.
+*Learner impact:* A learner with a colour-vision deficiency, or reading a monochrome print-out, must infer which curve is which from shape alone. The two shapes are very different so practical risk is modest, but the intended key is colour-only.
+*Evidence:* chain-vs-step-growth.svg legend swatches use fill #B3541E and #1B6CA8 with no in-plot curve labels; the long_description does resolve the ambiguity in text.
+*Recommended outcome (need):* The curve-to-label mapping needs a non-colour cue so the key survives colour-vision differences and greyscale reproduction.
+*Confidence:* 0.78
+
+##### `access-010` — low · keyboard-operability
+*Location:* section_id=`nugget-step-growth-polymerization`
+*Anchor:* “Step growth: everything reacts with everything”
+*Observation:* The compiled chapter has two levels of structure but every block card inside a section renders at heading level four, skipping level three: TopicPackageChapterRenderer emits h1 and h2, ReaderBlockRenderer emits h4 for molecule, reaction, image, video, link and tutorial cards. The longest section carries thirteen blocks, eleven of them figure or link cards at the same level with no intermediate grouping.
+*Learner impact:* A screen-reader user navigating by heading meets a level jump (h2 to h4) and then a flat run of same-level card titles inside long sections, making it hard to move to a specific figure or sense where a sub-argument begins.
+*Evidence:* [internal source reference — not in this repo] (h1), :140 (h2); [internal source reference — not in this repo], 304, 382, 514, 541, 584 (all h4).
+*Recommended outcome (need):* The chapter's structure needs to be navigable by heading at the granularity a reader uses — no skipped level, and some way to reach a named figure within a long section without linear reading.
+*Confidence:* 0.7
+
+**Open questions**
+
+- Is there any surface where a student answering these questions is shown accessible_description? Searching frontend/src found only ReactionCoordinateQuestionRenderer, MolecularGeometryRenderer and the demo page, none of which apply to this chapter's eleven types.
+- Are option-level and matching-level structure_smiles rendered anywhere? SelectedResponseRenderer and MatchingRenderer read only imageUrl, so no structure is drawn for any of these items for any learner — which would make several items stimulus-less for sighted learners too.
+- The reader renders long_description at fontSize 'xs' in muted grey. Is that intended for what is, for a non-visual or low-vision learner, the primary equivalent of the figure?
+- I did not exercise the terse/standard/expanded control and cannot say whether it is keyboard-reachable or whether switching drops content that only exists at 'standard'.
+- The video_brief schema has no captions, transcript or audio-description field. Is that requirement captured elsewhere in the production pipeline?
+
+#### Learner with Visual Preference — 6.4/10
+
+The five hand-built SVGs are genuinely good instructional figures: each carries an argument rather than decorating a page, each encodes its categories redundantly rather than by colour alone, and all 43 assets are referenced in the compiled reader with no orphans. polymer-tacticity.svg solves the hardest drawing problem in the chapter — it flattens the backbone so every stereocentre sits at an equivalent upper vertex, and the build script asserts that invariant. The chapter's weakness is distribution, not quality. Three of the ten sections — cationic/anionic chain growth, step growth, and olefin metathesis — carry no diagram at all, and each is where the most spatial or temporal reasoning lives: the metallacyclobutane, the SBS hard-domain morphology, and the dimer-joins-trimer population picture. Smaller problems: ldpe-vs-hdpe.svg is inserted three times, once inside the tacticity section where the prose says 'the figure for this section'; the chain-growth line strikes through a label in chain-vs-step-growth.svg; the atactic row shows only one flipped methyl out of five, so 'no repeating pattern' is not visible; and mol-polynorbornene-segment is titled and described as a two-unit segment but depicts a single cyclopentane.
+
+**Strengths**
+
+- Every one of the 43 package assets resolves to at least one block in the compiled reader — no orphaned or unreferenced figures, and no figure is decorative.
+- polymer-tacticity.svg solves the chapter's hardest drawing problem correctly: all five stereocentres are placed at geometrically equivalent upper vertices of a flat all-anti zig-zag, an invariant the build script asserts, so the wedge/hash pattern alone carries the stereochemistry.
+- Four of the five figures encode their categories redundantly rather than by colour alone — wedge/hash plus colour, filled/open beads plus colour, panel headers plus colour, dashed style plus labels. This is unusually disciplined.
+- ldpe-vs-hdpe.svg makes an abstract four-step causal chain physically visible — branches drawn, voids hatched and labelled, a shaded crystalline-register band — and correctly foregrounds that the two materials are chemically identical.
+- molecular-weight-distribution.svg draws Mn and Mw as two lines on one curve, annotates the gap with its numeric value, and separately calls out the mode so the peak is not mistaken for either average.
+- copolymer-architectures.svg backs each schematic with computed sequence statistics consistent with the letter strings shown.
+- Every diagram carries both an alt_text and a substantial long_description, and the long descriptions describe the argument the figure makes, not just its contents.
+
+**Findings**
+
+##### `visual-001` — high · visual-opportunity
+*Location:* section_id=`nugget-olefin-metathesis-polymerization`, concept_slug=`olefin-metathesis-polymerization`, asset_id=`rxn-cross-metathesis`
+*Anchor:* “That ring can then break apart along either of two pairs of bonds”
+*Observation:* The metathesis section contains no diagram of any kind. Its four assets are two before/after reaction SMILES and two molecules, and the reaction SMILES jump straight from starting alkenes to products, omitting the metallacyclobutane entirely. The central claim — that a four-membered metal-containing ring forms and can break along either of two pairs of opposite bonds — is a purely topological statement carried in a single sentence. The nugget itself warns that arrow-pushing habits do not transfer, removing the one representational tool the student would fall back on.
+*Learner impact:* A student cannot form any mental image of the step the section says is the whole mechanism. The follow-on claims that depend on the same picture — that the double bond survives, that ROMP is driven by ring strain, that RCM is the same step intramolecularly — all rest on an intermediate the reader has never seen.
+*Evidence:* Section blocks: reaction, molecule, molecule, reaction, video(url=''), external_link — zero image blocks. The only asset that would have carried it is deferred.
+*Recommended outcome (need):* The chapter needs the metallacyclobutane, and the two alternative ways it can cleave, to be visible rather than described — a representation in which a reader can see the same square ring breaking two different ways.
+*Confidence:* 0.93
+
+##### `visual-002` — high · media-equivalence
+*Location:* section_id=`nugget-chain-growth-radical-polymerization`, asset_id=`video-metathesis-partner-swap`
+*Anchor:* “Open on a ruthenium carbene, the metal-carbon double bond highlighted, with an alkene approaching from the right.”
+*Observation:* All six video briefs are deferred and unrendered, but the compiled reader still emits six video blocks. Each renders as a pink badge, a title, one sentence of description, and a 'Watch' router link whose url is the empty string. Worse, the sentence shown is storyboard beat 1 — the opening shot — not a summary.
+*Learner impact:* A learner is shown six labelled affordances promising visual explanations, clicks them, and nothing happens. Because the visible teaser is the opening camera direction, the learner is told what the missing explanation starts with and never what it concludes.
+*Evidence:* Six video blocks with url '' and is_external false. ReaderBlockRenderer case 'video' renders a RouterLink to c.url unconditionally.
+*Recommended outcome (need):* Either the six deferred briefs need a non-broken presence in the reader, or the substance they hold needs to reach the learner in a form that does not depend on a video ever being produced.
+*Confidence:* 0.95
+
+##### `visual-003` — high · figure-accuracy
+*Location:* section_id=`nugget-olefin-metathesis-polymerization`, asset_id=`mol-polynorbornene-segment`
+*Anchor:* “A chain segment in which cyclopentane rings are joined to one another through carbon-carbon double bonds, representing two repeat units of polynorbornene.”
+*Observation:* The asset is titled 'A two-unit segment of polynorbornene' and its alt text describes 'cyclopentane rings' (plural) 'joined to one another through carbon-carbon double bonds', but the SMILES contains exactly one cyclopentane ring bearing two propenyl stubs. Rendered with RDKit it reads as a single substituted cyclopentane, not as a chain.
+*Learner impact:* This is the only depiction of a metathesis polymer in the chapter, and the specific thing it exists to show — that the alkene survives in the backbone between successive rings — cannot be seen from one ring with two dangling arms.
+*Evidence:* Asset smiles C/C=C\[C@H]1C[C@@H](/C=C\C)CC1; RDKit depiction shows a single cyclopentane. Downstream prose depends on it: 'It can be cross-linked at those sites'.
+*Recommended outcome (need):* The depiction and its caption need to agree, and the picture needs to show repeat units strung together through surviving backbone double bonds — the structural point is a chain, so a single ring cannot carry it.
+*Confidence:* 0.86
+
+##### `visual-004` — medium · visual-opportunity
+*Location:* section_id=`nugget-cationic-and-anionic-chain-growth`, concept_slug=`cationic-and-anionic-chain-growth`
+*Anchor:* “Each rubbery segment is anchored at both ends into a hard domain”
+*Observation:* This section has no diagram at all — five RDKit molecules and an external link. Yet it carries two of the most spatial and temporal ideas in the chapter: the SBS thermoplastic elastomer nanoscale morphology, and the living-chain timeline in which all chains start together and none dies.
+*Learner impact:* The reader is asked to hold a three-level structure — molecule, block architecture, phase morphology — with a picture supplied only for the first. The payoff claim of the whole living-polymerisation section is the one part of the chapter with no visual support, and it is also the answer to ch31-copolymer-architecture.
+*Evidence:* Compiled section block list: text, molecule x5, external_link. No image block.
+*Recommended outcome (need):* The section needs the domain morphology of a block copolymer, and the difference between chain histories in living versus radical polymerisation, to be seeable rather than only assertable.
+*Confidence:* 0.87
+
+##### `visual-005` — medium · figure-purpose
+*Location:* section_id=`nugget-copolymers`, asset_id=`fig-copolymer-architectures`
+*Anchor:* “All four can be drawn with the same overall A:B ratio and still behave nothing alike.”
+*Observation:* The figure's stated goal is to separate the four architectures so that block, the one with genuinely different physical behaviour, can be told apart at a glance. It does the first half excellently but never shows the second: nothing depicts the segregation into domains that is the actual reason block is different.
+*Learner impact:* The figure makes the four architectures memorable as patterns while leaving the causal step — sequence to phase separation to behaviour — entirely verbal. A learner who has looked at it can recite the four names and still not say why a block copolymer is elastic and remeltable.
+*Evidence:* fig-copolymer-architectures learning_goal; closing line; block panel caption 'each block keeps its own properties'. Compare nugget prose 'two interpenetrating phases and a covalent join between them'.
+*Recommended outcome (need):* The consequence of block architecture needs to be visible in the same place the architectures are compared.
+*Confidence:* 0.83
+
+##### `visual-006` — medium · figure-purpose
+*Location:* asset_id=`fig-polymer-tacticity`, section_id=`nugget-ziegler-natta-and-tacticity`
+*Anchor:* “No repeating relationship, nothing to pack: a soft amorphous gum.”
+*Observation:* The atactic row is drawn m r r m — four methyls wedged up and exactly one hashed down out of five. Scanned next to the isotactic row (five up), it reads as an isotactic chain with a single defect, not as a chain with 'no repeating relationship'. The syndiotactic row's strict alternation is instantly legible by contrast.
+*Learner impact:* The single visual contrast the section exists to teach is three-way, and one of the three does not read. A learner sees two obviously patterned chains and one nearly-patterned chain, which undercuts the claim that atactic material has nothing to pack and makes it easy to mis-generalise atacticity as occasional mistakes in a regular chain.
+*Evidence:* [internal source reference — not in this repo] asserts atactic dyads 'mrrm' and meso_fraction 0.5 over five centres; the rendered third panel shows wedge, wedge, hash, wedge, wedge.
+*Recommended outcome (need):* The atactic case needs to look irregular at a glance, not merely be labelled irregular.
+*Confidence:* 0.79
+
+##### `visual-007` — medium · visual-opportunity
+*Location:* asset_id=`fig-polymer-tacticity`, concept_slug=`ziegler-natta-and-tacticity`
+*Anchor:* “Every methyl on one face. Crystalline; melts near 165 °C.”
+*Observation:* The tacticity figure shows the stereochemical pattern and then states its consequence in words inside each panel. The step from a regular side pattern to neighbouring chains registering with one another is never drawn — conspicuous because ldpe-vs-hdpe.svg draws exactly that packing argument for branching, and is reused in this very section.
+*Learner impact:* Tacticity is the chapter's signature stereochemical idea, but the learner sees the cause (methyl faces) and the effect (melting point) with no visible link. The two are joined only by the words 'so still crystalline', which is the reasoning burden the figure was supposed to relieve.
+*Evidence:* fig-polymer-tacticity panel captions carry the crystallinity claims as text; fig-ldpe-vs-hdpe draws the equivalent argument for branching in the same section; video-tacticity-and-packing (deferred) exists precisely to show it.
+*Recommended outcome (need):* The link from a regular tacticity pattern to chains registering with one another needs to be shown somewhere in this section.
+*Confidence:* 0.85
+
+##### `visual-008` — medium · visual-redundancy
+*Location:* asset_id=`fig-ldpe-vs-hdpe`, section_id=`nugget-ziegler-natta-and-tacticity`
+*Anchor:* “it is why the figure for this section draws all three cases on a deliberately flattened backbone”
+*Observation:* fig-ldpe-vs-hdpe.svg is inserted three times, each at full size with its full caption block. It is the largest figure in the chapter. The tacticity section now contains two full figures, and its prose says 'the figure for this section', a reference that is no longer unambiguous because figures are captioned but not numbered. Placing the branching-versus-linear packing figure inside the tacticity section also puts two different explanations for low crystallinity side by side without distinguishing them.
+*Learner impact:* Repeating an argument-carrying figure verbatim three times trains the reader to skip it. In the tacticity section a reader following the prose pointer may land on the branching figure and take branching to be the reason atactic polypropylene does not crystallise — a confusion the chapter otherwise takes care to avoid.
+*Evidence:* Image blocks with the same url appear in three sections; image blocks carry caption but no figure number.
+*Recommended outcome (need):* The chapter needs each reuse to be trimmed, re-pointed at the specific claim it supports there, or dropped, and prose references to 'the figure' need to resolve unambiguously.
+*Confidence:* 0.88
+
+##### `visual-009` — medium · figure-accuracy
+*Location:* asset_id=`fig-chain-vs-step-growth`, section_id=`nugget-chain-growth-versus-step-growth`
+*Anchor:* “step growth, computed:”
+*Observation:* The chain-growth curve plateaus at DPn ~90 and runs as a bold horizontal rule straight through the bold heading 'step growth, computed:'. At 1.5x raster the rule strikes the text at cap height and the words are visibly crossed out; the heading labels the five-row DPn table that is the figure's quantitative payload.
+*Learner impact:* The most information-dense part of the figure is introduced by a struck-through label. At reader width, on a phone, or at reduced contrast this heading is the first thing to become unreadable, and without it the five rows of numbers float unattached to either curve.
+*Evidence:* [internal source reference — not in this repo] places the table at tx, ty = 700.0, Y0 + 60 while the chain-growth curve is drawn across the full plot width.
+*Recommended outcome (need):* The table heading and the plateau line need to stop occupying the same pixels.
+*Confidence:* 0.9
+
+##### `visual-010` — medium · figure-accuracy
+*Location:* asset_id=`fig-chain-vs-step-growth`
+*Anchor:* “the curves meet only at p = 98.9%”
+*Observation:* The figure prints 'the curves meet only at p = 98.9%' to one decimal place and marks the crossing with a dashed line, but that number is computed by bisection against a chain-growth model whose plateau is an illustrative constant chosen for the drawing. The crossing point is an artifact of the plot's arbitrary y-scale: pick a different plateau and the meeting point moves.
+*Learner impact:* Everything else printed on this figure is exact, so a reader has every reason to read 98.9% as equally exact and to remember it as a fact about polymerisation. It is a fact about this drawing. A learner who reasons that step growth overtakes chain growth at a specific conversion has been misled by the figure's own precision.
+*Evidence:* [internal source reference — not in this repo] chain_growth_dp uses DP_CHAIN_MAX with a docstring noting the time constant is deliberately tiny; the crossing is found by bisection and printed to one decimal.
+*Recommended outcome (need):* The figure needs to distinguish its exact quantities from its illustrative ones — a number carried to a tenth of a percent should not be an artifact of a chosen drawing constant.
+*Confidence:* 0.82
+
+##### `visual-012` — medium · visual-opportunity
+*Location:* section_id=`nugget-step-growth-polymerization`, concept_slug=`step-growth-polymerization`
+*Anchor:* “Monomer joins monomer, dimer joins trimer, and late in the reaction two long chains join to make one twice as long.”
+*Observation:* This is the longest section (13 blocks) and contains no diagram: eleven RDKit molecules and reactions plus a link. Its organising idea is explicitly a picture of a changing population over time. The chapter's one figure on this topic plots the average DPn against conversion; it never shows what is actually in the flask at each stage.
+*Learner impact:* The distinguishing feature of step growth is not a rate law but a picture of the reacting mixture at three moments. Delivered as prose, a student can reproduce the sentence and still answer the practice check from memory rather than from a model. The section also front-loads eleven small structures with no organising visual.
+*Evidence:* Compiled section: text, molecule x7, reaction x3, molecule, external_link — no image block. Practice check asks 'Describe what is physically in each flask'.
+*Recommended outcome (need):* The section needs the evolving mixture — monomer, oligomer, long chain at low, mid and near-complete conversion — to be visible.
+*Confidence:* 0.84
+
+##### `visual-013` — medium · visual-opportunity
+*Location:* section_id=`nugget-polymer-properties-and-degradation`, asset_id=`mol-natural-rubber-segment`
+*Anchor:* “giving a kinked chain”
+*Observation:* The cis/trans polyisoprene pair is the chapter's cleanest controlled experiment, but the two are delivered as independent RDKit depictions with no shared template, alignment or highlighting. Whether the difference reads as kinked versus straight depends on RDKit's automatic layout, which the package does not control. Neither depiction shows the consequence — that a kinked chain cannot register with a neighbour.
+*Learner impact:* To see the point, a learner must independently verify E/Z at three double bonds in each structure and then imagine two chains packing. Two pictures differing in layout as well as geometry do not read as a controlled comparison; they read as two different molecules, which is the misconception the pair exists to prevent.
+*Evidence:* Neither asset sets rdkit_options, so layout is unconstrained. The practice check asks the student to account for the difference.
+*Recommended outcome (need):* The cis/trans comparison needs to be presented as a controlled pair in which geometry is the only visible difference, and the packing consequence needs to be shown.
+*Confidence:* 0.76
+
+##### `visual-014` — medium · visual-opportunity
+*Location:* section_id=`nugget-polymer-properties-and-degradation`, concept_slug=`polymer-properties-and-degradation`
+*Anchor:* “Two thermal transitions matter, and they are not the same thing.”
+*Observation:* The closing section states the chapter's whole organising framework as prose: two thermal transitions, a cross-link axis running thermoplastic to elastomer to thermoset, and the rule that where a polymer sits relative to Tg decides how it feels. That is a two-axis classification with worked positions on it. The section's only figure is the third appearance of ldpe-vs-hdpe.svg, which addresses none of it.
+*Learner impact:* This section is where the chapter's threads converge, and it is delivered with no visual organiser at all. The two independent variables — crystallinity/Tg and cross-link density — are easy to collapse into one.
+*Evidence:* Compiled section: text, molecule x6, reaction, image(third use), video, external_link.
+*Recommended outcome (need):* The chapter's summarising framework needs a visual organiser; at present the synthesis section is the least visually supported part of the chapter.
+*Confidence:* 0.81
+
+##### `visual-015` — medium · visual-opportunity
+*Location:* question_slug=`ch31-tacticity-comparison`, concept_slug=`ziegler-natta-and-tacticity`
+*Anchor:* “Stereocentres follow a regular repeating pattern”
+*Observation:* Tacticity is the chapter's signature stereochemical idea and the nugget warns that reading it off a drawing is a real source of confusion. Neither assessment item exercises that skill. Both tacticity items are yes/no comparison matrices whose cells are answerable verbatim from the figure's panel captions without looking at a structure. Across all 26 questions only four carry structure_smiles, and none of those involves stereochemistry.
+*Learner impact:* A learner can score full marks on tacticity by matching caption text, then fail the first exam question that shows a drawn chain and asks which tacticity it is — the exact failure mode the nugget predicts. The figure builds a see-and-decide skill that nothing then requires the learner to use.
+*Evidence:* ch31-tacticity-comparison features and value_options; nugget text warning about wedge/hash position.
+*Recommended outcome (need):* The chapter needs at least one item where the student must determine tacticity from a drawn chain rather than from remembered property words.
+*Confidence:* 0.86
+
+##### `visual-011` — low · color-motion-only
+*Location:* asset_id=`fig-chain-vs-step-growth`
+*Anchor:* “chain growth (radical, ionic)”
+*Observation:* The two curves are distinguished only by hue, with the same stroke weight and style, and a legend whose text is itself colour-coded to match. Neither curve is labelled on or beside itself. This is the one figure in the chapter that departs from the redundant-encoding discipline the other four keep.
+*Learner impact:* A reader with a colour-vision difference, or reading a monochrome print, sees two solid lines of identical weight and a legend of two identical swatches. The curve shapes are recoverable by reasoning from the Carothers formula, but that reasoning is exactly the burden the figure exists to remove.
+*Evidence:* Legend drawn with matching stroke and label fill colours; no dash pattern or on-curve label. Overlaps the Accessibility persona.
+*Recommended outcome (need):* Which curve is which needs to survive loss of colour, as it does in the chapter's other four figures.
+*Confidence:* 0.84
+
+##### `visual-016` — low · alt-text-quality
+*Location:* asset_id=`mol-tert-butyl-cation`, section_id=`nugget-cationic-and-anionic-chain-growth`
+*Anchor:* “with an empty p orbital implied at the charged carbon”
+*Observation:* The alt text describes 'an empty p orbital implied at the charged carbon' and the learning goal is to show why the monomer's substituents decide whether it can exist. The rendered depiction is a flat line drawing of C+ with three methyls: no orbital, no indication of planarity, no representation of hyperconjugative donation. The word 'implied' concedes this, but the alt text still names a feature a reader is told to look for and cannot find.
+*Learner impact:* A learner working from the alt text hunts for an orbital that is not drawn; a sighted learner is shown a structure that supports none of the stability reasoning the surrounding prose relies on.
+*Evidence:* Asset smiles C[C+](C)C, rdkit_options null, alt_text as quoted.
+*Recommended outcome (need):* The description and the picture need to agree, and the reason a tertiary cation survives where a primary one does not needs some visible support if this asset is to carry its stated goal.
+*Confidence:* 0.78
+
+##### `visual-017` — low · visual-opportunity
+*Location:* section_id=`nugget-molecular-weight-and-dispersity`, asset_id=`fig-molecular-weight-distribution`
+*Anchor:* “A living anionic polymerisation, where all the chains start together and none dies, gives 1.05 or below.”
+*Observation:* The dispersity figure is strong on its stated goal, but the nugget's most useful practical claim is comparative: 1.05 for living anionic, 1.5-2.0 for radical, almost exactly 2.0 for step growth. The figure shows one curve at 1.58, so the reader has no visual sense of what 1.05 or 2.0 looks like, and dispersity remains a number rather than the shape parameter the learning goal claims.
+*Learner impact:* The learner can read the ratio off the figure but cannot picture the difference between a narrow and a broad distribution, which is what makes dispersity diagnostic. The practice check and both molar-mass items ask the student to infer mechanism from a computed value — an inference the single-curve figure does not support.
+*Evidence:* fig-molecular-weight-distribution learning_goal versus the rendered single distribution; nugget text 'where a sample sits is a fingerprint of how it was made'.
+*Recommended outcome (need):* Dispersity is taught as a comparative fingerprint but shown as a single value; the reader needs to see what different dispersities look like as shapes.
+*Confidence:* 0.75
+
+**Open questions**
+
+- Is the reader expected to suppress video blocks when url is empty, or is prefs.showVideos the only control? I treated the six blocks as a shipped defect rather than an authoring choice.
+- visual-003 is a structural-accuracy question as much as a figure question; the Instructor persona may rate it higher than I have.
+- The six deferred storyboards are six-beat sequences with narration outlines already written. Is the orchestrator willing to treat a storyboard as a specification for a static sequence?
+- I coined no new category ids. visual-011 uses color-motion-only and visual-002 uses media-equivalence, both overlapping the Accessibility persona's remit — flagged for dedupe rather than suppressed.
+
+### Orchestrator decisions
+
+**`rec-001` — Polyoctenamer repeat unit stated with the wrong carbon count** (blocker)
+- *Need:* The model answer says seven saturated carbons between double bonds; ring-opening cyclooctene (C8H14) gives -CH=CH-(CH2)6-, which is six.
+- *Chosen intervention:* **prose-edit** on *prose*
+- *Why this is the least-complex option that fully addresses the need:* One number in one practice-check answer is wrong; correcting it, and showing the count derived from the monomer's ring size, fully addresses the error without touching anything else.
+- *Consolidates:* instr-001
+
+**`rec-002` — Polynorbornene: the depicted structure and the account of ROMP are both wrong** (blocker)
+- *Need:* The asset is titled and described as a two-unit segment with rings joined through double bonds but contains one ring, and its long description says the six-membered ring becomes the backbone and a new five-membered ring closes — the opposite of what happens.
+- *Chosen intervention:* **new-figure** on *figure*
+- *Why this is the least-complex option that fully addresses the need:* The SMILES itself must change to show two repeat units before any description can be true of it, so a corrected structure plus rewritten descriptions is the minimum; a description-only fix would leave the picture contradicting the words.
+- *Consolidates:* instr-002, instr-003, visual-003
+
+**`rec-003` — Matching item labels its four stimuli 'Model A' to 'Model D'** (blocker)
+- *Need:* The chemistry lives in structure_smiles, which no renderer reads, and in accessible_description, which no student surface delivers, so the item carries no information for any learner.
+- *Chosen intervention:* **text-equivalent** on *assessment*
+- *Why this is the least-complex option that fully addresses the need:* Making the four left labels self-describing — exactly the pattern the item's own v2 sibling already uses — fixes it inside the item's delivered text and needs no renderer change.
+- *Consolidates:* access-001, access-006
+
+**`rec-004` — At the reader's default depth the chapter never states its own definitions** (blocker)
+- *Need:* The reader defaults to 'expanded' and replaces rather than appends, but every expanded tier is authored as a supplement, so isotactic/syndiotactic/atactic, the four copolymer architectures, initiation/propagation/termination, and the Carothers relationship are all absent from what a student sees.
+- *Chosen intervention:* **prose-edit** on *prose*
+- *Why this is the least-complex option that fully addresses the need:* Folding each section's defining statements into its expanded tier keeps the fix inside this package and works regardless of what the platform default is; changing the platform default is a product decision affecting every chapter.
+- *Consolidates:* ss-001, instr-004
+
+**`rec-005` — Figure text equivalents omit the numbers baked into the SVGs** (high)
+- *Need:* Four figures carry quantitative content as on-canvas text invisible to assistive technology, and the molecular-weight description explicitly points at values it does not supply.
+- *Chosen intervention:* **longer-description** on *figure*
+- *Why this is the least-complex option that fully addresses the need:* The figures are correct and the numbers already exist; carrying them into the long_description is the smallest change that closes the gap.
+- *Consolidates:* access-002, access-003, access-004, access-007
+
+**`rec-006` — The metallacyclobutane, the chapter's least familiar step, has no depiction** (high)
+- *Need:* The section states the four-membered ring can break along either of two pairs of bonds and warns that arrow-pushing does not transfer, then supplies no picture at all; the only planned treatment is a deferred video.
+- *Chosen intervention:* **new-figure** on *figure*
+- *Why this is the least-complex option that fully addresses the need:* No existing asset or description can carry a topological claim about which two bonds of a square break; this genuinely needs a drawn intermediate.
+- *Consolidates:* visual-001, ss-003, instr-011
+
+**`rec-007` — The bracket-and-subscript-n notation is never shown** (high)
+- *Need:* The section's first objective is to draw a repeat unit and its named trouble spot is drawing the monomer inside the brackets, yet no asset anywhere shows brackets, open valences, or a subscript n.
+- *Chosen intervention:* **new-figure** on *figure*
+- *Why this is the least-complex option that fully addresses the need:* The notation itself is the thing being assessed; prose cannot model a drawing convention.
+- *Consolidates:* ss-002
+
+**`rec-021` — Neither the practice checks nor the question accessibility descriptions reach any student surface** (high)
+- *Need:* Ten authored practice_checks appear nowhere in the reader, and accessible_description is consumed by only two renderers, neither used by this chapter's eleven types.
+- *Chosen intervention:* **instructor-note** on *instructor-support*
+- *Why this is the least-complex option that fully addresses the need:* Both are platform delivery gaps outside a chapter package's reach; recorded for the pipeline rather than worked around in content.
+- *Consolidates:* instr-005, ss-004, access-006
+
+**`rec-008` — The tacticity figure's most prominent labels use notation defined nowhere** (medium)
+- *Need:* Each panel is captioned with m/r dyads and percent meso, and those terms appear zero times in the package at any depth.
+- *Chosen intervention:* **prose-edit** on *prose*
+- *Why this is the least-complex option that fully addresses the need:* Introducing the dyad vocabulary where the figure uses it, and adding it to the long_description, is cheaper and more useful than stripping a label that is chemically standard.
+- *Consolidates:* ss-007, access-005
+
+**`rec-009` — The chain-versus-step figure has three defects that undercut its own numbers** (medium)
+- *Need:* The plateau line strikes through the table heading, the curve key is carried by colour alone, and an illustrative constant produces a '98.9%' crossing printed to the same precision as the exact Carothers values.
+- *Chosen intervention:* **new-figure** on *figure*
+- *Why this is the least-complex option that fully addresses the need:* All three live in the generator script and are fixed by regenerating the figure; the alternative — describing around them — would leave a misleading number on the page.
+- *Consolidates:* visual-009, visual-010, visual-011, access-008, ss-008
+
+**`rec-010` — The copolymer figure's closing caption is contradicted by its own statistics** (medium)
+- *Need:* The caption says all four panels share an A:B ratio while the printed values read 45%, 50%, 50% and 57%.
+- *Chosen intervention:* **prose-edit** on *figure*
+- *Why this is the least-complex option that fully addresses the need:* One caption line; the panels and their statistics are correct.
+- *Consolidates:* ss-016
+
+**`rec-011` — A core question is tagged to a concept that does not teach what it tests** (medium)
+- *Need:* The head-to-tail item sits on polymer-basics-and-repeat-units, whose text never mentions head-to-tail or alternating substituents at any depth.
+- *Chosen intervention:* **prose-edit** on *assessment*
+- *Why this is the least-complex option that fully addresses the need:* Re-tagging to the concept that supplies the reasoning is a one-field change and preserves a good question.
+- *Consolidates:* ss-011
+
+**`rec-012` — Polycarbonate is assessed twice but never taught** (medium)
+- *Need:* The carbonate source is never named, the linkage never drawn, and phosgene appears only inside a question and its own feedback.
+- *Chosen intervention:* **prose-edit** on *assessment*
+- *Why this is the least-complex option that fully addresses the need:* Restricting the item to reactions the chapter writes out is the minimum; the fuller fix — a carbonate reaction asset — is recorded but not required to make the assessment fair.
+- *Consolidates:* instr-007, instr-008, ss-006
+
+**`rec-013` — One question uses two different carbon-counting conventions** (medium)
+- *Need:* Adipic acid is described as 'a six-carbon chain with a carboxylic acid at each end' (which reads as eight carbons) while the diisocyanate description excludes its functional-group carbons, in an item whose answer is a carbon count.
+- *Chosen intervention:* **prose-edit** on *assessment*
+- *Why this is the least-complex option that fully addresses the need:* Making the convention explicit and consistent in both descriptions resolves it.
+- *Consolidates:* instr-009
+
+**`rec-014` — A structured-reasoning evidence key accepts a consequence as evidence** (medium)
+- *Need:* The claim field asks which chain packs; the evidence key requires selecting the glass-transition observation, which is a consequence of the packing failure rather than evidence for it.
+- *Chosen intervention:* **prose-edit** on *assessment*
+- *Why this is the least-complex option that fully addresses the need:* Scoping the evidence field label to the full elasticity argument keeps all three observations correct and preserves the item.
+- *Consolidates:* instr-014
+
+**`rec-015` — The prerequisite graph understates what the prose assumes** (medium)
+- *Need:* copolymers omits the living-polymerisation prerequisite it depends on, properties-and-degradation omits step growth, and metathesis declares a prerequisite it never uses.
+- *Chosen intervention:* **prose-edit** on *prose*
+- *Why this is the least-complex option that fully addresses the need:* Three edges; the defect is invisible in linear reading and only bites when a path-building surface uses the graph.
+- *Consolidates:* instr-013
+
+**`rec-016` — The reason isotactic chains are not optically active is misstated** (medium)
+- *Need:* The text attributes it to near-cancellation of individual rotations, implying a small residual rotation; the operative reason is that the chain is achiral by its own symmetry.
+- *Chosen intervention:* **prose-edit** on *prose*
+- *Why this is the least-complex option that fully addresses the need:* A short replacement passage, plus acknowledging that the backbone branches are constitutionally equivalent so 'stereocentre' is a working shorthand.
+- *Consolidates:* instr-010
+
+**`rec-017` — One figure carries three different arguments in three places** (medium)
+- *Need:* ldpe-vs-hdpe is inserted three times at full size with identical description, and the tacticity section's prose reference to 'the figure for this section' no longer resolves unambiguously.
+- *Chosen intervention:* **prose-edit** on *prose*
+- *Why this is the least-complex option that fully addresses the need:* Disambiguating the prose reference and dropping the least-motivated reuse is cheaper than authoring per-placement variants.
+- *Consolidates:* visual-008, ss-017
+
+**`rec-018` — The chapter's concluding third is essentially unassessed** (medium)
+- *Need:* Seven declared objectives have no question, clustered in dispersity, Tg-versus-Tm and degradation; no item requires Mn and none touches recycling.
+- *Chosen intervention:* **added-practice** on *assessment*
+- *Why this is the least-complex option that fully addresses the need:* New items are the only thing that closes an assessment gap; recorded rather than applied because expanding the bank is a scope decision.
+- *Consolidates:* instr-006, instr-016
+
+**`rec-019` — The atactic row does not read as irregular** (medium)
+- *Need:* Four methyls up and one down out of five scans as an isotactic chain with a single defect, undercutting the panel's own caption.
+- *Chosen intervention:* **new-figure** on *figure*
+- *Why this is the least-complex option that fully addresses the need:* Only a change to the drawn pattern can fix a legibility problem in the drawing.
+- *Consolidates:* visual-006
+
+**`rec-022` — Three sections carry no diagram at all** (medium)
+- *Need:* Cationic/anionic chain growth, step growth and metathesis each deliver their most spatial or temporal idea — domain morphology, the evolving population, the metallacyclobutane — in prose alone.
+- *Chosen intervention:* **new-figure** on *figure*
+- *Why this is the least-complex option that fully addresses the need:* Recorded as a figure cluster rather than applied; each needs authoring and only the metathesis one is required to clear a verified defect.
+- *Consolidates:* visual-004, visual-012, visual-014, instr-012
+
+**`rec-020` — Two figure descriptions claim more than the structures show** (low)
+- *Need:* The polyisoprene segments say 'every carbon-carbon double bond' has defined geometry when the terminal isopropylidene has none, and the tert-butyl cation alt text names an empty p orbital that is not drawn.
+- *Chosen intervention:* **sufficient-alt-text** on *figure*
+- *Why this is the least-complex option that fully addresses the need:* Both are description-only overclaims; trimming the claims makes the descriptions accurate without changing the figures.
+- *Consolidates:* instr-015, visual-016
+
+### Merged duplicates
+
+- `instr-002` / `visual-003` — the polynorbornene one-ring-versus-two mismatch, found independently by the instructor and visual personas. Consolidated into `rec-002` at the stronger severity, keeping both learner impacts: the structural claim cannot be confirmed (instructor) and the ring/double-bond alternation cannot be seen (visual).
+- `ss-001` / `instr-004` — the expanded-tier default, found independently by the struggling-student and instructor personas from the same renderer code. Consolidated into `rec-004`.
+- `access-008` / `visual-011` — the colour-only curve key in the chain-versus-step figure. Consolidated into `rec-009`; the visual persona flagged the overlap itself.
+- `ss-007` / `access-005` — undefined dyad/meso notation on the tacticity figure, one reading it as cognitive load and one as a text-layer gap. Consolidated into `rec-008`, keeping both framings.
+- `ss-008` / `visual-010` — the 98.9% crossing presented with exact-looking precision. Consolidated into `rec-009`.
+- `visual-008` / `ss-017` — the triple reuse of ldpe-vs-hdpe. Consolidated into `rec-017`.
+- `instr-005` / `ss-004` / `access-006` — practice checks and question accessibility descriptions never reaching a student surface; three personas, one platform cause. Consolidated into `rec-021`.
+
+### Retained disagreements
+
+**Whether the six deferred video blocks render as dead 'Watch' links in the reader**
+
+- *Learner with Visual Preference:* visual-002, severity high: 'the compiled reader still emits six video blocks... a Watch link whose url is the empty string, which resolves to the current page and therefore does nothing... a learner is shown six labelled affordances promising visual explanations, clicks them, and nothing happens.'
+- *Struggling Student:* 'All six video briefs are needs_review and their reader blocks are correctly is_hidden: true, so nothing is broken on screen.'
+- *Accessibility Persona:* 'Because all six are production_status deferred and their reader blocks are is_hidden with an empty url, nothing is broken for learners today... no differential barrier exists now.'
+
+*Orchestrator resolution:* Refuted, and the same claim was refuted on the same evidence in a previous chapter's review. The orchestrator verified directly: every one of the six compiled video blocks carries block-level is_hidden true, and [internal source reference — not in this repo] line 374 returns null on that before reaching the switch, so the video case never executes. The visual persona read the block content rather than the block wrapper. Retained as a low-severity note that the guard is a single flag with no compile-time assertion behind it — if is_hidden were ever dropped, six dead links would ship silently.
+
+**Severity of the polynorbornene asset defect**
+
+- *Learner with Visual Preference:* visual-003, high, explicitly not marked a publication blocker: 'a structural-accuracy question as much as a figure question; the Instructor persona may rate it higher than I have.'
+- *Organic Chemistry Instructor:* Split into two findings — instr-002 (high) for the one-ring-versus-two mismatch and instr-003 (blocker) for the misassignment of which ring becomes the backbone.
+
+*Orchestrator resolution:* The instructor's split is adopted. The count mismatch is a figure-accuracy defect, but the claim that the six-membered ring becomes the backbone and a new five-membered ring closes is a false statement about the mechanism, independently confirmed by cleaving the C=C computationally and observing that a five-membered ring survives intact. A student who accepts it will predict the wrong product for any other strained cyclic alkene, so it is treated as a blocker and both are fixed together.
+
+### Places where a description is sufficient (no new asset)
+
+- The bond_change_ledger items: atom_labels are self-describing and reaction_display states the connectivity change, so the task is performable without seeing the structure. No new asset needed.
+- All ten practice_check items are prose prompt-and-answer pairs with no visual dependency — their problem is delivery, not description.
+- Both structure_scaffold items: typed_structure_entry 'allowed' with an explanatory note is the correct call and needs no alternate activity.
+- The numeric questions restate their own data and formulas in the prompt, so no figure-only value propagates into assessment.
+- fig-ldpe-vs-hdpe and fig-polymer-tacticity are chemically and visually sound; their gaps are description and placement, not the drawings.
+- The six deferred video briefs need no reader-side workaround: their blocks are is_hidden and the ideas they carry are all present in prose.
+
+### Visual opportunities (recorded, not all applied)
+
+- A drawn metallacyclobutane showing the two ways the four-membered ring can cleave (visual-001, ss-003, instr-011).
+- The bracket-and-subscript-n repeat-unit notation with open valences (ss-002).
+- The many-chain domain morphology that makes a block copolymer a thermoplastic elastomer (instr-012, visual-004, visual-005).
+- The evolving population of a step-growth mixture at low, mid and near-complete conversion (visual-012).
+- A two-axis organiser for the closing section: thermal transitions against cross-link density (visual-014).
+- A comparative view of narrow versus broad dispersity, rather than one curve at a single value (visual-017).
+
+### Regression targets for next run
+
+All 60 finding ids are new in this baseline run. Recheck in particular: `instr-001`, `instr-003`, `ss-001`, `access-001` (the four blockers), and `access-002`, `access-006`, `instr-005` (delivery-layer gaps that a content fix cannot close).
+
+---
+
+## Post-correction record
+
+**Status:** second-correction-pass-applied-and-verified-without-second-persona-run 
+**Post-correction readiness estimate:** major revision 
+*Not a new persona verdict. All four baseline blockers are resolved and the chapter-local verified errors are corrected, but the platform delivery gap on `accessible_description` and the remaining figure and assessment clusters are open, so a full four-persona regression run is still due before any publication decision.*
+
+The baseline verdict above (**blocked**) and every baseline finding are preserved unchanged. What follows is a separate record of what was corrected afterwards. Groups 1–18 were applied 2026-07-31 in the first pass; groups 19–21 were applied later the same day in a second pass that closed the two remaining figure recommendations and the reader-delivery half of `rec-021`.
+
+### Applied (21 correction groups)
+
+1. Polyoctenamer repeat unit corrected in the metathesis practice-check answer from 'runs of seven saturated carbons' to six, with the count now derived on the page from cyclooctene's eight ring carbons minus the two sp2 carbons of the relocated double bond.
+ - *Resolves:* instr-001
+2. mol-polynorbornene-segment SMILES replaced with a genuine two-ring segment (C18H28, two cyclopentanes, three backbone C=C), and the long description rewritten to trace ROMP atom by atom: one bond is cut, the five-membered ring already exists and survives intact rather than closing, and the six-membered ring is not converted into the backbone.
+ - *Resolves:* instr-002, instr-003, visual-003
+3. ch31-match-linkage-to-polymer: the four 'Model A'-'Model D' labels replaced with self-describing text naming what is attached to each carbonyl carbon; prompt, accessible description and all four wrong-answer explanations updated to match, so the item carries its chemistry in delivered text rather than in structure_smiles no renderer reads.
+ - *Resolves:* access-001 · *Partially addresses:* access-006
+4. A self-contained definitional lead-in prepended to all ten expanded tiers, so the reader's default depth now states monomer versus repeat unit, initiation/propagation/termination and head-to-tail, the cationic/anionic substituent rule and what 'living' means, isotactic/syndiotactic/atactic plus m/r dyads, the four copolymer architectures, the step-growth definition and the condensation counterexample, the Carothers relationship with its ladder, Mn/Mw/dispersity, metathesis and the metallacyclobutane, and Tg versus Tm with the thermoplastic/thermoset/elastomer axis.
+ - *Resolves:* ss-001, instr-004 · *Partially addresses:* ss-007, access-005
+5. Nugget 1 now states that each monomer contributes two backbone carbons but one substituent, so the substituent lands on every second carbon, making the head-to-tail select item answerable from the concept it is tagged to while the mechanistic reason stays in concept 2.
+ - *Resolves:* ss-011
+6. The reason isotactic chains are not optically active corrected from near-cancellation of individual rotations to achirality by the chain's own mirror symmetry, with an added note that calling those carbons stereocentres is a working shorthand because the backbone branches are constitutionally equivalent.
+ - *Resolves:* instr-010
+7. Both polyisoprene segment descriptions now state that the terminal alkene bears two methyls and therefore has no cis/trans geometry to define, so 'every carbon-carbon double bond' no longer overclaims and the controlled comparison is honestly scoped to the two interior double bonds.
+ - *Resolves:* instr-015
+8. mol-tert-butyl-cation alt text no longer names an empty p orbital the line drawing does not contain; the long description now says explicitly that the orbital is not drawn and must be supplied from what the reader knows about a trivalent carbon.
+ - *Resolves:* visual-016
+9. ch31-match-linkage-to-polymer-v2: the diacid and diisocyanate descriptions now state their carbon-counting convention explicitly ('six carbons counting its two carboxyl carbons' versus 'six counting only the chain carbons'), since the item's answer is itself a carbon count.
+ - *Resolves:* instr-009
+10. ch31-rubber-elasticity-reasoning: the evidence field label rescoped from the packing claim alone to the overall account of why one chain packs and the other stays elastic, so the glass-transition observation is legitimately part of the expected set.
+ - *Resolves:* instr-014
+11. Prerequisite graph corrected: copolymers now declares cationic-and-anionic-chain-growth (it depends on living polymerisation), polymer-properties-and-degradation declares step-growth-polymerization (it rests on ester hydrolysis and the trifunctional-monomer network argument), and olefin-metathesis-polymerization drops the chain-growth-versus-step-growth edge it never used.
+ - *Resolves:* instr-013
+12. ch31-classify-growth-mechanism-v2: the bisphenol A / phosgene entry — whose reagent and HCl by-product the chapter never teaches — replaced with glycolic acid self-condensation to polyglycolic acid, a condensation the degradation section does supply, with the wrong-answer explanation rewritten; every entry is now settleable from the chapter text.
+ - *Resolves:* instr-007 · *Partially addresses:* instr-008, ss-006
+13. Figure text equivalents enriched with the values previously visible only as glyphs inside the SVGs: the molecular-weight description now gives Mn 44,553, Mw 70,530, the 25,976 g/mol gap, dispersity 1.58 and the mode at 19,031 g/mol; the copolymer description gives all four literal A/B sequences and every run statistic; the LDPE/HDPE description gives the crystallinity ranges, process conditions, branch counts and the 25-percentage-point-versus-4-per-cent relationship; the chain-versus-step description gives the full computed ladder plus a numeric anchor for the chain-growth curve flagged as illustrative.
+ - *Resolves:* access-002, access-003, access-004, access-007
+14. The tacticity figure's description now carries the wedge/hash convention and defines the m/r dyad and percent-meso notation its panels are labelled with, and the prose lead-in defines meso and racemo dyads where a student first meets them; a caveat was added that five stereocentres give only four dyads so no short segment can be statistically representative.
+ - *Resolves:* ss-007, access-005
+15. fig-ldpe-vs-hdpe dropped from the tacticity section, where it offered a competing explanation for low crystallinity next to the tacticity argument, and both prose pointers changed from 'the figure for this section' to naming the three-panel tacticity figure directly. Two placements remain.
+ - *Resolves:* visual-008, ss-017
+16. chain-vs-step-growth.svg regenerated: the legend and Carothers ladder moved clear of the plateau line so no rule strikes the table heading (asserted); the illustrative '98.9% crossing' annotation and its dashed marker removed entirely and replaced with an on-curve label stating that the plateau height is illustrative and chain length is set by propagation versus termination rather than conversion (asserted absent); and the two curves given distinct dash patterns reflected in both legend and plot, verified in a greyscale render.
+ - *Resolves:* visual-009, visual-010, visual-011, access-008, ss-008
+17. copolymer-architectures.svg regenerated: every panel now reports the same monomer's percentage on the same denominator (the graft panel previously reported B where the others reported A), run counts that cover both monomers say so, and the footer replaced with a computed claim that composition moves by a factor of 1.3 across the four panels while mean A run length moves by a factor of 20 — so the caption no longer asserts a constant ratio its own statistics contradict.
+ - *Resolves:* ss-016
+18. polymer-tacticity.svg regenerated with a new atactic pattern (2 up / 3 down, dyads r m r r, 25 per cent meso, both recomputed from the drawn sides and asserted) so the row no longer scans as 'isotactic with one defect'; its wedge count now differs from both isotactic and syndiotactic and it contains an adjacent like pair, so it cannot be read as alternation either.
+ - *Resolves:* visual-006
+
+19. **`fig-metallacyclobutane` built and wired into the metathesis section**, which previously carried no diagram of any kind. Three panels track three carbons (a, b, c) from a ruthenium carbene plus hex-3-ene into the four-membered metallacyclobutane and then out along each of the two possible cleavages: breaking the two bonds the ring just made hands back the starting carbene and alkene unchanged, breaking the two it brought in releases pent-2-ene and leaves a new carbene on the metal. The ring, which pair each cleavage cuts, and what each pair releases are all derived in the build script from a four-atom connectivity table and asserted, and the cross metathesis the substituents encode (but-2-ene + hex-3-ene = 2 pent-2-ene) is balanced with RDKit — so a printed product cannot claim a fragment the drawn cut does not produce.
+ - *Resolves:* rec-006 · visual-001, ss-003, instr-011
+20. **`fig-repeat-unit-notation` built and wired into section 1**, so the bracket-and-subscript-n convention the section's first objective asks a student to produce is modelled rather than only asserted. It derives the polyethylene repeat unit from ethylene in three steps, shows the open valence at each end and brackets that cut those two bonds, sets the bracketed monomer (struck through, labelled wrong) beside the bracketed repeat unit, and repeats the construction for propylene with two units written out so the methyl on every second backbone carbon is visible. Both "same molecular formula either way" claims are counted off RDKit, and the bracket positions are asserted to fall strictly inside the open-bond stubs, because a bracket that does not cut the continuing bond is the notation drawn wrongly.
+ - *Resolves:* rec-007 · ss-002
+21. **Recompiled against the reader's callout emission** — a platform fix that landed with ch30 after this chapter was last compiled. All ten authored practice_checks now reach the reader as tip callouts and all thirty authored trouble spots as warning callouts; the block inventory goes from zero practice or scaffolding blocks to twenty callouts, and every one of the ten practice-check prompts is now present in the compiled chapter.
+ - *Resolves:* instr-005, ss-004 · *Partially addresses:* rec-021, ss-010, access-006
+
+### Remaining high priority
+
+- **Platform:** `accessible_description` is still consumed by only `ReactionCoordinateQuestionRenderer`, `MolecularGeometryRenderer` and `QuestionTypeDemoPage` (gated on `demo_eligible`, which is 0) — none of which applies to this chapter's eleven question types. Re-verified 2026-07-31 by grep over `frontend/src`. Not fixable inside a topic package: closing it means teaching `ActivityWorkspaceRenderer` to deliver the bundle, which changes every already-seeded chapter and needs sign-off. This is the surviving half of `rec-021`; its reader half is closed by correction 21.
+- **Platform:** neither `MatchingRenderer` nor `SelectedResponseRenderer` reads `structure_smiles` (only `imageUrl`), so no option structure renders for any learner in these question types. Worked around here by making labels self-describing; the underlying gap is unfixed.
+- rec-018 / instr-006 / instr-016 — the concluding third stays lightly assessed: no item on Tg versus Tm, dispersity-as-fingerprint, degradability-versus-persistence, or computing Mn.
+- rec-022 / instr-012 / visual-004 / visual-012 / visual-014 — the remaining figure cluster: block-copolymer domain morphology, the evolving step-growth population, and a two-axis organiser for the closing section. The metathesis member of this cluster is closed by correction 19.
+- instr-008 / ss-006 — polycarbonate still has no linkage-forming reaction asset, though it is no longer assessed by an untaught reaction.
+
+### Verification
+
+- Automated test suite — 144 passed
+- `[internal source reference — not in this repo] --write-runtime — compiled clean; 10 concepts, 10 nuggets, 43 assets, 26 questions, 13 surfaced / 13 staged / 11 types`
+- `load_topic_package() semantic validation — passed`
+- `All 26 answer keys re-graded from their ideal submissions — 26/26 correct`
+- `88 wrong-answer explanation patterns re-checked against submission shapes — 0 unreachable`
+- `find_accessibility_leaks over all 26 accessible descriptions — 0 leaks`
+- `All asset and question SMILES re-parsed with RDKit — 0 invalid; polynorbornene now C18H28, 2 rings, 3 C=C`
+- `11/11 external links in the recompiled reader return 200`
+- `question-bank seeder (proprietary toolchain, not in this repo)`
+
+**Second correction pass (2026-07-31), verification:**
+
+- Automated test suite — 147 passed
+- `[internal source reference — not in this repo] — 7 figures built, every in-script invariant green; the five pre-existing SVGs regenerate byte-identically (no git diff), so the two new builders changed nothing else`
+- Both new figures rasterised and visually inspected before wiring in — which is what caught the text-block overruns no schema check can see
+- `[internal source reference — not in this repo] --write-runtime — compiled clean with zero warnings; 10 concepts, 10 nuggets, 45 assets, 26 questions, 13 surfaced / 13 staged / 11 types`
+- `load_topic_package() semantic validation — passed; 45/45 assets carry both alt_text and a long_description`
+- Reader block inventory: 8 image blocks and all 8 URLs resolve on disk (was 6); 20 callout blocks (was 0); all 10 practice-check prompts present in the compiled chapter
+- `All asset SMILES re-parsed with RDKit — 0 invalid; polynorbornene still C18H28, 2 rings, 3 C=C`
+- Not reseeded: no question changed in this pass, so the seeded bank is unaffected.
+
+A full four-persona regression run is due before any publication decision; neither correction pass is a new verdict.

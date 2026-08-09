@@ -1,0 +1,1733 @@
+{
+ "chapter_id": "amines-and-heterocycles",
+ "chapter_version": "1",
+ "run_at": "2026-07-30T14:05:00+00:00",
+ "personas": [
+ {
+ "persona": "Organic Chemistry Instructor",
+ "persona_version": "1.0.0",
+ "chapter_id": "amines-and-heterocycles",
+ "chapter_version": "1",
+ "model": "claude-opus-5[1m]",
+ "summary": "A strong, unusually well-verified amines chapter. I checked all 26 asset SMILES and every SMILES in the 56 questions with RDKit against formula, canonical connectivity and InChIKey, and every one is the compound it claims to be, including the stereo-defined azo dye, the 2,4-dinitroaniline pattern, histamine's C4 attachment and quinoline versus isoquinoline. I independently re-derived every answer key and all 56 are correct. Roughly twenty quoted pKa values check out against literature and are internally consistent. Of the three late-added passages, two are sound; the third introduced a quantitative claim its own numbers refute. My verdict is NOT-GO as written on one narrow but hard defect: the accessible descriptions of both Hofmann drawing questions call primary amines secondary, which is precisely the misconception concept 1 exists to prevent. Beyond it, no amine nomenclature is taught although several items require name-to-structure translation, and the halogen substituent case is graded twice while the rule the chapter states predicts the wrong sign for it.",
+ "overall_score": 7.6,
+ "publication_blockers": [
+ "instr-001"
+ ],
+ "findings": [
+ {
+ "finding_id": "instr-001",
+ "location": {
+ "question_slug": "ch24-hofmann-major-alkene",
+ "concept_slug": "amine-structure-classification",
+ "anchor_text": "exhaustive methylation of a five-carbon secondary amine"
+ },
+ "severity": "blocker",
+ "category": "chemical-accuracy",
+ "observation": "Both Hofmann drawing questions misclassify their starting amine in the accessible_description, calling 2-aminopentane and 3-methylbutan-2-amine secondary amines. Both are primary: in each the nitrogen carries exactly one carbon substituent. The descriptions classified the carbon rather than the nitrogen.",
+ "learner_impact": "Every learner who reads the description is taught the exact misconception the chapter's first concept is built to destroy, by the chapter itself. It also silently contradicts ch24-hofmann-equivalents, whose key of 3 equiv is correct only because sec-butylamine is primary; a student accepting secondary would compute 2 and be marked wrong with no way to reconcile the two items.",
+ "evidence": "Both accessible_descriptions say secondary amine; contradicted by nugget-amine-structure-classification practice_check, which states of the formula-identical case that sec-butylamine is a primary amine because classification counts carbon substituents on nitrogen.",
+ "recommended_outcome": "The two Hofmann drawing items need starting-material descriptions that classify the amine at nitrogen, and the chapter needs assurance no other item description classifies an amine by its carbon.",
+ "confidence": 0.99
+ },
+ {
+ "finding_id": "instr-002",
+ "location": {
+ "concept_slug": "amine-structure-classification",
+ "nugget_id": "nugget-amine-structure-classification",
+ "question_slug": "ch24-hofmann-major-alkene"
+ },
+ "severity": "high",
+ "category": "missing-example",
+ "observation": "The chapter teaches no amine nomenclature at all, yet multiple graded items require translating an amine name into a structure with no structure supplied: 2-Aminopentane on a blank canvas, sec-Butylamine, N-Methylpiperidine, and parsing N,N-dimethylpentanamide versus N,N-dimethylpentan-1-amine. Three incompatible naming conventions are used across the chapter and none is introduced.",
+ "learner_impact": "Name-to-structure translation becomes an ungraded prerequisite silently gating graded chemistry; a student who understands Hofmann regiochemistry can fail by drawing the wrong skeleton, and the feedback about beta hydrogens will not diagnose it.",
+ "evidence": "No nugget text in any tier contains a naming rule and no concept covers nomenclature. ch24-hofmann-major-alkene-v2 supplies a condensed formula while its v1 twin supplies only the name.",
+ "recommended_outcome": "Either the chapter needs explicit amine-naming instruction in the default tier, or the name-only items need structures supplied so nomenclature is not an unstated gate.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "instr-003",
+ "location": {
+ "nugget_id": "nugget-arylamine-basicity",
+ "concept_slug": "arylamine-basicity",
+ "anchor_text": "One ring in the path, one discount; no ring in the path, no discount; two rings, twice the discount."
+ },
+ "severity": "high",
+ "category": "misconception",
+ "observation": "The closing line of the late-added benzylamine/diphenylamine paragraph asserts two rings deliver twice the discount of one. The chapter's own numbers refute it: aniline's discount is 10.7 minus 4.6 equals 6.1 units, so twice would put diphenylamine near minus 1.5, but diphenylamine is 0.8 and the paragraph says so two sentences earlier. The real second-ring increment is 3.8 units; the effects are strongly sublinear, partly because the two rings cannot both be coplanar with nitrogen.",
+ "learner_impact": "Hands students a false additive model that is memorable because it is tidy, produces wrong estimates for triphenylamine and any di-arylated nitrogen, and teaches that resonance effects simply add. An attentive student can see the sentence contradict the number beside it.",
+ "evidence": "nugget-arylamine-basicity expanded tier closing line; ch24-rank-aniline-substituents-v2 uses the same four values as its reference ladder.",
+ "recommended_outcome": "The summary line needs to match the data it just presented, showing the second ring adding a further smaller discount rather than doubling the first, ideally with a reason the increments are not additive.",
+ "confidence": 0.92
+ },
+ {
+ "finding_id": "instr-004",
+ "location": {
+ "nugget_id": "nugget-arylamine-basicity",
+ "question_slug": "ch24-rank-aniline-substituents",
+ "anchor_text": "The same electronic vocabulary that predicts electrophilic aromatic substitution rates thus predicts arylamine basicity, with no new ideas needed."
+ },
+ "severity": "high",
+ "category": "objective-alignment",
+ "observation": "Halogen substituents are graded twice but never taught, and the stated rule predicts the wrong answer for them. The expanded tier discusses only nitro and methoxy and then tells students to reuse their EAS directing-effect vocabulary, which classifies chlorine as an ortho/para director, the same box as methoxy. Two items require the opposite. The reconciling idea, that halogens are inductively withdrawing but resonance-donating and induction wins for basicity, appears in no tier, only in a level-3 hint.",
+ "learner_impact": "A student reasoning exactly as instructed gets both items wrong, and the feedback states the conclusion without giving the mechanism. This is the one place where following the taught rule produces a wrong graded answer, which discredits a rule needed elsewhere.",
+ "evidence": "The expanded tier covers only p-nitro and p-methoxy; no tier mentions halogen, chlorine, or inductive-versus-resonance competition. Graded in ch24-strongest-arylamine option c and ch24-rank-aniline-substituents key order, and in the nugget's own practice_check.",
+ "recommended_outcome": "The default-tier prose needs to cover the halogen case explicitly so the substituent rule the chapter states actually covers every substituent it grades.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "instr-005",
+ "location": {
+ "nugget_id": "nugget-arenediazonium-chemistry",
+ "concept_slug": "arenediazonium-chemistry",
+ "anchor_text": "historically the chief industrial phenol synthesis"
+ },
+ "severity": "medium",
+ "category": "chemical-accuracy",
+ "observation": "Warm hydrolysis of a diazonium salt is described as historically the chief industrial phenol synthesis. It never was: industrial phenol ran on benzenesulfonate/alkali fusion, then chlorobenzene hydrolysis, and since the 1950s overwhelmingly on the cumene hydroperoxide process. Diazonium hydrolysis consumes stoichiometric nitrite, needs ice-bath control and runs dilute. The rest of the sentence, about positional control, is correct.",
+ "learner_impact": "Students carry away a false piece of process chemistry contradicted in any industrial context, and it distorts why the diazonium route is valuable: positional control, not throughput.",
+ "evidence": "nugget-arenediazonium-chemistry expanded tier; note ch24-diazonium-route offers NaOH at 300 C as a distractor, so the actual historical industrial chemistry appears only as a wrong answer.",
+ "recommended_outcome": "The industrial attribution needs removing or correcting; the positional-control justification is accurate and sufficient alone.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "instr-006",
+ "location": {
+ "nugget_id": "nugget-hofmann-elimination",
+ "concept_slug": "hofmann-elimination",
+ "anchor_text": "eliminations with quaternary ammonium leaving groups give the less substituted alkene — is called the Hofmann rule"
+ },
+ "severity": "medium",
+ "category": "misconception",
+ "observation": "The Hofmann rule is stated without exception, as a property of the leaving group. The well-known exception, a beta hydrogen made acidic by an adjacent aryl or carbonyl group where the elimination acquires E1cb character and gives the conjugated more substituted alkene, is not mentioned anywhere.",
+ "learner_impact": "Students meeting a benzylic or carbonyl-activated substrate apply the steric rule confidently and get the wrong alkene, with no cue that a different control operates. It also implies regiochemistry is decided by leaving-group size alone.",
+ "evidence": "nugget-hofmann-elimination expanded tier; no tier contains acidic, conjugat-, E1cb or styrene. All four Hofmann assessment items use purely alkyl substrates.",
+ "recommended_outcome": "The section needs a bounding sentence stating the condition under which Hofmann orientation fails, so the rule carries its domain of validity.",
+ "confidence": 0.82
+ },
+ {
+ "finding_id": "instr-007",
+ "location": {
+ "concept_slug": "hofmann-elimination",
+ "nugget_id": "nugget-hofmann-elimination",
+ "anchor_text": "Exhaustive methylation exploits precisely the runaway alkylation that plagued amine synthesis"
+ },
+ "severity": "medium",
+ "category": "sequencing",
+ "observation": "Declared prerequisites do not match what the prose assumes, in both directions. hofmann-elimination declares only amine-structure-classification yet builds its central move on the overalkylation runaway from amine-synthesis-alkylation and its regiochemistry on E2/Zaitsev. Conversely reductive-amination declares amine-synthesis-alkylation but uses nothing from it. pyrrole-imidazole and pyridine-chemistry both lean on the protonation-destroys-stabilization argument from arylamine-basicity, which neither declares.",
+ "learner_impact": "The prerequisite graph drives adaptive sequencing and remediation; where it is wrong a stuck student is routed to the wrong concept.",
+ "evidence": "concepts[] prerequisite lists versus the dependency sentences in nugget-hofmann-elimination expanded.",
+ "recommended_outcome": "Prerequisite declarations need reconciling with the dependencies the prose actually asserts.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "instr-008",
+ "location": {
+ "concept_slug": "amine-synthesis-alkylation",
+ "question_slug": "ch24-gabriel-on-aryl-halide-v2",
+ "anchor_text": "Use the azide synthesis and the Gabriel synthesis to prepare a primary amine cleanly."
+ },
+ "severity": "medium",
+ "category": "objective-alignment",
+ "observation": "The stated objective is to use the azide and Gabriel syntheses to make a primary amine, but every item on this concept is a failure case: why direct alkylation fails, how Gabriel avoids overalkylation, Gabriel failing on an aryl halide, azide failing on a tertiary halide. No item asks a student to execute a successful sequence, and neither synthesis_route item uses them. It is also the thinnest concept in the bank with 2 unique items.",
+ "learner_impact": "Students can pass every item while knowing only where the methods break, never having produced a primary amine by either route.",
+ "evidence": "The objective text versus the concept's four items; ch24-nitrile-route offers NaN3 only as a distractor.",
+ "recommended_outcome": "This concept needs at least one item in which a masked-nitrogen route succeeds and the student builds or draws the product.",
+ "confidence": 0.87
+ },
+ {
+ "finding_id": "instr-009",
+ "location": {
+ "nugget_id": "nugget-amine-synthesis-reduction",
+ "section_id": "amine-synthesis-reduction",
+ "anchor_text": "LiAlH4 delivers two hydride equivalents to the C#N triple bond"
+ },
+ "severity": "medium",
+ "category": "notation-consistency",
+ "observation": "Reader prose ships raw ASCII and SMILES-derived notation while question surfaces use correct typography. The compiled reader contains C#N triple bond, Ar-N#N+, LiAlH4 seventeen times, NaBH3CN, CH3I, N3-, 10^6 and 10^11; the questions render the same species with proper Unicode. The hash character is SMILES syntax, not chemical notation, and nothing tells the reader it means a triple bond.",
+ "learner_impact": "A student meeting C#N in prose and the Unicode triple bond in the next question must infer they are the same object, and unsubscripted formulas model habits that lose marks on handwritten work.",
+ "evidence": "grep counts against the compiled reader as listed; contrast ch24-choose-reducing-agent prompt.",
+ "recommended_outcome": "Prose and assessment need one shared notation convention, with the SMILES hash removed from student-facing text.",
+ "confidence": 0.93
+ },
+ {
+ "finding_id": "instr-010",
+ "location": {
+ "section_id": "hofmann-elimination",
+ "asset_id": "mol-sec-butyltrimethylammonium",
+ "concept_slug": "hofmann-elimination"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "All 26 assets are static single-molecule depictions; the chapter contains no figure of a process, comparison or energy relationship. The places where the prose is explicitly describing a picture are exactly the places with no picture: the pKaH ladder, aniline's delocalization, the Hofmann E2 profile, the pyrrole-versus-pyridine lone-pair geometry, and the Hofmann rearrangement migration. The five video briefs that would carry this load compile hidden with empty urls.",
+ "learner_impact": "The chapter's hardest ideas are all spatial and all carried by prose alone; students get static structures for the easy content and nothing for the difficult content.",
+ "evidence": "All 26 assets are type molecule; every video block has an empty url and is_hidden true.",
+ "recommended_outcome": "The chapter needs process-level visual support where the reasoning is spatial, and the five briefs need either delivery or removal so the reader is not carrying dead blocks.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "instr-011",
+ "location": {
+ "section_id": "amine-basicity",
+ "nugget_id": "nugget-amine-basicity",
+ "anchor_text": "The conjugate acid of pyridine has pKa 5.2 and the conjugate acid of piperidine has pKa 11.1."
+ },
+ "severity": "medium",
+ "category": "retrieval-practice",
+ "observation": "All ten nuggets carry a well-written practice_check with a worked answer and none reaches the reader; the compiled chapter contains zero occurrences and no block type that could render one. Several checks are the only place a skill is exercised at all.",
+ "learner_impact": "A student reading end to end encounters ten sections of continuous exposition with no point at which they must produce anything; the first retrieval attempt happens in the graded bank.",
+ "evidence": "grep -c practice_check on the compiled reader returns 0; all ten nuggets carry a populated object.",
+ "recommended_outcome": "The authored practice checks need to reach the reader, or the chapter needs to stop authoring content that is never delivered so the gap is visible in production rather than review.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "instr-012",
+ "location": {
+ "nugget_id": "nugget-amine-synthesis-reduction",
+ "anchor_text": "Three reducing systems appear on exams"
+ },
+ "severity": "low",
+ "category": "missing-example",
+ "observation": "The nitro-reduction paragraph announces three reducing systems and lists two: catalytic hydrogenation over Pt or Pd, and Fe/Sn/SnCl2 in aqueous HCl. The terse tier lists the same two, so the third is not hiding in another tier.",
+ "learner_impact": "A student revising from this paragraph hunts for a missing third system and ends up with an off-by-one checklist.",
+ "evidence": "nugget-amine-synthesis-reduction expanded tier.",
+ "recommended_outcome": "The count and the list need to agree.",
+ "confidence": 0.94
+ },
+ {
+ "finding_id": "instr-013",
+ "location": {
+ "nugget_id": "nugget-pyrrole-imidazole",
+ "question_slug": "ch24-protonated-on-nitrogen-v2",
+ "anchor_text": "roughly a hundred-million-fold weaker as a base than pyridine"
+ },
+ "severity": "low",
+ "category": "chemical-accuracy",
+ "observation": "The prose and question feedback disagree by an order of magnitude and the prose is wrong. The chapter's values give 5.2 minus minus 4 equals 9.2 log units, about a billion-fold; the prose says hundred-million-fold. The wrong-answer explanation states it correctly as some nine orders of magnitude.",
+ "learner_impact": "Small, but this chapter's pedagogy is explicitly built on converting pKa differences into factors, so a worked conversion off by ten undercuts the skill taught two sections earlier.",
+ "evidence": "nugget-pyrrole-imidazole expanded versus ch24-protonated-on-nitrogen-v2 option d explanation.",
+ "recommended_outcome": "The prose conversion needs to match the chapter's own pKaH values and the question feedback.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "instr-014",
+ "location": {
+ "nugget_id": "nugget-hofmann-elimination",
+ "anchor_text": "Neutral NH2- is among the worst leaving groups in chemistry"
+ },
+ "severity": "low",
+ "category": "notation-consistency",
+ "observation": "The standard tier opens by calling an anion neutral. The expanded tier states the same point correctly, so this is a tier-local slip. Relatedly, SnCl2 is grouped under dissolving-metal conditions although tin(II) chloride is a metal-salt reductant rather than a dissolving-metal system.",
+ "learner_impact": "Charge bookkeeping is the exact skill this chapter drills, so a leading sentence labelling a charged species neutral is a bad model at the worst moment.",
+ "evidence": "nugget-hofmann-elimination standard tier opening sentence; nugget-amine-synthesis-reduction expanded dissolving-metal grouping.",
+ "recommended_outcome": "The standard tier needs its leaving-group sentence corrected, and the dissolving-metal label scoped to the metals.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "instr-015",
+ "location": {
+ "section_id": "amine-structure-classification",
+ "anchor_text": "Read in McMurry (OpenStax) — Chapter 24"
+ },
+ "severity": "low",
+ "category": "missing-example",
+ "observation": "The compiled reader carries one mcmurry_link block, on section 1, pointing at the chapter front matter. Nine of ten sections have no textbook reading block. The Wikipedia links are per-section and well chosen; I checked all ten and each resolves to the correct article, so this is specifically an OpenStax-mapping gap in the reader blocks.",
+ "learner_impact": "Students wanting the textbook treatment of a specific section are dropped on the chapter opening page, and instructors cannot point at assigned readings section by section.",
+ "evidence": "Exactly one mcmurry_link block in the compiled reader, url ending 24-why-this-chapter.",
+ "recommended_outcome": "The chapter needs section-specific OpenStax targets in the reader blocks, matching the per-section granularity the Wikipedia links achieve.",
+ "confidence": 0.86
+ },
+ {
+ "finding_id": "instr-016",
+ "location": {
+ "nugget_id": "nugget-reductive-amination",
+ "anchor_text": "Pyridoxal phosphate (vitamin B6) enzymes convert ketoacids to amino acids through iminium intermediates reduced or transaminated in the active site"
+ },
+ "severity": "low",
+ "category": "conceptual-support",
+ "observation": "The biology paragraph blurs two distinct reactions. PLP-dependent transamination is not a reductive amination: no hydride is delivered and no net reduction occurs; the amine arrives by a 1,3-proton shift and ketimine hydrolysis. The hedge reduced or transaminated lets the conflation stand. The glutamate dehydrogenase example in the same sentence is a genuine reductive amination and carries the point alone.",
+ "learner_impact": "Students going on to biochemistry meet transamination as mechanistically distinct and must unlearn the pairing.",
+ "evidence": "nugget-reductive-amination expanded final paragraph.",
+ "recommended_outcome": "The metabolic analogy needs to rest on the genuine reductive amination and either drop the PLP clause or mark transamination as related but different.",
+ "confidence": 0.8
+ }
+ ],
+ "strengths": [
+ "Every SMILES in the package is correct. All 26 assets and all 84 question structures verified with RDKit against formula, canonical connectivity and InChIKey, including cases where a formula-identical isomer was available to go wrong: the azo dye is correctly E-configured, 2,4-dinitroaniline has its nitro groups at 2 and 4, histamine is attached at imidazole C4, and quinoline is the 2,3-benzo-fused isomer.",
+ "Every answer key is chemically correct on independent re-derivation, including both anti-Zaitsev Hofmann products, both reductive-amination amine classes, the plus-one and minus-one carbon counts, the Chichibabin at C2, pyrrole at C2 and indole at C3, and every diazonium reagent-product pairing including the copper-free KI and the Schiemann route.",
+ "The pKa data are accurate and internally consistent across roughly twenty values checked against literature, used consistently in prose, options, hints and feedback.",
+ "The look-at-what-protonation-destroys framing converts memorized pKaH values into one transferable decision rule, and the structured_reasoning items grade the reasoning rather than the number.",
+ "The structured_reasoning items are unusually well built, each pairing a correct claim against a plausible competing claim and forcing rejection of an irrelevant physical property as evidence.",
+ "The two error_repair items are the best-designed assessment in the chapter: both put the flaw in the substrate rather than the reagent, offer a correct-but-not-flawed decoy claim, and include repairs that adjust conditions where no change of conditions can rescue a geometrically impossible step.",
+ "Coverage and type variety are strong: 56 items across 15 question types and all ten concepts, with a sensible difficulty spread and a v2 variant for every item, giving a usable retest form."
+ ],
+ "open_questions": [
+ "I graded the industrial-phenol claim as medium rather than blocker because it is a false historical attribution rather than wrong reaction chemistry and no student will predict a wrong product from it. The orchestrator may wish to override.",
+ "The practice_check non-delivery and the hidden empty-url video blocks look like platform delivery gaps rather than authoring defects, and the same pattern has been reported for earlier chapters. Should these be filed against the chapter or tracked as a platform ticket?",
+ "ch24-hofmann-e2-ledger labels atom 2 as the terminal CH3 carbon bonded to atom 1. That is unambiguous on close reading but sec-butyl has a second terminal methyl, and a hurried student may pick it. I did not raise it as a finding.",
+ "Every item has demo_eligible false, so nothing can appear in a public sampler. Intentional or oversight?",
+ "The chapter states Hofmann orientation is steric, the standard textbook line. If the course wants the modern E1cb-character account that is a scope decision; I flagged only the missing exception."
+ ]
+ },
+ {
+ "persona": "Struggling Student",
+ "persona_version": "1.0.0",
+ "chapter_id": "amines-and-heterocycles",
+ "chapter_version": "1",
+ "model": "claude-opus-5[1m]",
+ "summary": "As a student who is not fluent yet, I found this chapter unusually well-written at the sentence level and unusually hard to study from. The default (expanded) prose is careful about the things that normally trip me. What defeats me is structure and support, not content: no retrieval practice reaches the reader, the two list-shaped topics (pKaH ladder, diazonium menu) arrive as paragraphs, the three resonance arguments are asserted without any intermediate drawn, all five videos compile with an empty url, and the two different Hofmann reactions are never disambiguated.",
+ "overall_score": 6.4,
+ "publication_blockers": [],
+ "findings": [
+ {
+ "finding_id": "ss-001",
+ "location": {
+ "section_id": "nugget-amine-basicity",
+ "nugget_id": "nugget-amine-basicity",
+ "anchor_text": "The conjugate acid of pyridine has pKa 5.2 and the conjugate acid of piperidine has pKa 11.1."
+ },
+ "severity": "high",
+ "category": "retrieval-practice",
+ "observation": "All ten nuggets carry a practice_check and none reaches the compiled reader; sections contain only text, molecule, video, mcmurry_link and external_link blocks.",
+ "learner_impact": "A low-confidence student reads 3,000-4,000 characters per section with no way to test retention, then meets a graded question cold.",
+ "evidence": "topic.package.json nuggets each have practice_check; compiled reader has 53 blocks across 10 sections, none a practice block.",
+ "recommended_outcome": "The student needs a low-stakes retrieval checkpoint per section; the authored self-check content exists but never reaches the learner surface.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "ss-002",
+ "location": {
+ "section_id": "nugget-amine-basicity",
+ "concept_slug": "amine-basicity",
+ "anchor_text": "methylamine 10.6, ethylamine 10.8, dimethylamine 10.7, cyclohexylamine 10.7, and the cyclic secondary amine piperidine at 11.1"
+ },
+ "severity": "high",
+ "category": "cognitive-load",
+ "observation": "Section 2 delivers roughly fourteen pKaH values entirely in running prose with no ladder, table or ordered visual anywhere in the chapter.",
+ "learner_impact": "Six ranking/selection questions ask the student to order these compounds; holding fourteen numbers from four paragraphs in working memory forces guessing.",
+ "evidence": "nugget-amine-basicity expanded paragraphs 2-3; section assets are only mol-cyclohexylamine and mol-acetamide.",
+ "recommended_outcome": "The basicity ladder is the chapter's central organizing structure and needs a form a student can see at once and return to.",
+ "confidence": 0.93
+ },
+ {
+ "finding_id": "ss-003",
+ "location": {
+ "section_id": "nugget-pyridine-chemistry",
+ "concept_slug": "pyridine-chemistry",
+ "anchor_text": "Attack at C2 delocalizes the cation over C3, C5"
+ },
+ "severity": "high",
+ "category": "worked-example-gap",
+ "observation": "The three regiochemistry arguments (pyrrole C2, pyridine C3, indole C3) are all settled by counting resonance structures of a cationic intermediate, and none is ever drawn. The pyridine sentence contains a literal unfinished enumeration: 'Attack at C2 delocalizes the cation over C3, C5... and the nitrogen'.",
+ "learner_impact": "Question hints instruct the student to draw the cationic intermediate and write out resonance forms, a procedure the chapter never demonstrates; students fall back on pattern-matching that fails on the indole item.",
+ "evidence": "nugget-pyridine-chemistry paragraph 2 and nugget-pyrrole-imidazole paragraph 3; ch24-pyridine-eas-position, -v2, ch24-fused-heterocycle-reactivity-v2 turn on these counts.",
+ "recommended_outcome": "A student needs one sigma-complex argument worked through with competing intermediates and charge locations, and the truncated enumeration must be completed.",
+ "confidence": 0.92
+ },
+ {
+ "finding_id": "ss-004",
+ "location": {
+ "section_id": "nugget-amine-synthesis-reduction",
+ "concept_slug": "amine-synthesis-reduction",
+ "anchor_text": "The Hofmann rearrangement subtracts a carbon, and its mechanism is more interesting than a simple reduction."
+ },
+ "severity": "high",
+ "category": "misconception",
+ "observation": "Two entirely different reactions share a name (Hofmann rearrangement in section 5, Hofmann elimination in section 7) and no sentence anywhere acknowledges the collision. Section 7 adds 'the Hofmann rule' as a third use.",
+ "learner_impact": "Installs a permanent wrong mental model; a student meeting 'a Hofmann rearrangement' in a question looks for iodomethane and silver oxide and concludes they misunderstood a section.",
+ "evidence": "nugget-amine-synthesis-reduction paragraph 4 vs nugget-hofmann-elimination throughout; ch24-nitrile-carbon-count-v2 vs ch24-hofmann-* items sit in the same bank.",
+ "recommended_outcome": "The student needs an explicit disambiguation of the two Hofmann reactions: what each starts from, produces, and does to the carbon count.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "ss-005",
+ "location": {
+ "section_id": "nugget-arenediazonium-chemistry",
+ "concept_slug": "arenediazonium-chemistry",
+ "anchor_text": "the replacement menu, which should be learned as a table because exams treat it as one"
+ },
+ "severity": "high",
+ "category": "cognitive-load",
+ "observation": "The prose tells the student this content should be learned as a table and then delivers seven reagent-product pairs as a single 250-word paragraph with no table or figure.",
+ "learner_impact": "The chapter names the form the knowledge needs and refuses to supply it; students guess on the H3PO2 and warm-water pairs in both matching items.",
+ "evidence": "nugget-arenediazonium-chemistry paragraph 3; ch24-diazonium-reagent-match and -v2 test exactly this list.",
+ "recommended_outcome": "List-shaped knowledge tested as a list needs a scannable, rehearsable presentation rather than continuous prose.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "ss-006",
+ "location": {
+ "section_id": "nugget-amine-synthesis-reduction",
+ "concept_slug": "amine-synthesis-reduction",
+ "anchor_text": "Three reducing systems appear on exams:"
+ },
+ "severity": "medium",
+ "category": "conceptual-support",
+ "observation": "The sentence announces three reducing systems for nitroarenes and then lists two (H2/Pt or Pd; Fe or Sn or SnCl2 in aqueous HCl).",
+ "learner_impact": "A student counting along searches backward for content that is not there and goes into an exam believing the list is incomplete.",
+ "evidence": "nugget-amine-synthesis-reduction expanded paragraph 3.",
+ "recommended_outcome": "The promised count and the delivered list must agree.",
+ "confidence": 0.94
+ },
+ {
+ "finding_id": "ss-007",
+ "location": {
+ "section_id": "nugget-arenediazonium-chemistry",
+ "concept_slug": "arenediazonium-chemistry",
+ "anchor_text": "which tautomerizes and dehydrates under the acidic conditions to the arenediazonium ion"
+ },
+ "severity": "medium",
+ "category": "conceptual-support",
+ "observation": "Five load-bearing terms are used in the default expanded tier without gloss and without a named earlier chapter: tautomerizes, cumulated pi system, Huckel criterion (4n+2 never appears), anti-periplanar, anilides.",
+ "learner_impact": "Diazotization becomes a black box; 'the usual anti-periplanar geometry' signals the student should already know something they do not.",
+ "evidence": "nugget-arenediazonium-chemistry para 1; nugget-amine-synthesis-alkylation para 2; nugget-pyrrole-imidazole para 1; nugget-hofmann-elimination para 2; nugget-arylamine-basicity para 4.",
+ "recommended_outcome": "Each term needs its meaning attached at point of use or an explicit pointer to where it was established.",
+ "confidence": 0.87
+ },
+ {
+ "finding_id": "ss-008",
+ "location": {
+ "section_id": "nugget-amine-basicity",
+ "concept_slug": "amine-basicity",
+ "anchor_text": "Pyrrole, whose nitrogen lone pair is built into its aromatic sextet, barely protonates at all"
+ },
+ "severity": "medium",
+ "category": "sequencing",
+ "observation": "Section 2 explains pyrrole's and pyridine's ladder positions using 'aromatic sextet' and the in-plane-vs-pi lone pair distinction, but the sextet is not defined until section 9 and the pyridine geometry until section 10.",
+ "learner_impact": "Two of five cliffs are memorized as brute facts with reasons deferred seven sections, and the connection is never made when the explanation finally arrives.",
+ "evidence": "nugget-amine-basicity paragraph 3 vs nugget-pyrrole-imidazole paragraph 1 and nugget-pyridine-chemistry paragraph 1.",
+ "recommended_outcome": "Either a one-line working definition where the idea is first used, or an explicit forward-reference marker.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "ss-009",
+ "location": {
+ "question_slug": "ch24-rank-aniline-substituents",
+ "concept_slug": "arylamine-basicity",
+ "anchor_text": "para-methoxyaniline's oxygen feeds density into the ring"
+ },
+ "severity": "medium",
+ "category": "assessment-readiness",
+ "observation": "The five-card ranking needs p-methylaniline 5.1 and p-chloroaniline 4.0, but the default expanded prose supplies values only for aniline, p-nitroaniline and p-methoxyaniline. The two missing facts appear only in the practice_check answer, which never compiles.",
+ "learner_impact": "Two of five positions rest on facts a default reader has never seen, forcing import from the aromatic-substitution chapter.",
+ "evidence": "nugget-arylamine-basicity paragraph 3 mentions only nitro and methoxy; 5.1 and 4.0 appear only in the practice_check answer.",
+ "recommended_outcome": "Every comparison a ranking item scores should be derivable from what the default-tier reader actually shows.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "ss-010",
+ "location": {
+ "question_slug": "ch24-protonated-on-nitrogen",
+ "section_id": "nugget-pyrrole-imidazole",
+ "anchor_text": "even that number refers to protonation on C2, not nitrogen"
+ },
+ "severity": "medium",
+ "category": "misconception",
+ "observation": "Section 9 says pyrrole's pKaH of about -4 refers to protonation on C2, not nitrogen. The wrong-answer explanation on ch24-protonated-on-nitrogen attaches the same number to nitrogen protonation.",
+ "learner_impact": "A student who notices the careful caveat is contradicted by the feedback and stops attending to that level of precision.",
+ "evidence": "nugget-pyrrole-imidazole paragraph 2 vs feedback_bundle.wrong_answer_explanations option b of ch24-protonated-on-nitrogen; ch24-rank-basicity-v2 hint level 3 also uses -4 unqualified.",
+ "recommended_outcome": "The chapter and its question feedback need to agree about what the -4 value measures.",
+ "confidence": 0.86
+ },
+ {
+ "finding_id": "ss-011",
+ "location": {
+ "question_slug": "ch24-reductive-amination-arrow",
+ "anchor_text": "One arrow only: from the nitrogen's lone pair to the carbonyl carbon."
+ },
+ "severity": "medium",
+ "category": "assessment-readiness",
+ "observation": "Level-3 hints on both curved-arrow items state the complete answer verbatim, naming the exact source and target sites the answer key expects.",
+ "learner_impact": "Students learn to open hint 3 first, losing the one skill the item exists to build.",
+ "evidence": "feedback_bundle.hints level 3 of ch24-reductive-amination-arrow and -v2 vs answer_key.expected_arrows.",
+ "recommended_outcome": "The final hint needs to leave one decision to the student rather than reading out the answer key.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "ss-012",
+ "location": {
+ "section_id": "nugget-reductive-amination",
+ "asset_id": "video-reductive-amination",
+ "anchor_text": "Reductive amination step by step: carbonyl in, amine out"
+ },
+ "severity": "medium",
+ "category": "media-equivalence",
+ "observation": "Five video blocks compile into the reader with an empty url, each showing a title and storyboard-style description. All five briefs are production_status deferred and cover exactly the electron-flow, orbital and multi-step content the 26 static figures cannot carry.",
+ "learner_impact": "The student clicks a playable-looking block, nothing plays, and reads a description of content that does not exist.",
+ "evidence": "compiled reader video blocks in six sections with empty url; topic.package.json video_briefs all deferred.",
+ "recommended_outcome": "Either the five explanations need some delivered form, or an unproduced brief should not surface as a playable-looking block.",
+ "confidence": 0.93
+ },
+ {
+ "finding_id": "ss-013",
+ "location": {
+ "section_id": "nugget-amine-structure-classification",
+ "concept_slug": "amine-structure-classification",
+ "anchor_text": "But the pyramid is not frozen. It inverts through a planar, sp2-like transition state"
+ },
+ "severity": "medium",
+ "category": "cognitive-load",
+ "observation": "The third paragraph of the chapter's first section introduces about ten new ideas in seven sentences, several prerequisite-heavy (hybridization, transition state, resolution of enantiomers).",
+ "learner_impact": "This is where a student calibrates whether they can keep up; ten ideas on page one triggers a switch from understanding to memorizing.",
+ "evidence": "nugget-amine-structure-classification expanded paragraph 3; section assets are four static molecules plus an empty-url video.",
+ "recommended_outcome": "The inversion chain of reasoning needs breaking into steps with the consequence stated before the numbers.",
+ "confidence": 0.82
+ },
+ {
+ "finding_id": "ss-014",
+ "location": {
+ "section_id": "nugget-reductive-amination",
+ "concept_slug": "reductive-amination",
+ "anchor_text": "giving after proton shuffling a carbinolamine"
+ },
+ "severity": "medium",
+ "category": "worked-example-gap",
+ "observation": "The full reductive-amination mechanism is delivered as one paragraph of continuous prose; the section's only figures are the starting ketone and finished amine, and neither intermediate the student is later asked about is drawn.",
+ "learner_impact": "Students retrieve words without a picture of the sequence, producing the exact oxygen-in-product error the generic feedback anticipates.",
+ "evidence": "nugget-reductive-amination expanded paragraph 1; asset_ids only mol-cyclohexanone and mol-n-methylcyclohexylamine.",
+ "recommended_outcome": "The carbonyl to carbinolamine to iminium to amine sequence needs to be visible as discrete stages before intermediates are named and arrows drawn.",
+ "confidence": 0.84
+ },
+ {
+ "finding_id": "ss-015",
+ "location": {
+ "question_slug": "ch24-nitrogen-inversion",
+ "section_id": "nugget-amine-structure-classification",
+ "anchor_text": "Name the process, occurring roughly a hundred billion times per second, that is responsible."
+ },
+ "severity": "low",
+ "category": "conceptual-support",
+ "observation": "The question asks students to name a process the default expanded tier never names; 'pyramidal inversion' and 'umbrella flip' appear only in the terse and standard tiers and the unproduced video title.",
+ "learner_impact": "Being asked to name something the chapter never named reads as having skipped a paragraph; a low-confidence student leaves it blank.",
+ "evidence": "nugget-amine-structure-classification expanded paragraph 3 vs answer_key.answer_text of ch24-nitrogen-inversion; _detail_texts.terse and .standard are alternatives to the shown tier.",
+ "recommended_outcome": "A term a question asks a student to produce needs to appear in the tier the reader shows by default.",
+ "confidence": 0.8
+ },
+ {
+ "finding_id": "ss-016",
+ "location": {
+ "section_id": "nugget-pyrrole-imidazole",
+ "anchor_text": "roughly a hundred-million-fold weaker as a base than pyridine"
+ },
+ "severity": "low",
+ "category": "chemical-accuracy",
+ "observation": "Pyrrole -4 and pyridine 5.2 differ by 9.2 units, a factor of about 10^9, but the prose says 'a hundred-million-fold' (10^8). The question feedback correctly says 'some nine orders of magnitude'.",
+ "learner_impact": "Section 2 trains the student to convert pKa gaps into factors; doing so here contradicts the text and destroys trust in their own arithmetic.",
+ "evidence": "nugget-pyrrole-imidazole paragraph 2 vs nugget-amine-basicity practice_check and ch24-protonated-on-nitrogen-v2 option d explanation.",
+ "recommended_outcome": "A quantitative claim the student is explicitly taught to check by subtraction has to survive that check.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "ss-017",
+ "location": {
+ "section_id": "nugget-amine-synthesis-reduction",
+ "anchor_text": "the classical dissolving-metal conditions that tolerate no strong-acid-sensitive groups but leave alkenes and carbonyls alone better than catalytic hydrogenation does"
+ },
+ "severity": "low",
+ "category": "conceptual-support",
+ "observation": "The clause packs a negative-tolerance and a comparative-selectivity statement into one sentence, and 'tolerate no strong-acid-sensitive groups' inverts the usual sense of tolerate.",
+ "learner_impact": "The student cannot tell whether Fe/HCl is the safer or riskier choice, the only thing needed for two synthesis-route questions.",
+ "evidence": "nugget-amine-synthesis-reduction expanded paragraph 3.",
+ "recommended_outcome": "The compatibility trade-off is decision-relevant for two route questions and needs stating in a form a student can act on.",
+ "confidence": 0.78
+ },
+ {
+ "finding_id": "ss-018",
+ "location": {
+ "question_slug": "ch24-strongest-arylamine-v2",
+ "anchor_text": "p-Toluidine"
+ },
+ "severity": "low",
+ "category": "cognitive-load",
+ "observation": "Option d is named p-Toluidine, a word the chapter never uses; section 3 and the sibling ranking item both call the compound p-methylaniline.",
+ "learner_impact": "Under time pressure the unfamiliar label reads as a distractor to be avoided, costing the student a real option.",
+ "evidence": "student_config.options d of ch24-strongest-arylamine-v2 vs nugget-arylamine-basicity; 'toluidine' occurs 0 times in the expanded tier.",
+ "recommended_outcome": "Compound names in questions should match the names the chapter taught, or the alternative name needs introducing.",
+ "confidence": 0.83
+ },
+ {
+ "finding_id": "ss-019",
+ "location": {
+ "section_id": "nugget-amine-basicity",
+ "anchor_text": "Background reading on Amine basicity: the pKaH scale from alkylamines to amides."
+ },
+ "severity": "low",
+ "category": "conceptual-support",
+ "observation": "The further-reading link for the basicity section is labelled for amine basicity but points to the Conjugate_acid article, which does not discuss amine basicity or contain a pKaH ladder.",
+ "learner_impact": "The section where a struggling student most wants a second explanation sends them to a generic definition article, teaching them the chapter's links are not worth following.",
+ "evidence": "external_link block in section nugget-amine-basicity of the compiled reader; other sections point to Aniline, Gabriel_synthesis, Hofmann_elimination, Diazonium_compound, Pyrrole, Pyridine.",
+ "recommended_outcome": "The section whose numbers most need cross-checking needs a background link that actually covers amine basicity.",
+ "confidence": 0.87
+ }
+ ],
+ "strengths": [
+ "Almost every question is answerable from the chapter's own default-tier prose; the only real outside-knowledge dependency found is methyl and chlorine substituent behaviour in ch24-rank-aniline-substituents.",
+ "Carbon-count bookkeeping is worked with named numbers on both sides, and the classic error is named out loud.",
+ "The amine-class rule after reductive amination is derived rather than asserted, with the retrosynthetic version spelled out.",
+ "Section 8 contains a genuine worked example for the synthesis_route question type before it is used.",
+ "Wrong-answer explanations on select items teach the discriminating criterion rather than restating the key.",
+ "The chapter signals what matters instead of weighting everything equally, which helps prioritize limited study time.",
+ "Named misconceptions (tert-butylamine trap, pKaH direction inversion, trimethylamine solvation anomaly, non-existent Gabriel synthesis of aniline) are raised before a student could fall into them.",
+ "The structured_reasoning items teach a transferable move by making students sort real evidence from irrelevant physical properties."
+ ],
+ "open_questions": [
+ "Is the reader intended to surface practice_check at all? All ten exist and none compiles, matching a compiler gap rather than an authoring choice.",
+ "Are deferred video briefs expected to compile as blocks with an empty url, or should the compiler suppress unproduced briefs?",
+ "Does the reader offer any control to switch detail tiers? Finding ss-015 would be materially reduced if a student can reach the standard tier.",
+ "Section 9 says the -4 value refers to C2 protonation while the question bank attributes it to nitrogen; I flagged the disagreement rather than picking a side.",
+ "I used no coined categories; every finding uses an id from the shared list."
+ ]
+ },
+ {
+ "persona": "Accessibility Persona",
+ "persona_version": "1.0.0",
+ "chapter_id": "amines-and-heterocycles",
+ "chapter_version": "1",
+ "model": "claude-opus-5[1m]",
+ "summary": "The authoring side is among the strongest in this pipeline: all 26 assets carry alt_text and long_description, all 56 questions carry an accessible_description, find_accessibility_leaks returns zero hits, and the expanded prose is genuinely text-first. The two reaction_coordinate_reasoning items are clean, reporting curve geometry and relative heights without stating step count or the exergonic classification. The barriers are elsewhere. Two are hard: the four structure_scaffold items are answerable only by drawing on a Ketcher canvas whose toolbar profile hides paste, so there is no text path in; and ch24-hofmann-equivalents-v2's description classifies the amine as cyclic tertiary, which is exactly what determines the requested count. Beyond those, most authored accessibility payload never reaches a student, and two descriptions mislabel a primary amine as secondary.",
+ "overall_score": 6.4,
+ "publication_blockers": [
+ "access-001",
+ "access-002"
+ ],
+ "findings": [
+ {
+ "finding_id": "access-001",
+ "location": {
+ "question_slug": "ch24-reductive-amination-product",
+ "concept_slug": "reductive-amination",
+ "anchor_text": "A blank drawing canvas is provided."
+ },
+ "severity": "blocker",
+ "category": "interactive-fallback",
+ "observation": "All four structure_scaffold items set scaffold to blank_canvas and are graded against answer_key.smiles. StructureWorkspaceRenderer embeds the generator as an iframe with toolbarProfile lti_drawing, which hides open, save, copies, paste and cut, so a learner cannot even paste a SMILES as a substitute for pointer drawing. There is no SMILES field, no name entry, and no alternate activity.",
+ "learner_impact": "A learner who is blind, low-vision, screen-reader dependent, or keyboard/switch-navigating cannot submit any response to these four items, and therefore also cannot receive the feedback or hint ladder everyone else gets.",
+ "evidence": "ch24-reductive-amination-product, -v2, ch24-hofmann-major-alkene, -v2 each have student_config [redacted]; [internal source reference — not in this repo] renders only the iframe and a link to the same drawing surface.",
+ "recommended_outcome": "Every learner needs a way to express a drawn structure without a pointer on a canvas; the product identity is expressible in text, so the need is a non-drawing response path or an equivalent alternate item. No concept becomes unassessable, since both concepts carry other question types.",
+ "confidence": 0.93
+ },
+ {
+ "finding_id": "access-002",
+ "location": {
+ "question_slug": "ch24-hofmann-equivalents-v2",
+ "concept_slug": "hofmann-elimination",
+ "anchor_text": "The question describes converting a named cyclic tertiary amine to its quaternary ammonium iodide with iodomethane."
+ },
+ "severity": "blocker",
+ "category": "alt-text-quality",
+ "observation": "The item asks how many equivalents of iodomethane are consumed taking N-methylpiperidine to its quaternary salt (answer 1). Equivalents equal four minus the carbons already on nitrogen, and the chapter states that rule directly. The accessible_description classifies the amine as cyclic tertiary, handing over the answer in one trivial step. The v1 twin says only 'a named amine'.",
+ "learner_impact": "A screen-reader learner is given the one fact the item tests, so their score is not comparable to a sighted peer's, reversing the equity the bundle exists to provide.",
+ "evidence": "ch24-hofmann-equivalents-v2 answer_key value 1 unit equiv; contrast ch24-hofmann-equivalents description which gives no classification.",
+ "recommended_outcome": "The description needs to convey the stimulus without performing the classification step the item grades, matching the neutral phrasing the v1 item already uses.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "access-003",
+ "location": {
+ "question_slug": "ch24-reductive-amination-arrow",
+ "anchor_text": "accessibility_bundle"
+ },
+ "severity": "high",
+ "category": "media-equivalence",
+ "observation": "All 56 items carry an authored accessible_description that survives compilation, but only ReactionCoordinateQuestionRenderer consumes it for the types this chapter uses. Thirteen other renderers contain no reference to accessibilityBundle, so 54 of 56 descriptions are inert metadata.",
+ "learner_impact": "Where item controls happen to carry good labels the learner is fine; where they do not, the learner gets no orienting description of the stimulus even though a good one was written and shipped.",
+ "evidence": "grep for accessibilityBundle across activity-renderers returns hits only in MolecularGeometryRenderer and ReactionCoordinateQuestionRenderer.",
+ "recommended_outcome": "The authored per-item stimulus description needs a delivery path all renderers honour. Platform-level gap recurring from ch16/ch21/ch22.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "access-004",
+ "location": {
+ "asset_id": "mol-pyridine",
+ "concept_slug": "pyridine-chemistry",
+ "anchor_text": "Pyridine: a six-membered aromatic ring in which one CH unit of benzene is replaced by a nitrogen."
+ },
+ "severity": "high",
+ "category": "alt-text-quality",
+ "observation": "Every asset carries a long_description doing the real chemical work, and none reaches the reader; the compiled chapter contains zero occurrences of long_description. For 12 of 26 assets the alt_text alone then omits the lone-pair or formal-charge fact the figure exists to teach. mol-pyrrole and mol-pyridine alt texts are nearly interchangeable on the one contrast that matters.",
+ "learner_impact": "A learner relying on alt text gets a shape inventory; for the pyrrole-versus-pyridine contrast the figures teach that learner nothing, though the surrounding prose does state it.",
+ "evidence": "mol-pyridine long_description explains the in-plane sp2 lone pair; the compiled block carries only name, smiles, alt_text, description, generator_href.",
+ "recommended_outcome": "The chemistry each figure teaches needs to reach a non-visual learner at the figure, either by delivering the authored longer description or folding its load-bearing clause into the alt text. No new asset required.",
+ "confidence": 0.92
+ },
+ {
+ "finding_id": "access-005",
+ "location": {
+ "question_slug": "ch24-hofmann-major-alkene",
+ "concept_slug": "hofmann-elimination",
+ "anchor_text": "exhaustive methylation of a five-carbon secondary amine"
+ },
+ "severity": "high",
+ "category": "alt-text-quality",
+ "observation": "Both hofmann-major-alkene descriptions misclassify their starting material. 2-Aminopentane and 3-methylbutan-2-amine each have a nitrogen bearing exactly one carbon, so both are primary amines; the descriptions call them secondary. The prompts do not use the word, so the error is introduced only in the accessibility channel.",
+ "learner_impact": "A screen-reader learner is fed a statement contradicting the chapter's core classification convention at the moment they must apply bookkeeping that depends on that count; sighted learners never see it.",
+ "evidence": "Both accessible_descriptions say 'secondary amine'; the first nugget's practice_check drills the opposite explicitly for the formula-identical sec-butylamine case.",
+ "recommended_outcome": "The non-visual channel must state the same chemistry as the visual one; the amine class needs correcting or simply not asserting.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "access-006",
+ "location": {
+ "question_slug": "ch24-classify-tert-butylamine",
+ "concept_slug": "amine-structure-classification",
+ "anchor_text": "a branched four-carbon amine, an amine flanked by two ethyl groups"
+ },
+ "severity": "high",
+ "category": "alt-text-quality",
+ "observation": "The description states each distractor's nitrogen substitution outright but describes the key only as 'a branched four-carbon amine', saying nothing about how many carbons touch nitrogen. The key is the one option whose classification cannot be read off its description, so a learner can select it by elimination. The v2 twin does not have this asymmetry.",
+ "learner_impact": "The item stops measuring whether a screen-reader learner can apply the counting rule and starts measuring whether they notice which description is underspecified, on precisely the case the chapter most wants reasoned through.",
+ "evidence": "Options a=CC(C)(C)N, b=CCNCC, c=CN1CCCCC1, d=CCN(CC)CC with key a; find_accessibility_leaks returns clean because the asymmetry is semantic.",
+ "recommended_outcome": "Each option needs describing at the same level of structural detail so classification requires the same reasoning step from every learner.",
+ "confidence": 0.82
+ },
+ {
+ "finding_id": "access-007",
+ "location": {
+ "question_slug": "ch24-reductive-amination-arrow",
+ "concept_slug": "reductive-amination",
+ "anchor_text": "Two species are shown on an arrow-drawing surface"
+ },
+ "severity": "medium",
+ "category": "alt-text-quality",
+ "observation": "The rendered stimulus image for curved_arrow items carries hard-coded alt text 'Reaction system for this arrow question' and error_repair 'Structure for the flawed step'. Neither names a single atom, bond or species.",
+ "learner_impact": "Mitigation is incidental: authored site labels and flawed_work text let a learner operate both items, but they cannot perceive the stimulus as a whole, such as that the two species are separate unbonded molecules.",
+ "evidence": "[internal source reference — not in this repo] and [internal source reference — not in this repo] hard-coded alt strings; affects four items.",
+ "recommended_outcome": "The rendered structure images need alt text naming what is drawn; the authored accessible_description already contains it.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "access-008",
+ "location": {
+ "question_slug": "ch24-rank-basicity",
+ "anchor_text": "Five draggable cards name nitrogen compounds"
+ },
+ "severity": "medium",
+ "category": "keyboard-operability",
+ "observation": "Six descriptions say the interaction is drag-and-drop when the shipped controls are not. All four rank_order items say 'draggable cards' and both categorize_groups items say 'draggable items'. MechanismCardSortRenderer exposes Move up / Move down buttons announcing position, and CategorizeRenderer exposes a labelled Select. Both are fully keyboard-operable.",
+ "learner_impact": "A screen-reader user told the items are draggable hunts for an affordance that does not exist and may abandon six items that are among the most operable in the chapter.",
+ "evidence": "Six accessible_descriptions use draggable wording; MechanismCardSortRenderer and CategorizeRenderer implement button and select controls.",
+ "recommended_outcome": "The description of how to respond needs to match the control the learner actually receives.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "access-009",
+ "location": {
+ "nugget_id": "nugget-amine-basicity",
+ "section_id": "nugget-amine-basicity",
+ "anchor_text": "practice_check"
+ },
+ "severity": "medium",
+ "category": "interactive-fallback",
+ "observation": "All 10 nuggets carry a practice_check with prompt and worked answer; the compiled reader contains zero occurrences. Blocks are only text, molecule, hidden video, mcmurry_link and external_link.",
+ "learner_impact": "This drops equally for everyone so it is not an asymmetry, but it removes the one retrieval path requiring no canvas, pointer or interactive renderer, which was the natural substitute for the learner blocked by access-001.",
+ "evidence": "10 authored practice_check objects; reader block_type counts molecule 26, text 10, external_link 10, video 6, mcmurry_link 1.",
+ "recommended_outcome": "Learners need a prose-only self-check path in the reader; the content is authored and only needs to survive compilation.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "access-010",
+ "location": {
+ "asset_id": "video-hofmann-elimination",
+ "concept_slug": "hofmann-elimination",
+ "anchor_text": "silver oxide enters, yellow AgI precipitates and settles out"
+ },
+ "severity": "medium",
+ "category": "color-motion-only",
+ "observation": "Each deferred brief records captions, narration and transcript requirements, but several storyboard beats designate colour, glow or an unlabelled chart as the sole carrier of a distinction, and the production notes record no constraint against that: yellow AgI, a product bar showing the 95:5 ratio, a glowing positive nitrogen, resonance structures graying out, an energy ledger, a flickering pi cloud.",
+ "learner_impact": "If produced as storyboarded, a learner with low vision or colour-vision deficiency loses the highlighted bond identity, the precipitate identity, the ratio and the ledger direction. Nothing is broken today since all six blocks compile hidden with empty url.",
+ "evidence": "video_briefs storyboard entries; production_notes record caption and transcript requirements but no colour or chart-labelling constraint.",
+ "recommended_outcome": "The deferral record needs to carry forward the constraint that no distinction may rest on colour, glow or motion alone and that quantities shown as bars must also be stated numerically.",
+ "confidence": 0.8
+ },
+ {
+ "finding_id": "access-011",
+ "location": {
+ "section_id": "nugget-amine-synthesis-reduction",
+ "nugget_id": "nugget-amine-synthesis-reduction",
+ "anchor_text": "LiAlH4 delivers two hydride equivalents to the C#N triple bond"
+ },
+ "severity": "medium",
+ "category": "notation-consistency",
+ "observation": "Reader prose is plain ASCII with zero Unicode sub/superscripts while question prompts use proper Unicode. Two conventions are hostile to text-to-speech: SMILES-style triple bonds appear inline as C#N and Ar-N#N+, announced as 'C hash N'; and exponents appear as 10^11 and 10^6, announced as 'ten caret eleven'.",
+ "learner_impact": "A TTS learner hears a self-contradicting phrase at the moment nitrile reduction is introduced, and hears the chapter's two headline magnitude claims as caret expressions. The same species also sounds different in reading than in practice.",
+ "evidence": "Reader markdown contains 10^11, 10^6, C#N triple bond, Ar-N#N+; Unicode sub/superscript count across all 10 text blocks is zero.",
+ "recommended_outcome": "Chemistry notation in reader prose needs to be pronounceable, using the same Unicode form the question prompts already use.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "access-012",
+ "location": {
+ "section_id": "nugget-amine-basicity",
+ "nugget_id": "nugget-amine-basicity",
+ "anchor_text": "Every comparison of amine basicity in this chapter"
+ },
+ "severity": "low",
+ "category": "keyboard-operability",
+ "observation": "Each of the 10 sections compiles to a single text block of 2,637 to 4,171 characters with no internal headings; the chapter offers 10 headings for roughly 35,000 characters.",
+ "learner_impact": "Screen-reader users navigate long documents by heading; within a section there is no landmark, so re-finding a specific paragraph requires linear reading or find-in-page against ASCII formulas.",
+ "evidence": "Section text-block lengths 2637 to 4171 characters; markdown heading count zero in every block.",
+ "recommended_outcome": "Long sections need intra-section landmarks a screen reader can jump between.",
+ "confidence": 0.75
+ },
+ {
+ "finding_id": "access-013",
+ "location": {
+ "question_slug": "ch24-hofmann-profile",
+ "concept_slug": "hofmann-elimination",
+ "anchor_text": "rises to a maximum at twenty-four units"
+ },
+ "severity": "low",
+ "category": "media-equivalence",
+ "observation": "The reaction-coordinate SVG is a single role=img element whose entire accessible content is the aria-label. The three control points, energies and axis labels are not exposed as text, a list or a table. The authored description does carry the numbers, and the rendered plot draws no axis tick values.",
+ "learner_impact": "A learner cannot re-inspect an individual point and must hold the whole readout in memory from one announcement while answering three sub-questions, where a sighted learner can glance back freely.",
+ "evidence": "ch24-hofmann-profile control points and axis labels; renderer draws point labels as SVG text inside the role=img element and emits no tick values.",
+ "recommended_outcome": "The plotted data needs to be re-inspectable as discrete values, not only as one linear announcement.",
+ "confidence": 0.7
+ }
+ ],
+ "strengths": [
+ "The two reaction_coordinate_reasoning items pass the leak test the prior chapter failed: both descriptions report curve geometry and relative heights and neither states the step count, uses exergonic or endergonic, or names a rate-determining step.",
+ "Coverage is complete at the authoring layer: 26 of 26 assets carry both alt_text and long_description, and 56 of 56 questions carry an accessible_description. Nothing is stubbed.",
+ "find_accessibility_leaks returns zero hits across all 56 compiled items.",
+ "The expanded reader prose is genuinely text-first and carries the chapter's chemistry without reference to any figure, including both lone-pair geometries, every pKaH value, the regiochemical arguments and the 95:5 ratio.",
+ "single_select and multi_select options pair a compound name with the structure image and the renderer sets alt to the option text, so the screen-reader learner receives the compound name where a sighted learner receives a drawing.",
+ "The bond_change_ledger items author a reaction_display string used as the structure image alt text, giving a real chemical text equivalent rather than a generic label.",
+ "curved_arrow site labels are written as chemistry rather than indices, and the hit targets are real buttons with aria-pressed state and a visible focus ring.",
+ "rank_order ships Move up / Move down buttons announcing current position, and five other types use labelled selects rather than drag-and-drop; thirteen of fifteen question types are keyboard-operable as shipped.",
+ "All five video briefs record captions, narration and transcript requirements, and all six compiled blocks ship is_hidden true with an empty url, so no student encounters a broken player.",
+ "No concept is assessed only through the inaccessible drawing workspace; the blocker closes items rather than concepts."
+ ],
+ "open_questions": [
+ "Does the generator embed expose any structure-entry path outside the hidden toolbar buttons? I could not establish this, so access-001 is logged as a barrier rather than a pass.",
+ "The reader text block ships _detail_texts variants but delivers expanded as content.markdown. Is the depth switcher exposed and keyboard-reachable?",
+ "Are the 10 section titles rendered as real heading elements with correct nesting? The compiled JSON carries titles but not heading semantics.",
+ "Is the curved_arrow render enrichment attached at seed time for this chapter's two items, and does clicking the nitrogen produce a lone_pair source kind matching the key?",
+ "notation-consistency on access-011 is an instructor-persona id applied to a text-to-speech problem; it reads equally well as media-equivalence if the orchestrator prefers."
+ ]
+ },
+ {
+ "persona": "Learner with Visual Preference",
+ "persona_version": "1.0.0",
+ "chapter_id": "amines-and-heterocycles",
+ "chapter_version": "1",
+ "model": "claude-opus-5[1m]",
+ "summary": "The figure set is technically clean: all 26 SMILES render correctly, no asset uses annotation_font_scale, and question option sets are illustrated all-or-nothing so there is no lone-illustrated-option answer tell. What the chapter lacks is visual load-bearing. All 26 figures are static single-molecule snapshots; none shows a relationship, sequence, orbital, resonance form, ordering, or comparison. The pKaH ladder, the pyrrole-vs-pyridine lone-pair geometry, aniline's resonance forms, and four of five multi-species mechanisms are carried entirely by prose. Layout compounds this: figures are appended after all section prose (415-667 words before the first figure), and the two densest numeric sections have the fewest figures. Two concrete defects: show_hydrogens is applied roughly inversely to teaching load, and it clutters pyrrole/imidazole in a way that camouflages the N-H versus bare-N distinction those figures exist to teach.",
+ "overall_score": 6.0,
+ "publication_blockers": [],
+ "findings": [
+ {
+ "finding_id": "vis-001",
+ "location": {
+ "concept_slug": "pyrrole-imidazole",
+ "nugget_id": "nugget-pyrrole-imidazole",
+ "asset_id": "mol-pyrrole",
+ "anchor_text": "the nitrogen sits sp2-hybridized with its lone pair in the perpendicular p orbital"
+ },
+ "severity": "high",
+ "category": "visual-opportunity",
+ "observation": "The pyrrole/pyridine distinction is entirely a statement about where a lone pair sits in space, rendered only as words. The three supporting assets are flat 2D structures physically incapable of showing orbital orientation; both rings look identical in the one respect that matters. The video brief scoped to carry it is deferred and compiles hidden with an empty url.",
+ "learner_impact": "This is the chapter's declared keystone; a student who cannot picture the two orbital orientations holds the distinction as a memorized verbal pair, producing wrong answers on basicity, EAS regiochemistry, SNAr and imidazole N1-vs-N3.",
+ "evidence": "nugget-pyrrole-imidazole and nugget-pyridine-chemistry orbital sentences; ch24-protonated-on-nitrogen-v2 option a; video-heterocycle-lone-pairs production_note claims the flat figures carry this content.",
+ "recommended_outcome": "Some representation distinguishing in-plane from perpendicular lone pairs for the two rings side by side is needed; the deferral note's claim that existing flat figures cover it is not accurate.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "vis-002",
+ "location": {
+ "concept_slug": "amine-basicity",
+ "nugget_id": "nugget-amine-basicity",
+ "anchor_text": "The numbers organize into families."
+ },
+ "severity": "high",
+ "category": "visual-opportunity",
+ "observation": "The pKaH ladder is stated as a running list of roughly eighteen values across two sections with no visual ordering anywhere. The section carries two figures marking only the top and bottom of the scale, and is the longest unbroken prose run in the chapter at 667 words.",
+ "learner_impact": "Ordering, spacing and family clustering are the entire content; the chapter then assesses exactly this relational skill in two rank_order items.",
+ "evidence": "nugget-amine-basicity paragraphs 2-3; section figure count 2.",
+ "recommended_outcome": "A representation making the ordering and the two large discontinuities visible in one place is needed, spanning the alkylamine cluster and the delocalized outliers.",
+ "confidence": 0.93
+ },
+ {
+ "finding_id": "vis-003",
+ "location": {
+ "concept_slug": "reductive-amination",
+ "nugget_id": "nugget-reductive-amination",
+ "question_slug": "ch24-iminium-intermediate",
+ "anchor_text": "generating the key electrophile: an iminium ion"
+ },
+ "severity": "high",
+ "category": "visual-opportunity",
+ "observation": "The section describes a four-species pathway and the reader shows only first and last. The carbinolamine and iminium ion are never drawn, though the entire NaBH3CN selectivity argument turns on the contrast between a neutral carbonyl and a positively charged C=N.",
+ "learner_impact": "The two figures present look like an unexplained jump from ketone to amine; a student asked to name the intermediate has never seen it depicted.",
+ "evidence": "nugget-reductive-amination iminium sentence; reader section 6 molecule blocks are only cyclohexanone and N-methylcyclohexylamine.",
+ "recommended_outcome": "Some depiction of the intermediate species, particularly the charged C=N against the neutral C=O, is needed.",
+ "confidence": 0.92
+ },
+ {
+ "finding_id": "vis-004",
+ "location": {
+ "concept_slug": "hofmann-elimination",
+ "nugget_id": "nugget-hofmann-elimination",
+ "asset_id": "mol-sec-butyltrimethylammonium",
+ "anchor_text": "the base must pull a hydrogen from the internal CH2"
+ },
+ "severity": "high",
+ "category": "figure-purpose",
+ "observation": "show_hydrogens is set roughly inversely to where hydrogens do teaching work. mol-sec-butylamine and mol-1-butene draw with every C-H explicit, flattening the skeleton into a straight stick; mol-tert-butylamine renders as a flat cross of eleven hydrogens obscuring the branching that is its entire point. Meanwhile mol-sec-butyltrimethylammonium, the one molecule whose beta hydrogens the argument is about, has no rdkit_options and is drawn with no hydrogens visible. The Hofmann section presents its three-stage sequence in two different notations.",
+ "learner_impact": "A student cannot track the same four-carbon skeleton across three panels drawn in different notations, and the regiochemical claim asks them to compare two sets of hydrogens on a structure where none are drawn.",
+ "evidence": "rdkit_options: mol-tert-butylamine, mol-butylamine, mol-sec-butylamine, mol-1-butene, mol-propanenitrile all show_hydrogens true; mol-sec-butyltrimethylammonium none.",
+ "recommended_outcome": "Explicit-hydrogen display should follow teaching load rather than molecule size, and notation should be consistent within a multi-panel sequence.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "vis-005",
+ "location": {
+ "concept_slug": "pyrrole-imidazole",
+ "asset_id": "mol-imidazole",
+ "anchor_text": "N3 has no hydrogen; its lone pair occupies an sp2 orbital in the ring plane"
+ },
+ "severity": "medium",
+ "category": "figure-purpose",
+ "observation": "mol-pyrrole and mol-imidazole set show_hydrogens true, drawing all aromatic C-H bonds explicitly and surrounding the ring with hydrogens that compete with the one distinction the figure exists to teach. mol-histamine in the same section contains the same ring without the flag and renders a clean NH and a clean bare N.",
+ "learner_impact": "The section tells students to look at a drawn imidazole to find the nitrogen without a hydrogen, and the chapter's own drawn imidazole is the cluttered one; it also breaks the drawing convention used by every other aromatic asset.",
+ "evidence": "mol-pyrrole and mol-imidazole carry show_hydrogens true; mol-histamine carries none.",
+ "recommended_outcome": "The N-H versus bare-N contrast needs to be the most visually salient thing in those figures.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "vis-006",
+ "location": {
+ "concept_slug": "pyridine-chemistry",
+ "asset_id": "mol-quinoline",
+ "question_slug": "ch24-fused-heterocycle-reactivity",
+ "anchor_text": "the regiochemistry is C2, and the reason is the standard EAS argument"
+ },
+ "severity": "high",
+ "category": "figure-purpose",
+ "observation": "The last three sections reason almost entirely in ring position numbers and not one heterocycle figure carries a position label. No asset uses an atom-numbering or annotation option; show_hydrogens is the only rdkit_option present anywhere.",
+ "learner_impact": "Students must map a numbering scheme onto figures that do not display it, and must already know the heterocycle numbering convention the chapter never states. This bites hardest on ch24-fused-heterocycle-reactivity, whose distractors name C2 and C3 of a bicycle it shows no structure of.",
+ "evidence": "nugget-pyrrole-imidazole and nugget-pyridine-chemistry position claims; all asset rdkit_options keys are show_hydrogens only.",
+ "recommended_outcome": "Position identity needs to be visible on the heterocycle figures and on the pyridine option structures.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "vis-007",
+ "location": {
+ "section_id": "nugget-amine-basicity",
+ "nugget_id": "nugget-arylamine-basicity",
+ "anchor_text": "Every comparison of amine basicity in this chapter"
+ },
+ "severity": "medium",
+ "category": "figure-purpose",
+ "observation": "Every one of the ten compiled sections has the identical block order: all section prose in one text block, then all molecule blocks, then video, then links. No figure is adjacent to the sentence it supports. Word counts before the first figure: 415, 667, 631, 480, 532, 509, 564, 558, 613, 606. The two most number-dense sections carry the fewest figures.",
+ "learner_impact": "A figure arriving 600 words after its passage must be re-connected by the reader; a reader scanning figures first sees a gallery of unrelated molecules with no argument attached.",
+ "evidence": "Block-order dump of the compiled reader shows text-then-molecules-then-video-then-links in all ten sections with zero interleaving.",
+ "recommended_outcome": "Figure placement needs to be adjacent to the passage that uses it, and the basicity sections need more visual support than the concrete-structure sections, not less.",
+ "confidence": 0.87
+ },
+ {
+ "finding_id": "vis-008",
+ "location": {
+ "concept_slug": "arenediazonium-chemistry",
+ "nugget_id": "nugget-arenediazonium-chemistry",
+ "anchor_text": "the replacement menu, which should be learned as a table because exams treat it as one"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The section tells the reader the menu should be learned as a table and then delivers it as a 200-word paragraph. Seven replacements plus azo coupling are described; the reader shows two of eight product structures.",
+ "learner_impact": "One starting material fanning out to seven products is the archetypal branching-layout case; the matching question quietly proves the point by supplying structures for all five of its products, structures the reader never showed.",
+ "evidence": "nugget-arenediazonium-chemistry paragraph 3; reader section 8 shows only benzenediazonium, benzonitrile and the azo dye.",
+ "recommended_outcome": "The full menu needs to be readable at a glance, with the products it names actually depicted.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "vis-009",
+ "location": {
+ "concept_slug": "hofmann-elimination",
+ "question_slug": "ch24-hofmann-profile",
+ "asset_id": "mol-1-butene",
+ "anchor_text": "about 95% 1-butene"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The section's headline result is a roughly 95:5 ratio and only the winning product is drawn; 2-butene appears in no asset. The one energy-profile item models a single pathway and does not depict the two competing transition states whose relative heights are the entire explanation.",
+ "learner_impact": "A ratio between two outcomes cannot be reasoned about when only one is visible; ch24-hofmann-major-alkene asks students to draw a preference they were never shown against its alternative.",
+ "evidence": "nugget-hofmann-elimination ratio sentence; reader section 7 molecule blocks; ch24-hofmann-profile control has three points and step_count 1.",
+ "recommended_outcome": "The alternative outcome and the reason it loses need to be visible alongside the winner.",
+ "confidence": 0.86
+ },
+ {
+ "finding_id": "vis-010",
+ "location": {
+ "asset_id": "mol-methylamine",
+ "nugget_id": "nugget-amine-basicity",
+ "anchor_text": "the nitrogen also holds a lone pair, not drawn, at the fourth corner of its pyramid"
+ },
+ "severity": "medium",
+ "category": "alt-text-quality",
+ "observation": "All 26 assets carry an authored accessibility.long_description and all 10 nuggets carry a practice_check; the compiled reader contains zero occurrences of either. Molecule blocks ship only name, smiles, alt_text, description (a copy of learning_goal), generator_href and rdkit_options.",
+ "learner_impact": "This is the cheapest available mitigation for several visual gaps and it is authored but undelivered, so the flat figures stand unaccompanied. Overlaps the Accessibility persona's lane; flagged for dedupe.",
+ "evidence": "long_description occurs 26 times in the package, 0 in the reader; practice_check present for all 10 nuggets, 0 in the reader.",
+ "recommended_outcome": "Authored per-figure long descriptions and per-section practice checks exist in source and are dropped in compilation; the reader needs to deliver them.",
+ "confidence": 0.94
+ },
+ {
+ "finding_id": "vis-011",
+ "location": {
+ "concept_slug": "arylamine-basicity",
+ "nugget_id": "nugget-arylamine-basicity",
+ "asset_id": "mol-aniline",
+ "anchor_text": "resonance structures can be drawn with a C=N double bond and a carbanion at the ortho or para position"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The section's argument is delocalization and it explicitly describes structures that can be drawn while drawing none. The two figures show no charge separation and no comparison to the protonated form. The benzylamine/diphenylamine control comparison is delivered as three numbers in a sentence with neither compound depicted.",
+ "learner_impact": "'Look at what protonation destroys' is called the section's most transferable lesson, and the thing destroyed is a set of resonance forms the student never sees.",
+ "evidence": "nugget-arylamine-basicity resonance and conjugation-path sentences; reader section 3 shows only aniline and p-nitroaniline.",
+ "recommended_outcome": "The reader needs to see the electron distribution being argued about rather than only its numeric consequences.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "vis-012",
+ "location": {
+ "question_slug": "ch24-rank-basicity",
+ "concept_slug": "amine-basicity",
+ "anchor_text": "Piperidine (six-membered saturated ring, one N-H)"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "Structure support is applied unevenly by item rather than by need. Eleven option-bearing items supply structures for every option, but five intrinsically structural items supply none: ch24-rank-basicity, ch24-rank-aniline-substituents, ch24-classify-amine-classes, ch24-pyrrole-vs-pyridine and ch24-fused-heterocycle-reactivity. Within those items scaffolding is also uneven, mixing condensed formulas, a verbal structure description and a bare name. ch24-protonated-on-nitrogen supplies structures for all five options while its own -v2 supplies none.",
+ "learner_impact": "Where a card must be decoded from a parenthetical verbal description while its neighbours come as formulas, the item tests description-parsing rather than chemistry.",
+ "evidence": "structure_smiles coverage by item: rank-basicity 0/5, rank-aniline-substituents 0/5, classify-amine-classes 0/6, fused-heterocycle-reactivity 0/4, versus protonated-on-nitrogen 5/5 and pyridine-eas-position 4/4.",
+ "recommended_outcome": "Support needs to follow the demand of the task, and within a single option set the level of scaffolding needs to be uniform.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "vis-013",
+ "location": {
+ "question_slug": "ch24-hofmann-e2-ledger",
+ "concept_slug": "hofmann-elimination",
+ "anchor_text": "One hydrogen on atom 2"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The ledger asks students to record bonds between five labelled atoms, one of which is a hydrogen. Its molecule_smiles has no rdkit options so the rendered structure contains no explicit hydrogens; the hydroxide oxygen is also labelled but absent from the SMILES.",
+ "learner_impact": "Two of five labelled atoms cannot be pointed at, so the student holds an invisible beta hydrogen and an invisible counterion in memory while filling a five-row table.",
+ "evidence": "ch24-hofmann-e2-ledger student_config molecule_smiles CCC(C)[N+](C)(C)C with atom_labels id 3 and id 5; no rdkit_options field.",
+ "recommended_outcome": "An item requiring students to track specific atoms needs those atoms visible in the stimulus.",
+ "confidence": 0.87
+ },
+ {
+ "finding_id": "vis-014",
+ "location": {
+ "concept_slug": "amine-synthesis-reduction",
+ "nugget_id": "nugget-amine-synthesis-reduction",
+ "anchor_text": "how many carbons does the product amine have, relative to what you started with?"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The section states its organizing principle as a cross-route carbon-count comparison and carries two figures, neither expressing a count relationship. The Hofmann rearrangement, running through four species including an isocyanate, has no figure at all.",
+ "learner_impact": "The section says exam problems turn on the difference between routes, and that difference is a four-way comparison the reader must assemble from four paragraphs; the isocyanate is the one genuinely unfamiliar structure and is never shown.",
+ "evidence": "nugget-amine-synthesis-reduction opening line and four route paragraphs; reader section 5 shows only propanenitrile and nitrobenzene.",
+ "recommended_outcome": "The cross-route comparison and the isocyanate pathway both need to be visible, and the two same-named Hofmann reactions need to be distinguishable at a glance.",
+ "confidence": 0.83
+ },
+ {
+ "finding_id": "vis-015",
+ "location": {
+ "concept_slug": "amine-synthesis-alkylation",
+ "nugget_id": "nugget-amine-synthesis-alkylation",
+ "anchor_text": "The isolated result is a statistical mess of all four alkylation levels."
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The motivating failure is a four-level runaway cascade and none of the levels is drawn. The Gabriel route shows phthalimide but not the N-alkylphthalimide intermediate that is the whole reason the route stops; the azide route omits the starting halide.",
+ "learner_impact": "ch24-overalkylation asks students to select statements naming four species none of which the chapter depicts, and the masking/unmasking logic has no visual expression.",
+ "evidence": "nugget-amine-synthesis-alkylation cascade sentence; reader section 4 shows phthalimide, butyl azide, butylamine; ch24-overalkylation option e.",
+ "recommended_outcome": "The escalation and the masking/unmasking steps need to be traceable.",
+ "confidence": 0.82
+ },
+ {
+ "finding_id": "vis-016",
+ "location": {
+ "concept_slug": "amine-structure-classification",
+ "nugget_id": "nugget-amine-structure-classification",
+ "asset_id": "mol-methylamine",
+ "anchor_text": "It inverts through a planar, sp2-like transition state"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "Nitrogen inversion is described as a three-dimensional motion through a planar transition state, and the two assets the deferral note nominates as its coverage are flat 2D structures showing neither pyramidal geometry nor a lone pair. Nothing depicts the pyramid, the transition state, or the two mirror-image forms.",
+ "learner_impact": "The reader accepts 'it looks like a stereocenter but isn't' on authority; ch24-nitrogen-inversion requires picturing two interconverting pyramids the chapter gives no support for.",
+ "evidence": "nugget-amine-structure-classification paragraph 3; video-nitrogen-inversion production_note nominates mol-methylamine and mol-triethylamine as coverage.",
+ "recommended_outcome": "The pyramidal geometry and the interconversion need some representation, or the deferral note should stop asserting the existing figures cover it.",
+ "confidence": 0.84
+ },
+ {
+ "finding_id": "vis-017",
+ "location": {
+ "question_slug": "ch24-pyridine-eas-position",
+ "concept_slug": "pyridine-chemistry",
+ "anchor_text": "Which product is it?"
+ },
+ "severity": "low",
+ "category": "figure-purpose",
+ "observation": "All 168 compiled hints are kind text; no item uses a structure, highlight or region-focus hint, including on items where the answer depends on locating a position or atom. All 56 compiled questions also have an empty representation_tags array.",
+ "learner_impact": "A student stuck on 'which position' gets another sentence rather than an indication of where to look, repeating the modality that already failed.",
+ "evidence": "Compiled question-set hint kinds group to text 168; representation_tags flatten to empty.",
+ "recommended_outcome": "Where the difficulty is locating something on a structure, the hint needs to be able to indicate the location.",
+ "confidence": 0.78
+ },
+ {
+ "finding_id": "vis-018",
+ "location": {
+ "nugget_id": "nugget-pyridine-chemistry",
+ "asset_id": "mol-pyrrole",
+ "anchor_text": "Two rings, two lone pairs, two fates: pyrrole versus pyridine"
+ },
+ "severity": "low",
+ "category": "visual-redundancy",
+ "observation": "video-heterocycle-lone-pairs compiles into two reader sections, producing six video blocks for five briefs. All six carry an empty url and is_hidden true, and each block's description holds only the first storyboard line rather than a summary.",
+ "learner_impact": "No current impact while hidden, but if produced the same asset would appear twice in one chapter and the descriptions would read as production stage directions.",
+ "evidence": "Reader video block count 6 against 5 briefs; section 1 video description is a storyboard opening line.",
+ "recommended_outcome": "The duplication and the stage-direction phrasing both need resolving before any brief is produced.",
+ "confidence": 0.8
+ }
+ ],
+ "strengths": [
+ "No asset sets annotation_font_scale or any font-scale option; the oversized R/S-glyph defect from an earlier chapter does not recur.",
+ "Structure support in question option sets is all-or-nothing per item, so there is no lone-illustrated-option answer tell of the kind found in ch15 and ch16.",
+ "All 26 SMILES parse and render correctly and legibly, including charged species and the azo dye, which correctly carries explicit E geometry.",
+ "Every asset carries a non-trivial alt_text describing the structure rather than repeating the name, and a learning_goal stating a specific teaching point.",
+ "nugget-hofmann-elimination ships a genuine three-stage static sequence rather than endpoints only, which should be the model for the reductive amination and Gabriel/azide sections.",
+ "The five video deferrals are documented honestly, naming the production constraint and recording caption/transcript requirements.",
+ "The fully illustrated items describe their option structures without revealing which is correct."
+ ],
+ "open_questions": [
+ "Does any downstream surface consume asset accessibility.long_description or nugget practice_check? Neither appears in the compiled reader; if the reader fetches them separately vis-010 softens considerably.",
+ "Is there a supported rdkit_option or block-level mechanism for ring-position numbering? vis-006 assumes not, based on show_hydrogens being the only option key used.",
+ "representation_tags compiles as an empty array on all 56 questions; compiler default or authoring omission?",
+ "I could not determine whether the reader's molecule renderer applies show_hydrogens identically to Chem.AddHs, which is how I reproduced the figures for vis-004 and vis-005.",
+ "No new category identifiers were coined."
+ ]
+ }
+ ],
+ "publication_readiness": "blocked",
+ "executive_summary": "Chapter 24 is chemically the cleanest package the pipeline has produced. The instructor persona verified all 26 asset SMILES and all 84 question structures with RDKit against formula, canonical connectivity and InChIKey, re-derived all 56 answer keys independently, and checked roughly twenty pKa values against literature: zero wrong structures, zero wrong keys, zero wrong values. The ch22 answer-leak class was avoided at baseline — both reaction-coordinate descriptions report curve geometry and relative heights without stating step count or thermodynamic classification, and the automated guard is clean across all 56 items. The baseline verdict is nevertheless BLOCKED, on three grounds. Two are chapter-local and were corrected the same day: both Hofmann drawing items described a primary amine as 'secondary' in the accessibility channel only — teaching, to non-visual learners exclusively, the exact misconception the chapter's first concept exists to destroy — and one numeric item handed the screen-reader learner the amine classification that is the whole of its answer. The third is the platform structure_scaffold input-path ticket (canvas-only drawing, no text entry), unresolved and identical to ch1/11/15-19/23, which forces 'blocked' on its own. Production's own coherence pass again introduced an error while closing a gap — the benzylamine/diphenylamine paragraph asserted that two aryl rings double the basicity discount, refuted by the two numbers printed beside it — repeating the ch23 pattern exactly. The chapter's real weakness is not chemistry but form: every one of its 26 figures is a static single molecule, so the pKaH ladder, the diazonium replacement menu, the pyrrole-versus-pyridine orbital geometry and four multi-step mechanisms are all carried by prose alone, and the chapter twice tells the reader that content 'should be learned as a table' without supplying one.",
+ "consensus_strengths": [
+ "Zero chemistry errors and zero wrong answer keys across 56 items and 110 verified structures — the first chapter in this series to reach that on the baseline pass.",
+ "The reaction-coordinate accessible descriptions avoid the ch22 leak class entirely; both report plotted geometry and relative heights and neither names step count, rate-determining step, or thermodynamic direction.",
+ "Authoring-layer accessibility coverage is complete: 26 of 26 assets carry alt_text and long_description, 56 of 56 questions carry an accessible_description, and nothing is stubbed.",
+ "Thirteen of the fifteen question types are keyboard-operable as shipped, including rank_order Move up/down buttons that announce position and labelled selects on five other types.",
+ "The expanded prose is genuinely text-first: a learner who perceives no figure can still obtain every lone-pair geometry, every pKaH value, both regiochemical arguments and the 95:5 Hofmann ratio.",
+ "The two error_repair items are the strongest assessment design in the chapter — the flaw sits in the substrate, a correct-but-unflawed decoy is offered, and two repairs adjust conditions where no condition change can rescue a geometrically impossible step.",
+ "Option sets carry structures all-or-nothing, so the lone-illustrated-option answer tell found in ch15 and ch16 does not recur.",
+ "No asset sets annotation_font_scale; the oversized stereo-glyph defect of ch14/ch18 does not recur."
+ ],
+ "ranked_recommendations": [
+ {
+ "rec_id": "rec-001",
+ "title": "Primary amines described as 'secondary' in the accessibility channel",
+ "need": "The non-visual channel must state the same chemistry as the visual one; both Hofmann drawing items classified the carbon rather than the nitrogen.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "A bounded text correction fully resolves it; the prompts and keys were already correct, so nothing structural changes.",
+ "target_surface": "assessment",
+ "severity": "blocker",
+ "source_findings": [
+ "instr-001",
+ "access-005"
+ ]
+ },
+ {
+ "rec_id": "rec-002",
+ "title": "Numeric item hands the screen-reader learner its own answer",
+ "need": "The description must convey the stimulus without performing the classification step the item grades.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "The v1 twin already demonstrates the neutral phrasing; matching it is the least-complex fix.",
+ "target_surface": "assessment",
+ "severity": "blocker",
+ "source_findings": [
+ "access-002"
+ ]
+ },
+ {
+ "rec_id": "rec-003",
+ "title": "structure_scaffold accepts only canvas drawing",
+ "need": "A learner who cannot use a pointer has no way to submit any response to the four drawing items; the toolbar profile also hides paste, so no SMILES can be entered.",
+ "chosen_intervention": "keyboard-alternative",
+ "rationale": "Requires a platform input path, not chapter content. Deliberately NOT worked around per chapter, since a chapter-local hack would mask a platform ticket that recurs in ch1/11/15-19/23. No concept becomes unassessable — both affected concepts carry three or four other types.",
+ "target_surface": "interactive",
+ "severity": "blocker",
+ "source_findings": [
+ "access-001"
+ ]
+ },
+ {
+ "rec_id": "rec-004",
+ "title": "'Two rings, twice the discount' refuted by its own numbers",
+ "need": "The summary of the conjugation-path argument must match the data presented beside it; resonance discounts are sublinear.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Introduced by production's coherence pass; replaced with the actual increments (6.1 then a further 3.8) and the reason they are not additive.",
+ "target_surface": "prose",
+ "severity": "high",
+ "source_findings": [
+ "instr-003"
+ ]
+ },
+ {
+ "rec_id": "rec-005",
+ "title": "Halogen substituents graded twice, never taught, and the stated rule predicts the wrong sign",
+ "need": "The substituent rule the chapter states must cover every substituent it grades; a student following it as written gets both halogen items wrong.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "The missing idea is one paragraph (induction versus resonance for halogens), and it simultaneously supplies the two pKaH values that previously existed only in an undelivered practice_check.",
+ "target_surface": "prose",
+ "severity": "high",
+ "source_findings": [
+ "instr-004",
+ "ss-009"
+ ]
+ },
+ {
+ "rec_id": "rec-006",
+ "title": "Classification item describes distractors more fully than its key",
+ "need": "Every option must be described at the same structural depth so the classification requires the same reasoning step from every learner.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Semantic asymmetry the automated guard cannot see; a one-clause rewrite restores parity.",
+ "target_surface": "assessment",
+ "severity": "high",
+ "source_findings": [
+ "access-006"
+ ]
+ },
+ {
+ "rec_id": "rec-007",
+ "title": "Name-to-structure translation is an unstated gate on graded mechanism items",
+ "need": "Nomenclature is taught nowhere, yet three items supply only a name and a blank canvas.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Chose to supply the condensed formula on the name-only stems rather than author a nomenclature section: it removes the gate at the point of harm, and the sibling v2 item already set that precedent. A full nomenclature section remains open as a scope decision.",
+ "target_surface": "assessment",
+ "severity": "high",
+ "source_findings": [
+ "instr-002"
+ ]
+ },
+ {
+ "rec_id": "rec-008",
+ "title": "Two same-named Hofmann reactions never disambiguated",
+ "need": "A student must be told that the rearrangement and the elimination share only a surname, before being graded on both.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "A short explicit contrast in each section is cheaper and more durable than reorganising the chapter.",
+ "target_surface": "prose",
+ "severity": "high",
+ "source_findings": [
+ "ss-004",
+ "vis-014"
+ ]
+ },
+ {
+ "rec_id": "rec-009",
+ "title": "Authored accessibility payload never reaches the learner",
+ "need": "long_description on 26 assets, practice_check on 10 nuggets, and accessible_description on 54 of 56 items are authored, compiled or dropped, and consumed by almost nothing.",
+ "chosen_intervention": "instructor-note",
+ "rationale": "Platform delivery gap, verified identical in ch21/ch22/ch23. Recorded rather than re-authored; re-authoring per chapter would not change what students receive.",
+ "target_surface": "instructor-support",
+ "severity": "high",
+ "source_findings": [
+ "access-003",
+ "access-004",
+ "access-009",
+ "instr-011",
+ "ss-001",
+ "vis-010"
+ ]
+ },
+ {
+ "rec_id": "rec-010",
+ "title": "List-shaped knowledge delivered as paragraphs",
+ "need": "The pKaH ladder (about eighteen values) and the diazonium replacement menu (seven reagents) are ordering/mapping content presented as continuous prose, and the chapter itself says the menu 'should be learned as a table'.",
+ "chosen_intervention": "new-figure",
+ "rationale": "Genuine new authoring, not a defect fix; left open rather than improvised, since it needs a non-molecule asset kind the pipeline does not yet have.",
+ "target_surface": "figure",
+ "severity": "high",
+ "source_findings": [
+ "ss-002",
+ "ss-005",
+ "vis-002",
+ "vis-008"
+ ]
+ },
+ {
+ "rec_id": "rec-011",
+ "title": "The chapter's keystone idea has no visual representation",
+ "need": "The pyrrole-versus-pyridine lone-pair distinction is pure orbital geometry; three flat 2D rings cannot show in-plane versus perpendicular, and the deferral note wrongly claims they do.",
+ "chosen_intervention": "new-figure",
+ "rationale": "Needs an orbital-overlay preset that does not exist yet; the deferral note's inaccurate mitigation claim is the part worth correcting now.",
+ "target_surface": "figure",
+ "severity": "high",
+ "source_findings": [
+ "vis-001",
+ "instr-010"
+ ]
+ },
+ {
+ "rec_id": "rec-012",
+ "title": "Six discrete text defects",
+ "need": "A truncated enumeration, a promised count of three delivered as two, an order-of-magnitude arithmetic error, an anion called neutral, a false industrial-history claim, and a transamination/reductive-amination conflation.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "All six are bounded factual corrections with unambiguous right answers.",
+ "target_surface": "prose",
+ "severity": "medium",
+ "source_findings": [
+ "ss-003",
+ "ss-006",
+ "instr-012",
+ "ss-016",
+ "instr-013",
+ "instr-014",
+ "instr-005",
+ "instr-016"
+ ]
+ },
+ {
+ "rec_id": "rec-013",
+ "title": "Hofmann rule stated without its domain of validity",
+ "need": "The rule is presented as universal; an acidified beta hydrogen gives E1cb character and the conjugated alkene instead.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "One bounding sentence with the styrene case preserves the rule while removing the exceptionless claim.",
+ "target_surface": "prose",
+ "severity": "medium",
+ "source_findings": [
+ "instr-006"
+ ]
+ },
+ {
+ "rec_id": "rec-014",
+ "title": "Question feedback contradicts the chapter on what pyrrole's pKaH measures",
+ "need": "Prose says the -4 value refers to C2 protonation; the feedback attaches it to nitrogen.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Align the feedback to the more careful statement the prose already makes.",
+ "target_surface": "assessment",
+ "severity": "medium",
+ "source_findings": [
+ "ss-010"
+ ]
+ },
+ {
+ "rec_id": "rec-015",
+ "title": "Descriptions promise drag-and-drop the UI does not ship",
+ "need": "Six descriptions tell screen-reader users to drag when the controls are buttons and selects, risking abandonment of six operable items.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Describe the shipped control; this makes the metadata more accessible, not less.",
+ "target_surface": "assessment",
+ "severity": "medium",
+ "source_findings": [
+ "access-008"
+ ]
+ },
+ {
+ "rec_id": "rec-016",
+ "title": "Explicit hydrogens applied inversely to teaching load",
+ "need": "The one molecule whose beta hydrogens are the argument hid them, while two aromatic rings whose N-H versus bare-N contrast is the teaching point buried it under four C-H bonds.",
+ "chosen_intervention": "new-figure",
+ "rationale": "Setting show_hydrogens per teaching load (on for the quaternary salt, off for pyrrole and imidazole) fixes both without new assets.",
+ "target_surface": "figure",
+ "severity": "medium",
+ "source_findings": [
+ "vis-004",
+ "vis-005"
+ ]
+ },
+ {
+ "rec_id": "rec-017",
+ "title": "Ledger labels atoms absent from the drawn stimulus",
+ "need": "Two of five labelled atoms — a beta hydrogen and the hydroxide oxygen — did not exist in the rendered structure students must point at.",
+ "chosen_intervention": "new-figure",
+ "rationale": "Adding the hydroxide to the SMILES and relabelling the implicit hydrogen honestly makes the ledger operable without changing what it grades.",
+ "target_surface": "assessment",
+ "severity": "medium",
+ "source_findings": [
+ "vis-013"
+ ]
+ },
+ {
+ "rec_id": "rec-018",
+ "title": "Level-3 hints read out the answer key",
+ "need": "Both curved-arrow items' final hints name the exact source and target sites, training students to open hint 3 first.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Rewrite to leave one decision; levels 1 and 2 were already well pitched.",
+ "target_surface": "assessment",
+ "severity": "medium",
+ "source_findings": [
+ "ss-011"
+ ]
+ },
+ {
+ "rec_id": "rec-019",
+ "title": "Prerequisite graph does not match the prose dependencies",
+ "need": "Remediation routing sends a student stuck on Hofmann elimination to amine classification rather than to the alkylation runaway the section actually builds on.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Metadata-only correction to three concepts.",
+ "target_surface": "prose",
+ "severity": "medium",
+ "source_findings": [
+ "instr-007"
+ ]
+ },
+ {
+ "rec_id": "rec-020",
+ "title": "Reader prose and question prompts use different notation",
+ "need": "Prose shipped ASCII with SMILES-derived triple bonds and caret exponents while prompts used Unicode, making the same species sound different in reading and practice and rendering 'C#N' as 'C hash N' in text-to-speech.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Normalise prose to the Unicode convention the prompts already use, keeping mechanism names (SN2, E2) plain per house rule.",
+ "target_surface": "prose",
+ "severity": "medium",
+ "source_findings": [
+ "instr-009",
+ "access-011"
+ ]
+ },
+ {
+ "rec_id": "rec-021",
+ "title": "Structure support uneven across items whose task is structural",
+ "need": "Two categorize items and a comparison matrix presented compounds as names while less structural items were fully illustrated.",
+ "chosen_intervention": "new-figure",
+ "rationale": "Added structures only where the renderer displays them. rank_order was deliberately excluded: the backend enriches cards but MechanismCardSortRenderer has no imageUrl path, so authored structures would be silently dropped — recorded as a platform gap instead.",
+ "target_surface": "assessment",
+ "severity": "medium",
+ "source_findings": [
+ "vis-012"
+ ]
+ },
+ {
+ "rec_id": "rec-022",
+ "title": "Deferred video briefs lacked a colour/motion-only constraint",
+ "need": "Storyboards designate colour, glow and an unlabelled ratio bar as sole carriers; the deferral notes recorded captions and transcripts but not this.",
+ "chosen_intervention": "instructor-note",
+ "rationale": "The briefs are the spec a future producer builds from, so the constraint must be recorded now.",
+ "target_surface": "instructor-support",
+ "severity": "medium",
+ "source_findings": [
+ "access-010"
+ ]
+ },
+ {
+ "rec_id": "rec-023",
+ "title": "Compound named by a word the chapter never uses",
+ "need": "An option was labelled p-Toluidine while the chapter consistently says p-methylaniline.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Give both names so the label is recognisable either way.",
+ "target_surface": "assessment",
+ "severity": "low",
+ "source_findings": [
+ "ss-018"
+ ]
+ },
+ {
+ "rec_id": "rec-024",
+ "title": "Background link did not cover its section's topic",
+ "need": "The basicity section — the one whose values a struggling student most wants to cross-check — linked to a generic conjugate-acid article.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Retarget to the acid dissociation constant article; verified 200 and not a redirect.",
+ "target_surface": "prose",
+ "severity": "low",
+ "source_findings": [
+ "ss-019"
+ ]
+ },
+ {
+ "rec_id": "rec-025",
+ "title": "A term the question asks students to produce was absent from the default tier",
+ "need": "'Pyramidal inversion' appeared only in the terse and standard tiers, which the reader never shows by default.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Name it in the expanded tier; the ch23 lesson that tiers are alternatives rather than cumulative applies directly.",
+ "target_surface": "prose",
+ "severity": "low",
+ "source_findings": [
+ "ss-015"
+ ]
+ },
+ {
+ "rec_id": "rec-026",
+ "title": "Azide and Gabriel objective is assessed only through failure cases",
+ "need": "The stated objective is to USE the masked-nitrogen routes, but all four items on the concept are failure diagnoses.",
+ "chosen_intervention": "added-practice",
+ "rationale": "Needs a new item where the route succeeds; left open as scope rather than improvised during a correction pass.",
+ "target_surface": "practice",
+ "severity": "medium",
+ "source_findings": [
+ "instr-008"
+ ]
+ },
+ {
+ "rec_id": "rec-027",
+ "title": "Figures stranded after 400-670 words of prose; long sections lack internal landmarks",
+ "need": "The compiler appends all figures after the whole section text, and each section is one heading-free block of up to 4,171 characters.",
+ "chosen_intervention": "instructor-note",
+ "rationale": "Compiler layout behaviour, not chapter authoring; recorded for the pipeline.",
+ "target_surface": "instructor-support",
+ "severity": "low",
+ "source_findings": [
+ "vis-007",
+ "access-012"
+ ]
+ },
+ {
+ "rec_id": "rec-028",
+ "title": "Reader carries a single OpenStax link to chapter front matter",
+ "need": "Nine of ten sections have no textbook reading block, and the one that exists points at 'Why This Chapter?'.",
+ "chosen_intervention": "instructor-note",
+ "rationale": "Distinct from the Additional Reading panel, which does carry six verified section-specific links; this is a compiler block-level gap.",
+ "target_surface": "instructor-support",
+ "severity": "low",
+ "source_findings": [
+ "instr-015"
+ ]
+ }
+ ],
+ "accessibility_blockers": [
+ "access-001",
+ "access-002",
+ "access-005"
+ ],
+ "visual_opportunities": [
+ "A pKaH ladder that shows ordering, family clustering and the two large discontinuities in one place (ss-002, vis-002).",
+ "A branching diagram of the diazonium replacement menu — one starting material to seven products, with the products actually depicted (ss-005, vis-008).",
+ "An orbital representation distinguishing pyrrole's p-orbital lone pair from pyridine's in-plane sp2 lone pair (vis-001).",
+ "The reductive-amination pathway's two intermediates, particularly the charged C=N against the neutral C=O that carries the NaBH3CN selectivity argument (vis-003).",
+ "A worked sigma-complex comparison for one heterocycle, since three regiochemical arguments are settled by resonance counts the chapter never draws (ss-003).",
+ "Ring position numbers on the heterocycle figures, which the last three sections reason about constantly (vis-006).",
+ "The competing Hofmann transition states, since only the winning product of a 95:5 ratio is depicted (vis-009)."
+ ],
+ "sufficient_as_is": [
+ "Both reaction_coordinate_reasoning accessible descriptions — they carry the plotted heights a non-visual learner needs and leak nothing; no additional description or alternative is warranted.",
+ "All 26 asset alt_texts as structural descriptions — the gap is delivery of the authored long_description, not the alt text's own quality, so no asset needs re-authoring.",
+ "curved_arrow site labels — already written as chemistry rather than indices and exposed as button labels; no further description needed.",
+ "bond_change_ledger reaction_display strings — these already give the structure image a real chemical text equivalent.",
+ "The five video deferral records — honest, specific, and now carrying the colour/motion constraint; no video needs producing to clear a blocker.",
+ "single_select and multi_select option sets — pairing a compound name with a structure image already gives the screen-reader learner an equivalent stimulus."
+ ],
+ "disagreements": [
+ {
+ "topic": "Whether students currently encounter the five unproduced videos as dead players",
+ "positions": {
+ "Struggling Student": "ss-012 describes clicking a playable-looking block and having nothing play, treating it as the chapter withholding help.",
+ "Accessibility Persona": "access-010 states all six compiled video blocks ship is_hidden true with an empty url, so no student encounters a broken or silent player.",
+ "Learner with Visual Preference": "vis-018 agrees the blocks are hidden and notes the risk is prospective, if the briefs are ever produced."
+ },
+ "resolution": "Verified directly against the compiled reader: all six video blocks carry is_hidden true and an empty url. The Accessibility and Visual personas are correct on the delivery question and ss-012's stated impact does not occur today. The underlying point still stands and is retained under rec-010/rec-011 — the explanations those briefs were scoped to carry are not delivered by any surface, which is why the visual gaps are ranked high."
+ },
+ {
+ "topic": "Whether the false industrial-phenol attribution is a blocker",
+ "positions": {
+ "Organic Chemistry Instructor": "Graded medium and flagged for override, reasoning that it is a false historical attribution rather than wrong reaction chemistry, since no student will predict a wrong product from it.",
+ "Orchestrator": "Accepted as medium."
+ },
+ "resolution": "Upheld at medium and corrected anyway in the same pass. The rubric's blocker bar is wrong chemistry that changes what a student predicts; this changes only provenance. Correcting it cost one sentence, so the severity call had no practical consequence."
+ },
+ {
+ "topic": "Whether practice_check and long_description non-delivery is a chapter finding or a platform ticket",
+ "positions": {
+ "Struggling Student": "ss-001 raises it as the chapter's single largest structural weakness.",
+ "Organic Chemistry Instructor": "instr-011 asks whether it should be filed against the chapter at all.",
+ "Learner with Visual Preference": "vis-010 calls it the cheapest available mitigation for several visual gaps."
+ },
+ "resolution": "Recorded as a platform gap (rec-009), not a chapter defect. Verified identical in carbonyl-condensation and carbonyl-alpha-substitution, so the content is authored correctly and dropped downstream. Kept visible in the report because it materially degrades this chapter, but no chapter-local re-authoring was performed."
+ }
+ ],
+ "regression": {
+ "resolved": [],
+ "unchanged": [],
+ "worsened": [],
+ "new": []
+ },
+ "corrections": {
+ "status": "applied-and-verified-without-second-persona-run",
+ "post_correction_readiness_estimate": "blocked",
+ "estimate_note": "Not a new persona verdict. All chapter-local blockers and every verified factual defect are resolved; the estimate remains 'blocked' solely because access-001, the platform structure_scaffold input-path ticket, is unresolved. Setting that platform item aside, the estimated state is 'ready with minor revisions'.",
+ "applied": [
+ {
+ "change": "Both Hofmann drawing items' accessible descriptions now say the nitrogen carries one carbon substituent instead of calling the amine 'secondary'.",
+ "resolves": [
+ "instr-001",
+ "access-005"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "ch24-hofmann-equivalents-v2's description now describes the ring and methyl substitution without naming the amine class.",
+ "resolves": [
+ "access-002"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "ch24-classify-tert-butylamine's description now states what is attached to the key's nitrogen, matching the depth given to its distractors.",
+ "resolves": [
+ "access-006"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Replaced 'two rings, twice the discount' with the actual increments (6.1 then a further 3.8) and the reason resonance discounts are sublinear.",
+ "resolves": [
+ "instr-003"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Added a halogen paragraph to nugget-arylamine-basicity covering induction versus resonance, p-chloroaniline 4.0 and p-methylaniline 5.1.",
+ "resolves": [
+ "instr-004"
+ ],
+ "partially_addresses": [
+ "ss-009"
+ ]
+ },
+ {
+ "change": "Added explicit Hofmann rearrangement versus Hofmann elimination disambiguation to both sections.",
+ "resolves": [
+ "ss-004"
+ ],
+ "partially_addresses": [
+ "vis-014"
+ ]
+ },
+ {
+ "change": "Bounded the Hofmann rule with its E1cb exception and the styrene case.",
+ "resolves": [
+ "instr-006"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Six text defects corrected: completed the truncated 'C3, C5...' enumeration; restored a genuine third nitro-reducing system and rescoped the dissolving-metal label off SnCl2; changed 'hundred-million-fold' to 'billion-fold'; rewrote 'Neutral NH2-' as an amide ion; removed the false industrial-phenol attribution; separated PLP transamination from genuine reductive amination.",
+ "resolves": [
+ "ss-003",
+ "ss-006",
+ "instr-012",
+ "ss-016",
+ "instr-013",
+ "instr-014",
+ "instr-005",
+ "instr-016"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Aligned ch24-protonated-on-nitrogen's feedback with the prose on what pyrrole's -4 pKaH measures.",
+ "resolves": [
+ "ss-010"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Rewrote six 'draggable' descriptions to name the Move up/down buttons and per-item group selectors actually shipped.",
+ "resolves": [
+ "access-008"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Set show_hydrogens true on mol-sec-butyltrimethylammonium and false on mol-pyrrole and mol-imidazole so explicit hydrogens follow teaching load.",
+ "resolves": [
+ "vis-005"
+ ],
+ "partially_addresses": [
+ "vis-004"
+ ]
+ },
+ {
+ "change": "Added the hydroxide ion to both bond_change_ledger stimuli and relabelled the implicit beta hydrogen honestly.",
+ "resolves": [
+ "vis-013"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Rewrote both curved-arrow level-3 hints to leave the source/target decision to the student.",
+ "resolves": [
+ "ss-011"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Corrected prerequisites on hofmann-elimination, reductive-amination and pyrrole-imidazole to match the dependencies the prose asserts.",
+ "resolves": [
+ "instr-007"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Normalised reader prose, asset captions and video briefs to Unicode chemical notation (45 fields), keeping mechanism names plain per house rule.",
+ "resolves": [
+ "instr-009",
+ "access-011"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Supplied condensed formulas on the three name-only question stems.",
+ "resolves": [],
+ "partially_addresses": [
+ "instr-002"
+ ]
+ },
+ {
+ "change": "Added structures to both categorize_groups item sets and the pyrrole/pyridine comparison-matrix cases, where the renderers display them.",
+ "resolves": [],
+ "partially_addresses": [
+ "vis-012"
+ ]
+ },
+ {
+ "change": "Renamed the p-Toluidine option to p-Methylaniline (p-toluidine).",
+ "resolves": [
+ "ss-018"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Retargeted the amine-basicity background link from Conjugate_acid to Acid_dissociation_constant, verified 200 and not a redirect.",
+ "resolves": [
+ "ss-019"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Named pyramidal inversion in the expanded tier so the term the question asks for exists in the tier the reader shows.",
+ "resolves": [
+ "ss-015"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Recorded a colour/motion-only prohibition and a numeric-labelling requirement in all five video deferral notes.",
+ "resolves": [
+ "access-010"
+ ],
+ "partially_addresses": []
+ }
+ ],
+ "remaining_high_priority": [
+ "access-001 — structure_scaffold canvas-only input path (platform, unresolved; the sole reason the estimate stays 'blocked').",
+ "access-003 / access-004 / access-009 — accessible_description reaches 1 of 15 renderers; long_description and practice_check are dropped in compilation (platform, verified identical in ch21-23).",
+ "rec-010 / rec-011 — the pKaH ladder, the diazonium menu and the pyrrole/pyridine orbital contrast still have no visual form; needs non-molecule asset kinds.",
+ "instr-002 — no amine nomenclature is taught anywhere; mitigated at the three name-only items but unresolved as a chapter gap.",
+ "instr-008 — the azide/Gabriel objective is still assessed only through failure cases.",
+ "vis-012 (partial) — rank_order cannot show structures: the backend enriches cards but MechanismCardSortRenderer has no imageUrl path, so authored structures are silently dropped. New platform finding from this review."
+ ],
+ "verification": [
+ "compile_topic_package --write-runtime — clean, 10 concepts / 26 assets / 47 slides / 56 questions / 28 surfaced / 28 staged / 15 types",
+ "pytest tools/topic_packages/tests/ -q — 62 passed",
+ "pytest backend question-bank + leak-guard + numeric-grading suites -q — 177 passed",
+ "find_accessibility_leaks with compiler-identical 4-arg call over all 56 compiled items — 0 hits",
+ "RDKit re-validation of all asset and question SMILES after edits — all parse; categorize structures' carbons-on-nitrogen match every answer key",
+ "Wikipedia target Acid_dissociation_constant — HTTP 200, no redirect",
+ "topic-package-textbook-profiles.json clobbered twice more by recompiles (14th and 15th hits) and re-merged to 247 chapter entries across 13 textbooks"
+ ]
+ },
+ "accessibility_blocker_notes": {
+ "access-001": "UNRESOLVED. The four structure_scaffold items accept only pointer drawing on a Ketcher canvas whose lti_drawing toolbar profile hides paste, so no SMILES, name or selection path exists. Platform-level, identical to ch1/11/15-19/23. This alone forces 'blocked'.",
+ "access-002": "RESOLVED in the correction pass — ch24-hofmann-equivalents-v2 no longer states the amine classification that determines its answer.",
+ "access-005": "RESOLVED in the correction pass (with instr-001) — neither Hofmann drawing item describes a primary amine as secondary any more."
+ }
+}

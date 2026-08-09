@@ -1,0 +1,331 @@
+{
+ "persona": "Organic Chemistry Instructor",
+ "persona_version": "1.0.0",
+ "chapter_id": "aldehydes-and-ketones",
+ "chapter_version": "1",
+ "model": "claude-opus-5[1m]",
+ "summary": "Not-go as written, but close. The prose is unusually strong for a first pass: the chapter is organized around a single 'master mechanism' spine, every SMILES in all 13 assets is valid and matches its name (verified with RDKit), the answer keys for all 18 surfaced questions are chemically correct, and the trouble_spots read like they were written by someone who has graded this exam. The chemistry fails in one place: the conjugate-addition nugget asserts that 'the common hydride reagents' add 1,2 to enones, which is wrong for NaBH4 — the reagent this same chapter teaches as the standard reductant — and is the reason Luche conditions exist. Beyond that one blocker, the chapter's weaknesses are structural rather than factual: the section that is explicitly billed as the master mechanism has no mechanism figure, no mechanism question, and its only mechanism video compiles into the reader as an empty-URL block whose caption is raw storyboard direction; all eleven practice_checks exist in the package but never reach the compiled reader; the IR objective and the ozonolysis objective are taught and never assessed; the hydrate is used as an explanatory device in section 3 but not defined until section 5; and the conjugate-addition section leans on enol/enolate/tautomerization that this chapter never introduces and never lists as a prerequisite. Fix the hydride claim, restore the practice checks, suppress or fill the empty video blocks, and add mechanism-level assessment, and I would assign this.",
+ "overall_score": 6.4,
+ "publication_blockers": ["instr-001"],
+ "findings": [
+ {
+ "finding_id": "instr-001",
+ "location": {
+ "concept_slug": "conjugate-addition",
+ "nugget_id": "nugget-conjugate-addition",
+ "section_id": "nugget-conjugate-addition",
+ "anchor_text": "and the common hydride reagents attack the site of highest positive charge density, the carbonyl carbon, and give 1,2 products"
+ },
+ "severity": "blocker",
+ "category": "chemical-accuracy",
+ "observation": "The expanded and standard prose both class 'the common hydride reagents' with organolithiums and Grignards as 1,2-selective toward alpha,beta-unsaturated carbonyls. This is false for sodium borohydride, which gives substantial conjugate (1,4) reduction of enones — the well-known reason Luche conditions (NaBH4/CeCl3) exist. Only LiAlH4 and bulky/hard hydride sources are reliably 1,2. The chapter compounds this by teaching NaBH4 as the default carbonyl reductant in nugget-hydride-grignard, so a student is being told the wrong thing about a reagent they have just been handed.",
+ "learner_impact": "Any student asked to predict the product of NaBH4 plus 2-cyclohexenone will confidently answer the allylic alcohol and be wrong; the error will be re-taught against in the alpha-substitution/enolate chapter and in any lab that runs a Luche reduction. It also undercuts the chapter's otherwise sound hard/soft selectivity story, because the one hydride reagent named is the counterexample.",
+ "evidence": "nugget-conjugate-addition standard text: 'strongly basic, hard organometallics (Grignard and organolithium reagents, and hydride reagents) attack the carbonyl directly'; expanded text: 'and the common hydride reagents attack the site of highest positive charge density, the carbonyl carbon, and give 1,2 products (allylic alcohols from enones)'. Question ch19-conjugate-addition-select distractor 'd' explains NaBH4 away only as 'delivers hydride, not a methyl group', so the wrong claim is never corrected at the assessment surface either.",
+ "recommended_outcome": "The chapter needs the hydride-plus-enone case stated correctly: hydride selectivity toward enones is reagent-dependent, with LiAlH4 largely 1,2 and NaBH4 giving significant conjugate reduction, and learners need to be told which reagent is safe to assume for each outcome rather than being given a blanket rule.",
+ "confidence": 0.93
+ },
+ {
+ "finding_id": "instr-002",
+ "location": {
+ "concept_slug": "oxidation-of-aldehydes",
+ "nugget_id": "nugget-aldehyde-oxidation",
+ "section_id": "nugget-aldehyde-oxidation",
+ "anchor_text": "a small fraction of the aldehyde exists as its hydrate, a gem-diol, and the hydrate is oxidized exactly as a secondary alcohol would be"
+ },
+ "severity": "high",
+ "category": "sequencing",
+ "observation": "The central mechanistic explanation of section 3 (order 3) — that aqueous oxidants overshoot the aldehyde because they oxidize the hydrate — depends on the hydration equilibrium, which is not introduced until section 5, nugget-hydration-cyanohydrin (order 5). The same forward reference appears one section earlier still, in nugget-preparation (order 2, 'allow the aldehyde to hydrate and be oxidized a second time') and in its practice_check answer. The concept prerequisites for oxidation-of-aldehydes list only carbonyl-structure-and-naming, so the dependency is neither declared nor satisfied.",
+ "learner_impact": "A student reading in order meets 'the hydrate, a gem-diol' as an unexplained term at the exact point where it is doing all the explanatory work. They can only memorize the outcome (aqueous oxidant overshoots) instead of understanding it, which is precisely the failure mode the chapter otherwise avoids.",
+ "evidence": "concepts[].order: oxidation-of-aldehydes = 3, hydration-and-cyanohydrins = 5. oxidation-of-aldehydes.prerequisites = ['carbonyl-structure-and-naming'] only. nugget-preparation practice_check answer: 'Aqueous chromium(VI) conditions would let the aldehyde hydrate and be oxidized further to the acid.'",
+ "recommended_outcome": "Either the hydration equilibrium must be available to the learner before it is used to explain aldehyde over-oxidation, or the oxidation section needs a self-contained introduction of the gem-diol at first use; the declared prerequisites must reflect whichever ordering is chosen.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "instr-003",
+ "location": {
+ "concept_slug": "conjugate-addition",
+ "nugget_id": "nugget-conjugate-addition",
+ "anchor_text": "the electrons displaced into the carbonyl make an enolate, protonation gives an enol, and tautomerization delivers the saturated carbonyl compound"
+ },
+ "severity": "high",
+ "category": "sequencing",
+ "observation": "Three ideas the chapter's own learning objective depends on — enolate, enol, and keto-enol tautomerization — are used as known vocabulary and are introduced nowhere in this chapter, nor listed in any concept's prerequisites. The same pattern recurs in nugget-imines-enamines, which invokes 'reductive amination' as a familiar reaction and forward-references the enamine alpha carbon 'in later chapters', and in nugget-preparation, whose prose assumes alcohol oxidation levels, ozonolysis, Markovnikov/anti-Markovnikov alkyne hydration, and Friedel-Crafts acylation. Every concepts[].prerequisites array in this package contains only within-chapter slugs; no cross-chapter dependency is recorded anywhere.",
+ "learner_impact": "The stated objective 'Draw the ketone product of a conjugate addition after tautomerization' is unachievable from this chapter alone. A student who has not yet had the enol/enolate chapter cannot follow the 1,4 pathway past the first arrow, and an instructor scheduling the chapter has no machine-readable signal of what must precede it.",
+ "evidence": "nugget-conjugate-addition learning_objectives includes 'Draw the ketone product of a conjugate addition after tautomerization'; the term tautomerization is used four times across the package and defined zero times. nugget-imines-enamines: 'the same balancing act reappears wherever amines and carbonyls meet, from reductive amination to enzyme active sites.' All 11 concepts' prerequisites reference only aldehydes-and-ketones slugs.",
+ "recommended_outcome": "The chapter needs its assumed cross-chapter prior knowledge made explicit and satisfied — either by declaring the external prerequisites so sequencing tools can enforce them, or by giving enol/enolate/tautomerization a brief in-chapter treatment sufficient to support the 1,4 objective.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "instr-004",
+ "location": {
+ "concept_slug": "nucleophilic-addition-mechanism",
+ "nugget_id": "nugget-nucleophilic-addition",
+ "asset_id": "video-nucleophilic-addition",
+ "anchor_text": "Draw the general mechanism of nucleophilic addition under basic and acidic conditions."
+ },
+ "severity": "high",
+ "category": "objective-alignment",
+ "observation": "The chapter's flagship objective asks students to draw the general nucleophilic addition mechanism under both basic and acidic conditions. Nothing in the chapter shows that mechanism and nothing assesses it. The two questions tagged to this concept are a reactivity ranking and a claim-evidence-reasoning item about relative rates; neither requires a single arrow. The two assets attached to the section (mol-acetone, mol-benzaldehyde) are static structures of starting materials. The one artifact that would have carried it, video-nucleophilic-addition, has production_status 'deferred'. Across all 36 compiled questions there is no mechanism, arrow-pushing, or intermediate-identification item, and no chapter figure depicts the tetrahedral alkoxide intermediate.",
+ "learner_impact": "The single idea the chapter says organizes everything else is delivered only as continuous prose. Students who can recite that 'the pi electrons shift onto oxygen' have no way to practice or be checked on producing that representation, and the mechanistic 'why' the chapter builds — acid-first versus nucleophile-first — is never made retrievable.",
+ "evidence": "nugget-nucleophilic-addition.learning_objectives[0]; asset_ids = ['mol-acetone','mol-benzaldehyde']; video_briefs[0].production_status = 'deferred'; compiled/question-set.json counts.by_type contains no mechanism type, and both questions with concept_slug 'nucleophilic-addition-mechanism' are rank_order and structured_reasoning.",
+ "recommended_outcome": "The master mechanism needs a representation the learner can see step by step and an assessment that requires them to reproduce or reason over the intermediate and the electron flow, rather than only over rate comparisons.",
+ "confidence": 0.94
+ },
+ {
+ "finding_id": "instr-005",
+ "location": {
+ "section_id": "nugget-acetals",
+ "nugget_id": "nugget-acetals",
+ "anchor_text": "Protonation of the hemiacetal hydroxyl converts it to a good leaving group; water departs to give an oxocarbenium ion"
+ },
+ "severity": "high",
+ "category": "worked-example-gap",
+ "observation": "No section of the chapter contains a worked example. Every one of the eleven nuggets is continuous expository prose followed by a single practice_check that states a prompt and its answer with no intermediate steps. Multi-step sequences that students demonstrably fail on — acetal formation and hydrolysis (five discrete steps described in one paragraph), the carbinolamine-to-iminium-to-imine/enamine branch, and the protect-react-deprotect synthesis plan — are narrated at speed and never modeled.",
+ "learner_impact": "Students see finished reasoning but never the reasoning being performed, so they have no template for the intermediate steps. The gap is sharpest for the protecting-group workflow, where the chapter's own error_repair question (ch19-acetal-base-error) asks students to diagnose a step-order/conditions error in a synthesis they have never been walked through.",
+ "evidence": "nuggets[].text has only terse/standard/expanded prose variants; no nugget carries a worked_example field or a step-numbered passage. nugget-acetals expanded paragraph 2 compresses protonation, loss of water, oxocarbenium formation, second alcohol attack, and deprotection into four sentences.",
+ "recommended_outcome": "The chapter needs at least one fully modeled multi-step example per mechanism-heavy section — reasoning shown as it is performed, not summarized — with the acetal protect/deprotect sequence as the highest priority.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "instr-006",
+ "location": {
+ "section_id": "nugget-carbonyl-structure-naming",
+ "anchor_text": "Classify 2-hexanone and hexanal as aldehyde or ketone, and state which carbon is C1 in each name."
+ },
+ "severity": "high",
+ "category": "retrieval-practice",
+ "observation": "All eleven nuggets carry a practice_check with a prompt and answer, but none of them appear in the compiled reader chapter. Every section in frontend/public/reader/topic-chapters/aldehydes-and-ketones.json contains only text, molecule, video, mcmurry_link, and external_link blocks. The compiler emits no practice block type, so the authored retrieval practice is silently dropped between the package and the surface a student actually reads.",
+ "learner_impact": "A student working through the reader gets eleven sections of continuous prose with zero opportunity to self-test. The question bank exists but is a separate artifact (and is itself marked available: false), so nothing interrupts passive reading at the point of learning — the condition under which students most reliably overestimate their understanding.",
+ "evidence": "Every nuggets[].practice_check in topic.package.json (11 of 11); compiled reader block_type values are exclusively text/molecule/video/mcmurry_link/external_link across all 11 sections; grep for the practice_check prompt text returns no match in the reader JSON.",
+ "recommended_outcome": "The authored practice checks need to reach the reader surface so learners encounter retrieval at the end of each section, or the compile step needs to fail loudly when authored practice has no destination block.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "instr-007",
+ "location": {
+ "section_id": "nugget-nucleophilic-addition",
+ "asset_id": "video-nucleophilic-addition",
+ "anchor_text": "Open on a ketone with the C=O polarization marked: partial positive on carbon, partial negative on oxygen."
+ },
+ "severity": "high",
+ "category": "interactive-fallback",
+ "observation": "All three video briefs are production_status 'deferred', yet the compiler still emits a video block into three reader sections (nucleophilic addition, acetals, Wittig). Each block has \"url\": \"\" and a description that is the verbatim first line of the storyboard — internal production direction addressed to a film crew, not to a student. There is no substitute content and no note explaining the absence.",
+ "learner_impact": "Students hit three broken or empty media slots at exactly the three most mechanism-dense points in the chapter, and read stage directions ('Open on the ylide: positive phosphorus adjacent to a carbanion carbon') as if they were instructional text. This reads as an unfinished product and erodes trust in the rest of the chapter.",
+ "evidence": "Reader sections nugget-nucleophilic-addition, nugget-acetals, nugget-wittig each contain a block with block_type 'video', content.url '' and content.description equal to video_briefs[].storyboard[0]. video_briefs[*].production_status = 'deferred' with production_note 'The reader carries the same content in the linked nugget prose and molecule figures.'",
+ "recommended_outcome": "Deferred video briefs must not surface to learners as empty players with storyboard text; the reader needs either the equivalent content in a form that exists, or the block suppressed until the video does.",
+ "confidence": 0.96
+ },
+ {
+ "finding_id": "instr-008",
+ "location": {
+ "concept_slug": "spectroscopy-of-aldehydes-and-ketones",
+ "nugget_id": "nugget-carbonyl-spectroscopy",
+ "question_slug": "ch19-aldehyde-nmr-shift",
+ "anchor_text": "Assign C=O IR stretches for aldehydes, ketones, and conjugated carbonyls."
+ },
+ "severity": "high",
+ "category": "objective-alignment",
+ "observation": "The spectroscopy section teaches a substantial and correct body of IR content (1730 aldehyde, 1715 ketone, ~30 cm-1 conjugation shift, the diagnostic 2720/2820 aldehyde C-H pair, ring-strain effects) and states it as a learning objective, but the concept has exactly one question in the bank — ch19-aldehyde-nmr-shift — which asks for a single 1H chemical shift number. No question touches IR at all; no question touches 13C. The section's only asset is a static structure of acetaldehyde; there is no spectrum figure of any kind, in a chapter whose stated selling point is that these compounds are 'the easiest functional groups to spot spectroscopically'.",
+ "learner_impact": "The most decision-useful skill in the section — reading conjugation off a C=O frequency, and using the 2720 cm-1 band to call aldehyde versus ketone — is taught and never practiced. The single question that exists rewards memorizing '9.7' rather than interpreting a spectrum, so students arrive at an unknown-identification exam having never been asked to do the task.",
+ "evidence": "nugget-carbonyl-spectroscopy.learning_objectives = ['Assign C=O IR stretches for aldehydes, ketones, and conjugated carbonyls.', 'Identify the diagnostic 1H and 13C NMR signatures of the two families.']; the only question with concept_slug 'spectroscopy-of-aldehydes-and-ketones' is ch19-aldehyde-nmr-shift (numeric_with_units, value 9.7). The section's practice_check does exercise the IR reasoning but does not reach the reader (see instr-006).",
+ "recommended_outcome": "The IR and 13C objectives need assessment that requires interpreting actual band positions and shifts, and the section needs a spectral representation students can read rather than a table of numbers embedded in prose.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "instr-009",
+ "location": {
+ "concept_slug": "oxidation-of-aldehydes",
+ "question_slug": "ch19-tollens-test",
+ "anchor_text": "The test is named after a nineteenth-century German chemist."
+ },
+ "severity": "medium",
+ "category": "assessment-readiness",
+ "observation": "The oxidation-of-aldehydes concept has a single question, and it is pure name recall: 'Name the classical laboratory test...'. Its level-1 hint is a biographical clue about a nineteenth-century German chemist, which rewards trivia rather than chemistry. The concept's first stated objective — explain why aldehydes are oxidized to carboxylic acids while ketones are inert — is never assessed. ch19-wittig-byproduct has the same shape (name the phosphorus byproduct), giving the chapter two of eighteen surfaced items that test vocabulary rather than reasoning.",
+ "learner_impact": "Students can score full marks on the oxidation concept without knowing that the aldehyde C-H is what makes the difference, which is the single idea the section is built on. It also signals to students that recall is what will be assessed, which changes how they read the rest of the chapter.",
+ "evidence": "ch19-tollens-test (short_answer, answer_key.answer_text lists seven spellings of 'Tollens'); its hint level 1 = 'The test is named after a nineteenth-century German chemist.' nugget-aldehyde-oxidation.learning_objectives[0] = 'Explain why aldehydes are oxidized to carboxylic acids while ketones are inert to mild oxidants.'",
+ "recommended_outcome": "The oxidation concept needs at least one item that makes students use the structural reason (presence or absence of the carbonyl C-H) to predict an outcome, so the concept is assessed at the level its objective states.",
+ "confidence": 0.86
+ },
+ {
+ "finding_id": "instr-010",
+ "location": {
+ "concept_slug": "preparation-of-aldehydes-and-ketones",
+ "nugget_id": "nugget-preparation",
+ "anchor_text": "Ozonolysis of an alkene followed by a reductive workup (Zn/CH3COOH or dimethyl sulfide) cleaves the double bond completely"
+ },
+ "severity": "medium",
+ "category": "missing-example",
+ "observation": "Ozonolysis is named in a learning objective ('Predict the carbonyl products of alkene ozonolysis and alkyne hydration'), described correctly in two sentences of prose, and then never instantiated: there is no example substrate, no figure showing a specific alkene cleaving to its two carbonyl fragments, and no question in the bank involves ozonolysis. Both preparation questions (ch19-prep-matching, ch19-ketone-routes) cover alcohol oxidation, Friedel-Crafts, and the two alkyne hydrations only.",
+ "learner_impact": "Ozonolysis is the one preparation in this section where students must track which alkene carbon becomes which carbonyl compound, and it is the one they get no practice on. A stated objective is unassessed and unexemplified, so students will not know it was expected of them.",
+ "evidence": "nugget-preparation.learning_objectives[1]; asset_ids for the section = ['mol-cyclohexanone'] only; ch19-prep-matching left items are 1-hexanol/PCC, cyclohexanol/CrO3, benzene/CH3COCl, 1-hexyne/HgSO4; ch19-ketone-routes options a-e contain no ozonolysis.",
+ "recommended_outcome": "Ozonolysis needs a concrete substrate-to-products instance the learner can see, plus practice that requires mapping each alkene carbon to its carbonyl product, matching the level of the stated objective.",
+ "confidence": 0.88
+ },
+ {
+ "finding_id": "instr-011",
+ "location": {
+ "concept_slug": "hydride-and-grignard-addition",
+ "asset_id": "mol-1-phenylethanol",
+ "nugget_id": "nugget-hydride-grignard",
+ "anchor_text": "A secondary alcohol, 1-phenylethanol — the direct product is the magnesium alkoxide"
+ },
+ "severity": "medium",
+ "category": "missing-example",
+ "observation": "The chapter never addresses the stereochemical consequence of nucleophilic addition. A planar sp2 carbonyl is attacked with equal probability from either face, so addition to a prochiral carbonyl gives a racemic mixture. The chapter's own flagship example — CH3MgBr plus benzaldehyde giving 1-phenylethanol — creates a stereocenter, and neither the prose, the practice_check answer, the asset mol-1-phenylethanol (SMILES CC(O)c1ccccc1, no stereodescriptor and no note), nor question ch19-grignard-product mentions that the product is racemic. The nucleophilic-addition nugget describes the trigonal-to-tetrahedral rehybridization in detail without ever noting that this is where the stereocenter is born.",
+ "learner_impact": "Students coming out of the stereochemistry chapters are primed to ask about this and get no answer; worse, drawing a single enantiomer of 1-phenylethanol as 'the product' teaches an incorrect model that will need un-teaching in any later treatment of asymmetric reduction or enzymatic ketone reduction.",
+ "evidence": "assets mol-1-phenylethanol smiles 'CC(O)c1ccccc1' with alt_text 'a carbon that bears a hydroxyl group, a methyl group, and one hydrogen — a secondary alcohol' (no stereochemistry mentioned); nugget-hydride-grignard practice_check answer names 1-phenylethanol with no stereochemical comment; ch19-grignard-product option a same SMILES, no stereo.",
+ "recommended_outcome": "The chapter needs the facial-attack consequence made explicit at the point a stereocenter is first formed — that addition to a planar carbonyl gives both enantiomers in equal amounts — so the flat structures shown are correctly interpreted.",
+ "confidence": 0.87
+ },
+ {
+ "finding_id": "instr-012",
+ "location": {
+ "concept_slug": "imines-and-enamines",
+ "nugget_id": "nugget-imines-enamines",
+ "anchor_text": "Ammonia and amines are good nucleophiles, and their addition to aldehydes and ketones opens a family of condensation products"
+ },
+ "severity": "medium",
+ "category": "missing-example",
+ "observation": "The nitrogen-nucleophile section opens by promising 'a family of condensation products' and then delivers exactly two members: the alkylamine imine and the secondary-amine enamine. The substituted-hydrazine and hydroxylamine derivatives that constitute the rest of that family in every standard treatment of this chapter — oximes, hydrazones, semicarbazones — are absent, as is Wolff-Kishner reduction, which is the reason hydrazone formation is taught at all and the chapter's only route from C=O to CH2. Baeyer-Villiger oxidation is likewise absent from the oxidation section, which asserts that 'only forcing conditions that break carbon-carbon bonds can degrade' ketones without naming the standard method that does so.",
+ "learner_impact": "Students assigned this chapter alongside a standard textbook will find a visible content gap; more importantly, they leave without the C=O to CH2 transformation, so their retrosynthetic toolkit has a hole exactly where Friedel-Crafts acylation (taught in this chapter's preparation section) creates the need for it.",
+ "evidence": "nugget-imines-enamines covers only imine and enamine; ch19-amine-outcomes uses methylamine, dimethylamine, aniline, pyrrolidine — all C- or H-substituted amines, no N- or O-substituted nucleophiles. nugget-aldehyde-oxidation: 'only forcing conditions that break carbon-carbon bonds can degrade them.'",
+ "recommended_outcome": "The chapter needs a decision about scope made deliberately and stated: either the remaining nitrogen-nucleophile condensations and the C=O to CH2 deoxygenation belong here, or their absence needs to be flagged so instructors know to supply them.",
+ "confidence": 0.8
+ },
+ {
+ "finding_id": "instr-013",
+ "location": {
+ "question_slug": "ch19-iupac-name",
+ "anchor_text": "Select the correct IUPAC name for the compound shown: CH₃COCH₂CH(CH₃)CH₃."
+ },
+ "severity": "medium",
+ "category": "assessment-readiness",
+ "observation": "The distractor structures undermine the question. Option b ('2-Methyl-4-pentanone') carries structure_smiles 'CC(=O)CC(C)C' — byte-identical to correct option a — so if the surface renders option structures the student sees two identical drawings under different names. Meanwhile options c and d carry structures that do not match the stem compound at all (an alcohol, C6H14O; and 2-methylpentanal), so a student who ignores the names entirely can eliminate c and d on structure alone and face a coin flip. The stem itself is given only as a condensed formula with no rendered structure, so the option structures are the only drawings in the item.",
+ "learner_impact": "The item no longer measures naming skill: it can be reduced to a two-way guess by structure-matching, and the duplicated render is actively confusing for students who do read carefully. A student who selects b and reads the (correct) feedback about numbering will still be looking at a picture identical to the right answer's.",
+ "evidence": "ch19-iupac-name.student_config.options: a text '4-Methyl-2-pentanone' smiles 'CC(=O)CC(C)C'; b text '2-Methyl-4-pentanone' smiles 'CC(=O)CC(C)C'; c 'CC(O)CC(C)C'; d 'CCCC(C)C=O'. RDKit confirms a and b are the same molecule and c, d are different molecules from the stem.",
+ "recommended_outcome": "The naming item needs its stimulus and its options to carry consistent structural information — one authoritative structure for the stem, and options that cannot be resolved by structure-matching instead of by naming rules.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "instr-014",
+ "location": {
+ "question_slug": "ch19-imine-ph-optimum",
+ "nugget_id": "nugget-imines-enamines",
+ "anchor_text": "The compromise, mildly acidic solution, keeps a workable fraction of both reactive species present"
+ },
+ "severity": "medium",
+ "category": "misconception",
+ "observation": "The pH 4.5 optimum is correct and the trade-off is correctly identified, but the stated reason invites a wrong quantitative model. At pH 4.5 a typical primary alkylamine (conjugate acid pKa around 10.6) is more than 99.99% protonated — the free-amine fraction is roughly 10^-6, not 'a workable fraction'. The reaction is fast there because the rate is the product of a tiny free-amine concentration and a greatly accelerated dehydration, not because both species are appreciably present. No pKa value appears anywhere in the chapter to let a student check this.",
+ "learner_impact": "Students who accept 'both species present in workable amounts' will predict, wrongly, that the free-amine concentration is appreciable at pH 4.5, and will be unable to reconcile the chapter's claim with an amine pKa table they can look up. It also sets them up to mis-reason about every other rate-versus-speciation problem (enzyme pH optima, buffer selection).",
+ "evidence": "nugget-imines-enamines expanded paragraph 3; ch19-imine-ph-optimum answer_key value 4.5 tolerance 0.5, and its wrong_answer_explanation for pH 2 ('still acidic enough to protonate most of the amine') implies that at 4.5 most of the amine is not protonated. No pKa or pKaH value appears in any nugget in the package.",
+ "recommended_outcome": "The pH-optimum explanation needs to be grounded in the actual speciation — a stated amine pKaH and the recognition that the optimum is a rate product, not a point where both species are abundant — so the correct mechanism reasoning is not bought with a false quantitative picture.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "instr-015",
+ "location": {
+ "concept_slug": "nucleophilic-addition-mechanism",
+ "asset_id": "mol-acetone",
+ "nugget_id": "nugget-nucleophilic-addition",
+ "anchor_text": "attacks that carbon along a trajectory roughly 105° to the C=O axis"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "All 13 assets in this chapter are type 'molecule' — static structures of starting materials and products. Nothing in the chapter's visual layer carries a process: not the Burgi-Dunitz approach angle and sp2-to-sp3 rehybridization described in the prose above, not the aldehyde-versus-ketone transition-state energy comparison that the whole reactivity argument rests on, not the reversible acetal equilibrium whose direction is controlled by water, and not the 1,2-versus-1,4 branch point. Peer packages in this same content set do carry process figures (11 reaction_coordinate assets, plus conformational_energy_profile, newman_projection, and synthesis_roadmap types across other chapters); this chapter uses none of them.",
+ "learner_impact": "Every dynamic idea in the chapter — trajectory, rehybridization, transition-state crowding, equilibrium direction, competing pathways — is available to the student only as a sentence to be parsed. The reactivity ordering in particular is asserted verbally and then tested by ch19-reactivity-ranking, so students must hold a four-way steric/electronic comparison entirely in prose.",
+ "evidence": "assets[] in topic.package.json: 13 entries, all type 'molecule'. Across all topic packages: molecule 241, reaction_coordinate 11, stereochemistry_conversion 3, conformational_energy_profile 3, synthesis_roadmap 1, newman_projection 1 — none of the non-molecule types appear in aldehydes-and-ketones.",
+ "recommended_outcome": "The chapter needs representations that show change rather than end states — at minimum for the aldehyde-versus-ketone transition-state comparison and the 1,2/1,4 branch point, where the teaching claim is about relative energies and competing pathways that a static structure cannot convey.",
+ "confidence": 0.83
+ },
+ {
+ "finding_id": "instr-016",
+ "location": {
+ "concept_slug": "hydride-and-grignard-addition",
+ "question_slug": "ch19-grignard-product",
+ "anchor_text": "NaBH4 is mild, selective for aldehydes and ketones, and tolerant of protic solvents; LiAlH4 is far stronger"
+ },
+ "severity": "medium",
+ "category": "assessment-readiness",
+ "observation": "Coverage across concepts is uneven. hydride-and-grignard-addition and conjugate-addition carry one question each, while carbonyl-structure-and-naming, preparation, hydration, imines, acetals, and wittig carry two. The single hydride/Grignard item (ch19-grignard-product) is a core-difficulty product-identification select; the reagent-selection judgment the section actually teaches — NaBH4 versus LiAlH4, and why an ester survives one and not the other — is never assessed, nor is the second stated objective about the separate aqueous workup. Additionally, all 36 compiled questions have demo_eligible false, so none of this bank is surfaced in the demo path.",
+ "learner_impact": "The reagent-choice decision is the transferable skill in this section and the one students carry into synthesis problems; it is taught and left untested. An instructor pulling from this bank cannot build a balanced quiz without writing new hydride items themselves.",
+ "evidence": "compiled/question-set.json counts: 36 questions, 18 surfaced, demo_eligible 0. Questions by concept_slug: hydride-and-grignard-addition = ch19-grignard-product (+v2) only; conjugate-addition = ch19-conjugate-addition-select (+v2) only. nugget-hydride-grignard.learning_objectives[1] = 'Explain why an aqueous workup is a separate, necessary step.'",
+ "recommended_outcome": "Assessment needs to reach the reagent-selection and workup-necessity judgments in the hydride/Grignard section, and coverage across the eleven concepts needs to be levelled so no core concept rests on a single recognition item.",
+ "confidence": 0.84
+ },
+ {
+ "finding_id": "instr-017",
+ "location": {
+ "question_slug": "ch19-iupac-name",
+ "nugget_id": "nugget-conjugate-addition",
+ "anchor_text": "4-Methylpentan-2-ol"
+ },
+ "severity": "low",
+ "category": "notation-consistency",
+ "observation": "Nomenclature style is mixed within single option lists and across the chapter. ch19-iupac-name offers '4-Methyl-2-pentanone' (substituent-prefix style) alongside '4-Methylpentan-2-ol' (locant-in-name style) as parallel choices. The prose likewise mixes '2-cyclohexenone' with '1-methyl-2-cyclohexen-1-ol' and '3-methylcyclohexanone'. Separately, Greek letters are spelled out throughout the prose ('alpha,beta-unsaturated', 'the alpha carbon') while other symbols are set as Unicode (π, σ, sp², cm⁻¹, ¹H, ¹³C), and 'lithium aluminium hydride' / 'aluminium chloride' use British spelling against otherwise US-convention text.",
+ "learner_impact": "In a naming question specifically, presenting two different naming conventions as parallel options adds noise to the discrimination the item is trying to measure; students may read the style difference as the thing being tested. Elsewhere the inconsistency is cosmetic but signals uneven authoring.",
+ "evidence": "ch19-iupac-name options a ('4-Methyl-2-pentanone') and c ('4-Methylpentan-2-ol'); nugget-conjugate-addition expanded: '1-methyl-2-cyclohexen-1-ol' and '3-methylcyclohexanone'; nugget-hydride-grignard: 'lithium aluminium hydride'; nugget-conjugate-addition title uses 'alpha,beta-unsaturated' while the same package uses π and sp² as Unicode.",
+ "recommended_outcome": "One nomenclature convention and one symbol convention need to hold across prose, figures, and question options, especially inside a naming item where the convention is not the construct being assessed.",
+ "confidence": 0.82
+ },
+ {
+ "finding_id": "instr-018",
+ "location": {
+ "concept_slug": "nucleophilic-addition-mechanism",
+ "anchor_text": "attacks that carbon along a trajectory roughly 105° to the C=O axis"
+ },
+ "severity": "low",
+ "category": "conceptual-support",
+ "observation": "The nucleophile approach angle is given twice (prose and the video-nucleophilic-addition storyboard) as 'roughly 105° to the C=O axis'. The commonly cited Burgi-Dunitz value is about 107°, the angle is never named, and 'to the C=O axis' is ambiguous about what it is measured from. Nothing in the chapter depicts the angle, so a student has a bare number with no anchor.",
+ "learner_impact": "A precise-looking number with no name, no reference geometry, and no picture is memorization bait: students will record '105 degrees' without understanding that it encodes approach along the pi* lobe, which is the only reason the number is interesting.",
+ "evidence": "nugget-nucleophilic-addition expanded text and video_briefs[0].storyboard[1] both state 'roughly 105° to the C=O axis'; the term Burgi-Dunitz appears nowhere in the package; no asset depicts the trajectory.",
+ "recommended_outcome": "The approach angle needs to be either named and geometrically anchored so the number means something, or dropped in favour of the qualitative claim about attack perpendicular to the carbonyl plane.",
+ "confidence": 0.75
+ },
+ {
+ "finding_id": "instr-019",
+ "location": {
+ "concept_slug": "carbonyl-structure-and-naming",
+ "anchor_text": "\"difficulty\": \"core\""
+ },
+ "severity": "low",
+ "category": "cognitive-load",
+ "observation": "All eleven concepts are marked difficulty 'core' and none carries a teacher_optional flag or why_optional note, totalling 70 minutes of nugget content covering naming, four preparation routes, oxidation, the general mechanism, six distinct addition reactions, and spectroscopy. Peer packages in this set (acids-bases-and-curved-arrows, alkenes-reactions-and-synthesis) do use teacher_optional/why_optional to mark reducible scope.",
+ "learner_impact": "An instructor with fewer contact hours has no authored guidance about what can be dropped, and a struggling student has no signal about which of eleven equally-weighted sections carry the load-bearing ideas. The chapter's own structure identifies nucleophilic-addition-mechanism as the spine, but the metadata does not.",
+ "evidence": "concepts[] all have difficulty 'core'; no concept has teacher_optional or why_optional keys, which do appear in acids-bases-and-curved-arrows and alkenes-reactions-and-synthesis. Sum of nuggets[].duration_minutes = 70.",
+ "recommended_outcome": "The chapter needs its reducible scope marked so instructors can shorten it deliberately and students can see which sections the rest depend on.",
+ "confidence": 0.7
+ },
+ {
+ "finding_id": "instr-020",
+ "location": {
+ "asset_id": "mol-cyclohexanone",
+ "anchor_text": "it is made by oxidizing cyclohexanol and undergoes every addition in the chapter — hydride, Grignard, amine, alcohol, and ylide"
+ },
+ "severity": "low",
+ "category": "figure-purpose",
+ "observation": "The mol-cyclohexanone asset declares concept_slugs ['preparation-of-aldehydes-and-ketones', 'nucleophilic-addition-mechanism'] but nugget_ids ['nugget-preparation'] only, so the compiler places it in the preparation section alone. Its learning_goal explicitly frames it as the chapter's workhorse substrate for every addition, and cyclohexanone is in fact the substrate for the imine, enamine, acetal, and Wittig examples — but the figure never appears alongside any of them.",
+ "learner_impact": "The recurring-substrate thread the asset is written to carry is invisible to the reader: four later sections discuss cyclohexanone derivatives with no anchor structure of cyclohexanone itself in view, so the deliberate reuse that would reduce cognitive load is lost.",
+ "evidence": "assets mol-cyclohexanone concept_slugs vs nugget_ids mismatch; compiled reader places the cyclohexanone molecule block only in section nugget-preparation, while nugget-imines-enamines, nugget-acetals, and nugget-wittig show only cyclohexanone-derived products.",
+ "recommended_outcome": "The recurring-substrate figure needs to be present wherever the chapter reasons from it, so the intended thread through the addition sections is actually visible to the reader.",
+ "confidence": 0.72
+ }
+ ],
+ "strengths": [
+ "Every SMILES in the package is valid and matches its stated compound name — verified with RDKit across all 13 assets, all option-level structure_smiles, and both structure_scaffold answer keys (13/13 assets, 21/21 structures checked).",
+ "All 18 surfaced answer keys are chemically correct, including the regiochemically delicate ones: mercury-catalyzed versus hydroboration alkyne hydration in ch19-prep-matching and ch19-ketone-routes, the aniline-gives-imine case in ch19-amine-outcomes, and the cuprate 1,4 selectivity in ch19-conjugate-addition-select.",
+ "The chapter is genuinely organized around one mechanism rather than a list of reactions: nine of eleven concepts declare nucleophilic-addition-mechanism as prerequisite, and each reaction section is written as that mechanism with a different nucleophile.",
+ "The concepts[].trouble_spots are unusually well-observed — the PCC-versus-aqueous-chromium overshoot, the imine-versus-enamine N-H count, and the 'ketones are bigger so they must be more reactive' inversion are exactly the errors that recur on exams.",
+ "Explanations reach for mechanism rather than assertion in most places: aldehyde over-oxidation is explained through the hydrate, acetal robustness through the absence of a leaving group without protonation, and the Wittig's positional certainty is contrasted against Zaitsev dehydration with a specific worked contrast (methylenecyclohexane versus 1-methylcyclohexene).",
+ "Wrong-answer explanations are specific and diagnostic rather than generic — ch19-grignard-product's four distractor explanations each name the precise misconception (chain extension at the wrong carbon, addition versus substitution, hydride versus carbon nucleophile).",
+ "Distractor design in ch19-aldehyde-vs-ketone-reasoning is strong: it includes one plausible non-evidence option (molecular mass and diffusion) that forces students to distinguish evidence from irrelevant true statements.",
+ "Every question ships a hint ladder and an accessible_description, and the structure_scaffold items correctly choose achiral products (acetone cyanohydrin, methylenecyclohexane) so a single-SMILES answer key is unambiguous."
+ ],
+ "open_questions": [
+ "publishing.available is false in topic.package.json and available is false in both the compiled reader chapter and the compiled question set. Is this chapter intended to be reviewed as pre-release, and does the empty-URL video block behaviour (instr-007) change once available flips to true?",
+ "All 36 compiled questions have demo_eligible false. Is that deliberate for this chapter, or has the demo-eligibility pass not run yet?",
+ "The compiler drops nuggets[].practice_check entirely (instr-006). Is a practice block type planned for the reader schema, or are practice checks intended only as source for the question bank?",
+ "The three video briefs are deferred with the note that 'the reader carries the same content in the linked nugget prose and molecule figures.' I do not agree that static product structures carry the electron flow of a mechanism, but I flag it as a question because the deferral appears to be a standing pipeline decision (chapters 12-18) rather than a choice made for this chapter.",
+ "External link URLs contain raw spaces (e.g. https://en.wikipedia.org/wiki/Carbonyl group, .../Tollens' reagent). These generally resolve after browser encoding, but I did not verify the reader's link rendering; worth a check.",
+ "Concepts in this schema never carry learning_objectives — objectives live on nuggets — so I did not flag their absence at the concept level, but note that objective-to-concept alignment therefore has to be traced through the nugget layer."
+ ]
+}

@@ -1,0 +1,1039 @@
+# Chapter 7 — Alkenes: Structure and Reactivity: chapter review
+
+**Topic package:** `alkenes-structure-and-reactivity` · **version:** 1 · **run:** 2026-07-31T00:00:00Z 
+**Baseline publication readiness:** **BLOCKED**
+
+> This is an AI review, not an accessibility audit of record. It reports specific barriers.
+
+---
+
+## Compact editorial view
+
+### Executive summary
+
+Chapter 7 is blocked, and its most serious defect is invisible in the reader a student sees today. All four reviewers independently reached the same finding: the source package specifies the first step of all three reaction-coordinate assets as exergonic, which draws the carbocation and the bromonium ion below the reactants. That is chemically wrong and it destroys the stability-controls-rate argument the entire chapter rests on. The compiled reader currently says endergonic - but only because commit [commit ref — not in this repo] hand-patched the artifact and never wrote the fix back to the package. The same commit's six Wikipedia link repairs are artifact-only too. So chapter 7 reads correctly right now and is one recompile away from re-shipping both the wrong chemistry and six dead links. That matters immediately, because the chapter also needs a recompile for an unrelated reason: its artifact predates the callout emitter, so all six practice checks and all six trouble spots reach no reader. The fix that this chapter needs is precisely the action that would destroy its existing corrections unless the package is repaired first. Two further blockers are authored in the questions: the curved-arrow item's accessible description states the arrow's source and destination verbatim, and the E/Z item's description states which geometry is Z. Beyond the blockers, the chapter's only E/Z figure is silently dropped at compile because stereochemistry_conversion is unmapped in the reader block builder, the halogenation section asserts stereospecificity while every structure it shows is stereochemically flat, and the hydration energy profile omits the oxonium intermediate its own prose describes.
+
+### Persona scores
+
+| Persona | Score | Blockers raised |
+|---|---:|---|
+| Organic Chemistry Instructor | 5.5 | instr-001 |
+| Struggling Student | 4.5 | struggle-001 |
+| Accessibility Persona | 5.6 | access-001, access-002 |
+| Learner with Visual Preference | 5.2 | vis-002 |
+
+Scores are advisory. Readiness is computed, not averaged: any blocker forces at least major revision.
+
+### Ranked recommendations
+
+| # | Recommendation | Severity | Intervention | Surface | Sources |
+|---|---|---|---|---|---|
+| 001 | Write the endergonic first step into the source package for all three energy profiles | blocker | `prose-edit` | figure | instr-001, vis-002, access-007 |
+| 002 | Author wikipedia_title on all six concepts before any recompile | blocker | `prose-edit` | prose | instr-002 |
+| 003 | Recompile so practice checks and trouble spots reach the reader | high | `added-practice` | practice | instr-011, struggle-003, struggle-004 |
+| 004 | Remove the two answer leaks from accessible descriptions | blocker | `text-equivalent` | assessment | access-001, access-002 |
+| 005 | Reorder the carbocation ranking description and cards | high | `text-equivalent` | assessment | access-003 |
+| 006 | Illustrate every option or none in alk-sp2-geometry | high | `prose-edit` | assessment | instr-008, vis-008, struggle-014, access-011 |
+| 007 | Give the E/Z section a figure that survives compilation | high | `new-figure` | figure | instr-005, vis-001, struggle-001, access-005 |
+| 008 | Add the oxonium intermediate to the hydration energy profile | high | `new-figure` | figure | instr-003, vis-010, struggle-009 |
+| 009 | Give the halogenation section stereochemistry it can actually show | high | `new-figure` | figure | instr-004, vis-003, struggle-011, access-008 |
+| 010 | Make the reversed-arrow wrong-answer pattern reachable | medium | `prose-edit` | assessment | struggle-015 |
+| 011 | State the racemic character of the halogenation product | medium | `prose-edit` | assessment | instr-013 |
+| 012 | Explain why alkyl substitution stabilises a carbocation, in the reading | medium | `prose-edit` | prose | instr-010, struggle-007, struggle-008 |
+
+### Why each intervention was chosen
+
+**rec-001 — Write the endergonic first step into the source package for all three energy profiles** 
+*Need:* All three reaction-coordinate assets specify an exergonic first step, drawing the carbocation and bromonium ion below the reactants. The reader is correct only because of an artifact-only hand patch that any recompile reverts. 
+*Chosen:* `prose-edit` — All four personas found this independently and it is the chapter's only unanimous blocker. Correcting the authored spec is the least-complex fix and the only one that survives a compile; the figure itself renders correctly once the value is right. This must land before rec-003.
+
+**rec-002 — Author wikipedia_title on all six concepts before any recompile** 
+*Need:* The six working Wikipedia links exist only in the compiled artifact. The package has no wikipedia_title on any concept, so _concept_wiki_title falls back to the concept's prose title and a recompile would produce six 404s exactly as it already did in chapter 6. 
+*Chosen:* `prose-edit` — This is preventive rather than corrective - the links work today - but it is the same latent defect that has already fired twice in chapter 6. Authoring the six verified titles costs six lines and removes the trap permanently.
+
+**rec-003 — Recompile so practice checks and trouble spots reach the reader** 
+*Need:* All six practice checks and all six trouble spots are stranded; the compiled reader has zero callout blocks because the artifact predates the callout emitter. 
+*Chosen:* `added-practice` — The compiler already emits these, so no new authoring is needed. Sequencing is the whole point: this recompile is safe only after rec-001 and rec-002 are in the package, and destructive before.
+
+**rec-004 — Remove the two answer leaks from accessible descriptions** 
+*Need:* The curved-arrow description states the arrow's source and destination verbatim, and the E/Z description states which geometry corresponds to Z, pointing at the key by its own option text. 
+*Chosen:* `text-equivalent` — Rewriting two description strings so they convey task and stimulus only is sufficient. Neither leak is catchable by the mechanical guard, which matches only answer ids, a verdict vocabulary and answer-key numbers.
+
+**rec-005 — Reorder the carbocation ranking description and cards** 
+*Need:* The accessible description lists the three cards in answer order rather than presented order, both leaking the ranking and misdescribing what the learner will encounter. 
+*Chosen:* `text-equivalent` — Naming the cards in presented order fixes both problems at once and needs no change to the item's chemistry.
+
+**rec-006 — Illustrate every option or none in alk-sp2-geometry** 
+*Need:* Only the correct option carries a structure, so the answer is identifiable from the presence of a picture alone. 
+*Chosen:* `prose-edit` — Removing the lone structure is the least-complex fix; adding structures to all three would be better pedagogy but a flat C=C does not display the geometric distinction anyway, so it would not earn its place.
+
+**rec-007 — Give the E/Z section a figure that survives compilation** 
+*Need:* The one authored E/Z figure is silently dropped because stereochemistry_conversion has no entry in _ASSET_TYPE_TO_BLOCK, leaving a section about geometry illustrated by a single geometry-free structure. 
+*Chosen:* `new-figure` — Three personas converged here. The underlying gap is platform-side and affects every chapter authoring this asset type, so it is recorded rather than patched locally: fixing it in this one package would not fix the compiler.
+
+**rec-008 — Add the oxonium intermediate to the hydration energy profile** 
+*Need:* The prose walks three steps and the figure shows two, omitting the oxonium ion the prose has just named, so the figure and text describe different mechanisms two sentences apart. 
+*Chosen:* `new-figure` — An earlier version of this same asset id in chapter-04's manifest already has three steps and four minima including the protonated alcohol, so the correct spec exists; adopting it is bounded but is a content change rather than a defect repair, so it is recorded.
+
+**rec-009 — Give the halogenation section stereochemistry it can actually show** 
+*Need:* The section's entire claim is a stereochemical outcome and every structure it ships is flat, with no stereodescriptors and no mention of faces in any alt text. 
+*Chosen:* `new-figure` — The question bank already carries correct stereo SMILES, so students are assessed on a distinction the instruction never draws. Which diastereomer to show depends on which but-2-ene isomer was intended, which is an authoring decision, so this is recorded with that question attached.
+
+**rec-010 — Make the reversed-arrow wrong-answer pattern reachable** 
+*Need:* The explanation written for the most common curved-arrow error matches a lone-pair source at site 1, but site 1 is declared with kinds ['atom'] only, so the submission a student can actually make matches nothing and falls through to the generic message. 
+*Chosen:* `prose-edit` — A one-field correction to the match pattern makes an already-authored explanation fire. This is the same dead-pattern class recorded for chapter 27.
+
+**rec-011 — State the racemic character of the halogenation product** 
+*Need:* The correct option is drawn as a single enantiomer, but Br2 addition to achiral cyclohexene must give the racemate, and nothing in the item or the section says so. 
+*Chosen:* `prose-edit` — Distinguishing stereospecific from enantioselective is exactly what this advanced concept should establish, and the fix is a clause rather than a rewrite. Left as a recommendation because it changes what the item teaches.
+
+**rec-012 — Explain why alkyl substitution stabilises a carbocation, in the reading** 
+*Need:* The stability order is stated as fact and relied on in three later sections, while the explanation exists only inside a wrong-answer explanation a student sees after committing. 
+*Chosen:* `prose-edit` — Two personas independently identified this as the chapter's missing causal link, alongside the unnamed Hammond postulate. It is genuine new prose, so it is recorded rather than written.
+
+### Sufficient as is (do not over-build)
+
+- The molecule alt texts for the simple neutral structures are adequate for identification and need no expansion.
+- The reaction-coordinate alt texts for the HBr and Br2 profiles are written at the right register and need only the intermediate's relative height added, not a rewrite.
+- The hidden video blocks need no accessibility work while unproduced and suppressed.
+- The E/Z and halogenation-stereochemistry question options carry their distinguishing information in the option text, so those items remain answerable without seeing the structures - no additional description is required there.
+
+### Consensus strengths
+
+- Every SMILES in the package and compiled question set parses and matches its label, verified by RDKit formula and InChIKey.
+- The stereochemistry that is specified is specified correctly: RDKit confirms C/C=C\C as Z and C/C=C/C as E, and the cyclohexane dibromides as the (S,S) trans and (S,R) cis meso compounds, each matching its answer key.
+- The chapter has one clear mechanistic spine and reuses it deliberately across HBr addition, hydration and halogenation, with the prose explicitly pointing out the reuse.
+- The prose links structure to reactivity causally rather than by assertion, deriving restricted rotation from the p-orbital overlap that would have to break.
+- No distractor in the bank is accidentally also correct, and wrong-answer explanations name the specific chemical error and often the conditions under which the wrong answer would be right.
+- The curved_arrow question is fully keyboard-operable through a select-based renderer, and nothing in the nine-item set requires drag-and-drop, hover, or colour discrimination.
+- Every reader figure carries non-empty alt text, and the reaction-coordinate card prints its description visibly beneath the diagram as well as substituting it when rendering fails.
+
+### Accessibility blockers
+
+- `access-001`
+- `access-002`
+- `access-003`
+- `access-009`
+- `access-006`
+
+### Visual opportunities
+
+- A side-by-side E and Z pair with priority groups marked, in a representation the compiler can actually emit.
+- The competing primary and secondary pathways on shared axes, which is the comparison the Markovnikov objective and prose both ask the learner to make and the current single-branch figure cannot support.
+- The carbocation and bromonium intermediates drawn and pinned to their energy wells via minima_molecules, which the renderer supports and none of the three assets uses.
+- An orbital picture for the pi bond; the concept declares orbital_overlay in preferred_representations but no such asset exists, and the compiler already supports the type.
+- A worked curved-arrow depiction before the graded curved-arrow item.
+
+### Disagreements retained
+
+**Whether the exergonic-versus-endergonic defect is live or latent**
+
+- *Organic Chemistry Instructor:* Live: the deck surface reads chapter-alkenes-reactivity/assets.manifest.json, which already serves the wrong profile today.
+- *Accessibility Persona:* Latent for the reader: the compiled artifact says endergonic, so a reader today sees the correct figure.
+
+*Resolution:* Both hold, on different surfaces. Recorded as a blocker on the strength of the instructor's finding that a non-reader surface is already wrong, and because the reader's correctness is contingent on an artifact patch that the recommended recompile would destroy. The package fix resolves both readings at once.
+
+**Whether the option-illustration asymmetry is an accessibility issue or an assessment issue**
+
+- *Accessibility Persona:* Filed under color-motion-only: a visual cue invisible to a screen-reader user, so the two populations answer different questions.
+- *Organic Chemistry Instructor:* Filed under assessment-readiness: a test-wiseness tell that invalidates the item for everyone who spots it.
+
+*Resolution:* Kept both framings visible and merged into one recommendation. The chosen intervention is the same either way, and the accessibility framing is the stronger argument for acting because it identifies an inequity rather than merely a weak item.
+
+**Severity of the dropped E/Z figure**
+
+- *Struggling Student:* Blocker: the objective is to assign E or Z and the learner is asked to do it having never seen the two isomers drawn.
+- *Learner with Visual Preference:* High, not blocker.
+- *Organic Chemistry Instructor:* High, not blocker.
+
+*Resolution:* Recorded as high rather than blocker, with the minority blocker position preserved. The deciding factor is that the root cause is a platform gap in the reader block builder rather than a chapter defect, so it cannot be cleared by editing this package, and the question bank does show correct E/Z structures - though only as assessment, which is exactly the struggling student's complaint.
+
+---
+
+## Full evidence view
+
+Every finding from all four independent persona reviews, grouped by persona and ordered by severity. Persona reviews were isolated: each subagent saw only its own rubric and the chapter files.
+
+### Organic Chemistry Instructor (score 5.5)
+
+Not-go as it stands. The prose is genuinely good and every SMILES parses to the compound its label claims, verified by InChIKey and RDKit CIP labelling. But the source of truth carries a hard chemistry error the compiled reader does not: all three reaction-coordinate specs mark the first step exergonic, drawing the carbocation and bromonium ion below the reactants, which destroys the stability-controls-rate argument the chapter rests on. The reader has endergonic but the package and the chapter asset manifest do not, so a recompile silently re-breaks it. Beyond that the hydration profile omits the oxonium intermediate its own prose describes, halogenation asserts stereospecificity while every structure shown is flat, the E/Z figure is silently dropped by the compiler, and the bank is nine questions with two items answerable without doing the chemistry.
+
+#### `instr-001` — BLOCKER · chemical-accuracy
+*Location:* `asset_id`=rc-alkene-hbr-addition · `concept_slug`=electrophilic-addition-carbocation
+*Anchor:* “{"type": "exergonic", "barrier": "large"}”
+
+**Observation.** All three reaction-coordinate assets declare their first step as exergonic with a large barrier. The platform defines this field as the sign of the step's free-energy change, so as authored each diagram places the carbocation or bromonium ion in an energy well below the starting alkene. These are high-energy reactive intermediates that sit above the reactants.
+
+**Learner impact.** Every student reading the figure sees a picture saying the reactive intermediate is more stable than the alkene it came from. If the cation were downhill the first step could not be rate-determining and Markovnikov selectivity could not be traced to intermediate stability, so the prose becomes unreadable against the diagram.
+
+**Evidence.** topic.package.json rc-alkene-hbr-addition, rc-alkene-acid-hydration and rc-alkene-br2-addition all carry [exergonic, exergonic]; chapter-04's assets.manifest.json holds the same ids with [endergonic, exergonic], confirming the intended shape; the prose says 'a large first barrier leading to the carbocation intermediate'.
+
+**Need.** The source package needs the first elementary step of every carbocation- or bromonium-forming profile to encode an uphill free-energy change, so the intermediate is drawn above the reactants. *(confidence 0.96)*
+
+#### `instr-002` — HIGH · figure-accuracy
+*Location:* `asset_id`=rc-alkene-acid-hydration
+*Anchor:* “minima_labels”
+
+**Observation.** The three assets disagree across three surfaces: the package and the chapter asset manifest hold exergonic first steps while the compiled reader holds the corrected endergonic. The correction exists only in the artifact a recompile regenerates.
+
+**Learner impact.** The student-facing reader is currently correct only by accident; any recompile reverts it without signal, and the deck surface reading the chapter manifest is already serving the wrong profile today.
+
+**Evidence.** grep of exergonic returns 6 hits in chapter-alkenes-reactivity/assets.manifest.json and 0 endergonic; the reader topic-chapter has endergonic in blk-x3lpbuuq, blk-yn2l9dl9, blk-54zbeqik, blk-ur483tha.
+
+**Need.** The corrected energetics need to live in the package everything is generated from, and the derived manifest needs to agree. *(confidence 0.93)*
+
+#### `instr-003` — HIGH · chemical-accuracy
+*Location:* `asset_id`=rc-alkene-acid-hydration · `nugget_id`=nugget-hydration · `concept_slug`=acid-catalyzed-hydration
+*Anchor:* “producing a protonated alcohol (an oxonium ion)”
+
+**Observation.** Acid-catalyzed hydration is three steps and the prose correctly walks all three, but the asset is a two-step profile whose minima omit the oxonium ion, so the diagram shows the neutral alcohol forming directly from the carbocation in one elementary step.
+
+**Learner impact.** The objective is to relate hydration to the HBr mechanism, and the difference that matters is precisely the deprotonation that regenerates the catalyst. A student counting minima learns hydration as two steps and cannot explain why H+ is catalytic.
+
+**Evidence.** topic.package.json rc-alkene-acid-hydration has two steps and three minima_labels, versus the same asset id in chapter-04's manifest with three steps and four minima_labels including 'Protonated alcohol'.
+
+**Need.** The hydration profile needs to show the same number of elementary steps the prose teaches, with the protonated-alcohol intermediate present. *(confidence 0.92)*
+
+#### `instr-004` — HIGH · missing-example
+*Location:* `asset_id`=mol-anti-dibromide · `concept_slug`=alkene-halogenation-anti · `nugget_id`=nugget-halogenation
+*Anchor:* “(E)- and (Z)-alkenes give different products”
+
+**Observation.** The section's point is that anti addition is stereospecific, yet every structure is flat: mol-anti-dibromide is CC(Br)C(Br)C with no stereo layer and zero defined stereocentres, and the RC product is the same string. The prose asserts that E and Z alkenes give different products but never says which gives which.
+
+**Learner impact.** The chapter's only advanced concept is illustrated at the level of 'opposite faces', which a student can memorise without working a stereospecific outcome. The transferable skill is stated as true and never modelled.
+
+**Evidence.** RDKit InChIKey of CC(Br)C(Br)C is BXXWFOGWXLJPPA-UHFFFAOYSA-N with no stereo layer; the real answers (meso from Z, the racemic pair from E) appear nowhere; the sole halogenation question uses cyclohexene and asks only trans versus cis.
+
+**Need.** The chapter needs one fully worked stereospecific case carrying a named alkene geometry through to a named diastereomer, and product structures here need the stereochemistry the section claims is the point. *(confidence 0.94)*
+
+#### `instr-005` — HIGH · missing-example
+*Location:* `asset_id`=stereo-ez-but-2-ene · `section_id`=nugget-ez · `concept_slug`=alkene-ez-stereochemistry
+
+**Observation.** The E/Z section reaches the reader with no stereochemically defined structure. Its only figure is flat CC=CC. The asset authored to show the contrast is silently dropped because _ASSET_TYPE_TO_BLOCK has no stereochemistry_conversion key and _asset_block returns None for unmapped types. A recompile today would drop it again.
+
+**Learner impact.** A student is told same-side is Z and opposite-side is E and shown a single ambiguous flat structure that is neither. The only place E and Z are ever drawn is inside a graded question, so the figure appears first as assessment rather than instruction.
+
+**Evidence.** Reader section nugget-ez contains exactly three blocks: text, molecule CC=CC, external_link; the asset with input/output representations appears in no block; [internal source reference — not in this repo] lines 15-33.
+
+**Need.** The E/Z section needs a student-visible side-by-side of the two geometries in a form the compiler can emit. *(confidence 0.95)*
+
+#### `instr-006` — HIGH · objective-alignment
+*Location:* `concept_slug`=alkene-ez-stereochemistry · `question_slug`=alk-ez-identify-z
+*Anchor:* “Assigning E/Z from drawing position rather than CIP priority”
+
+**Observation.** Every example and question uses an alkene where each carbon bears methyl versus hydrogen, so the higher-priority group is the one defining cis/trans and CIP never has to be invoked. There is no case anywhere where the CIP answer differs from the naive reading, and only the first-atom rule is taught.
+
+**Learner impact.** The trouble spot the concept identifies is the one thing the chapter cannot catch, because a student using drawing position scores 100% on both E/Z questions. Students leave believing E/Z is a synonym for trans/cis.
+
+**Evidence.** Examples used are but-2-ene and, in questions, 2-butene, 1-butene, 3-hexene, 2-methylpropene, all methyl-or-ethyl versus hydrogen. The prose writes 'the cis-trans (E/Z) isomerism' and the practice check answers 'the Z (cis) isomer'.
+
+**Need.** The chapter needs at least one E/Z case where CIP priority and the visual reading give different labels, plus enough of the priority rules to work it. *(confidence 0.93)*
+
+#### `instr-007` — HIGH · assessment-readiness
+*Location:* `concept_slug`=acid-catalyzed-hydration · `section_id`=nugget-hydration
+*Anchor:* “questions”
+
+**Observation.** The bank holds 9 questions for 6 concepts, the thinnest non-template package in the corpus; the sibling ch8 package has 32 for the same width. Three concepts are covered by exactly one item each and there are no staged variants.
+
+**Learner impact.** There is no room to reteach: a student who misses the single hydration item has no second attempt, and an instructor cannot build a pre/post pair. Two declared objectives are unassessed, including justifying regiochemistry from a reaction-coordinate diagram, which no question shows.
+
+**Evidence.** compiled/question-set.json counts {questions: 9, types: 5, staged_variants: 0}; electrophilic-addition-carbocation, acid-catalyzed-hydration and alkene-halogenation-anti have one item each; the halogenation concept is authored advanced while its only question is standard.
+
+**Need.** The bank needs enough items per concept for a student to fail, get feedback and retry, plus items assessing the two unassessed objectives. *(confidence 0.9)*
+
+#### `instr-008` — HIGH · assessment-readiness
+*Location:* `question_slug`=alk-sp2-geometry
+*Anchor:* “sp2, trigonal planar (bond angles near 120 degrees)”
+
+**Observation.** Only the correct option carries a structure_smiles; both distractors are text-only, so the correct answer is the only option that renders with a picture.
+
+**Learner impact.** A student who knows nothing about hybridization can pick the illustrated option and score, so one of only two items on the chapter's foundational concept is effectively unassessed for anyone who spots the tell.
+
+**Evidence.** alk-sp2-geometry options: a and c have no structure_smiles, b has 'C=C', correct_option_ids [redacted]. alk-halogenation-anti-stereo has the same asymmetry in weaker form.
+
+**Need.** Every option needs the same representational treatment so the presence of a figure carries no information about correctness. *(confidence 0.95)*
+
+#### `instr-009` — HIGH · assessment-readiness
+*Location:* `question_slug`=alk-hbr-capture-arrow
+*Anchor:* “draw the curved arrow for bromide attacking the tert-butyl carbocation”
+
+**Observation.** The prompt states the electron source, the sink and the direction in plain language, and the three selectable sites are labelled accordingly with max_arrows 1. Every decision the item assesses is pre-stated in the stem.
+
+**Learner impact.** The chapter's single opportunity to check whether a student can identify a nucleophile and electrophile and orient an arrow can be completed by transcribing the sentence just given, and the chapter never shows a curved arrow anywhere, so the item is both over-specified and unprepared for.
+
+**Evidence.** prompt_text plus student_config.sites labels; expected_arrows source lone_pair site 4 to atom site 1; RDKit indexing of C[C+](C)C.[Br-] confirms the key is mechanically correct.
+
+**Need.** The stem needs to describe the chemical situation without naming the arrow's endpoints or direction, and the chapter needs a worked curved-arrow example first. *(confidence 0.9)*
+
+#### `instr-010` — MEDIUM · conceptual-support
+*Location:* `nugget_id`=nugget-hbr-markovnikov · `concept_slug`=markovnikov-hbr-addition
+*Anchor:* “The more stable intermediate is therefore also the one that forms more rapidly”
+
+**Observation.** Two causal links are asserted rather than explained: the leap from more stable to forms faster is the Hammond postulate, never named, and why alkyl substitution stabilises a cation appears only once in the package, inside a wrong-answer explanation.
+
+**Learner impact.** The chapter's headline claim is that carbocation stability controls regiochemistry, and neither half of the reasoning is available to a student who reads the chapter and answers correctly.
+
+**Evidence.** grep of 'hammond' returns 0; 'hyperconjugation' returns 1, in alk-carbocation-stability-rank generic_incorrect_explanation.
+
+**Need.** The prose needs to carry why alkyl groups stabilise a cation and why a more stable intermediate comes with a lower barrier. *(confidence 0.88)*
+
+#### `instr-011` — MEDIUM · retrieval-practice
+*Location:* `section_id`=nugget-alkene-structure
+*Anchor:* “Why is the π bond, rather than the σ bond, the site of alkene reactivity?”
+
+**Observation.** All six practice_check items and all six trouble_spots reach no student; the compiled reader contains zero callout blocks even though the builder now emits both. The artifact predates the callout emitter.
+
+**Learner impact.** The chapter's only in-reading retrieval opportunities are invisible, and the six trouble spots are its own diagnosis of where students fail, none shown at the moment of risk.
+
+**Evidence.** Reader blocks are only text, molecule, reaction_coordinate, video, external_link, mcmurry_link; [internal source reference — not in this repo] lines 282-331 define both callout builders and 352/369 wire them in.
+
+**Need.** The authored self-checks and trouble-spot warnings need to reach the reading student where they apply. *(confidence 0.92)*
+
+#### `instr-012` — MEDIUM · misconception
+*Location:* `concept_slug`=acid-catalyzed-hydration · `nugget_id`=nugget-hydration
+*Anchor:* “Because the intermediate is the same, the regiochemistry is the same”
+
+**Observation.** The chapter teaches a free open carbocation for both HBr addition and hydration with no caveat that the isolated product can correspond to a different skeleton. Carbocation rearrangement is not mentioned anywhere.
+
+**Learner impact.** Students form the rule protonate, capture, done, and will give the wrong product for substrates such as 3-methylbut-1-ene. The model works perfectly for the three substrates used, so nothing signals it is provisional.
+
+**Evidence.** grep of rearrang/hydride shift/methyl shift returns 0 hits in this package; the sibling ch8 package already asks students to compare on 'carbocation rearrangement' before it is defined.
+
+**Need.** The carbocation sections need an explicit signal that the open cation is a simplification with a known exception. *(confidence 0.85)*
+
+#### `instr-013` — MEDIUM · misconception
+*Location:* `question_slug`=alk-halogenation-anti-stereo
+*Anchor:* “Br[C@H]1CCCC[C@@H]1Br”
+
+**Observation.** The correct option is drawn as a single enantiomer; RDKit CIP returns (1S,2S). Br2 addition to achiral cyclohexene must give the racemate. Neither the option text nor any feedback mentions that the product is racemic.
+
+**Learner impact.** Students conclude a stereospecific mechanism produces a single optically active compound from an achiral start, which would violate the requirement that achiral reactants cannot give an optically active product. Distinguishing stereospecific from enantioselective is exactly what an advanced concept should establish.
+
+**Evidence.** rdCIPLabeler on option a gives ['S','S'], InChIKey CZNHKZKWKJNOTE-WDSKDSINSA-N; option b gives ['S','R'], the cis meso compound. Both structures are correct for their labels and the key is right; the racemic nature is nowhere stated.
+
+**Need.** The racemic character of the product needs to be explicit alongside the anti relationship. *(confidence 0.87)*
+
+#### `instr-014` — MEDIUM · sequencing
+*Location:* `section_id`=nugget-hydration
+*Anchor:* “Read in McMurry (OpenStax) — Chapter 7”
+
+**Observation.** The only assigned reading is a single link to OpenStax chapter 7, but halogenation is 8.2 and acid-catalyzed hydration is 8.4, both in chapter 8 which is owned by the sibling package. Conversely several chapter 7 topics the linked reading covers are taught nowhere here.
+
+**Learner impact.** A student following the link to prepare for hydration and halogenation finds no corresponding reading, and one reading it straight through meets topics the chapter never addresses. The sibling ch8 package does not cover halogenation, so the split is not compensated downstream.
+
+**Evidence.** blk-6uam561q is the sole mcmurry_link, to 7-why-this-chapter, and appears only in the first section; nugget-hydration and nugget-halogenation carry only a Wikipedia link.
+
+**Need.** Reading links need to point each section at the source material that covers it, and the boundary with the ch8 package needs settling. *(confidence 0.86)*
+
+#### `instr-015` — LOW · notation-consistency
+*Location:* `asset_id`=mol-but-2-ene · `question_slug`=alk-ez-identify-z
+*Anchor:* “Which structure is (Z)-2-butene?”
+
+**Observation.** Nomenclature and typography switch between prose and questions: current IUPAC locant placement in prose versus older style in questions, and Greek symbols in nuggets versus spelled-out forms in questions. The prose also equates two systems that are not synonyms.
+
+**Learner impact.** A student reading but-2-ene then asked about (Z)-2-butene must reconcile two naming systems the chapter never acknowledges are different, adding load on top of the actual E/Z decision.
+
+**Evidence.** Asset titles 'But-2-ene', 'propan-2-ol' versus option texts '2-Butene', '3-Hexene'; nugget text uses sigma, pi and degree symbols where questions spell them out.
+
+**Need.** One naming and typographic convention needs to hold across prose, figure titles and questions. *(confidence 0.88)*
+
+#### `instr-016` — LOW · sequencing
+*Location:* `concept_slug`=alkene-ez-stereochemistry
+*Anchor:* “cip-priority”
+
+**Observation.** Three declared external prerequisites resolve to no concept anywhere in the corpus: cip-priority, hybridization and bonding-and-molecular-shape. The CIP case matters most because the chapter both declares it assumed and partially teaches it.
+
+**Learner impact.** Prerequisite navigation cannot route a struggling student back to where CIP priority is taught, so the chapter's stated safety net for its hardest prerequisite is inert.
+
+**Evidence.** Scan of concepts[].slug across all topic packages: none of the three is defined; 17 of 186 distinct prerequisite slugs are undefined corpus-wide.
+
+**Need.** The CIP prerequisite needs to point at the concept that actually teaches it. *(confidence 0.82)*
+
+**Strengths noted by this persona**
+
+- Every SMILES in the package and compiled question set parses and matches its label, verified by RDKit formula and InChIKey.
+- The stereochemistry that is specified is specified correctly: C/C=C\C is Z and C/C=C/C is E, and the cyclohexane dibromides are the (S,S) trans and (S,R) cis meso compounds, matching their keys.
+- No distractor in the bank is accidentally also correct; alk-ez-which-isomerize is exactly right about terminal and gem-disubstituted alkenes.
+- The chapter has one clear mechanistic spine and reuses it deliberately across HBr, hydration and halogenation.
+- The prose links structure to reactivity causally rather than by assertion, deriving restricted rotation from the p-orbital overlap that would have to break.
+- Every question carries a graded hint ladder and per-option wrong-answer explanations naming the specific chemical error.
+- The curved-arrow answer key indexes correctly against its own molecule string.
+
+**Open questions**
+
+- Do wrong-answer explanations keyed by a match object actually fire for multi_select, rank_order, curved_arrow and short_answer? Nine authored explanations use that form.
+- Is stereochemistry_conversion intended to reach the reader at all, or is it deck-only? It is absent from _ASSET_TYPE_TO_BLOCK.
+- Which but-2-ene isomer was intended for the halogenation example? The answer differs (meso versus racemic pair), so intent needs confirming before adding stereochemistry.
+- Should halogenation and hydration live here or in alkenes-reactions-and-synthesis? They map to OpenStax 8.2 and 8.4 but ch8 does not cover halogenation.
+- Are the two video briefs part of this chapter's definition of done or placeholders? The bromonium backside attack is the strongest case for motion and has no visual support.
+
+### Struggling Student (score 4.5)
+
+The prose is unusually readable and each section explicitly hands off to the next. The problem is that almost none of the scaffolding a shaky student needs survives into what I read. The compiled reader has zero callout blocks, so all six practice checks and all six trouble spots reach me as nothing. The E/Z section shows a single flat CC=CC because its stereochemistry_conversion asset is silently dropped at compile. Four nuggets are typed mechanism but there is no reaction scheme, no curved arrow and no orbital picture anywhere, while the bank asks me to draw a curved arrow at advanced difficulty. Carbocation stability, the Hammond leap, and why an empty orbital is electrophilic are all asserted rather than explained.
+
+#### `struggle-001` — BLOCKER · conceptual-support
+*Location:* `section_id`=nugget-ez · `concept_slug`=alkene-ez-stereochemistry · `nugget_id`=nugget-ez · `asset_id`=stereo-ez-but-2-ene
+*Anchor:* “the isomer with the two methyl groups on the same side is Z”
+
+**Observation.** The section teaching E/Z contains no figure of an E or a Z isomer. The authored asset does not appear in the compiled reader at all, and across every reader chapter in the repo there is no block of type stereochemistry_conversion, so it is dropped by the compiler rather than misplaced.
+
+**Learner impact.** The objective is to assign E or Z using CIP priorities and I am asked to do that having never seen the two isomers drawn; the one picture I get looks identical for both answers, so I memorize 'same side is Z' verbatim, exactly the surface rule the trouble spot warns against.
+
+**Evidence.** Reader section nugget-ez blocks: blk-4b6lenst text, blk-glm7vdk3 molecule with smiles CC=CC, blk-pikt5ucc external_link. The asset lists nugget_ids ['nugget-ez'] and priority labels, none of which reach the reader.
+
+**Need.** A student must be able to see the E and the Z isomer of the same alkene, distinguishable from one another, inside the E/Z section of the reader. *(confidence 0.93)*
+
+#### `struggle-002` — HIGH · worked-example-gap
+*Location:* `section_id`=nugget-ez · `concept_slug`=alkene-ez-stereochemistry · `question_slug`=alk-ez-identify-z
+*Anchor:* “ranked by Cahn-Ingold-Prelog priority”
+
+**Observation.** CIP priority is the entire machinery of the section and gets one subordinate clause. The only illustration is but-2-ene where Z coincides with cis, the practice check answer fuses them as 'the Z (cis) isomer', and both questions compare only methyl or ethyl against hydrogen.
+
+**Learner impact.** I finish with the rule 'two big groups on the same side means Z', fully confirmed by everything shown. The first exam alkene with a bromine on it I get wrong with total confidence and will not know why.
+
+**Evidence.** Concept trouble_spots names assigning from drawing position; practice_check answer says 'the Z (cis) isomer'; alk-ez-identify-z option texts are 'same side' and 'opposite sides'.
+
+**Need.** The chapter needs at least one fully worked E/Z assignment where the higher-priority group is not the obvious main-chain group, plus an item that fails a student who uses drawing position. *(confidence 0.9)*
+
+#### `struggle-003` — HIGH · retrieval-practice
+*Location:* `section_id`=nugget-alkene-structure · `nugget_id`=nugget-alkene-structure
+*Anchor:* “Why is the π bond, rather than the σ bond, the site of alkene reactivity?”
+
+**Observation.** All six nuggets carry an authored practice_check and none reaches the reader; the compiled chapter has zero callout blocks, while the epoxides chapter compiled 2026-07-31 carries twelve. This chapter's compiled_at is 2026-07-25, predating the compiler change.
+
+**Learner impact.** I read six sections of continuous prose with nothing asking me to stop and produce an answer, so I cannot find out I have misunderstood until a graded assignment tells me, by which point I have layered four mechanisms on the misunderstanding.
+
+**Evidence.** All six nuggets define practice_check; grep for callout in the reader chapter returns nothing while seven sibling chapters contain them.
+
+**Need.** The six authored self-check prompts need to appear in the reader at the end of their sections. *(confidence 0.95)*
+
+#### `struggle-004` — HIGH · misconception
+*Location:* `concept_slug`=alkene-halogenation-anti · `section_id`=nugget-halogenation
+*Anchor:* “Drawing a free carbocation instead of the cyclic bromonium ion”
+
+**Observation.** Every concept declares a trouble_spot naming the exact wrong move students make, and not one appears anywhere in the compiled reader; sibling chapters emit them as callouts.
+
+**Learner impact.** Somebody already knew precisely which mistakes I would make and I never see them. In halogenation especially I have just spent four sections being told the intermediate is a carbocation, and nothing interrupts me when I draw one for Br2.
+
+**Evidence.** trouble_spots arrays on all six concepts; zero corresponding text in the compiled reader.
+
+**Need.** The six authored misconception warnings need to be visible at the point of risk, especially the bromonium one which contradicts the pattern the preceding sections established. *(confidence 0.93)*
+
+#### `struggle-005` — HIGH · cognitive-load
+*Location:* `section_id`=nugget-alkene-structure · `concept_slug`=alkene-structure-pi-bond · `asset_id`=mol-ethene
+*Anchor:* “whose electron density lies above and below the σ framework”
+
+**Observation.** The founding idea, two parallel p orbitals overlapping side-on with density above and below a plane, is delivered entirely in words while the two figures are flat line structures whose alt text describes only connectivity. The concept declares preferred_representations including orbital_overlay but no such asset exists. The same three paragraphs also introduce eight other new labels.
+
+**Learner impact.** I am asked to build a three-dimensional mental picture from prose while learning eight labels, and the pictures actively show me a flat molecule. I stop trying to picture it and memorize the phrase, so every later section that depends on it rests on nothing.
+
+**Evidence.** Section nugget-alkene-structure has one text block, molecules C=C and CC=C, an mcmurry_link and an external_link; no orbital_overlay asset exists in assets[].
+
+**Need.** The pi bond's spatial arrangement needs to be visible where it is introduced, and the opening paragraph load needs breaking up. *(confidence 0.88)*
+
+#### `struggle-006` — HIGH · worked-example-gap
+*Location:* `section_id`=nugget-electrophilic-addition · `question_slug`=alk-hbr-capture-arrow
+*Anchor:* “the nucleophilic π electrons attack an electrophile”
+
+**Observation.** Four of six nuggets are typed mechanism yet the compiled chapter contains no reaction scheme and no curved arrow anywhere, where sibling reader chapters carry 51 reaction blocks between them. The assessment then asks me to draw a curved arrow at advanced difficulty.
+
+**Learner impact.** Electron movement is the one thing I have to be able to do and I am asked to do it cold; reading that the pi electrons attack gives me a sentence, not a procedure, so I guess at where the arrow starts.
+
+**Evidence.** Block-type census: text, molecule, reaction_coordinate, hidden video, external_link, mcmurry_link. No reaction, image or teaching_asset block.
+
+**Need.** A student needs to see at least one full electron-flow mechanism worked step by step before being asked to produce one. *(confidence 0.9)*
+
+#### `struggle-007` — HIGH · conceptual-support
+*Location:* `section_id`=nugget-hbr-markovnikov · `concept_slug`=markovnikov-hbr-addition
+*Anchor:* “The more stable intermediate is therefore also the one that forms more rapidly”
+
+**Observation.** This sentence is the logical hinge of the chapter and is asserted with 'therefore' and no supporting reason. It is Hammond's postulate; the postulate is never named and the connection between a lower intermediate and a lower barrier is never argued or pointed at on the diagram.
+
+**Learner impact.** 'Therefore' tells me a step of reasoning just happened and I cannot find it. I reread, give up, and accept it as a rule, so I cannot tell later when it stops applying.
+
+**Evidence.** nugget-hbr-markovnikov expanded text; the reaction_coordinate figure plots only the winning pathway with three minima, so the two competing barriers are not shown.
+
+**Need.** The step from more stable intermediate to faster reaction needs to be explicit and ideally visible as two competing pathways. *(confidence 0.87)*
+
+#### `struggle-008` — HIGH · conceptual-support
+*Location:* `section_id`=nugget-electrophilic-addition · `concept_slug`=electrophilic-addition-carbocation · `question_slug`=alk-carbocation-stability-rank
+*Anchor:* “tertiary > secondary > primary”
+
+**Observation.** The stability order is stated as fact and relied on in three later sections, but the reader never says why more alkyl substituents stabilize a cation. The explanation exists only inside the feedback bundle of a question, which a student sees only after committing to an answer.
+
+**Learner impact.** I am handed the most load-bearing ranking in the chapter to memorize with the reason withheld until after I am graded, so ranking is pure recall and I cannot reason about a cation type the list did not cover.
+
+**Evidence.** Neither reader section contains the words hyperconjugation or induction; the explanation appears in alk-carbocation-stability-rank generic_incorrect_explanation.
+
+**Need.** The reason alkyl substitution stabilizes a carbocation needs to be available while reading, not only in post-answer feedback. *(confidence 0.89)*
+
+#### `struggle-009` — HIGH · worked-example-gap
+*Location:* `section_id`=nugget-hydration · `asset_id`=rc-alkene-acid-hydration · `concept_slug`=acid-catalyzed-hydration
+*Anchor:* “The reaction-coordinate diagram has the same two-step form as that for HBr addition”
+
+**Observation.** The prose describes three distinct steps and then says the energy diagram has the same two-step form as HBr addition. The figure agrees with the second claim and not the first: two barriers and three minima, with no oxonium ion and no deprotonation step.
+
+**Learner impact.** I try to walk the mechanism along the curve and the mechanism has three steps while the curve has two. I assume I miscounted, or I conclude the oxonium ion was not real and delete it from the version I write on an exam.
+
+**Evidence.** nugget-hydration expanded text paragraph 2 versus reader block blk-54zbeqik spec: two steps, three minima, no oxonium label.
+
+**Need.** The number of steps in the profile must match the number the prose walks through, and the oxonium intermediate needs to be locatable. *(confidence 0.91)*
+
+#### `struggle-011` — HIGH · conceptual-support
+*Location:* `section_id`=nugget-halogenation · `asset_id`=mol-anti-dibromide · `concept_slug`=alkene-halogenation-anti
+*Anchor:* “bridges both former double-bond carbons as a three-membered cyclic bromonium ion”
+
+**Observation.** The bromonium ion is the new species the section exists to teach and it is never drawn, appearing only as a text label on an energy minimum. The product figure has no stereochemistry and its alt text says nothing about anti.
+
+**Learner impact.** I am told a face is blocked and there is no picture of a face anywhere. The product drawing looks exactly like what I would draw from a free carbocation, the misconception this section is supposed to prevent.
+
+**Evidence.** Section blocks: text, reaction_coordinate blk-ur483tha with a 'Bromonium ion' label, molecule blk-qzm2thi8 with CC(Br)C(Br)C, hidden video, external link.
+
+**Need.** A student needs to see the bridged bromonium intermediate, and the anti relationship needs to be distinguishable in the product shown. *(confidence 0.9)*
+
+#### `struggle-010` — MEDIUM · conceptual-support
+*Location:* `section_id`=nugget-electrophilic-addition
+*Anchor:* “Because this orbital is empty and low in energy, it is electrophilic.”
+
+**Observation.** Two sections earlier the chapter explains reactivity with the opposite energy argument, that the pi electrons are higher in energy and therefore nucleophilic. The donor-high/acceptor-low framing that reconciles them is never stated, so on the page they read as a flat contradiction.
+
+**Learner impact.** I have one heuristic at this stage and the chapter uses it then reverses it four paragraphs later without comment. I stop trusting the energy explanations and treat nucleophile/electrophile as vocabulary to match to reagents.
+
+**Evidence.** nugget-alkene-structure paragraph 2 versus nugget-electrophilic-addition paragraph 2, both in the compiled reader as blk-svc8qpjj and blk-kmr6nmxw.
+
+**Need.** The chapter needs to state the rule that makes both sentences consistent, or drop the energy justification in one place. *(confidence 0.83)*
+
+#### `struggle-012` — MEDIUM · conceptual-support
+*Location:* `section_id`=nugget-alkene-structure · `concept_slug`=alkene-structure-pi-bond
+*Anchor:* “Both carbons of a carbon–carbon double bond are sp² hybridized”
+
+**Observation.** The first sentence assumes hybridization and the E/Z section assumes CIP rules. Both are declared prerequisites in the package, but the compiled reader never states a prerequisite, never warns they are assumed, and offers no link back.
+
+**Learner impact.** Hybridization is what I am shakiest on and the chapter opens by using it. With nothing signalling it is prior knowledge I read my confusion as not understanding alkenes and keep pushing forward on a foundation I never repaired.
+
+**Evidence.** concepts[].prerequisites lists three slugs; the compiled reader has no prerequisite field and no internal cross-chapter link.
+
+**Need.** A student needs to be told before the first paragraph what prior knowledge the chapter assumes and where to repair it. *(confidence 0.86)*
+
+#### `struggle-013` — MEDIUM · conceptual-support
+*Location:* `section_id`=nugget-halogenation · `nugget_id`=nugget-halogenation
+*Anchor:* “Halogenation and anti addition”
+
+**Observation.** Nothing in the reader signals relative importance or difficulty. The package grades each nugget core, standard or advanced with durations, but compiled sections carry only an id, a title and blocks, and there is no chapter summary or synthesis of the four reactions.
+
+**Learner impact.** With limited time I cannot tell what to study first, so I distribute effort evenly and under-study the two core ideas everything depends on. I also finish with four separate reactions and never notice they are three variations of one mechanism.
+
+**Evidence.** nuggets[].depth values and duration_minutes 5-7; compiled sections contain only id, title, blocks; no summary section exists.
+
+**Need.** A student needs a visible signal of what is core versus advanced, and a place where the four additions are compared as one pattern. *(confidence 0.84)*
+
+#### `struggle-014` — MEDIUM · assessment-readiness
+*Location:* `question_slug`=alk-sp2-geometry · `concept_slug`=alkene-structure-pi-bond
+*Anchor:* “sp2, trigonal planar”
+
+**Observation.** In alk-sp2-geometry the correct option is the only one of three carrying a structure. In alk-halogenation-anti-stereo the two plausible options carry structures and the throwaway distractor does not. In both cases the presence of a picture correlates perfectly with correctness.
+
+**Learner impact.** When unsure I look for any pattern that is not chemistry, and 'the one with the picture' is the easiest there is. I answer both correctly, the system records that I know the material, and the one signal that would have told me to reread is destroyed.
+
+**Evidence.** alk-sp2-geometry: only option b has structure_smiles; alk-halogenation-anti-stereo: options a and b have structures, c does not.
+
+**Need.** Whether an option carries a structure must not correlate with whether it is correct. *(confidence 0.88)*
+
+#### `struggle-015` — MEDIUM · misconception
+*Location:* `question_slug`=alk-hbr-capture-arrow
+*Anchor:* “This arrow is backwards. The carbocation has an empty orbital”
+
+**Observation.** The targeted feedback for the most common curved-arrow error cannot fire. The wrong_answer_explanation matches an arrow whose source is a lone pair at site 1, but site 1 is declared with kinds ['atom'] only, so that combination is not selectable. The backwards arrow a student can actually draw matches nothing and falls through to the generic message.
+
+**Learner impact.** Drawing the arrow from the positive carbon toward the bromide is exactly the mistake I make, and when I make it the sentence written to correct me never appears, so I reverse arrows again next time.
+
+**Evidence.** student_config.sites: {id 1, label 'Carbocation carbon (C+)', kinds ['atom']}; wrong_answer_explanations[0].match.arrows[0].source = {kind 'lone_pair', site 1}.
+
+**Need.** The reversed-arrow submission a student can actually make needs to trigger the explanation already written for it. *(confidence 0.82)*
+
+#### `struggle-016` — MEDIUM · cognitive-load
+*Location:* `section_id`=nugget-halogenation
+*Anchor:* “halogenation is stereospecific: a given alkene configuration gives a specific diastereomer”
+
+**Observation.** Several load-bearing terms are never defined: regiochemistry first appears in the electrophilic-addition section and is never explained; diastereomer appears once, in the clause meant to define stereospecific, so an unknown word is defined by a second unknown word; vicinal appears only in a figure title.
+
+**Learner impact.** I hit that clause in the hardest section and it is opaque, so the sentence explaining stereospecificity explains nothing. I skip it, which means I skip the reason halogenation differs from the three reactions before it.
+
+**Evidence.** Compiled blocks blk-kmr6nmxw, blk-zxfiyfsk and blk-qzm2thi8 contain these terms; none is defined anywhere in the chapter.
+
+**Need.** Terms introduced in this chapter need a definition at first use, and stereospecific must not be explained using a word the chapter never introduced. *(confidence 0.85)*
+
+#### `struggle-017` — MEDIUM · cognitive-load
+*Location:* `section_id`=nugget-electrophilic-addition · `asset_id`=video-alkene-hbr
+*Anchor:* “HBr addition and the origin of the Markovnikov product”
+
+**Observation.** Three video blocks exist with empty url and is_hidden true, and both briefs are status needs_review. The two topics chosen for animation are precisely the two processes hardest to follow as static prose.
+
+**Learner impact.** The three sections where I most need to watch something happen in sequence give me a paragraph and a static curve, so I try to hold a three-stage process in my head from text alone and lose the thread.
+
+**Evidence.** All three video blocks carry empty url and is_hidden true; video_briefs status needs_review for both.
+
+**Need.** The two mechanisms flagged for animation need some step-sequenced representation a student can work through. *(confidence 0.87)*
+
+#### `struggle-018` — LOW · conceptual-support
+*Location:* `section_id`=nugget-halogenation
+*Anchor:* “Background reading on Halogenation and anti addition. Opens on Wikipedia.”
+
+**Observation.** Five of six sections end with a generic Wikipedia article as their only outside pointer, and the sole textbook link is one mcmurry_link in section 1 to the chapter landing page, not to any specific section.
+
+**Learner impact.** When I stall on bromonium ions the only help offered is a Wikipedia article written above my level that does not follow this chapter's framing, so I go back to rereading the same paragraph.
+
+**Evidence.** One mcmurry_link in section nugget-alkene-structure only; external_link blocks in all six sections point at top-level Wikipedia articles.
+
+**Need.** Each section needs a pointer to a level-appropriate second explanation of that specific topic. *(confidence 0.8)*
+
+**Strengths noted by this persona**
+
+- The prose is genuinely readable: short paragraphs, one idea per sentence, almost no unexplained symbolic notation.
+- Sections hand off to each other explicitly, so I always know where I am in the chapter.
+- Hydration is deliberately framed as a repeat of the HBr pathway rather than a fourth thing to memorize.
+- The hint ladders are properly progressive rather than three restatements of the answer.
+- Wrong-answer explanations name the specific error and often the condition under which the wrong answer would be right.
+- Every question carries an accessible_description that restates the task.
+
+**Open questions**
+
+- The package specifies the first step of all three reaction-coordinate diagrams as exergonic but the compiled reader shows endergonic. The reader version is the one that makes sense; is the package or the compiler the intended source of truth?
+- Is block_type stereochemistry_conversion supported by the reader renderer at all? No chapter contains one.
+- Does the compiled question set surface inside the reader chapter, or only through a separate homework surface?
+- Both the reader chapter and question set carry available false. Is the missing-callout compile gap scheduled for a bulk recompile?
+- I filed the answer-tell issue under assessment-readiness rather than misconception; the orchestrator may want to normalize that.
+
+### Accessibility Persona (score 5.6)
+
+Structurally better than most: every reader figure carries non-empty alt text, the reaction-coordinate card prints its description visibly, and the curved_arrow question is served by a select-based, fully keyboard-operable renderer with no drag-and-drop anywhere in the nine-item set. The failures are in the content of the equivalents. Two accessible_descriptions hand a screen-reader user the answer outright and a third pre-sorts the ranking cards into correct order. The chapter's only stereochemistry figure never reaches a learner because stereochemistry_conversion is unmapped in the reader block builder, and the artifact predates the long_description and callout fixes so zero long descriptions ship.
+
+#### `access-001` — BLOCKER · alt-text-quality
+*Location:* `question_slug`=alk-hbr-capture-arrow · `concept_slug`=markovnikov-hbr-addition
+*Anchor:* “the source is a lone pair on the bromide ion, and the destination is the positively charged central carbon”
+
+**Observation.** The accessible_description states the complete answer. The key is a single arrow from lone_pair site 4 to atom site 1, and the description restates exactly that in prose, nearly verbatim the gated level-3 hint. The mechanical guard cannot catch it: 'lone pair' has a space so the id check misses, 'atom' is not id-like, and there are no digits for the numeric check.
+
+**Learner impact.** A screen-reader user is handed the answer to the chapter's only mechanism-drawing item and cannot practise electron-flow reasoning, while a sighted user must reason it out. The item is scored, so this is also an integrity problem for anyone using the description as an accommodation.
+
+**Evidence.** compiled/question-set.json alk-hbr-capture-arrow answer_key.expected_arrows and accessibility_bundle.accessible_description; [internal source reference — not in this repo] checks only id-like tokens, verdict vocabulary and answer-key numbers.
+
+**Need.** The equivalent needs to convey the task and the available sites without naming which site is the source and which the destination, and the chapter needs a check that does not rely on the mechanical guard. *(confidence 0.96)*
+
+#### `access-002` — BLOCKER · alt-text-quality
+*Location:* `question_slug`=alk-ez-identify-z · `concept_slug`=alkene-ez-stereochemistry
+*Anchor:* “select the one where the two methyl groups are on the same side of the double bond (the Z isomer)”
+
+**Observation.** The description identifies the correct option. Option a, the key, is labelled 'Methyl groups on the same side of the double bond', and the description supplies exactly the same-side-equals-Z mapping the item tests while pointing at option a by its own option text.
+
+**Learner impact.** A screen-reader user gets a free correct answer on the E/Z item and never applies the rule, so their mastery data on the concept is meaningless.
+
+**Evidence.** compiled/question-set.json alk-ez-identify-z options and correct_option_ids [redacted]; accessible_description as quoted.
+
+**Need.** The description needs to enumerate the three structures neutrally and restate the task without asserting which geometry corresponds to Z. *(confidence 0.93)*
+
+#### `access-003` — HIGH · alt-text-quality
+*Location:* `question_slug`=alk-carbocation-stability-rank · `concept_slug`=electrophilic-addition-carbocation
+*Anchor:* “tert-butyl (tertiary), isopropyl (secondary), and ethyl (primary)”
+
+**Observation.** The description lists the three cards in the correct answer order and not the order they are presented: cards are c2, c1, c3 while correct_order is c1, c2, c3 and the description enumerates c1, c2, c3.
+
+**Learner impact.** A screen-reader user reading the description first is handed the ranking, then meets the cards in a different order than described, which is disorienting on top of being an unearned answer.
+
+**Evidence.** compiled/question-set.json cards [c2 Isopropyl, c1 tert-Butyl, c3 Ethyl]; correct_order ['c1','c2','c3']; accessible_description as quoted.
+
+**Need.** The description needs to name the cards in presented order and state the sorting task without implying a ranking, and make the response mechanism explicit for a non-pointer user. *(confidence 0.9)*
+
+#### `access-005` — HIGH · media-equivalence
+*Location:* `asset_id`=stereo-ez-but-2-ene · `section_id`=nugget-ez · `nugget_id`=nugget-ez · `concept_slug`=alkene-ez-stereochemistry
+
+**Observation.** The chapter's only figure contrasting E with Z never reaches the reader. _ASSET_TYPE_TO_BLOCK has no stereochemistry_conversion entry so _asset_block returns None and the asset is dropped silently along with its authored alt text. What does reach the reader is a flat CC=CC whose alt text conveys no geometry.
+
+**Learner impact.** Every learner loses the contrast figure, and the loss is worst for anyone relying on a described figure: the section's whole distinction survives only inside running prose, with no figure-level description to re-read.
+
+**Evidence.** topic.package.json assets[3] type stereochemistry_conversion with nugget_ids ['nugget-ez']; reader section nugget-ez has three blocks and none is that asset; [internal source reference — not in this repo] lines 15-33.
+
+**Need.** The E/Z distinction needs to reach the reader as an inspectable figure-level equivalent, in a form that survives the compile. *(confidence 0.95)*
+
+#### `access-006` — HIGH · alt-text-quality
+*Location:* `asset_id`=rc-alkene-acid-hydration · `section_id`=nugget-hydration
+*Anchor:* “Carbocation-pathway energy profile for acid-catalyzed hydration of propene to propan-2-ol.”
+
+**Observation.** The alt text names the figure instead of describing it: it conveys none of what the curve carries, not the two steps, the barrier sizes, the intermediate between them, or which step is rate-determining. The sibling HBr diagram's alt text does convey barrier sizes, so the omission is specific to this figure.
+
+**Learner impact.** A learner who cannot see the plot gets no energy information from the hydration figure, yet the nugget's point is that hydration reuses the same two-step profile as HBr addition, a comparison the description makes impossible to verify. Learners with images off see the same non-description.
+
+**Evidence.** topic.package.json assets[6] alt_text; contrast blk-x3lpbuuq alt_text naming a large first barrier then a small second; ReaderBlockRenderer prints it as 'Described as:'.
+
+**Need.** This figure needs a description carrying the readable content of the profile at the level of detail the HBr profile reaches. *(confidence 0.92)*
+
+#### `access-007` — HIGH · media-equivalence
+*Location:* `asset_id`=rc-alkene-hbr-addition · `section_id`=nugget-hbr-markovnikov · `concept_slug`=markovnikov-hbr-addition
+*Anchor:* “the pathway through the more stable secondary carbocation has the lower first barrier”
+
+**Observation.** The objective is to justify the Markovnikov product from a reaction-coordinate diagram and the prose asks the learner to compare two pathways, but the spec plots a single pathway with no primary-cation branch. Separately, none of the three descriptions states the vertical relationship between the intermediate and the reactants, and the compiled spec and source package disagree on step 1's direction.
+
+**Learner impact.** No learner can perform the comparison the objective asks for because the branch being compared is absent. A learner working from descriptions cannot tell the carbocation is uphill, the single most misread feature of these plots and the basis of the stability-controls-rate argument.
+
+**Evidence.** nuggets[3].learning_objectives and text.expanded; assets[4].spec.minima_labels lists one branch; compiled blocks carry endergonic while the package carries exergonic.
+
+**Need.** The two-pathway comparison needs to exist in inspectable form, every profile description needs to state whether each intermediate lies above or below the reactants, and the package/artifact divergence needs resolving in the source. *(confidence 0.87)*
+
+#### `access-008` — HIGH · alt-text-quality
+*Location:* `asset_id`=mol-anti-dibromide · `section_id`=nugget-halogenation · `concept_slug`=alkene-halogenation-anti
+*Anchor:* “a vicinal dibromide with bromine on each of the two central carbons”
+
+**Observation.** The figure whose stated goal is to identify the anti-addition product conveys no stereochemistry in either channel: its SMILES has no stereodescriptors and its alt text describes connectivity only. The section's energy diagram asserts anti addition as a label without describing any face relationship.
+
+**Learner impact.** A learner who cannot see the drawn structure has no described representation of what opposite faces looks like anywhere in the chapter, and a learner who can see it is shown a flat structure that does not encode the relationship the caption claims.
+
+**Evidence.** topic.package.json assets[9] smiles CC(Br)C(Br)C and alt_text; nuggets[5].learning_objectives; question alk-halogenation-anti-stereo.
+
+**Need.** The anti relationship needs a representation stating explicitly which bromine is on which face, available as text. *(confidence 0.91)*
+
+#### `access-004` — MEDIUM · alt-text-quality
+*Location:* `question_slug`=alk-ez-which-isomerize · `concept_slug`=alkene-ez-stereochemistry
+*Anchor:* “Select every one whose double-bond carbons each carry two different groups”
+
+**Observation.** The description restates the level-1 and level-2 hints as part of the task statement, adding the decision rule the prompt does not carry.
+
+**Learner impact.** The gated hint ladder is ungated for screen-reader users, so they skip the retrieval step while sighted peers must recall the rule or spend a hint. It does not name the answers, so this is a scaffolding asymmetry rather than a full leak.
+
+**Evidence.** compiled/question-set.json accessible_description versus feedback_bundle.hints levels 1 and 2.
+
+**Need.** The description needs to identify the four candidates and the multi-select task, leaving the criterion behind the hint ladder. *(confidence 0.82)*
+
+#### `access-009` — MEDIUM · media-equivalence
+*Location:* `asset_id`=mol-alkene-propene · `section_id`=nugget-alkene-structure
+*Anchor:* “Propene: a terminal alkene with a CH2=CH- double bond attached to a methyl group.”
+
+**Observation.** Not one long_description reaches the reader. The package authors exactly one and the compiled chapter contains zero occurrences, because the artifact was compiled before the builder began carrying the field through. The other nine assets author none at all.
+
+**Learner impact.** Learners who suppress images to reduce visual load, and screen-reader users needing more than one line for a multi-step energy profile, both receive the thinnest possible equivalent. There is no tier between one sentence and the whole prose paragraph.
+
+**Evidence.** grep long_description: 1 hit in the package, 0 in the reader chapter; compiled_at 2026-07-25; [internal source reference — not in this repo] lines 188-193; the images-off path builds its callout from long_description || alt_text.
+
+**Need.** The multi-part figures need a longer structured readout, and whatever is authored has to actually reach the reader. *(confidence 0.9)*
+
+#### `access-010` — MEDIUM · media-equivalence
+*Location:* `asset_id`=video-alkene-hbr · `section_id`=nugget-electrophilic-addition
+*Anchor:* “HBr addition and the origin of the Markovnikov product”
+
+**Observation.** Both video briefs declare a storyboard and narration outline but no captions, transcript or audio description. They reach no learner today since all three blocks carry empty url and is_hidden true. The narration outlines describe conclusions rather than the visual changes on screen.
+
+**Learner impact.** Nobody is harmed today, but the chapter is one publish away from shipping two mechanism animations with no text equivalent, no caption track, and narration that does not describe what moves.
+
+**Evidence.** video_briefs[0] and [1] have no transcript or caption key and status needs_review; all three compiled video blocks have empty url and is_hidden true.
+
+**Need.** Before publication each animation needs a text equivalent covering the visual changes plus a caption track, and narration describing the depicted change. *(confidence 0.85)*
+
+#### `access-011` — MEDIUM · color-motion-only
+*Location:* `question_slug`=alk-sp2-geometry · `concept_slug`=alkene-structure-pi-bond
+*Anchor:* “sp2, trigonal planar (bond angles near 120 degrees)”
+
+**Observation.** Only the correct option carries a structure; the two distractors have none, so the presence of a drawn structure is a purely visual signal identifying the answer, and it is not mentioned in the accessible description at all.
+
+**Learner impact.** A sighted learner gets an unearned cue invisible to a screen-reader user, so the two populations are answering different questions, and the description is an incomplete account of what is on screen.
+
+**Evidence.** compiled/question-set.json alk-sp2-geometry: only one option has structure_smiles, matching correct_option_ids [redacted]; alk-halogenation-anti-stereo has a milder version.
+
+**Need.** Illustration needs to be uniform across an option set so its presence never marks the key, and the description needs to reflect what is displayed. *(confidence 0.88)*
+
+#### `access-012` — MEDIUM · keyboard-operability
+*Location:* `section_id`=nugget-alkene-structure
+*Anchor:* “The C=C double bond: one sigma bond and one pi bond”
+
+**Observation.** The heading outline skips a level: the chapter title is h1, each section title h2, and every figure, video and link card inside a section is h4, with no h3 anywhere. In this chapter that is 6 h2 sections containing 17 h4 cards.
+
+**Learner impact.** Screen-reader users navigating by heading level, and anyone skimming a heading outline, meet a broken hierarchy where figure titles sit two levels below their section, so jump-to-next-heading behaves unpredictably.
+
+**Evidence.** [internal source reference — not in this repo] lines 172 and 194; [internal source reference — not in this repo] renders all cards as h4; no h3 in either file.
+
+**Need.** Rendered heading levels need to be contiguous so a figure card sits exactly one level below its section. This is shared renderer behavior, so the fix is platform-side. *(confidence 0.86)*
+
+**Strengths noted by this persona**
+
+- The curved_arrow item is completable without a pointing device and without vision: the site-select path builds each arrow from labelled selects and the on-structure path exposes each atom as a focusable button with an aria-label and visible focus ring.
+- Every figure block that reaches the reader carries non-empty alt text; 10 of 10 assets author it.
+- The reaction-coordinate card prints its description visibly beneath the diagram and substitutes the same text when rendering fails.
+- In the E/Z and halogenation-stereochemistry questions the distinguishing information lives in the option text, not only in the drawn structure, so those items are answerable without seeing the structures.
+- Three prose detail tiers compile into every text block and are switchable from reader preferences, and the images-off path converts a suppressed figure into a described callout.
+- Every external link states its destination and that it opens off-site, so link purpose is clear out of context.
+
+**Open questions**
+
+- Does any surface inject a rendered molecule into the curved-arrow question's responseConfig? If so the renderer switches to the on-structure path whose image alt is generic and the reactants would be undescribed.
+- access-011 is filed under color-motion-only because the presence of an image is the sole visual carrier of a distinction; the orchestrator may prefer assessment-readiness.
+- The artifact predates the callout and long_description emitters, so all six practice checks and six trouble spots are absent. Note the compiled step-1 endergonic differs from the package's exergonic, so a blind recompile would overwrite that artifact-only value.
+- Both available flags are false so nothing is student-facing today; if the bank ships ahead of the reader, access-001 and access-002 must clear first.
+- I could not verify whether the rank_order widget offers a keyboard alternative to dragging; if it is drag-only, alk-carbocation-stability-rank becomes an interactive-fallback blocker.
+
+### Learner with Visual Preference (score 5.2)
+
+Well-written prose with a thin and partly misaligned figure layer. Every rendered figure is either a plain line structure of a simple neutral molecule or a schematic energy profile. Not one figure shows a p orbital, a curved arrow, a carbocation, a bromonium ion, an E/Z pair, or a face of an alkene - none of the six things the six sections exist to teach. The one asset that would make a relationship visible, stereo-ez-but-2-ene, never reaches the reader because stereochemistry_conversion is absent from the compiler's _ASSET_TYPE_TO_BLOCK map. Three figures under-deliver against their own captions, and all three energy diagrams still carry exergonic step 1 in the package, so a recompile silently reinstates a figure teaching that the carbocation is a thermodynamic sink.
+
+#### `vis-002` — BLOCKER · figure-accuracy
+*Location:* `asset_id`=rc-alkene-hbr-addition · `concept_slug`=electrophilic-addition-carbocation
+*Anchor:* “{"type": "exergonic", "barrier": "large"}”
+
+**Observation.** All three reaction-coordinate assets in the topic package still specify step 1 as exergonic with a large barrier. Rendered, that draws the cationic intermediate BELOW the reactants. Formation of a carbocation or bromonium ion from a neutral alkene and HX or Br2 is uphill; the second barrier is small precisely because the intermediate sits high. The compiled reader carries endergonic in all four blocks, but that came from a hand edit (commit [commit ref — not in this repo]), not from the package. The source of truth was never corrected, so any recompile reverts the reader to the wrong figure.
+
+**Learner impact.** As specified the diagram teaches the opposite of the section it illustrates: an intermediate in a deep well reads as stable and as the thermodynamic destination, contradicting the adjacent prose and destroying the Hammond argument the Markovnikov section depends on. A student reading the curve rather than the words would draw the wrong conclusion and would be right to trust the curve.
+
+**Evidence.** topic.package.json lines 274, 309, 344 all {'type': 'exergonic', 'barrier': 'large'} as step 0; reader blocks blk-x3lpbuuq, blk-yn2l9dl9, blk-54zbeqik, blk-ur483tha all endergonic; git show [commit ref — not in this repo] shows the edits applied to the reader JSON only.
+
+**Need.** The authored energy profiles must encode an uphill first step so every surface built from the package shows the intermediate above the reactants, and the correction must live where a recompile cannot undo it. Note the interaction with the pending recompile: this chapter's artifact predates the callout emission, so it will be recompiled, and that recompile is exactly what would reintroduce the error. *(confidence 0.96)*
+
+#### `vis-001` — HIGH · visual-opportunity
+*Location:* `section_id`=nugget-ez · `concept_slug`=alkene-ez-stereochemistry · `nugget_id`=nugget-ez · `asset_id`=stereo-ez-but-2-ene
+
+**Observation.** The one authored figure showing E versus Z side by side never renders. stereochemistry_conversion is not a key in _ASSET_TYPE_TO_BLOCK in [internal source reference — not in this repo], so _asset_block returns None and the asset is dropped with no placeholder and no warning. Separately the asset's spec could not render even if mapped - it puts molecule names in the representation fields and carries no SMILES, unlike the same asset id in chapter-04's manifest which uses molecules[] with SMILES and show_priority_labels.
+
+**Learner impact.** E/Z is a purely spatial distinction; 'same side' versus 'opposite sides' is a claim about a picture. Students get the claim only as words, and the section's stated trouble spot is precisely that they assign E/Z from where things sit on the page.
+
+**Evidence.** topic.package.json asset stereo-ez-but-2-ene with nugget_ids ['nugget-ez']; reader section nugget-ez block list = [text blk-4b6lenst, molecule blk-glm7vdk3, external_link blk-pikt5ucc]; _ASSET_TYPE_TO_BLOCK has no stereochemistry_conversion entry.
+
+**Need.** The E/Z section needs a rendering channel that shows the two isomers together with priority groups marked - the asset type must survive compilation and the spec must carry the two structures, not just their names. *(confidence 0.97)*
+
+#### `vis-003` — HIGH · figure-accuracy
+*Location:* `section_id`=nugget-halogenation · `concept_slug`=alkene-halogenation-anti · `asset_id`=mol-anti-dibromide
+*Anchor:* “Identify the vicinal dibromide from anti addition of Br2 to but-2-ene.”
+
+**Observation.** The halogenation section is entirely about a stereochemical outcome and no figure in it carries any stereochemistry. mol-anti-dibromide is captioned as the anti-addition product but its SMILES CC(Br)C(Br)C leaves both stereocentres unassigned - RDKit FindMolChiralCenters returns [(1,'?'),(3,'?')] and the InChIKey has no stereo layer. Nothing anywhere depicts the two faces of the alkene, the bridged bromonium, or backside attack.
+
+**Learner impact.** The section's one claim - the bromines end up on opposite faces - is a claim about three-dimensional arrangement the pictures cannot express. A student comparing figure to text sees a structure equally consistent with syn addition, which is the misconception the section exists to prevent. Sharper because the question bank does show correct stereochemistry, so students are assessed on a distinction the instruction never drew.
+
+**Evidence.** asset mol-anti-dibromide smiles CC(Br)C(Br)C, alt text mentions no faces; reader block blk-qzm2thi8; rc-alkene-br2-addition minima_molecules {'0': 'CC=CC', '2': 'CC(Br)C(Br)C'}.
+
+**Need.** The anti relationship must be visible somewhere in this section - the product's relative configuration has to be specified rather than flat, and the learner needs a way to see which face bromide attacks. *(confidence 0.95)*
+
+#### `vis-004` — HIGH · figure-purpose
+*Location:* `section_id`=nugget-hbr-markovnikov · `concept_slug`=markovnikov-hbr-addition · `asset_id`=rc-alkene-hbr-addition
+*Anchor:* “Both pathways begin from the same reactants, but the pathway through the more stable secondary carbocation has the lower first barrier.”
+
+**Observation.** The HBr energy diagram is captioned as accounting for Markovnikov regiochemistry but draws a single pathway with a single set of minima. Regiochemistry is a comparison between two competing pathways, and the prose explicitly asks the student to make that comparison off the diagram. The primary-carbocation pathway appears nowhere on the figure.
+
+**Learner impact.** The figure cannot support the reasoning it is placed there to support. A student following the instruction to read the outcome off the diagram finds only one curve and no basis for choosing anything. This is the chapter's central inference and the one place a picture would replace a paragraph outright.
+
+**Evidence.** Asset learning_goal 'Read the two-step energy profile that accounts for Markovnikov regiochemistry'; spec minima_labels ['Propene + HBr', 'Secondary carbocation', '2-bromopropane'] - one branch only; reader blocks blk-x3lpbuuq and blk-yn2l9dl9.
+
+**Need.** The competing primary and secondary pathways need to be visible on the same axes so the difference in first-barrier height carries the regiochemical conclusion. *(confidence 0.92)*
+
+#### `vis-008` — HIGH · figure-purpose
+*Location:* `question_slug`=alk-sp2-geometry · `concept_slug`=alkene-structure-pi-bond
+
+**Observation.** In alk-sp2-geometry only one of three options carries a structure_smiles - option b, 'C=C' - and option b is the key. Options a and c are text only. The asymmetry survives compilation.
+
+**Learner impact.** A student who knows nothing about hybridisation can see which option is intended: the one with a picture. The visual channel identifies the answer independently of the chemistry, which invalidates the item and rewards a test-taking habit.
+
+**Evidence.** compiled question-set.json alk-sp2-geometry student_config: options a and c have no structure_smiles; option b has 'C=C'; answer_key correct_option_ids [redacted].
+
+**Need.** The illustration state of options must not correlate with correctness - either every option is depicted or none is. *(confidence 0.94)*
+
+#### `vis-005` — MEDIUM · visual-opportunity
+*Location:* `concept_slug`=electrophilic-addition-carbocation · `asset_id`=rc-alkene-hbr-addition
+*Anchor:* “the site of the former π bond is now a vacant p orbital”
+
+**Observation.** In all three energy diagrams minima_molecules maps only indices 0 and 2. Index 1, the intermediate, is a bare text label. The intermediate is the subject of three of six sections and is the only species never drawn anywhere: no carbocation, bromonium, or oxonium structure appears in any asset or reader block.
+
+**Learner impact.** The learner sees structures for what they already understand and a word for what they do not. The recorded trouble spots for these concepts are both failures to hold a structure in mind, and the chapter supplies no structure to hold.
+
+**Evidence.** minima_molecules for all three RC assets omit index 1; concepts[].trouble_spots for electrophilic-addition-carbocation and alkene-halogenation-anti.
+
+**Need.** The learner needs to see the intermediate as a structure pinned at the energy well it occupies. *(confidence 0.93)*
+
+#### `vis-006` — MEDIUM · visual-opportunity
+*Location:* `concept_slug`=alkene-structure-pi-bond · `nugget_id`=nugget-alkene-structure
+*Anchor:* “Side-on overlap of these two parallel p orbitals forms the π bond, whose electron density lies above and below the σ framework rather than along the internuclear axis.”
+
+**Observation.** The opening concept declares preferred_representations including orbital_overlay, but no orbital_overlay asset exists and no orbital figure reaches the reader. The section's two figures are flat line structures showing a double bond as two parallel lines and showing nothing about hybridisation, planarity, 120 degree angles, or p-orbital lobes.
+
+**Learner impact.** The recorded trouble spot is 'Treating the double bond as two identical bonds instead of one sigma plus one pi' - which is exactly what the line-structure figures depict. The figures reinforce the misconception the section exists to defeat.
+
+**Evidence.** concepts[0].preferred_representations includes orbital_overlay; assets[] contains no orbital_overlay asset; the compiler does support orbital_overlay via _LIVE_RENDERED_FIELDS, so this is an authoring gap not a platform one.
+
+**Need.** The learner needs the pi bond's electron density shown off the internuclear axis alongside the sigma framework. *(confidence 0.9)*
+
+#### `vis-007` — MEDIUM · figure-accuracy
+*Location:* `section_id`=nugget-ez · `asset_id`=mol-but-2-ene
+*Anchor:* “Identify a disubstituted alkene whose two ends can be E or Z.”
+
+**Observation.** With stereo-ez-but-2-ene dropped, the only figure in the E/Z section is mol-but-2-ene, SMILES CC=CC, with no double-bond geometry specified. RDKit lays this out as a zig-zag whose methyls read as trans, i.e. as (E)-but-2-ene, while the caption asserts the molecule can be E or Z.
+
+**Learner impact.** A student looking for the E and the Z sees one drawing that looks like a specific isomer captioned as if it were both - precisely the confusion the concept's trouble spot names.
+
+**Evidence.** asset mol-but-2-ene smiles CC=CC with no bond directions (contrast the question bank which uses C/C=C\C and C/C=C/C); reader block blk-glm7vdk3.
+
+**Need.** The structure standing in the E/Z section must either commit to a named configuration or be replaced by something showing both. *(confidence 0.88)*
+
+#### `vis-009` — MEDIUM · visual-opportunity
+*Location:* `question_slug`=alk-hbr-capture-arrow · `concept_slug`=markovnikov-hbr-addition
+
+**Observation.** alk-hbr-capture-arrow (advanced) asks the student to draw a curved arrow from a bromide lone pair to the carbocation carbon. No curved arrow appears anywhere in the chapter's instructional layer: no mechanism figure, no arrow-pushing figure, and not even a drawing of a carbocation. The four mechanism-type nuggets are illustrated exclusively by energy profiles and product structures.
+
+**Learner impact.** The first curved arrow a student is asked to produce is one they have never been shown. Arrow-pushing is learned by imitation; asking for it cold converts a mechanism question into a guess about interface semantics.
+
+**Evidence.** Nuggets nugget-electrophilic-addition, nugget-hbr-markovnikov, nugget-hydration, nugget-halogenation all type mechanism; combined asset_ids are three reaction_coordinate and three molecule assets, no mechanism or arrow figure.
+
+**Need.** Electron flow needs to be shown at least once in the instruction before it is graded. *(confidence 0.9)*
+
+#### `vis-010` — MEDIUM · figure-accuracy
+*Location:* `section_id`=nugget-hydration · `concept_slug`=acid-catalyzed-hydration · `asset_id`=rc-alkene-acid-hydration
+*Anchor:* “producing a protonated alcohol (an oxonium ion)”
+
+**Observation.** The hydration prose describes three stages but the accompanying diagram has two steps and three minima. The oxonium intermediate the prose names is absent from the profile, and the text then instructs the reader that the diagram has the same two-step form as HBr addition, asserting the simplification rather than flagging it.
+
+**Learner impact.** A student counting intermediates in the paragraph and then counting wells in the figure gets different answers two sentences apart, with no signal about which to trust. Reading step count off a profile is a skill this chapter is trying to build.
+
+**Evidence.** Reader block blk-54zbeqik spec: two steps, minima_labels ['Propene + H3O+', 'Secondary carbocation', 'Propan-2-ol']; same section's prose names the oxonium ion.
+
+**Need.** The energy profile and the mechanism narrative must agree on how many intermediates exist, or the simplification must be made explicit. *(confidence 0.86)*
+
+#### `vis-011` — MEDIUM · figure-purpose
+*Location:* `question_slug`=alk-carbocation-stability-rank · `concept_slug`=electrophilic-addition-carbocation
+
+**Observation.** The carbocation-ranking item presents three text-only cards, each stating its own substitution class in parentheses. No card carries a structure.
+
+**Learner impact.** The task the chapter cares about - look at a structure, count alkyl groups, infer stability - has been pre-performed on the cards. What remains is ordering three words a student may have memorised as a slogan. A learner who can recite the slogan but cannot recognise a tertiary cation passes.
+
+**Evidence.** compiled question-set.json alk-carbocation-stability-rank student_config.cards: all three {id, text} with no structure field; card texts contain '(secondary)', '(tertiary)', '(primary)'; the hints ask the student to count alkyl groups, which the card text has already done.
+
+**Need.** The ranking should require reading substitution off the species itself rather than off a parenthetical label. *(confidence 0.87)*
+
+#### `vis-013` — MEDIUM · alt-text-quality
+*Location:* `asset_id`=mol-anti-dibromide · `section_id`=nugget-halogenation
+*Anchor:* “Line structure of 2,3-dibromobutane, a vicinal dibromide with bromine on each of the two central carbons.”
+
+**Observation.** Where a figure fails to show the relationship it exists for, its description does not rescue it. mol-anti-dibromide's alt text describes only connectivity and never mentions opposite faces. The three reaction-coordinate alt texts describe barrier sizes but never state that the intermediate lies above the reactants. Only one asset has a long_description and it merely restates the alt text.
+
+**Learner impact.** The description layer is the fallback for anyone who cannot resolve the figure. Here the fallback omits exactly the relationships the figures are captioned to teach.
+
+**Evidence.** assets[].accessibility.alt_text for mol-anti-dibromide and the three RC assets; only mol-alkene-propene carries long_description.
+
+**Need.** Each figure's description needs to state the specific relationship the figure is captioned to teach. *(confidence 0.88)*
+
+#### `vis-012` — LOW · visual-redundancy
+*Location:* `section_id`=nugget-electrophilic-addition · `asset_id`=rc-alkene-hbr-addition
+*Anchor:* “HBr addition reaction coordinate (Markovnikov)”
+
+**Observation.** Two figures repeat verbatim across consecutive sections. rc-alkene-hbr-addition renders identically in nugget-electrophilic-addition and nugget-hbr-markovnikov with nothing added or annotated. mol-alkene-propene likewise appears twice.
+
+**Learner impact.** Repeating an identical figure signals 'here is something more to see' and delivers nothing, costing attention in a chapter already short of figures that pay off. In the Markovnikov section the repeat occupies the slot where the two-pathway comparison should be.
+
+**Evidence.** Reader blocks blk-x3lpbuuq and blk-yn2l9dl9 byte-identical apart from block ids; blk-17y4qahh and blk-u7qub35l likewise.
+
+**Need.** A figure's second appearance should carry something its first did not, or the slot should go to a figure the section lacks. *(confidence 0.85)*
+
+#### `vis-014` — LOW · figure-purpose
+*Location:* `section_id`=nugget-halogenation · `asset_id`=rc-alkene-br2-addition
+*Anchor:* “Halogenation: anti addition through a bromonium ion”
+
+**Observation.** Three video blocks compile into the reader with empty url and is_hidden true. Both video briefs are status needs_review and no media exists. The blocks are hidden so they should not surface as broken players, but the chapter ships placeholder figure blocks whose descriptions are storyboard lines rather than descriptions.
+
+**Learner impact.** Currently near-zero since the blocks are hidden. The concern is what happens if the hidden flag is dropped, and that the motion these briefs describe has no static substitute in the chapter either.
+
+**Evidence.** Reader blocks blk-3716w0xg, blk-xuvd9w4u, blk-8yk4d2xt each empty url with is_hidden true; video_briefs video-alkene-hbr and video-alkene-br2 both needs_review.
+
+**Need.** Either the placeholder blocks should not be emitted, or the step-by-step change should exist in a form the chapter can show today. *(confidence 0.8)*
+
+#### `vis-015` — LOW · visual-redundancy
+*Location:* `question_slug`=alk-ez-identify-z · `concept_slug`=alkene-ez-stereochemistry
+
+**Observation.** In alk-ez-identify-z the structures are correct but each option's text already states what its picture shows. The same pattern appears in alk-halogenation-anti-stereo, where the options spell out trans/anti and cis/syn and only two of three options carry a structure.
+
+**Learner impact.** The student can answer without ever looking at the drawings, so the item does not test structure reading - the one skill the E/Z concept requires. These are the only places in the chapter where correct stereochemical drawings appear, and the text renders them decorative.
+
+**Evidence.** compiled question-set.json alk-ez-identify-z options a/b text plus structure_smiles C/C=C\C and C/C=C/C (RDKit-verified cis and trans); alk-halogenation-anti-stereo options a/b carry stereo SMILES while option c has none.
+
+**Need.** Where a structure is shown, the option text should not pre-answer what the structure depicts. *(confidence 0.83)*
+
+**Strengths noted by this persona**
+
+- Every reaction-coordinate figure carries an inline spec with named minima, so the reader draws the diagram client-side rather than falling back to alt text.
+- Figure placement tracks the prose closely and the product structures are correct in connectivity and correctly captioned as the section's outcome.
+- The question bank's stereochemistry is drawn correctly where drawn at all - RDKit confirms the (S,S) trans dibromide, the meso cis isomer, and the Z/E 2-butene pair.
+- The reaction-coordinate alt texts are single readable sentences that name the shape, the right register for a figure description.
+- rc-alkene-acid-hydration explicitly reuses the shape of the HBr profile and the prose points this out - one relationship the chapter does make visible.
+
+**Open questions**
+
+- Is stereochemistry_conversion intended to render in the reader at all? It is absent from _ASSET_TYPE_TO_BLOCK, so no chapter authoring this asset type can surface it. If it is meant to render live like enzyme_active_site, the fix belongs in the compiler, not this chapter.
+- The asset id stereo-ez-but-2-ene exists twice with materially different specs - here and in chapter-04's assets.manifest.json. Is asset id collision across chapters expected, and which spec is canonical?
+- On the Deck Creator surface all four non-molecule figures compile to empty placeholders. Whether the deck surface is in scope for this review pass is a question for the orchestrator.
+- This chapter's reader artifact contains no callout blocks, so its practice_check entries and trouble_spots reach no reader. If it is recompiled to fix that, vis-002 must be corrected in the package first or the energy-diagram fix from [commit ref — not in this repo] is silently reverted.
+- No new category ids were coined; all findings use ids listed in the finding schema.
+
+
+---
+
+## Post-correction record
+
+**Status:** applied-and-verified-without-second-persona-run 
+**Post-correction estimate:** major revision — *Not a new persona verdict. The unanimous energetics blocker and both answer leaks are cleared and the chapter is no longer one recompile away from regression, but the E/Z figure still does not render, the halogenation section still shows no stereochemistry, and the hydration profile still omits the oxonium intermediate.* 
+**Baseline verdict above is preserved and unchanged (BLOCKED).** Only a separate four-persona regression run can issue a new verdict.
+
+### Changes applied
+
+1. Changed the first step of all three reaction-coordinate assets from exergonic to endergonic in the source package, so the carbocation and bromonium ion are drawn above the reactants. This was the only finding all four personas raised independently. The correction had existed since commit [commit ref — not in this repo] in the compiled reader alone; the package and the deck asset manifest still held the wrong value, and the recompile this chapter needed for other reasons would have reverted the reader too.
+ - *Resolves:* `instr-001`, `vis-002`, `instr-002`
+ - *Partially addresses:* `access-007`
+
+2. Authored wikipedia_title on all six concepts. The six working links were also artifact-only, with no wikipedia_title anywhere in the package, so a recompile would have regenerated six 404s exactly as it twice did in chapter 6. All six verified HTTP 200 after recompile.
+ - *Resolves:* —
+ - *Partially addresses:* `instr-002`
+
+3. Rewrote the accessible descriptions for alk-hbr-capture-arrow and alk-ez-identify-z so neither states the answer: the first no longer names the arrow's source and destination, the second no longer states which geometry is Z.
+ - *Resolves:* `access-001`, `access-002`
+ - *Partially addresses:* —
+
+4. Rewrote alk-carbocation-stability-rank's accessible description to list the cards in presented order (isopropyl, tert-butyl, ethyl) rather than answer order, and to name the move controls.
+ - *Resolves:* `access-003`
+ - *Partially addresses:* —
+
+5. Removed structure_smiles from option b of alk-sp2-geometry. It was the answer key and the only illustrated option, so the correct answer was identifiable from the presence of a picture alone.
+ - *Resolves:* `instr-008`, `vis-008`, `struggle-014`, `access-011`
+ - *Partially addresses:* —
+
+6. Corrected the reversed-arrow wrong-answer pattern in alk-hbr-capture-arrow from a lone_pair source at site 1 to an atom source at site 1 with an atom target at site 4. Site 1 is declared kinds=['atom'], so the authored pattern matched a submission no student could make and the explanation was dead.
+ - *Resolves:* `struggle-015`
+ - *Partially addresses:* —
+
+7. Recompiled with --write-runtime. The reader now carries 12 callout blocks, so all six practice checks and all six trouble spots reach a student for the first time, and the deck asset manifest now carries the corrected energetics.
+ - *Resolves:* `instr-011`, `struggle-003`, `struggle-004`
+ - *Partially addresses:* —
+
+### Still open (not corrected)
+
+- rec-007: the E/Z figure still does not reach the reader. stereochemistry_conversion has no entry in _ASSET_TYPE_TO_BLOCK, so the asset is silently dropped for every chapter that authors this type. The fix is platform-side in [internal source reference — not in this repo], not in this package.
+- rec-008: the hydration energy profile still shows two steps where the prose walks three, omitting the oxonium intermediate. The correct four-minima spec exists in chapter-04's assets manifest.
+- rec-009: the halogenation section still ships stereochemically flat structures while asserting stereospecificity. Which diastereomer to draw depends on which but-2-ene isomer was intended, which is an authoring decision.
+- rec-011: the halogenation product is still presented as a single enantiomer with no statement that the outcome is racemic.
+- rec-012: why alkyl substitution stabilises a carbocation, and the Hammond step from stability to rate, are still available only inside wrong-answer feedback.
+- rec-006 note: alk-sp2-geometry now illustrates no option. Adding a structure to all three would be better pedagogy, but a flat C=C does not display the geometric distinction, so that needs a figure that actually shows tetrahedral vs planar vs linear.
+
+### Verification
+
+- Topic-package compiler (proprietary toolchain, not in this repo) — clean
+- Automated test suite — 144 passed, 4 failed (unrelated fixture drift noted in review)
+- curl -L on all 14 compiled external links across both chapters - 14/14 HTTP 200
+- python .[internal source reference — not in this repo] on all 8 persona envelopes - valid
+- python .[internal source reference — not in this repo] --synthesized on both reports - valid
+
+### Follow-up pass (same day)
+
+Follow-up pass, same day, after the correction record above. Platform and figure work requested by the maintainer: transformation-figure support, the stereochemistry_conversion mapping, viewer colour preferences on reactions, and admin preview of unpublished chapters.
+
+1. Mapped `stereochemistry_conversion` to a `teaching_asset` block in `_ASSET_TYPE_TO_BLOCK`. The type had no entry, so `_asset_block` returned None and every chapter authoring it lost the figure silently - ch5, ch7 and ch25. AssetPreview has rendered the type all along; only the mapping was missing.
+ - *Resolves:* `instr-005`, `vis-001`, `struggle-001`, `access-005`
+ - *Partially addresses:* —
+
+2. Reshaped the E/Z asset spec to the renderable form: `spec.molecules[]` carrying RDKit-verified SMILES (C/C=C/C = E/trans, C/C=C\\C = Z/cis, InChIKeys matching the question bank) instead of bare `input_representation`/`output_representation` names with no structures, plus an authored long_description. The figure now reaches the reader.
+ - *Resolves:* —
+ - *Partially addresses:* `instr-006`, `struggle-002`
+
+**Verification**
+
+- Automated test suite — 167 passed
+- Automated test suite — 104 passed
+- npx tsc --noEmit - no errors in any changed file; project total unchanged at 729
+- All four ch6 transformations verified balanced (atom counts and formal charge) and rendered for visual inspection

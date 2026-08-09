@@ -1,0 +1,992 @@
+{
+ "chapter_id": "acids-bases-and-curved-arrows",
+ "chapter_version": "1",
+ "run_at": "2026-07-31T03:23:21Z",
+ "personas": [
+ {
+ "persona": "Organic Chemistry Instructor",
+ "persona_version": "1.0.0",
+ "chapter_id": "acids-bases-and-curved-arrows",
+ "chapter_version": "1",
+ "model": "gpt-5.6-sol",
+ "summary": "Not ready for instructor use. The chapter has a strong donor-to-arrow-to-acid/base-to-pKa sequence, varied assessments, valid question SMILES, and mostly correct answer keys, but three chemistry errors require correction before publication: protonated amines are assigned the wrong acidity in source and compiled detail text, period and group acidity trends are reversed in concept metadata, and an equilibrium explanation calls ammonium an amine. Core curved-arrow figures also render only isolated molecules rather than the reactions and arrows they claim to show, while the two-arrow objective is never assessed. The structure–acidity section additionally tests induction without teaching it and depends on resonance without establishing it as a prerequisite.",
+ "overall_score": 4.1,
+ "publication_blockers": [
+ "instr-001",
+ "instr-002",
+ "instr-003"
+ ],
+ "findings": [
+ {
+ "finding_id": "instr-001",
+ "location": {
+ "section_id": "common-organic-acid-pkas",
+ "concept_slug": "common-organic-acid-pkas",
+ "nugget_id": "nugget-functional-group-acidities",
+ "anchor_text": "Protonated amines and protonated alcohols are strong acids (pKa –1 to 0)."
+ },
+ "severity": "blocker",
+ "category": "chemical-accuracy",
+ "observation": "The source standard text assigns protonated amines and protonated alcohols the same pKa range of −1 to 0, and the source expanded text says both R–OH2+ and R–NH3+ have pKa values below 1. Protonated amines normally have pKa values near 9–11, not below 1. The compiled reader partially corrects this, but its standard detail still says that primary amines, identified through the pKa of their conjugate acids, are weak acids; primary amines themselves have N–H acidities near 35–40 and are ordinarily discussed as bases, whereas their ammonium conjugate acids are weak acids.",
+ "learner_impact": "Students can confuse the acidity of an amine with that of its ammonium conjugate acid and make incorrect protonation-state and equilibrium predictions.",
+ "evidence": "Source standard: \"Protonated amines and protonated alcohols are strong acids (pKa –1 to 0)\" and \"Primary amines (pKa of the conjugate acid ≈ 10) are weak acids.\" Source expanded: \"Protonated heteroatoms (R–OH2+, R–NH3+) have pKa values below 1.\" Compiled standard retains the primary-amine statement even while assigning protonated amines pKa ≈ 10–11.",
+ "recommended_outcome": "All source and compiled detail levels need one chemically correct distinction among neutral amines as very weak N–H acids, amines as bases, ammonium ions as their conjugate acids, and protonated alcohols as substantially stronger acids.",
+ "confidence": 0.99
+ },
+ {
+ "finding_id": "instr-002",
+ "location": {
+ "concept_slug": "structure-and-acidity",
+ "anchor_text": "size dominates across a period"
+ },
+ "severity": "blocker",
+ "category": "chemical-accuracy",
+ "observation": "The structure-and-acidity concept metadata says size dominates across a period. The correct organizing rule is that electronegativity generally governs acidity across a period, while atomic size and polarizability govern the trend down a group.",
+ "learner_impact": "If this trouble-spot metadata drives instructor guidance or adaptive support, it teaches the reverse of the intended periodic trend and will produce wrong acidity rankings.",
+ "evidence": "The concept trouble_spots entry reads: \"Applying electronegativity rules when atoms differ in size (size dominates across a period).\" The reader prose correctly contrasts electronegativity within a row with size down a group, so the package is internally contradictory.",
+ "recommended_outcome": "The concept metadata and all reader-facing explanations need a consistent, chemically correct separation of across-period electronegativity effects from down-group size and polarizability effects.",
+ "confidence": 0.99
+ },
+ {
+ "finding_id": "instr-003",
+ "location": {
+ "section_id": "equilibrium-prediction",
+ "concept_slug": "equilibrium-prediction",
+ "nugget_id": "nugget-equilibrium-direction",
+ "anchor_text": "because the amine is a weaker acid on that side"
+ },
+ "severity": "blocker",
+ "category": "chemical-accuracy",
+ "observation": "The amine/carboxylic-acid equilibrium explanation misidentifies the product-side acid. The species with pKa ≈ 10 in the ammonium carboxylate product is the ammonium ion, not the neutral amine.",
+ "learner_impact": "Students may compare the wrong species when applying the pKa-difference method and lose the distinction between a base and its conjugate acid.",
+ "evidence": "Both source and compiled expanded text state: \"the equilibrium favors the ammonium carboxylate salt because the amine is a weaker acid on that side.\" The neutral amine is a reactant; its ammonium conjugate acid is on the product side.",
+ "recommended_outcome": "The equilibrium explanation needs to name the actual acid on each side and consistently distinguish the amine base from its ammonium conjugate acid.",
+ "confidence": 0.99
+ },
+ {
+ "finding_id": "instr-004",
+ "location": {
+ "section_id": "curved-arrow-notation",
+ "concept_slug": "curved-arrow-notation",
+ "nugget_id": "nugget-curved-arrow-rules",
+ "asset_id": "asset-curved-arrow-displacement"
+ },
+ "severity": "high",
+ "category": "figure-accuracy",
+ "observation": "The core curved-arrow assets do not structurally represent what their titles, descriptions, and alt text claim. The association assets compile from SMILES \"N\" and the displacement asset from \"O\", so the reader renders isolated ammonia or water rather than the acceptor, leaving group, products, charges, and curved arrows.",
+ "learner_impact": "Students are told how arrows work but cannot inspect a chemically complete example of arrow tails, heads, simultaneous bond formation, or bond cleavage before being assessed.",
+ "evidence": "asset-curved-arrow-association is titled \"Association: one curved arrow\" but has smiles \"N\"; asset-curved-arrow-displacement is titled \"Displacement: two curved arrows\" but has smiles \"O\". Their compiled blocks remain molecule blocks with those same single-molecule SMILES while the alt text asserts complete arrow-pushing reactions.",
+ "recommended_outcome": "The core arrow lesson needs representations whose visible chemistry faithfully includes every relevant species, formal charge, electron source, electron destination, bond change, and required curved arrow.",
+ "confidence": 0.99
+ },
+ {
+ "finding_id": "instr-005",
+ "location": {
+ "section_id": "curved-arrow-notation",
+ "concept_slug": "curved-arrow-notation",
+ "question_slug": "ch2-lewis-arrow",
+ "anchor_text": "Use two arrows for any displacement step"
+ },
+ "severity": "high",
+ "category": "objective-alignment",
+ "observation": "The explicit two-arrow displacement objective is not assessed. Both curved-arrow questions are one-arrow lone-pair additions to a tert-butyl cation, and the two-arrow H2O/HCl activity exists only as an uncompiled source practice check.",
+ "learner_impact": "A student can pass the available curved-arrow assessment without demonstrating simultaneous bond formation and bond cleavage, the chapter's main stated safeguard against octet errors.",
+ "evidence": "The learning objective says \"Use two arrows for any displacement step.\" ch2-lewis-arrow and ch2-lewis-arrow-v2 each set max_arrows to 1 and expect only a lone-pair-to-carbocation arrow.",
+ "recommended_outcome": "Assessment coverage needs to require students to account for both electron-pair movements in a chemically complete displacement or proton-transfer step.",
+ "confidence": 0.99
+ },
+ {
+ "finding_id": "instr-006",
+ "location": {
+ "section_id": "structure-and-acidity",
+ "concept_slug": "structure-and-acidity",
+ "question_slug": "ch2-acidity-factors-matrix",
+ "anchor_text": "Electron-withdrawing groups stabilize the conjugate base by induction"
+ },
+ "severity": "high",
+ "category": "objective-alignment",
+ "observation": "The structure–acidity assessments emphasize induction through trifluoroethanol and chloroacetic acid, but the instructional text defines only electronegativity, size, hybridization, and resonance and never introduces induction as a through-sigma-bond effect. Conversely, the stated objectives require ranking by electronegativity, size, hybridization, and resonance, yet no question samples size and none directly tests the across-period versus down-group decision.",
+ "learner_impact": "Students are graded on an untaught explanatory model while substantial parts of the stated objective remain unmeasured, so performance does not establish mastery of the section.",
+ "evidence": "ch2-acidity-factors-matrix feedback invokes \"inductive stabilization\" and ch2-acidity-factors-matrix-v2 invokes chlorine withdrawal \"by induction.\" The nugget learning objective instead names electronegativity, size, hybridization, and resonance.",
+ "recommended_outcome": "Instruction, objectives, worked reasoning, and assessment need to cover the same named structural effects and distinguish direct atom effects from substituent induction.",
+ "confidence": 0.98
+ },
+ {
+ "finding_id": "instr-007",
+ "location": {
+ "section_id": "structure-and-acidity",
+ "concept_slug": "structure-and-acidity",
+ "nugget_id": "nugget-structure-acidity",
+ "question_slug": "ch2-stronger-acid-resonance"
+ },
+ "severity": "high",
+ "category": "sequencing",
+ "observation": "Resonance stabilization is essential to the default prose and an answer key, but the concept prerequisites list only pKa and functional-group acidities, and the chapter never establishes how resonance contributors are drawn or why equivalent contributors delocalize charge.",
+ "learner_impact": "Learners without prior resonance instruction must memorize that acetate is stabilized rather than reason from valid contributors and electron flow.",
+ "evidence": "structure-and-acidity prerequisites are pka-and-acid-strength and common-organic-acid-pkas. The prose says acetate \"spreads the negative charge equally over both oxygens,\" and ch2-stronger-acid-resonance requires resonance as the correct explanation.",
+ "recommended_outcome": "Resonance reasoning needs to be an explicit prerequisite or be established before it is used to explain acidity and grade student answers.",
+ "confidence": 0.96
+ },
+ {
+ "finding_id": "instr-008",
+ "location": {
+ "section_id": "pka-and-acid-strength",
+ "concept_slug": "pka-and-acid-strength",
+ "nugget_id": "nugget-pka-scale",
+ "anchor_text": "A stronger acid is more dissociated at equilibrium, generates a lower pH in solution"
+ },
+ "severity": "high",
+ "category": "misconception",
+ "observation": "The chapter first distinguishes pH from pKa but then states without conditions that a stronger acid generates a lower solution pH. Solution pH also depends on analytical concentration, solvent, temperature, activity, and acid stoichiometry; pKa values likewise belong to specified media and conditions.",
+ "learner_impact": "Students may infer that pKa alone determines the pH of any sample and may compare tabulated pKa values without checking medium or concentration.",
+ "evidence": "Standard text says \"pH describes the proton concentration in a particular solution,\" while expanded text adds the unqualified claim that a stronger acid \"generates a lower pH in solution.\" The chapter combines representative values spanning very different acid classes without stating a solvent convention.",
+ "recommended_outcome": "The pKa–pH explanation needs explicit conditions that separate intrinsic equilibrium strength in a specified medium from the concentration-dependent pH of a particular solution.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "instr-009",
+ "location": {
+ "section_id": "pka-and-acid-strength",
+ "asset_id": "asset-pka-scale-table",
+ "anchor_text": "Representative pKa values"
+ },
+ "severity": "high",
+ "category": "figure-accuracy",
+ "observation": "The purported pKa and acidity tables compile as molecule cards using placeholder SMILES rather than displaying the claimed tabular comparisons. asset-pka-scale-table and asset-delta-g-keq-table use methane, while the functional-group and acidity-factor tables use acetic acid.",
+ "learner_impact": "Students do not receive the ranked numerical or factor comparison the prose and asset descriptions rely on, making recall and cross-category comparison unnecessarily difficult.",
+ "evidence": "The compiled \"Representative pKa values\" block contains smiles \"C\" despite alt text describing seven acids and values; \"ΔG° and Keq relationship\" also contains smiles \"C\" despite describing a two-column table.",
+ "recommended_outcome": "Each quantitative or comparison asset needs visible content that faithfully presents the complete values, labels, units, trends, and examples claimed by its title and description.",
+ "confidence": 0.99
+ },
+ {
+ "finding_id": "instr-010",
+ "location": {
+ "concept_slug": "bronsted-lowry-framework",
+ "question_slug": "ch2-bronsted-acids-select",
+ "anchor_text": "can act as a Brønsted acid in water"
+ },
+ "severity": "medium",
+ "category": "assessment-readiness",
+ "observation": "The multi-select prompt uses the open-ended phrase \"can act as a Brønsted acid in water\" to count ethanol as acidic but exclude propane. Both are enormously unfavorable proton donors to water, differing by degree rather than by an absolute capacity to donate a proton, so the intended operational threshold is not stated.",
+ "learner_impact": "A chemically careful student can interpret the prompt differently from the key, and the feedback risks replacing equilibrium reasoning with the heuristic that the presence of O–H or N–H alone determines Brønsted acidity.",
+ "evidence": "The key selects acetic acid and ethanol but not propane. The hint says \"Look for O–H or N–H protons,\" while the feedback justifies the distinction with approximate pKa values of 16 and 50.",
+ "recommended_outcome": "The assessment needs a chemically explicit criterion for appreciable proton donation under stated conditions or a comparison framed directly in terms of relative pKa.",
+ "confidence": 0.89
+ }
+ ],
+ "strengths": [
+ "The broad instructional sequence from electron-pair donors and acceptors through curved arrows, Brønsted pairs, pKa, equilibrium, and structural effects is coherent.",
+ "All SMILES inspected in the source questions and assets parse successfully, and the curved-arrow site indices correctly identify the donor and tert-butyl carbocation atoms.",
+ "The answer keys for Lewis classification, conjugate-base naming, acidity ranking, pKa matching, equilibrium direction, resonance stabilization, and inductive acidity comparisons are chemically correct.",
+ "Assessment formats are varied and include semantic curved-arrow questions, ranking, matching, categorization, matrices, selection, and short answer.",
+ "Most feedback explains why distractors fail and repeatedly connects acid strength to conjugate-base stability rather than relying only on memorized pKa values."
+ ],
+ "open_questions": [
+ "Is the compiled reader's corrected expanded protonated-amine text intended to supersede the contradictory source package, and which detail level is presented to students by default?",
+ "Are the molecule-typed table and curved-arrow assets temporary placeholders, or are the compiled StructureCards the intended publication rendering?",
+ "Is resonance formally taught in a prerequisite chapter outside this topic-package sequence?"
+ ]
+ },
+ {
+ "persona": "Struggling Student",
+ "persona_version": "1.0.0",
+ "chapter_id": "acids-bases-and-curved-arrows",
+ "chapter_version": "1",
+ "model": "gpt-5.6-sol",
+ "summary": "The chapter has a sensible overall progression and unusually helpful question feedback, but a low-confidence learner encounters two publication-level problems: the foundational curved-arrow visuals contain only placeholder molecule SMILES rather than the reactions and arrows their titles describe, and the source package gives chemically incorrect, internally contradictory pKa guidance for protonated amines. Dense prerequisite language, missing worked steps, unmarked optional thermodynamics, source-to-reader drift, and assessments that introduce phenol and induction before instruction make the chapter feel less learnable than its orderly outline suggests.",
+ "overall_score": 4.1,
+ "publication_blockers": [
+ "struggling-001",
+ "struggling-007"
+ ],
+ "findings": [
+ {
+ "finding_id": "struggling-001",
+ "location": {
+ "section_id": "curved-arrow-notation",
+ "concept_slug": "curved-arrow-notation",
+ "nugget_id": "nugget-curved-arrow-rules",
+ "asset_id": "asset-curved-arrow-displacement",
+ "anchor_text": "Displacement: two curved arrows"
+ },
+ "severity": "blocker",
+ "category": "worked-example-gap",
+ "observation": "The core arrow lesson claims to show association and displacement mechanisms, but the source assets are molecule records containing only SMILES \"N\" and \"O\". The compiled reader likewise supplies molecule blocks with those isolated SMILES; it contains no reactant pair, product, bond-change sequence, or encoded curved arrows.",
+ "learner_impact": "A low-confidence learner stares at ammonia or water while the prose refers to an incoming donor, central atom, leaving group, and simultaneous arrows. The learner cannot trace the required move, rereads the paragraph, and then guesses where an arrow should begin when the curved-arrow question appears.",
+ "evidence": "In topic.package.json, asset-curved-arrow-association has smiles \"N\" and asset-curved-arrow-displacement has smiles \"O\", although their learning goals say \"Illustrate a single curved arrow\" and \"Show the two-arrow requirement.\" The compiled reader repeats these as molecule blocks blk-m84n5dny and blk-ltsfu1cz with the same isolated SMILES. The prose says, \"one arrow forms the new bond ... while a second arrow moves the old bonding electrons,\" but no worked structure displays either movement.",
+ "recommended_outcome": "The foundational lesson needs an inspectable, chemically complete account of the electron source, destination, bond formed, bond broken, and resulting structures for both one-arrow and two-arrow moves.",
+ "confidence": 0.99
+ },
+ {
+ "finding_id": "struggling-002",
+ "location": {
+ "section_id": "electron-pair-donors-acceptors",
+ "concept_slug": "electron-pair-donors-acceptors",
+ "nugget_id": "nugget-electron-pair-flow",
+ "question_slug": "ch2-lewis-sort",
+ "anchor_text": "Lewis bases include lone-pair donors such as water, ammonia, and halide ions, as well as alkenes and other pi systems."
+ },
+ "severity": "high",
+ "category": "conceptual-support",
+ "observation": "The opening paragraph rapidly invokes lone pairs, pi systems, carbocations, metal ions, and incomplete valence shells without showing how a learner recognizes any of those features. The subsequent sorting question requires electron counting for BF3 and AlCl3, a procedure the chapter never demonstrates.",
+ "learner_impact": "A learner with weak bonding prerequisites cannot convert the vocabulary into a decision. They reread the donor/acceptor definition, then sort species by whether the word or formula looks positive or familiar instead of checking for an available pair or incomplete octet.",
+ "evidence": "The first reader section lists \"lone-pair donors,\" \"pi systems,\" \"carbocations,\" and \"an incomplete valence shell\" in one paragraph. Question ch2-lewis-sort then asks the learner to classify BF3, trimethylamine, AlCl3, and dimethyl ether; its feedback says to count six electrons and identify an empty orbital, reasoning not modeled in the reader.",
+ "recommended_outcome": "Learners need enough recognition guidance to locate an available electron pair or an electron-deficient center from the formulas and structures used in the first practice set.",
+ "confidence": 0.96
+ },
+ {
+ "finding_id": "struggling-003",
+ "location": {
+ "section_id": "pka-and-acid-strength",
+ "concept_slug": "pka-and-acid-strength",
+ "nugget_id": "nugget-pka-scale",
+ "anchor_text": "A stronger acid is more dissociated at equilibrium, generates a lower pH in solution"
+ },
+ "severity": "high",
+ "category": "misconception",
+ "observation": "The default expanded reader text links stronger acid directly to lower solution pH without specifying equal concentration or otherwise controlling solution conditions. This undercuts the chapter's own stated trouble spot of distinguishing pH from pKa.",
+ "learner_impact": "A shaky learner turns the sentence into the rule \"lower pKa always means lower pH.\" They then compare solution pH values as if pH were an intrinsic property of the acid and stop attending to concentration.",
+ "evidence": "The expanded compiled text says, \"A stronger acid is more dissociated at equilibrium, generates a lower pH in solution.\" Only the alternate standard detail says, \"pH describes the proton concentration in a particular solution; pKa is a fixed property of the acid regardless of concentration.\"",
+ "recommended_outcome": "The acid-strength explanation needs to keep intrinsic pKa separate from concentration-dependent solution pH in every detail level.",
+ "confidence": 0.98
+ },
+ {
+ "finding_id": "struggling-004",
+ "location": {
+ "section_id": "equilibrium-prediction",
+ "concept_slug": "equilibrium-prediction",
+ "nugget_id": "nugget-equilibrium-direction",
+ "anchor_text": "because the amine is a weaker acid on that side"
+ },
+ "severity": "high",
+ "category": "conceptual-support",
+ "observation": "The equilibrium example tells learners to identify the acid on each side but then calls the amine the weaker acid on the ammonium-carboxylate product side. The acid on that side is the ammonium conjugate acid, not the neutral amine.",
+ "learner_impact": "The learner repeatedly scans the products looking for the neutral amine, cannot reconcile the names with the species, and may compare the pKa of the wrong member of the conjugate pair in later problems.",
+ "evidence": "The source and compiled reader say, \"If an amine (pKa of conjugate acid ≈ 10) reacts with a carboxylic acid (pKa ≈ 5), the equilibrium favors the ammonium carboxylate salt because the amine is a weaker acid on that side.\" This follows the instruction to compare \"the starting acid and the conjugate acid produced,\" making the label inconsistent with the stated procedure.",
+ "recommended_outcome": "The worked equilibrium reasoning needs to name the actual acid species on each side and consistently connect each quoted pKa to that species.",
+ "confidence": 0.99
+ },
+ {
+ "finding_id": "struggling-005",
+ "location": {
+ "section_id": "common-organic-acid-pkas",
+ "concept_slug": "common-organic-acid-pkas",
+ "nugget_id": "nugget-functional-group-acidities",
+ "question_slug": "ch2-pka-match",
+ "anchor_text": "Match each compound to its approximate pKa."
+ },
+ "severity": "high",
+ "category": "assessment-readiness",
+ "observation": "The matching assessment requires the learner to assign phenol pKa approximately 10, but neither the reader prose nor the claimed functional-group pKa asset teaches phenol as a benchmark.",
+ "learner_impact": "The learner can place acetic acid and ethanol from the chapter, but has no basis for phenol. They guess the remaining value by elimination and may believe they understood the chemistry even though the explanation about phenoxide appears only after an error.",
+ "evidence": "Question ch2-pka-match includes \"Phenol\" paired with \"pKa ≈ 10.\" The preceding prose lists carboxylic acids, protonated heteroatoms, alcohols, water, alkynes, and unfunctionalized C-H bonds. The asset-functional-group-pka-table alt text lists carboxylic acids, thiols, protonated amines, alcohols, alkynes, aldehyde alpha-C-H, and sp3 C-H, but not phenol.",
+ "recommended_outcome": "Learners need the phenol benchmark and the reason for its intermediate acidity established before they are asked to recall or match it.",
+ "confidence": 0.99
+ },
+ {
+ "finding_id": "struggling-006",
+ "location": {
+ "section_id": "structure-and-acidity",
+ "concept_slug": "structure-and-acidity",
+ "nugget_id": "nugget-structure-acidity",
+ "question_slug": "ch2-acidity-factors-matrix",
+ "anchor_text": "Electron-withdrawing groups stabilize the conjugate base by induction"
+ },
+ "severity": "high",
+ "category": "assessment-readiness",
+ "observation": "The structure-and-acidity lesson explicitly presents four factors—electronegativity, size, hybridization, and resonance—but the comparison-matrix assessment introduces electron-withdrawing groups and induction as the governing explanation without prior instruction or a worked comparison.",
+ "learner_impact": "A low-confidence learner notices fluorine and marks trifluoroethanol as \"higher\" by pattern matching. If asked why, they cannot explain transmission through sigma bonds and only encounter that reasoning in feedback after submitting an answer.",
+ "evidence": "The reader says, \"Four factors independently govern that stability\" and names electronegativity, size, hybridization, and resonance. Question ch2-acidity-factors-matrix asks about \"Electron-withdrawing groups near the O-H,\" while its feedback first introduces \"inductive stabilization\" and fluorine pulling electron density \"through the sigma bonds.\"",
+ "recommended_outcome": "Learners need electron-withdrawing and inductive effects connected to conjugate-base stability before those ideas determine a graded comparison.",
+ "confidence": 0.98
+ },
+ {
+ "finding_id": "struggling-007",
+ "location": {
+ "section_id": "common-organic-acid-pkas",
+ "concept_slug": "common-organic-acid-pkas",
+ "nugget_id": "nugget-functional-group-acidities",
+ "anchor_text": "Protonated amines and protonated alcohols are strong acids (pKa –1 to 0)."
+ },
+ "severity": "blocker",
+ "category": "misconception",
+ "observation": "The source package gives protonated amines an incorrect pKa below 1 and contradicts itself and the compiled artifacts. In the same source standard text, protonated amines are assigned pKa −1 to 0 and a primary amine's conjugate acid is assigned pKa approximately 10; the source expanded text again places R-NH3+ below 1. The compiled reader instead gives protonated amines pKa approximately 10–11, while the question set gives ammonia's own N-H acidity near 38.",
+ "learner_impact": "A weak learner cannot tell whether an amine, its protonated conjugate acid, and ammonia are being assigned 0, 10, or 38. They memorize whichever number they saw last and form the wrong rule that all protonated heteroatoms are comparably strong acids.",
+ "evidence": "topic.package.json standard text states, \"Protonated amines and protonated alcohols are strong acids (pKa –1 to 0)\" and later, \"Primary amines (pKa of the conjugate acid ≈ 10).\" Its expanded text says \"R–OH2+, R–NH3+ have pKa values below 1.\" The compiled reader changes protonated amines to pKa 10–11, and ch2-pka-match-v2 assigns ammonia pKa approximately 38.",
+ "recommended_outcome": "Every source and compiled detail level needs one chemically correct, explicit distinction among amine N-H acidity, the pKa of an ammonium conjugate acid, and protonated alcohol acidity.",
+ "confidence": 1.0
+ },
+ {
+ "finding_id": "struggling-008",
+ "location": {
+ "section_id": "free-energy-and-equilibrium-constants",
+ "concept_slug": "free-energy-and-equilibrium-constants",
+ "nugget_id": "nugget-free-energy-equilibrium",
+ "anchor_text": "Every acid-base equilibrium has an associated standard free-energy change ΔG° = –RT ln Keq"
+ },
+ "severity": "medium",
+ "category": "cognitive-load",
+ "observation": "The source marks the ΔG°–Keq concept as advanced and teacher-optional, but the compiled reader presents it as an ordinary final section without carrying forward an optional marker or prerequisite warning.",
+ "learner_impact": "The learner assumes the equation, units, natural logarithm, standard conditions, and exponential relationship are all required core material. They stop at the symbol-heavy paragraph or spend disproportionate study time on it because nothing signals that it is an optional extension.",
+ "evidence": "The source concept free-energy-and-equilibrium-constants has \"difficulty\": \"advanced\", \"teacher_optional\": true, and says the treatment extends beyond core Org 1 outcomes. The compiled reader section nugget-free-energy-equilibrium contains the full quantitative paragraph but no corresponding optional designation.",
+ "recommended_outcome": "The compiled learning path needs to preserve the section's optional status and make its prerequisite expectations distinguishable from the chapter's core learning targets.",
+ "confidence": 0.98
+ },
+ {
+ "finding_id": "struggling-009",
+ "location": {
+ "section_id": "curved-arrow-notation",
+ "concept_slug": "curved-arrow-notation",
+ "nugget_id": "nugget-curved-arrow-rules",
+ "anchor_text": "Both arrows must be drawn; using only one is the most common error"
+ },
+ "severity": "medium",
+ "category": "retrieval-practice",
+ "observation": "Each source nugget contains a practice_check, but none of those checks appears in the compiled reader sections. The learner therefore reads several dense explanations consecutively without an immediate opportunity to verify understanding.",
+ "learner_impact": "The learner nods along with phrases such as \"donor,\" \"conjugate acid,\" and \"higher pKa\" but does not discover that they cannot apply them until reaching the separate question set. At that point they must search backward across multiple sections and are more likely to guess or quit.",
+ "evidence": "For example, source nugget-curved-arrow-rules includes the check, \"How many curved arrows are needed to show H2O acting as a base toward HCl?\" with a two-arrow answer. The compiled section nugget-curved-arrow-rules contains text, two molecule blocks, a hidden video, and an external link, but no practice block. The same omission occurs for the other source practice_check fields.",
+ "recommended_outcome": "Learners need timely, low-stakes checks at the point each core rule is introduced so misunderstandings surface before concepts accumulate.",
+ "confidence": 0.97
+ },
+ {
+ "finding_id": "struggling-010",
+ "location": {
+ "section_id": "pka-and-acid-strength",
+ "concept_slug": "pka-and-acid-strength",
+ "nugget_id": "nugget-pka-scale",
+ "asset_id": "asset-pka-scale-table",
+ "anchor_text": "Representative pKa values"
+ },
+ "severity": "high",
+ "category": "cognitive-load",
+ "observation": "Several assets described as tables or comparison summaries compile as generic molecule blocks with placeholder SMILES rather than the structured comparisons promised by their titles and descriptions.",
+ "learner_impact": "A learner expecting a ranked pKa reference sees a methane rendering from SMILES \"C\" and must extract every benchmark from dense prose. In the four-factor section they see acetic acid rather than four organized trends, so the supposed visual support increases uncertainty instead of reducing memory load.",
+ "evidence": "asset-pka-scale-table is type \"molecule\" with smiles \"C\" although its learning goal is \"Display a ranked table of pKa values.\" asset-functional-group-pka-table and asset-acidity-factors-table are also molecule assets with smiles \"CC(=O)O\" despite table-oriented learning goals. The compiled reader preserves them as molecule blocks blk-yaiwejyd, blk-qfsll4of, and blk-3qb9hzwr.",
+ "recommended_outcome": "Quantitative ranges and multi-factor comparisons need to be available in a form whose visible content actually exposes the relationships promised by the asset titles.",
+ "confidence": 0.99
+ },
+ {
+ "finding_id": "struggling-011",
+ "location": {
+ "section_id": "curved-arrow-notation",
+ "concept_slug": "curved-arrow-notation",
+ "nugget_id": "nugget-curved-arrow-rules",
+ "question_slug": "ch2-lewis-arrow",
+ "anchor_text": "Draw the single curved arrow for this step."
+ },
+ "severity": "high",
+ "category": "objective-alignment",
+ "observation": "The stated core objective requires learners to use two arrows for displacement, but both compiled curved-arrow questions permit and assess only one-arrow association. The source's two-arrow practice check is not present in the compiled reader or question set.",
+ "learner_impact": "The learner completes the only arrow tasks by drawing one arrow and concludes that the chapter's main rule has been mastered. When a later mechanism requires bond formation and bond breaking together, they omit the second arrow and create the exact octet error the prose warned about.",
+ "evidence": "The source objective says, \"Use two arrows for any displacement step.\" Questions ch2-lewis-arrow and ch2-lewis-arrow-v2 both say \"Draw the single curved arrow\" and set max_arrows to 1. The compiled question inventory contains no two-arrow displacement task.",
+ "recommended_outcome": "The core two-arrow objective needs an opportunity for learners to perform the coordinated bond-forming and bond-breaking move and receive feedback on either missing or reversed arrows.",
+ "confidence": 0.99
+ }
+ ],
+ "strengths": [
+ "The broad concept sequence—donor/acceptor recognition, curved arrows, Brønsted pairs, pKa, equilibrium, and structural effects—is easy to recognize and generally moves from foundational language toward prediction.",
+ "The chapter repeats the crucial mnemonic that lower pKa means stronger acid in prose, hints, and feedback.",
+ "Many questions include targeted wrong-answer explanations that name the mistaken reasoning instead of merely revealing the correct option.",
+ "Common examples such as ammonia, water, acetic acid, ethanol, and acetate recur across sections, reducing unnecessary molecule-name load.",
+ "The question set offers multiple interaction types and staged variants, giving learners more than one way to encounter several core concepts."
+ ],
+ "open_questions": [
+ "Does the production reader inject mechanism arrows or table overlays from data outside the compiled chapter JSON? The inspected molecule blocks contain only SMILES and descriptive strings.",
+ "Are source nugget practice_check fields rendered through a separate runtime path not represented in the compiled reader JSON?"
+ ]
+ },
+ {
+ "persona": "Accessibility Persona",
+ "persona_version": "1.0.0",
+ "chapter_id": "acids-bases-and-curved-arrows",
+ "chapter_version": "1",
+ "model": "gpt-5.6-sol",
+ "summary": "The chapter provides strong text-based instruction, neutral accessible descriptions for all 15 questions, and keyboard-capable interaction patterns for sorting, matching, ranking, comparison matrices, and curved-arrow work. No required activity is demonstrably impossible without vision or fine-pointer input. The principal access risk is that the compiled reader's purported mechanisms and tables are rendered as unrelated single molecules while their alt text describes richer diagrams, so visual and nonvisual representations do not reliably correspond. One complex table also lacks a figure-specific extended description, and figure headings create a navigation-level gap.",
+ "overall_score": 7.8,
+ "publication_blockers": [],
+ "findings": [
+ {
+ "finding_id": "access-001",
+ "location": {
+ "section_id": "electron-pair-donors-acceptors",
+ "concept_slug": "electron-pair-donors-acceptors",
+ "nugget_id": "nugget-electron-pair-flow",
+ "asset_id": "asset-electron-pair-flow-diagram",
+ "anchor_text": "Electron-pair donation: association vs displacement"
+ },
+ "severity": "high",
+ "category": "alt-text-quality",
+ "observation": "The source and compiled reader use single-molecule renderings as stand-ins for multi-species mechanisms and tables, so the alt text does not describe the image actually produced. For example, asset-electron-pair-flow-diagram compiles as a molecule block with SMILES \"N\" while its alt text describes NH3 + H+ and a curved arrow. The same mismatch appears for asset-curved-arrow-displacement (SMILES \"O\" but a water/HCl displacement), asset-pka-scale-table and asset-delta-g-keq-table (SMILES \"C\" but table descriptions), and the other table-designated assets.",
+ "learner_impact": "A learner using magnification, residual vision, or both speech and visual output receives contradictory representations. A screen-reader-only learner hears intended chemistry that is not present in the rendered figure, making references to the figure unreliable and preventing a shared point of reference with instructors or peers.",
+ "evidence": "In topic.package.json, asset-electron-pair-flow-diagram has type \"molecule\", smiles \"N\", and alt text \"Curved arrow from nitrogen lone pair to hydrogen in NH3 + H+ association.\" The compiled reader preserves that mismatch in block blk-i84t6fzt. Likewise, blk-yaiwejyd renders SMILES \"C\" under the title \"Representative pKa values\" while its alt text describes a seven-entry table.",
+ "recommended_outcome": "Each figure needs visual and nonvisual representations that refer to the same chemical object and communicate the same chemically relevant relationships.",
+ "confidence": 0.99
+ },
+ {
+ "finding_id": "access-002",
+ "location": {
+ "section_id": "structure-and-acidity",
+ "concept_slug": "structure-and-acidity",
+ "nugget_id": "nugget-structure-acidity",
+ "asset_id": "asset-acidity-factors-table",
+ "anchor_text": "Table with four rows (electronegativity, size, hybridization, resonance) listing the trend and an example acid pair for each."
+ },
+ "severity": "medium",
+ "category": "alt-text-quality",
+ "observation": "The acidity-factors figure description names its four row headings but does not state the trend or example pair contained in any row, and neither the source asset nor compiled block carries a long_description or transcript. The surrounding prose explains the general concepts, but it does not provide a figure-specific readout that lets a nonvisual learner inspect the purported table row by row.",
+ "learner_impact": "A learner navigating directly to the figure cannot recover the relationships that the figure claims to summarize and must search surrounding prose to reconstruct them. This weakens independent figure navigation and makes figure references less useful during review.",
+ "evidence": "asset-acidity-factors-table contains only the quoted alt_text and science_review metadata under accessibility; compiled block blk-3qb9hzwr contains alt_text and a learning-goal description but no long_description or transcript.",
+ "recommended_outcome": "The figure needs a complete, logically ordered nonvisual account of every factor, its acidity trend, and its associated comparison so the summary can be understood independently of visual layout.",
+ "confidence": 0.96
+ },
+ {
+ "finding_id": "access-003",
+ "location": {
+ "section_id": "electron-pair-donors-acceptors",
+ "nugget_id": "nugget-electron-pair-flow",
+ "asset_id": "asset-electron-pair-flow-diagram",
+ "anchor_text": "Electrons move; atoms do not"
+ },
+ "severity": "medium",
+ "category": "keyboard-operability",
+ "observation": "The reader renders each chapter section title as an h2 and each molecule-figure title as an h4, with no intervening h3. This produces a repeated heading-level gap throughout the compiled chapter.",
+ "learner_impact": "Screen-reader users navigating by heading level may infer missing subsections or have difficulty understanding how figures relate to their enclosing sections.",
+ "evidence": "TopicPackageChapterRenderer renders section titles with Heading as=\"h2\". ReaderBlockRenderer's StructureCard renders molecule titles with Heading as=\"h4\". Every compiled figure in this chapter is a molecule block nested directly inside a section.",
+ "recommended_outcome": "The chapter needs a contiguous, semantically meaningful heading hierarchy so figure titles are announced at the level implied by their position within each section.",
+ "confidence": 0.98
+ }
+ ],
+ "strengths": [
+ "All 15 source and compiled questions include task-focused accessible descriptions; none of the reviewed descriptions states an answer or internal answer identifier.",
+ "Question stimuli use explicit compound names and textual values alongside structure SMILES, so the reviewed selection, matching, ranking, and matrix tasks do not depend solely on recognizing rendered structures.",
+ "The rank-order, matching, categorization, and comparison-matrix renderers provide labeled keyboard controls, and the curved-arrow renderer exposes named source and destination sites through keyboard-reachable controls.",
+ "The reader has a clear chapter h1 followed by ordered section h2 headings, and the instructional prose supplies substantial text equivalents for the core electron-flow, pKa, equilibrium, and acidity concepts.",
+ "The planned curved-arrow video blocks are hidden while their URLs are empty, so unfinished media is not currently exposed as required learner content."
+ ],
+ "open_questions": [
+ "Before video-curved-arrow-intro is made visible, will the delivered media include captions, descriptive narration of the meaningful arrow motion, pause/replay or stepping controls, and an equivalent non-animated account?",
+ "How do the mixed chemistry notations in compiled prose, including \"10–5\", \"10–50\", \"10^5\", H3O+, and ΔG° equations, announce in the supported screen-reader/browser combinations?"
+ ]
+ },
+ {
+ "persona": "Learner with Visual Preference",
+ "persona_version": "1.0.0",
+ "chapter_id": "acids-bases-and-curved-arrows",
+ "chapter_version": "1",
+ "model": "gpt-5.6-sol",
+ "summary": "The chapter has a clear conceptual progression and several well-chosen interactive question formats, but its compiled visual layer does not deliver what the source assets, figure titles, descriptions, and alt text promise. Core curved-arrow diagrams compile as isolated ammonia or water molecule blocks, the conjugate-pair diagram compiles as acetic acid alone, and four purported tables compile as methane or acetic acid structures. These are misleading existing figures rather than merely missing optional visuals. Important relationships in equilibrium prediction and structure–acidity analysis also remain paragraph-bound. The incomplete video is appropriately hidden, and the comparison-matrix questions provide some genuinely useful side-by-side organization.",
+ "overall_score": 3.8,
+ "publication_blockers": [],
+ "findings": [
+ {
+ "finding_id": "visual-001",
+ "location": {
+ "section_id": "curved-arrow-notation",
+ "concept_slug": "curved-arrow-notation",
+ "nugget_id": "nugget-curved-arrow-rules",
+ "asset_id": "asset-curved-arrow-association",
+ "anchor_text": "Association: one curved arrow"
+ },
+ "severity": "high",
+ "category": "figure-accuracy",
+ "observation": "The three assets intended to teach electron flow do not contain the reactions or arrows named by their titles. In the source, asset-electron-pair-flow-diagram and asset-curved-arrow-association are molecule assets containing only SMILES \"N\", while asset-curved-arrow-displacement contains only SMILES \"O\". The compiled reader preserves these as molecule blocks, so the visible content cannot show NH3 + H+, an arrow path, a product, HCl, bond breaking, or the promised contrast between one and two arrows.",
+ "learner_impact": "The chapter's central spatial convention—where arrow tails begin, where arrowheads end, and why displacement needs two simultaneous arrows—is asserted in prose but represented by isolated molecules under diagram-like titles. A learner cannot visually inspect or compare the moves before being asked to draw them.",
+ "evidence": "Source assets asset-electron-pair-flow-diagram (SMILES \"N\"), asset-curved-arrow-association (SMILES \"N\"), and asset-curved-arrow-displacement (SMILES \"O\") compile to blocks blk-i84t6fzt, blk-m84n5dny, and blk-ltsfu1cz. Their titles and descriptions respectively promise electron-pair flow, a one-arrow association, and a two-arrow displacement.",
+ "recommended_outcome": "The visible treatment needs to match the stated learning goals by making the relevant reactants, electron source, electron destination, arrow count, and resulting bond changes inspectable; otherwise the diagram-like blocks and claims need to be removed or reframed.",
+ "confidence": 0.99
+ },
+ {
+ "finding_id": "visual-002",
+ "location": {
+ "section_id": "bronsted-lowry-framework",
+ "concept_slug": "bronsted-lowry-framework",
+ "nugget_id": "nugget-bronsted-definition",
+ "asset_id": "asset-conjugate-pair-diagram",
+ "anchor_text": "Conjugate acid-base pair"
+ },
+ "severity": "high",
+ "category": "figure-accuracy",
+ "observation": "The purported conjugate acid-base pair diagram is a molecule asset containing only acetic acid (SMILES \"CC(=O)O\"). Its compiled block does not encode water, acetate, hydronium, a reaction arrow, proton transfer, or the four promised role labels.",
+ "learner_impact": "The one-proton relationship between each acid and conjugate base, and between each base and conjugate acid, is not made visible. The isolated acetic-acid structure can be mistaken for the complete figure described by the title.",
+ "evidence": "asset-conjugate-pair-diagram states the goal \"Label the acid, base, conjugate acid, and conjugate base in a proton-transfer reaction,\" while compiled block blk-gc7i9uy9 contains only name, SMILES \"CC(=O)O\", descriptive text, and a generic /generator link.",
+ "recommended_outcome": "The figure needs either to expose the complete proton-transfer relationship and its four roles or to stop presenting the isolated acetic-acid rendering as a conjugate-pair diagram.",
+ "confidence": 0.99
+ },
+ {
+ "finding_id": "visual-003",
+ "location": {
+ "section_id": "pka-and-acid-strength",
+ "concept_slug": "pka-and-acid-strength",
+ "nugget_id": "nugget-pka-scale",
+ "asset_id": "asset-pka-scale-table",
+ "anchor_text": "Representative pKa values"
+ },
+ "severity": "high",
+ "category": "figure-accuracy",
+ "observation": "All four assets described as quantitative or comparative tables are encoded and compiled as single molecule structures rather than tables. Representative pKa values and ΔG°/Keq compile from SMILES \"C\" as methane, while functional-group pKa ranges and the four acidity factors compile from SMILES \"CC(=O)O\" as acetic acid. None of the promised rows, values, ranges, trends, or comparisons are present in the visible block data.",
+ "learner_impact": "Learners expecting a ranked scale or side-by-side comparison instead encounter an unrelated single structure. This hides the relationships that were supposed to reduce the burden of parsing dense quantitative prose and can make the figure titles actively confusing.",
+ "evidence": "Source assets asset-pka-scale-table, asset-functional-group-pka-table, asset-acidity-factors-table, and asset-delta-g-keq-table all have type \"molecule\" and compile to blocks blk-yaiwejyd, blk-qfsll4of, blk-3qb9hzwr, and blk-78w7w9oy with only methane or acetic-acid SMILES despite table-specific titles and learning goals.",
+ "recommended_outcome": "Each table-labeled block needs to present the actual ordered values or comparisons in a visibly usable form, or the misleading block needs to be removed while the information is organized clearly in the surrounding content.",
+ "confidence": 0.99
+ },
+ {
+ "finding_id": "visual-004",
+ "location": {
+ "section_id": "curved-arrow-notation",
+ "concept_slug": "curved-arrow-notation",
+ "question_slug": "ch2-lewis-arrow",
+ "anchor_text": "Draw the single curved arrow for this step."
+ },
+ "severity": "high",
+ "category": "visual-opportunity",
+ "observation": "The surfaced curved-arrow question asks learners to draw from the ammonia lone pair to the tert-butyl carbocation, but the compiled instructional chapter contains no functioning worked arrow diagram before this task. Its intended examples are the inaccurate molecule blocks identified above, and the only video brief is hidden with an empty URL.",
+ "learner_impact": "A learner must infer the spatial notation directly from prose and then perform it in an editor without first seeing a resolved example. That makes the assessment partly a test of interpreting the interface and notation rather than applying a demonstrated electron-flow rule.",
+ "evidence": "Question ch2-lewis-arrow uses molecule_smiles \"[NH3].C[C+](C)C\" and expects a lone-pair-to-carbocation arrow. Preceding compiled blocks blk-m84n5dny and blk-ltsfu1cz contain only \"N\" and \"O\" structures, while video block blk-zissq1t9 has url \"\" and is_hidden true.",
+ "recommended_outcome": "Before this drawing task is surfaced, learners need an inspectable worked representation of the same source-to-sink convention and a clear correspondence between the representation and the editor's selectable sites.",
+ "confidence": 0.97
+ },
+ {
+ "finding_id": "visual-005",
+ "location": {
+ "section_id": "equilibrium-prediction",
+ "concept_slug": "equilibrium-prediction",
+ "nugget_id": "nugget-equilibrium-direction",
+ "question_slug": "ch2-equilibrium-direction",
+ "anchor_text": "Equilibrium lies on the side bearing the weaker acid"
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "Equilibrium prediction is delivered as a dense paragraph containing two acids, two pKa values, a favored side, and an exponent calculation, but this is the only core section with no local asset at all. The assessment then presents a long inline proton-transfer equation and asks for direction.",
+ "learner_impact": "The repeated mapping from each side to its acid, from each acid to its pKa, and from the higher pKa to the favored side must be held in working memory instead of being visibly aligned.",
+ "evidence": "nugget-equilibrium-direction has an empty asset_ids array. Its expanded text uses the amine/carboxylic-acid example and Keq ≈ 10^(10 − 5), while ch2-equilibrium-direction presents CH3CH2O− + CH3COOH ⇌ CH3CH2OH + CH3COO− in one textual prompt.",
+ "recommended_outcome": "The acid-on-each-side, corresponding pKa values, and favored direction need a visibly aligned presentation that reduces the number of cross-paragraph relationships a learner must track.",
+ "confidence": 0.96
+ },
+ {
+ "finding_id": "visual-006",
+ "location": {
+ "section_id": "structure-and-acidity",
+ "concept_slug": "structure-and-acidity",
+ "nugget_id": "nugget-structure-acidity",
+ "question_slug": "ch2-stronger-acid-resonance",
+ "anchor_text": "Four factors independently govern that stability."
+ },
+ "severity": "medium",
+ "category": "visual-opportunity",
+ "observation": "The section asks learners to compare electronegativity, atomic size, hybridization, and resonance, but the prose does not visibly pair each parent acid with its conjugate base or show the charge distribution being compared. The promised four-factor table is itself only an acetic-acid molecule block.",
+ "learner_impact": "Key structural relationships—especially acetate charge delocalization versus localized ethoxide and the sp/sp2/sp3 progression—remain verbal assertions. This makes it harder to transfer the rules to the resonance and induction questions even though those questions rely on inspecting structure.",
+ "evidence": "nugget-structure-acidity describes acetate spreading charge over two oxygens and compares terminal alkynes, ethylene, and methane. Compiled block blk-3qb9hzwr contains only SMILES \"CC(=O)O\", while ch2-stronger-acid-resonance and ch2-acidity-factors-matrix assess resonance and induction.",
+ "recommended_outcome": "The section needs the compared structures and their relevant charge-stabilizing features to be visibly aligned with the four factors, without requiring additional media where a compact static or structured comparison would suffice.",
+ "confidence": 0.96
+ },
+ {
+ "finding_id": "visual-007",
+ "location": {
+ "section_id": "common-organic-acid-pkas",
+ "concept_slug": "common-organic-acid-pkas",
+ "nugget_id": "nugget-functional-group-acidities",
+ "asset_id": "asset-functional-group-pka-table",
+ "anchor_text": "Grouped bar chart or table showing pKa ranges"
+ },
+ "severity": "medium",
+ "category": "alt-text-quality",
+ "observation": "The asset descriptions repeatedly describe content that is not present in the corresponding compiled molecule blocks. The functional-group asset is additionally described ambiguously as a \"Grouped bar chart or table,\" so it does not identify a definite visual form. Similar alt text claims unrendered arrows, reaction participants, pair labels, and table rows elsewhere.",
+ "learner_impact": "The textual description cannot function as an equivalent for a specific visual when it refers to an uncertain or nonexistent visual, and it creates a major discrepancy between what different learners are told the figure contains.",
+ "evidence": "asset-functional-group-pka-table has alt text beginning \"Grouped bar chart or table\" but compiles as block blk-qfsll4of with SMILES \"CC(=O)O\". asset-pka-scale-table and asset-delta-g-keq-table likewise describe tables while their compiled blocks contain SMILES \"C\".",
+ "recommended_outcome": "Descriptions need to correspond exactly to the final visible content and identify its definite organization; intended-but-unrendered information should not be presented as though it is already in the figure.",
+ "confidence": 0.99
+ }
+ ],
+ "strengths": [
+ "The chapter's sequence from donor/acceptor roles through arrow notation, conjugate pairs, pKa, equilibrium, and structural acidity gives the visual relationships a coherent conceptual order.",
+ "The source storyboard for video-curved-arrow-intro identifies a useful instructional contrast among a one-arrow association, a two-arrow displacement, and a wrong-way arrow, and the incomplete empty-URL video is correctly hidden in the compiled reader.",
+ "Question ch2-pka-match pairs named compounds with rendered structure SMILES, giving learners a useful connection between molecular structure and benchmark pKa values.",
+ "The comparison-matrix questions place ethanol beside 2,2,2-trifluoroethanol and acetic acid beside chloroacetic acid, making the presence of an electron-withdrawing substituent and the corresponding acidity judgment visibly comparable."
+ ],
+ "open_questions": [
+ "Do molecule blocks receive reaction arrows, labels, or table data from a runtime source not represented in the compiled reader JSON? The inspected blocks contain only names, placeholder SMILES, descriptions, alt text, and a generic /generator link.",
+ "Are the four table-labeled molecule assets temporary placeholders scheduled to be replaced before the chapter's available flag becomes true?"
+ ]
+ }
+ ],
+ "orchestrator_findings": [],
+ "publication_readiness": "major revision",
+ "executive_summary": "The chapter's conceptual sequence, question variety, answer keys, and non-answer-leaking accessibility descriptions are strong, but the baseline is a major revision. Three chapter-local chemistry blockers misstate ammonium acidity, periodic acidity trends, and the identity of the product-side acid. More fundamentally, the core curved-arrow examples and four table-labeled assets compile as unrelated single molecules, leaving the reader without the worked electron-flow and comparison representations the text promises. The chemistry blockers are bounded and will be corrected in this pass; the missing/misleading figure layer and two-arrow assessment gap remain authoring work.",
+ "consensus_strengths": [
+ "The concept sequence from donors and acceptors through curved arrows, conjugate pairs, pKa, equilibrium, and structure–acidity reasoning is coherent.",
+ "The reviewed question SMILES and answer keys are chemically sound apart from an ambiguous Brønsted-acid prompt.",
+ "Question formats are varied, feedback is generally explanatory, and all 15 accessible descriptions are task-focused without answer leakage.",
+ "Incomplete video blocks are hidden rather than exposed as dead media."
+ ],
+ "ranked_recommendations": [
+ {
+ "rec_id": "rec-001",
+ "title": "Correct amine, ammonium, and oxonium acidity",
+ "need": "Source and compiled detail levels must distinguish neutral amine N–H acidity, ammonium conjugate-acid pKa, and protonated-alcohol acidity.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "The defect is repeated textual chemistry; aligned prose edits are the least-complex complete correction.",
+ "target_surface": "prose",
+ "severity": "blocker",
+ "source_findings": [
+ "instr-001",
+ "struggling-007"
+ ]
+ },
+ {
+ "rec_id": "rec-002",
+ "title": "Repair the reversed periodic-trend metadata",
+ "need": "Concept metadata must state electronegativity across a period and size/polarizability down a group.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "A one-line metadata correction removes the contradiction without changing scope.",
+ "target_surface": "instructor-support",
+ "severity": "blocker",
+ "source_findings": [
+ "instr-002"
+ ]
+ },
+ {
+ "rec_id": "rec-003",
+ "title": "Name ammonium as the product-side acid",
+ "need": "The equilibrium example must compare the actual acid species on the two sides.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "A local terminology correction restores the worked method.",
+ "target_surface": "prose",
+ "severity": "blocker",
+ "source_findings": [
+ "instr-003",
+ "struggling-004"
+ ]
+ },
+ {
+ "rec_id": "rec-004",
+ "title": "Replace placeholder curved-arrow figures",
+ "need": "Learners need chemically complete one-arrow and two-arrow examples whose visible and nonvisual content agree.",
+ "chosen_intervention": "new-figure",
+ "rationale": "Alt-text edits cannot make isolated ammonia and water renders show the missing reactants, bond changes, products, and arrows.",
+ "target_surface": "figure",
+ "severity": "blocker",
+ "source_findings": [
+ "instr-004",
+ "struggling-001",
+ "access-001",
+ "visual-001",
+ "visual-004"
+ ]
+ },
+ {
+ "rec_id": "rec-005",
+ "title": "Replace molecule placeholders posing as tables",
+ "need": "The pKa, functional-group, acidity-factor, and ΔG°/Keq summaries need to visibly expose the values and comparisons their titles promise.",
+ "chosen_intervention": "new-figure",
+ "rationale": "A structured static table is the least-complex representation that carries the complete ordered data; animation is unnecessary.",
+ "target_surface": "figure",
+ "severity": "high",
+ "source_findings": [
+ "instr-009",
+ "struggling-010",
+ "access-001",
+ "visual-003",
+ "visual-007"
+ ]
+ },
+ {
+ "rec_id": "rec-006",
+ "title": "Make the conjugate-pair relationship real",
+ "need": "The four acid/base roles and proton transfer must be visible rather than represented by acetic acid alone.",
+ "chosen_intervention": "new-figure",
+ "rationale": "A compact static reaction scheme is sufficient; no video or interactive is needed.",
+ "target_surface": "figure",
+ "severity": "high",
+ "source_findings": [
+ "visual-002"
+ ]
+ },
+ {
+ "rec_id": "rec-007",
+ "title": "Assess the two-arrow displacement objective",
+ "need": "Students must demonstrate both coordinated electron-pair movements, not only one-arrow association.",
+ "chosen_intervention": "added-practice",
+ "rationale": "A focused two-arrow item directly closes the objective gap without expanding the bank broadly.",
+ "target_surface": "assessment",
+ "severity": "high",
+ "source_findings": [
+ "instr-005",
+ "struggling-011"
+ ]
+ },
+ {
+ "rec_id": "rec-008",
+ "title": "Teach induction before grading it",
+ "need": "The prose must connect substituent electron withdrawal through sigma bonds to conjugate-base stability.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "A short definition and the two already-assessed comparisons are sufficient.",
+ "target_surface": "prose",
+ "severity": "high",
+ "source_findings": [
+ "instr-006",
+ "struggling-006"
+ ]
+ },
+ {
+ "rec_id": "rec-009",
+ "title": "Establish resonance before relying on it",
+ "need": "Learners need a prerequisite or a compact explanation of equivalent resonance contributors before acetate stabilization is graded.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "A bounded contributor explanation in the existing section is less complex than adding a new prerequisite dependency.",
+ "target_surface": "prose",
+ "severity": "high",
+ "source_findings": [
+ "instr-007"
+ ]
+ },
+ {
+ "rec_id": "rec-010",
+ "title": "Keep pKa separate from solution pH",
+ "need": "The expanded tier must qualify its pH comparison by concentration and conditions.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "A local qualifier preserves the intended comparison while preventing the misconception.",
+ "target_surface": "prose",
+ "severity": "high",
+ "source_findings": [
+ "instr-008",
+ "struggling-003"
+ ]
+ },
+ {
+ "rec_id": "rec-011",
+ "title": "Clarify the Brønsted-acid selection criterion",
+ "need": "The assessment must not use an undefined practical threshold for whether ethanol and propane can donate a proton.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "Reframing the prompt around the heteroatom proton makes the key unambiguous without changing the options.",
+ "target_surface": "assessment",
+ "severity": "medium",
+ "source_findings": [
+ "instr-010"
+ ]
+ },
+ {
+ "rec_id": "rec-012",
+ "title": "Teach the phenol benchmark before matching it",
+ "need": "Phenol's approximate pKa and phenoxide resonance need to appear before the matching item.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "One benchmark sentence aligns the existing assessment with instruction.",
+ "target_surface": "prose",
+ "severity": "high",
+ "source_findings": [
+ "struggling-005"
+ ]
+ },
+ {
+ "rec_id": "rec-013",
+ "title": "Preserve optional status in the reader",
+ "need": "The advanced ΔG°–Keq section needs to remain visibly teacher-optional after compilation.",
+ "chosen_intervention": "instructor-note",
+ "rationale": "The authored metadata is already correct; the remaining need is a reader/compiler delivery decision.",
+ "target_surface": "instructor-support",
+ "severity": "medium",
+ "source_findings": [
+ "struggling-008"
+ ]
+ },
+ {
+ "rec_id": "rec-014",
+ "title": "Deliver source practice checks",
+ "need": "The eight authored low-stakes checks need a reader surface or an explicit alternative.",
+ "chosen_intervention": "instructor-note",
+ "rationale": "The content exists and is correct; the gap is cross-surface delivery rather than new authoring.",
+ "target_surface": "instructor-support",
+ "severity": "medium",
+ "source_findings": [
+ "struggling-009"
+ ]
+ },
+ {
+ "rec_id": "rec-015",
+ "title": "Model donor/acceptor recognition",
+ "need": "The opening section needs a concrete way to recognize lone-pair donors and incomplete-octet acceptors used in its first classification items.",
+ "chosen_intervention": "prose-edit",
+ "rationale": "A short electron-counting bridge is sufficient and avoids adding another medium.",
+ "target_surface": "prose",
+ "severity": "high",
+ "source_findings": [
+ "struggling-002"
+ ]
+ },
+ {
+ "rec_id": "rec-016",
+ "title": "Provide a complete acidity-factor description",
+ "need": "The factor summary needs a row-by-row nonvisual account with trends and example pairs.",
+ "chosen_intervention": "structured-chemical-description",
+ "rationale": "A structured description is sufficient for equivalence once the real table exists; animation would add no value.",
+ "target_surface": "figure",
+ "severity": "medium",
+ "source_findings": [
+ "access-002"
+ ]
+ },
+ {
+ "rec_id": "rec-017",
+ "title": "Repair the reader heading hierarchy",
+ "need": "Figure headings nested directly under section h2 headings must not jump to h4.",
+ "chosen_intervention": "instructor-note",
+ "rationale": "This is a shared renderer issue, not a chapter-local content edit.",
+ "target_surface": "instructor-support",
+ "severity": "medium",
+ "source_findings": [
+ "access-003"
+ ]
+ },
+ {
+ "rec_id": "rec-018",
+ "title": "Align equilibrium and structural comparisons",
+ "need": "The acid on each side, its pKa, favored direction, and the compared conjugate-base features need visible alignment.",
+ "chosen_intervention": "new-figure",
+ "rationale": "Compact static comparison panels fully address the relationship; no animation is needed.",
+ "target_surface": "figure",
+ "severity": "medium",
+ "source_findings": [
+ "visual-005",
+ "visual-006"
+ ]
+ }
+ ],
+ "accessibility_blockers": [],
+ "visual_opportunities": [
+ "visual-004",
+ "visual-005",
+ "visual-006"
+ ],
+ "sufficient_as_is": [
+ "All 15 question accessible descriptions are neutral, task-focused, and do not reveal answers.",
+ "Keyboard-labelled controls are sufficient for the reviewed rank-order, matching, categorization, comparison-matrix, and curved-arrow interactions.",
+ "The incomplete curved-arrow video blocks are correctly hidden while their URLs are empty.",
+ "The existing comparison-matrix questions provide useful side-by-side organization; their main gap is prior explanation, not another visual."
+ ],
+ "disagreements": [
+ {
+ "topic": "Whether the placeholder curved-arrow figures are a publication blocker",
+ "positions": {
+ "Struggling Student": "The absent worked arrow representation is a blocker because the learner cannot reconstruct the required move before assessment.",
+ "Organic Chemistry Instructor": "The same defect is high severity; the prose rule is chemically correct but lacks a faithful worked figure.",
+ "Accessibility Persona": "No required activity is demonstrably impossible, so the mismatch is high severity rather than an access blocker.",
+ "Learner with Visual Preference": "The figures are misleading existing visuals and high severity, but not independently marked as blockers."
+ },
+ "resolution": "Retain the Struggling Student's blocker exactly. It forces at least major revision even after the local chemistry blockers are corrected; however, because no required-access path is impossible, the baseline is major revision rather than blocked."
+ }
+ ],
+ "regression": {
+ "resolved": [],
+ "unchanged": [],
+ "worsened": [],
+ "new": [
+ "instr-001",
+ "instr-002",
+ "instr-003",
+ "instr-004",
+ "instr-005",
+ "instr-006",
+ "instr-007",
+ "instr-008",
+ "instr-009",
+ "instr-010",
+ "struggling-001",
+ "struggling-002",
+ "struggling-003",
+ "struggling-004",
+ "struggling-005",
+ "struggling-006",
+ "struggling-007",
+ "struggling-008",
+ "struggling-009",
+ "struggling-010",
+ "struggling-011",
+ "access-001",
+ "access-002",
+ "access-003",
+ "visual-001",
+ "visual-002",
+ "visual-003",
+ "visual-004",
+ "visual-005",
+ "visual-006",
+ "visual-007"
+ ]
+ },
+ "corrections": {
+ "status": "applied-and-verified-without-second-persona-run",
+ "post_correction_readiness_estimate": "major revision",
+ "estimate_note": "Not a new persona verdict.",
+ "applied": [
+ {
+ "change": "Rewrote all three functional-group-acidity tiers and the learning objective to distinguish neutral amine N–H acidity (about 35–40), ammonium conjugate-acid pKa (about 9–11), and oxonium acidity (about −2); added the phenol pKa benchmark and phenoxide rationale before it is assessed.",
+ "resolves": [
+ "instr-001",
+ "struggling-005",
+ "struggling-007"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Corrected the structure-and-acidity trouble-spot metadata to state that electronegativity governs across-period comparisons while size and polarizability govern down-group comparisons.",
+ "resolves": [
+ "instr-002"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Rewrote the amine/carboxylic-acid equilibrium example so the product-side acid is explicitly the ammonium ion, the neutral amine's conjugate acid.",
+ "resolves": [
+ "instr-003",
+ "struggling-004"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Qualified the pKa-to-pH comparison by solvent, temperature, and analytical concentration, and stated that pH depends on the composition and concentration of the particular solution.",
+ "resolves": [
+ "instr-008",
+ "struggling-003"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Added explicit induction instruction using the two assessed examples, added a compact equivalent-resonance-contributor explanation for acetate, and aligned the learning objective with induction.",
+ "resolves": [
+ "instr-007",
+ "struggling-006"
+ ],
+ "partially_addresses": [
+ "instr-006"
+ ]
+ },
+ {
+ "change": "Added a donor/acceptor recognition sequence and the exact BF3, AlCl3, trimethylamine, and dimethyl-ether reasoning needed by the opening classification task.",
+ "resolves": [
+ "struggling-002"
+ ],
+ "partially_addresses": []
+ },
+ {
+ "change": "Reframed the Brønsted multi-select around the stated O–H criterion and aligned its hint, feedback, wrong-answer explanation, and accessible description.",
+ "resolves": [
+ "instr-010"
+ ],
+ "partially_addresses": []
+ }
+ ],
+ "remaining_high_priority": [
+ "The curved-arrow mechanism assets still compile as isolated molecule placeholders; struggling-001 remains a live baseline blocker.",
+ "The pKa, functional-group, acidity-factor, and ΔG°/Keq table assets still compile as methane or acetic-acid cards.",
+ "The two-arrow displacement objective still lacks a compiled assessment item.",
+ "The conjugate-pair diagram still renders acetic acid alone.",
+ "Optional-section, practice-check, extended-description, and heading-hierarchy delivery remain platform/compiler work."
+ ],
+ "verification": [
+ "jq empty content/organic/topic-packages/acids-bases-and-curved-arrows/topic.package.json — valid JSON",
+ "Topic-package compiler (proprietary toolchain, not in this repo) — clean
+ "Automated test suite — 143 passed
+ "python .[internal source reference — not in this repo] --synthesized reports/topic-packages/acids-bases-and-curved-arrows/chapter-review.json — valid",
+ "Generated diff inspected; chapter-derived outputs retained and unrelated aggregate catalog/profile churn restored."
+ ]
+ }
+}

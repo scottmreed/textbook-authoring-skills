@@ -1,0 +1,207 @@
+{
+ "persona": "Accessibility Persona",
+ "persona_version": "1.0.0",
+ "chapter_id": "benzene-and-aromaticity",
+ "chapter_version": "1",
+ "model": "claude-opus-5",
+ "summary": "The prose of this chapter is unusually strong for non-visual access: every inherently visual idea in it is carried fully in words in the nugget text, and the reader chapter contains no animation, no color coding, and no hover-dependent content. Every figure is a static molecule with alt text and a visible description, and the text-based question types are keyboard-complete with labeled selects. The problems are concentrated in the assessment layer and in a handful of alt texts. Three required activities cannot be completed without vision: the two 'Structure A/B/C/D' isomer-identification items, whose only chemical content is in images whose alt text is the string 'Structure A'; the two hotspot items, whose atom targets are keyboard-reachable but labeled only 'C atom 3'; and the four structure_scaffold items, which require drawing in an embedded canvas editor with no text/SMILES/name alternative. Separately, the authored accessible_descriptions appear never to be surfaced to students by any activity renderer, and in 9 of the 10 items where exactly one option carries a decorative structure image, that option is the correct answer.",
+ "overall_score": 5.4,
+ "publication_blockers": ["access-001", "access-002", "access-003"],
+ "findings": [
+ {
+ "finding_id": "access-001",
+ "location": {
+ "question_slug": "ch15-identify-meta-isomer",
+ "concept_slug": "naming-substituted-benzenes",
+ "anchor_text": "Which structure is 3-bromotoluene"
+ },
+ "severity": "blocker",
+ "category": "media-equivalence",
+ "observation": "In ch15-identify-meta-isomer and its variant the four options carry no chemical text — their text values are literally 'Structure A', 'Structure B', 'Structure C', 'Structure D' — and the entire discriminating content lives in the rendered structure_smiles images. The option image in [internal source reference — not in this repo] is given alt={option.text}, so a screen reader announces 'Structure A' for both the label and the picture. The accessible_description describes the set as a whole but never maps any described structure to an option letter. Every sibling multiple-choice item in this chapter names its options chemically, so the pattern is isolated to these two.",
+ "learner_impact": "A blind or low-vision student, or any student whose images fail to load, hears four indistinguishable choices and can only guess at 25%. The ortho/meta/para discrimination these two items assess — a core objective of naming-substituted-benzenes — is unassessable and unlearnable for them, and a wrong guess triggers a wrong_answer_explanation that references a structure they were never given.",
+ "evidence": "topic.package.json question_sets: ch15-identify-meta-isomer options with text 'Structure A' through 'Structure D' and structure_smiles carrying the chemistry; identical shape in the v2 variant. [internal source reference — not in this repo] line 165: alt={option.text}.",
+ "recommended_outcome": "Each answer option in these two items needs a chemically identifying non-visual equivalent that is bound to that specific option — the relationship of the two substituents must be recoverable per choice, not only for the set as a whole.",
+ "confidence": 0.95
+ },
+ {
+ "finding_id": "access-002",
+ "location": {
+ "question_slug": "ch15-select-sp3-carbon",
+ "concept_slug": "aromatic-ions",
+ "anchor_text": "select the carbon that must lose a proton before the ring can become aromatic"
+ },
+ "severity": "blocker",
+ "category": "interactive-fallback",
+ "observation": "The two hotspot items require pointing at one specific ring carbon. The atom targets are keyboard-reachable buttons, but each is labeled only with symbol and index — 'C atom 1' through 'C atom 5' for cyclopentadiene. Nothing in the label, the prompt, or the accessible_description states which numbered atom is the saturated one. The answer key is the positional id atom_2 / atom_4. There is no per-atom hybridization readout, no ordered walk around the ring, and no alternative response mode.",
+ "learner_impact": "A student who cannot see the drawing knows exactly which carbon is chemically correct and still cannot select it: the buttons expose only a bare index with no chemical meaning. They are reduced to a 1-in-5 or 1-in-7 guess on an item whose reasoning they have already completed. This is a required item in the surfaced set, not an optional extension.",
+ "evidence": "topic.package.json ch15-select-sp3-carbon student_config [redacted], answer_key [redacted]; [internal source reference — not in this repo] line 268: aria-label with symbol and index only.",
+ "recommended_outcome": "The selectable atoms need chemical identity, not just an index — a non-visual learner must be able to tell which numbered target is the sp3/CH2 carbon before choosing, or be offered an equivalent way to answer the same question.",
+ "confidence": 0.92
+ },
+ {
+ "finding_id": "access-003",
+ "location": {
+ "question_slug": "ch15-draw-para-bromotoluene",
+ "concept_slug": "naming-substituted-benzenes",
+ "anchor_text": "Using the structure editor, draw the compound named in the question"
+ },
+ "severity": "blocker",
+ "category": "interactive-fallback",
+ "observation": "Four required items are structure_scaffold with scaffold 'blank_canvas' and are answered only by drawing. [internal source reference — not in this repo] embeds the generator as an iframe and posts back ket/molfile/smiles produced by that canvas; the only instruction offered is 'Draw your answer in the tool above.' No SMILES entry, no name entry, no fragment-assembly alternative, and no keyboard path is provided or documented.",
+ "learner_impact": "Students who cannot use a pointer-driven drawing canvas — screen-reader users, students with motor or fine-pointer impairments, students on keyboard-only or switch access — cannot submit any answer at all to four of the twenty-three surfaced items. They are not merely disadvantaged; the response mode is unavailable to them.",
+ "evidence": "topic.package.json: four structure_scaffold entries with scaffold 'blank_canvas' and grading_rules structure_engine 'rdkit' against SMILES answer keys; [internal source reference — not in this repo] — iframe workspace only, no text-entry affordance.",
+ "recommended_outcome": "Every drawing item in this chapter needs an equivalent non-drawing route to submit the same structure, so that a student who cannot operate a pointer canvas can still be assessed on the same chemistry rather than on their ability to draw.",
+ "confidence": 0.82
+ },
+ {
+ "finding_id": "access-004",
+ "location": {
+ "question_slug": "ch15-select-sp3-carbon",
+ "concept_slug": "benzene-structure-and-stability",
+ "anchor_text": "accessible_description"
+ },
+ "severity": "high",
+ "category": "media-equivalence",
+ "observation": "All 46 questions carry a carefully written accessibility_bundle.accessible_description, and the compiled question-set preserves it, but there is no evidence any of it reaches a student. The bundle travels to the frontend as envelope.question.accessibilityBundle, and the only renderer that reads it is [internal source reference — not in this repo], which looks for the key 'description', not 'accessible_description'. No question type used in this chapter consumes it.",
+ "learner_impact": "The chapter's entire non-visual equivalence strategy for assessment is inert. Wherever an item's meaning is carried by an image, the student gets whatever the component happens to expose and nothing else. This is the mechanism by which access-001 and access-002 become unanswerable rather than merely awkward.",
+ "evidence": "compiled/question-set.json: every question has accessibility_bundle.accessible_description populated and no top-level accessible_description. Repo-wide grep for accessibilityBundle in frontend/src returns only [internal source reference — not in this repo], [internal source reference — not in this repo], [internal source reference — not in this repo] and [internal source reference — not in this repo].",
+ "recommended_outcome": "The authored non-visual descriptions need to actually be perceivable by a student attempting the item, on every question type this chapter uses; until they are, the descriptions are documentation rather than access.",
+ "confidence": 0.85
+ },
+ {
+ "finding_id": "access-005",
+ "location": {
+ "question_slug": "ch15-pyridine-lone-pair",
+ "concept_slug": "aromatic-heterocycles",
+ "anchor_text": "One option is accompanied by a benzene structure."
+ },
+ "severity": "high",
+ "category": "color-motion-only",
+ "observation": "Ten items attach a decorative structure_smiles to exactly one of their options. In nine of those ten the decorated option is the correct answer: ch15-benzene-bond-lengths, ch15-benzene-mo-ladder-v2, ch15-pyridine-lone-pair, ch15-pyridine-lone-pair-v2, ch15-fused-ring-stabilization, ch15-fused-ring-stabilization-v2, ch15-ring-current-shift, ch15-ring-current-shift-v2, and the claim field of ch15-cyclopentadiene-acidity-reasoning-v2. Only ch15-benzene-bond-lengths-v2 puts the image on a distractor. The accessible_description states that one option is accompanied by a structure without saying which — so it names the existence of the tell while withholding it.",
+ "learner_impact": "Sighted students learn within two or three items that the option with the picture is the answer, which hollows out these items as assessments for everyone. Students who cannot see the layout get no such shortcut and are told a cue exists that they cannot use. The mechanical leak guard reports zero leaks across all 46 items, so nothing catches this.",
+ "evidence": "topic.package.json question_sets, e.g. ch15-pyridine-lone-pair: option b alone carries structure_smiles 'c1ccncc1' and answer_key correct_option_ids [redacted]. Same pattern in 8 further items.",
+ "recommended_outcome": "The presence of a structure image must stop correlating with correctness, and no item should describe a cue in words that only some learners can act on.",
+ "confidence": 0.9
+ },
+ {
+ "finding_id": "access-006",
+ "location": {
+ "question_slug": "ch15-aromatic-ir-band",
+ "concept_slug": "spectroscopy-of-aromatic-compounds",
+ "anchor_text": "two of them near 3000"
+ },
+ "severity": "medium",
+ "category": "media-equivalence",
+ "observation": "The two spectrum_peaks items hinge on the 3000 cm-1 dividing line or on the out-of-plane bending region. Each peak is authored with a printed label that a sighted student reads directly off the plot. The accessible_description collapses exactly that datum, describing only 'two of them near 3000, two between 1400 and 1700, and one below 800'. On the described version alone the two C-H stretches are indistinguishable and the item is unanswerable. Access survives only because [internal source reference — not in this repo] happens to label each target button with the peak label.",
+ "learner_impact": "A screen-reader student who reads the description first is told the discriminating information does not exist, and must reverse-engineer the spectrum by exploring five buttons. Relative intensity, which the plot encodes as depth, is never conveyed at all.",
+ "evidence": "topic.package.json ch15-aromatic-ir-band peaks with labels '3030 cm-1' etc.; accessible_description as quoted; [internal source reference — not in this repo] line 214 aria-label uses peak.label.",
+ "recommended_outcome": "The described form of these spectra needs to carry the same numbers the plot prints — the actual wavenumbers, in order, with relative intensity — since those labels are stimulus, not answer.",
+ "confidence": 0.86
+ },
+ {
+ "finding_id": "access-007",
+ "location": {
+ "asset_id": "mol-benzene",
+ "nugget_id": "nugget-benzene-structure",
+ "anchor_text": "a regular hexagon with alternating double and single bonds"
+ },
+ "severity": "medium",
+ "category": "alt-text-quality",
+ "observation": "The alt text for mol-benzene — the chapter's most-used figure, compiled into four separate reader blocks — states as the figure's content the exact proposition the section spends three paragraphs refuting: that benzene has alternating single and double bonds. The asset's own learning_goal says all six bonds are equal at 139 pm, and the sibling asset mol-cyclooctatetraene shows the authors know how to handle this; mol-benzene gets no equivalent caveat.",
+ "learner_impact": "A learner whose access to the figure is the alt text alone — in a deck, LMS export, or PDF where the visible description field does not travel with the image — is handed the localized-Kekule misconception four times over, with no signal that the drawing is a convention.",
+ "evidence": "topic.package.json assets: mol-benzene accessibility.alt_text against learning_goal; compare mol-cyclooctatetraene alt_text 'drawn flat although the molecule itself is tub-shaped'.",
+ "recommended_outcome": "The benzene figure's non-visual description needs to convey both what is drawn and that the drawing is one Kekule convention for a ring whose six bonds are in fact identical.",
+ "confidence": 0.8
+ },
+ {
+ "finding_id": "access-008",
+ "location": {
+ "asset_id": "mol-cyclopropenyl-cation",
+ "concept_slug": "aromatic-ions",
+ "anchor_text": "a three-membered carbon ring carrying a positive charge"
+ },
+ "severity": "medium",
+ "category": "alt-text-quality",
+ "observation": "The three aromatic-ion figures describe charge but not the pi system that is their entire teaching point. mol-cyclopropenyl-cation mentions no double bond and no empty p orbital, so nothing from which the 2 pi electrons of its learning_goal could be counted. mol-cyclopentadienyl-anion and mol-tropylium-cation say 'aromatic carbon ring carrying a negative/positive charge' without stating that the bonds are drawn delocalized or where the charge sits.",
+ "learner_impact": "The single skill this concept assesses — counting pi electrons around a charged ring and checking it against 4n + 2 — is not performable from these descriptions. A non-visual learner gets the verdict word but not the evidence.",
+ "evidence": "topic.package.json assets mol-cyclopropenyl-cation, mol-cyclopentadienyl-anion, mol-tropylium-cation accessibility.alt_text; mol-cyclopropenyl-cation learning_goal cites the 2 pi electron count.",
+ "recommended_outcome": "The aromatic-ion figures need descriptions from which a learner can count pi electrons for themselves — the bonding actually drawn and the location of the charge — rather than descriptions that name the conclusion.",
+ "confidence": 0.82
+ },
+ {
+ "finding_id": "access-009",
+ "location": {
+ "asset_id": "mol-imidazole",
+ "concept_slug": "aromatic-heterocycles",
+ "anchor_text": "a five-membered aromatic ring with two nitrogens, one bearing a hydrogen and one not"
+ },
+ "severity": "medium",
+ "category": "alt-text-quality",
+ "observation": "mol-imidazole's alt text does not state that the two nitrogens are in a 1,3 relationship; as written it equally describes pyrazole, a different compound. Its learning_goal and the section prose depend on the two nitrogens being of different types and non-adjacent. mol-adenine has the same gap in a larger form: it does not say the six-membered ring is a pyrimidine with two nitrogens, nor where the amino group sits, so the purine skeleton is not recoverable.",
+ "learner_impact": "A non-visual learner cannot use these two figures for the task the section sets — classifying each nitrogen as pyridine-type or pyrrole-type by its position and substitution.",
+ "evidence": "topic.package.json assets mol-imidazole (smiles c1cnc[nH]1) and mol-adenine (smiles Nc1ncnc2[nH]cnc12) accessibility.alt_text; nugget-aromatic-heterocycles expanded text on the two nitrogen types.",
+ "recommended_outcome": "The heterocycle figures need descriptions in which heteroatom positions around the ring are explicit, so the pyridine-type/pyrrole-type classification can be carried out from the description alone.",
+ "confidence": 0.84
+ },
+ {
+ "finding_id": "access-010",
+ "location": {
+ "asset_id": "video-benzene-mo-filling",
+ "nugget_id": "nugget-benzene-mos",
+ "concept_slug": "molecular-orbitals-of-benzene"
+ },
+ "severity": "medium",
+ "category": "media-equivalence",
+ "observation": "The chapter's single video brief plans a five-beat animated construction. Its narration_outline describes the chemistry well, but the brief specifies no captions, no transcript, no audio description of the visual changes, and no requirement that the animation be pausable, steppable, or replayable. The compiled reader block is emitted with url '' and is_hidden true, so nothing is currently broken for students, but the specification that would govern the produced asset is silent on all of it.",
+ "learner_impact": "As specified, the asset would ship without an equivalent for deaf and hard-of-hearing students, without a described-visual equivalent for the electron-filling sequence that is the whole point, and without controls for students who need to slow or re-step motion.",
+ "evidence": "topic.package.json video_briefs[0]: formats mp4/gif, narration_outline and storyboard present, no caption/transcript/control fields; production_status 'deferred'.",
+ "recommended_outcome": "Before this video is produced its brief needs to require a synchronized text equivalent for the narration, a described equivalent for the visual state changes it animates, and learner control over pacing.",
+ "confidence": 0.78
+ },
+ {
+ "finding_id": "access-011",
+ "location": {
+ "section_id": "nugget-aromatic-ions",
+ "asset_id": "mol-benzene",
+ "anchor_text": "Benzene, the parent aromatic ring"
+ },
+ "severity": "low",
+ "category": "keyboard-operability",
+ "observation": "The compiled chapter renders as h1 (chapter title) then h2 (section title) then h4 (each molecule card heading), skipping h3 entirely for all 26 molecule blocks. Several cards also repeat verbatim: 'Benzene, the parent aromatic ring' appears four times, toluene twice, 1-bromo-4-methylbenzene twice — each with byte-identical heading, description, and alt text. Each molecule card also renders the alt string twice: once as the image alt and again as visible 'Described as' text.",
+ "learner_impact": "A student navigating by heading level gets a broken outline and a list in which four entries are indistinguishable, so headings stop working as an orientation device in a chapter with 26 figures. The duplicated alt string makes every figure announce its description twice.",
+ "evidence": "[internal source reference — not in this repo] heading levels; [internal source reference — not in this repo] molecule card Heading as h4 plus alt and visible description; reader chapter JSON with 26 molecule blocks, four sharing the same content.name.",
+ "recommended_outcome": "The figure headings in this chapter need a correct outline position and enough per-instance distinctness to serve as navigation landmarks, and the figure's description should be announced once rather than twice.",
+ "confidence": 0.72
+ },
+ {
+ "finding_id": "access-012",
+ "location": {
+ "question_slug": "ch15-benzyl-substituent-name-v2",
+ "concept_slug": "naming-substituted-benzenes",
+ "anchor_text": "the counterpart of alkane, alkene, and alkyne"
+ },
+ "severity": "low",
+ "category": "alt-text-quality",
+ "observation": "This item's accessible_description is not an equivalent of the prompt but a differently-scaffolded version of it. The prompt asks for the general class name for aromatic hydrocarbons; the description adds a cue absent from the prompt — 'the counterpart of alkane, alkene, and alkyne' — which points at the morphology of the expected answer. The item has no figure, so the description has no visual content to stand in for.",
+ "learner_impact": "Minor, and in the learner's favour, but it means the two populations are not answering the same question, and it sets a precedent that descriptions may add scaffolding rather than restate stimulus.",
+ "evidence": "topic.package.json ch15-benzyl-substituent-name-v2 prompt_text and accessibility_bundle.accessible_description; student_config has no figure.",
+ "recommended_outcome": "Descriptions on text-only items need to restate the same task the prompt gives, without adding or removing cues.",
+ "confidence": 0.7
+ }
+ ],
+ "strengths": [
+ "Every inherently visual idea in the chapter is fully carried in prose: the six-orbital ladder, the degeneracies, the node counts, and the inscribed-polygon construction including its failure mode; the ring-current mechanism, the delta ranges, the 3000 cm-1 divide, and the 690-900 cm-1 substitution-pattern bands.",
+ "The chapter contains no animation, no color-coded distinction, no hover-dependent content, and no motion-carried meaning; the one video asset is deferred and correctly compiled as hidden rather than shipped as a broken embed.",
+ "mol-cyclooctatetraene's alt text does exactly what a chemistry alt text should do — separating the drawing convention from the molecular truth.",
+ "The drag-shaped question types are all keyboard-complete rather than pointer-only: categorize and matching expose one labeled select per item, rank_order uses labeled move-up/move-down buttons with position announced, and the comparison matrix uses a labeled select per cell.",
+ "Most multiple-choice items name their options chemically rather than 'Structure A', so the majority of the selected-response set survives image failure.",
+ "Running find_accessibility_leaks over all 46 questions returns zero mechanical answer leaks.",
+ "Every one of the 21 assets carries a non-empty alt_text and a distinct learning_goal that the reader renders as visible description text beside the figure."
+ ],
+ "open_questions": [
+ "Does the embedded Ketcher workspace used by the four structure_scaffold items expose its own SMILES/paste import that is reachable by keyboard and screen reader? If it does, access-003 may be a documentation gap rather than a missing capability.",
+ "Is there a delivery surface outside the LMS activity shell that does render accessibility_bundle.accessible_description? The only consumer found reads the key 'description' rather than 'accessible_description', so the field name may itself be a mismatch.",
+ "Which surfaces carry an asset's alt_text without its learning_goal/description? That determines how severe access-007 is.",
+ "Are the 23 v2 variants ever surfaced to students directly, or only through instructor-side variant swapping? If variants are student-facing the affected item count doubles."
+ ]
+}
