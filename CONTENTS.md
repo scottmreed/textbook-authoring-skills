@@ -1,190 +1,153 @@
 # Contents map — textbook-authoring-skills
 
-Snapshot of agent skills used to author organic textbook **content and assets**
-(reader chapters, topic packages, teaching figures, videos, questions). Sourced
-from ChemIllusion’s skill tree for a publishable textbook-authoring story.
+This is the authoritative map of the tracked public snapshot. The inventory
+below is generated from the Git index; run `python scripts/check_contents.py
+--check` to verify it and `--write` to refresh it after a tracked top-level
+path changes.
 
----
+<!-- BEGIN GENERATED REPOSITORY INVENTORY -->
 
-## Layout
+## Generated repository inventory
 
-```
+```text
 textbook-authoring-skills/
-├── LICENSE                 # MIT
-├── README.md
-├── CONTENTS.md             # this file
-├── .gitignore
-├── skills/                 # duplicated skill folders (SKILL.md + refs)
-├── prompts/                # stand-in prompts for agents / RDKit helpers not copied
-├── reports/topic-packages/ # persona-based chapter reviews (32 topics)
-└── notes/                  # corpus-wide reader fix writeups
+├── .gitignore               # ignored local tooling, caches, and scratch outputs
+├── CONTENTS.md              # this repository map
+├── LICENSE                  # MIT license
+├── README.md                # project overview and clean-checkout workflow
+├── config/                  # chapter map and molecule-alias curation
+├── data/                    # tracked placeholders for local cache data
+├── notes/                   # dated reader chemistry and link-fix notes
+├── outputs/                 # tracked placeholders for ignored local analysis outputs
+├── prompts/                 # portable stand-ins for omitted helper agents
+├── reports/                 # dated QA snapshots and curated comparison releases
+├── requirements.txt         # optional Python tooling dependencies
+├── scripts/                 # reproducible repository helper scripts
+├── skills/                  # authoring and review skill packages
+└── tests/                   # automated regression checks
 ```
 
----
+<!-- END GENERATED REPOSITORY INVENTORY -->
+
+## How to read this collection
+
+The repository combines reusable authoring methods with evidence from one
+historical product framework. To build a new textbook, adapt the portable
+methods to your own subject expertise, source documents, content model,
+publishing tools, and evaluation suite. The recommended composition is:
+
+1. `syllabus-to-reader-outline` for scope and learning goals.
+2. `author-organic-topic-package` and `organic-textbook-reader-content` for
+   authored material in your own schema.
+3. `organic-chapter-asset-auditor`, the relevant figure skills, and
+   `chem-representation-accessibility` for teaching assets.
+4. The question-authoring skills for assessments that match the prose and
+   figures.
+5. `review-organic-chapter`, subject-matter review, learner testing, and your
+   own automated evaluations before publication.
+
+`produce-organic-chapter` is the historical working example of how we chained
+those methods in the original framework. It is intentionally product-coupled:
+its registries, seed process, runtime variants, paid behavior, and services are
+examples to replace, not infrastructure supplied by this repository.
 
 ## Included skills (`skills/`)
 
-### Orchestration & QA
+### Orchestration and review
 
-| Skill | Role |
-|-------|------|
-| `produce-organic-chapter` | End-to-end chapter pipeline (canonical entry) |
-| `review-organic-chapter` | Multi-persona QA + finding schema / scripts |
+| Skill | Role | Portability |
+|---|---|---|
+| `produce-organic-chapter` | Historical end-to-end chapter-production example | Product-coupled reference |
+| `review-organic-chapter` | Multi-persona QA, finding schema, and validation script | Adaptable review method |
+| `syllabus-to-reader-outline` | Syllabus-to-reader and figure plan | Adaptable planning method |
+| `organic-chapter-asset-auditor` | Missing-figure audit | Adaptable audit method |
 
 *Omitted:* `add-organic-chapter` (deprecated redirect only).
 
-### Content & prose
+### Content and prose
 
 | Skill | Role |
-|-------|------|
-| `author-organic-topic-package` | Concepts, nuggets, assets, question sets (+ contract ref) |
-| `organic-textbook-reader-content` | PWA reader catalog / bridges / McMurry links |
-| `ingest-deck-json-to-nuggets` | Private source decks → nugget proposals |
-| `chemistry-text-normalizer` | Subscripts / Greek / OCR cleanup conventions |
+|---|---|
+| `author-organic-topic-package` | Concepts, nuggets, assets, and question sets, with contract reference |
+| `organic-textbook-reader-content` | Reader content and textbook bridges |
+| `ingest-deck-json-to-nuggets` | Private source-deck evidence to nugget proposals |
+| `chemistry-text-normalizer` | Subscript, Greek, and OCR-cleanup conventions |
 
-### Planning & audit
-
-| Skill | Role |
-|-------|------|
-| `syllabus-to-reader-outline` | Syllabus → reader/deck plan + figure needs |
-| `organic-chapter-asset-auditor` | Missing-figure audit |
-
-### Figure / teaching-asset authoring
+### Figure, accessibility, and video assets
 
 | Skill | Role |
-|-------|------|
+|---|---|
 | `newman-projection-authoring` | Newman projections |
 | `reaction-coordinate-diagram-authoring` | Mechanism energy diagrams |
-| `conformational-energy-profile-authoring` | Torsional / ring-flip profiles |
+| `conformational-energy-profile-authoring` | Torsional and ring-flip profiles |
 | `orbital-overlay-assets` | Orbital overlays |
 | `synthesis-roadmap-authoring` | Multistep synthesis maps |
 | `ir-vibration-asset-authoring` | IR vibration figures |
 | `nmr-spectrum-figure-authoring` | NMR traces |
-| `molecule-svg-drawing` | Hand/SVG skeletal conventions |
-| `ring-closure-tutor-sugar-tool` | Sugar Fischer/ring forms (product-coupled) |
-| `chem-representation-accessibility` | Alt text / transcripts |
-
-### Video
-
-| Skill | Role |
-|-------|------|
-| `molecule-video-creator` | Structure video (ChemIllusion-coupled; see portable prompt) |
+| `molecule-svg-drawing` | Skeletal drawing conventions |
+| `ring-closure-tutor-sugar-tool` | Sugar Fischer/ring forms |
+| `chem-representation-accessibility` | Alt text and transcripts |
+| `molecule-video-creator` | Structure video; product-coupled, with a portable prompt alternative |
 
 ### Questions
 
 | Skill | Role |
-|-------|------|
+|---|---|
 | `question-figure-authoring` | Stimulus figures |
 | `question-explanation-authoring` | Wrong-answer explanations |
 | `question-hint-authoring` | Hint ladders |
-| `molecular-geometry-question-authoring` | VSEPR / geometry items |
-| `qm9s-ir-question-updater` | Attach calculated IR to vibration questions |
-
----
+| `molecular-geometry-question-authoring` | VSEPR and geometry items |
+| `qm9s-ir-question-updater` | Calculated IR for vibration questions |
 
 ## Prompts instead of molecule-rendering agents (`prompts/`)
 
-These were **not** copied (CLI agent or heavy product RDKit service skills).
-Use the prompts when a chapter skill would have invoked them:
+These helpers were not copied because they require unavailable CLI agents or
+product services. Use the stand-in prompts when a chapter skill calls for their
+capability:
 
 | Prompt | Replaces |
-|--------|----------|
+|---|---|
 | `molecule-validation.md` | `rdkit-agent` |
 | `molecule-render-acs-1996.md` | `rdkit-acs-1996-rendering` |
 | `molecule-render-styled.md` | `rdkit-advanced-rendering` |
 | `molecule-structure-build.md` | `rdkit-structure-builder` |
-| `structure-video-brief.md` | Portable alternative to `molecule-video-creator` API |
+| `structure-video-brief.md` | Portable alternative to the structure-video API |
 
----
+## Out of scope
 
-## Out of scope (not copied)
+- Deck, slide, PPTX, ZoomDeck, graphical-abstract, and journal-club workflows.
+- Product catalog, runtime, database, and deployment work.
+- The product-specific implementations behind `(not in this repo)` references.
 
-### Deck / slide companions
+## Dated QA snapshots (`reports/topic-packages/`)
 
-Intentionally excluded from the story repo:
-
-- `deck-creator-content`
-- `deck-creator-concept-authoring`
-- `deck-creator-dynamic-chem-assets`
-- `deck-video-integration`
-- `deck-harness-intent`
-- `pptx-deck-creator`
-- `zoomdeck-creator`
-
-**During textbook writing:** `produce-organic-chapter` / the auditor may *mention*
-Deck Creator for verification or placeholder replacement. That is product
-packaging, not required for reader chapter prose + figures.
-
-### Graphical abstract / journal club
-
-**Double-check result:** not called by the textbook chapter skills listed above.
-Do not copy `graphical-abstract-pipeline` or journal-club workflows.
-
-### Infrastructure (skipped)
-
-Not part of day-to-day textbook writing:
-
-- `teaching-asset-kind-registration`
-- `visual-capability-registry`
-- `course-reader-builder` (teacher course reader at `/chemed/readers`, not the organic PWA)
-- `textbook-ingestion` (add a textbook *lens* / mapping — product catalog work, not chapter prose)
-
-### Optional polish (skipped)
-
-- `kling-character-overlays` (mascot overlays on videos)
-
----
-
-## Persona-based reviews (`reports/topic-packages/`)
-
-Copied from ChemIllusion `reports/topic-packages/` for the textbook-authoring story.
+See [`reports/topic-packages/README.md`](reports/topic-packages/README.md)
+before opening individual reviews. They are point-in-time QA evidence, not
+claims about the current released textbook.
 
 | Artifact | Description |
-|----------|-------------|
-| `CHAPTER_REVIEW_STATUS.md` | Corpus status tally |
-| `<topic>/chapter-review.md` | Human-readable multi-persona review report |
-| `<topic>/chapter-review.json` | Structured findings + corrections |
-| `<topic>/coherence-pass.md` | Coherence notes (where present) |
-| `<topic>/persona-*` / `persona-returns/` / `persona-envelopes/` | Raw persona envelopes (subset of chapters) |
-| `<topic>/review-submission.json` | Submission payload (where present) |
+|---|---|
+| `CHAPTER_REVIEW_STATUS.md` | Concise dated index of the saved review snapshots |
+| `<topic>/chapter-review.md` | Human-readable multi-persona report |
+| `<topic>/chapter-review.json` | Structured findings and corrections |
+| `<topic>/coherence-pass.md` | Coherence notes, where present |
+| `<topic>/persona-*`, `persona-returns/`, `persona-envelopes/` | Raw persona envelopes, where present |
+| `<topic>/review-submission.json` | Submission payload, where present |
 
-**32 topic folders** with `chapter-review.md` + `.json` (acids/bases through synthetic polymers, plus biomolecules, spectroscopy, etc.).
+## Curated comparisons (`reports/comparison/`)
 
-Personas (from `review-organic-chapter`): instructor, struggling student, accessibility, visual preference.
+Dated comparison releases are intentionally version-controlled. They contain
+the published results, figures, and public-safe provenance manifests for a
+specific run; they are not ignored scratch output. Run manifests contain input
+hashes and source commit state, never local paths, source-repository identity,
+branches, or repository-wide dirty-file lists.
 
-## Reader fix notes (`notes/`)
+## Provenance and history
 
-| File | Description |
-|------|-------------|
-| `reader-chemistry-and-link-fixes.md` | How cover-to-cover audits produced tier-1 and tier-2 reader fix batches in the private ChemIllusion monorepo, including the tier-2 chemistry table and tier-1 barrier/dead-link summary |
-
-## Suggested story reading order
-
-1. `produce-organic-chapter` — how a chapter is built  
-2. `author-organic-topic-package` + `references/topic-package-contract.md`  
-3. `organic-chapter-asset-auditor` → figure skills → `chem-representation-accessibility`  
-4. Question trio (`question-figure` / `explanation` / `hint`)  
-5. `review-organic-chapter` personas + sample `reports/topic-packages/*/chapter-review.md`  
-6. `notes/reader-chemistry-and-link-fixes.md` — corpus-wide chemistry/link pass  
-7. `prompts/*` when structures need validate/render without RDKit agents  
-
----
-
-## Provenance note
-
-Skills are **duplicates** for storytelling and review. Product monorepo paths
-(`frontend/…`, `backend/…`, `docs/…`, `content/organic/…`), internal API routes,
-feature-flag names, hosting/database vendor names, private-repo commit and issue
-references, and AI-generation cost figures have been removed from skill text and
-replaced with `(not in this repo)` statements. Omitted helpers point at `prompts/`
-where a portable stand-in exists.
-
-Persona reviews and reader fix notes are historical QA artifacts from the ChemIllusion
-reader corpus; they may name internal slugs, block IDs, and product URLs. A second
-redaction pass over `reports/topic-packages/` has removed literal answer-key data
-(`answer_key`, `correct_option_ids`, `expected_*`, graded SMILES/atom-id values),
-whole-bank grading-positional-bias disclosures, backend/frontend source file and
-line citations, pricing-tier constants, and private-repo commit references. A small
-number of narrative sentences describing specific graded questions may still name
-an option/atom id in free prose rather than a structured field — treat any such
-mention you find as informational QA history, not as current live assessment data.
+The skills are substantially decoupled from the original product, not fully
+product-neutral. They retain selected terminology and `(not in this repo)`
+markers where that preserves the workflow’s meaning. The reports and notes are
+historical QA material and retain selected implementation details, identifiers,
+and product context. Read their dates and the surrounding historical wrapper;
+do not interpret a snapshot finding, test count, deployment reference, or
+publication assessment as a statement about the current textbook.

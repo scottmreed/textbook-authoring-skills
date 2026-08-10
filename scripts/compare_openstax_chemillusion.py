@@ -19,8 +19,8 @@ Analyses implemented
    * visible ChemIllusion visual blocks from compiled reader JSON
    * taxonomy counts only; no visual-density output
 
-The script can read ChemIllusion chapters from a local checkout of the private
-repository or from a previously generated snapshot JSON used for testing.
+The script can read compiled chapters from a local source tree or from a
+previously generated snapshot JSON used for testing.
 """
 from __future__ import annotations
 
@@ -160,10 +160,12 @@ def _display_fingerprint(path: Path, display_path: str) -> dict[str, Any]:
     return fingerprint
 
 
-def git_source_metadata(root: Path | None) -> dict[str, Any]:
-    """Capture repository identity without failing for an exported tree."""
+def git_source_metadata(
+    root: Path | None, selected_relative_paths: set[str]
+) -> dict[str, Any]:
+    """Return public-safe provenance for the selected authored inputs only."""
     if root is None:
-        return {"head": None, "branch": None, "status": [], "dirty_paths": []}
+        return {"source_commit": None, "selected_inputs_dirty": False}
 
     def run(*arguments: str) -> str | None:
         completed = subprocess.run(
@@ -183,10 +185,28 @@ def git_source_metadata(root: Path | None) -> dict[str, Any]:
         if len(line) > 3
     ]
     return {
-        "head": run("rev-parse", "HEAD"),
-        "branch": run("branch", "--show-current"),
-        "status": status,
-        "dirty_paths": dirty_paths,
+        "source_commit": run("rev-parse", "HEAD"),
+        "selected_inputs_dirty": any(
+            path in selected_relative_paths for path in dirty_paths
+        ),
+    }
+
+
+def chapter_source_manifest_record(
+    *, chapter: int, spec: ChapterSpec, compiled_chapter: dict[str, Any]
+) -> dict[str, Any]:
+    """Describe one compiled chapter without exposing its local input path."""
+    compiled_source = Path(str(compiled_chapter.get("source_path", "")))
+    compiled_sha256 = (
+        file_fingerprint(compiled_source)["sha256"]
+        if compiled_source.is_file()
+        else ""
+    )
+    return {
+        "chapter": chapter,
+        "slug": spec.slug,
+        "compiled_source_sha256": compiled_sha256,
+        "compiled_source_available": bool(compiled_chapter.get("available", False)),
     }
 
 
@@ -210,7 +230,6 @@ def build_run_manifest(
     """Build the complete reproducibility record for a comparison run."""
     source_root = chemillusion_provenance_root
     package_root = chemillusion_root or source_root
-    git_metadata = git_source_metadata(source_root)
     packages: list[dict[str, Any]] = []
     selected_relative_paths: set[str] = set()
     for spec in selected_specs:
@@ -222,7 +241,6 @@ def build_run_manifest(
         record: dict[str, Any] = {
             "chapter": spec.chapter,
             "slug": spec.slug,
-            "path": relative.as_posix(),
             "exists": package_path.is_file(),
         }
         if package_path.is_file():
@@ -231,19 +249,15 @@ def build_run_manifest(
                 {
                     "size_bytes": fingerprint["size_bytes"],
                     "sha256": fingerprint["sha256"],
-                    "modified_at_utc": fingerprint["modified_at_utc"],
                 }
             )
         packages.append(record)
 
-    relevant_dirty_paths = [
-        path for path in git_metadata["dirty_paths"] if path in selected_relative_paths
-    ]
+    git_metadata = git_source_metadata(source_root, selected_relative_paths)
     pdf_fingerprint = _display_fingerprint(openstax_pdf, openstax_pdf.name)
     return {
-        "schema_version": 1,
+        "schema_version": 2,
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
-        "command": list(command),
         "parameters": {
             "chapters": list(selected_chapters),
             "ngram_sizes": list(ngram_sizes),
@@ -255,12 +269,9 @@ def build_run_manifest(
             "page_count": openstax_page_count,
             "pdf_metadata": openstax_metadata or {},
         },
-        "chemillusion": {
-            "compiled_input_label": chemillusion_root.name if chemillusion_root else None,
-            "provenance_repository": source_root.name if source_root else None,
-            "git": git_metadata,
-            "relevant_dirty_paths": relevant_dirty_paths,
-            "topic_packages": packages,
+        "authoring_source": {
+            **git_metadata,
+            "topic_package_inputs": packages,
         },
         "comparison_code": {
             "script": _display_fingerprint(
@@ -1283,7 +1294,7 @@ def write_markdown_report(
             "",
             "## Reproducibility",
             "",
-            "See [`run_manifest.json`](run_manifest.json) for source fingerprints, repository state, parameters, and code/configuration hashes.",
+            "See [`run_manifest.json`](run_manifest.json) for selected-input fingerprints, public-safe source provenance, parameters, and code/configuration hashes.",
             "",
             "## Interpretation limits",
             "",
@@ -1479,24 +1490,12 @@ def main() -> int:
         molecule_detail_rows.extend(molecule_details)
 
         figure_rows.extend(figure_inventory(chapter, openstax_raw, ci_data))
-        compiled_source = Path(str(ci_data.get("source_path", "")))
-        compiled_sha256 = (
-            file_fingerprint(compiled_source)["sha256"]
-            if compiled_source.is_file()
-            else ""
-        )
         chapter_source_rows.append(
-            {
-                "chapter": chapter,
-                "slug": chapter_map[chapter].slug,
-                "openstax_pdf": str(openstax_pdf),
-                "chemillusion_source": (
-                    "frontend/public/reader/topic-chapters/"
-                    f"{chapter_map[chapter].slug}.json"
-                ),
-                "chemillusion_source_sha256": compiled_sha256,
-                "chemillusion_available": bool(ci_data.get("available", False)),
-            }
+            chapter_source_manifest_record(
+                chapter=chapter,
+                spec=chapter_map[chapter],
+                compiled_chapter=ci_data,
+            )
         )
 
     text_ngram_df = pd.DataFrame(text_ngram_rows)

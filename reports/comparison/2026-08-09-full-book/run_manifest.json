@@ -1,27 +1,6 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "generated_at_utc": "2026-08-09T13:58:20.252226+00:00",
-  "command": [
-    "python",
-    "scripts/compare_openstax_chemillusion.py",
-    "--openstax-pdf",
-    "/tmp/openstax-organic-chemistry-current.pdf",
-    "--openstax-url",
-    "https://assets.openstax.org/oscms-prodcms/media/documents/organic-chemistry_-_WEB.pdf",
-    "--chemillusion-root",
-    "/tmp/chemillusion-oer-analysis.o6olU7",
-    "--chemillusion-provenance-root",
-    "/Users/scottreed/PycharmProjects/chem-art-generator",
-    "--chapters",
-    "1-31",
-    "--ngram-sizes",
-    "5,8,12,16,20",
-    "--min-match-block",
-    "8",
-    "--strict",
-    "--output-dir",
-    "reports/comparison/2026-08-09-full-book"
-  ],
   "parameters": {
     "chapters": [
       1,
@@ -80,505 +59,226 @@
       "modDate": "D:20260427161032-05'00'"
     }
   },
-  "chemillusion": {
-    "compiled_input_label": "chemillusion-oer-analysis.o6olU7",
-    "provenance_repository": "chem-art-generator",
-    "git": {
-      "head": "563a4db8914d45084e474925e4124d7df241b302",
-      "branch": "main",
-      "status": [
-        " M .claude/skills/lipid-structure-figure-authoring/SKILL.md",
-        " M backend/app/api/auth.py",
-        " M backend/app/api/course_adopt.py",
-        " M backend/app/api/deck_creator.py",
-        " M backend/app/data/compiled/canonical_concept_dependencies.compat.json",
-        " M backend/app/data/compiled/canonical_concept_graph.v2.json",
-        " M backend/app/data/compiled/learning_asset_index.v1.json",
-        " M backend/app/services/chemistry_text_normalizer_service.py",
-        " M backend/app/services/lipid_layout_service.py",
-        " M backend/app/services/oer_book_content_service.py",
-        " M backend/app/services/oer_book_epub_service.py",
-        " M backend/app/services/oer_book_html_service.py",
-        " M backend/app/services/synthesis_roadmap_render_service.py",
-        " M backend/app/services/teacher_preview_service.py",
-        " M backend/tests/unit/test_api/test_reaction_figure_rendering.py",
-        " M backend/tests/unit/test_services/test_course_adopt_intake_api.py",
-        " M backend/tests/unit/test_services/test_lipid_layout_service.py",
-        " M backend/tests/unit/test_services/test_oer_book_constants_typography.py",
-        " M backend/tests/unit/test_services/test_oer_book_frontmatter_and_figures.py",
-        " M backend/tests/unit/test_services/test_oer_book_html_service.py",
-        " M backend/tests/unit/test_services/test_oer_book_svg_image_blocks.py",
-        " M backend/tests/unit/test_services/test_teacher_preview_service.py",
-        " M content/organic/topic-packages/aldehydes-and-ketones/topic.package.json",
-        " M content/organic/topic-packages/amines-and-heterocycles/topic.package.json",
-        " M content/organic/topic-packages/biomolecules-amino-acids-peptides-and-proteins/topic.package.json",
-        " M content/organic/topic-packages/biomolecules-nucleic-acids/topic.package.json",
-        " M content/organic/topic-packages/mass-spectrometry-and-infrared-spectroscopy/topic.package.json",
-        " M content/organic/topic-packages/orbitals-and-pericyclic-reactions/topic.package.json",
-        " M content/organic/topic-packages/overview-of-organic-reactions/topic.package.json",
-        " M frontend/public/assets/reader/figures/electrocyclic-rotation-modes.svg",
-        " M frontend/public/assets/reader/figures/mech-chain-extension.svg",
-        " M frontend/public/assets/reader/figures/orbitals/ethene_orbital_ready_v1--pi_bond_alkene.svg",
-        " M frontend/public/assets/reader/figures/orbitals/formaldehyde_orbital_ready_v1--carbonyl_pi_star.svg",
-        " M frontend/public/assets/reader/figures/pair-ac-fails.svg",
-        " M frontend/public/assets/reader/figures/pair-at.svg",
-        " M frontend/public/assets/reader/figures/pair-gc.svg",
-        " M frontend/public/assets/reader/figures/roadmap-phosphoramidite.svg",
-        " M frontend/public/content/organic/chapters/chapter-aldehydes-and-ketones/assets.manifest.json",
-        " M frontend/public/content/organic/chapters/chapter-biomolecules-nucleic-acids/assets.manifest.json",
-        " M frontend/public/content/organic/chapters/chapter-mass-spec-and-ir/assets.manifest.json",
-        " M frontend/public/content/organic/chapters/chapter-orbitals-and-pericyclic-reactions/assets.manifest.json",
-        " M frontend/public/content/organic/chapters/chapter-overview-organic-reactions/assets.manifest.json",
-        " M frontend/public/deck-creator/aldehydes-and-ketones.json",
-        " M frontend/public/deck-creator/amines-and-heterocycles.json",
-        " M frontend/public/deck-creator/biomolecules-amino-acids-peptides-and-proteins.json",
-        " M frontend/public/deck-creator/mass-spectrometry-and-infrared-spectroscopy.json",
-        " M frontend/public/deck-creator/orbitals-and-pericyclic-reactions.json",
-        " M frontend/public/deck-creator/overview-of-organic-reactions.json",
-        " M frontend/public/deck-creator/review/aldehydes-and-ketones.review.json",
-        " M frontend/public/deck-creator/review/amines-and-heterocycles.review.json",
-        " M frontend/public/deck-creator/review/biomolecules-amino-acids-peptides-and-proteins.review.json",
-        " M frontend/public/deck-creator/review/mass-spectrometry-and-infrared-spectroscopy.review.json",
-        " M frontend/public/deck-creator/review/orbitals-and-pericyclic-reactions.review.json",
-        " M frontend/public/deck-creator/review/overview-of-organic-reactions.review.json",
-        " M frontend/public/reader/lms-modules/amines-and-heterocycles.json",
-        " M frontend/public/reader/lms-modules/biomolecules-amino-acids-peptides-and-proteins.json",
-        " M frontend/public/reader/lms-modules/mass-spectrometry-and-infrared-spectroscopy.json",
-        " M frontend/public/reader/lms-modules/orbitals-and-pericyclic-reactions.json",
-        " M frontend/public/reader/topic-chapters/aldehydes-and-ketones.json",
-        " M frontend/public/reader/topic-chapters/amines-and-heterocycles.json",
-        " M frontend/public/reader/topic-chapters/biomolecules-amino-acids-peptides-and-proteins.json",
-        " M frontend/public/reader/topic-chapters/biomolecules-nucleic-acids.json",
-        " M frontend/public/reader/topic-chapters/catalog.json",
-        " M frontend/public/reader/topic-chapters/mass-spectrometry-and-infrared-spectroscopy.json",
-        " M frontend/public/reader/topic-chapters/orbitals-and-pericyclic-reactions.json",
-        " M frontend/public/reader/topic-chapters/overview-of-organic-reactions.json",
-        " M frontend/src/assets/orbitals/carbonyl_pi_star/v1/carbonyl_pi_star.svg",
-        " M frontend/src/assets/orbitals/pi_bond_alkene/v1/pi_bond_alkene.svg",
-        " M frontend/src/components/TextbookReleaseBanner.tsx",
-        " M frontend/src/components/deckCreator/ConceptMapLaunchStep.tsx",
-        " M frontend/src/components/landing/HomeEducationPaths.tsx",
-        " M frontend/src/components/teachers/TeacherCoursePathCard.tsx",
-        " M frontend/src/components/teachers/TeacherCoursePathHero.tsx",
-        " M frontend/src/components/teachers/__tests__/TeacherCoursePathHero.test.tsx",
-        " M frontend/src/features/deckCreator/synthesisRoadmap.test.ts",
-        " M frontend/src/features/deckCreator/synthesisRoadmap.ts",
-        " M frontend/src/locales/de/landing.json",
-        " M frontend/src/locales/en/landing.json",
-        " M frontend/src/locales/es/landing.json",
-        " M frontend/src/pages/AdoptCoursePage.tsx",
-        " M frontend/src/pages/ReaderDownloadsPage.tsx",
-        " M frontend/src/pages/TeacherLandingPage.tsx",
-        " M frontend/src/pages/__tests__/AdoptCoursePage.test.tsx",
-        " M frontend/src/types/courseAdoptIntake.ts",
-        " M frontend/src/utils/oerChemistryText.tsx",
-        " M frontend/tests/unit/test_components/test_TextbookReleaseBanner.test.tsx",
-        " M frontend/tests/unit/test_pages/test_HomePageHero.test.tsx",
-        " M frontend/tests/unit/test_utils/test_oerChemistryText.test.tsx",
-        " M reports/canonical-graph/graph-health.json",
-        " M reports/topic-packages/aldehydes-and-ketones/compile-report.json",
-        " M reports/topic-packages/amines-and-heterocycles/compile-report.json",
-        " M reports/topic-packages/biomolecules-amino-acids-peptides-and-proteins/compile-report.json",
-        " M reports/topic-packages/biomolecules-nucleic-acids/compile-report.json",
-        " M reports/topic-packages/mass-spectrometry-and-infrared-spectroscopy/compile-report.json",
-        " M reports/topic-packages/orbitals-and-pericyclic-reactions/compile-report.json",
-        " M reports/topic-packages/overview-of-organic-reactions/compile-report.json",
-        " M scripts/figures/build_ch30_figures.py",
-        "?? backend/app/services/course_adopt_capture_service.py",
-        "?? backend/app/services/model_pricing_2026-08-09.json",
-        "?? frontend/src/components/BookstorePartnerNote.tsx"
-      ],
-      "dirty_paths": [
-        ".claude/skills/lipid-structure-figure-authoring/SKILL.md",
-        "backend/app/api/auth.py",
-        "backend/app/api/course_adopt.py",
-        "backend/app/api/deck_creator.py",
-        "backend/app/data/compiled/canonical_concept_dependencies.compat.json",
-        "backend/app/data/compiled/canonical_concept_graph.v2.json",
-        "backend/app/data/compiled/learning_asset_index.v1.json",
-        "backend/app/services/chemistry_text_normalizer_service.py",
-        "backend/app/services/lipid_layout_service.py",
-        "backend/app/services/oer_book_content_service.py",
-        "backend/app/services/oer_book_epub_service.py",
-        "backend/app/services/oer_book_html_service.py",
-        "backend/app/services/synthesis_roadmap_render_service.py",
-        "backend/app/services/teacher_preview_service.py",
-        "backend/tests/unit/test_api/test_reaction_figure_rendering.py",
-        "backend/tests/unit/test_services/test_course_adopt_intake_api.py",
-        "backend/tests/unit/test_services/test_lipid_layout_service.py",
-        "backend/tests/unit/test_services/test_oer_book_constants_typography.py",
-        "backend/tests/unit/test_services/test_oer_book_frontmatter_and_figures.py",
-        "backend/tests/unit/test_services/test_oer_book_html_service.py",
-        "backend/tests/unit/test_services/test_oer_book_svg_image_blocks.py",
-        "backend/tests/unit/test_services/test_teacher_preview_service.py",
-        "content/organic/topic-packages/aldehydes-and-ketones/topic.package.json",
-        "content/organic/topic-packages/amines-and-heterocycles/topic.package.json",
-        "content/organic/topic-packages/biomolecules-amino-acids-peptides-and-proteins/topic.package.json",
-        "content/organic/topic-packages/biomolecules-nucleic-acids/topic.package.json",
-        "content/organic/topic-packages/mass-spectrometry-and-infrared-spectroscopy/topic.package.json",
-        "content/organic/topic-packages/orbitals-and-pericyclic-reactions/topic.package.json",
-        "content/organic/topic-packages/overview-of-organic-reactions/topic.package.json",
-        "frontend/public/assets/reader/figures/electrocyclic-rotation-modes.svg",
-        "frontend/public/assets/reader/figures/mech-chain-extension.svg",
-        "frontend/public/assets/reader/figures/orbitals/ethene_orbital_ready_v1--pi_bond_alkene.svg",
-        "frontend/public/assets/reader/figures/orbitals/formaldehyde_orbital_ready_v1--carbonyl_pi_star.svg",
-        "frontend/public/assets/reader/figures/pair-ac-fails.svg",
-        "frontend/public/assets/reader/figures/pair-at.svg",
-        "frontend/public/assets/reader/figures/pair-gc.svg",
-        "frontend/public/assets/reader/figures/roadmap-phosphoramidite.svg",
-        "frontend/public/content/organic/chapters/chapter-aldehydes-and-ketones/assets.manifest.json",
-        "frontend/public/content/organic/chapters/chapter-biomolecules-nucleic-acids/assets.manifest.json",
-        "frontend/public/content/organic/chapters/chapter-mass-spec-and-ir/assets.manifest.json",
-        "frontend/public/content/organic/chapters/chapter-orbitals-and-pericyclic-reactions/assets.manifest.json",
-        "frontend/public/content/organic/chapters/chapter-overview-organic-reactions/assets.manifest.json",
-        "frontend/public/deck-creator/aldehydes-and-ketones.json",
-        "frontend/public/deck-creator/amines-and-heterocycles.json",
-        "frontend/public/deck-creator/biomolecules-amino-acids-peptides-and-proteins.json",
-        "frontend/public/deck-creator/mass-spectrometry-and-infrared-spectroscopy.json",
-        "frontend/public/deck-creator/orbitals-and-pericyclic-reactions.json",
-        "frontend/public/deck-creator/overview-of-organic-reactions.json",
-        "frontend/public/deck-creator/review/aldehydes-and-ketones.review.json",
-        "frontend/public/deck-creator/review/amines-and-heterocycles.review.json",
-        "frontend/public/deck-creator/review/biomolecules-amino-acids-peptides-and-proteins.review.json",
-        "frontend/public/deck-creator/review/mass-spectrometry-and-infrared-spectroscopy.review.json",
-        "frontend/public/deck-creator/review/orbitals-and-pericyclic-reactions.review.json",
-        "frontend/public/deck-creator/review/overview-of-organic-reactions.review.json",
-        "frontend/public/reader/lms-modules/amines-and-heterocycles.json",
-        "frontend/public/reader/lms-modules/biomolecules-amino-acids-peptides-and-proteins.json",
-        "frontend/public/reader/lms-modules/mass-spectrometry-and-infrared-spectroscopy.json",
-        "frontend/public/reader/lms-modules/orbitals-and-pericyclic-reactions.json",
-        "frontend/public/reader/topic-chapters/aldehydes-and-ketones.json",
-        "frontend/public/reader/topic-chapters/amines-and-heterocycles.json",
-        "frontend/public/reader/topic-chapters/biomolecules-amino-acids-peptides-and-proteins.json",
-        "frontend/public/reader/topic-chapters/biomolecules-nucleic-acids.json",
-        "frontend/public/reader/topic-chapters/catalog.json",
-        "frontend/public/reader/topic-chapters/mass-spectrometry-and-infrared-spectroscopy.json",
-        "frontend/public/reader/topic-chapters/orbitals-and-pericyclic-reactions.json",
-        "frontend/public/reader/topic-chapters/overview-of-organic-reactions.json",
-        "frontend/src/assets/orbitals/carbonyl_pi_star/v1/carbonyl_pi_star.svg",
-        "frontend/src/assets/orbitals/pi_bond_alkene/v1/pi_bond_alkene.svg",
-        "frontend/src/components/TextbookReleaseBanner.tsx",
-        "frontend/src/components/deckCreator/ConceptMapLaunchStep.tsx",
-        "frontend/src/components/landing/HomeEducationPaths.tsx",
-        "frontend/src/components/teachers/TeacherCoursePathCard.tsx",
-        "frontend/src/components/teachers/TeacherCoursePathHero.tsx",
-        "frontend/src/components/teachers/__tests__/TeacherCoursePathHero.test.tsx",
-        "frontend/src/features/deckCreator/synthesisRoadmap.test.ts",
-        "frontend/src/features/deckCreator/synthesisRoadmap.ts",
-        "frontend/src/locales/de/landing.json",
-        "frontend/src/locales/en/landing.json",
-        "frontend/src/locales/es/landing.json",
-        "frontend/src/pages/AdoptCoursePage.tsx",
-        "frontend/src/pages/ReaderDownloadsPage.tsx",
-        "frontend/src/pages/TeacherLandingPage.tsx",
-        "frontend/src/pages/__tests__/AdoptCoursePage.test.tsx",
-        "frontend/src/types/courseAdoptIntake.ts",
-        "frontend/src/utils/oerChemistryText.tsx",
-        "frontend/tests/unit/test_components/test_TextbookReleaseBanner.test.tsx",
-        "frontend/tests/unit/test_pages/test_HomePageHero.test.tsx",
-        "frontend/tests/unit/test_utils/test_oerChemistryText.test.tsx",
-        "reports/canonical-graph/graph-health.json",
-        "reports/topic-packages/aldehydes-and-ketones/compile-report.json",
-        "reports/topic-packages/amines-and-heterocycles/compile-report.json",
-        "reports/topic-packages/biomolecules-amino-acids-peptides-and-proteins/compile-report.json",
-        "reports/topic-packages/biomolecules-nucleic-acids/compile-report.json",
-        "reports/topic-packages/mass-spectrometry-and-infrared-spectroscopy/compile-report.json",
-        "reports/topic-packages/orbitals-and-pericyclic-reactions/compile-report.json",
-        "reports/topic-packages/overview-of-organic-reactions/compile-report.json",
-        "scripts/figures/build_ch30_figures.py",
-        "backend/app/services/course_adopt_capture_service.py",
-        "backend/app/services/model_pricing_2026-08-09.json",
-        "frontend/src/components/BookstorePartnerNote.tsx"
-      ]
-    },
-    "relevant_dirty_paths": [
-      "content/organic/topic-packages/aldehydes-and-ketones/topic.package.json",
-      "content/organic/topic-packages/amines-and-heterocycles/topic.package.json",
-      "content/organic/topic-packages/biomolecules-amino-acids-peptides-and-proteins/topic.package.json",
-      "content/organic/topic-packages/biomolecules-nucleic-acids/topic.package.json",
-      "content/organic/topic-packages/mass-spectrometry-and-infrared-spectroscopy/topic.package.json",
-      "content/organic/topic-packages/orbitals-and-pericyclic-reactions/topic.package.json",
-      "content/organic/topic-packages/overview-of-organic-reactions/topic.package.json"
-    ],
-    "topic_packages": [
+  "authoring_source": {
+    "source_commit": "563a4db8914d45084e474925e4124d7df241b302",
+    "selected_inputs_dirty": true,
+    "topic_package_inputs": [
       {
         "chapter": 1,
         "slug": "structure-and-bonding",
-        "path": "content/organic/topic-packages/structure-and-bonding/topic.package.json",
         "exists": true,
         "size_bytes": 83911,
-        "sha256": "bcc5bc9777189d7190d7444a992c25548e49cdae1ede8a542bbb60a7bd5c8d2c",
-        "modified_at_utc": "2026-08-09T02:12:51.910192+00:00"
+        "sha256": "bcc5bc9777189d7190d7444a992c25548e49cdae1ede8a542bbb60a7bd5c8d2c"
       },
       {
         "chapter": 2,
         "slug": "acids-bases-and-curved-arrows",
-        "path": "content/organic/topic-packages/acids-bases-and-curved-arrows/topic.package.json",
         "exists": true,
         "size_bytes": 155055,
-        "sha256": "65050e99222ce97b3f6d915c8bf69f68634a5d25e2dac23ceb2ac92aacabc31d",
-        "modified_at_utc": "2026-08-09T02:12:51.793895+00:00"
+        "sha256": "65050e99222ce97b3f6d915c8bf69f68634a5d25e2dac23ceb2ac92aacabc31d"
       },
       {
         "chapter": 3,
         "slug": "alkanes-and-stereochemistry",
-        "path": "content/organic/topic-packages/alkanes-and-stereochemistry/topic.package.json",
         "exists": true,
         "size_bytes": 120804,
-        "sha256": "a58062931090238f64ce1fad40f3980b59a0f3ea6b5add270d49f75a11d39638",
-        "modified_at_utc": "2026-08-09T02:12:51.803319+00:00"
+        "sha256": "a58062931090238f64ce1fad40f3980b59a0f3ea6b5add270d49f75a11d39638"
       },
       {
         "chapter": 4,
         "slug": "cycloalkanes-and-stereochemistry",
-        "path": "content/organic/topic-packages/cycloalkanes-and-stereochemistry/topic.package.json",
         "exists": true,
         "size_bytes": 138585,
-        "sha256": "50940754e361946a1dce4827a9443bf25ec1b376696b10005d1b1bd16725b73a",
-        "modified_at_utc": "2026-08-09T02:12:51.873856+00:00"
+        "sha256": "50940754e361946a1dce4827a9443bf25ec1b376696b10005d1b1bd16725b73a"
       },
       {
         "chapter": 5,
         "slug": "stereochemistry-at-tetrahedral-centers",
-        "path": "content/organic/topic-packages/stereochemistry-at-tetrahedral-centers/topic.package.json",
         "exists": true,
         "size_bytes": 151360,
-        "sha256": "ac157c20e6c740fa08b23470530a680ed424eae22f12869473b612039a89d5c7",
-        "modified_at_utc": "2026-08-09T11:01:55.175403+00:00"
+        "sha256": "ac157c20e6c740fa08b23470530a680ed424eae22f12869473b612039a89d5c7"
       },
       {
         "chapter": 6,
         "slug": "overview-of-organic-reactions",
-        "path": "content/organic/topic-packages/overview-of-organic-reactions/topic.package.json",
         "exists": true,
         "size_bytes": 120657,
-        "sha256": "3d5616e9a19bb960920b372953bc4c8cb7232099db6790da48e32e378b199a2b",
-        "modified_at_utc": "2026-08-09T13:08:31.607002+00:00"
+        "sha256": "3d5616e9a19bb960920b372953bc4c8cb7232099db6790da48e32e378b199a2b"
       },
       {
         "chapter": 7,
         "slug": "alkenes-structure-and-reactivity",
-        "path": "content/organic/topic-packages/alkenes-structure-and-reactivity/topic.package.json",
         "exists": true,
         "size_bytes": 74282,
-        "sha256": "3ed0c795edfa773145e267378c641ff7dda98eda7c3603b899b34cbc217fdf07",
-        "modified_at_utc": "2026-08-09T11:14:47.970740+00:00"
+        "sha256": "3ed0c795edfa773145e267378c641ff7dda98eda7c3603b899b34cbc217fdf07"
       },
       {
         "chapter": 8,
         "slug": "alkenes-reactions-and-synthesis",
-        "path": "content/organic/topic-packages/alkenes-reactions-and-synthesis/topic.package.json",
         "exists": true,
         "size_bytes": 151485,
-        "sha256": "70420d3b12ca2ff43336c6534ce988cfb5600cb4ec09e8cf470e1645bfc96207",
-        "modified_at_utc": "2026-08-09T02:12:51.806167+00:00"
+        "sha256": "70420d3b12ca2ff43336c6534ce988cfb5600cb4ec09e8cf470e1645bfc96207"
       },
       {
         "chapter": 9,
         "slug": "alkynes-organic-synthesis",
-        "path": "content/organic/topic-packages/alkynes-organic-synthesis/topic.package.json",
         "exists": true,
         "size_bytes": 210278,
-        "sha256": "e312f5e8c34835ab954955ef0107609deb8945ab143859241e76d72a0f60a421",
-        "modified_at_utc": "2026-08-09T02:12:51.814386+00:00"
+        "sha256": "e312f5e8c34835ab954955ef0107609deb8945ab143859241e76d72a0f60a421"
       },
       {
         "chapter": 10,
         "slug": "organohalides",
-        "path": "content/organic/topic-packages/organohalides/topic.package.json",
         "exists": true,
         "size_bytes": 188995,
-        "sha256": "b156318261925cf09974d19ea8e0c70adcbba69b18c5ce9199858123353a37f1",
-        "modified_at_utc": "2026-08-09T02:12:51.904051+00:00"
+        "sha256": "b156318261925cf09974d19ea8e0c70adcbba69b18c5ce9199858123353a37f1"
       },
       {
         "chapter": 11,
         "slug": "alkyl-halide-substitution-and-elimination",
-        "path": "content/organic/topic-packages/alkyl-halide-substitution-and-elimination/topic.package.json",
         "exists": true,
         "size_bytes": 175024,
-        "sha256": "ef5417ffb2ecbcc532e7e004d1b1a92fe178c2a35ab7cf5ed354b10543788f71",
-        "modified_at_utc": "2026-08-09T11:01:51.797432+00:00"
+        "sha256": "ef5417ffb2ecbcc532e7e004d1b1a92fe178c2a35ab7cf5ed354b10543788f71"
       },
       {
         "chapter": 12,
         "slug": "mass-spectrometry-and-infrared-spectroscopy",
-        "path": "content/organic/topic-packages/mass-spectrometry-and-infrared-spectroscopy/topic.package.json",
         "exists": true,
         "size_bytes": 130288,
-        "sha256": "a0954d7914a1bb373672f4f4fc81acdc91e77372a8617de0effa28c5c9f6ea57",
-        "modified_at_utc": "2026-08-09T13:10:36.160814+00:00"
+        "sha256": "a0954d7914a1bb373672f4f4fc81acdc91e77372a8617de0effa28c5c9f6ea57"
       },
       {
         "chapter": 13,
         "slug": "nuclear-magnetic-resonance-spectroscopy",
-        "path": "content/organic/topic-packages/nuclear-magnetic-resonance-spectroscopy/topic.package.json",
         "exists": true,
         "size_bytes": 206139,
-        "sha256": "e114856301ce9c9790d665d736ec45101c6e7c7b6c1e657d685f6c2e176739ba",
-        "modified_at_utc": "2026-08-09T02:12:51.887974+00:00"
+        "sha256": "e114856301ce9c9790d665d736ec45101c6e7c7b6c1e657d685f6c2e176739ba"
       },
       {
         "chapter": 14,
         "slug": "conjugated-compounds-and-ultraviolet-spectroscopy",
-        "path": "content/organic/topic-packages/conjugated-compounds-and-ultraviolet-spectroscopy/topic.package.json",
         "exists": true,
         "size_bytes": 201897,
-        "sha256": "3e64101d22f85128abf7a89f0d14ec4f7118141f03cf3705fb0857b4cf6093af",
-        "modified_at_utc": "2026-08-09T02:12:51.871349+00:00"
+        "sha256": "3e64101d22f85128abf7a89f0d14ec4f7118141f03cf3705fb0857b4cf6093af"
       },
       {
         "chapter": 15,
         "slug": "benzene-and-aromaticity",
-        "path": "content/organic/topic-packages/benzene-and-aromaticity/topic.package.json",
         "exists": true,
         "size_bytes": 230247,
-        "sha256": "b27d60954e4a70024f636e319441589f6d68289564f894f06be469741764528f",
-        "modified_at_utc": "2026-08-09T02:12:51.823477+00:00"
+        "sha256": "b27d60954e4a70024f636e319441589f6d68289564f894f06be469741764528f"
       },
       {
         "chapter": 16,
         "slug": "electrophilic-aromatic-substitution",
-        "path": "content/organic/topic-packages/electrophilic-aromatic-substitution/topic.package.json",
         "exists": true,
         "size_bytes": 252002,
-        "sha256": "4fdfe0871f888816420815f0a045e41ce0f42ebe68c4507aa1f0788bf7cdab1f",
-        "modified_at_utc": "2026-08-09T02:12:51.877632+00:00"
+        "sha256": "4fdfe0871f888816420815f0a045e41ce0f42ebe68c4507aa1f0788bf7cdab1f"
       },
       {
         "chapter": 17,
         "slug": "alcohols-and-phenols",
-        "path": "content/organic/topic-packages/alcohols-and-phenols/topic.package.json",
         "exists": true,
         "size_bytes": 143786,
-        "sha256": "55728a9ac58e3385b25f0a8b0e429be1efda78c1809b13153499aac834c502d4",
-        "modified_at_utc": "2026-08-09T02:12:51.797364+00:00"
+        "sha256": "55728a9ac58e3385b25f0a8b0e429be1efda78c1809b13153499aac834c502d4"
       },
       {
         "chapter": 18,
         "slug": "ethers-epoxides-thiols-and-sulfides",
-        "path": "content/organic/topic-packages/ethers-epoxides-thiols-and-sulfides/topic.package.json",
         "exists": true,
         "size_bytes": 276754,
-        "sha256": "e9b2407a163d845c8bc488869333b65b956c244b5de4a8432c4196f43956e022",
-        "modified_at_utc": "2026-08-09T02:12:51.882226+00:00"
+        "sha256": "e9b2407a163d845c8bc488869333b65b956c244b5de4a8432c4196f43956e022"
       },
       {
         "chapter": 19,
         "slug": "aldehydes-and-ketones",
-        "path": "content/organic/topic-packages/aldehydes-and-ketones/topic.package.json",
         "exists": true,
         "size_bytes": 212958,
-        "sha256": "fa281c43bd633948eda2b23f8dd333d562fbea59e579b3ca144c32d2fd6f7765",
-        "modified_at_utc": "2026-08-09T13:08:24.113424+00:00"
+        "sha256": "fa281c43bd633948eda2b23f8dd333d562fbea59e579b3ca144c32d2fd6f7765"
       },
       {
         "chapter": 20,
         "slug": "carboxylic-acids-and-nitriles",
-        "path": "content/organic/topic-packages/carboxylic-acids-and-nitriles/topic.package.json",
         "exists": true,
         "size_bytes": 255376,
-        "sha256": "94a3c41c7021700c3b68f232f2cac7d54a1334c9de0e06d7bfb7538e34c74a09",
-        "modified_at_utc": "2026-08-09T02:12:51.867744+00:00"
+        "sha256": "94a3c41c7021700c3b68f232f2cac7d54a1334c9de0e06d7bfb7538e34c74a09"
       },
       {
         "chapter": 21,
         "slug": "carboxylic-acid-derivatives",
-        "path": "content/organic/topic-packages/carboxylic-acid-derivatives/topic.package.json",
         "exists": true,
         "size_bytes": 283418,
-        "sha256": "506560c21904033e7d72e9c0a924ea2adfb7a790d90025507656144ebd5259ac",
-        "modified_at_utc": "2026-08-09T02:12:51.863666+00:00"
+        "sha256": "506560c21904033e7d72e9c0a924ea2adfb7a790d90025507656144ebd5259ac"
       },
       {
         "chapter": 22,
         "slug": "carbonyl-alpha-substitution",
-        "path": "content/organic/topic-packages/carbonyl-alpha-substitution/topic.package.json",
         "exists": true,
         "size_bytes": 275644,
-        "sha256": "24b0c8528e5966365dfd6dbe6e94e8c0fae37f0c02a204c0405e1f90d96bbd17",
-        "modified_at_utc": "2026-08-09T02:12:51.854550+00:00"
+        "sha256": "24b0c8528e5966365dfd6dbe6e94e8c0fae37f0c02a204c0405e1f90d96bbd17"
       },
       {
         "chapter": 23,
         "slug": "carbonyl-condensation",
-        "path": "content/organic/topic-packages/carbonyl-condensation/topic.package.json",
         "exists": true,
         "size_bytes": 324476,
-        "sha256": "1fac2ffa781842657eac0fefdba55570cf5e31c3697edcfbb33be6ddc69db642",
-        "modified_at_utc": "2026-08-09T02:12:51.859387+00:00"
+        "sha256": "1fac2ffa781842657eac0fefdba55570cf5e31c3697edcfbb33be6ddc69db642"
       },
       {
         "chapter": 24,
         "slug": "amines-and-heterocycles",
-        "path": "content/organic/topic-packages/amines-and-heterocycles/topic.package.json",
         "exists": true,
         "size_bytes": 357531,
-        "sha256": "407cbe21ff9f2ef80f225420e9bb3021af2e0a110e991d75e20a3ab9ad0eddea",
-        "modified_at_utc": "2026-08-09T13:15:11.565520+00:00"
+        "sha256": "407cbe21ff9f2ef80f225420e9bb3021af2e0a110e991d75e20a3ab9ad0eddea"
       },
       {
         "chapter": 25,
         "slug": "biomolecules-carbohydrates",
-        "path": "content/organic/topic-packages/biomolecules-carbohydrates/topic.package.json",
         "exists": true,
         "size_bytes": 375267,
-        "sha256": "5a41dfd5f5a7e345f43003e92fae97f7d7d0368065a707253f21d01a5835b2f2",
-        "modified_at_utc": "2026-08-09T02:12:51.836863+00:00"
+        "sha256": "5a41dfd5f5a7e345f43003e92fae97f7d7d0368065a707253f21d01a5835b2f2"
       },
       {
         "chapter": 26,
         "slug": "biomolecules-amino-acids-peptides-and-proteins",
-        "path": "content/organic/topic-packages/biomolecules-amino-acids-peptides-and-proteins/topic.package.json",
         "exists": true,
         "size_bytes": 523535,
-        "sha256": "a6d0893340e6d0b3ce899fc4862273adc8d2bcb78801ad48a71ae352490a77a8",
-        "modified_at_utc": "2026-08-09T13:15:12.860716+00:00"
+        "sha256": "a6d0893340e6d0b3ce899fc4862273adc8d2bcb78801ad48a71ae352490a77a8"
       },
       {
         "chapter": 27,
         "slug": "biomolecules-lipids",
-        "path": "content/organic/topic-packages/biomolecules-lipids/topic.package.json",
         "exists": true,
         "size_bytes": 448905,
-        "sha256": "682085a889da937b67934122eb3be64260d28847125e89bfb38b28c53a44e536",
-        "modified_at_utc": "2026-08-09T02:12:51.843216+00:00"
+        "sha256": "682085a889da937b67934122eb3be64260d28847125e89bfb38b28c53a44e536"
       },
       {
         "chapter": 28,
         "slug": "biomolecules-nucleic-acids",
-        "path": "content/organic/topic-packages/biomolecules-nucleic-acids/topic.package.json",
         "exists": true,
         "size_bytes": 461884,
-        "sha256": "7c39feef6c99dacfc3592cba876c290b71e79c4e7860259986b57e9f99196355",
-        "modified_at_utc": "2026-08-09T13:54:38.589140+00:00"
+        "sha256": "7c39feef6c99dacfc3592cba876c290b71e79c4e7860259986b57e9f99196355"
       },
       {
         "chapter": 29,
         "slug": "organic-chemistry-of-metabolic-pathways",
-        "path": "content/organic/topic-packages/organic-chemistry-of-metabolic-pathways/topic.package.json",
         "exists": true,
         "size_bytes": 378585,
-        "sha256": "2f3214cb3feac8e27812dd0f3b0f52eaf6658e3ebb0857d2e65c5bb628e47602",
-        "modified_at_utc": "2026-08-09T02:12:51.900646+00:00"
+        "sha256": "2f3214cb3feac8e27812dd0f3b0f52eaf6658e3ebb0857d2e65c5bb628e47602"
       },
       {
         "chapter": 30,
         "slug": "orbitals-and-pericyclic-reactions",
-        "path": "content/organic/topic-packages/orbitals-and-pericyclic-reactions/topic.package.json",
         "exists": true,
         "size_bytes": 456314,
-        "sha256": "52e48d1f186e23aecfdbb9584e8713d8bd53099bbe96d640f292a6207ae46512",
-        "modified_at_utc": "2026-08-09T13:33:26.557920+00:00"
+        "sha256": "52e48d1f186e23aecfdbb9584e8713d8bd53099bbe96d640f292a6207ae46512"
       },
       {
         "chapter": 31,
         "slug": "synthetic-polymers",
-        "path": "content/organic/topic-packages/synthetic-polymers/topic.package.json",
         "exists": true,
         "size_bytes": 401184,
-        "sha256": "d54f16918de824e5638c94be65468e884f52f05f1227e99ab76f1d8b1ce34ef9",
-        "modified_at_utc": "2026-08-09T02:12:51.916213+00:00"
+        "sha256": "d54f16918de824e5638c94be65468e884f52f05f1227e99ab76f1d8b1ce34ef9"
       }
     ]
   },

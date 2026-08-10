@@ -107,13 +107,19 @@ class MoleculeAliasRegressionTests(unittest.TestCase):
 
 
 class ProvenanceTests(unittest.TestCase):
-    def test_git_metadata_preserves_first_status_path_exactly(self) -> None:
+    def test_git_metadata_exposes_only_commit_and_selected_input_dirty_state(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             subprocess.run(["git", "init", "-q", str(root)], check=True)
-            hidden = root / ".authored-state"
-            hidden.write_text("original\n", encoding="utf-8")
-            subprocess.run(["git", "-C", str(root), "add", ".authored-state"], check=True)
+            selected = root / "content/organic/topic-packages/chapter-one/topic.package.json"
+            unrelated = root / "private-product-state"
+            selected.parent.mkdir(parents=True)
+            selected.write_text("original\n", encoding="utf-8")
+            unrelated.write_text("original\n", encoding="utf-8")
+            subprocess.run(
+                ["git", "-C", str(root), "add", selected.relative_to(root), unrelated.relative_to(root)],
+                check=True,
+            )
             subprocess.run(
                 [
                     "git",
@@ -130,11 +136,18 @@ class ProvenanceTests(unittest.TestCase):
                 ],
                 check=True,
             )
-            hidden.write_text("modified\n", encoding="utf-8")
+            selected.write_text("modified\n", encoding="utf-8")
+            unrelated.write_text("modified\n", encoding="utf-8")
 
-            metadata = COMPARISON["git_source_metadata"](root)
+            metadata = COMPARISON["git_source_metadata"](
+                root,
+                {selected.relative_to(root).as_posix()},
+            )
 
-        self.assertEqual(metadata["dirty_paths"], [".authored-state"])
+        self.assertEqual(set(metadata), {"source_commit", "selected_inputs_dirty"})
+        self.assertRegex(metadata["source_commit"], r"^[0-9a-f]{40}$")
+        self.assertTrue(metadata["selected_inputs_dirty"])
+        self.assertNotIn("private-product-state", json.dumps(metadata))
 
     def test_sha256_file_returns_auditable_fingerprint(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -177,6 +190,27 @@ class ProvenanceTests(unittest.TestCase):
             ):
                 path.parent.mkdir(parents=True, exist_ok=True)
                 path.write_bytes(content)
+            subprocess.run(["git", "init", "-q", str(provenance_root)], check=True)
+            subprocess.run(
+                ["git", "-C", str(provenance_root), "add", "content"], check=True
+            )
+            subprocess.run(
+                [
+                    "git",
+                    "-C",
+                    str(provenance_root),
+                    "-c",
+                    "user.name=Comparison Test",
+                    "-c",
+                    "user.email=comparison@example.test",
+                    "commit",
+                    "-q",
+                    "-m",
+                    "fixture",
+                ],
+                check=True,
+            )
+            live_package.write_bytes(b"{\"topic_id\": \"locally-modified\"}")
             expected_package_sha256 = COMPARISON["file_fingerprint"](package)["sha256"]
 
             manifest = COMPARISON["build_run_manifest"](
@@ -195,16 +229,53 @@ class ProvenanceTests(unittest.TestCase):
                 command=["compare.py", "--strict"],
             )
 
-        self.assertEqual(manifest["schema_version"], 1)
+        self.assertEqual(manifest["schema_version"], 2)
         self.assertEqual(manifest["openstax"]["page_count"], 1245)
         self.assertEqual(manifest["parameters"]["chapters"], [1])
         self.assertEqual(manifest["parameters"]["ngram_sizes"], [5, 8])
-        self.assertEqual(manifest["chemillusion"]["topic_packages"][0]["slug"], "chapter-one")
         self.assertEqual(
-            manifest["chemillusion"]["topic_packages"][0]["sha256"],
+            manifest["authoring_source"]["topic_package_inputs"][0]["slug"],
+            "chapter-one",
+        )
+        self.assertEqual(
+            manifest["authoring_source"]["topic_package_inputs"][0]["sha256"],
             expected_package_sha256,
         )
+        self.assertTrue(manifest["authoring_source"]["selected_inputs_dirty"])
+        self.assertRegex(
+            manifest["authoring_source"]["source_commit"], r"^[0-9a-f]{40}$"
+        )
         self.assertIn("sha256", manifest["comparison_code"]["script"])
+        serialized = json.dumps(manifest)
+        self.assertNotIn(str(root), serialized)
+        self.assertNotIn("compiled_input_label", serialized)
+        self.assertNotIn("provenance_repository", serialized)
+        self.assertNotIn("dirty_paths", serialized)
+        self.assertNotIn("--strict", serialized)
+
+    def test_chapter_source_manifest_record_has_no_input_locations(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory) / "private/reader/chapter-one.json"
+            source.parent.mkdir(parents=True)
+            source.write_text('{"available": true}', encoding="utf-8")
+            expected_sha256 = COMPARISON["file_fingerprint"](source)["sha256"]
+
+            record = COMPARISON["chapter_source_manifest_record"](
+                chapter=1,
+                spec=COMPARISON["ChapterSpec"](1, "chapter-one", "Chapter One"),
+                compiled_chapter={"source_path": str(source), "available": True},
+            )
+
+        self.assertEqual(
+            record,
+            {
+                "chapter": 1,
+                "slug": "chapter-one",
+                "compiled_source_sha256": expected_sha256,
+                "compiled_source_available": True,
+            },
+        )
+        self.assertNotIn(str(source.parent), json.dumps(record))
 
 
 class ReportTests(unittest.TestCase):

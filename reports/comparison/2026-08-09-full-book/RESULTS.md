@@ -171,7 +171,7 @@ The inventory contains 531 OpenStax and 1,294 ChemIllusion visual assets.
 
 ## Reproducibility
 
-See [`run_manifest.json`](run_manifest.json) for source fingerprints, repository state, parameters, and code/configuration hashes.
+See [`run_manifest.json`](run_manifest.json) for selected-input fingerprints, public-safe source provenance, parameters, and code/configuration hashes.
 
 ## Interpretation limits
 
